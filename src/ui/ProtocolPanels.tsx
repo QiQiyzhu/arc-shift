@@ -1,0 +1,259 @@
+import {
+  ArrowRight,
+  ArrowUpRight,
+  Flame,
+  Zap,
+  Snowflake,
+  Orbit,
+  Wind,
+  Check,
+  ShieldPlus,
+  Gem,
+  Skull,
+  Target,
+} from 'lucide-react';
+import type { Element, Upgrade, RoomKind } from '../game/types';
+import type { Engine } from '../game/engine';
+import { ELEMENTS } from '../cards/catalog';
+import { buildCounts } from '../cards/system';
+import { roomChoices } from '../rooms/generator';
+export function ElementIcon({
+  element,
+  size = 24,
+}: {
+  element: Element;
+  size?: number;
+}) {
+  const Icon = {
+    fire: Flame,
+    storm: Zap,
+    frost: Snowflake,
+    void: Orbit,
+    shift: Wind,
+  }[element];
+  return <Icon size={size} strokeWidth={1.35} />;
+}
+export function CardView({
+  card,
+  owned = false,
+  onSelect,
+  index = 0,
+}: {
+  card: Upgrade;
+  owned?: boolean;
+  onSelect?: () => void;
+  index?: number;
+}) {
+  const el = ELEMENTS[card.element];
+  return (
+    <button
+      className={`protocol-card ${card.rarity} ${owned ? 'owned' : ''}`}
+      style={{ '--element': el.color, '--index': index } as React.CSSProperties}
+      onClick={onSelect}
+      disabled={!onSelect}
+      aria-label={`${card.name}：${card.description} ${card.preview}`}
+    >
+      <div className="card-top">
+        <span>
+          {el.en} / {el.name}
+        </span>
+        <b>
+          {card.rarity === 'epic'
+            ? '史诗'
+            : card.rarity === 'rare'
+              ? '稀有'
+              : '标准'}
+        </b>
+      </div>
+      <div className="card-sigil">
+        <i />
+        <i />
+        <ElementIcon element={card.element} size={45} />
+      </div>
+      <span className="card-en">{card.en}</span>
+      <h3>{card.name}</h3>
+      <p>{card.description}</p>
+      <div className="card-preview">{card.preview}</div>
+      <div className="card-bottom">
+        <span>
+          {owned ? (
+            <>
+              <Check size={14} /> 已收录
+            </>
+          ) : onSelect ? (
+            '整合此协议'
+          ) : (
+            '未收录'
+          )}
+        </span>
+        {onSelect ? (
+          <ArrowUpRight size={18} />
+        ) : (
+          <ElementIcon element={card.element} size={15} />
+        )}
+      </div>
+    </button>
+  );
+}
+export function CardDraft({ engine }: { engine: Engine }) {
+  const w = engine.world;
+  return (
+    <div className="modal-shade draft-shade">
+      <section className="draft-panel">
+        <div className="eyebrow">
+          {w.rewardContext === 'start'
+            ? 'INITIALIZE YOUR PROTOCOL'
+            : 'ANOMALY PURGED // REWARD AVAILABLE'}
+        </div>
+        <h2>
+          {w.rewardContext === 'start'
+            ? '选择你的初始协议'
+            : '力量，等待被改写。'}
+        </h2>
+        <p>
+          {w.rewardContext === 'start'
+            ? '选择一种元素，开始这次跃迁。'
+            : '整合一个新协议。相同元素收集 3 张，将激活共鸣。'}
+        </p>
+        <div className="draft-cards">
+          {w.rewards.map((c, i) => (
+            <CardView
+              key={c.id}
+              card={c}
+              index={i}
+              onSelect={() => engine.chooseCard(c.id)}
+            />
+          ))}
+        </div>
+        <div className="draft-foot">
+          <span>选择 1 项 · 本次行动持续生效</span>
+          <span>
+            {w.rewardContext === 'start'
+              ? '初始选择 / 01'
+              : `区域净化奖励 / 0${w.room.index}`}
+          </span>
+        </div>
+      </section>
+    </div>
+  );
+}
+const ROOM_INFO: Record<
+  RoomKind,
+  { name: string; reward: string; risk: string; Icon: typeof Target }
+> = {
+  combat: {
+    name: '战斗',
+    reward: '协议 ×1 · 恢复 12 生命',
+    risk: '标准异常',
+    Icon: Target,
+  },
+  elite: {
+    name: '精英',
+    reward: '稀有协议保障 · 额外经验',
+    risk: '强化实体 · 高风险',
+    Icon: Skull,
+  },
+  heal: {
+    name: '修复',
+    reward: '恢复 50 生命 · 协议 ×1',
+    risk: '安全区域',
+    Icon: ShieldPlus,
+  },
+  treasure: {
+    name: '宝藏',
+    reward: '免费协议 ×1',
+    risk: '安全区域',
+    Icon: Gem,
+  },
+  boss: {
+    name: '核心',
+    reward: '解除核心锁定',
+    risk: '多阶段实体 · 极高风险',
+    Icon: Orbit,
+  },
+};
+export function RouteMap({ engine }: { engine: Engine }) {
+  const w = engine.world;
+  return (
+    <div className="modal-shade">
+      <section className="map-panel">
+        <div className="eyebrow">NETWORK TOPOLOGY // 选择路径</div>
+        <h2>下一次跃迁，去往何处？</h2>
+        <p>网络分支已重新连接。选择你的风险与奖励。</p>
+        <div className="node-map">
+          {Array.from({ length: 8 }, (_, i) => (
+            <div
+              key={i}
+              className={`map-node ${i < w.room.index ? 'complete' : ''} ${i === w.room.index ? 'next' : ''} ${i === 3 || i === 7 ? 'core' : ''}`}
+            >
+              <i>
+                {i < w.room.index ? (
+                  <Check size={15} />
+                ) : i === 3 || i === 7 ? (
+                  <Skull size={19} />
+                ) : (
+                  String(i + 1).padStart(2, '0')
+                )}
+              </i>
+              <span>
+                {i === 3 ? '守门人' : i === 7 ? '零号神谕' : `区域 0${i + 1}`}
+              </span>
+            </div>
+          ))}
+        </div>
+        <div className="map-choices">
+          {roomChoices(w.room.index + 1, w.seed).map((r) => {
+            const info = ROOM_INFO[r.kind];
+            return (
+              <button
+                className={`route-card ${r.kind}`}
+                key={r.seed}
+                onClick={() => engine.enter(r)}
+              >
+                <div className="route-heading">
+                  <info.Icon size={24} />
+                  <span>
+                    {info.name} / SECTOR 0{r.index}
+                  </span>
+                </div>
+                <h3>{r.name}</h3>
+                <p>{info.risk}</p>
+                <div className="route-reward">{info.reward}</div>
+                <div className="route-bottom">
+                  跃迁至此区域 <ArrowRight size={20} />
+                </div>
+              </button>
+            );
+          })}
+        </div>
+        <p className="checkpoint-note">
+          进入区域时自动保存 · 可从主界面继续行动
+        </p>
+      </section>
+    </div>
+  );
+}
+export function BuildHUD({ cards }: { cards: string[] }) {
+  const counts = buildCounts(cards);
+  return (
+    <aside className="build-hud">
+      <span>ACTIVE PROTOCOLS</span>
+      {(Object.keys(ELEMENTS) as Element[])
+        .filter((el) => counts[el] > 0)
+        .map((el) => (
+          <div
+            key={el}
+            title={ELEMENTS[el].synergy}
+            style={{ '--element': ELEMENTS[el].color } as React.CSSProperties}
+          >
+            <ElementIcon element={el} size={17} />
+            <span>{ELEMENTS[el].name}</span>
+            <b>{counts[el]}</b>
+            <i className={counts[el] >= 3 ? 'resonant' : ''}>
+              {counts[el] >= 3 ? '共鸣' : '/ 3'}
+            </i>
+          </div>
+        ))}
+    </aside>
+  );
+}
