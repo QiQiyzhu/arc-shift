@@ -8,11 +8,11 @@ import { EventBus } from '../src/core/events';
 import { parseSave, blankSave } from '../src/core/save';
 import { Engine } from '../src/game/engine';
 describe('data-driven builds', () => {
-  it('contains 30 unique protocols evenly across five branches', () => {
-    expect(CARDS.length).toBe(30);
-    expect(new Set(CARDS.map((c) => c.id)).size).toBe(30);
+  it('contains 40 unique protocols evenly across five branches', () => {
+    expect(CARDS.length).toBe(40);
+    expect(new Set(CARDS.map((c) => c.id)).size).toBe(40);
     expect(Object.values(buildCounts(CARDS.map((c) => c.id)))).toEqual([
-      6, 6, 6, 6, 6,
+      8, 8, 8, 8, 8,
     ]);
   });
   it('never offers owned or unusable dependent cards across 100 seeds', () => {

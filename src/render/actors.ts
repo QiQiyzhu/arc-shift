@@ -11,7 +11,7 @@ export function glow(
   c: number,
   a = 0.15,
 ) {
-  for (let i = 4; i > 0; i--) {
+  for (let i = 2; i > 0; i--) {
     g.fillStyle(c, a / i);
     g.fillCircle(x, y, r * i * 0.5);
   }
@@ -39,6 +39,12 @@ export function drawActors(
         g.strokeEllipse(h.x, h.y, h.r * (1 + i * 0.3), h.r * (0.4 + i * 0.2));
       }
       glow(g, h.x, h.y, 20, c, 0.12);
+      for (let i = 0; i < 10; i++) {
+        const a = t * 1.8 + (i * Math.PI) / 5;
+        const r = h.r * (0.4 + 0.5 * ((t * 0.4 + i / 10) % 1));
+        g.fillStyle(0xe3b5ff, 0.6);
+        g.fillCircle(h.x + Math.cos(a) * r, h.y + Math.sin(a) * r, 2);
+      }
     }
   }
   for (const e of w.enemies) {
@@ -194,16 +200,76 @@ export function drawActors(
   for (const b of w.projectiles.items) {
     if (!b.active) continue;
     const a = Math.atan2(b.vy, b.vx);
+    if (!b.enemy && b.shape === 'lance') {
+      const tail = 65;
+      g.lineStyle(12, b.color, 0.13);
+      g.lineBetween(
+        b.x - Math.cos(a) * tail,
+        b.y - Math.sin(a) * tail,
+        b.x,
+        b.y,
+      );
+      g.lineStyle(4, b.color, 0.95);
+      g.lineBetween(
+        b.x - Math.cos(a) * tail,
+        b.y - Math.sin(a) * tail,
+        b.x,
+        b.y,
+      );
+      g.lineStyle(1.5, b.accent, 1);
+      g.lineBetween(
+        b.x - Math.cos(a) * tail,
+        b.y - Math.sin(a) * tail,
+        b.x,
+        b.y,
+      );
+    }
     g.lineStyle(b.enemy ? 10 : 9, b.color, 0.08);
     g.lineBetween(b.x - Math.cos(a) * 27, b.y - Math.sin(a) * 27, b.x, b.y);
     g.lineStyle(b.enemy ? 4 : 3, b.color, 0.9);
     g.lineBetween(b.x - Math.cos(a) * 15, b.y - Math.sin(a) * 15, b.x, b.y);
     glow(g, b.x, b.y, b.radius, b.color, 0.14);
-    g.fillStyle(b.enemy ? b.color : 0xe3fffa);
+    g.fillStyle(b.enemy ? b.color : b.accent);
     g.fillCircle(b.x, b.y, b.radius * 0.65);
+    if (!b.enemy && b.shape === 'meteor') {
+      g.lineStyle(2, b.color, 0.8);
+      g.strokeCircle(b.x, b.y, b.radius * 1.2);
+      g.lineStyle(1, b.accent, 0.7);
+      polygon(g, b.x, b.y, b.radius * 1.5, 3, b.age * 5);
+    } else if (!b.enemy && b.shape === 'crystal') {
+      g.lineStyle(1, b.accent, 0.9);
+      g.fillStyle(b.color, 0.65);
+      polygon(g, b.x, b.y, b.radius * 1.8, 4, a);
+    }
+    if (!b.enemy && b.bounced) {
+      g.lineStyle(1, b.accent, 0.55);
+      g.strokeCircle(b.x, b.y, b.radius + 5);
+    }
   }
   const p = w.player;
-  const c = p.invulnerable > 0 ? 0xe4ffde : 0x83efdb;
+  const c =
+    p.dashTime > 0 ? 0xe4ffde : w.cards.length ? w.stats.primary : 0x83efdb;
+  if (w.stats.orbit) {
+    g.lineStyle(1, w.stats.accent, 0.13);
+    g.strokeCircle(p.x, p.y, 80);
+    g.strokeCircle(p.x, p.y, 160);
+  }
+  if (w.echo.time > 0) {
+    g.lineStyle(1, 0xb2a3ff, w.echo.time);
+    g.fillStyle(0x8adaca, 0.12);
+    polygon(g, w.echo.x, w.echo.y, 20, 4, Math.PI / 4);
+    g.lineBetween(w.echo.x - 8, w.echo.y - 6, w.echo.x + 8, w.echo.y - 6);
+  }
+  if (w.stats.familiar) {
+    const x = p.x + Math.cos(w.elapsed * 2) * 48,
+      y = p.y + Math.sin(w.elapsed * 2) * 48;
+    glow(g, x, y, 12, w.stats.accent, 0.2);
+    g.lineStyle(1, w.stats.accent, 0.8);
+    g.fillStyle(0x1b213a);
+    polygon(g, x, y, 10, 4, w.elapsed);
+    g.fillStyle(0xffffff);
+    g.fillCircle(x, y, 3);
+  }
   g.fillStyle(0x010508, 0.8);
   g.fillEllipse(p.x, p.y + 20, 53, 17);
   glow(g, p.x, p.y, 22, c, 0.09);
@@ -223,6 +289,11 @@ export function drawActors(
   ];
   g.fillPoints(points, true);
   g.strokePoints(points, true);
+  g.lineStyle(1, 0xe5c494, 0.8);
+  g.lineBetween(p.x - 6, p.y + 1, p.x - 11, p.y + 12);
+  g.lineBetween(p.x + 6, p.y + 1, p.x + 11, p.y + 12);
+  g.fillStyle(w.stats.accent, 0.7);
+  polygon(g, p.x, p.y + 5, 3, 4, 0);
   g.fillStyle(0x07141d);
   polygon(g, p.x, p.y - 8, 9, 4, Math.PI / 4);
   g.lineStyle(3, 0xc9fff2);

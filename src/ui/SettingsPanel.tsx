@@ -10,6 +10,7 @@ import type { Engine } from '../game/engine';
 import type { Synth } from '../audio/synth';
 import { useState } from 'react';
 import { CARDS, ELEMENTS } from '../cards/catalog';
+import { SYNERGIES, TRIAL_BUILDS } from '../cards/synergies';
 import { CardView } from './ProtocolPanels';
 import type { Element } from '../game/types';
 export function UtilityPanel({
@@ -18,7 +19,7 @@ export function UtilityPanel({
   engine,
   synth,
 }: {
-  mode: 'settings' | 'library' | 'help' | null;
+  mode: 'settings' | 'library' | 'help' | 'lab' | null;
   onClose: () => void;
   engine: Engine;
   synth: Synth;
@@ -39,23 +40,47 @@ export function UtilityPanel({
       }}
     >
       <DialogContent
-        className={`utility-dialog ${mode === 'library' ? 'library-dialog' : ''}`}
+        className={`utility-dialog ${mode === 'library' || mode === 'lab' ? 'library-dialog' : ''}`}
       >
         <DialogTitle>
-          {mode === 'settings'
-            ? '系统设置'
-            : mode === 'library'
-              ? '协议档案'
-              : '行动指南'}
+          {mode === 'lab'
+            ? '协议试炼'
+            : mode === 'settings'
+              ? '系统设置'
+              : mode === 'library'
+                ? '协议档案'
+                : '行动指南'}
         </DialogTitle>
         <DialogDescription>
-          {mode === 'settings'
-            ? '调整声音与战斗反馈。设置保存在当前设备。'
-            : mode === 'library'
-              ? '30 项协议，5 种元素。集齐同系 3 张，激活共鸣。'
-              : '观察预警，保留一次闪避，在敌人恢复时输出。'}
+          {mode === 'lab'
+            ? '选择一套组合，立即感受叠加后的弹道。无敌试炼，不覆盖你的行动存档。'
+            : mode === 'settings'
+              ? '调整声音与战斗反馈。设置保存在当前设备。'
+              : mode === 'library'
+                ? '40 项协议，5 种元素。弹体形态、轨迹与命中效果可以自由叠加。'
+                : '观察预警，保留一次闪避，在敌人恢复时输出。'}
         </DialogDescription>
-        {mode === 'settings' ? (
+        {mode === 'lab' ? (
+          <div className="trial-grid">
+            {TRIAL_BUILDS.map((b, i) => (
+              <button
+                key={b.name}
+                className={`trial-card trial-${i}`}
+                onClick={() => {
+                  synth.unlock();
+                  engine.startPractice(b.cards);
+                  onClose();
+                }}
+              >
+                <span>EXPERIMENT 0{i + 1}</span>
+                <h3>{b.name}</h3>
+                <b>{b.subtitle}</b>
+                <p>{b.description}</p>
+                <small>进入试炼 →</small>
+              </button>
+            ))}
+          </div>
+        ) : mode === 'settings' ? (
           <>
             <div className="settings-list">
               {(['master', 'music', 'sfx'] as const).map((key, i) => (
@@ -135,6 +160,20 @@ export function UtilityPanel({
                   key={c.id}
                   owned={engine.save.meta.discovered.includes(c.id)}
                 />
+              ))}
+            </div>
+            <div className="synergy-library">
+              <h3>跨系共鸣图谱</h3>
+              {SYNERGIES.map((s) => (
+                <div key={s.id}>
+                  <b style={{ color: s.color }}>{s.name}</b>
+                  <span>
+                    {s.requires
+                      .map((id) => CARDS.find((c) => c.id === id)?.name)
+                      .join(' ＋ ')}
+                  </span>
+                  <p>{s.description}</p>
+                </div>
               ))}
             </div>
           </>

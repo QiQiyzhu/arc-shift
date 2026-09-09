@@ -1,4 +1,6 @@
 import type { EffectEvent } from '../core/events';
+import type { Phase, RoomKind } from '../game/types';
+import { midi, scoreStep, STEP_SECONDS } from './score';
 export interface SoundSettings {
   master: number;
   music: number;
@@ -8,23 +10,150 @@ export interface SoundSettings {
 }
 export const defaultSettings: SoundSettings = {
   master: 0.6,
-  music: 0.22,
+  music: 0.32,
   sfx: 0.65,
   muted: false,
   reducedMotion: false,
 };
+type Voice = {
+  source: AudioScheduledSourceNode;
+  nodes: AudioNode[];
+  music: boolean;
+};
 export class Synth {
   context: AudioContext | null = null;
   settings = { ...defaultSettings };
-  voices = 0;
-  private lastShot = 0;
-  private lastHit = 0;
-  private timer = 0;
-  private noteIndex = 0;
+  masterGain: GainNode | null = null;
+  musicGain: GainNode | null = null;
+  sfxGain: GainNode | null = null;
+  private active = new Set<Voice>();
+  get voices() {
+    return this.active.size;
+  }
+  get musicVoices() {
+    return [...this.active].filter((v) => v.music).length;
+  }
+  private noiseBuffer: AudioBuffer | null = null;
+  private lastShot = -1;
+  private lastHit = -1;
+  private lastDash = -1;
+  private lastSkill = -1;
+  private nextStep = 0;
+  private step = 0;
+  private mixStamp = '';
+  private wasPaused = false;
   unlock() {
-    if (!this.context) this.context = new AudioContext();
+    if (!this.context) {
+      const c = new AudioContext();
+      this.context = c;
+      this.lastShot = this.lastHit = this.lastDash = this.lastSkill = -Infinity;
+      this.step = 0;
+      this.wasPaused = false;
+      this.masterGain = c.createGain();
+      this.musicGain = c.createGain();
+      this.sfxGain = c.createGain();
+      const compressor = c.createDynamicsCompressor();
+      compressor.threshold.value = -12;
+      compressor.knee.value = 18;
+      compressor.ratio.value = 4;
+      compressor.attack.value = 0.004;
+      compressor.release.value = 0.16;
+      this.musicGain.connect(this.masterGain);
+      this.sfxGain.connect(this.masterGain);
+      this.masterGain.connect(compressor);
+      compressor.connect(c.destination);
+      const delay = c.createDelay(1),
+        feedback = c.createGain(),
+        wet = c.createGain();
+      delay.delayTime.value = 0.19;
+      feedback.gain.value = 0.16;
+      wet.gain.value = 0.08;
+      this.musicGain.connect(delay);
+      delay.connect(feedback);
+      feedback.connect(delay);
+      delay.connect(wet);
+      wet.connect(this.masterGain);
+      this.noiseBuffer = c.createBuffer(1, c.sampleRate * 0.2, c.sampleRate);
+      const data = this.noiseBuffer.getChannelData(0);
+      for (let i = 0; i < data.length; i++) data[i] = Math.random() * 2 - 1;
+      this.mixStamp = '';
+      this.nextStep = c.currentTime + 0.03;
+      this.syncMix(false);
+    }
     if (this.context.state === 'suspended')
       void this.context.resume().catch(() => {});
+  }
+  private syncMix(paused: boolean) {
+    const c = this.context;
+    if (!c) return;
+    const s = this.settings,
+      stamp = `${s.master}/${s.music}/${s.sfx}/${s.muted}/${paused}`;
+    if (stamp === this.mixStamp) return;
+    this.mixStamp = stamp;
+    const targets: [
+      [GainNode | null, number],
+      [GainNode | null, number],
+      [GainNode | null, number],
+    ] = [
+      [this.masterGain, s.muted ? 0 : s.master],
+      [this.musicGain, s.music * (paused ? 0 : 1)],
+      [this.sfxGain, s.sfx],
+    ];
+    for (const [node, value] of targets)
+      if (node) {
+        const p = node.gain;
+        p.cancelScheduledValues(c.currentTime);
+        p.setValueAtTime(p.value, c.currentTime);
+        p.linearRampToValueAtTime(value, c.currentTime + 0.012);
+      }
+  }
+  private connect(
+    source: AudioScheduledSourceNode,
+    length: number,
+    volume: number,
+    music: boolean,
+    at: number,
+    attack = 0.008,
+    filter?: BiquadFilterNode,
+  ) {
+    const c = this.context;
+    if (
+      !c ||
+      this.active.size >= 30 ||
+      (music && [...this.active].filter((v) => v.music).length >= 12)
+    ) {
+      source.disconnect();
+      filter?.disconnect();
+      return false;
+    }
+    const gain = c.createGain(),
+      bus = music ? this.musicGain : this.sfxGain;
+    if (!bus) return false;
+    gain.gain.setValueAtTime(0.0001, at);
+    gain.gain.exponentialRampToValueAtTime(
+      Math.max(0.0001, volume),
+      at + attack,
+    );
+    gain.gain.exponentialRampToValueAtTime(0.0001, at + length);
+    if (filter) {
+      source.connect(filter);
+      filter.connect(gain);
+    } else source.connect(gain);
+    gain.connect(bus);
+    const voice: Voice = {
+      source,
+      nodes: filter ? [gain, filter] : [gain],
+      music,
+    };
+    this.active.add(voice);
+    source.onended = () => {
+      if (!this.active.delete(voice)) return;
+      source.disconnect();
+      voice.nodes.forEach((n) => n.disconnect());
+    };
+    source.start(at);
+    source.stop(at + length + 0.015);
+    return true;
   }
   tone(
     freq: number,
@@ -33,83 +162,171 @@ export class Synth {
     volume: number,
     type: OscillatorType = 'sine',
     music = false,
+    at = this.context?.currentTime || 0,
   ) {
     const c = this.context;
-    if (!c || c.state !== 'running' || this.settings.muted || this.voices >= 30)
+    if (
+      !c ||
+      c.state !== 'running' ||
+      this.settings.muted ||
+      this.voices >= 30 ||
+      (music && [...this.active].filter((v) => v.music).length >= 12)
+    )
       return;
-    const level =
-      volume *
-      this.settings.master *
-      (music ? this.settings.music : this.settings.sfx);
-    if (level <= 0) return;
-    this.voices++;
-    const o = c.createOscillator(),
-      g = c.createGain();
+    const o = c.createOscillator();
     o.type = type;
-    o.frequency.setValueAtTime(freq, c.currentTime);
-    o.frequency.exponentialRampToValueAtTime(
-      Math.max(20, end),
-      c.currentTime + length,
+    o.frequency.setValueAtTime(freq, at);
+    o.frequency.exponentialRampToValueAtTime(Math.max(20, end), at + length);
+    this.connect(
+      o,
+      length,
+      volume,
+      music,
+      at,
+      music && length > 1 ? 0.16 : 0.008,
     );
-    g.gain.setValueAtTime(0.0001, c.currentTime);
-    g.gain.exponentialRampToValueAtTime(level, c.currentTime + 0.008);
-    g.gain.exponentialRampToValueAtTime(0.0001, c.currentTime + length);
-    o.connect(g);
-    g.connect(c.destination);
-    o.start();
-    o.stop(c.currentTime + length + 0.01);
-    o.onended = () => {
-      o.disconnect();
-      g.disconnect();
-      this.voices--;
-    };
+  }
+  private noise(
+    length: number,
+    volume: number,
+    freq: number,
+    music = false,
+    at = this.context?.currentTime || 0,
+  ) {
+    const c = this.context;
+    if (
+      !c ||
+      c.state !== 'running' ||
+      !this.noiseBuffer ||
+      this.voices >= 27 ||
+      this.settings.muted
+    )
+      return;
+    const src = c.createBufferSource(),
+      filter = c.createBiquadFilter();
+    src.buffer = this.noiseBuffer;
+    filter.type = 'highpass';
+    filter.frequency.value = freq;
+    this.connect(src, length, volume, music, at, 0.003, filter);
   }
   event(e: EffectEvent) {
     const now = this.context?.currentTime || 0;
     if (e.kind === 'shot') {
-      if (now - this.lastShot < 0.07) return;
+      if (now - this.lastShot < 0.08 || this.voices >= 25) return;
       this.lastShot = now;
-      this.tone(620, 190, 0.09, 0.1, 'triangle');
-    } else if (e.kind === 'hit') {
-      if (now - this.lastHit < 0.04) return;
-      this.lastHit = now;
-      this.tone(180, 60, 0.06, 0.085, 'triangle');
-    } else if (e.kind === 'crit') {
-      this.tone(920, 120, 0.13, 0.13, 'triangle');
+      const sounds = {
+        fire: [220, 65, 0.12, 'sawtooth'],
+        storm: [1250, 180, 0.055, 'square'],
+        frost: [1100, 880, 0.14, 'sine'],
+        void: [170, 48, 0.19, 'sine'],
+        shift: [420, 1250, 0.07, 'triangle'],
+      } as const;
+      const [f, end, length, type] = sounds[e.element || 'shift'];
+      this.tone(f, end, length, e.element === 'storm' ? 0.035 : 0.065, type);
+      if (e.element === 'fire') this.noise(0.04, 0.025, 800);
+      if (e.element === 'frost') this.tone(1650, 1400, 0.09, 0.02);
     } else if (e.kind === 'dash') {
-      if (now - this.lastShot < 0.08) return;
-      this.lastShot = now;
-      this.tone(100, 840, 0.13, 0.07, 'sine');
+      if (now - this.lastDash < 0.19) return;
+      this.lastDash = now;
+      this.tone(120, 900, 0.16, 0.08, 'sine');
+      this.noise(0.12, 0.035, 2800);
+    } else if (e.kind === 'hit' || e.kind === 'crit') {
+      if (now - this.lastHit < 0.05 || this.voices >= 27) return;
+      this.lastHit = now;
+      this.tone(
+        e.kind === 'crit' ? 800 : 210,
+        65,
+        0.08,
+        e.kind === 'crit' ? 0.1 : 0.045,
+        'triangle',
+      );
     } else if (e.kind === 'hurt') {
-      this.tone(115, 40, 0.2, 0.22, 'sawtooth');
+      this.tone(120, 38, 0.22, 0.17, 'sawtooth');
+      this.noise(0.12, 0.07, 700);
     } else if (e.kind === 'kill') {
-      this.tone(260, 40, 0.16, 0.09, 'triangle');
+      if (this.voices < 25) this.tone(280, 42, 0.15, 0.06, 'triangle');
     } else if (e.kind === 'skill') {
-      this.tone(140, 620, 0.45, 0.13, 'sine');
-      this.tone(285, 125, 0.3, 0.04, 'triangle');
+      if (now - this.lastSkill < 0.09) return;
+      this.lastSkill = now;
+      this.tone(e.reaction ? 520 : 140, 70, 0.35, 0.1, 'triangle');
+      this.tone(280, 680, 0.32, 0.04);
     } else if (e.kind === 'reward') {
-      [330, 440, 660].forEach((f) => this.tone(f, f, 0.6, 0.06));
+      [62, 65, 69, 76].forEach((n) => this.tone(midi(n), midi(n), 0.8, 0.035));
     } else if (e.kind === 'phase') {
-      this.tone(65, 130, 0.9, 0.2, 'sawtooth');
+      this.tone(55, 110, 1.1, 0.12, 'sawtooth');
+      this.noise(0.16, 0.06, 450);
     } else if (e.kind === 'victory') {
-      [261.6, 329.6, 392, 523].forEach((f) => this.tone(f, f, 2, 0.08));
+      [50, 57, 62, 65, 69].forEach((n) =>
+        this.tone(midi(n), midi(n), 2.5, 0.035),
+      );
     }
   }
-  update(dt: number, playing: boolean) {
-    if (!playing) return;
-    this.timer -= dt;
-    if (this.timer > 0) return;
-    this.timer = 0.42;
-    const notes = [130.81, 196, 261.63, 293.66, 196, 164.81, 261.63, 196];
-    const f = notes[this.noteIndex++ % notes.length];
-    this.tone(f, f, 1.5, 0.11, 'sine', true);
-    if (this.noteIndex % 4 === 0) this.tone(65.4, 65.4, 2, 0.1, 'sine', true);
+  update(
+    _dt: number,
+    playing: boolean,
+    mood?: { phase: Phase; kind: RoomKind; bossPhase: number },
+  ) {
+    const c = this.context;
+    if (!c || c.state !== 'running') return;
+    const paused = mood?.phase === 'paused' || mood?.phase === 'gameover';
+    this.syncMix(paused);
+    if (paused || this.settings.muted) {
+      this.nextStep = c.currentTime + 0.03;
+      this.wasPaused = true;
+      return;
+    }
+    if (this.wasPaused || this.nextStep < c.currentTime - 0.25)
+      this.nextStep = c.currentTime + 0.03;
+    this.wasPaused = false;
+    const intensity = playing
+      ? mood?.kind === 'boss'
+        ? 2 + (mood.bossPhase > 1 ? 1 : 0)
+        : 1
+      : 0;
+    let scheduled = 0;
+    while (this.nextStep < c.currentTime + 0.1 && scheduled++ < 4) {
+      const at = Math.max(c.currentTime, this.nextStep);
+      for (const n of scoreStep(this.step, intensity))
+        this.tone(
+          midi(n.note),
+          midi(n.note),
+          n.length,
+          n.volume,
+          n.type,
+          true,
+          at,
+        );
+      const beat = this.step % 16;
+      if (intensity > 0) {
+        if (beat % 8 === 0 || (intensity > 1 && beat === 14))
+          this.tone(125, 42, 0.16, 0.15, 'sine', true, at);
+        if (beat === 4 || beat === 12) this.noise(0.09, 0.045, 1300, true, at);
+        if (beat % (intensity > 1 ? 1 : 2) === 0)
+          this.noise(0.025, beat % 2 ? 0.008 : 0.014, 6500, true, at);
+      }
+      this.step++;
+      this.nextStep += STEP_SECONDS;
+    }
   }
   ui() {
-    this.tone(720, 960, 0.08, 0.08);
+    this.tone(720, 960, 0.08, 0.06);
   }
   dispose() {
-    void this.context?.close();
+    const c = this.context;
     this.context = null;
+    for (const v of this.active) {
+      v.source.onended = null;
+      try {
+        v.source.stop();
+      } catch {
+        /* already ended */
+      }
+      v.source.disconnect();
+      v.nodes.forEach((n) => n.disconnect());
+    }
+    this.active.clear();
+    this.masterGain = this.musicGain = this.sfxGain = null;
+    this.noiseBuffer = null;
+    if (c) void c.close().catch(() => {});
   }
 }

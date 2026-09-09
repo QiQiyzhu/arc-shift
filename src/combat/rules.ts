@@ -18,6 +18,18 @@ export const baseStats = (): Stats => ({
   explosion: 0,
   homing: 0,
   lifesteal: 0,
+  shotSize: 4,
+  shotSpeed: 720,
+  fragment: 0,
+  wave: 0,
+  orbit: false,
+  returning: false,
+  lance: false,
+  familiar: false,
+  rear: false,
+  primary: 0x8cf1dc,
+  accent: 0xe3fffa,
+  element: 'shift',
 });
 export function calculateDamage(
   base: number,

@@ -2,6 +2,7 @@ import { Random } from '../core/math';
 import { baseStats } from '../combat/rules';
 import type { Stats, Element } from '../game/types';
 import { CARDS, REQUIREMENTS } from './catalog';
+import { SYNERGIES } from './synergies';
 export function buildCounts(ids: readonly string[]): Record<Element, number> {
   const counts = { fire: 0, storm: 0, frost: 0, void: 0, shift: 0 };
   for (const id of ids) {
@@ -41,6 +42,50 @@ export function deriveStats(ids: readonly string[], level = 1): Stats {
   }
   if (has('shift-quick')) s.dashCooldown *= 0.7;
   if (has('shift-stride')) s.speed *= 1.18;
+  if (has('fire-meteor')) {
+    s.shotSize = 9;
+    s.shotSpeed *= 0.66;
+    s.damage *= 1.65;
+    s.rate *= 1.4;
+  }
+  if (has('fire-bloom')) s.fragment = 3;
+  if (has('storm-lance')) {
+    s.lance = true;
+    s.shotSpeed *= 2.4;
+    s.pierce += 3;
+    s.rate *= 1.35;
+    s.damage *= 1.15;
+  }
+  if (has('storm-familiar')) s.familiar = true;
+  if (has('frost-wave')) s.wave = 1;
+  if (has('frost-fan')) {
+    s.projectiles += 2;
+    s.damage *= 0.7;
+  }
+  if (has('void-orbit')) {
+    s.orbit = true;
+    s.pierce += 2;
+    s.rate *= 1.2;
+  }
+  if (has('void-return')) {
+    s.returning = true;
+    s.damage *= 0.9;
+  }
+  if (has('shift-rear')) s.rear = true;
+  const colors = {
+    fire: 0xffa85c,
+    storm: 0xc2a2ff,
+    frost: 0x8ce6ff,
+    void: 0xd997fa,
+    shift: 0xd0ed9e,
+  };
+  const counts = buildCounts(ids);
+  const elements = (Object.keys(counts) as Element[])
+    .filter((el) => counts[el] > 0)
+    .sort((a, b) => counts[b] - counts[a]);
+  s.element = elements[0] || 'shift';
+  s.primary = colors[s.element];
+  s.accent = elements[1] ? colors[elements[1]] : 0xf0ffed;
   const c = buildCounts(ids);
   if (c.fire >= 3 && s.burn) s.burn += 4;
   if (c.storm >= 3 && s.chain) s.chain++;
@@ -69,7 +114,18 @@ export function rewardChoices(
   const counts = buildCounts(ids);
   const preferred = rng.shuffle(pool.filter((c) => counts[c.element] > 0));
   const rest = rng.shuffle(pool);
-  const results = preferred.slice(0, 2);
+  const bridges = rng.shuffle(
+    pool.filter((c) =>
+      SYNERGIES.some(
+        (s) =>
+          s.requires.some((id) => id === c.id) &&
+          s.requires.some((id) => ids.includes(id)),
+      ),
+    ),
+  );
+  const results = bridges.slice(0, 1);
+  for (const c of preferred)
+    if (results.length < 2 && !results.includes(c)) results.push(c);
   for (const c of rest)
     if (results.length < 3 && !results.includes(c)) results.push(c);
   if (elite && !results.some((c) => c.rarity !== 'common')) {

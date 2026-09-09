@@ -38,6 +38,29 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
     Math.round(damage),
   );
   if (proc) {
+    if (
+      w.has('fire-ember') &&
+      w.has('ice-touch') &&
+      e.burn > 0 &&
+      e.slow > 0 &&
+      e.reactionCd <= 0 &&
+      w.reactionBudget > 0
+    ) {
+      w.reactionBudget--;
+      w.reactionCount++;
+      e.reactionCd = 1.2;
+      e.burn = e.slow = 0;
+      w.bus.emit({
+        kind: 'skill',
+        x: e.x,
+        y: e.y,
+        color: 0xffc49c,
+        amount: 85,
+        reaction: '热裂变',
+      });
+      for (const n of w.enemies)
+        if (n !== e && distance(n, e) < 85) hitEnemy(w, n, base * 0.65, false);
+    }
     const a = Math.atan2(e.y - w.player.y, e.x - w.player.x);
     if (!['warden', 'oracle'].includes(e.kind)) {
       e.x += Math.cos(a) * 6;
@@ -51,10 +74,16 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
     ) {
       let from = e;
       const seen = new Set([e.id]);
-      for (let i = 0; i < w.stats.chain; i++) {
+      let extra = 0;
+      for (let i = 0; i < w.stats.chain + extra; i++) {
         const target = w.enemies
           .filter((n) => n.hp > 0 && !seen.has(n.id) && distance(n, from) < 230)
-          .sort((a, b) => distance(a, from) - distance(b, from))[0];
+          .sort(
+            (a, b) =>
+              (w.has('ice-touch')
+                ? Number(b.slow > 0) - Number(a.slow > 0)
+                : 0) || distance(a, from) - distance(b, from),
+          )[0];
         if (!target) break;
         w.bus.emit({
           kind: 'skill',
@@ -62,9 +91,36 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
           y: from.y,
           x2: target.x,
           y2: target.y,
-          color: 0xbba4ff,
+          color: w.has('fire-ember')
+            ? 0xffb477
+            : w.has('ice-touch')
+              ? 0x8cdeff
+              : 0xbba4ff,
         });
-        hitEnemy(w, target, base * 0.48, false);
+        if (w.has('ice-touch') && target.slow > 0) extra = 1;
+        hitEnemy(w, target, base * (i >= w.stats.chain ? 0.3 : 0.48), false);
+        if (
+          w.has('fire-ember') &&
+          target.burn > 0 &&
+          target.reactionCd <= 0 &&
+          w.reactionBudget > 0
+        ) {
+          target.reactionCd = 0.6;
+          target.burn = Math.max(0, target.burn - 1);
+          w.reactionBudget--;
+          w.reactionCount++;
+          w.bus.emit({
+            kind: 'skill',
+            x: target.x,
+            y: target.y,
+            color: 0xe8a5e4,
+            amount: 70,
+            reaction: '电浆回路',
+          });
+          for (const n of w.enemies)
+            if (n !== target && distance(n, target) < 70)
+              hitEnemy(w, n, base * 0.35, false);
+        }
         seen.add(target.id);
         from = target;
       }
@@ -74,12 +130,32 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
         if (n !== e && distance(n, e) < 130) hitEnemy(w, n, base * 0.4, false);
     }
     if (w.stats.explosion > 0) {
-      w.emit('skill', e.x, e.y, 0xffad6f, 44);
+      const well = w.has('void-horizon')
+        ? w.hazards.find(
+            (h) => h.friendly && h.type === 'well' && distance(h, e) < h.r,
+          )
+        : undefined;
+      const collapse = well && w.reactionBudget > 0 && e.reactionCd <= 0;
+      const center = collapse ? well : e;
+      if (collapse) {
+        w.reactionBudget--;
+        w.reactionCount++;
+        e.reactionCd = 0.2;
+      }
+      w.bus.emit({
+        kind: 'skill',
+        x: center.x,
+        y: center.y,
+        color: collapse ? 0xe5a0ef : 0xffad6f,
+        amount: collapse ? 90 : 44,
+        reaction: collapse ? '坍缩火种' : undefined,
+      });
       for (const n of w.enemies)
-        if (n !== e && distance(n, e) < 65) hitEnemy(w, n, base * 0.25, false);
+        if (n !== e && distance(n, center) < (collapse ? 90 : 65))
+          hitEnemy(w, n, base * (collapse ? 0.35 : 0.25), false);
     }
   }
-  if (e.hp <= 0) {
+  if (e.hp <= 0 && e.state !== 'dead') {
     e.state = 'dead';
     w.kills++;
     w.xp += e.elite ? 28 : 10;

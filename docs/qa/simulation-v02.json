@@ -1,0 +1,1753 @@
+{
+  "summary": {
+    "date": "2026-09-09",
+    "version": "0.2.0",
+    "totalRuns": 18,
+    "victories": 18,
+    "peakEnemies": 14.0,
+    "peakProjectiles": 41.0,
+    "poolMisses": 0.0,
+    "simSeconds": [
+      270.3,
+      428.45
+    ],
+    "updateMeanMs": [
+      0.0015,
+      0.0051
+    ],
+    "updateP99Ms": [
+      0.0058,
+      0.0395
+    ]
+  },
+  "runs": [
+    {
+      "initial": "storm-arc",
+      "seed": 531,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 283.83,
+      "wallMs": 191,
+      "health": 112,
+      "kills": 233,
+      "damageTaken": 46,
+      "build": [
+        "storm-arc",
+        "storm-surge",
+        "storm-conduct",
+        "fire-ember",
+        "shift-reload",
+        "void-echo",
+        "void-leech",
+        "void-execute"
+      ],
+      "inputs": {
+        "dashes": 11,
+        "qs": 36,
+        "es": 18
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 21,
+      "poolMisses": 0,
+      "updateMeanMs": 0.005,
+      "updateP99Ms": 0.0274,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.9,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-surge"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 100.3,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-conduct"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 100.3,
+          "hp": 120,
+          "kills": 68,
+          "card": "fire-ember"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 120.4,
+          "hp": 110,
+          "kills": 69,
+          "card": "shift-reload"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 189.7,
+          "hp": 120,
+          "kills": 141,
+          "card": "void-echo"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 189.7,
+          "hp": 120,
+          "kills": 141,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 262.3,
+          "hp": 120,
+          "kills": 229,
+          "card": "void-execute"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 283.8,
+          "hp": 112,
+          "kills": 233
+        }
+      ]
+    },
+    {
+      "initial": "storm-arc",
+      "seed": 12345,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 270.3,
+      "wallMs": 103,
+      "health": 120,
+      "kills": 231,
+      "damageTaken": 0,
+      "build": [
+        "storm-arc",
+        "storm-critical",
+        "shift-stride",
+        "storm-surge",
+        "fire-split",
+        "void-seek",
+        "void-leech",
+        "fire-ember"
+      ],
+      "inputs": {
+        "dashes": 4,
+        "qs": 29,
+        "es": 14
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 30,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0029,
+      "updateP99Ms": 0.0192,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.3,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-critical"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 100.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "shift-stride"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 100.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-surge"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 119.5,
+          "hp": 120,
+          "kills": 69,
+          "card": "fire-split"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 189.5,
+          "hp": 120,
+          "kills": 141,
+          "card": "void-seek"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 189.5,
+          "hp": 120,
+          "kills": 141,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 258.5,
+          "hp": 120,
+          "kills": 229,
+          "card": "fire-ember"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 270.3,
+          "hp": 120,
+          "kills": 231
+        }
+      ]
+    },
+    {
+      "initial": "storm-arc",
+      "seed": 20260908,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 292.87,
+      "wallMs": 98,
+      "health": 108,
+      "kills": 234,
+      "damageTaken": 24,
+      "build": [
+        "storm-arc",
+        "storm-surge",
+        "storm-critical",
+        "storm-static",
+        "void-singularity",
+        "void-return",
+        "frost-wave",
+        "void-seek"
+      ],
+      "inputs": {
+        "dashes": 8,
+        "qs": 35,
+        "es": 22
+      },
+      "peakEnemies": 14,
+      "peakProjectiles": 25,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0023,
+      "updateP99Ms": 0.013,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-surge"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 101.2,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-critical"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 101.2,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-static"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 119.8,
+          "hp": 120,
+          "kills": 69,
+          "card": "void-singularity"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 191,
+          "hp": 120,
+          "kills": 141,
+          "card": "void-return"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 191,
+          "hp": 120,
+          "kills": 141,
+          "card": "frost-wave"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 264.8,
+          "hp": 120,
+          "kills": 229,
+          "card": "void-seek"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 292.9,
+          "hp": 108,
+          "kills": 234
+        }
+      ]
+    },
+    {
+      "initial": "storm-arc",
+      "seed": 531,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 420.78,
+      "wallMs": 129,
+      "health": 111,
+      "kills": 368,
+      "damageTaken": 24,
+      "build": [
+        "storm-arc",
+        "storm-surge",
+        "storm-conduct",
+        "fire-ember",
+        "shift-reload",
+        "void-echo",
+        "void-leech",
+        "void-execute"
+      ],
+      "inputs": {
+        "dashes": 9,
+        "qs": 51,
+        "es": 19
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 21,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0017,
+      "updateP99Ms": 0.0064,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.9,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-surge"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 100.3,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-conduct"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 170.7,
+          "hp": 120,
+          "kills": 124,
+          "card": "fire-ember"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 188.5,
+          "hp": 120,
+          "kills": 125,
+          "card": "shift-reload"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 260.3,
+          "hp": 120,
+          "kills": 197,
+          "card": "void-echo"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 330.8,
+          "hp": 120,
+          "kills": 277,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 402.8,
+          "hp": 120,
+          "kills": 365,
+          "card": "void-execute"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 420.8,
+          "hp": 111,
+          "kills": 368
+        }
+      ]
+    },
+    {
+      "initial": "storm-arc",
+      "seed": 12345,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 403.32,
+      "wallMs": 122,
+      "health": 109,
+      "kills": 366,
+      "damageTaken": 24,
+      "build": [
+        "storm-arc",
+        "storm-critical",
+        "shift-stride",
+        "storm-surge",
+        "fire-split",
+        "void-seek",
+        "void-leech",
+        "fire-ember"
+      ],
+      "inputs": {
+        "dashes": 4,
+        "qs": 47,
+        "es": 20
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 30,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0019,
+      "updateP99Ms": 0.0094,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.3,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-critical"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 100.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "shift-stride"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 170.9,
+          "hp": 120,
+          "kills": 124,
+          "card": "storm-surge"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 187.7,
+          "hp": 120,
+          "kills": 125,
+          "card": "fire-split"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 256.7,
+          "hp": 120,
+          "kills": 197,
+          "card": "void-seek"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 324.7,
+          "hp": 120,
+          "kills": 277,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 393.3,
+          "hp": 120,
+          "kills": 365,
+          "card": "fire-ember"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 403.3,
+          "hp": 109,
+          "kills": 366
+        }
+      ]
+    },
+    {
+      "initial": "storm-arc",
+      "seed": 20260908,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 420.13,
+      "wallMs": 126,
+      "health": 108,
+      "kills": 370,
+      "damageTaken": 24,
+      "build": [
+        "storm-arc",
+        "storm-surge",
+        "storm-critical",
+        "storm-static",
+        "void-singularity",
+        "void-return",
+        "frost-wave",
+        "void-seek"
+      ],
+      "inputs": {
+        "dashes": 9,
+        "qs": 46,
+        "es": 33
+      },
+      "peakEnemies": 14,
+      "peakProjectiles": 24,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0017,
+      "updateP99Ms": 0.0064,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-surge"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 101.2,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-critical"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 169.4,
+          "hp": 120,
+          "kills": 124,
+          "card": "storm-static"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 185,
+          "hp": 120,
+          "kills": 125,
+          "card": "void-singularity"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 254.4,
+          "hp": 120,
+          "kills": 197,
+          "card": "void-return"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 325.5,
+          "hp": 120,
+          "kills": 277,
+          "card": "frost-wave"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 396.3,
+          "hp": 120,
+          "kills": 365,
+          "card": "void-seek"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 420.1,
+          "hp": 108,
+          "kills": 370
+        }
+      ]
+    },
+    {
+      "initial": "fire-ember",
+      "seed": 531,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 286.93,
+      "wallMs": 220,
+      "health": 113,
+      "kills": 234,
+      "damageTaken": 24,
+      "build": [
+        "fire-ember",
+        "fire-blast",
+        "fire-fuel",
+        "void-echo",
+        "fire-funeral",
+        "storm-needle",
+        "void-leech",
+        "storm-surge"
+      ],
+      "inputs": {
+        "dashes": 8,
+        "qs": 36,
+        "es": 13
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 30,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0049,
+      "updateP99Ms": 0.0395,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.7,
+          "hp": 120,
+          "kills": 20,
+          "card": "fire-blast"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 102,
+          "hp": 120,
+          "kills": 68,
+          "card": "fire-fuel"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 102,
+          "hp": 120,
+          "kills": 68,
+          "card": "void-echo"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 120.7,
+          "hp": 120,
+          "kills": 69,
+          "card": "fire-funeral"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 192.4,
+          "hp": 120,
+          "kills": 141,
+          "card": "storm-needle"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 192.4,
+          "hp": 120,
+          "kills": 141,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 263.4,
+          "hp": 120,
+          "kills": 229,
+          "card": "storm-surge"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 286.9,
+          "hp": 113,
+          "kills": 234
+        }
+      ]
+    },
+    {
+      "initial": "fire-ember",
+      "seed": 12345,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 276.27,
+      "wallMs": 183,
+      "health": 148,
+      "kills": 232,
+      "damageTaken": 24,
+      "build": [
+        "fire-ember",
+        "fire-split",
+        "ice-touch",
+        "fire-blast",
+        "shift-rear",
+        "ice-shell",
+        "fire-dash",
+        "storm-needle"
+      ],
+      "inputs": {
+        "dashes": 10,
+        "qs": 30,
+        "es": 16
+      },
+      "peakEnemies": 12,
+      "peakProjectiles": 41,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0049,
+      "updateP99Ms": 0.0315,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33.6,
+          "hp": 120,
+          "kills": 20,
+          "card": "fire-split"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 103.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "ice-touch"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 103.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "fire-blast"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 114.6,
+          "hp": 120,
+          "kills": 69,
+          "card": "shift-rear"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 185.3,
+          "hp": 160,
+          "kills": 141,
+          "card": "ice-shell"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 185.3,
+          "hp": 160,
+          "kills": 141,
+          "card": "fire-dash"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 258.2,
+          "hp": 160,
+          "kills": 229,
+          "card": "storm-needle"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 276.3,
+          "hp": 148,
+          "kills": 232
+        }
+      ]
+    },
+    {
+      "initial": "fire-ember",
+      "seed": 20260908,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 289.2,
+      "wallMs": 141,
+      "health": 84,
+      "kills": 232,
+      "damageTaken": 48,
+      "build": [
+        "fire-ember",
+        "storm-lance",
+        "shift-quick",
+        "storm-familiar",
+        "void-echo",
+        "ice-pierce",
+        "storm-critical",
+        "shift-stride"
+      ],
+      "inputs": {
+        "dashes": 6,
+        "qs": 33,
+        "es": 13
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 21,
+      "poolMisses": 0,
+      "updateMeanMs": 0.003,
+      "updateP99Ms": 0.0183,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.9,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-lance"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 101.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "shift-quick"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 101.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-familiar"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 124.8,
+          "hp": 120,
+          "kills": 69,
+          "card": "void-echo"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 196.6,
+          "hp": 120,
+          "kills": 141,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 196.6,
+          "hp": 120,
+          "kills": 141,
+          "card": "storm-critical"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 267.9,
+          "hp": 120,
+          "kills": 229,
+          "card": "shift-stride"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 289.2,
+          "hp": 84,
+          "kills": 232
+        }
+      ]
+    },
+    {
+      "initial": "fire-ember",
+      "seed": 531,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 422.1,
+      "wallMs": 145,
+      "health": 113,
+      "kills": 370,
+      "damageTaken": 24,
+      "build": [
+        "fire-ember",
+        "fire-blast",
+        "fire-fuel",
+        "void-echo",
+        "fire-funeral",
+        "storm-needle",
+        "void-leech",
+        "storm-surge"
+      ],
+      "inputs": {
+        "dashes": 13,
+        "qs": 53,
+        "es": 24
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 30,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0019,
+      "updateP99Ms": 0.0076,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.7,
+          "hp": 120,
+          "kills": 20,
+          "card": "fire-blast"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 102,
+          "hp": 120,
+          "kills": 68,
+          "card": "fire-fuel"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 170.6,
+          "hp": 120,
+          "kills": 124,
+          "card": "void-echo"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 187.1,
+          "hp": 120,
+          "kills": 125,
+          "card": "fire-funeral"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 258.7,
+          "hp": 120,
+          "kills": 197,
+          "card": "storm-needle"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 329.4,
+          "hp": 120,
+          "kills": 277,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 400.7,
+          "hp": 120,
+          "kills": 365,
+          "card": "storm-surge"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 422.1,
+          "hp": 113,
+          "kills": 370
+        }
+      ]
+    },
+    {
+      "initial": "fire-ember",
+      "seed": 12345,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 413.65,
+      "wallMs": 133,
+      "health": 160,
+      "kills": 368,
+      "damageTaken": 0,
+      "build": [
+        "fire-ember",
+        "fire-split",
+        "ice-touch",
+        "fire-blast",
+        "shift-rear",
+        "ice-shell",
+        "fire-dash",
+        "storm-needle"
+      ],
+      "inputs": {
+        "dashes": 11,
+        "qs": 48,
+        "es": 21
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 38,
+      "poolMisses": 0,
+      "updateMeanMs": 0.002,
+      "updateP99Ms": 0.0078,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33.6,
+          "hp": 120,
+          "kills": 20,
+          "card": "fire-split"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 103.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "ice-touch"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 173.7,
+          "hp": 120,
+          "kills": 124,
+          "card": "fire-blast"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 186.5,
+          "hp": 120,
+          "kills": 125,
+          "card": "shift-rear"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 256.7,
+          "hp": 160,
+          "kills": 197,
+          "card": "ice-shell"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 327.3,
+          "hp": 160,
+          "kills": 277,
+          "card": "fire-dash"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 399,
+          "hp": 160,
+          "kills": 365,
+          "card": "storm-needle"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 413.6,
+          "hp": 160,
+          "kills": 368
+        }
+      ]
+    },
+    {
+      "initial": "fire-ember",
+      "seed": 20260908,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 428.45,
+      "wallMs": 127,
+      "health": 84,
+      "kills": 368,
+      "damageTaken": 48,
+      "build": [
+        "fire-ember",
+        "storm-lance",
+        "shift-quick",
+        "storm-familiar",
+        "void-echo",
+        "ice-pierce",
+        "storm-critical",
+        "shift-stride"
+      ],
+      "inputs": {
+        "dashes": 7,
+        "qs": 49,
+        "es": 21
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 21,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0015,
+      "updateP99Ms": 0.006,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.9,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-lance"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 101.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "shift-quick"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 170.8,
+          "hp": 120,
+          "kills": 124,
+          "card": "storm-familiar"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 192.6,
+          "hp": 120,
+          "kills": 125,
+          "card": "void-echo"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 264.3,
+          "hp": 120,
+          "kills": 197,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 335.6,
+          "hp": 120,
+          "kills": 277,
+          "card": "storm-critical"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 408.8,
+          "hp": 120,
+          "kills": 365,
+          "card": "shift-stride"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 428.4,
+          "hp": 84,
+          "kills": 368
+        }
+      ]
+    },
+    {
+      "initial": "ice-touch",
+      "seed": 531,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 288.52,
+      "wallMs": 231,
+      "health": 148,
+      "kills": 234,
+      "damageTaken": 24,
+      "build": [
+        "ice-touch",
+        "ice-shell",
+        "ice-brittle",
+        "storm-needle",
+        "storm-surge",
+        "fire-ember",
+        "ice-pierce",
+        "fire-dash"
+      ],
+      "inputs": {
+        "dashes": 8,
+        "qs": 34,
+        "es": 15
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 30,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0051,
+      "updateP99Ms": 0.0358,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33.1,
+          "hp": 160,
+          "kills": 20,
+          "card": "ice-shell"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 101.5,
+          "hp": 160,
+          "kills": 68,
+          "card": "ice-brittle"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 101.5,
+          "hp": 160,
+          "kills": 68,
+          "card": "storm-needle"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 123.6,
+          "hp": 160,
+          "kills": 69,
+          "card": "storm-surge"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 193.9,
+          "hp": 160,
+          "kills": 141,
+          "card": "fire-ember"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 193.9,
+          "hp": 160,
+          "kills": 141,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 266.7,
+          "hp": 160,
+          "kills": 229,
+          "card": "fire-dash"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 288.5,
+          "hp": 148,
+          "kills": 234
+        }
+      ]
+    },
+    {
+      "initial": "ice-touch",
+      "seed": 12345,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 279.98,
+      "wallMs": 163,
+      "health": 127,
+      "kills": 232,
+      "damageTaken": 48,
+      "build": [
+        "ice-touch",
+        "ice-pierce",
+        "shift-stride",
+        "ice-shell",
+        "fire-split",
+        "void-seek",
+        "void-leech",
+        "void-horizon"
+      ],
+      "inputs": {
+        "dashes": 9,
+        "qs": 30,
+        "es": 16
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 36,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0047,
+      "updateP99Ms": 0.0291,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33.3,
+          "hp": 120,
+          "kills": 20,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 102.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "shift-stride"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 102.4,
+          "hp": 160,
+          "kills": 68,
+          "card": "ice-shell"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 124.7,
+          "hp": 160,
+          "kills": 69,
+          "card": "fire-split"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 197.5,
+          "hp": 160,
+          "kills": 141,
+          "card": "void-seek"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 197.5,
+          "hp": 160,
+          "kills": 141,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 265.8,
+          "hp": 160,
+          "kills": 229,
+          "card": "void-horizon"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 280,
+          "hp": 127,
+          "kills": 232
+        }
+      ]
+    },
+    {
+      "initial": "ice-touch",
+      "seed": 20260908,
+      "route": "safe",
+      "result": "victory",
+      "simSeconds": 281,
+      "wallMs": 93,
+      "health": 108,
+      "kills": 232,
+      "damageTaken": 24,
+      "build": [
+        "ice-touch",
+        "storm-arc",
+        "storm-surge",
+        "ice-pierce",
+        "fire-ember",
+        "ice-brittle",
+        "ice-shatter",
+        "storm-needle"
+      ],
+      "inputs": {
+        "dashes": 6,
+        "qs": 33,
+        "es": 16
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 27,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0019,
+      "updateP99Ms": 0.0099,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.9,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-arc"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 102.9,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-surge"
+        },
+        {
+          "room": 3,
+          "kind": "heal",
+          "time": 102.9,
+          "hp": 120,
+          "kills": 68,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 120.7,
+          "hp": 120,
+          "kills": 69,
+          "card": "fire-ember"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 190.8,
+          "hp": 120,
+          "kills": 141,
+          "card": "ice-brittle"
+        },
+        {
+          "room": 6,
+          "kind": "treasure",
+          "time": 190.8,
+          "hp": 120,
+          "kills": 141,
+          "card": "ice-shatter"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 260,
+          "hp": 120,
+          "kills": 229,
+          "card": "storm-needle"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 281,
+          "hp": 108,
+          "kills": 232
+        }
+      ]
+    },
+    {
+      "initial": "ice-touch",
+      "seed": 531,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 422.98,
+      "wallMs": 139,
+      "health": 148,
+      "kills": 368,
+      "damageTaken": 24,
+      "build": [
+        "ice-touch",
+        "ice-shell",
+        "ice-brittle",
+        "storm-needle",
+        "storm-surge",
+        "fire-ember",
+        "ice-pierce",
+        "fire-dash"
+      ],
+      "inputs": {
+        "dashes": 17,
+        "qs": 47,
+        "es": 21
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 27,
+      "poolMisses": 0,
+      "updateMeanMs": 0.002,
+      "updateP99Ms": 0.0092,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33.1,
+          "hp": 160,
+          "kills": 20,
+          "card": "ice-shell"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 101.5,
+          "hp": 160,
+          "kills": 68,
+          "card": "ice-brittle"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 173.1,
+          "hp": 160,
+          "kills": 124,
+          "card": "storm-needle"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 190.3,
+          "hp": 160,
+          "kills": 125,
+          "card": "storm-surge"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 262.5,
+          "hp": 160,
+          "kills": 197,
+          "card": "fire-ember"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 333.7,
+          "hp": 160,
+          "kills": 277,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 403.9,
+          "hp": 160,
+          "kills": 365,
+          "card": "fire-dash"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 423,
+          "hp": 148,
+          "kills": 368
+        }
+      ]
+    },
+    {
+      "initial": "ice-touch",
+      "seed": 12345,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 409.63,
+      "wallMs": 109,
+      "health": 160,
+      "kills": 368,
+      "damageTaken": 0,
+      "build": [
+        "ice-touch",
+        "ice-pierce",
+        "shift-stride",
+        "ice-shell",
+        "fire-split",
+        "void-seek",
+        "void-leech",
+        "void-horizon"
+      ],
+      "inputs": {
+        "dashes": 7,
+        "qs": 45,
+        "es": 21
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 39,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0018,
+      "updateP99Ms": 0.0076,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 33.3,
+          "hp": 120,
+          "kills": 20,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 102.4,
+          "hp": 120,
+          "kills": 68,
+          "card": "shift-stride"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 170.5,
+          "hp": 160,
+          "kills": 124,
+          "card": "ice-shell"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 190.5,
+          "hp": 160,
+          "kills": 125,
+          "card": "fire-split"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 260.2,
+          "hp": 160,
+          "kills": 197,
+          "card": "void-seek"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 329,
+          "hp": 160,
+          "kills": 277,
+          "card": "void-leech"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 397.3,
+          "hp": 160,
+          "kills": 365,
+          "card": "void-horizon"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 409.6,
+          "hp": 160,
+          "kills": 368
+        }
+      ]
+    },
+    {
+      "initial": "ice-touch",
+      "seed": 20260908,
+      "route": "combat",
+      "result": "victory",
+      "simSeconds": 416.13,
+      "wallMs": 112,
+      "health": 108,
+      "kills": 368,
+      "damageTaken": 24,
+      "build": [
+        "ice-touch",
+        "storm-arc",
+        "storm-surge",
+        "ice-pierce",
+        "fire-ember",
+        "ice-brittle",
+        "ice-shatter",
+        "storm-needle"
+      ],
+      "inputs": {
+        "dashes": 8,
+        "qs": 49,
+        "es": 16
+      },
+      "peakEnemies": 11,
+      "peakProjectiles": 27,
+      "poolMisses": 0,
+      "updateMeanMs": 0.0015,
+      "updateP99Ms": 0.0058,
+      "rooms": [
+        {
+          "room": 1,
+          "kind": "combat",
+          "time": 32.9,
+          "hp": 120,
+          "kills": 20,
+          "card": "storm-arc"
+        },
+        {
+          "room": 2,
+          "kind": "combat",
+          "time": 102.9,
+          "hp": 120,
+          "kills": 68,
+          "card": "storm-surge"
+        },
+        {
+          "room": 3,
+          "kind": "combat",
+          "time": 172.9,
+          "hp": 120,
+          "kills": 124,
+          "card": "ice-pierce"
+        },
+        {
+          "room": 4,
+          "kind": "boss",
+          "time": 188.3,
+          "hp": 120,
+          "kills": 125,
+          "card": "fire-ember"
+        },
+        {
+          "room": 5,
+          "kind": "combat",
+          "time": 257.9,
+          "hp": 120,
+          "kills": 197,
+          "card": "ice-brittle"
+        },
+        {
+          "room": 6,
+          "kind": "combat",
+          "time": 328.3,
+          "hp": 120,
+          "kills": 277,
+          "card": "ice-shatter"
+        },
+        {
+          "room": 7,
+          "kind": "combat",
+          "time": 398,
+          "hp": 120,
+          "kills": 365,
+          "card": "storm-needle"
+        },
+        {
+          "room": 8,
+          "kind": "boss",
+          "time": 416.1,
+          "hp": 108,
+          "kills": 368
+        }
+      ]
+    }
+  ]
+}

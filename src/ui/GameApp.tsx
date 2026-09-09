@@ -14,6 +14,7 @@ import {
   Pause,
   Play,
   BookOpen,
+  FlaskConical,
   Shield,
 } from 'lucide-react';
 import { Engine } from '../game/engine';
@@ -39,10 +40,17 @@ export default function GameApp() {
   const [loaded, setLoaded] = useState(false);
   const scene = useRef<ArcScene | null>(null);
   const [utility, setUtility] = useState<
-    'settings' | 'library' | 'help' | null
+    'settings' | 'library' | 'help' | 'lab' | null
   >(null);
   useEffect(() => {
     const s = new ArcScene(engine);
+    s.onReady = () => setLoaded(true);
+    s.onSuspend = () =>
+      synth.update(0, false, {
+        phase: 'paused',
+        kind: engine.world.room.kind,
+        bossPhase: 0,
+      });
     scene.current = s;
     synth.settings = { ...engine.save.settings };
     const off = engine.world.bus.on((e) => synth.event(e));
@@ -56,6 +64,11 @@ export default function GameApp() {
       synth.update(
         Math.min(0.1, (now - lastSound) / 1000),
         engine.world.phase === 'playing',
+        {
+          phase: engine.world.phase,
+          kind: engine.world.room.kind,
+          bossPhase: engine.world.boss?.phase || 0,
+        },
       );
       lastSound = now;
       if (now - last > 80) {
@@ -74,12 +87,12 @@ export default function GameApp() {
       scene: s,
       audio: { noAudio: true },
       render: { powerPreference: 'high-performance' },
-      callbacks: { postBoot: () => setLoaded(true) },
     });
     return () => {
       off();
       webOff();
       s.release();
+      synth.dispose();
       game.destroy(true);
       scene.current = null;
     };
@@ -92,7 +105,7 @@ export default function GameApp() {
     engine.start();
     render((n) => n + 1);
   };
-  const openUtility = (mode: 'settings' | 'library' | 'help') => {
+  const openUtility = (mode: 'settings' | 'library' | 'help' | 'lab') => {
     synth.unlock();
     if (['playing', 'transition', 'bossIntro'].includes(w.phase))
       engine.pause();
@@ -100,7 +113,9 @@ export default function GameApp() {
     setUtility(mode);
   };
   return (
-    <main className={`game-shell phase-${w.phase}`}>
+    <main
+      className={`game-shell phase-${w.phase}${engine.practice ? ' is-practice' : ''}`}
+    >
       <header className="topbar">
         <a className="wordmark" href="./" aria-label="ARC SHIFT 首页">
           ARC<span>{'//'}</span>SHIFT<i>奥术跃迁</i>
@@ -109,7 +124,7 @@ export default function GameApp() {
           <span className="signal-dot" /> 网络异常 · 连接已建立
         </div>
         <div className="top-actions">
-          <span className="version">PROTOCOL 01.0</span>
+          <span className="version">RESONANCE / 02</span>
           <button
             aria-label={engine.save.settings.muted ? '开启声音' : '静音'}
             onClick={() => {
@@ -141,9 +156,10 @@ export default function GameApp() {
         <div className="vignette" />
         {w.phase === 'menu' && (
           <div className="menu-overlay">
+            <img className="menu-keyart" src="/art/rift-keyart.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> AN ORIGINAL ACTION ROGUELITE
+                <span /> CHAPTER II · RESONANCE
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -152,12 +168,12 @@ export default function GameApp() {
               </h1>
               <div className="cn-title">
                 <span>奥 术 跃 迁</span>
-                <i>魔法已觉醒。网络已失控。</i>
+                <i>万物皆可共鸣。</i>
               </div>
               <p className="menu-description">
-                深入异常区域，改写你的战斗协议。
+                深入失落圣所，让元素彼此改写。
                 <br />
-                让每一次跃迁，成为突破边界的可能。
+                星火、冰晶与电弧，汇成你的独特弹幕。
               </p>
               <button
                 className="start-button"
@@ -171,12 +187,19 @@ export default function GameApp() {
                 <ArrowUpRight size={24} />
               </button>
               <div className="menu-secondary">
+                <button disabled={!loaded} onClick={() => openUtility('lab')}>
+                  <FlaskConical size={16} /> 协议试炼 <ChevronRight size={14} />
+                </button>
                 <button onClick={() => openUtility('library')}>
                   <BookOpen size={16} /> 协议档案 <ChevronRight size={14} />
                 </button>
                 <button onClick={() => openUtility('help')}>
                   操作指南 <ChevronRight size={14} />
                 </button>
+              </div>
+              <div className="edition-note">
+                40 项协议 <span> / </span> 自由叠加弹道 <span> / </span> 6
+                种跨系反应
               </div>
               <div className="continue-row">
                 {engine.save.checkpoint && (
@@ -203,9 +226,9 @@ export default function GameApp() {
               </div>
             </div>
             <div className="scene-label">
-              <span className="tiny">LIVE SIGNAL // 001</span>
+              <span className="tiny">THE FRACTURED SANCTUM</span>
               <div>
-                <span className="signal-dot" /> 静默矩阵
+                <span className="signal-dot" /> 裂隙圣所
               </div>
               <p>
                 奥术残留强度 <b>87.4%</b>
@@ -253,9 +276,11 @@ export default function GameApp() {
                 </div>
                 <h2>{w.room.name}</h2>
                 <p>
-                  {w.room.kind === 'boss'
-                    ? '击败核心实体'
-                    : `清除异常 · 波次 ${w.wave} / ${w.room.index === 1 ? 4 : 8}`}
+                  {engine.practice
+                    ? `无尽试炼 · 波次 ${w.wave}`
+                    : w.room.kind === 'boss'
+                      ? '击败核心实体'
+                      : `清除异常 · 波次 ${w.wave} / ${w.room.index === 1 ? 4 : 8}`}
                 </p>
               </div>
               <div className="hud-right">
@@ -279,6 +304,20 @@ export default function GameApp() {
               </div>
             )}
             <BuildHUD cards={w.cards} />
+            {engine.practice && (
+              <div className="practice-banner">
+                <FlaskConical size={14} /> 无敌试炼 · 不影响存档{' '}
+                <button onClick={() => openUtility('lab')}>切换组合</button>
+                <button
+                  onClick={() => {
+                    w.phase = 'menu';
+                    render((n) => n + 1);
+                  }}
+                >
+                  退出试炼
+                </button>
+              </div>
+            )}
             <div className="hud-bottom">
               <div className="kill-count">
                 <span>已净化</span>

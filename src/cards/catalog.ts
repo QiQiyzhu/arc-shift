@@ -49,6 +49,22 @@ type Row = [string, string, string, string, string, Upgrade['rarity']];
 const groups: Record<Element, Row[]> = {
   fire: [
     [
+      'fire-meteor',
+      '赤核陨星',
+      'CRIMSON MASS',
+      '弹体变为缓慢的大型陨星；可叠加追踪、反弹与多发。',
+      '伤害 ×1.65 · 射击间隔 ×1.4',
+      'epic',
+    ],
+    [
+      'fire-bloom',
+      '星火胚芽',
+      'SOLAR SEEDS',
+      '主弹首次命中时裂出三枚继承元素的微型弹。微型弹不会再次分裂或触发反应。',
+      '分裂 3 发 · 每发 28% 伤害',
+      'rare',
+    ],
+    [
       'fire-ember',
       '余烬协议',
       'EMBER SCRIPT',
@@ -98,6 +114,22 @@ const groups: Record<Element, Row[]> = {
     ],
   ],
   storm: [
+    [
+      'storm-lance',
+      '贯星光矛',
+      'ASTRAL LANCE',
+      '高速光矛穿过敌群，仍可叠加多发与反弹；射击间隔增加。',
+      '穿透 +3 · 弹速 ×2.4 · 间隔 ×1.35',
+      'epic',
+    ],
+    [
+      'storm-familiar',
+      '浮游使魔',
+      'CHOIR WISP',
+      '一枚使魔围绕你，每 0.7 秒向准星射击，继承弹道与元素状态。',
+      '辅助射击 45% 伤害 · 不触发派生反应',
+      'rare',
+    ],
     [
       'storm-arc',
       '电弧引擎',
@@ -149,6 +181,22 @@ const groups: Record<Element, Row[]> = {
   ],
   frost: [
     [
+      'frost-wave',
+      '蜿蜒频谱',
+      'SERPENT WAVE',
+      '弹体沿波形前进，可叠加追踪、反弹和环绕。',
+      '波动弹道 · 横向覆盖',
+      'common',
+    ],
+    [
+      'frost-fan',
+      '碎星扇面',
+      'SHARD FAN',
+      '每次射击增加两枚弹体，降低单发伤害。',
+      '弹体 +2 · 单发伤害 ×70%',
+      'epic',
+    ],
+    [
       'ice-touch',
       '冰霜编码',
       'FROST CODE',
@@ -199,6 +247,22 @@ const groups: Record<Element, Row[]> = {
   ],
   void: [
     [
+      'void-orbit',
+      '微型星系',
+      'LITTLE COSMOS',
+      '主弹先围绕你旋转，再飞向敌群；环绕半径逐渐扩大。',
+      '星轨弹道 · 穿透 +2 · 间隔 ×1.2',
+      'epic',
+    ],
+    [
+      'void-return',
+      '逆因果回旋',
+      'RETURN VECTOR',
+      '弹体飞行后折返至你身边；无法反弹的边界提前返航，保留命中记录。',
+      '回旋弹道 · 单发伤害 ×90%',
+      'rare',
+    ],
+    [
       'void-seek',
       '引力偏移',
       'GRAVITY BIAS',
@@ -248,6 +312,22 @@ const groups: Record<Element, Row[]> = {
     ],
   ],
   shift: [
+    [
+      'shift-echo',
+      '镜像裂雨',
+      'MIRROR RAIN',
+      '每次 Dash 从起点向八个方向放出元素弹幕。',
+      '8 枚次生弹 · 每枚 45% 伤害',
+      'epic',
+    ],
+    [
+      'shift-rear',
+      '双向因果',
+      'JANUS VECTOR',
+      '射击同时向背后发出一枚次生弹，继承弹道和元素状态。',
+      '背向弹体 · 65% 伤害',
+      'rare',
+    ],
     [
       'shift-quick',
       '快速重编译',

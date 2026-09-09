@@ -31,6 +31,10 @@ export class World {
   spawnTimer = 1.5;
   clearTimer = 0;
   transitionTimer = 0;
+  reactionBudget = 12;
+  reactionCount = 0;
+  companionCd = 0;
+  echo = { x: 0, y: 0, time: 0, shots: 0 };
   player: Player = {
     x: 640,
     y: 410,
@@ -70,6 +74,18 @@ export class World {
     pierce: 0,
     bounce: 0,
     hits: new Set(),
+    age: 0,
+    initialLife: 0,
+    angle: 0,
+    speed: 0,
+    generation: 0,
+    wave: 0,
+    orbit: false,
+    returning: false,
+    bounced: false,
+    returningStarted: false,
+    shape: 'bolt',
+    accent: 0xe3fffa,
   }));
   nextId = 0;
   has(id: string) {
@@ -113,6 +129,7 @@ export class World {
       phase: 1,
       attackIndex: 0,
       elite,
+      reactionCd: 0,
     };
     this.enemies.push(e);
     this.emit('room', x, y, d.color);

@@ -53,6 +53,22 @@ try {
   await page.locator('.phase-playing').waitFor();
   await page.reload();
   await page.getByRole('button', { name: /继续行动/ }).waitFor();
+  const checkpoint = await page.evaluate(() =>
+    localStorage.getItem('arcshift.save.v1'),
+  );
+  await page.getByRole('button', { name: '协议试炼', exact: true }).click();
+  await page.getByRole('button', { name: /相位织雨/ }).click();
+  await page.locator('.phase-playing').waitFor();
+  await page.getByText(/无尽试炼 · 波次/).waitFor();
+  await page.mouse.down();
+  await page.keyboard.press('Space');
+  await page.waitForTimeout(800);
+  await page.mouse.up();
+  await page.getByRole('button', { name: '退出试炼', exact: true }).click();
+  assert.equal(
+    await page.evaluate(() => localStorage.getItem('arcshift.save.v1')),
+    checkpoint,
+  );
   assert.deepEqual(errors, []);
   assert.deepEqual(failedAssets, []);
   fs.mkdirSync('outputs/qa', { recursive: true });
@@ -64,6 +80,7 @@ try {
     startAndInput: true,
     pauseAndResume: true,
     checkpointRetained: true,
+    resonanceTrial: true,
     pageErrors: errors,
     failedAssets,
   };

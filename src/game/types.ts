@@ -76,6 +76,7 @@ export interface Enemy {
   phase: number;
   attackIndex: number;
   elite: boolean;
+  reactionCd: number;
 }
 export interface Projectile {
   active: boolean;
@@ -93,6 +94,18 @@ export interface Projectile {
   pierce: number;
   bounce: number;
   hits: Set<number>;
+  age: number;
+  initialLife: number;
+  angle: number;
+  speed: number;
+  generation: number;
+  wave: number;
+  orbit: boolean;
+  returning: boolean;
+  bounced: boolean;
+  returningStarted: boolean;
+  shape: 'bolt' | 'meteor' | 'lance' | 'crystal';
+  accent: number;
 }
 export interface Hazard {
   x: number;
@@ -132,6 +145,18 @@ export interface Stats {
   explosion: number;
   homing: number;
   lifesteal: number;
+  shotSize: number;
+  shotSpeed: number;
+  fragment: number;
+  wave: number;
+  orbit: boolean;
+  returning: boolean;
+  lance: boolean;
+  familiar: boolean;
+  rear: boolean;
+  primary: number;
+  accent: number;
+  element: Element;
 }
 export interface Upgrade {
   id: string;

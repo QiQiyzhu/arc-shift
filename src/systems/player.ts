@@ -7,6 +7,8 @@ import type { World } from '../game/world';
 export function updatePlayer(w: World, input: Input, dt: number) {
   const p = w.player,
     s = w.stats;
+  w.echo.time = Math.max(0, w.echo.time - dt);
+  w.companionCd = Math.max(0, w.companionCd - dt);
   for (const key of [
     'invulnerable',
     'dashTime',
@@ -27,6 +29,21 @@ export function updatePlayer(w: World, input: Input, dt: number) {
     p.invulnerable = Math.max(p.invulnerable, s.dashDuration + 0.06);
     p.dashCd = s.dashCooldown;
     w.emit('dash', p.x, p.y);
+    if (w.has('shift-reload') && w.has('storm-arc'))
+      w.echo = { x: p.x, y: p.y, time: 0.7, shots: 3 };
+    if (w.has('shift-echo'))
+      for (let i = 0; i < 8; i++)
+        shoot(
+          w,
+          p.x,
+          p.y,
+          (i * Math.PI) / 4,
+          false,
+          s.damage * 0.45,
+          s.shotSpeed,
+          s.primary,
+          1,
+        );
     if (w.has('shift-shield')) p.shield = Math.min(30, p.shield + 12);
     if (w.has('shift-reload')) p.shotCd = 0;
     if (w.has('shift-nova'))
@@ -63,15 +80,7 @@ export function updatePlayer(w: World, input: Input, dt: number) {
     p.shotCd =
       s.rate *
       (w.has('shift-reload') && p.dashCd > s.dashCooldown - 0.7 ? 0.5 : 1);
-    const color = s.burn
-      ? 0xffb477
-      : s.chain
-        ? 0xba9aff
-        : s.slow
-          ? 0x8cdeff
-          : s.homing
-            ? 0xbb9aff
-            : 0x8cf1dc;
+    const color = s.primary;
     for (let i = 0; i < s.projectiles; i++)
       shoot(
         w,
@@ -80,14 +89,55 @@ export function updatePlayer(w: World, input: Input, dt: number) {
         p.angle + (i - (s.projectiles - 1) / 2) * 0.15,
         false,
         s.damage,
-        720,
+        s.shotSpeed,
         color,
       );
-    w.emit(
-      'shot',
-      p.x + Math.cos(p.angle) * 24,
-      p.y + Math.sin(p.angle) * 24,
+    if (s.rear)
+      shoot(
+        w,
+        p.x,
+        p.y,
+        p.angle + Math.PI,
+        false,
+        s.damage * 0.65,
+        s.shotSpeed,
+        color,
+        1,
+      );
+    if (w.echo.time > 0 && w.echo.shots > 0) {
+      w.echo.shots--;
+      shoot(
+        w,
+        w.echo.x,
+        w.echo.y,
+        p.angle,
+        false,
+        s.damage * 0.35,
+        s.shotSpeed,
+        color,
+        1,
+      );
+    }
+    w.bus.emit({
+      kind: 'shot',
+      x: p.x + Math.cos(p.angle) * 24,
+      y: p.y + Math.sin(p.angle) * 24,
       color,
+      element: s.element,
+    });
+  }
+  if (input.fire && s.familiar && w.companionCd === 0) {
+    w.companionCd = 0.7;
+    shoot(
+      w,
+      p.x + Math.cos(w.elapsed * 2) * 48,
+      p.y + Math.sin(w.elapsed * 2) * 48,
+      p.angle,
+      false,
+      s.damage * 0.45,
+      s.shotSpeed,
+      s.accent,
+      1,
     );
   }
   if (input.q && p.qCd === 0) {

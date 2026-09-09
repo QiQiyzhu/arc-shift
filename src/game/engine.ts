@@ -14,10 +14,12 @@ export class Engine {
   private resumePhase: 'playing' | 'transition' | 'bossIntro' = 'playing';
   save: SaveData = loadSave();
   storageAvailable = true;
+  practice = false;
   persist() {
     this.storageAvailable = writeSave(this.save);
   }
   start(seed = Date.now() % 1e8) {
+    this.practice = false;
     this.settled = false;
     const bus = this.world.bus;
     this.world = new World();
@@ -57,6 +59,7 @@ export class Engine {
     return true;
   }
   checkpoint() {
+    if (this.practice) return;
     const w = this.world;
     this.save.checkpoint = {
       progress:
@@ -78,6 +81,7 @@ export class Engine {
   resume() {
     const c = this.save.checkpoint;
     if (!c) return false;
+    this.practice = false;
     this.settled = false;
     const bus = this.world.bus;
     this.world = new World();
@@ -122,6 +126,8 @@ export class Engine {
     w.enemies = [];
     w.projectiles.clear();
     w.hazards = [];
+    w.echo = { x: 0, y: 0, time: 0, shots: 0 };
+    w.companionCd = 0;
     w.rng = new Random(w.seed + room.index * 1129);
     Object.assign(w.player, {
       x: 640,
@@ -157,6 +163,12 @@ export class Engine {
       return;
     }
     if (w.phase !== 'playing') return;
+    w.reactionBudget = 12;
+    for (const e of w.enemies) e.reactionCd = Math.max(0, e.reactionCd - dt);
+    if (this.practice) {
+      w.player.hp = w.player.maxHp;
+      w.player.invulnerable = 1;
+    }
     w.elapsed += dt;
     w.roomTime += dt;
     updatePlayer(w, input, dt);
@@ -172,8 +184,12 @@ export class Engine {
       return;
     }
     w.spawnTimer -= dt;
-    const maxWaves = roomWaveCount(w.room.index);
-    if (w.wave < maxWaves && w.spawnTimer <= 0) {
+    const maxWaves = this.practice ? Infinity : roomWaveCount(w.room.index);
+    if (
+      w.wave < maxWaves &&
+      w.spawnTimer <= 0 &&
+      (!this.practice || w.enemies.length < 22)
+    ) {
       this.spawnWave();
       w.wave++;
       w.spawnTimer = 9;
@@ -225,6 +241,7 @@ export class Engine {
     else this.checkpoint();
   }
   finish() {
+    if (this.practice) return;
     const w = this.world;
     if (this.settled || !['victory', 'gameover'].includes(w.phase)) return;
     this.settled = true;
@@ -248,5 +265,19 @@ export class Engine {
       this.resumePhase = phase;
       this.world.phase = 'paused';
     } else if (phase === 'paused') this.world.phase = this.resumePhase;
+  }
+  startPractice(cards: readonly string[]) {
+    this.practice = true;
+    this.settled = false;
+    const bus = this.world.bus;
+    this.world = new World();
+    const w = this.world;
+    w.bus = bus;
+    w.seed = 20260909;
+    w.cards = [...cards];
+    w.level = 4;
+    w.stats = deriveStats(w.cards, w.level);
+    w.player.maxHp = w.player.hp = cards.includes('ice-shell') ? 160 : 120;
+    this.enter(makeRoom(3, 'combat', w.seed));
   }
 }

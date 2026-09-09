@@ -11,7 +11,7 @@
   --popover-foreground: #e5eddf;
   --muted: #1b2a30;
   --muted-foreground: #8b9c9b;
-  --accent: #d0f49c;
+  --accent: #e6c68f;
   --border: #293a3e;
   --ring: #b9dd98;
   color-scheme: dark;
@@ -1836,5 +1836,270 @@ kbd {
   }
   .end-shade .pause-panel > .start-button {
     margin-top: 22px;
+  }
+}
+/* RESONANCE 02 — worn bronze, cold glass and the fractured sanctum. */
+.menu-overlay {
+  background: #070d10;
+  isolation: isolate;
+}
+.menu-keyart {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+.menu-overlay::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background:
+    linear-gradient(90deg, #060b10c9 0%, #060b1055 46%, transparent 72%),
+    linear-gradient(0deg, #071015b0, transparent 28%);
+}
+.menu-copy {
+  width: 58%;
+}
+.menu-copy h1 > span,
+.menu-copy h1 .title-period {
+  color: #e7c388;
+}
+.menu-copy .eyebrow {
+  color: #e0c398;
+  font-size: 12px;
+}
+.menu-copy .start-button {
+  background: #e8ca94;
+  color: #172020;
+  box-shadow: 0 8px 40px #d9a55716;
+}
+.menu-secondary {
+  flex-wrap: wrap;
+  gap: 18px;
+}
+.menu-secondary button {
+  font-size: 14px;
+}
+.edition-note {
+  color: #a7b6af;
+  font-size: 12px;
+  margin-top: 22px;
+  letter-spacing: 1px;
+}
+.edition-note span {
+  color: #bda678;
+  padding: 0 8px;
+}
+.scene-label {
+  top: auto;
+  bottom: 12%;
+  right: 5%;
+  background: #091318aa;
+  backdrop-filter: blur(12px);
+  padding: 18px 20px;
+  border-left: 1px solid #c7a66e77;
+}
+.scene-label .tiny {
+  color: #d9be94;
+}
+.scene-label .signal-bars,
+.scene-label p {
+  display: none;
+}
+.menu-bottom-note {
+  display: none;
+}
+.card-sigil {
+  background: radial-gradient(
+    circle,
+    color-mix(in srgb, var(--element) 14%, transparent),
+    transparent 68%
+  );
+}
+.protocol-card {
+  background: linear-gradient(145deg, #202627f5, #101920fa 60%);
+  border-color: color-mix(in srgb, var(--element) 34%, #26312d);
+}
+.protocol-card.epic {
+  box-shadow:
+    inset 0 1px #ead9ad55,
+    0 12px 36px #0005;
+}
+.protocol-card .card-en {
+  color: color-mix(in srgb, var(--element) 72%, white);
+}
+.synergy-preview {
+  padding: 8px 0 0;
+  color: #f0d499;
+  font-size: 13px;
+  font-weight: 650;
+}
+.synergy-hint {
+  padding: 8px 0 0;
+  font-size: 12px;
+  color: #98a5a5;
+}
+.build-hud .fusion-hud {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px solid #a2b8bb22;
+  font-size: 12px;
+}
+.practice-banner {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 8px;
+  z-index: 4;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  background: #0c171cec;
+  border: 1px solid #bea77488;
+  color: #e4c590;
+  font-size: 12px;
+  white-space: nowrap;
+}
+.practice-banner button {
+  color: #b6e5de;
+  padding: 5px 10px;
+  border: 1px solid #70948b66;
+  background: #182b30;
+}
+.is-practice .room-hud {
+  top: 48px;
+}
+.health-panel,
+.room-hud,
+.build-hud {
+  text-shadow:
+    0 2px 5px #000,
+    0 0 14px #000;
+}
+.trial-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 14px;
+  margin-top: 20px;
+}
+.trial-card {
+  text-align: left;
+  border: 1px solid #485555;
+  background: linear-gradient(135deg, #20312f, #101b25);
+  padding: 23px 20px;
+  min-height: 235px;
+  transition:
+    transform 0.18s,
+    border-color 0.18s;
+}
+.trial-card:hover {
+  transform: translateY(-3px);
+  border-color: #e6c58b;
+}
+.trial-card > span {
+  color: #8aaba6;
+  font:
+    11px 'Space Grotesk',
+    sans-serif;
+  letter-spacing: 2px;
+}
+.trial-card h3 {
+  font-size: 23px;
+  margin: 12px 0 7px;
+  color: #eee1c7;
+}
+.trial-card b {
+  font-size: 13px;
+  font-weight: 500;
+  color: #d7b67a;
+}
+.trial-card p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b0c1c0;
+  margin: 14px 0;
+}
+.trial-card small {
+  color: #a1e8d6;
+  font-size: 12px;
+}
+.trial-1,
+.trial-3 {
+  background: linear-gradient(140deg, #202c44, #121a21);
+}
+.trial-2,
+.trial-4 {
+  background: linear-gradient(140deg, #36273a, #111a22);
+}
+.synergy-library {
+  margin-top: 24px;
+  border-top: 1px solid #3c4b4c;
+  padding-top: 16px;
+}
+.synergy-library h3 {
+  font-size: 18px;
+  color: #e3ca9e;
+}
+.synergy-library > div {
+  margin-top: 14px;
+  border-bottom: 1px solid #2b3c3d;
+  padding-bottom: 12px;
+}
+.synergy-library b {
+  font-size: 15px;
+  margin-right: 14px;
+}
+.synergy-library span {
+  font-size: 12px;
+  color: #95aaa8;
+}
+.synergy-library p {
+  font-size: 14px;
+  margin: 7px 0 0;
+  color: #b6c5c2;
+  line-height: 1.7;
+}
+@media (max-width: 1000px) {
+  .trial-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .menu-copy {
+    width: 67%;
+  }
+  .scene-label {
+    right: 3%;
+    bottom: 8%;
+  }
+  .edition-note {
+    font-size: 11px;
+  }
+}
+@media (max-width: 620px) {
+  .trial-grid {
+    grid-template-columns: 1fr;
+  }
+  .menu-copy {
+    width: 95%;
+  }
+  .scene-label {
+    display: none;
+  }
+  .menu-keyart {
+    object-position: 65% center;
+    opacity: 0.48;
+  }
+  .edition-note {
+    max-width: 280px;
+    line-height: 1.8;
+  }
+  .practice-banner {
+    font-size: 10px;
+    gap: 6px;
+    padding: 6px;
+    top: 0;
   }
 }

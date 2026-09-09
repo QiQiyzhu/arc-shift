@@ -11,6 +11,8 @@ export type EffectEvent = {
     | 'phase'
     | 'victory'
     | 'room';
+  element?: import('../game/types').Element;
+  reaction?: string;
   x: number;
   y: number;
   color: number;

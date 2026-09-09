@@ -68,7 +68,7 @@ test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized
     const w = window.arcQA.engine.world;
     w.player.invulnerable = 60;
     w.enemies = [];
-    w.wave = 6;
+    w.wave = 4;
     w.spawnTimer = 999;
     const e = w.spawn('sentry', 900, 410);
     e.hp = e.maxHp = 800;
@@ -115,7 +115,7 @@ test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized
   await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
   expect(errors).toEqual([]);
 });
-test('round 2: menu, draft, 30-card library, settings, route, elite, heal, save and resume', async ({
+test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume', async ({
   page,
 }) => {
   await page.goto('/?qa');
@@ -124,7 +124,7 @@ test('round 2: menu, draft, 30-card library, settings, route, elite, heal, save 
   await expect(page.getByRole('dialog')).toBeVisible();
   for (const name of ['火焰', '雷电', '冰霜', '虚空', '跃迁']) {
     await page.getByRole('button', { name, exact: true }).click();
-    await expect(page.locator('.library-grid .protocol-card')).toHaveCount(6);
+    await expect(page.locator('.library-grid .protocol-card')).toHaveCount(8);
   }
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: '系统设置', exact: true }).click();

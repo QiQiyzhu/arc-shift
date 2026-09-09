@@ -11,12 +11,19 @@ import {
   Gem,
   Skull,
   Target,
+  Sparkles,
+  Split,
+  Waves,
+  MoveHorizontal,
+  Radio,
+  Crosshair,
 } from 'lucide-react';
 import type { Element, Upgrade, RoomKind } from '../game/types';
 import type { Engine } from '../game/engine';
 import { ELEMENTS } from '../cards/catalog';
 import { buildCounts } from '../cards/system';
 import { roomChoices } from '../rooms/generator';
+import { activeSynergies, newSynergies, SYNERGIES } from '../cards/synergies';
 export function ElementIcon({
   element,
   size = 24,
@@ -38,13 +45,32 @@ export function CardView({
   owned = false,
   onSelect,
   index = 0,
+  build = [],
 }: {
   card: Upgrade;
   owned?: boolean;
   onSelect?: () => void;
   index?: number;
+  build?: readonly string[];
 }) {
   const el = ELEMENTS[card.element];
+  const Glyph = card.id.includes('meteor')
+    ? Sparkles
+    : card.id.includes('bloom') ||
+        card.id.includes('split') ||
+        card.id.includes('fan')
+      ? Split
+      : card.id.includes('wave')
+        ? Waves
+        : card.id.includes('return') || card.id.includes('rear')
+          ? MoveHorizontal
+          : card.id.includes('familiar')
+            ? Radio
+            : card.id.includes('lance')
+              ? Crosshair
+              : card.id.includes('orbit')
+                ? Orbit
+                : null;
   return (
     <button
       className={`protocol-card ${card.rarity} ${owned ? 'owned' : ''}`}
@@ -68,12 +94,29 @@ export function CardView({
       <div className="card-sigil">
         <i />
         <i />
-        <ElementIcon element={card.element} size={45} />
+        {Glyph ? (
+          <Glyph size={45} strokeWidth={1.35} />
+        ) : (
+          <ElementIcon element={card.element} size={45} />
+        )}
       </div>
       <span className="card-en">{card.en}</span>
       <h3>{card.name}</h3>
       <p>{card.description}</p>
       <div className="card-preview">{card.preview}</div>
+      {newSynergies(build, card.id).map((s) => (
+        <div className="synergy-preview" key={s.id}>
+          ✦ 激活 {s.name}
+        </div>
+      ))}
+      {!newSynergies(build, card.id).length &&
+        SYNERGIES.filter((s) => s.requires.some((id) => id === card.id))
+          .slice(0, 1)
+          .map((s) => (
+            <div className="synergy-hint" key={s.id}>
+              共鸣方向 · {s.name}
+            </div>
+          ))}
       <div className="card-bottom">
         <span>
           {owned ? (
@@ -113,7 +156,7 @@ export function CardDraft({ engine }: { engine: Engine }) {
         <p>
           {w.rewardContext === 'start'
             ? '选择一种元素，开始这次跃迁。'
-            : '整合一个新协议。相同元素收集 3 张，将激活共鸣。'}
+            : '形态 × 弹道 × 元素。预览这次选择将激活的共鸣。'}
         </p>
         <div className="draft-cards">
           {w.rewards.map((c, i) => (
@@ -121,6 +164,7 @@ export function CardDraft({ engine }: { engine: Engine }) {
               key={c.id}
               card={c}
               index={i}
+              build={w.cards}
               onSelect={() => engine.chooseCard(c.id)}
             />
           ))}
@@ -254,6 +298,16 @@ export function BuildHUD({ cards }: { cards: string[] }) {
             </i>
           </div>
         ))}
+      {activeSynergies(cards).map((s) => (
+        <div
+          className="fusion-hud"
+          key={s.id}
+          title={s.description}
+          style={{ color: s.color }}
+        >
+          ✦ {s.name}
+        </div>
+      ))}
     </aside>
   );
 }

@@ -120,6 +120,19 @@ export class Effects {
         t.setData('life', 0.65);
       }
     }
+    if (e.reaction) {
+      const label = this.labels.find((t) => !t.visible);
+      if (label) {
+        label
+          .setPosition(e.x - 24, e.y - 34)
+          .setText(e.reaction)
+          .setFontSize(14)
+          .setColor('#ffe0b2')
+          .setVisible(true)
+          .setAlpha(1);
+        label.setData('life', 0.75);
+      }
+    }
   }
   draw(g: Phaser.GameObjects.Graphics, dt: number) {
     for (const p of this.particles.items) {
