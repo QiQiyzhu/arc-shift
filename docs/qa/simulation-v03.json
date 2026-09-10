@@ -1,0 +1,1946 @@
+[
+  {
+    "initial": "storm-arc",
+    "weapon": "arc",
+    "seed": 531,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 421.9,
+    "wallMs": 273,
+    "health": 109,
+    "kills": 230,
+    "damageTaken": 46,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "storm-familiar",
+      "storm-static",
+      "shift-reload",
+      "shift-echo",
+      "void-singularity",
+      "void-leech",
+      "void-echo"
+    ],
+    "inputs": {
+      "dashes": 32,
+      "qs": 32,
+      "es": 14
+    },
+    "peakEnemies": 19,
+    "peakProjectiles": 30,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0049,
+    "updateP99Ms": 0.0234,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.9,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 106.6,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 106.6,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-static"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 167,
+        "hp": 110,
+        "kills": 69,
+        "card": "shift-reload"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 243.3,
+        "hp": 120,
+        "kills": 141,
+        "card": "shift-echo"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 243.3,
+        "hp": 120,
+        "kills": 141,
+        "card": "void-leech"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 331,
+        "hp": 120,
+        "kills": 229,
+        "card": "void-echo"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 421.9,
+        "hp": 109,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "arc",
+    "seed": 12345,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 270.02,
+    "wallMs": 120,
+    "health": 120,
+    "kills": 230,
+    "damageTaken": 0,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-critical",
+      "storm-familiar",
+      "ice-touch",
+      "ice-pierce",
+      "storm-needle",
+      "fire-ember",
+      "shift-reload",
+      "ice-brittle",
+      "storm-conduct"
+    ],
+    "inputs": {
+      "dashes": 7,
+      "qs": 31,
+      "es": 15
+    },
+    "peakEnemies": 11,
+    "peakProjectiles": 24,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0033,
+    "updateP99Ms": 0.02,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.3,
+        "hp": 120,
+        "kills": 20,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 101.1,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-touch"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 101.1,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 115.4,
+        "hp": 120,
+        "kills": 69,
+        "card": "storm-needle"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 185.1,
+        "hp": 120,
+        "kills": 141,
+        "card": "fire-ember"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 185.1,
+        "hp": 120,
+        "kills": 141,
+        "card": "ice-brittle"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 255.3,
+        "hp": 120,
+        "kills": 229,
+        "card": "storm-conduct"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 270,
+        "hp": 120,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "arc",
+    "seed": 20260908,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 459.65,
+    "wallMs": 171,
+    "health": 120,
+    "kills": 230,
+    "damageTaken": 70,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "void-leech",
+      "shift-reload",
+      "fire-ember",
+      "void-echo",
+      "storm-needle",
+      "ice-touch",
+      "ice-pierce"
+    ],
+    "inputs": {
+      "dashes": 31,
+      "qs": 33,
+      "es": 12
+    },
+    "peakEnemies": 18,
+    "peakProjectiles": 29,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0026,
+    "updateP99Ms": 0.0078,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 33,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 115.8,
+        "hp": 120,
+        "kills": 68,
+        "card": "void-leech"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 115.8,
+        "hp": 120,
+        "kills": 68,
+        "card": "shift-reload"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 182.6,
+        "hp": 111,
+        "kills": 69,
+        "card": "fire-ember"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 268.3,
+        "hp": 120,
+        "kills": 141,
+        "card": "void-echo"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 268.3,
+        "hp": 120,
+        "kills": 141,
+        "card": "ice-touch"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 352.2,
+        "hp": 120,
+        "kills": 229,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 459.6,
+        "hp": 120,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "arc",
+    "seed": 531,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 576.45,
+    "wallMs": 256,
+    "health": 109,
+    "kills": 366,
+    "damageTaken": 64,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "storm-familiar",
+      "storm-static",
+      "shift-reload",
+      "shift-echo",
+      "void-singularity",
+      "void-leech",
+      "void-echo"
+    ],
+    "inputs": {
+      "dashes": 42,
+      "qs": 40,
+      "es": 15
+    },
+    "peakEnemies": 20,
+    "peakProjectiles": 29,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0031,
+    "updateP99Ms": 0.0093,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.9,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 106.6,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 197.1,
+        "hp": 120,
+        "kills": 124,
+        "card": "storm-static"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 247.6,
+        "hp": 110,
+        "kills": 125,
+        "card": "shift-reload"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 342.5,
+        "hp": 120,
+        "kills": 197,
+        "card": "shift-echo"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 421.9,
+        "hp": 114,
+        "kills": 277,
+        "card": "void-leech"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 511.7,
+        "hp": 120,
+        "kills": 365,
+        "card": "void-echo"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 576.4,
+        "hp": 109,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "arc",
+    "seed": 12345,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 408.22,
+    "wallMs": 103,
+    "health": 120,
+    "kills": 366,
+    "damageTaken": 0,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-critical",
+      "storm-familiar",
+      "ice-touch",
+      "ice-pierce",
+      "storm-needle",
+      "fire-ember",
+      "shift-reload",
+      "ice-brittle",
+      "storm-conduct"
+    ],
+    "inputs": {
+      "dashes": 5,
+      "qs": 48,
+      "es": 22
+    },
+    "peakEnemies": 11,
+    "peakProjectiles": 29,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0015,
+    "updateP99Ms": 0.0044,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.3,
+        "hp": 120,
+        "kills": 20,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 101.1,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-touch"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 171.2,
+        "hp": 120,
+        "kills": 124,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 184,
+        "hp": 120,
+        "kills": 125,
+        "card": "storm-needle"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 253.8,
+        "hp": 120,
+        "kills": 197,
+        "card": "fire-ember"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 323.8,
+        "hp": 120,
+        "kills": 277,
+        "card": "ice-brittle"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 396,
+        "hp": 120,
+        "kills": 365,
+        "card": "storm-conduct"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 408.2,
+        "hp": 120,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "arc",
+    "seed": 20260908,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 597.42,
+    "wallMs": 244,
+    "health": 120,
+    "kills": 366,
+    "damageTaken": 65,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "void-leech",
+      "shift-reload",
+      "fire-ember",
+      "void-echo",
+      "storm-needle",
+      "ice-touch",
+      "ice-pierce"
+    ],
+    "inputs": {
+      "dashes": 48,
+      "qs": 41,
+      "es": 17
+    },
+    "peakEnemies": 19,
+    "peakProjectiles": 32,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0028,
+    "updateP99Ms": 0.0087,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 33,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 115.8,
+        "hp": 120,
+        "kills": 68,
+        "card": "void-leech"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 194.2,
+        "hp": 120,
+        "kills": 124,
+        "card": "shift-reload"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 265.5,
+        "hp": 120,
+        "kills": 125,
+        "card": "fire-ember"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 345.9,
+        "hp": 120,
+        "kills": 197,
+        "card": "void-echo"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 420.2,
+        "hp": 120,
+        "kills": 277,
+        "card": "ice-touch"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 506.5,
+        "hp": 120,
+        "kills": 365,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 597.4,
+        "hp": 120,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "sword",
+    "seed": 531,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 289.03,
+    "wallMs": 208,
+    "health": 120,
+    "kills": 230,
+    "damageTaken": 65,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "storm-familiar",
+      "storm-static",
+      "shift-reload",
+      "shift-echo",
+      "void-singularity",
+      "void-leech",
+      "void-echo"
+    ],
+    "inputs": {
+      "dashes": 19,
+      "qs": 23,
+      "es": 9
+    },
+    "peakEnemies": 15,
+    "peakProjectiles": 34,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0057,
+    "updateP99Ms": 0.0345,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.8,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 103.4,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 103.4,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-static"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 124,
+        "hp": 120,
+        "kills": 69,
+        "card": "shift-reload"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 196.5,
+        "hp": 120,
+        "kills": 141,
+        "card": "shift-echo"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 196.5,
+        "hp": 120,
+        "kills": 141,
+        "card": "void-leech"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 268.8,
+        "hp": 116,
+        "kills": 229,
+        "card": "void-echo"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 289,
+        "hp": 120,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "sword",
+    "seed": 12345,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 273.52,
+    "wallMs": 114,
+    "health": 108,
+    "kills": 230,
+    "damageTaken": 109,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 131,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-critical",
+      "storm-familiar",
+      "ice-touch",
+      "ice-pierce",
+      "storm-needle",
+      "fire-ember",
+      "shift-reload",
+      "ice-brittle",
+      "storm-conduct"
+    ],
+    "inputs": {
+      "dashes": 12,
+      "qs": 26,
+      "es": 10
+    },
+    "peakEnemies": 11,
+    "peakProjectiles": 17,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0028,
+    "updateP99Ms": 0.0183,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 34.4,
+        "hp": 106,
+        "kills": 20,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 104.8,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-touch"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 104.8,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 118.6,
+        "hp": 120,
+        "kills": 69,
+        "card": "storm-needle"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 188.6,
+        "hp": 120,
+        "kills": 141,
+        "card": "fire-ember"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 188.6,
+        "hp": 120,
+        "kills": 141,
+        "card": "ice-brittle"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 259.6,
+        "hp": 120,
+        "kills": 229,
+        "card": "storm-conduct"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 273.5,
+        "hp": 108,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "sword",
+    "seed": 20260908,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 288.48,
+    "wallMs": 88,
+    "health": 120,
+    "kills": 230,
+    "damageTaken": 75,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "void-leech",
+      "shift-reload",
+      "fire-ember",
+      "void-echo",
+      "storm-needle",
+      "ice-touch",
+      "ice-pierce"
+    ],
+    "inputs": {
+      "dashes": 19,
+      "qs": 27,
+      "es": 14
+    },
+    "peakEnemies": 12,
+    "peakProjectiles": 24,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0019,
+    "updateP99Ms": 0.0059,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 35.4,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 106,
+        "hp": 120,
+        "kills": 68,
+        "card": "void-leech"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 106,
+        "hp": 120,
+        "kills": 68,
+        "card": "shift-reload"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 124.3,
+        "hp": 120,
+        "kills": 69,
+        "card": "fire-ember"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 195.8,
+        "hp": 120,
+        "kills": 141,
+        "card": "void-echo"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 195.8,
+        "hp": 120,
+        "kills": 141,
+        "card": "ice-touch"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 267.8,
+        "hp": 120,
+        "kills": 229,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 288.5,
+        "hp": 120,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "sword",
+    "seed": 531,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 424.2,
+    "wallMs": 115,
+    "health": 120,
+    "kills": 366,
+    "damageTaken": 51,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 158,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "storm-familiar",
+      "storm-static",
+      "shift-reload",
+      "shift-echo",
+      "void-singularity",
+      "void-leech",
+      "void-echo"
+    ],
+    "inputs": {
+      "dashes": 24,
+      "qs": 37,
+      "es": 17
+    },
+    "peakEnemies": 13,
+    "peakProjectiles": 35,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0017,
+    "updateP99Ms": 0.0061,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.8,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 103.4,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 174.9,
+        "hp": 120,
+        "kills": 124,
+        "card": "storm-static"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 191.6,
+        "hp": 120,
+        "kills": 125,
+        "card": "shift-reload"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 261.2,
+        "hp": 120,
+        "kills": 197,
+        "card": "shift-echo"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 334.1,
+        "hp": 120,
+        "kills": 277,
+        "card": "void-leech"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 405.3,
+        "hp": 120,
+        "kills": 365,
+        "card": "void-echo"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 424.2,
+        "hp": 120,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "sword",
+    "seed": 12345,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 411.5,
+    "wallMs": 103,
+    "health": 108,
+    "kills": 366,
+    "damageTaken": 199,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 143,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-critical",
+      "storm-familiar",
+      "ice-touch",
+      "ice-pierce",
+      "storm-needle",
+      "fire-ember",
+      "shift-reload",
+      "ice-brittle",
+      "storm-conduct"
+    ],
+    "inputs": {
+      "dashes": 14,
+      "qs": 37,
+      "es": 19
+    },
+    "peakEnemies": 11,
+    "peakProjectiles": 17,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0014,
+    "updateP99Ms": 0.0047,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 34.4,
+        "hp": 106,
+        "kills": 20,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 104.8,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-touch"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 173.7,
+        "hp": 120,
+        "kills": 124,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 185.4,
+        "hp": 110,
+        "kills": 125,
+        "card": "storm-needle"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 255.8,
+        "hp": 96,
+        "kills": 197,
+        "card": "fire-ember"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 327.7,
+        "hp": 120,
+        "kills": 277,
+        "card": "ice-brittle"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 400.2,
+        "hp": 120,
+        "kills": 365,
+        "card": "storm-conduct"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 411.5,
+        "hp": 108,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "sword",
+    "seed": 20260908,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 425.73,
+    "wallMs": 112,
+    "health": 109,
+    "kills": 366,
+    "damageTaken": 75,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "void-leech",
+      "shift-reload",
+      "fire-ember",
+      "void-echo",
+      "storm-needle",
+      "ice-touch",
+      "ice-pierce"
+    ],
+    "inputs": {
+      "dashes": 21,
+      "qs": 39,
+      "es": 21
+    },
+    "peakEnemies": 13,
+    "peakProjectiles": 22,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0015,
+    "updateP99Ms": 0.0044,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 35.4,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 106,
+        "hp": 120,
+        "kills": 68,
+        "card": "void-leech"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 177.5,
+        "hp": 117,
+        "kills": 124,
+        "card": "shift-reload"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 194.8,
+        "hp": 120,
+        "kills": 125,
+        "card": "fire-ember"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 267.7,
+        "hp": 120,
+        "kills": 197,
+        "card": "void-echo"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 337.6,
+        "hp": 120,
+        "kills": 277,
+        "card": "ice-touch"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 409,
+        "hp": 120,
+        "kills": 365,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 425.7,
+        "hp": 109,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "cannon",
+    "seed": 531,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 410.6,
+    "wallMs": 266,
+    "health": 101,
+    "kills": 230,
+    "damageTaken": 89,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "storm-familiar",
+      "storm-static",
+      "shift-reload",
+      "shift-echo",
+      "void-singularity",
+      "void-leech",
+      "void-echo"
+    ],
+    "inputs": {
+      "dashes": 36,
+      "qs": 41,
+      "es": 14
+    },
+    "peakEnemies": 19,
+    "peakProjectiles": 25,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0046,
+    "updateP99Ms": 0.0242,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.5,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 111.2,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 111.2,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-static"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 173.7,
+        "hp": 120,
+        "kills": 69,
+        "card": "shift-reload"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 256.2,
+        "hp": 120,
+        "kills": 141,
+        "card": "shift-echo"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 256.2,
+        "hp": 120,
+        "kills": 141,
+        "card": "void-leech"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 334.4,
+        "hp": 120,
+        "kills": 229,
+        "card": "void-echo"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 410.6,
+        "hp": 101,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "cannon",
+    "seed": 12345,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 275.65,
+    "wallMs": 123,
+    "health": 120,
+    "kills": 230,
+    "damageTaken": 0,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-critical",
+      "storm-familiar",
+      "ice-touch",
+      "ice-pierce",
+      "storm-needle",
+      "fire-ember",
+      "shift-reload",
+      "ice-brittle",
+      "storm-conduct"
+    ],
+    "inputs": {
+      "dashes": 5,
+      "qs": 33,
+      "es": 13
+    },
+    "peakEnemies": 12,
+    "peakProjectiles": 19,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0032,
+    "updateP99Ms": 0.0186,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 33.3,
+        "hp": 120,
+        "kills": 20,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 102.6,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-touch"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 102.6,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 115.9,
+        "hp": 120,
+        "kills": 69,
+        "card": "storm-needle"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 188.9,
+        "hp": 120,
+        "kills": 141,
+        "card": "fire-ember"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 188.9,
+        "hp": 120,
+        "kills": 141,
+        "card": "ice-brittle"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 261,
+        "hp": 120,
+        "kills": 229,
+        "card": "storm-conduct"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 275.7,
+        "hp": 120,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "cannon",
+    "seed": 20260908,
+    "route": "safe",
+    "result": "victory",
+    "simSeconds": 453.88,
+    "wallMs": 157,
+    "health": 77,
+    "kills": 230,
+    "damageTaken": 152,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 146,
+      "keys": 2,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "void-leech",
+      "shift-reload",
+      "fire-ember",
+      "void-echo",
+      "storm-needle",
+      "ice-touch",
+      "ice-pierce"
+    ],
+    "inputs": {
+      "dashes": 36,
+      "qs": 44,
+      "es": 18
+    },
+    "peakEnemies": 17,
+    "peakProjectiles": 25,
+    "poolMisses": 0,
+    "updateMeanMs": 0.002,
+    "updateP99Ms": 0.0085,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.5,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 104.9,
+        "hp": 120,
+        "kills": 68,
+        "card": "void-leech"
+      },
+      {
+        "room": 3,
+        "kind": "heal",
+        "time": 104.9,
+        "hp": 120,
+        "kills": 68,
+        "card": "shift-reload"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 184.7,
+        "hp": 111,
+        "kills": 69,
+        "card": "fire-ember"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 268.8,
+        "hp": 120,
+        "kills": 141,
+        "card": "void-echo"
+      },
+      {
+        "room": 6,
+        "kind": "treasure",
+        "time": 268.8,
+        "hp": 120,
+        "kills": 141,
+        "card": "ice-touch"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 347.7,
+        "hp": 120,
+        "kills": 229,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 453.9,
+        "hp": 77,
+        "kills": 230
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "cannon",
+    "seed": 531,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 545.77,
+    "wallMs": 189,
+    "health": 120,
+    "kills": 366,
+    "damageTaken": 121,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 0,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "storm-familiar",
+      "storm-static",
+      "shift-reload",
+      "shift-echo",
+      "void-singularity",
+      "void-leech",
+      "void-echo"
+    ],
+    "inputs": {
+      "dashes": 43,
+      "qs": 37,
+      "es": 14
+    },
+    "peakEnemies": 17,
+    "peakProjectiles": 26,
+    "poolMisses": 0,
+    "updateMeanMs": 0.002,
+    "updateP99Ms": 0.0056,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.5,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 111.2,
+        "hp": 120,
+        "kills": 68,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 190.8,
+        "hp": 114,
+        "kills": 124,
+        "card": "storm-static"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 248.3,
+        "hp": 104,
+        "kills": 125,
+        "card": "shift-reload"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 326.6,
+        "hp": 107,
+        "kills": 197,
+        "card": "shift-echo"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 409.7,
+        "hp": 120,
+        "kills": 277,
+        "card": "void-leech"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 485.3,
+        "hp": 120,
+        "kills": 365,
+        "card": "void-echo"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 545.8,
+        "hp": 120,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "cannon",
+    "seed": 12345,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 406.6,
+    "wallMs": 102,
+    "health": 120,
+    "kills": 366,
+    "damageTaken": 0,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-critical",
+      "storm-familiar",
+      "ice-touch",
+      "ice-pierce",
+      "storm-needle",
+      "fire-ember",
+      "shift-reload",
+      "ice-brittle",
+      "storm-conduct"
+    ],
+    "inputs": {
+      "dashes": 5,
+      "qs": 46,
+      "es": 16
+    },
+    "peakEnemies": 11,
+    "peakProjectiles": 25,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0014,
+    "updateP99Ms": 0.0045,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 33.3,
+        "hp": 120,
+        "kills": 20,
+        "card": "storm-familiar"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 102.6,
+        "hp": 120,
+        "kills": 68,
+        "card": "ice-touch"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 171.9,
+        "hp": 120,
+        "kills": 124,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 183.6,
+        "hp": 120,
+        "kills": 125,
+        "card": "storm-needle"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 254.4,
+        "hp": 120,
+        "kills": 197,
+        "card": "fire-ember"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 323.7,
+        "hp": 120,
+        "kills": 277,
+        "card": "ice-brittle"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 393.5,
+        "hp": 120,
+        "kills": 365,
+        "card": "storm-conduct"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 406.6,
+        "hp": 120,
+        "kills": 366
+      }
+    ]
+  },
+  {
+    "initial": "storm-arc",
+    "weapon": "cannon",
+    "seed": 20260908,
+    "route": "combat",
+    "result": "victory",
+    "simSeconds": 570.97,
+    "wallMs": 191,
+    "health": 109,
+    "kills": 366,
+    "damageTaken": 41,
+    "banked": 13,
+    "settlement": 21,
+    "wallet": {
+      "coins": 173,
+      "keys": 1,
+      "bombs": 0,
+      "tonics": 1,
+      "shards": 0
+    },
+    "build": [
+      "storm-arc",
+      "storm-surge",
+      "void-orbit",
+      "void-leech",
+      "shift-reload",
+      "fire-ember",
+      "void-echo",
+      "storm-needle",
+      "ice-touch",
+      "ice-pierce"
+    ],
+    "inputs": {
+      "dashes": 53,
+      "qs": 49,
+      "es": 16
+    },
+    "peakEnemies": 21,
+    "peakProjectiles": 23,
+    "poolMisses": 0,
+    "updateMeanMs": 0.0019,
+    "updateP99Ms": 0.0053,
+    "rooms": [
+      {
+        "room": 1,
+        "kind": "combat",
+        "time": 32.5,
+        "hp": 120,
+        "kills": 20,
+        "card": "void-orbit"
+      },
+      {
+        "room": 2,
+        "kind": "combat",
+        "time": 104.9,
+        "hp": 120,
+        "kills": 68,
+        "card": "void-leech"
+      },
+      {
+        "room": 3,
+        "kind": "combat",
+        "time": 191.3,
+        "hp": 120,
+        "kills": 124,
+        "card": "shift-reload"
+      },
+      {
+        "room": 4,
+        "kind": "boss",
+        "time": 243.5,
+        "hp": 120,
+        "kills": 125,
+        "card": "fire-ember"
+      },
+      {
+        "room": 5,
+        "kind": "combat",
+        "time": 322.8,
+        "hp": 120,
+        "kills": 197,
+        "card": "void-echo"
+      },
+      {
+        "room": 6,
+        "kind": "combat",
+        "time": 398.3,
+        "hp": 120,
+        "kills": 277,
+        "card": "ice-touch"
+      },
+      {
+        "room": 7,
+        "kind": "combat",
+        "time": 473.8,
+        "hp": 120,
+        "kills": 365,
+        "card": "ice-pierce"
+      },
+      {
+        "room": 8,
+        "kind": "boss",
+        "time": 571,
+        "hp": 109,
+        "kills": 366
+      }
+    ]
+  }
+]

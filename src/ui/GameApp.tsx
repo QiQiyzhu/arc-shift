@@ -7,7 +7,6 @@ import {
   Maximize,
   Settings2,
   ChevronRight,
-  Target,
   Zap,
   Orbit,
   Wind,
@@ -16,7 +15,10 @@ import {
   BookOpen,
   FlaskConical,
   Shield,
+  Hammer,
 } from 'lucide-react';
+import { WeaponPicker, WeaponIcon, WalletBar } from './EconomyPanels';
+import { WEAPONS } from '../economy/catalog';
 import { Engine } from '../game/engine';
 import { ArcScene } from '../game/scene';
 import { ENEMIES } from '../data/enemies';
@@ -40,7 +42,7 @@ export default function GameApp() {
   const [loaded, setLoaded] = useState(false);
   const scene = useRef<ArcScene | null>(null);
   const [utility, setUtility] = useState<
-    'settings' | 'library' | 'help' | 'lab' | null
+    'settings' | 'library' | 'help' | 'lab' | 'workshop' | null
   >(null);
   useEffect(() => {
     const s = new ArcScene(engine);
@@ -105,7 +107,9 @@ export default function GameApp() {
     engine.start();
     render((n) => n + 1);
   };
-  const openUtility = (mode: 'settings' | 'library' | 'help' | 'lab') => {
+  const openUtility = (
+    mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop',
+  ) => {
     synth.unlock();
     if (['playing', 'transition', 'bossIntro'].includes(w.phase))
       engine.pause();
@@ -124,7 +128,7 @@ export default function GameApp() {
           <span className="signal-dot" /> 网络异常 · 连接已建立
         </div>
         <div className="top-actions">
-          <span className="version">RESONANCE / 02</span>
+          <span className="version">RELIQUARY / 03</span>
           <button
             aria-label={engine.save.settings.muted ? '开启声音' : '静音'}
             onClick={() => {
@@ -159,7 +163,7 @@ export default function GameApp() {
             <img className="menu-keyart" src="/art/rift-keyart.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> CHAPTER II · RESONANCE
+                <span /> CHAPTER III · RELIQUARY
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -168,13 +172,20 @@ export default function GameApp() {
               </h1>
               <div className="cn-title">
                 <span>奥 术 跃 迁</span>
-                <i>万物皆可共鸣。</i>
+                <i>带回火种，再赴深渊。</i>
               </div>
               <p className="menu-description">
-                深入失落圣所，让元素彼此改写。
+                圣剑、法器与重炮，选择你的破局之道。
                 <br />
-                星火、冰晶与电弧，汇成你的独特弹幕。
+                每一枚金币，每一次血誓，都改变下一步。
               </p>
+              <WeaponPicker
+                value={engine.save.meta.weapon}
+                onChange={(id) => {
+                  engine.selectWeapon(id);
+                  render((n) => n + 1);
+                }}
+              />
               <button
                 className="start-button"
                 onClick={start}
@@ -187,6 +198,10 @@ export default function GameApp() {
                 <ArrowUpRight size={24} />
               </button>
               <div className="menu-secondary">
+                <button onClick={() => openUtility('workshop')}>
+                  <Hammer size={16} /> 行者营地{' '}
+                  <span className="camp-badge">{engine.save.meta.shards}</span>
+                </button>
                 <button disabled={!loaded} onClick={() => openUtility('lab')}>
                   <FlaskConical size={16} /> 协议试炼 <ChevronRight size={14} />
                 </button>
@@ -198,8 +213,8 @@ export default function GameApp() {
                 </button>
               </div>
               <div className="edition-note">
-                40 项协议 <span> / </span> 自由叠加弹道 <span> / </span> 6
-                种跨系反应
+                3 种武装 <span> / </span> 40 项协议 <span> / </span> 局内经营 ·
+                局外成长
               </div>
               <div className="continue-row">
                 {engine.save.checkpoint && (
@@ -268,6 +283,7 @@ export default function GameApp() {
                 {p.shield > 0 && (
                   <span className="shield-tag">护盾 +{p.shield}</span>
                 )}
+                <WalletBar engine={engine} interactive />
               </div>
               <div className="room-hud">
                 <div className="hud-caption">
@@ -326,8 +342,8 @@ export default function GameApp() {
               </div>
               <div className="skills">
                 <Skill
-                  icon={<Target />}
-                  label="奥术弹"
+                  icon={<WeaponIcon id={w.weapon} />}
+                  label={WEAPONS.find((item) => item.id === w.weapon)!.name}
                   keycap="LMB"
                   value={0}
                   max={1}
@@ -466,6 +482,13 @@ export default function GameApp() {
                 </div>
               </div>
               <div className="end-build">
+                <div className="shard-settlement">
+                  本次带回 {w.settlement} 碎片 · 途中已归档 {w.banked}
+                  <br />
+                  <small>
+                    营地余额 {engine.save.meta.shards} · 可用于升级下一次行动
+                  </small>
+                </div>
                 {w.cards.length} 项协议已整合{' '}
                 <span>总伤害 {Math.round(w.totalDamage).toLocaleString()}</span>
                 <small>SEED {w.seed}</small>
@@ -492,7 +515,7 @@ export default function GameApp() {
           <i /> ALL SYSTEMS UNSTABLE
         </span>
         <span>
-          WASD 移动 <i>·</i> 鼠标射击 <i>·</i> SPACE 闪避
+          WASD 移动 <i>·</i> 左键攻击 <i>·</i> B 炸弹 <i>·</i> R 灵药
         </span>
         <span>
           ARCANE RESEARCH COLLECTIVE <b>© 2026</b>
@@ -502,6 +525,7 @@ export default function GameApp() {
         建议使用桌面浏览器与键鼠游玩。横向屏幕体验更佳。
       </div>
       <UtilityPanel
+        key={utility || 'closed'}
         mode={utility}
         onClose={() => {
           setUtility(null);

@@ -37,6 +37,7 @@ const nil = {
 function clean(seed) {
   store.clear();
   const e = new Engine();
+  e.selectWeapon(weapon);
   e.start(seed);
   return e;
 }
@@ -70,6 +71,8 @@ const priorities = [
   'fire-ember',
 ];
 const initial = process.argv[2] || 'storm-arc';
+const weapon = process.argv[3] || 'arc';
+assert(['arc', 'sword', 'cannon'].includes(weapon), 'Unknown weapon');
 if (initial === 'fire-ember')
   priorities.unshift(
     'fire-split',
@@ -109,7 +112,10 @@ function inputFor(w) {
         x - (e.x + e.vx * (e.state === 'attack' ? horizon : 0)),
         y - (e.y + e.vy * (e.state === 'attack' ? horizon : 0)),
       );
-      score += Math.max(0, 100 + e.radius - d) ** 2 * 0.025;
+      score +=
+        // Melee still needs room for inertia and the boss's body contact radius.
+        Math.max(0, (w.weapon === 'sword' ? 70 : 100) + e.radius - d) ** 2 *
+        0.025;
       if (e.kind === 'oracle' && e.state === 'attack') {
         const beam = laserGeometry({ ...e, timer: e.timer - horizon });
         const d = segmentDist(x, y, beam.x1, beam.y1, beam.x2, beam.y2);
@@ -153,10 +159,12 @@ function inputFor(w) {
     }
     const x = p.x + dx * w.stats.speed * 0.5,
       y = p.y + dy * w.stats.speed * 0.5;
-    score += Math.hypot(x - tx, y - ty) * 0.22;
+    score += Math.hypot(x - tx, y - ty) * (w.weapon === 'sword' ? 0.02 : 0.22);
     if (target) {
       const d = Math.hypot(target.x - x, target.y - y);
-      score += Math.max(0, d - 300) * 0.16;
+      score +=
+        Math.max(0, d - (w.weapon === 'sword' ? 100 : 300)) *
+        (w.weapon === 'sword' ? 0.9 : 0.16);
     }
     if (score < best.score) best = { x: dx, y: dy, score };
   }
@@ -183,6 +191,8 @@ function inputFor(w) {
     q:
       dist < 185 || bullets.some((b) => Math.hypot(b.x - p.x, b.y - p.y) < 100),
     e: dist < 340,
+    heal: p.hp <= p.maxHp - 40,
+    bomb: dist < 210 && (p.hp < 65 || !!w.boss),
   };
 }
 function simulate(seed, route) {
@@ -211,6 +221,10 @@ function simulate(seed, route) {
       assert(e.chooseCard(choice));
     }
     if (w.phase === 'map') {
+      e.openChest('key');
+      if (w.player.hp <= w.player.maxHp - 30) e.buy('heal');
+      if (w.wallet.tonics === 0) e.buy('tonic');
+      if (w.wallet.shards >= 5) e.bankShards();
       rooms.push({
         room: w.room.index,
         kind: w.room.kind,
@@ -250,6 +264,7 @@ function simulate(seed, route) {
   });
   const result = {
     initial,
+    weapon,
     seed,
     route,
     result: w.phase,
@@ -258,6 +273,9 @@ function simulate(seed, route) {
     health: w.player.hp,
     kills: w.kills,
     damageTaken: w.damageTaken,
+    banked: w.banked,
+    settlement: w.settlement,
+    wallet: w.wallet,
     build: w.cards,
     inputs: { dashes, qs, es },
     peakEnemies: highestEntities,
@@ -278,7 +296,7 @@ for (const route of ['safe', 'combat'])
     results.push(simulate(seed, route));
 fs.mkdirSync('outputs/qa', { recursive: true });
 fs.writeFileSync(
-  path.join('outputs/qa', 'bot-' + initial + '.json'),
+  path.join('outputs/qa', 'bot-v03-' + weapon + '-' + initial + '.json'),
   JSON.stringify(results, null, 2),
 );
 assert(

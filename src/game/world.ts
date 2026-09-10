@@ -4,6 +4,12 @@ import { Random } from '../core/math';
 import { baseStats } from '../combat/rules';
 import { ENEMIES } from '../data/enemies';
 import { makeRoom } from '../rooms/generator';
+import {
+  emptyPreparation,
+  startingWallet,
+  type Wallet,
+} from '../economy/catalog';
+import type { WeaponId } from './types';
 import type {
   Enemy,
   EnemyKind,
@@ -16,6 +22,38 @@ import type {
   Upgrade,
 } from './types';
 export class World {
+  weapon: WeaponId = 'arc';
+  preparation = emptyPreparation();
+  wallet = startingWallet();
+  pickups: {
+    x: number;
+    y: number;
+    kind: keyof Wallet;
+    amount: number;
+    age: number;
+  }[] = [];
+  campUsed: string[] = [];
+  rerolls = 0;
+  campMessage = '';
+  banked = 0;
+  roomCoinDrops = 0;
+  settlement = 0;
+  bombCd = 0;
+  bombs: { x: number; y: number; time: number }[] = [];
+  swing: {
+    x: number;
+    y: number;
+    angle: number;
+    age: number;
+    range: number;
+    arc: number;
+    damage: number;
+    combo: number;
+    hits: Set<number>;
+    fragmented: boolean;
+  } | null = null;
+  combo = 0;
+  comboTime = 0;
   phase: Phase = 'menu';
   bus = new EventBus<EffectEvent>();
   rng = new Random(7);
@@ -86,6 +124,7 @@ export class World {
     returningStarted: false,
     shape: 'bolt',
     accent: 0xe3fffa,
+    blastRadius: 0,
   }));
   nextId = 0;
   has(id: string) {
@@ -100,7 +139,13 @@ export class World {
   ) {
     this.bus.emit({ kind, x, y, color, amount });
   }
-  spawn(kind: EnemyKind, x: number, y: number, elite = false) {
+  spawn(
+    kind: EnemyKind,
+    x: number,
+    y: number,
+    elite = false,
+    summoned = false,
+  ) {
     const d = ENEMIES[kind];
     const boss = kind === 'warden' || kind === 'oracle';
     const mult = boss ? 1 : 1 + (this.room.index - 1) * 0.15;
@@ -129,6 +174,7 @@ export class World {
       phase: 1,
       attackIndex: 0,
       elite,
+      summoned,
       reactionCd: 0,
     };
     this.enemies.push(e);

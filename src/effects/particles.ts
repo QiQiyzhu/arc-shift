@@ -51,15 +51,19 @@ export class Effects {
       return;
     }
     const count =
-      e.kind === 'dash'
-        ? 2
-        : e.kind === 'shot'
-          ? 3
-          : e.kind === 'kill'
-            ? 19
-            : e.kind === 'phase' || e.kind === 'victory'
-              ? 65
-              : 9;
+      e.kind === 'pickup'
+        ? 3
+        : e.kind === 'bomb'
+          ? 32
+          : e.kind === 'dash'
+            ? 2
+            : e.kind === 'shot'
+              ? 3
+              : e.kind === 'kill'
+                ? 19
+                : e.kind === 'phase' || e.kind === 'victory'
+                  ? 65
+                  : 9;
     for (let i = 0; i < count; i++) {
       const p = this.particles.acquire();
       if (!p) break;
@@ -83,7 +87,9 @@ export class Effects {
         ghost: e.kind === 'dash' && i === 0,
       });
     }
-    if (['skill', 'reward', 'phase', 'kill', 'victory'].includes(e.kind)) {
+    if (
+      ['skill', 'reward', 'phase', 'kill', 'victory', 'bomb'].includes(e.kind)
+    ) {
       const p = this.particles.acquire();
       if (p)
         Object.assign(p, {

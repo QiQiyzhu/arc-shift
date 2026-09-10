@@ -5,6 +5,9 @@ import fs from 'node:fs';
 const url = process.argv[2] || 'http://127.0.0.1:4173/';
 const browser = await chromium.launch({
   headless: true,
+  proxy: process.env.ARC_SMOKE_PROXY
+    ? { server: process.env.ARC_SMOKE_PROXY }
+    : undefined,
   channel:
     process.env.PLAYWRIGHT_CHANNEL ||
     (process.platform === 'win32' ? 'msedge' : undefined),
@@ -22,6 +25,7 @@ try {
   });
   const response = await page.goto(new URL('?qa', url).href);
   assert.equal(response.status(), 200);
+  await page.getByRole('button', { name: '装备黎明圣剑', exact: true }).click();
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
   assert.equal(
     await page.evaluate(() => 'arcQA' in window),
@@ -43,6 +47,8 @@ try {
   await page.keyboard.press('Space');
   await page.keyboard.press('q');
   await page.keyboard.press('e');
+  await page.keyboard.press('b');
+  await page.keyboard.press('r');
   await page.waitForTimeout(600);
   await page.mouse.up();
   await page.getByRole('button', { name: '系统设置', exact: true }).click();
@@ -56,7 +62,12 @@ try {
   const checkpoint = await page.evaluate(() =>
     localStorage.getItem('arcshift.save.v1'),
   );
+  assert.equal(JSON.parse(checkpoint).checkpoint.weapon, 'sword');
+  await page.getByRole('button', { name: /行者营地/ }).click();
+  await page.getByRole('button', { name: '升级生命刻印' }).waitFor();
+  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
+  await page.getByRole('button', { name: '装备裂核重炮', exact: true }).click();
   await page.getByRole('button', { name: /相位织雨/ }).click();
   await page.locator('.phase-playing').waitFor();
   await page.getByText(/无尽试炼 · 波次/).waitFor();
@@ -81,6 +92,10 @@ try {
     pauseAndResume: true,
     checkpointRetained: true,
     resonanceTrial: true,
+    version: '0.3.0',
+    swordCheckpoint: true,
+    cannonTrial: true,
+    workshop: true,
     pageErrors: errors,
     failedAssets,
   };

@@ -1,14 +1,17 @@
-# ARC//SHIFT · 奥术跃迁 — v0.2「共振」
+# ARC//SHIFT · 奥术跃迁 — v0.3「遗珍」
 
 魔法文明与失控 AI 网络融合后的原创俯视角动作 Roguelite。手动瞄准、穿弹 Dash 与元素协议构筑，穿越八个异常区域，击败两个核心实体。
 
 [在线试玩](https://arc-shift.black-kid-3047.chatgpt.site) · [设计说明](docs/game-design.md) · [架构](docs/architecture.md) · [面试指南](docs/interview-guide.md)
 
-![ARC SHIFT 主界面](docs/screenshots/menu.png)
+![ARC SHIFT v0.3 主界面](docs/screenshots/menu-v03.png)
 
 ## 玩什么
 
 - 连续移动与射击、无敌 Dash、清弹脉冲 Q、引力场 E。
+- 三种免费武装：高频奥术法器、三连斩与斩弹的黎明圣剑、缓慢范围爆破的裂核重炮。
+- 金币、钥匙、炸弹、灵药与随身碎片；清场营地包含行商、协议箱、血誓祭坛与碎片归档。
+- 金币重抽与补给取舍，失败带回半数随身碎片；局外行装提升新行动的生命与初始补给。
 - 五种普通敌人、精英变体、两种各三阶段的 Boss；攻击预警与恢复窗口。
 - 40 项升级、火焰 / 雷电 / 冰霜 / 虚空 / 跃迁五系；形态 × 弹道 × 命中效果可叠加，同系三张触发共鸣。
 - 陨星、光矛、分裂、波动、环绕、回旋、浮游使魔与 Dash 弹雨；六种跨系反应，奖励提示可补齐的组合。
@@ -21,7 +24,8 @@
 | 操作 | 输入 |
 | --- | --- |
 | 移动 / 瞄准 | WASD 或方向键 / 鼠标 |
-| 射击 | 按住鼠标左键 |
+| 武器攻击 | 按住鼠标左键；圣剑为近战三连斩 |
+| 投放炸弹 / 喝灵药 | B / R（满血不耗药） |
 | 相位跃迁 | Space，沿移动方向；静止时沿准星 |
 | 近身脉冲 / 引力奇点 | Q / E |
 | 暂停 / 继续 | Escape；失焦也会暂停 |
@@ -57,9 +61,9 @@ npm run test:e2e
 
 Playwright 会启动或复用开发服务器。Windows 默认使用已安装的 Microsoft Edge；其他平台先运行 `npx playwright install chromium`。可设置 `PLAYWRIGHT_CHANNEL` 选择已安装的浏览器。截图和原始浏览器报告输出到忽略目录 `outputs/qa/`。
 
-v0.2 验收包括 50 项规则测试、9 组浏览器场景，以及三种起始协议的 18 局完整规则模拟；实际结果见 [验收记录](docs/qa-report.md)。自动控制器精确读取世界状态，不代表真人胜率。Boss 后期、胜负等浏览器验收使用明确的开发测试场景，不冒充真人完整通关。`?qa` 测试入口只在开发构建启用，生产包移除。
+v0.3 验收覆盖资源交易、存档兼容、武器组合、实际键鼠输入与完整规则模拟；实际数量和结果见 [验收记录](docs/qa-report.md)。自动控制器精确读取世界状态，不代表真人胜率。Boss 后期、胜负等浏览器验收使用明确的开发测试场景，不冒充真人完整通关。`?qa` 测试入口只在开发构建启用，生产包移除。
 
-完整规则模拟可复现为 `npm run test:simulation -- storm-arc`，另分别传入 `fire-ember` 与 `ice-touch`。每次运行 3 个种子 × 2 类路线，输出到 `outputs/qa/`；控制器与规则执行的计时分开，报告见性能文档。
+完整规则模拟可复现为 `npm run test:simulation -- storm-arc sword`，末尾武器可换为 `arc` 或 `cannon`，初始协议可换为 `fire-ember` 与 `ice-touch`。每次运行 3 个种子 × 2 类路线，输出到 `outputs/qa/`；控制器与规则执行的计时分开，报告见性能文档。
 
 | 技术 | 责任 |
 | --- | --- |
@@ -78,8 +82,11 @@ v0.2 验收包括 50 项规则测试、9 组浏览器场景，以及三种起始
 
 ## 作品集材料
 
+![行者营地](docs/screenshots/workshop-v03.png)
+
 - [Game Design Mini Spec](docs/game-design.md)：循环、操作、敌人、Build、范围。
 - [v0.2 版本说明](docs/v02-release.md)：新增协议、跨系反应、试炼与音乐。
+- [v0.3 版本说明](docs/v03-release.md)：局内经济、局外准备、三种武装、研究来源与存档规则。
 - [竞品研究与原创边界](docs/competitive-analysis.md)：以撒、杀戮尖塔、死亡细胞等作品的官方来源与设计推导。
 - [系统架构](docs/architecture.md)：主循环、伤害、事件、场景生命周期、状态与存档。
 - [性能记录](docs/performance.md)：优化前后实际采样、复杂度和未达目标。

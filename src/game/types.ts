@@ -9,6 +9,7 @@ export type Phase =
   | 'victory'
   | 'gameover';
 export type Element = 'fire' | 'storm' | 'frost' | 'void' | 'shift';
+export type WeaponId = 'arc' | 'sword' | 'cannon';
 export type EnemyKind =
   | 'hunter'
   | 'sentry'
@@ -35,6 +36,8 @@ export interface Input {
   dash: boolean;
   q: boolean;
   e: boolean;
+  bomb?: boolean;
+  heal?: boolean;
 }
 export interface Player {
   x: number;
@@ -76,6 +79,7 @@ export interface Enemy {
   phase: number;
   attackIndex: number;
   elite: boolean;
+  summoned: boolean;
   reactionCd: number;
 }
 export interface Projectile {
@@ -104,7 +108,8 @@ export interface Projectile {
   returning: boolean;
   bounced: boolean;
   returningStarted: boolean;
-  shape: 'bolt' | 'meteor' | 'lance' | 'crystal';
+  shape: 'bolt' | 'meteor' | 'lance' | 'crystal' | 'blade' | 'shell';
+  blastRadius: number;
   accent: number;
 }
 export interface Hazard {

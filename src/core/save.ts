@@ -1,7 +1,21 @@
 import { CARDS } from '../cards/catalog';
 import { defaultSettings, type SoundSettings } from '../audio/synth';
 import type { Room } from '../game/types';
+import {
+  normalizeWallet,
+  normalizePreparation,
+  weaponId,
+  type Wallet,
+  type Preparation,
+} from '../economy/catalog';
+import type { WeaponId } from '../game/types';
 export interface Checkpoint {
+  weapon?: WeaponId;
+  preparation?: Preparation;
+  wallet?: Wallet;
+  campUsed?: string[];
+  rerolls?: number;
+  banked?: number;
   shield?: number;
   progress?: 'entry' | 'reward' | 'map';
   seed: number;
@@ -25,6 +39,9 @@ export interface SaveData {
     bestTime: number;
     totalKills: number;
     discovered: string[];
+    shards: number;
+    preparation: Preparation;
+    weapon: WeaponId;
   };
   checkpoint: Checkpoint | null;
 }
@@ -38,6 +55,9 @@ export const blankSave = (): SaveData => ({
     bestTime: 0,
     totalKills: 0,
     discovered: [],
+    shards: 0,
+    preparation: normalizePreparation(null),
+    weapon: 'arc',
   },
   checkpoint: null,
 });
@@ -59,6 +79,9 @@ export function parseSave(raw: string | null): SaveData {
     settings.reducedMotion = v.settings.reducedMotion === true;
     const ids = new Set(CARDS.map((c) => c.id));
     const meta = {
+      shards: Math.max(0, Math.min(99999, Math.floor(finite(v.meta.shards)))),
+      preparation: normalizePreparation(v.meta.preparation),
+      weapon: weaponId(v.meta.weapon),
       runs: Math.max(0, finite(v.meta.runs)),
       wins: Math.max(0, finite(v.meta.wins)),
       bestRoom: Math.max(0, Math.min(8, finite(v.meta.bestRoom))),
@@ -86,6 +109,30 @@ export function parseSave(raw: string | null): SaveData {
       c.hp > 0
     ) {
       cp = {
+        weapon: weaponId(c.weapon),
+        preparation: normalizePreparation(c.preparation),
+        wallet: normalizeWallet(c.wallet),
+        campUsed: Array.isArray(c.campUsed)
+          ? [
+              ...new Set<string>(
+                c.campUsed.filter(
+                  (x: unknown) =>
+                    typeof x === 'string' &&
+                    [
+                      'heal',
+                      'tonic',
+                      'bomb',
+                      'key',
+                      'chest',
+                      'altar',
+                      'bank',
+                    ].includes(x),
+                ),
+              ),
+            ]
+          : [],
+        rerolls: Math.max(0, Math.min(3, Math.floor(finite(c.rerolls)))),
+        banked: Math.max(0, Math.min(9999, Math.floor(finite(c.banked)))),
         progress:
           c.progress === 'reward' || c.progress === 'map'
             ? c.progress
@@ -93,7 +140,7 @@ export function parseSave(raw: string | null): SaveData {
         seed: c.seed,
         room: c.room,
         cards: [...new Set<string>(c.cards)],
-        hp: Math.min(160, c.hp),
+        hp: Math.min(190, c.hp),
         shield: Math.max(0, Math.min(30, finite(c.shield))),
         level: Math.max(1, Math.min(40, finite(c.level, 1))),
         xp: Math.max(0, finite(c.xp)),

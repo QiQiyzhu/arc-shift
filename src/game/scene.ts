@@ -12,7 +12,7 @@ export class ArcScene extends Phaser.Scene {
   private keys!: Record<string, Phaser.Input.Keyboard.Key>;
   private accumulator = 0;
   private stamp = '';
-  private edges = { dash: false, q: false, e: false };
+  private edges = { dash: false, q: false, e: false, bomb: false, heal: false };
   private pauseEdge = false;
   private unsubscribe?: () => void;
   private onBlur = () => {
@@ -63,7 +63,7 @@ export class ArcScene extends Phaser.Scene {
     this.graphics = this.add.graphics().setDepth(2);
     this.effects = new Effects(this);
     this.keys = this.input.keyboard!.addKeys(
-      'W,A,S,D,SPACE,Q,E,ESC,UP,DOWN,LEFT,RIGHT',
+      'W,A,S,D,SPACE,Q,E,B,R,ESC,UP,DOWN,LEFT,RIGHT',
     ) as typeof this.keys;
     this.input.keyboard!.addCapture(['SPACE', 'UP', 'DOWN', 'LEFT', 'RIGHT']);
     this.input.mouse!.disableContextMenu();
@@ -76,6 +76,12 @@ export class ArcScene extends Phaser.Scene {
     });
     this.keys.E.on('down', () => {
       this.edges.e = true;
+    });
+    this.keys.B.on('down', () => {
+      this.edges.bomb = true;
+    });
+    this.keys.R.on('down', () => {
+      this.edges.heal = true;
     });
     this.keys.ESC.on('down', () => {
       if (!this.inputBlocked) this.pauseEdge = true;
@@ -124,7 +130,13 @@ export class ArcScene extends Phaser.Scene {
       ...this.edges,
     };
     if (this.inputBlocked) {
-      this.edges = { dash: false, q: false, e: false };
+      this.edges = {
+        dash: false,
+        q: false,
+        e: false,
+        bomb: false,
+        heal: false,
+      };
       this.pauseEdge = false;
       this.accumulator = 0;
     }
@@ -135,8 +147,14 @@ export class ArcScene extends Phaser.Scene {
     if (!this.inputBlocked) this.accumulator += dt;
     while (this.accumulator >= 1 / 60) {
       this.engine.update(1 / 60, input);
-      input.dash = input.q = input.e = false;
-      this.edges = { dash: false, q: false, e: false };
+      input.dash = input.q = input.e = input.bomb = input.heal = false;
+      this.edges = {
+        dash: false,
+        q: false,
+        e: false,
+        bomb: false,
+        heal: false,
+      };
       this.accumulator -= 1 / 60;
     }
     const stamp = `${w.seed}-${w.room.index}-${w.room.template}`;

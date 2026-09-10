@@ -214,6 +214,11 @@ export class Synth {
     if (e.kind === 'shot') {
       if (now - this.lastShot < 0.08 || this.voices >= 25) return;
       this.lastShot = now;
+      if (e.weapon === 'cannon') {
+        this.tone(155, 32, 0.28, 0.14, 'triangle');
+        this.noise(0.13, 0.08, 700);
+        return;
+      }
       const sounds = {
         fire: [220, 65, 0.12, 'sawtooth'],
         storm: [1250, 180, 0.055, 'square'],
@@ -225,6 +230,18 @@ export class Synth {
       this.tone(f, end, length, e.element === 'storm' ? 0.035 : 0.065, type);
       if (e.element === 'fire') this.noise(0.04, 0.025, 800);
       if (e.element === 'frost') this.tone(1650, 1400, 0.09, 0.02);
+    } else if (e.kind === 'slash') {
+      this.noise(0.13, 0.075, 2400);
+      this.tone(820, 240, 0.13, 0.045, 'triangle');
+    } else if (e.kind === 'pickup') {
+      if (now - this.lastHit < 0.07) return;
+      this.lastHit = now;
+      this.tone(1450, 1950, 0.065, 0.025);
+    } else if (e.kind === 'bomb') {
+      if (now - this.lastSkill < 0.1) return;
+      this.lastSkill = now;
+      this.tone(100, 30, 0.38, 0.12, 'triangle');
+      this.noise(0.18, 0.07, 550);
     } else if (e.kind === 'dash') {
       if (now - this.lastDash < 0.19) return;
       this.lastDash = now;

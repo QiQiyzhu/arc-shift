@@ -102,8 +102,8 @@ function updateBoss(w: World, e: Enemy, dt: number) {
             tick: 0,
           });
         if (w.enemies.length < 6) {
-          w.spawn('hunter', 260, 240);
-          w.spawn('sentry', 1010, 500);
+          w.spawn('hunter', 260, 240, false, true);
+          w.spawn('sentry', 1010, 500, false, true);
         }
         changeState(e, 'recover', 2);
       }

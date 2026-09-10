@@ -34,6 +34,7 @@ export function shoot(
     speed,
     generation,
     bounced: false,
+    blastRadius: 0,
     returningStarted: false,
     wave: enemy ? 0 : w.stats.wave,
     orbit: !enemy && w.stats.orbit && generation === 0,
@@ -163,6 +164,19 @@ export function updateProjectiles(w: World, dt: number) {
         ) {
           b.hits.add(e.id);
           hitEnemy(w, e, b.damage, b.generation === 0);
+          if (b.blastRadius > 0) {
+            w.emit('bomb', b.x, b.y, b.color, b.blastRadius);
+            for (const n of w.enemies)
+              if (
+                n !== e &&
+                n.hp > 0 &&
+                distance(n, b) < b.blastRadius + n.radius
+              ) {
+                hitEnemy(w, n, b.damage * 0.45, false);
+                if (w.stats.burn) n.burn = Math.max(n.burn, 2);
+                if (w.has('ice-touch')) n.slow = Math.max(n.slow, 1.5);
+              }
+          }
           if (b.generation > 0) {
             if (w.stats.burn) e.burn = Math.max(e.burn, 2);
             if (w.has('ice-touch')) e.slow = Math.max(e.slow, 1.5);

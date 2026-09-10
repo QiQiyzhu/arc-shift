@@ -90,6 +90,16 @@ localStorage 解析检查版本、卡牌 ID、房间类型和关键数值；不�
 
 v0.2 沿用 arcshift.save.v1 格式与旧卡牌 ID，无需迁移原检查点。Engine.practice 使用独立 World，checkpoint 与 finish 在试炼时不写存档；start/resume 清除试炼标记，退出后可继续原行动。试炼没有最终结算和有限波数上限。
 
+## v0.3 资源与武装
+
+`economy/catalog.ts` 提供钱包、上限、价格、准备等级与武装定义；`loot.ts` 负责有界掉落、靠近吸附和清场收取。掉落缓冲最多 96，满载直接发放，避免表现容量吞掉资源。死亡结算仍幂等，Boss 增援标记为 summoned，排除有效击杀、经验、掉落与吸血。
+
+Engine 的 buy / openChest / bloodPact / bankShards / reroll 校验阶段、位置、余额、容量和单次使用记录，再统一保存。归档不分开写余额与检查点，避免刷新重复领取。准备与武器在新行动开始时复制进 World，并进入 Checkpoint；旧格式安全补默认值，局外升级不追溯生效。
+
+`combat/weapons.ts` 将攻击按武装分派。圣剑扇形使用圆与有限扇形的精确相交，包含径向边界端点而不是独立扩大角度和半径；每次挥砍记录命中 ID。炮弹通过池字段 shape / blastRadius 表示，shoot() 每次重置；次生溅射关闭完整命中链。B / R 使用按下沿锁存，与固定步模拟、暂停生命周期一致。`render/arsenal.ts` 绘制实际剑弧、持握武器、物资和炸弹预警；音效通过同一事件总线播放。
+
+存储失败时交易仍可在会话内使用，营地显示不可持久化提示。战斗中退出按入口整体回滚，包括消耗品；检查点机制不是实时战斗快照。
+
 ## 平台与工程取舍
 
 源码包含 Sites 初始化的组件目录；游戏运行从 `index.html → src/main.tsx → app/page.tsx` 进入，部署为 Vite 静态 `dist/`，不启动 RSC 或 Worker 服务。只有界面需要 React，核心规则不依赖它。

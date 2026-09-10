@@ -10,7 +10,11 @@ export type EffectEvent = {
     | 'reward'
     | 'phase'
     | 'victory'
-    | 'room';
+    | 'room'
+    | 'pickup'
+    | 'slash'
+    | 'bomb';
+  weapon?: import('../game/types').WeaponId;
   element?: import('../game/types').Element;
   reaction?: string;
   x: number;

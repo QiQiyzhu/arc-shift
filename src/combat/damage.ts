@@ -4,6 +4,7 @@ import { calculateDamage } from './rules';
 import { ENEMIES } from '../data/enemies';
 import type { Enemy } from '../game/types';
 import type { World } from '../game/world';
+import { dropLoot } from '../economy/loot';
 export function hurtPlayer(w: World, amount: number) {
   const p = w.player;
   if (p.invulnerable > 0 || w.phase !== 'playing') return;
@@ -157,18 +158,22 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
   }
   if (e.hp <= 0 && e.state !== 'dead') {
     e.state = 'dead';
-    w.kills++;
-    w.xp += e.elite ? 28 : 10;
-    if (w.xp >= w.level * 55) {
-      w.xp -= w.level * 55;
-      w.level++;
-      w.player.hp = clamp(w.player.hp + 8, 0, w.player.maxHp);
-      w.stats = deriveStats(w.cards, w.level);
-      w.emit('reward', w.player.x, w.player.y, 0xc7f794);
+    // Endless boss reinforcements cannot produce progression, healing or loot.
+    if (!e.summoned) {
+      w.kills++;
+      dropLoot(w, e);
+      w.xp += e.elite ? 28 : 10;
+      if (w.xp >= w.level * 55) {
+        w.xp -= w.level * 55;
+        w.level++;
+        w.player.hp = clamp(w.player.hp + 8, 0, w.player.maxHp);
+        w.stats = deriveStats(w.cards, w.level);
+        w.emit('reward', w.player.x, w.player.y, 0xc7f794);
+      }
+      if (w.stats.lifesteal > 0)
+        w.player.hp = clamp(w.player.hp + w.stats.lifesteal, 0, w.player.maxHp);
     }
     w.emit('kill', e.x, e.y, ENEMIES[e.kind].color);
-    if (w.stats.lifesteal > 0)
-      w.player.hp = clamp(w.player.hp + w.stats.lifesteal, 0, w.player.maxHp);
     if (proc && w.has('fire-funeral'))
       for (const n of w.enemies)
         if (n !== e && n.hp > 0 && distance(n, e) < 100)

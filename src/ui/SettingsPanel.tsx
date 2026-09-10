@@ -13,19 +13,23 @@ import { CARDS, ELEMENTS } from '../cards/catalog';
 import { SYNERGIES, TRIAL_BUILDS } from '../cards/synergies';
 import { CardView } from './ProtocolPanels';
 import type { Element } from '../game/types';
+import { WeaponPicker, Workshop } from './EconomyPanels';
 export function UtilityPanel({
   mode,
   onClose,
   engine,
   synth,
 }: {
-  mode: 'settings' | 'library' | 'help' | 'lab' | null;
+  mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop' | null;
   onClose: () => void;
   engine: Engine;
   synth: Synth;
 }) {
   const [, render] = useState(0);
   const [filter, setFilter] = useState<Element>('fire');
+  const [trialWeapon, setTrialWeapon] = useState(
+    engine.practice ? engine.world.weapon : engine.save.meta.weapon,
+  );
   const s = engine.save.settings;
   const change = () => {
     synth.settings = { ...s };
@@ -40,46 +44,58 @@ export function UtilityPanel({
       }}
     >
       <DialogContent
-        className={`utility-dialog ${mode === 'library' || mode === 'lab' ? 'library-dialog' : ''}`}
+        className={`utility-dialog ${mode === 'library' || mode === 'lab' || mode === 'workshop' ? 'library-dialog' : ''}`}
       >
         <DialogTitle>
-          {mode === 'lab'
-            ? '协议试炼'
-            : mode === 'settings'
-              ? '系统设置'
-              : mode === 'library'
-                ? '协议档案'
-                : '行动指南'}
+          {mode === 'workshop'
+            ? '行者营地'
+            : mode === 'lab'
+              ? '协议试炼'
+              : mode === 'settings'
+                ? '系统设置'
+                : mode === 'library'
+                  ? '协议档案'
+                  : '行动指南'}
         </DialogTitle>
         <DialogDescription>
-          {mode === 'lab'
-            ? '选择一套组合，立即感受叠加后的弹道。无敌试炼，不覆盖你的行动存档。'
-            : mode === 'settings'
-              ? '调整声音与战斗反馈。设置保存在当前设备。'
-              : mode === 'library'
-                ? '40 项协议，5 种元素。弹体形态、轨迹与命中效果可以自由叠加。'
-                : '观察预警，保留一次闪避，在敌人恢复时输出。'}
+          {mode === 'workshop'
+            ? '将带回的碎片刻入行装。武装免费选择，准备升级只影响新行动。'
+            : mode === 'lab'
+              ? '选择一套组合，立即感受叠加后的弹道。无敌试炼，不覆盖你的行动存档。'
+              : mode === 'settings'
+                ? '调整声音与战斗反馈。设置保存在当前设备。'
+                : mode === 'library'
+                  ? '40 项协议，5 种元素。弹体形态、轨迹与命中效果可以自由叠加。'
+                  : '观察预警，保留一次闪避，在敌人恢复时输出。'}
         </DialogDescription>
-        {mode === 'lab' ? (
-          <div className="trial-grid">
-            {TRIAL_BUILDS.map((b, i) => (
-              <button
-                key={b.name}
-                className={`trial-card trial-${i}`}
-                onClick={() => {
-                  synth.unlock();
-                  engine.startPractice(b.cards);
-                  onClose();
-                }}
-              >
-                <span>EXPERIMENT 0{i + 1}</span>
-                <h3>{b.name}</h3>
-                <b>{b.subtitle}</b>
-                <p>{b.description}</p>
-                <small>进入试炼 →</small>
-              </button>
-            ))}
-          </div>
+        {mode === 'workshop' ? (
+          <Workshop engine={engine} refresh={() => render((n) => n + 1)} />
+        ) : mode === 'lab' ? (
+          <>
+            <WeaponPicker value={trialWeapon} onChange={setTrialWeapon} />
+            <p className="weapon-trial-note">
+              圣剑的元素作用于剑弧，弹道协议增加次生剑气；重炮的弹道与爆破可叠加。试炼不影响资源和营地。
+            </p>
+            <div className="trial-grid">
+              {TRIAL_BUILDS.map((b, i) => (
+                <button
+                  key={b.name}
+                  className={`trial-card trial-${i}`}
+                  onClick={() => {
+                    synth.unlock();
+                    engine.startPractice(b.cards, trialWeapon);
+                    onClose();
+                  }}
+                >
+                  <span>EXPERIMENT 0{i + 1}</span>
+                  <h3>{b.name}</h3>
+                  <b>{b.subtitle}</b>
+                  <p>{b.description}</p>
+                  <small>进入试炼 →</small>
+                </button>
+              ))}
+            </div>
+          </>
         ) : mode === 'settings' ? (
           <>
             <div className="settings-list">
@@ -199,10 +215,33 @@ export function UtilityPanel({
                 <kbd>E</kbd> 引力奇点
               </span>
               <span>
+                <kbd>B</kbd> 投放炸弹
+              </span>
+              <span>
+                <kbd>R</kbd> 使用灵药
+              </span>
+              <span>
                 <kbd>ESC</kbd> 暂停 / 继续
               </span>
             </div>
             <div className="help-details">
+              <p>
+                <b>三种武装</b> ·
+                主菜单选择法器、圣剑或重炮。圣剑前摇后挥砍，可斩掉前方敌弹；不能斩除激光。弹道卡增加符文剑气，元素卡强化剑弧。
+              </p>
+              <p>
+                <b>消耗品</b> · B 在准星方向投放炸弹，0.8
+                秒后爆破并清弹，不伤自己；R 消耗灵药恢复 40 生命，满血不会消耗。
+              </p>
+              <p>
+                <b>清场经营</b> ·
+                金币买补给或重抽卡牌，钥匙保全箱内协议，炸弹破锁回收资源；血誓以生命换购买力。交易全部可跳过。
+              </p>
+              <p>
+                <b>局外成长</b> ·
+                碎片可提前归档。失败仅带回随身碎片的一半，胜利全部带回并奖励 8
+                枚；营地升级只影响新行动。
+              </p>
               <p>
                 <b>相位跃迁</b> ·
                 沿移动方向快速穿过敌人和弹幕；静止时沿准星方向。冷却 1.2 秒。
@@ -221,7 +260,7 @@ export function UtilityPanel({
               </p>
               <p>
                 <b>进度保存</b> ·
-                自动记录每个区域入口，关闭页面后可从入口继续。本局中途的击杀和伤害不保存。
+                自动记录区域入口、清场奖励和营地交易。战斗中关闭页面会回到该区入口，血量、击杀和消耗品也恢复到入口状态；已完成的营地交易不会重置。
               </p>
             </div>
           </>

@@ -16,7 +16,7 @@ interface RenderSample {
   viewport: number[];
   reactionCount: number;
 }
-for (const fixture of ['baseline', 'resonance'] as const) {
+for (const fixture of ['baseline', 'resonance', 'sword', 'cannon'] as const) {
   test(`ten-second ${fixture} render sample with a crowded arena and active VFX`, async ({
     page,
   }) => {
@@ -28,28 +28,31 @@ for (const fixture of ['baseline', 'resonance'] as const) {
       .poll(() => page.evaluate(() => window.arcQA.engine.world.phase))
       .toBe('playing');
     await page.evaluate((fixture) => {
-      if (fixture === 'resonance')
-        window.arcQA.engine.startPractice([
-          'fire-ember',
-          'fire-split',
-          'fire-blast',
-          'fire-meteor',
-          'fire-bloom',
-          'storm-arc',
-          'storm-lance',
-          'storm-familiar',
-          'ice-touch',
-          'ice-prism',
-          'frost-wave',
-          'frost-fan',
-          'void-seek',
-          'void-orbit',
-          'void-return',
-          'void-horizon',
-          'shift-reload',
-          'shift-echo',
-          'shift-rear',
-        ]);
+      if (fixture !== 'baseline')
+        window.arcQA.engine.startPractice(
+          [
+            'fire-ember',
+            'fire-split',
+            'fire-blast',
+            'fire-meteor',
+            'fire-bloom',
+            'storm-arc',
+            'storm-lance',
+            'storm-familiar',
+            'ice-touch',
+            'ice-prism',
+            'frost-wave',
+            'frost-fan',
+            'void-seek',
+            'void-orbit',
+            'void-return',
+            'void-horizon',
+            'shift-reload',
+            'shift-echo',
+            'shift-rear',
+          ],
+          fixture === 'sword' || fixture === 'cannon' ? fixture : 'arc',
+        );
       const w = window.arcQA.engine.world;
       w.enemies = [];
       w.wave = 99;
@@ -133,10 +136,10 @@ for (const fixture of ['baseline', 'resonance'] as const) {
     await page.mouse.up();
     fs.mkdirSync('outputs/qa', { recursive: true });
     fs.writeFileSync(
-      `outputs/qa/render-v02-${fixture}.json`,
+      `outputs/qa/render-v03-${fixture}.json`,
       JSON.stringify(result, null, 2),
     );
-    await page.screenshot({ path: `outputs/qa/v02-stress-${fixture}.png` });
+    await page.screenshot({ path: `outputs/qa/v03-stress-${fixture}.png` });
     expect(result.frames).toBeGreaterThan(100);
     expect(result.poolMisses).toBe(0);
     expect(result.phase).toBe('playing');

@@ -3,6 +3,7 @@ import type Phaser from 'phaser';
 import type { World } from '../game/world';
 import { ENEMIES } from '../data/enemies';
 import { polygon } from './arena';
+import { drawHeldWeapon, drawSupplies, drawSwordArc } from './arsenal';
 export function glow(
   g: Phaser.GameObjects.Graphics,
   x: number,
@@ -21,6 +22,7 @@ export function drawActors(
   w: World,
   t: number,
 ) {
+  drawSupplies(g, w, t);
   for (const h of w.hazards) {
     const c = h.friendly ? (h.type === 'well' ? 0xb3a0ff : 0xffa36b) : 0xff5977;
     g.lineStyle(2, c, 0.7);
@@ -236,6 +238,26 @@ export function drawActors(
       g.strokeCircle(b.x, b.y, b.radius * 1.2);
       g.lineStyle(1, b.accent, 0.7);
       polygon(g, b.x, b.y, b.radius * 1.5, 3, b.age * 5);
+    } else if (!b.enemy && b.shape === 'shell') {
+      g.lineStyle(3, 0xffc993, 0.9);
+      g.strokeCircle(b.x, b.y, b.radius + 3);
+      g.lineStyle(2, b.color, 0.7);
+      polygon(g, b.x, b.y, b.radius + 7, 6, -b.age * 4);
+      g.fillStyle(0xffffeb, 1);
+      g.fillCircle(b.x, b.y, b.radius * 0.65);
+    } else if (!b.enemy && b.shape === 'blade') {
+      const ux = Math.cos(a),
+        uy = Math.sin(a);
+      g.fillStyle(b.color, 0.95);
+      g.lineStyle(1, 0xffffda, 0.9);
+      const points = [
+        { x: b.x + ux * 17, y: b.y + uy * 17 },
+        { x: b.x - uy * 6, y: b.y + ux * 6 },
+        { x: b.x - ux * 11, y: b.y - uy * 11 },
+        { x: b.x + uy * 6, y: b.y - ux * 6 },
+      ];
+      g.fillPoints(points, true);
+      g.strokePoints(points, true);
     } else if (!b.enemy && b.shape === 'crystal') {
       g.lineStyle(1, b.accent, 0.9);
       g.fillStyle(b.color, 0.65);
@@ -247,6 +269,7 @@ export function drawActors(
     }
   }
   const p = w.player;
+  drawSwordArc(g, w);
   const c =
     p.dashTime > 0 ? 0xe4ffde : w.cards.length ? w.stats.primary : 0x83efdb;
   if (w.stats.orbit) {
@@ -298,14 +321,7 @@ export function drawActors(
   polygon(g, p.x, p.y - 8, 9, 4, Math.PI / 4);
   g.lineStyle(3, 0xc9fff2);
   g.lineBetween(p.x - 5, p.y - 8, p.x + 5, p.y - 8);
-  const ox = p.x + Math.cos(p.angle) * 25,
-    oy = p.y + Math.sin(p.angle) * 25;
-  g.lineStyle(2, c, 0.8);
-  g.lineBetween(p.x, p.y, ox, oy);
-  g.fillStyle(0x183b3e);
-  polygon(g, ox, oy, 8, 4, p.angle);
-  g.fillStyle(0xe1fff6);
-  g.fillCircle(ox, oy, 3);
+  drawHeldWeapon(g, w);
   if (p.shield > 0) {
     g.lineStyle(2, 0xd3f5a3, 0.5);
     g.strokeCircle(p.x, p.y, 29);

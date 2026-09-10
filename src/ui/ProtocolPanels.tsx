@@ -24,6 +24,7 @@ import { ELEMENTS } from '../cards/catalog';
 import { buildCounts } from '../cards/system';
 import { roomChoices } from '../rooms/generator';
 import { activeSynergies, newSynergies, SYNERGIES } from '../cards/synergies';
+import { CampActions, WalletBar } from './EconomyPanels';
 export function ElementIcon({
   element,
   size = 24,
@@ -177,6 +178,25 @@ export function CardDraft({ engine }: { engine: Engine }) {
               : `区域净化奖励 / 0${w.room.index}`}
           </span>
         </div>
+        {w.weapon === 'sword' && (
+          <p className="weapon-trial-note">
+            圣剑：元素强化剑弧，弹道协议化为次生剑气，多发扩大挥砍范围。
+          </p>
+        )}
+        {w.rewardContext !== 'start' && (
+          <div className="reroll-row">
+            <WalletBar engine={engine} />
+            <button
+              onClick={() => engine.reroll()}
+              disabled={w.rerolls >= 3 || w.wallet.coins < 12 + w.rerolls * 6}
+            >
+              {w.rerolls >= 3
+                ? '本次重抽已用尽'
+                : `${12 + w.rerolls * 6} 金币 · 重抽协议`}{' '}
+              <small>{w.rerolls} / 3</small>
+            </button>
+          </div>
+        )}
       </section>
     </div>
   );
@@ -193,7 +213,7 @@ const ROOM_INFO: Record<
   },
   elite: {
     name: '精英',
-    reward: '稀有协议保障 · 额外经验',
+    reward: '稀有协议保障 · 额外经验与碎片',
     risk: '强化实体 · 高风险',
     Icon: Skull,
   },
@@ -205,7 +225,7 @@ const ROOM_INFO: Record<
   },
   treasure: {
     name: '宝藏',
-    reward: '免费协议 ×1',
+    reward: '协议 ×1 · 金币 +16 · 钥匙 +1',
     risk: '安全区域',
     Icon: Gem,
   },
@@ -223,7 +243,8 @@ export function RouteMap({ engine }: { engine: Engine }) {
       <section className="map-panel">
         <div className="eyebrow">NETWORK TOPOLOGY // 选择路径</div>
         <h2>下一次跃迁，去往何处？</h2>
-        <p>网络分支已重新连接。选择你的风险与奖励。</p>
+        <p>先整理资源，再决定下一站。营地交易可全部跳过。</p>
+        <CampActions engine={engine} />
         <div className="node-map">
           {Array.from({ length: 8 }, (_, i) => (
             <div

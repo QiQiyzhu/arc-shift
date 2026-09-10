@@ -8,6 +8,16 @@ import { makeRoom, roomWaveCount } from '../rooms/generator';
 import type { EnemyKind, Input, Room } from './types';
 import { deriveStats, rewardChoices } from '../cards/system';
 import { loadSave, writeSave, type SaveData } from '../core/save';
+import {
+  SHOP,
+  WORKSHOP,
+  startingWallet,
+  weaponId,
+  type ShopId,
+  type Preparation,
+} from '../economy/catalog';
+import { grant, updatePickups } from '../economy/loot';
+import { updateWeapon } from '../combat/weapons';
 export class Engine {
   world = new World();
   private settled = false;
@@ -26,6 +36,11 @@ export class Engine {
     this.world.bus = bus;
     this.world.seed = seed;
     this.world.rng = new Random(seed);
+    this.world.weapon = this.save.meta.weapon;
+    this.world.preparation = { ...this.save.meta.preparation };
+    this.world.wallet = startingWallet(this.world.preparation);
+    this.world.player.maxHp = this.world.player.hp =
+      120 + this.world.preparation.vitality * 10;
     this.world.room = makeRoom(1, 'combat', seed);
     this.world.phase = 'reward';
     this.world.rewardContext = 'start';
@@ -42,14 +57,7 @@ export class Engine {
       w.cards.includes(id)
     )
       return false;
-    w.cards.push(id);
-    w.stats = deriveStats(w.cards, w.level);
-    if (id === 'ice-shell') {
-      w.player.maxHp += 40;
-      w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
-    }
-    if (!this.save.meta.discovered.includes(id))
-      this.save.meta.discovered.push(id);
+    this.integrateCard(id);
     w.emit('reward', w.player.x, w.player.y);
     if (w.rewardContext === 'start') this.enter(w.room);
     else {
@@ -58,10 +66,28 @@ export class Engine {
     }
     return true;
   }
+  private integrateCard(id: string) {
+    const w = this.world;
+    if (w.cards.includes(id)) return;
+    w.cards.push(id);
+    w.stats = deriveStats(w.cards, w.level);
+    if (id === 'ice-shell') {
+      w.player.maxHp += 40;
+      w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
+    }
+    if (!this.practice && !this.save.meta.discovered.includes(id))
+      this.save.meta.discovered.push(id);
+  }
   checkpoint() {
     if (this.practice) return;
     const w = this.world;
     this.save.checkpoint = {
+      weapon: w.weapon,
+      preparation: { ...w.preparation },
+      wallet: { ...w.wallet },
+      campUsed: [...w.campUsed],
+      rerolls: w.rerolls,
+      banked: w.banked,
       progress:
         w.phase === 'reward' ? 'reward' : w.phase === 'map' ? 'map' : 'entry',
       seed: w.seed,
@@ -96,10 +122,19 @@ export class Engine {
       kills: c.kills,
       totalDamage: c.totalDamage,
       damageTaken: c.damageTaken,
+      weapon: weaponId(c.weapon),
+      preparation: {
+        ...(c.preparation || { vitality: 0, flask: 0, stipend: 0 }),
+      },
+      wallet: { ...(c.wallet || startingWallet()) },
+      campUsed: [...(c.campUsed || [])],
+      rerolls: c.rerolls || 0,
+      banked: c.banked || 0,
     });
     w.rng = new Random(c.seed + c.room.index * 1129);
     w.stats = deriveStats(w.cards, w.level);
-    w.player.maxHp = 120 + (w.has('ice-shell') ? 40 : 0);
+    w.player.maxHp =
+      120 + w.preparation.vitality * 10 + (w.has('ice-shell') ? 40 : 0);
     w.player.hp = Math.min(w.player.maxHp, c.hp);
     w.player.shield = c.shield || 0;
     if (c.progress === 'map' || c.progress === 'reward') {
@@ -108,7 +143,7 @@ export class Engine {
       w.rewardContext = 'clear';
       w.rewards = rewardChoices(
         w.cards,
-        w.seed,
+        w.seed + w.rerolls * 31991,
         w.room.index,
         false,
         w.room.kind === 'elite',
@@ -126,6 +161,14 @@ export class Engine {
     w.enemies = [];
     w.projectiles.clear();
     w.hazards = [];
+    w.pickups = [];
+    w.bombs = [];
+    w.swing = null;
+    w.combo = w.comboTime = w.bombCd = 0;
+    w.campUsed = [];
+    w.campMessage = '';
+    w.rerolls = 0;
+    w.roomCoinDrops = 0;
     w.echo = { x: 0, y: 0, time: 0, shots: 0 };
     w.companionCd = 0;
     w.rng = new Random(w.seed + room.index * 1129);
@@ -172,9 +215,11 @@ export class Engine {
     w.elapsed += dt;
     w.roomTime += dt;
     updatePlayer(w, input, dt);
+    updateWeapon(w, dt);
     updateEnemies(w, dt);
     if (w.player.hp > 0) updateProjectiles(w, dt);
     if (w.player.hp > 0) updateHazards(w, dt);
+    if (w.player.hp > 0) updatePickups(w, dt);
     if (w.player.hp <= 0) {
       this.finish();
       return;
@@ -221,6 +266,16 @@ export class Engine {
     if (w.phase !== 'playing' || this.settled) return;
     w.projectiles.clear();
     w.hazards = [];
+    w.bombs = [];
+    w.swing = null;
+    updatePickups(w, 0, true);
+    grant(w, 'coins', w.room.kind === 'treasure' ? 16 : 4);
+    grant(
+      w,
+      'shards',
+      w.room.kind === 'elite' ? 3 : w.room.kind === 'boss' ? 4 : 1,
+    );
+    if (w.room.kind === 'treasure') grant(w, 'keys', 1);
     w.player.hp = Math.min(w.player.maxHp, w.player.hp + 12);
     w.phase = w.room.index === 8 ? 'victory' : 'reward';
     w.rewardContext = 'clear';
@@ -246,6 +301,12 @@ export class Engine {
     if (this.settled || !['victory', 'gameover'].includes(w.phase)) return;
     this.settled = true;
     const m = this.save.meta;
+    w.settlement =
+      w.phase === 'victory'
+        ? w.wallet.shards + 8
+        : Math.floor(w.wallet.shards * 0.5);
+    m.shards = Math.min(99999, m.shards + w.settlement);
+    w.wallet.shards = 0;
     m.bestRoom = Math.max(m.bestRoom, w.room.index);
     m.totalKills += w.kills;
     if (w.phase === 'victory') {
@@ -266,7 +327,146 @@ export class Engine {
       this.world.phase = 'paused';
     } else if (phase === 'paused') this.world.phase = this.resumePhase;
   }
-  startPractice(cards: readonly string[]) {
+  selectWeapon(id: string) {
+    if (this.world.phase !== 'menu' || !['arc', 'sword', 'cannon'].includes(id))
+      return false;
+    this.save.meta.weapon = weaponId(id);
+    this.persist();
+    return true;
+  }
+  upgradePreparation(id: keyof Preparation) {
+    if (this.world.phase !== 'menu') return false;
+    const item = WORKSHOP.find((x) => x.id === id);
+    if (!item) return false;
+    const rank = this.save.meta.preparation[id];
+    if (rank >= item.max || this.save.meta.shards < item.costs[rank])
+      return false;
+    this.save.meta.shards -= item.costs[rank];
+    this.save.meta.preparation[id]++;
+    this.persist();
+    return true;
+  }
+  buy(id: ShopId) {
+    const w = this.world,
+      item = SHOP.find((x) => x.id === id);
+    if (
+      this.practice ||
+      w.phase !== 'map' ||
+      ![2, 5, 7].includes(w.room.index) ||
+      !item ||
+      w.campUsed.includes(id) ||
+      w.wallet.coins < item.cost
+    )
+      return false;
+    if (
+      (id === 'heal' && w.player.hp >= w.player.maxHp) ||
+      (id === 'tonic' && w.wallet.tonics >= 3) ||
+      (id === 'bomb' && w.wallet.bombs >= 9) ||
+      (id === 'key' && w.wallet.keys >= 9)
+    )
+      return false;
+    w.wallet.coins -= item.cost;
+    w.campUsed.push(id);
+    if (id === 'heal') w.player.hp = Math.min(w.player.maxHp, w.player.hp + 35);
+    else
+      grant(w, id === 'tonic' ? 'tonics' : id === 'bomb' ? 'bombs' : 'keys', 1);
+    w.campMessage = `已购入${item.name}。每站库存一份。`;
+    this.checkpoint();
+    return true;
+  }
+  openChest(method: 'key' | 'bomb') {
+    const w = this.world,
+      resource = method === 'key' ? 'keys' : 'bombs';
+    if (
+      this.practice ||
+      w.phase !== 'map' ||
+      ![1, 3, 6].includes(w.room.index) ||
+      w.campUsed.includes('chest') ||
+      w.wallet[resource] < 1
+    )
+      return false;
+    w.wallet[resource]--;
+    w.campUsed.push('chest');
+    if (method === 'key') {
+      const card = rewardChoices(w.cards, w.seed + 8171, w.room.index)[0];
+      if (card) {
+        this.integrateCard(card.id);
+        w.campMessage = `封存箱已开启：获得「${card.name}」。`;
+      } else {
+        grant(w, 'coins', 18);
+        w.campMessage = '所有协议已拥有，转换为 18 金币。';
+      }
+    } else {
+      grant(w, 'coins', 18);
+      grant(w, 'shards', 2);
+      w.campMessage = '破锁回收：金币 +18，碎片 +2；箱内协议已损毁。';
+    }
+    this.checkpoint();
+    return true;
+  }
+  bloodPact() {
+    const w = this.world;
+    if (
+      this.practice ||
+      w.phase !== 'map' ||
+      ![3, 6].includes(w.room.index) ||
+      w.campUsed.includes('altar') ||
+      w.player.hp <= 30
+    )
+      return false;
+    w.player.hp -= 30;
+    grant(w, 'coins', 20);
+    grant(w, 'shards', 2);
+    w.campUsed.push('altar');
+    w.campMessage = '血誓已缔结：生命 −30，金币 +20，碎片 +2。';
+    this.checkpoint();
+    return true;
+  }
+  bankShards() {
+    const w = this.world;
+    if (
+      this.practice ||
+      w.phase !== 'map' ||
+      ![2, 4, 7].includes(w.room.index) ||
+      w.campUsed.includes('bank') ||
+      w.wallet.shards === 0 ||
+      w.wallet.coins < 8
+    )
+      return false;
+    const amount = w.wallet.shards;
+    w.wallet.coins -= 8;
+    w.wallet.shards = 0;
+    w.banked += amount;
+    this.save.meta.shards = Math.min(99999, this.save.meta.shards + amount);
+    w.campUsed.push('bank');
+    w.campMessage = `${amount} 枚碎片已送回营地，本次死亡也不会遗失。`;
+    this.checkpoint();
+    return true;
+  }
+  reroll() {
+    const w = this.world,
+      cost = 12 + w.rerolls * 6;
+    if (
+      this.practice ||
+      w.phase !== 'reward' ||
+      w.rewardContext === 'start' ||
+      w.rerolls >= 3 ||
+      w.wallet.coins < cost
+    )
+      return false;
+    w.wallet.coins -= cost;
+    w.rerolls++;
+    w.rewards = rewardChoices(
+      w.cards,
+      w.seed + w.rerolls * 31991,
+      w.room.index,
+      false,
+      w.room.kind === 'elite',
+    );
+    this.checkpoint();
+    return true;
+  }
+  startPractice(cards: readonly string[], weapon = this.save.meta.weapon) {
     this.practice = true;
     this.settled = false;
     const bus = this.world.bus;
@@ -274,6 +474,7 @@ export class Engine {
     const w = this.world;
     w.bus = bus;
     w.seed = 20260909;
+    w.weapon = weapon;
     w.cards = [...cards];
     w.level = 4;
     w.stats = deriveStats(w.cards, w.level);

@@ -1,3 +1,4 @@
+import { attack, throwBomb, drinkTonic } from '../combat/weapons';
 import { clamp, direction, distance } from '../core/math';
 import { cooldown } from '../combat/rules';
 import { shoot } from '../combat/projectiles';
@@ -76,56 +77,9 @@ export function updatePlayer(w: World, input: Input, dt: number) {
   }
   p.x = clamp(p.x + p.vx * dt, 88, 1192);
   p.y = clamp(p.y + p.vy * dt, 112, 620);
-  if (input.fire && p.shotCd === 0) {
-    p.shotCd =
-      s.rate *
-      (w.has('shift-reload') && p.dashCd > s.dashCooldown - 0.7 ? 0.5 : 1);
-    const color = s.primary;
-    for (let i = 0; i < s.projectiles; i++)
-      shoot(
-        w,
-        p.x + Math.cos(p.angle) * 22,
-        p.y + Math.sin(p.angle) * 22,
-        p.angle + (i - (s.projectiles - 1) / 2) * 0.15,
-        false,
-        s.damage,
-        s.shotSpeed,
-        color,
-      );
-    if (s.rear)
-      shoot(
-        w,
-        p.x,
-        p.y,
-        p.angle + Math.PI,
-        false,
-        s.damage * 0.65,
-        s.shotSpeed,
-        color,
-        1,
-      );
-    if (w.echo.time > 0 && w.echo.shots > 0) {
-      w.echo.shots--;
-      shoot(
-        w,
-        w.echo.x,
-        w.echo.y,
-        p.angle,
-        false,
-        s.damage * 0.35,
-        s.shotSpeed,
-        color,
-        1,
-      );
-    }
-    w.bus.emit({
-      kind: 'shot',
-      x: p.x + Math.cos(p.angle) * 24,
-      y: p.y + Math.sin(p.angle) * 24,
-      color,
-      element: s.element,
-    });
-  }
+  if (input.fire && p.shotCd === 0) attack(w);
+  if (input.bomb) throwBomb(w, input.aimX, input.aimY);
+  if (input.heal) drinkTonic(w);
   if (input.fire && s.familiar && w.companionCd === 0) {
     w.companionCd = 0.7;
     shoot(
