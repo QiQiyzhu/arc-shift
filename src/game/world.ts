@@ -7,6 +7,7 @@ import { makeRoom } from '../rooms/generator';
 import { terrainFor, safePosition } from '../rooms/terrain';
 import { isBoss } from '../progression/catalog';
 import { newQueryMetrics } from '../core/metrics';
+import { UniformGrid } from '../core/spatial-grid';
 import {
   emptyPreparation,
   startingWallet,
@@ -26,6 +27,8 @@ import type {
 } from './types';
 export class World {
   queries = newQueryMetrics();
+  collisionMode: 'grid' | 'brute' = 'grid';
+  spatial = new UniformGrid<Enemy>();
   campaign: 'legacy' | 'pilgrimage' = 'legacy';
   route: string[] = [];
   forms: WeaponId[] = [];

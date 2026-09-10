@@ -3,6 +3,7 @@ import { distance } from '../core/math';
 import { hitEnemy, hurtPlayer } from './damage';
 import type { World } from '../game/world';
 import { crossesBlock } from '../rooms/terrain';
+import { sweptAABB } from '../core/spatial-grid';
 export function shoot(
   w: World,
   x: number,
@@ -57,6 +58,8 @@ export function shoot(
   return b;
 }
 export function updateProjectiles(w: World, dt: number) {
+  // AI, separation and player skills may all move targets before this system.
+  if(w.collisionMode === 'grid') w.spatial.rebuild(w.enemies);
   for (const b of w.projectiles.items) {
     if (!b.active) continue;
     b.life -= dt;
@@ -174,7 +177,8 @@ export function updateProjectiles(w: World, dt: number) {
         b.active = false;
       }
     } else {
-      for (const e of w.enemies) {
+      const candidates=w.collisionMode === 'brute' ? w.enemies : w.spatial.query(sweptAABB(b.oldX,b.oldY,b.x,b.y,b.radius));
+      for (const e of candidates) {
         if (e.hp <= 0 || b.hits.has(e.id)) continue;
         w.queries.projectile++;
         if (
@@ -182,6 +186,8 @@ export function updateProjectiles(w: World, dt: number) {
         ) {
           b.hits.add(e.id);
           hitEnemy(w, e, b.damage, b.generation === 0);
+          // Direct hits apply knockback; subsequent projectiles must see the new cell.
+          if(w.collisionMode === 'grid') w.spatial.update(e);
           if (b.blastRadius > 0) {
             w.emit('bomb', b.x, b.y, b.color, b.blastRadius);
             for (const n of w.enemies)

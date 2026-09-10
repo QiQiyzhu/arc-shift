@@ -8,6 +8,7 @@ import type { Enemy } from '../game/types';
 import type { World } from '../game/world';
 import { isBoss } from '../progression/catalog';
 import { moveOnTerrain, safePosition, blocked } from '../rooms/terrain';
+import { separateBruteForce, separateWithGrid } from '../combat/separation';
 export function changeState(e: Enemy, state: Enemy['state'], time: number) {
   e.state = state;
   e.timer = time;
@@ -409,23 +410,8 @@ export function updateEnemies(w: World, dt: number) {
     if (e.state !== 'idle' && distance(e, w.player) < e.radius + 13)
       hurtPlayer(w, e.damage);
   }
-  // Soft separation keeps groups readable without an expensive rigid-body solver.
-  for (let i = 0; i < w.enemies.length; i++)
-    for (let j = i + 1; j < w.enemies.length; j++) {
-      const a = w.enemies[i],
-        b = w.enemies[j];
-      if (a.hp <= 0 || b.hp <= 0 || a.radius > 30 || b.radius > 30) continue;
-      w.queries.separation++;
-      const dist = distance(a, b);
-      const overlap = a.radius + b.radius - dist;
-      if (overlap > 0 && dist > 0) {
-        const p = overlap * 0.08;
-        a.x += ((a.x - b.x) / dist) * p;
-        a.y += ((a.y - b.y) / dist) * p;
-        b.x -= ((a.x - b.x) / dist) * p;
-        b.y -= ((a.y - b.y) / dist) * p;
-      }
-    }
+  if(w.collisionMode === 'brute') separateBruteForce(w);
+  else separateWithGrid(w);
   w.enemies = w.enemies.filter((e) => e.hp > 0);
   if (w.campaign === 'pilgrimage')
     for (const e of w.enemies)

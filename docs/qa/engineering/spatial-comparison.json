@@ -1,0 +1,317 @@
+{
+  "recordedAt": "2026-09-10T04:55:00.249Z",
+  "comparison": [
+    {
+      "enemies": 28,
+      "finalStateEqual": true,
+      "separationReduction": 0.9045273368606702,
+      "projectileReduction": 0.9671023714999555,
+      "before": {
+        "p50": 0.07709999999997308,
+        "p95": 0.1753000000001066,
+        "p99": 0.44430000000011205
+      },
+      "after": {
+        "p50": 0.05670000000009168,
+        "p95": 0.11879999999996471,
+        "p99": 0.23710000000005493
+      }
+    },
+    {
+      "enemies": 100,
+      "finalStateEqual": true,
+      "separationReduction": 0.9051653872053872,
+      "projectileReduction": 0.9711765868807474,
+      "before": {
+        "p50": 0.3170000000000073,
+        "p95": 0.622899999999845,
+        "p99": 0.8467999999998028
+      },
+      "after": {
+        "p50": 0.21609999999998308,
+        "p95": 0.3609000000000151,
+        "p99": 0.5403999999999769
+      }
+    },
+    {
+      "enemies": 250,
+      "finalStateEqual": true,
+      "separationReduction": 0.9253301847389558,
+      "projectileReduction": 0.9767625504613787,
+      "before": {
+        "p50": 0.9819999999999709,
+        "p95": 1.8786000000000058,
+        "p99": 2.3040000000000873
+      },
+      "after": {
+        "p50": 0.7757000000001426,
+        "p95": 1.0711999999998625,
+        "p99": 1.233900000000176
+      }
+    }
+  ],
+  "profiles": {
+    "brute": {
+      "totalSampleMs": 3890.46,
+      "method": "Node V8 sampled self time. Includes TS module compilation/startup and all three workloads; profiling overhead and concurrent tests affect timing.",
+      "top": [
+        {
+          "name": "distance @ core/math.ts:8",
+          "selfMs": 1171.911,
+          "percent": 30.12268472108697
+        },
+        {
+          "name": "separateBruteForce @ combat/separation.ts:23",
+          "selfMs": 558.046,
+          "percent": 14.343959326146521
+        },
+        {
+          "name": "segmentHits @ combat/rules.ts:45",
+          "selfMs": 534.704,
+          "percent": 13.74397886111154
+        },
+        {
+          "name": "updateProjectiles @ combat/projectiles.ts:54",
+          "selfMs": 459.752,
+          "percent": 11.817420048014887
+        },
+        {
+          "name": "updateEnemies @ ai/enemy-ai.ts:202",
+          "selfMs": 133.768,
+          "percent": 3.438359474200994
+        },
+        {
+          "name": "wrapSafe @ cjs/loader:1745",
+          "selfMs": 130.164,
+          "percent": 3.3457226137783196
+        },
+        {
+          "name": "(garbage collector) @ :0",
+          "selfMs": 123.991,
+          "percent": 3.1870524308179493
+        },
+        {
+          "name": "update @ game/engine.ts:237",
+          "selfMs": 121.85,
+          "percent": 3.132020378052981
+        },
+        {
+          "name": "spawnSync @ node:internal/child_process:1128",
+          "selfMs": 76.504,
+          "percent": 1.9664512679734532
+        },
+        {
+          "name": "updateHazards @ systems/hazards.ts:6",
+          "selfMs": 21.737,
+          "percent": 0.5587257033872601
+        },
+        {
+          "name": "readFileUtf8 @ :0",
+          "selfMs": 19.998,
+          "percent": 0.5140266189602257
+        },
+        {
+          "name": "(anonymous) @ scripts/benchmark.cjs:1",
+          "selfMs": 19.924,
+          "percent": 0.5121245302612031
+        },
+        {
+          "name": "updatePlayer @ systems/player.ts:10",
+          "selfMs": 16.054,
+          "percent": 0.4126504320825815
+        },
+        {
+          "name": "shoot @ combat/projectiles.ts:10",
+          "selfMs": 15.46,
+          "percent": 0.3973823146877233
+        },
+        {
+          "name": "separatePair @ combat/separation.ts:7",
+          "selfMs": 14.814,
+          "percent": 0.3807775944232816
+        },
+        {
+          "name": "(program) @ :0",
+          "selfMs": 13.359,
+          "percent": 0.34337841797628044
+        },
+        {
+          "name": "direction @ core/math.ts:10",
+          "selfMs": 13.28,
+          "percent": 0.34134780977056695
+        },
+        {
+          "name": "pipelineEmitWithHintWorker @ lib/typescript.js:121490",
+          "selfMs": 10.416,
+          "percent": 0.2677318363381194
+        },
+        {
+          "name": "hitEnemy @ combat/damage.ts:24",
+          "selfMs": 8.339,
+          "percent": 0.21434483325879203
+        },
+        {
+          "name": "now @ :0",
+          "selfMs": 7.896,
+          "percent": 0.20295800496599373
+        },
+        {
+          "name": "(anonymous) @ cjs/loader:1806",
+          "selfMs": 7.842,
+          "percent": 0.2015699942937339
+        },
+        {
+          "name": "(anonymous) @ lib/typescript.js:16",
+          "selfMs": 7.46,
+          "percent": 0.19175110398256248
+        },
+        {
+          "name": "getTypeChecker @ lib/typescript.js:127890",
+          "selfMs": 7.327,
+          "percent": 0.18833248510458916
+        },
+        {
+          "name": "getNodeLinks @ lib/typescript.js:52452",
+          "selfMs": 6.681,
+          "percent": 0.17172776484014743
+        },
+        {
+          "name": "pipelineEmitWithComments @ lib/typescript.js:125236",
+          "selfMs": 6.477,
+          "percent": 0.16648416896716584
+        }
+      ]
+    },
+    "grid": {
+      "totalSampleMs": 3420.938,
+      "method": "Node V8 sampled self time. Includes TS module compilation/startup and all three workloads; profiling overhead and concurrent tests affect timing.",
+      "top": [
+        {
+          "name": "query @ core/spatial-grid.ts:68",
+          "selfMs": 1296.282,
+          "percent": 37.89258969323618
+        },
+        {
+          "name": "insert @ core/spatial-grid.ts:27",
+          "selfMs": 441.416,
+          "percent": 12.903361592639213
+        },
+        {
+          "name": "separateWithGrid @ combat/separation.ts:28",
+          "selfMs": 246.618,
+          "percent": 7.209075405634362
+        },
+        {
+          "name": "wrapSafe @ cjs/loader:1745",
+          "selfMs": 141.317,
+          "percent": 4.1309430337527315
+        },
+        {
+          "name": "distance @ core/math.ts:8",
+          "selfMs": 132.017,
+          "percent": 3.859087770664069
+        },
+        {
+          "name": "order @ core/spatial-grid.ts:45",
+          "selfMs": 107.527,
+          "percent": 3.1432022445305936
+        },
+        {
+          "name": "(garbage collector) @ :0",
+          "selfMs": 88.783,
+          "percent": 2.595282346537704
+        },
+        {
+          "name": "updateProjectiles @ combat/projectiles.ts:54",
+          "selfMs": 88.335,
+          "percent": 2.5821865231114973
+        },
+        {
+          "name": "spawnSync @ node:internal/child_process:1128",
+          "selfMs": 76.964,
+          "percent": 2.24979230842535
+        },
+        {
+          "name": "(anonymous) @ core/spatial-grid.ts:25",
+          "selfMs": 52.444,
+          "percent": 1.533029829830298
+        },
+        {
+          "name": "update @ core/spatial-grid.ts:48",
+          "selfMs": 43.058,
+          "percent": 1.2586606363517843
+        },
+        {
+          "name": "update @ game/engine.ts:237",
+          "selfMs": 38.317,
+          "percent": 1.1200729156740052
+        },
+        {
+          "name": "(anonymous) @ core/spatial-grid.ts:74",
+          "selfMs": 36.551,
+          "percent": 1.0684496474358787
+        },
+        {
+          "name": "updateEnemies @ ai/enemy-ai.ts:202",
+          "selfMs": 34.565,
+          "percent": 1.0103953944795259
+        },
+        {
+          "name": "segmentHits @ combat/rules.ts:45",
+          "selfMs": 32.087,
+          "percent": 0.937959121153321
+        },
+        {
+          "name": "(program) @ :0",
+          "selfMs": 17.754,
+          "percent": 0.5189804667608708
+        },
+        {
+          "name": "readFileUtf8 @ :0",
+          "selfMs": 16.256,
+          "percent": 0.47519130717949287
+        },
+        {
+          "name": "shoot @ combat/projectiles.ts:10",
+          "selfMs": 14.524,
+          "percent": 0.42456191839781954
+        },
+        {
+          "name": "scan @ lib/typescript.js:12794",
+          "selfMs": 11.15,
+          "percent": 0.3259339982192019
+        },
+        {
+          "name": "get count @ core/pool.ts:29",
+          "selfMs": 11.141,
+          "percent": 0.32567091248072894
+        },
+        {
+          "name": "updatePlayer @ systems/player.ts:10",
+          "selfMs": 11.094,
+          "percent": 0.32429702029092605
+        },
+        {
+          "name": "updateWeapon @ combat/weapons.ts:164",
+          "selfMs": 10.496,
+          "percent": 0.3068164345568379
+        },
+        {
+          "name": "inSwordArc @ combat/weapons.ts:15",
+          "selfMs": 9.933,
+          "percent": 0.29035896002792216
+        },
+        {
+          "name": "pipelineEmitWithHintWorker @ lib/typescript.js:121490",
+          "selfMs": 9.476,
+          "percent": 0.27700005086324275
+        },
+        {
+          "name": "hitEnemy @ combat/damage.ts:24",
+          "selfMs": 8.639,
+          "percent": 0.25253307718526324
+        }
+      ]
+    }
+  }
+}

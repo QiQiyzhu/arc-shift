@@ -8,6 +8,7 @@ const label = process.argv[2] || 'baseline';
 const samples=[];
 for(const count of [28,100,250]) {
   const engine=new Engine(), w=configureStress(engine,count);
+  if(process.env.ARC_COLLISION_MODE==='brute')w.collisionMode='brute';
   const times=[]; let maxProjectiles=0;
   for(let tick=0;tick<1800;tick++) {
     const input=stressInput(tick), begin=performance.now();
@@ -22,7 +23,7 @@ for(const count of [28,100,250]) {
     finalState:{damage:w.totalDamage,rng:w.rng.seed,enemyPositions:w.enemies.map(e=>[e.id,e.x,e.y,e.hp])}});
 }
 fs.mkdirSync('docs/qa/engineering',{recursive:true});
-const result={label,recordedAt:new Date().toISOString(),sourceCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),
+const result={label,collisionMode:process.env.ARC_COLLISION_MODE||'grid',recordedAt:new Date().toISOString(),sourceCommit:execFileSync('git',['rev-parse','HEAD'],{encoding:'utf8'}).trim(),
   sourceDirty:execFileSync('git',['status','--porcelain'],{encoding:'utf8'}).length>0,
   environment:{platform:process.platform,node:process.version,cpu:os.cpus()[0].model},
   methodology:'Fixed seed, 5s warm-up +25s measured simulation; real AI/mixed weapons, high HP fixture; Node does not render. Other project agents active; repeat timings for causal claims.',samples};

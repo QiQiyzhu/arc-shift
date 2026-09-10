@@ -1,0 +1,44 @@
+{
+  "stage": "m2-spatial-final",
+  "recordedAt": "2026-09-10T04:59:37.384Z",
+  "commit": "7dc5fa538673d0bac9e8ea3eb14d7b2818e16459",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 4958
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 4328
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m2-spatial-final/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 7126
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 299092
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 5880
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6IBUiNml.css",
+      "bytes": 186303,
+      "gzipBytes": 32582
+    },
+    {
+      "name": "index-CVVtUe50.js",
+      "bytes": 1654520,
+      "gzipBytes": 470678
+    }
+  ]
+}
