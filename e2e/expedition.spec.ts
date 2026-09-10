@@ -119,9 +119,10 @@ test('camp choices, reroll, stock, bank and workshop persist through real page r
     page.getByRole('button', { name: '钥匙 ×1 · 解锁协议' }),
   ).toBeDisabled();
   await camp(page, 3);
+  const hpBeforePact=await page.evaluate(()=>window.arcQA.engine.world.player.hp);
   await page.getByRole('button', { name: '生命 −30 · 缔结血誓' }).click();
   expect(await page.evaluate(() => window.arcQA.engine.world.player.hp)).toBe(
-    42,
+    hpBeforePact-30,
   );
   await page.screenshot({ path: 'outputs/qa/v03/altar.png' });
   await camp(page, 2);

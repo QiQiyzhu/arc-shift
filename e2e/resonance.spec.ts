@@ -85,6 +85,7 @@ test('audio buses mute active voices, pause immediately, and survive context rec
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/?qa');
+  await page.waitForFunction(() => !!window.arcQA);
   expect(await page.evaluate(() => window.arcQA.synth.context)).toBeNull();
   await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();

@@ -303,7 +303,7 @@ export function RouteMap({ engine }: { engine: Engine }) {
               <button
                 className={`route-card ${r.kind}`}
                 key={r.seed}
-                onClick={() => engine.enter(r)}
+                onClick={() => engine.travelLegacy(r.kind)}
               >
                 <div className="route-heading">
                   <info.Icon size={24} />

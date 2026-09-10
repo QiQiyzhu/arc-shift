@@ -1,0 +1,61 @@
+
+> arc-shift@1.0.0 test:e2e
+> playwright test
+
+
+Running 27 tests using 1 worker
+
+  ok  1 e2e\engineering-performance.spec.ts:3:37 › engineering stress 28 enemies (12.5s)
+  ok  2 e2e\engineering-performance.spec.ts:3:37 › engineering stress 100 enemies (11.9s)
+  ok  3 e2e\engineering-performance.spec.ts:3:37 › engineering stress 250 enemies (12.3s)
+  ok  4 e2e\expedition.spec.ts:42:1 › holy sword, actual consumable keys, pause-frozen bomb and weapon continuation (8.5s)
+  ok  5 e2e\expedition.spec.ts:93:1 › camp choices, reroll, stock, bank and workshop persist through real page reloads (11.6s)
+  ok  6 e2e\expedition.spec.ts:183:1 › trial inherits equipped weapon, switches to cannon and leaves the real save untouched (6.8s)
+  ok  7 e2e\game.spec.ts:9:1 › settings and window blur freeze introductions; Escape only dismisses the dialog (15.7s)
+  ok  8 e2e\game.spec.ts:72:1 › round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio (6.8s)
+  ok  9 e2e\game.spec.ts:138:1 › round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume (11.6s)
+  ok 10 e2e\game.spec.ts:221:1 › round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080 (18.4s)
+  ok 11 e2e\game.spec.ts:309:1 › mobile loads with controls guidance and no horizontal overflow (1.4s)
+  ok 12 e2e\performance.spec.ts:4:3 › ten-second baseline render sample with a crowded arena and active VFX (15.5s)
+  ok 13 e2e\performance.spec.ts:4:3 › ten-second resonance render sample with a crowded arena and active VFX (15.7s)
+  ok 14 e2e\performance.spec.ts:4:3 › ten-second sword render sample with a crowded arena and active VFX (15.7s)
+  ok 15 e2e\performance.spec.ts:4:3 › ten-second cannon render sample with a crowded arena and active VFX (15.7s)
+  ok 16 e2e\performance.spec.ts:4:3 › ten-second hybrid render sample with a crowded arena and active VFX (15.8s)
+  ok 17 e2e\pilgrimage.spec.ts:26:1 › clean menu groups loadout, bestiary and memories into a navigable camp (3.5s)
+  ok 18 e2e\pilgrimage.spec.ts:80:1 › full route previews locked nodes and travels legally into a free hybrid forge (3.8s)
+  ok 19 e2e\pilgrimage.spec.ts:130:1 › resting preserves access to banking and completed treasure keeps its key chest (2.7s)
+  ok 20 e2e\pilgrimage.spec.ts:173:1 › archive choice persists its lore and offered cards (2.8s)
+  ok 21 e2e\pilgrimage.spec.ts:195:74 › matron has its own arena, attacks and escalating score (9.6s)
+  ok 22 e2e\pilgrimage.spec.ts:195:74 › forgemaster has its own arena, attacks and escalating score (7.8s)
+  ok 23 e2e\pilgrimage.spec.ts:225:1 › three-form trial fires actual hybrid attacks and does not change the profile (7.4s)
+  ok 24 e2e\replay.spec.ts:3:1 › QA replay records real controls, exports, steps, ignores blur and replays at x4 (12.4s)
+  ok 25 e2e\replay.spec.ts:74:1 › replay import rejects incompatible versions without discarding the current session (1.3s)
+  ok 26 e2e\resonance.spec.ts:3:1 › six resonance trials render their real projectile forms and preserve an existing run (35.4s)
+  x  27 e2e\resonance.spec.ts:90:1 › audio buses mute active voices, pause immediately, and survive context recreation (373ms)
+
+
+  1) e2e\resonance.spec.ts:90:1 › audio buses mute active voices, pause immediately, and survive context recreation 
+
+    Error: page.evaluate: TypeError: Cannot read properties of undefined (reading 'synth')
+        at eval (eval at evaluate (:291:30), <anonymous>:1:20)
+        at UtilityScript.evaluate (<anonymous>:293:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at eval (eval at evaluate (:291:30), <anonymous>:1:20)
+        at UtilityScript.evaluate (<anonymous>:293:16)
+        at UtilityScript.<anonymous> (<anonymous>:1:44)
+        at C:\Users\yzhu\Documents\ChatGPT\New project\e2e\resonance.spec.ts:88:21
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    outputs\qa\results\resonance-audio-buses-mute-5f096--survive-context-recreation\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+  1 failed
+    e2e\resonance.spec.ts:90:1 › audio buses mute active voices, pause immediately, and survive context recreation 
+  26 passed (4.8m)
+
+[2m[WebServer] [22m(node:58916) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+(node:59276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:59276) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

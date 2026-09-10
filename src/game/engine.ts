@@ -4,8 +4,9 @@ import { updateEnemies } from '../ai/enemy-ai';
 import { updateProjectiles } from '../combat/projectiles';
 import { updateHazards } from '../systems/hazards';
 import { Random, distance } from '../core/math';
-import { makeRoom, roomWaveCount } from '../rooms/generator';
-import type { EnemyKind, Input, Room } from './types';
+import { makeRoom, roomWaveCount, roomChoices } from '../rooms/generator';
+import type { EnemyKind, Input, Room, RoomKind } from './types';
+import type { GameCommand, SimulationObserver } from '../core/replay-contract';
 import { deriveStats, rewardChoices } from '../cards/system';
 import { loadSave, writeSave, type SaveData } from '../core/save';
 import {
@@ -25,13 +26,42 @@ export class Engine {
   world = new World();
   private settled = false;
   private resumePhase: 'playing' | 'transition' | 'bossIntro' = 'playing';
-  save: SaveData = loadSave();
+  save: SaveData;
   storageAvailable = true;
   practice = false;
+  persistenceEnabled = true;
+  observer?: SimulationObserver;
+  private decision<T extends boolean | void>(
+    command: GameCommand,
+    perform: () => T,
+  ): T {
+    this.observer?.beforeCommand(command);
+    const result = perform();
+    this.observer?.command(command, result);
+    return result;
+  }
+  constructor(options?: { save?: SaveData; persistence?: boolean }) {
+    this.save = options?.save ? structuredClone(options.save) : loadSave();
+    this.persistenceEnabled = options?.persistence ?? true;
+  }
+  /** Includes private control state that can affect future simulation. */
+  deterministicState() {
+    return {
+      world: this.world,
+      settled: this.settled,
+      resumePhase: this.resumePhase,
+      practice: this.practice,
+      meta: this.save.meta,
+      checkpoint: this.save.checkpoint,
+    };
+  }
   persist() {
+    if (!this.persistenceEnabled) return;
     this.storageAvailable = writeSave(this.save);
   }
   start(seed = Date.now() % 1e8) {
+    this.observer?.reset();
+    this.resumePhase = 'playing';
     this.practice = false;
     this.settled = false;
     const bus = this.world.bus;
@@ -63,6 +93,9 @@ export class Engine {
     this.persist();
   }
   chooseCard(id: string) {
+    return this.decision({ type: 'reward', id }, () => this.chooseCardImpl(id));
+  }
+  private chooseCardImpl(id: string) {
     const w = this.world;
     if (
       w.phase !== 'reward' ||
@@ -131,6 +164,8 @@ export class Engine {
   resume() {
     const c = this.save.checkpoint;
     if (!c) return false;
+    this.observer?.reset();
+    this.resumePhase = 'playing';
     this.practice = false;
     this.settled = false;
     const bus = this.world.bus;
@@ -259,6 +294,12 @@ export class Engine {
     this.checkpoint();
   }
   update(dt: number, input: Input) {
+    this.observer?.beforeStep(dt, input);
+    this.world.tick++;
+    this.advance(dt, input);
+    this.observer?.afterStep();
+  }
+  private advance(dt: number, input: Input) {
     const w = this.world;
     if (w.phase === 'transition' || w.phase === 'bossIntro') {
       w.transitionTimer -= dt;
@@ -444,6 +485,9 @@ export class Engine {
     this.persist();
   }
   pause() {
+    return this.decision({ type: 'pause' }, () => this.pauseImpl());
+  }
+  private pauseImpl() {
     const phase = this.world.phase;
     if (
       phase === 'playing' ||
@@ -470,6 +514,9 @@ export class Engine {
       this.save.meta.lore.push(id);
   }
   travel(id: string) {
+    return this.decision({ type: 'route', id }, () => this.travelImpl(id));
+  }
+  private travelImpl(id: string) {
     const w = this.world;
     if (w.phase !== 'map' || w.campaign !== 'pilgrimage' || this.practice)
       return false;
@@ -479,6 +526,22 @@ export class Engine {
     if (!node) return false;
     w.route.push(node.id);
     this.enter(node.room);
+    return true;
+  }
+  travelLegacy(kind: RoomKind) {
+    return this.decision({ type: 'legacyRoute', kind }, () =>
+      this.travelLegacyImpl(kind),
+    );
+  }
+  private travelLegacyImpl(kind: RoomKind) {
+    const w = this.world;
+    if (w.phase !== 'map' || w.campaign !== 'legacy' || this.practice)
+      return false;
+    const room = roomChoices(w.room.index + 1, w.seed).find(
+      (r) => r.kind === kind,
+    );
+    if (!room) return false;
+    this.enter(room);
     return true;
   }
   unlockRelic(id: string) {
@@ -521,6 +584,11 @@ export class Engine {
     return true;
   }
   resolveEvent(choice: string) {
+    return this.decision({ type: 'event', id: choice }, () =>
+      this.resolveEventImpl(choice),
+    );
+  }
+  private resolveEventImpl(choice: string) {
     const w = this.world;
     if (w.phase !== 'event' || w.eventDone || this.practice) return false;
     const kind = w.room.kind;
@@ -589,6 +657,9 @@ export class Engine {
     return true;
   }
   buy(id: ShopId) {
+    return this.decision({ type: 'shop', id }, () => this.buyImpl(id));
+  }
+  private buyImpl(id: ShopId) {
     const w = this.world,
       item = SHOP.find((x) => x.id === id);
     if (
@@ -619,6 +690,11 @@ export class Engine {
     return true;
   }
   openChest(method: 'key' | 'bomb') {
+    return this.decision({ type: 'chest', method }, () =>
+      this.openChestImpl(method),
+    );
+  }
+  private openChestImpl(method: 'key' | 'bomb') {
     const w = this.world,
       resource = method === 'key' ? 'keys' : 'bombs';
     if (
@@ -651,6 +727,9 @@ export class Engine {
     return true;
   }
   bloodPact() {
+    return this.decision({ type: 'pact' }, () => this.bloodPactImpl());
+  }
+  private bloodPactImpl() {
     const w = this.world;
     if (
       this.practice ||
@@ -669,6 +748,9 @@ export class Engine {
     return true;
   }
   bankShards() {
+    return this.decision({ type: 'bank' }, () => this.bankShardsImpl());
+  }
+  private bankShardsImpl() {
     const w = this.world;
     if (
       this.practice ||
@@ -692,6 +774,9 @@ export class Engine {
     return true;
   }
   reroll() {
+    return this.decision({ type: 'reroll' }, () => this.rerollImpl());
+  }
+  private rerollImpl() {
     const w = this.world,
       cost = 12 + w.rerolls * 6;
     if (
@@ -719,6 +804,8 @@ export class Engine {
     weapon = this.save.meta.weapon,
     hybrid = false,
   ) {
+    this.observer?.reset();
+    this.resumePhase = 'playing';
     this.practice = true;
     this.settled = false;
     const bus = this.world.bus;

@@ -26,6 +26,7 @@ import type {
   Upgrade,
 } from './types';
 export class World {
+  tick = 0;
   queries = newQueryMetrics();
   collisionMode: 'grid' | 'brute' = 'grid';
   spatial = new UniformGrid<Enemy>();

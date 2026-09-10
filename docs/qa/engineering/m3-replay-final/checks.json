@@ -1,0 +1,39 @@
+{
+  "stage": "m3-replay-final",
+  "recordedAt": "2026-09-10T05:28:20.394Z",
+  "commit": "e5be712160463a2804ace20d0c01b41484588feb",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 4078
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 1188
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m3-replay-final/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 5136
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 1,
+      "elapsedMs": 284606
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6IBUiNml.css",
+      "bytes": 186303,
+      "gzipBytes": 32582
+    },
+    {
+      "name": "index-CVVtUe50.js",
+      "bytes": 1654520,
+      "gzipBytes": 470678
+    }
+  ]
+}

@@ -1,0 +1,1284 @@
+{
+  "stats": {
+    "startTime": "2026-09-10T05:30:15.003Z",
+    "duration": 286884.808,
+    "expected": 27,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "suites": [
+    {
+      "title": "engineering-performance.spec.ts",
+      "file": "engineering-performance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "engineering stress 28 enemies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12358,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:30:16.613Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "55a9a40162de3dcdeb7f-0fb9488b51c8b25439aa",
+          "file": "engineering-performance.spec.ts",
+          "line": 3,
+          "column": 37
+        },
+        {
+          "title": "engineering stress 100 enemies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11871,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:30:29.158Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "55a9a40162de3dcdeb7f-eee5e0482bca5038a358",
+          "file": "engineering-performance.spec.ts",
+          "line": 3,
+          "column": 37
+        },
+        {
+          "title": "engineering stress 250 enemies",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 12230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:30:41.037Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "55a9a40162de3dcdeb7f-1d02a4bfeb074fc9171f",
+          "file": "engineering-performance.spec.ts",
+          "line": 3,
+          "column": 37
+        }
+      ]
+    },
+    {
+      "title": "expedition.spec.ts",
+      "file": "expedition.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "holy sword, actual consumable keys, pause-frozen bomb and weapon continuation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 8511,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1911
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 118
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 111
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 115
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 105
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 889
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:30:53.287Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58b0e299fbbf5848cf20-aea79bae21acc4a75562",
+          "file": "expedition.spec.ts",
+          "line": 42,
+          "column": 1
+        },
+        {
+          "title": "camp choices, reroll, stock, bank and workshop persist through real page reloads",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11313,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1898
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:31:01.805Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58b0e299fbbf5848cf20-0286e1cb63b6de1eb1fe",
+          "file": "expedition.spec.ts",
+          "line": 93,
+          "column": 1
+        },
+        {
+          "title": "trial inherits equipped weapon, switches to cannon and leaves the real save untouched",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6749,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1895
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1892
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 118
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:31:13.124Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "58b0e299fbbf5848cf20-55193cd062edf6de7e49",
+          "file": "expedition.spec.ts",
+          "line": 184,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "game.spec.ts",
+      "file": "game.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "settings and window blur freeze introductions; Escape only dismisses the dialog",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1886
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2917
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:31:19.903Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-b617505c6eda0071a1ce",
+          "file": "game.spec.ts",
+          "line": 9,
+          "column": 1
+        },
+        {
+          "title": "round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5862,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1916
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 377
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 4
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:31:35.517Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-49bca23011d025af675b",
+          "file": "game.spec.ts",
+          "line": 72,
+          "column": 1
+        },
+        {
+          "title": "round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11633,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1928
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 2896
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1900
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:31:41.386Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-3838ef7a34e521f9f96f",
+          "file": "game.spec.ts",
+          "line": 138,
+          "column": 1
+        },
+        {
+          "title": "round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 18166,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1897
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2903
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 4
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2909
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1900
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:31:53.026Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-16e764b08ab2c2be37d0",
+          "file": "game.spec.ts",
+          "line": 221,
+          "column": 1
+        },
+        {
+          "title": "mobile loads with controls guidance and no horizontal overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1554,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:32:11.199Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-7f29499ee596e1658f1d",
+          "file": "game.spec.ts",
+          "line": 309,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "performance.spec.ts",
+      "file": "performance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "ten-second baseline render sample with a crowded arena and active VFX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15836,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1897
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:32:12.775Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b15d6361b2fc38288977-d685a23fb2ec6c0a5be5",
+          "file": "performance.spec.ts",
+          "line": 4,
+          "column": 3
+        },
+        {
+          "title": "ten-second resonance render sample with a crowded arena and active VFX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15623,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1895
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:32:28.618Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b15d6361b2fc38288977-50820a0166718d17e08b",
+          "file": "performance.spec.ts",
+          "line": 4,
+          "column": 3
+        },
+        {
+          "title": "ten-second sword render sample with a crowded arena and active VFX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15730,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1892
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:32:44.247Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b15d6361b2fc38288977-cbc47b5fa990a6166a99",
+          "file": "performance.spec.ts",
+          "line": 4,
+          "column": 3
+        },
+        {
+          "title": "ten-second cannon render sample with a crowded arena and active VFX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15645,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1912
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:32:59.986Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b15d6361b2fc38288977-952cc87e2fa5c4fc045a",
+          "file": "performance.spec.ts",
+          "line": 4,
+          "column": 3
+        },
+        {
+          "title": "ten-second hybrid render sample with a crowded arena and active VFX",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 15804,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1896
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:33:15.638Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "b15d6361b2fc38288977-ffd2a56053c7950e3726",
+          "file": "performance.spec.ts",
+          "line": 4,
+          "column": 3
+        }
+      ]
+    },
+    {
+      "title": "pilgrimage.spec.ts",
+      "file": "pilgrimage.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "clean menu groups loadout, bestiary and memories into a navigable camp",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3230,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:33:31.461Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-3649c821097e8ba9064a",
+          "file": "pilgrimage.spec.ts",
+          "line": 26,
+          "column": 1
+        },
+        {
+          "title": "full route previews locked nodes and travels legally into a free hybrid forge",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4085,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:33:34.702Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-72abfb7c01c02d389bd6",
+          "file": "pilgrimage.spec.ts",
+          "line": 80,
+          "column": 1
+        },
+        {
+          "title": "resting preserves access to banking and completed treasure keeps its key chest",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2901,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:33:38.794Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-777424d2d366a84a0fdb",
+          "file": "pilgrimage.spec.ts",
+          "line": 130,
+          "column": 1
+        },
+        {
+          "title": "archive choice persists its lore and offered cards",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2718,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:33:41.703Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-eae47ad74696a92eee3c",
+          "file": "pilgrimage.spec.ts",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "matron has its own arena, attacks and escalating score",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 9562,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2920
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2927
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:33:44.429Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-bbdfc3d2fe3aa1ce2687",
+          "file": "pilgrimage.spec.ts",
+          "line": 195,
+          "column": 74
+        },
+        {
+          "title": "forgemaster has its own arena, attacks and escalating score",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 7654,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2919
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 879
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:33:53.998Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-5419788e3585f13cdda8",
+          "file": "pilgrimage.spec.ts",
+          "line": 195,
+          "column": 74
+        },
+        {
+          "title": "three-form trial fires actual hybrid attacks and does not change the profile",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5729,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1895
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 3
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:34:01.659Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "e10b105dc45667d4fadf-84f8c0664c6c8b3dd992",
+          "file": "pilgrimage.spec.ts",
+          "line": 225,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "replay.spec.ts",
+      "file": "replay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "QA replay records real controls, exports, steps, ignores blur and replays at x4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 11285,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:34:07.418Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6613f1f6335d1a86a8f6-937b02f02bfdd0746306",
+          "file": "replay.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "replay import rejects incompatible versions without discarding the current session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 984,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T05:34:18.710Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6613f1f6335d1a86a8f6-82d1c540061dc6e07d8f",
+          "file": "replay.spec.ts",
+          "line": 74,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "resonance.spec.ts",
+      "file": "resonance.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "six resonance trials render their real projectile forms and preserve an existing run",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 34868,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1904
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1913
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 881
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 3
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1899
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 887
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 123
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1888
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 885
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 116
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1895
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 896
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 112
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1908
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 884
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 115
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1885
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 893
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 110
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:34:19.721Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "77fa3f26c7eb3fb139be-070d333e2921ef33f3c5",
+          "file": "resonance.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "audio buses mute active voices, pause immediately, and survive context recreation",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6608,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 5
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 109
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 105
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1887
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 2
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3
+                    }
+                  ],
+                  "startTime": "2026-09-10T05:34:54.599Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "77fa3f26c7eb3fb139be-9ab0944d1d646ec9039f",
+          "file": "resonance.spec.ts",
+          "line": 90,
+          "column": 1
+        }
+      ]
+    }
+  ]
+}

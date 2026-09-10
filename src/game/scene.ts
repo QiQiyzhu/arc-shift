@@ -17,6 +17,7 @@ export class ArcScene extends Phaser.Scene {
   private pauseEdge = false;
   private unsubscribe?: () => void;
   private onBlur = () => {
+    if (import.meta.env.DEV && this.externalSimulation) return;
     if (
       ['playing', 'transition', 'bossIntro'].includes(this.engine.world.phase)
     )
@@ -27,6 +28,8 @@ export class ArcScene extends Phaser.Scene {
     if (document.hidden) this.onBlur();
   };
   inputBlocked = false;
+  /** Used only by the development QA page; production always owns its loop. */
+  externalSimulation?: (dt: number, input: Input) => void;
   onTick: () => void = () => {};
   onReady: () => void = () => {};
   onSuspend: () => void = () => {};
@@ -37,7 +40,10 @@ export class ArcScene extends Phaser.Scene {
     window.removeEventListener('blur', this.onBlur);
     document.removeEventListener('visibilitychange', this.onVisibility);
   };
-  constructor(engine: Engine) {
+  constructor(
+    engine: Engine,
+    private menuPreview = true,
+  ) {
     super('ARC');
     this.engine = engine;
   }
@@ -88,7 +94,11 @@ export class ArcScene extends Phaser.Scene {
       this.edges.heal = true;
     });
     this.keys.ESC.on('down', () => {
-      if (!this.inputBlocked) this.pauseEdge = true;
+      if (
+        !this.inputBlocked &&
+        !(import.meta.env.DEV && this.externalSimulation)
+      )
+        this.pauseEdge = true;
     });
     this.unsubscribe = this.engine.world.bus.on((e) => {
       this.effects.emit(e);
@@ -105,16 +115,18 @@ export class ArcScene extends Phaser.Scene {
     document.addEventListener('visibilitychange', this.onVisibility);
     this.events.once('shutdown', this.release);
     this.events.once('destroy', this.release);
-    const w = this.engine.world;
-    w.enemies = [];
-    w.player.x = 822;
-    w.player.y = 385;
-    w.player.angle = -0.6;
-    w.spawn('hunter', 995, 310);
-    w.spawn('lancer', 980, 480);
-    w.spawn('sentry', 660, 250);
-    w.spawn('weaver', 1050, 205);
-    w.phase = 'menu';
+    if (this.menuPreview) {
+      const w = this.engine.world;
+      w.enemies = [];
+      w.player.x = 822;
+      w.player.y = 385;
+      w.player.angle = -0.6;
+      w.spawn('hunter', 995, 310);
+      w.spawn('lancer', 980, 480);
+      w.spawn('sentry', 660, 250);
+      w.spawn('weaver', 1050, 205);
+      w.phase = 'menu';
+    }
     this.onReady();
   }
   update(time: number, delta: number) {
@@ -150,7 +162,9 @@ export class ArcScene extends Phaser.Scene {
     }
     if (!this.inputBlocked) this.accumulator += dt;
     while (this.accumulator >= 1 / 60) {
-      this.engine.update(1 / 60, input);
+      if (import.meta.env.DEV && this.externalSimulation)
+        this.externalSimulation(1 / 60, input);
+      else this.engine.update(1 / 60, input);
       input.dash = input.q = input.e = input.bomb = input.heal = false;
       this.edges = {
         dash: false,
