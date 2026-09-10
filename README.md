@@ -1,104 +1,95 @@
-# ARC//SHIFT · 奥术跃迁 — v1.0「钟声尽头」
+# ARC//SHIFT — Game Client Engineering
 
-魔法文明与失控 AI 网络融合后的原创俯视角动作 Roguelite。圣剑、弹幕与重炮可在一局中混搭，沿十二层分支路线穿越三个地区，选择遭遇、管理资源并面对三个核心；四种 Boss 可在不同行动中遇见。
+**[在线试玩](https://arc-shift.black-kid-3047.chatgpt.site/) · [五项目展示入口](https://arc-shift.black-kid-3047.chatgpt.site/portfolio/) · [A–G 工程交付](docs/delivery-v2.md) · [A–T 面试讲解](docs/interview-dossier.md) · [CI 与原始验收](docs/qa-report.md)**
 
-[在线试玩](https://arc-shift.black-kid-3047.chatgpt.site) · [作品提交与演示](docs/portfolio.md) · [v1.0 更新](docs/v1-release.md) · [架构](docs/architecture.md) · [面试指南](docs/interview-guide.md)
+一个可直接在浏览器玩的原创动作构筑游戏：圣剑、法器弹幕与重炮混搭，沿十二层路线管理资源、协议和遗器。本轮在已有 v1.0 玩法上完成客户端工程升级，保留原玩法与美术，重点处理可复现性、参数工具、输入边界和性能证据。
 
-![ARC SHIFT v1.0 主界面](docs/screenshots/menu-v1.png)
+| 工程能力 | 实现与可核对的结果 |
+|---|---|
+| **Spatial Hash / Uniform Grid** | 保留 brute-force oracle；250 敌人固定夹具中分离/弹体几何测试减少 **92.53% / 97.68%**，Engine P95 **1.8786 → 1.0712 ms**。[原始数据与反例](docs/performance-v2.md) |
+| **Deterministic QA Replay** | 固定步输入、奖励/路线/消费等有序命令与执行结果、版本校验、周期 checksum、导出/单步/失同步停播。[设计](docs/replay.md) |
+| **Gameplay Editor + Debugger** | 封闭参数 schema、语义 diff、JSON 往返、独立真实 Engine 沙盒；单步、调速、池/网格/FSM 叠加。[内容流程](docs/content-pipeline.md) |
+| **Automated QA** | 本地完整里程碑检查、Linux CI、生产隔离、存档/回放回归、六种子共 **648,000 模拟 tick**。[结果与失败记录](docs/qa-report.md) |
+| **Input actions** | 键鼠与标准 Gamepad API、可配置键位、边沿锁存、死区、焦点与断连保护；实体手柄兼容性未测。[输入边界](docs/input.md) |
 
-快速看组合效果：**营地与图鉴 → 协议试炼 → 开启三重共鸣 → 选择组合**。无需注册，试炼不覆盖正式行动。正式行动第二层可选择工坊，免费熔接第二种武装。
+```mermaid
+flowchart LR
+  Devices[Keyboard / mouse / gamepad] --> Actions[ActionInput]
+  Actions --> Scene[ArcScene fixed-step driver]
+  UI[React commands] --> Engine[Engine / World]
+  Scene --> Engine
+  Content[Validated ContentPack] --> Engine
+  Engine --> Rules[Combat / AI / rooms / economy]
+  Rules --> Grid[Grid candidates + existing narrow phase]
+  Engine --> Replay[Replay observer / checksums]
+  Replay -->|recorded inputs and commands| Engine
+  Rules --> Events[Presentation events]
+  Events --> View[Phaser / VFX / Web Audio]
+  Engine --> HUD[React HUD snapshot]
+```
 
-## 玩什么
+核心规则不依赖 Phaser，可由 Node 直接运行；集中式 World 加系统函数不是严格 ECS。**本项目是 QA replay，不是网络 lockstep。** 性能表只衡量该固定模拟夹具；浏览器帧率没有一致提升，不宣称所有设备稳定 60 FPS。[完整架构](docs/architecture.md) · [工程案例：问题到结果](docs/engineering-case-study.md)。
 
-- 连续移动与射击、无敌 Dash、清弹脉冲 Q、引力场 E。
-- 三种免费武装：高频奥术法器、三连斩与斩弹的黎明圣剑、缓慢范围爆破的裂核重炮。
-- 金币、钥匙、炸弹、灵药与随身碎片；清场营地包含行商、协议箱、血誓祭坛与碎片归档。
-- 金币重抽与补给取舍，失败带回半数随身碎片；局外行装提升新行动的生命与初始补给。
-- 八种普通敌人、精英变体、四种各三阶段的 Boss；攻击预警、侧翼瞬移、护盾支援与恢复窗口。
-- 40 项升级、火焰 / 雷电 / 冰霜 / 虚空 / 跃迁五系；形态 × 弹道 × 命中效果可叠加，同系三张触发共鸣。
-- 陨星、光矛、分裂、波动、环绕、回旋、浮游使魔与 Dash 弹雨；六种跨系反应，奖励提示可补齐的组合。
-- 六套「协议试炼」直接体验完整组合，无敌无限波，不改变原行动的存档与统计。
-- 十二层二十八节点全图预览，十种遭遇类型，驻守符阵、工坊熔接、遗迹抉择、档案阅读与死亡/胜利结算。
-- 六件碎片与 Boss 条件解锁的遗器；十二篇记忆残片和独立图鉴；主界面通过营地二级菜单管理行装。
-- 原创生成的圣所、林地与铸庭地面，以及裂隙主视觉；实体障碍、封闭角落、周期陷阱和中央增益区。
-- 三个地区、四个 Boss 的原创主题，阶段变奏与神谕终阶段的稀疏尾声；五系射击音色、独立音乐/音效音量。
-- 入口 / 奖励 / 地图检查点、协议发现记录、设置保存；无需账号或后端。
+![实际三武装混搭画面](docs/screenshots/hybrid-v1.png)
 
-| 操作 | 输入 |
-| --- | --- |
-| 移动 / 瞄准 | WASD 或方向键 / 鼠标 |
-| 武器攻击 | 按住鼠标左键；圣剑为近战三连斩 |
-| 投放炸弹 / 喝灵药 | B / R（满血不耗药） |
-| 相位跃迁 | Space，沿移动方向；静止时沿准星 |
-| 近身脉冲 / 引力奇点 | Q / E |
-| 暂停 / 继续 | Escape；失焦也会暂停 |
+## 运行与快速演示
 
-桌面键鼠体验为主要目标。移动端可浏览菜单和档案，没有触屏战斗操控。行动时长随路线、选卡与熟练度变化；可通过试炼快速展示组合。关闭页面后从最近检查点继续，房内战斗不会逐帧保存。v0.3 未完成的八区域行动仍可继续；新行动采用十二层路线。
-
-## 本地运行
-
-Node.js 22.13+，推荐 24；npm。
+Node.js 22.13+，推荐 24；锁文件安装：
 
 ```sh
 npm ci
 npm run dev
 ```
 
-打开 `http://127.0.0.1:5173`。发布构建与本地预览：
+打开 `http://127.0.0.1:5173`。发布构建为 `npm run build`，本地生产预览为 `npm start`。产物为静态 `dist/`，无需数据库、账号或 API Key。`.openai/hosting.json` 绑定本项目的 Sites 站点，复制项目时使用自己的部署配置；仓库没有部署凭据。
 
-```sh
-npm run build
-npm start
-```
+**三分钟演示**：在线进入“营地与图鉴 → 协议试炼”，开启三重共鸣，观察剑弧、炮击和元素载荷组合；回到正式行动展示资源和完整路线；随后打开本地内容工作台或回放页，解释同一套规则如何被检查。试炼和 DEV 沙盒不覆盖正式行动存档。
 
-静态产物为 `dist/`，可由普通静态服务器托管。当前 Sites 部署配置在 `.openai/hosting.json`；这是此项目的远端绑定，复制项目时应使用自己的部署配置。仓库不包含凭据。
+| 本机开发入口 | 可以操作什么 |
+|---|---|
+| `/dev/replay` | 录制、下载/导入、单步、×2/×4、checksum 与失败区间 |
+| `/dev/content-editor` | 编辑已有参数、校验/diff、导入导出、武器/卡牌/遗器沙盒 |
+| `/dev/debugger` | 暂停、单步、调速、生成敌人/Boss、协议、命中框/网格/FSM |
 
-## 验证
+这些开发入口不出现在生产构建。公开页面提供游戏和真实工程截图，开发工具需要本机启动。[操作说明](docs/content-editor.md) · [调试器说明](docs/debugger.md)。
+
+![实际本地内容工作台](docs/qa/engineering/content-editor.png)
+
+默认键鼠：WASD/方向键移动、鼠标瞄准、左键攻击、Space 跃迁、Q 脉冲、E 引力、B 炸弹、R 灵药、Escape 暂停。系统设置可改键。标准手柄左/右摇杆移动/瞄准，RT 射击、A 跃迁、LB/RB 技能、X/Y 消耗品、Start 暂停；菜单和路线仍使用键鼠。移动端可浏览，没有触屏战斗操控。音乐在第一次点击后启动。
+
+玩法包括 40 项协议、三种混搭武装、三种场景、四种 Boss、十二层二十八节点路线、十种遭遇、金币/钥匙/炸弹/灵药/碎片及局外解锁。规则、剧情与素材历史详见 [v1.0 说明](docs/v1-release.md)、[设计小册](docs/game-design.md) 和 [竞品研究与原创边界](docs/competitive-analysis.md)。
+
+## 验证与复现
 
 ```sh
 npm run typecheck
 npm run lint
 npm test
 npm run test:e2e
+npm run build
+npx playwright test --config playwright.production.config.ts
+npm run bundle:report
+npm audit
 ```
 
-Playwright 会启动或复用开发服务器。Windows 默认使用已安装的 Microsoft Edge；其他平台先运行 `npx playwright install chromium`。可设置 `PLAYWRIGHT_CHANNEL` 选择已安装的浏览器。截图和原始浏览器报告输出到忽略目录 `outputs/qa/`。
+Windows 浏览器测试默认使用已安装的 Edge；Linux/macOS 先安装 `npx playwright install chromium`，可通过 `PLAYWRIGHT_CHANNEL` 指定已有浏览器。每个工程里程碑都运行完整开发浏览器套件。push/PR CI 运行游戏、回放、输入 smoke 和独立生产检查；手动 `full_suite` 或每周默认分支任务运行全部浏览器场景及长模拟。运行日志、环境、源码 SHA、trace 和产物随 CI 上传。[工作流](.github/workflows/ci.yml)。
 
-v1.0 验收覆盖合法路线、事件单次结算、混搭武装、资源交易、存档兼容、实际键鼠输入与完整规则模拟；实际数量和结果见 [验收记录](docs/qa-report.md)。自动控制器精确读取世界状态，不代表真人胜率。Boss 后期、胜负等浏览器验收使用明确的开发测试场景。`?qa` 测试入口只在开发构建启用，生产包移除。
+当前测试数量、最近完整通过记录及失败历史集中在 [验收报告](docs/qa-report.md)，不把测试发现数当成通过数。受控 Gamepad API 快照不是实体手柄；DEV 后期场景不是自然真人通关；合计三小时的 headless 模拟不是墙钟三小时的浏览器压力测试。
 
-完整规则模拟可复现为 `npm run test:simulation -- storm-arc sword`，末尾武器可换为 `arc` 或 `cannon`，初始协议可换为 `fire-ember` 与 `ice-touch`。每次运行 3 个种子 × 2 类路线，输出到 `outputs/qa/`；控制器与规则执行的计时分开，报告见性能文档。
+```sh
+node scripts/benchmark.cjs current-grid
+npm run test:soak -- --long
+```
 
-| 技术 | 责任 |
-| --- | --- |
-| TypeScript / 固定 60 Hz 模拟 | 世界状态、伤害、AI、卡牌、随机数与存档 |
-| Phaser 3 | 输入、Canvas / WebGL、场景、缩放、几何绘制 |
-| React 19 / Base UI / shadcn | 菜单、HUD、卡牌、路线与设置 |
-| Web Audio | 原创乐谱、分层合成、独立总线、声部限制 |
-| Vite / Vitest / Playwright | 构建、规则回归与真实浏览器验证 |
+暴力算法对照、CPU profile 与浏览器采样的完整命令见 [performance-v2.md](docs/performance-v2.md)。静态目录包含按需加载的作品集录屏和手册；bundle 总字节数包含这些媒体，不能等同于游戏首次网络传输量。
 
-核心代码从 `src/game/engine.ts` 阅读；战斗系统不依赖 Phaser，可单独测试。界面约 12.5 Hz 更新；弹体、粒子、飘字与次生反应有容量上限；三个场景复用地面纹理，图片加载失败时回退到圣所或程序地面。
+## 文档与工程判断
 
-![十二层路线](docs/screenshots/route-v1.png)
-![三武装混搭](docs/screenshots/hybrid-v1.png)
-![挽歌圣母](docs/screenshots/matron-v1.png)
+- [工程案例](docs/engineering-case-study.md)：Problem → Evidence → Alternatives → Design → Implementation → Verification → Result → Remaining limitations。
+- [内容管线](docs/content-pipeline.md)、[回放](docs/replay.md)、[稳定性](docs/stability.md)、[依赖安全记录](docs/dependency-security.md)。
+- [17 个指定技术追问](docs/interview-v2.md) 与 [完整 A–T 手册](docs/interview-dossier.md)：真实结果、失败、10 个核心文件、5 个 UI 文件、10 段代码、20 个追问、5 条简历候选。
+- [提交介绍与演示路径](docs/portfolio.md)、[AI 开发记录](docs/ai-development-log.md)、[素材来源与许可](assets/LICENSES.md)。
 
-## 作品集材料
+**AI-assisted disclosure**：用户提出方向、范围与作品要求；Codex 参与大量实现、测试、审查与文档工作。自动测试不等于独立玩家研究。提交者应如实说明自己的实际参与，亲自读懂关键路径并复现报告，不将生成代码描述为无辅助独立手写。
 
-![记忆与遭遇](docs/screenshots/archive-v1.png)
-
-- [Game Design Mini Spec](docs/game-design.md)：循环、操作、敌人、Build、范围。
-- [v0.2 版本说明](docs/v02-release.md)：新增协议、跨系反应、试炼与音乐。
-- [v0.3 版本说明](docs/v03-release.md)：局内经济、局外准备、三种武装、研究来源与存档规则。
-- [竞品研究与原创边界](docs/competitive-analysis.md)：以撒、杀戮尖塔、死亡细胞等作品的官方来源与设计推导。
-- [系统架构](docs/architecture.md)：主循环、伤害、事件、场景生命周期、状态与存档。
-- [性能记录](docs/performance.md)：优化前后实际采样、复杂度和未达目标。
-- [验收记录](docs/qa-report.md)：测试范围、三轮打磨、已知局限。
-- [面试指南](docs/interview-guide.md)：22 个问题和三种时长的项目介绍。
-- [AI 开发记录](docs/ai-development-log.md)：自动实现、独立审查、实际修复和人的责任。
-- [素材来源与许可](assets/LICENSES.md)：生成图片、代码几何 / 原创乐谱、字体与第三方库。
-
-## 当前边界
-
-这是完整可玩的作品集版本，尚未经过商业发行级验证。场景包含不同障碍布局、封闭角落、陷阱与增益区；没有迷宫生成、全局寻路、联网、手柄或云存档。角色与敌人仍为代码几何绘制，尚无逐帧精灵动画集。性能数据见 [本版压力采样](docs/performance.md)，未承诺所有硬件稳定 60 FPS，也未做长期内存压力测试。真人难度、手感与组合平衡仍需更多玩家反馈。
-
-源码采用 [MIT](LICENSE)。大量代码与文档由 AI 辅助产生，具体分工见开发记录；字体和第三方库保留各自许可证。
+仍未验证：实体控制器、手柄菜单全流程、跨 JS 引擎确定性、多设备稳定帧率、墙钟级浏览器泄漏与真人平衡。自定义参数包回放被显式拒绝；没有联网、云存档、任意脚本模组或可信排行榜。源码 [MIT](LICENSE)，第三方库和字体保留各自许可。

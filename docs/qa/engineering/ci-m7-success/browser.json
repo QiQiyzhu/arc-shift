@@ -1,0 +1,630 @@
+{
+  "config": {
+    "configFile": "/home/runner/work/arc-shift/arc-shift/playwright.config.ts",
+    "rootDir": "/home/runner/work/arc-shift/arc-shift/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "ci": {
+        "commitHref": "https://github.com/QiQiyzhu/arc-shift/commit/cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+        "commitHash": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+        "buildHref": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005"
+      },
+      "gitCommit": {
+        "shortHash": "cd4ca2c",
+        "hash": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+        "subject": "feat(input): unify action bindings and gamepad lifecycle with verified regression",
+        "body": "feat(input): unify action bindings and gamepad lifecycle with verified regression\n",
+        "author": {
+          "name": "QiQiyzhu",
+          "email": "152687172+QiQiyzhu@users.noreply.github.com",
+          "time": 1789026784000
+        },
+        "committer": {
+          "name": "QiQiyzhu",
+          "email": "152687172+QiQiyzhu@users.noreply.github.com",
+          "time": 1789026784000
+        },
+        "branch": "codex/engineering-v2"
+      },
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "outputs/qa/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "/home/runner/work/arc-shift/arc-shift/outputs/qa/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "ci": {
+            "commitHref": "https://github.com/QiQiyzhu/arc-shift/commit/cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+            "commitHash": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+            "buildHref": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005"
+          },
+          "gitCommit": {
+            "shortHash": "cd4ca2c",
+            "hash": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+            "subject": "feat(input): unify action bindings and gamepad lifecycle with verified regression",
+            "body": "feat(input): unify action bindings and gamepad lifecycle with verified regression\n",
+            "author": {
+              "name": "QiQiyzhu",
+              "email": "152687172+QiQiyzhu@users.noreply.github.com",
+              "time": 1789026784000
+            },
+            "committer": {
+              "name": "QiQiyzhu",
+              "email": "152687172+QiQiyzhu@users.noreply.github.com",
+              "time": 1789026784000
+            },
+            "branch": "codex/engineering-v2"
+          },
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "/home/runner/work/arc-shift/arc-shift/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "game.spec.ts",
+      "file": "game.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "settings and window blur freeze introductions; Escape only dismisses the dialog",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31968,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 532
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 1182
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 265
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 3143
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:54:55.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-b617505c6eda0071a1ce",
+          "file": "game.spec.ts",
+          "line": 26,
+          "column": 1
+        },
+        {
+          "title": "round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 20956,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 3311
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 601
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 746
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 332
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 347
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 346
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 9
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:55:27.902Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-49bca23011d025af675b",
+          "file": "game.spec.ts",
+          "line": 92,
+          "column": 1
+        },
+        {
+          "title": "round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 44580,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 3429
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 342
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 454
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 3182
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 2018
+                    },
+                    {
+                      "title": "Simulation reaches reward",
+                      "duration": 3101
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:55:48.904Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-3838ef7a34e521f9f96f",
+          "file": "game.spec.ts",
+          "line": 173,
+          "column": 1
+        },
+        {
+          "title": "round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 41801,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 3493
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 5939
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 358
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 5939
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 3499
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:56:33.555Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-16e764b08ab2c2be37d0",
+          "file": "game.spec.ts",
+          "line": 257,
+          "column": 1
+        },
+        {
+          "title": "mobile loads with controls guidance and no horizontal overflow",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4598,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T07:57:15.373Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-7f29499ee596e1658f1d",
+          "file": "game.spec.ts",
+          "line": 345,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "input.spec.ts",
+      "file": "input.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "rebinds controls in settings, rejects conflicts, preserves them on reload and restores defaults",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 31111,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1303
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3456
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 381
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:57:20.037Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "62978389d577d9e03e88-ff7de34c34eb516cdbb9",
+          "file": "input.spec.ts",
+          "line": 16,
+          "column": 1
+        },
+        {
+          "title": "standard Gamepad API input drives real combat, resources, pause and disconnect fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28523,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1271
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 3481
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 354
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 825
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 435
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 418
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 397
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 382
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 388
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 331
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 404
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 295
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 381
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 379
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 382
+                    },
+                    {
+                      "title": "Expect \"poll toBeLessThan\"",
+                      "duration": 355
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:57:51.167Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "62978389d577d9e03e88-0533a349e2b9ae8f2ea0",
+          "file": "input.spec.ts",
+          "line": 61,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "replay.spec.ts",
+      "file": "replay.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "QA replay records real controls, exports, steps, ignores blur and replays at x4",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 28043,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Record at least 90 actual combat simulation ticks",
+                      "duration": 2239
+                    }
+                  ],
+                  "startTime": "2026-09-10T07:58:19.746Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6613f1f6335d1a86a8f6-937b02f02bfdd0746306",
+          "file": "replay.spec.ts",
+          "line": 3,
+          "column": 1
+        },
+        {
+          "title": "replay import rejects incompatible versions without discarding the current session",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3557,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T07:58:47.815Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "6613f1f6335d1a86a8f6-82d1c540061dc6e07d8f",
+          "file": "replay.spec.ts",
+          "line": 88,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-10T07:54:53.523Z",
+    "duration": 238061.58,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

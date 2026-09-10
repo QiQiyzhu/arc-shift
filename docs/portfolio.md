@@ -1,4 +1,32 @@
-# ARC//SHIFT · 可提交的作品介绍
+# ARC//SHIFT · 工程作品提交与演示
+
+**[公开五项目入口](https://arc-shift.black-kid-3047.chatgpt.site/portfolio/) · [在线游戏](https://arc-shift.black-kid-3047.chatgpt.site/) · [完整 A–T 手册](interview-dossier.md) · [验收与失败记录](qa-report.md)**
+
+本轮交付在已有 v1.0 游戏上增加了 Uniform Grid、同版本 QA replay、参数工作台、调试器、存档与长模拟回归、标准手柄动作层。核心讲解应围绕一个实际问题、对应源码和原始验证展开。公开游戏不暴露 DEV 干预工具；内容编辑/回放/调试从本机开发服务器演示。公开入口另提供真实工具截图与其他项目的实际媒体。
+
+## 给技术面试官的三分钟工程路径
+
+1. **看运行（30 秒）**：在线打开三重共鸣试炼，展示圣剑、法器与炮弹共享元素载荷；这是真实游戏路径，试炼不覆盖正式存档。
+2. **看因果（60 秒）**：打开 [Grid 对照](performance-v2.md)，解释为何首版更慢、如何保持原命中顺序，以及为何 Node 改善没有转化成一致 FPS 增益。
+3. **看工具（45 秒）**：本机 `/dev/content-editor` 修改一个已有数值，验证失败时禁止应用，应用后在真实 Engine 沙盒查看结果；或演示回放导入与单步。
+4. **看验证（45 秒）**：打开 [146 unit / 34 browser / 1 production 的 M7 记录](qa-report.md)，展示一项失败及修复后回归，说明 API 手柄夹具与实体设备的区别。
+
+## 本轮修改与阅读清单
+
+| 变化 | 核心入口 |
+|---|---|
+| 稳定顺序的空间候选查询 | [spatial-grid](../src/core/spatial-grid.ts)、[separation](../src/combat/separation.ts)、[projectiles](../src/combat/projectiles.ts) |
+| 固定步与有序决策回放 | [Replay](../src/replay/replay.ts)、[Engine](../src/game/engine.ts)、[Viewer](../src/dev/DevApp.tsx) |
+| 内容校验与沙盒 | [schema](../src/content/schema.ts)、[ContentEditor](../src/dev/ContentEditor.tsx)、[消费者说明](content-pipeline.md) |
+| 单步调试与状态观察 | [DebugSession](../src/dev/debug-session.ts)、[Debugger](../src/dev/Debugger.tsx) |
+| 输入、焦点与设备生命周期 | [ActionInput](../src/input/actions.ts)、[bindings](../src/input/bindings.ts)、[Scene](../src/game/scene.ts) |
+| 回归与安全边界 | [Save](../src/core/save.ts)、[测试树](../tests)、[CI](../.github/workflows/ci.yml)、[依赖审计](dependency-security.md) |
+
+完整变更文件可按历史基点查看 [工程分支对照](https://github.com/QiQiyzhu/arc-shift/compare/b17f4c24cf95a02d3197ec493026b6f23c8f2c3e...codex/engineering-v2)。[A–T 手册](interview-dossier.md) 的 P/Q/R/S/T 节分别提供必须读懂的十个核心文件、五个 UI 文件、十段实际源码、二十个追问与五条严格基于结果的简历候选；[17 个指定追问](interview-v2.md) 可用于专项练习。
+
+新增验证覆盖 5 项空间对照、17 项回放、9 项内容、4 项调试、8 项稳定性/存档、10 项输入，以及实际浏览器场景；另有音频基线回归。不同层级不相加成一个测试数，完整通过数以验收报告为准。未完成的硬件、真人研究和长期浏览器性能问题在 A–T 的 O 节明确保留。
+
+下面保留游戏本身的提交简介与玩法演示路径。
 
 **在线试玩：** https://arc-shift.black-kid-3047.chatgpt.site/
 

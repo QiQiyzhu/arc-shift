@@ -1,0 +1,212 @@
+{
+  "kind": "DERIVED summary; raw files are retained alongside this document",
+  "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005",
+  "runId": 34452226005,
+  "runAttempt": 1,
+  "sourceCommit": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+  "conclusion": "success",
+  "scope": "push smoke, NOT Linux full browser suite",
+  "sourceDirtyBeforeVerification": false,
+  "environment": {
+    "recordedAt": "2026-09-10T07:53:41.205Z",
+    "sourceCommit": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+    "sourceDirtyBeforeVerification": false,
+    "event": "push",
+    "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005",
+    "runAttempt": "1",
+    "fullSuite": false,
+    "node": "v24.20.0",
+    "platform": "linux",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "browser": "Playwright-managed Chromium",
+    "workers": 1
+  },
+  "unit": {
+    "passed": 146,
+    "failed": 0,
+    "skipped": 0,
+    "testFilesPassed": 15,
+    "durationSeconds": 9.57,
+    "source": "unit-tests.log"
+  },
+  "browserSmoke": {
+    "startTime": "2026-09-10T07:54:53.523Z",
+    "duration": 238061.58,
+    "expected": 9,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "globalErrors": [],
+    "files": [
+      "e2e/game.spec.ts",
+      "e2e/input.spec.ts",
+      "e2e/replay.spec.ts"
+    ],
+    "source": "browser.json"
+  },
+  "productionBrowser": {
+    "startTime": "2026-09-10T07:54:40.828Z",
+    "duration": 11607.173,
+    "expected": 1,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "globalErrors": [],
+    "source": "production-browser.json"
+  },
+  "soak": {
+    "mode": "smoke",
+    "passed": true,
+    "seeds": [
+      17,
+      293,
+      701
+    ],
+    "samples": [
+      {
+        "seed": 17,
+        "requestedTicks": 3600,
+        "completedTicks": 3600,
+        "simulatedSeconds": 60,
+        "elapsedMs": 464.375804,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 160,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "57cc8bde"
+      },
+      {
+        "seed": 293,
+        "requestedTicks": 3600,
+        "completedTicks": 3600,
+        "simulatedSeconds": 60,
+        "elapsedMs": 339.55049400000007,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 152,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "e33464e0"
+      },
+      {
+        "seed": 701,
+        "requestedTicks": 3600,
+        "completedTicks": 3600,
+        "simulatedSeconds": 60,
+        "elapsedMs": 297.237793,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 161,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "1a168a1c"
+      }
+    ],
+    "totalCompletedTicks": 10800,
+    "totalSimulatedSeconds": 180,
+    "totalPoolMisses": 0,
+    "source": "soak.json",
+    "limitation": "Fixed 60 Hz headless simulation, high-HP enemy fixtures, invulnerable practice player; no rendering, no real-time waiting. Heap snapshots are observed process memory, not a leak verdict. Other workloads may be active."
+  },
+  "audit": {
+    "command": "npm audit --audit-level=moderate",
+    "reportedVulnerabilities": 0,
+    "source": "audit.log",
+    "extraction": "Only matching step lines from downloaded gh job.log; timestamps and prefixes unchanged"
+  },
+  "otherChecks": {
+    "Audit locked dependencies": "success",
+    "Typecheck": "success",
+    "Lint": "success",
+    "Production build": "success",
+    "Measure the production bundle and check DEV markers": "success"
+  },
+  "bundle": {
+    "totalBytes": 3082730,
+    "javascriptBytes": 1672347,
+    "productionDebugMarkers": [],
+    "source": "bundle.json",
+    "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code."
+  },
+  "rawManifest": [
+    {
+      "file": "github.json",
+      "sourceWithinDownload": "github.json",
+      "bytes": 4175,
+      "sha256": "58ab7f28ac671066f56ac8ef16a250195edd105f8c5fb6540f3bf4240a4eb8e0"
+    },
+    {
+      "file": "artifacts.json",
+      "sourceWithinDownload": "artifacts.json",
+      "bytes": 1456,
+      "sha256": "4f4147b2e82ab4588a58a56180385d8e8f9f9c5e8ae5ec29db0e1ac7f4ec05ae"
+    },
+    {
+      "file": "environment.json",
+      "sourceWithinDownload": "artifact/outputs/qa/ci-environment.json",
+      "bytes": 440,
+      "sha256": "3fcdb3a2f1be44197e9883860c530b39c9d4b0da430804135dc9eba88b9c80f5"
+    },
+    {
+      "file": "unit-tests.log",
+      "sourceWithinDownload": "artifact/outputs/qa/unit-tests.log",
+      "bytes": 23081,
+      "sha256": "bde6db979621d726ca6838381611fc56b5d8c9e58a3f8cbf6c4e4b925e138c05"
+    },
+    {
+      "file": "browser.json",
+      "sourceWithinDownload": "artifact/outputs/qa/browser-results.json",
+      "bytes": 20060,
+      "sha256": "6135906667c8e636ae1bfb23df24dace39b5f1821ba73d24d621d5e036790cce"
+    },
+    {
+      "file": "production-browser.json",
+      "sourceWithinDownload": "artifact/outputs/qa/production-results.json",
+      "bytes": 4953,
+      "sha256": "71af2e1416cdaf381d2bd07dadc1dcc539dffffe7a987e10e871d0250dc69467"
+    },
+    {
+      "file": "soak.json",
+      "sourceWithinDownload": "artifact/outputs/qa/soak.json",
+      "bytes": 2750,
+      "sha256": "4de69ee7b3966dd0563de19663eb22e63d30a51a25e6f7a31c3aacec85e073d2"
+    },
+    {
+      "file": "bundle.json",
+      "sourceWithinDownload": "artifact/outputs/qa/bundle.json",
+      "bytes": 3627,
+      "sha256": "96eb87d61e662db505b6aab2b386ad2bbba5840184f353d6213c622b030ff6ac"
+    },
+    {
+      "file": "audit.log",
+      "sourceWithinDownload": "audit.log",
+      "bytes": 1127,
+      "sha256": "8941a8a1938b7bcf68b71271a5f9fb7335633999ab9348f100e64df9cf6ed87d"
+    },
+    {
+      "file": "typecheck.log",
+      "sourceWithinDownload": "artifact/outputs/qa/typecheck.log",
+      "bytes": 45,
+      "sha256": "38fabde74c3f8e89a3ebc30a26a65d10b309ef85886fe012c240c2a8d1133c2e"
+    },
+    {
+      "file": "lint.log",
+      "sourceWithinDownload": "artifact/outputs/qa/lint.log",
+      "bytes": 127,
+      "sha256": "45f203c03b29108eea80940f351cb1652efd59d2a302b072b228821867623cc8"
+    },
+    {
+      "file": "build.log",
+      "sourceWithinDownload": "artifact/outputs/qa/build.log",
+      "bytes": 2004,
+      "sha256": "962deeb10bd98ac732ed14cbee9d1feea20bd25f24249b15585471bf04096e7b"
+    }
+  ],
+  "copyDestinationSuggested": "docs/qa/engineering/ci-m7-success",
+  "repositoryModified": false,
+  "newTestsRun": false
+}

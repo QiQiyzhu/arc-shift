@@ -2,14 +2,19 @@
 
 ## 总体结构
 
-Phaser 3 负责输入、缩放和程序化渲染；React 负责菜单、HUD、奖励、路线、档案和设置。核心规则为无 Phaser 依赖的 TypeScript，可在 Node 中直接测试。它采用集中 World 数据与分离系统函数，不是严格 ECS。
+ActionInput 将键鼠与标准手柄快照转换为动作；ArcScene 负责时间驱动，Phaser 3 负责缩放和程序化渲染；React 负责菜单、HUD、奖励、路线、档案和设置。核心规则为无 Phaser 依赖的 TypeScript，可在 Node 中直接测试。它采用集中 World 数据与分离系统函数，不是严格 ECS。
 
 ```mermaid
 flowchart TD
-  A[Phaser input / latched key edges] --> B[Engine fixed step 1/60 s]
-  B --> C[Player controller]
-  B --> D[Enemy and Boss AI]
-  B --> E[Projectile and hazard systems]
+  A[ActionInput / keyboard / mouse / gamepad] --> B[ArcScene fixed step 1/60 s]
+  B --> Core[Engine / World]
+  Content[Validated ContentPack] --> Core
+  Core --> Replay[Replay observer / checkpoints]
+  Replay -->|recorded commands and inputs| Core
+  Core --> C[Player controller]
+  Core --> D[Enemy and Boss AI]
+  Core --> E[Projectile and hazard systems]
+  E --> Grid[Grid candidates / original narrow phase]
   C --> F[Damage rules]
   D --> F
   E --> F
@@ -24,7 +29,11 @@ flowchart TD
 | 目录 | 实际责任 |
 | --- | --- |
 | `src/game` | World、Engine、Phaser 场景；DEV 测试接口单独模块 |
-| `src/core` | RNG、数学、事件总线、对象池、存档校验 |
+| `src/core` | RNG、数学、事件总线、对象池、存档校验、Uniform Grid |
+| `src/input` | 统一动作、设备边沿、键位 schema、独立绑定存储 |
+| `src/content` | 封闭参数 schema、默认内容、校验、语义 diff |
+| `src/replay` | 输入与有序命令记录、校验导入、状态 checksum、播放 |
+| `src/dev` | DEV 回放/内容/调试 UI、禁持久化 Engine、单步调速 |
 | `src/systems` | 玩家操作与技能、范围危险区 |
 | `src/combat` | 伤害、暴击、护盾、无敌、扫掠碰撞、共享激光几何 |
 | `src/ai` | 敌人计时状态机、Boss 阶段和招式 |
@@ -38,7 +47,7 @@ flowchart TD
 
 ## 主循环与输入
 
-Phaser 每帧采集连续移动/射击状态。Space、Q、E 的 key-down 事件先锁存，再在下一次固定步消费一次，解决“渲染帧没有模拟步”与“极短按下释放在同一帧”两类漏键。单渲染帧增量最多 50 ms，避免后台切回产生大量追帧；严重卡顿时模拟时间会落后于现实时间。
+ActionInput 采集连续移动/射击状态。键盘与标准手柄的 Dash、Q、E、炸弹和灵药边沿先锁存，再在下一次固定步消费一次，解决“渲染帧没有模拟步”与“极短按下释放在同一帧”两类漏键。单渲染帧增量最多 50 ms，避免后台切回产生大量追帧；严重卡顿时模拟时间会落后于现实时间。
 
 更新顺序为玩家与主副攻击 → 挥砍和炸弹 → 地形 → AI → 弹体 → 危险区 → 拾取。各阶段检查死亡，死亡后不能继续吸血、升级或胜利。暂停、选卡、路线、遭遇和结算状态不推进战斗。失焦自动暂停，包括房间过渡与 Boss 介绍；继续时恢复原阶段。设置弹窗额外阻止场景输入与时间推进，Escape 关闭弹窗后仍维持暂停。
 
@@ -56,9 +65,9 @@ Phaser Scene 同时监听 shutdown 与 destroy，释放 EventBus 和窗口事件
 
 ## 数据驱动与扩展
 
-敌人 HP、速度、伤害、颜色与半径来自 `ENEMIES`。卡牌名称、说明、稀有度、元素和前置要求来自目录；基础属性统一由 `deriveStats(cards, level, relics)` 推导，升级和续玩使用相同路径。新增数值型协议很简单，新增特殊机制仍需在相关系统编写行为，不能把当前系统称作完全无需代码的技能编辑器。
+敌人颜色与名称来自类型目录，HP、速度、伤害与半径由注入 World 的已校验 ContentPack 提供；默认参数从既有目录建立。卡牌名称、说明、稀有度、元素和前置要求来自目录；基础属性统一由 `deriveStats(cards, level, relics)` 推导，升级和续玩使用相同路径。新增数值型协议很简单，新增特殊机制仍需在相关系统编写行为，不能把当前系统称作完全无需代码的技能编辑器。
 
-五系各三张时激活共鸣。奖励有独立派生 RNG，战斗暴击或粒子不会改变奖励。提供初始种子不等于已经实现输入录像、跨平台锁步或完整确定性回放。
+五系各三张时激活共鸣。奖励有独立派生 RNG，战斗暴击或粒子不会改变奖励。M3 已实现同版本 QA 输入/决策回放：记录实际固定步输入、命令结果、初始 profile 与周期核心状态 checksum。它不承诺跨平台锁步或像素一致。修改过的内容包会被录制器拒绝，避免内容版本相同却执行不同数值；详见回放文档。
 
 ## 状态与存档
 
@@ -128,3 +137,13 @@ stateDiagram-v2
 v1.0 场景复用圣所、林地与铸庭地面，图片失败回退圣所或最多四张程序地面缓存。障碍阻挡移动、Dash、弹体与剑弧；移动按至多 8 px 子步滑动，弹体和剑弧使用分段遮挡检测。敌人有碰撞滑动和局部侧移，没有通用障碍寻路。动态角色与预警继续用 Graphics。扩大敌群前应先测量空间查询和 Graphics 提交成本，实测范围见性能记录。
 
 Lint 配置移除了静态 Vite 项目不适用的 Next.js 页面规则；Phaser 的 UMD 默认导出由 TypeScript 与实际构建验证。未启用 React Compiler，故不套用其不可变外部模型规则，Engine 是明确的可变模拟对象。保留 Hooks 与其他正确性规则；未修改的 scaffold 组件 / hooks 作为供应组件不纳入 lint 计数。
+
+## Engineering update: boundaries and evidence
+
+Uniform Grid 为分离与弹体提供保守候选集，不决定命中；原窄相、源数组顺序和击退后的成员维护保持语义。网格是可重建派生状态，不进入 Replay checksum；实体数组、RNG、池槽/游标、顺序集合和结算状态进入 checksum。输入设备也不进入重放：记录的是最终 Input。完整规则与数据契约见 [性能](performance-v2.md)、[回放](replay.md)、[内容流程](content-pipeline.md)。
+
+DEV 工具创建独立 Engine，采用空白 profile、禁持久化与明确外部模拟驱动。调试指标只读取状态，不能反向决定伤害；开关绘制不会消耗 gameplay RNG。生产通过 DEV 动态导入裁剪，另用实际生产浏览器和标记扫描验证入口缺失。[调试器](debugger.md)。
+
+ArcScene 禁用额外的 Phaser delta smoother，保留自己的 1/60 累积器和 50ms 帧增量上限。失焦持续门控物理输入与普通模拟；恢复焦点和已观察设备的重连建立手柄按住状态基线，避免误触发 Pause/Bomb，同时保留恢复后的真实键盘边沿。DEV 的明确外部回放驱动可以继续，物理输入中立；释放与关闭清理 focus/blur/visibility/keyboard 订阅。[输入机制](input.md)。
+
+三个提交的历史回放、旧存档兼容、随机种子模拟、空间暴力 oracle 和 500 组历史默认构筑互相提供不同层级的回归。它们不取代真人研究，也不证明跨浏览器确定性或墙钟级浏览器无泄漏。失败与成功完整阶段均保留在 [验收记录](qa-report.md)。

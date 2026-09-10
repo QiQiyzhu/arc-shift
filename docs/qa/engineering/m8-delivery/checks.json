@@ -1,0 +1,49 @@
+{
+  "stage": "m8-delivery",
+  "recordedAt": "2026-09-10T08:27:07.277Z",
+  "commit": "cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 12271
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 3088
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m8-delivery/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 13559
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 400758
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 10919
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-Bnke9NCk.css",
+      "bytes": 187416,
+      "gzipBytes": 32848
+    },
+    {
+      "name": "index-COfphcW_.js",
+      "bytes": 192226,
+      "gzipBytes": 60073
+    },
+    {
+      "name": "page-CgDm0mCJ.js",
+      "bytes": 1480121,
+      "gzipBytes": 417471
+    }
+  ]
+}

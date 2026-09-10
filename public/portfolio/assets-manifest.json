@@ -1,0 +1,101 @@
+{
+  "version": 1,
+  "asOf": "2026-09-10",
+  "totalMediaBytes": 7935399.0,
+  "assets": [
+    {
+      "file": "assets/arc-shift.png",
+      "project": "ARC//SHIFT",
+      "source": "docs/screenshots/hybrid-v1.png",
+      "sourceKind": "Actual application screenshot",
+      "repository": "https://github.com/QiQiyzhu/arc-shift",
+      "ref": "codex/engineering-v2",
+      "bytes": 1545926,
+      "sha256": "ffa4e3ad7deebd64006195d5ab74397c137902c32249ee2aab7630b6834d31c8",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/arc-content-editor.png",
+      "project": "ARC//SHIFT",
+      "source": "docs/qa/engineering/content-editor.png",
+      "sourceKind": "Actual local DEV application screenshot",
+      "repository": "https://github.com/QiQiyzhu/arc-shift",
+      "ref": "codex/engineering-v2",
+      "bytes": 892982,
+      "sha256": "68f47fac27b5ad93f2e17669f0a109d8b360560a57bc873c764e5a0aa9e56c75",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/repopilot.png",
+      "project": "RepoPilot",
+      "source": "docs/assets/trace.png",
+      "sourceKind": "Actual application screenshot",
+      "repository": "https://github.com/QiQiyzhu/repopilot",
+      "ref": "6d6d6668f8e26c553d73bbcefb8c43ea858e216c",
+      "bytes": 102795,
+      "sha256": "b1bfe529d8517f7938c75b0b7d3d5e811928a4f7dbdad1738b21e3f2a6981a6c",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/repopilot-demo.webm",
+      "project": "RepoPilot",
+      "source": "docs/assets/demo.webm",
+      "sourceKind": "Actual local browser recording",
+      "repository": "https://github.com/QiQiyzhu/repopilot",
+      "ref": "6d6d6668f8e26c553d73bbcefb8c43ea858e216c",
+      "bytes": 2609861,
+      "sha256": "4f7645aaadefa512929a09e30a8c0a6b41b318a85c0d17ba95377e7c6737211c",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/opspilot.png",
+      "project": "OpsPilot AI",
+      "source": "docs/assets/demo-approval.png",
+      "sourceKind": "Actual application screenshot",
+      "repository": "https://github.com/QiQiyzhu/opspilot-ai",
+      "ref": "4ae96c64fe440b7de2b24c6a33e587c6ecd5d36a",
+      "bytes": 251073,
+      "sha256": "7542a3f92bad9f8c8b2a404c7d116fdd673b53477d39d04012a8c14d42607031",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/opspilot-demo.webm",
+      "project": "OpsPilot AI",
+      "source": "docs/assets/demo.webm",
+      "sourceKind": "Actual local browser recording",
+      "repository": "https://github.com/QiQiyzhu/opspilot-ai",
+      "ref": "4ae96c64fe440b7de2b24c6a33e587c6ecd5d36a",
+      "bytes": 1794285,
+      "sha256": "ccc089acd76b1f514e3b2d06cdae2c796dc3e72f4e474b5a73dbb4f5615d4fcc",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/aegis-arena.png",
+      "project": "Aegis Arena",
+      "source": "docs/media/unreal-arena.png",
+      "sourceKind": "Actual UE 5.8.2 D3D12 capture with runtime BT/EQS diagnostics; not Editor Debugger",
+      "repository": "https://github.com/QiQiyzhu/aegis-arena",
+      "ref": "codex/aegis-v1",
+      "bytes": 596833,
+      "sha256": "bb4d745e9d6f26d2f276aff6ac8473cb7ffa57732210083fbd3d9ba444c895f3",
+      "editing": "None; copied byte-for-byte"
+    },
+    {
+      "file": "assets/designlens.png",
+      "project": "DesignLens AI",
+      "source": "docs/screenshots/research-dashboard.png",
+      "sourceKind": "Actual application screenshot",
+      "repository": "https://github.com/QiQiyzhu/designlens-ai",
+      "ref": "ff53bdc30a3ddf5f2b8db52fd6a15fa4a0e45803",
+      "bytes": 141644,
+      "sha256": "1e2d298f7620637470cc29065c009462690664920e4b55f4a82467970108ad08",
+      "editing": "None; copied byte-for-byte"
+    }
+  ],
+  "notes": [
+    "ARC screenshot is the public v1 gameplay, not an engineering acceptance screenshot.",
+    "RepoPilot and OpsPilot recordings use deterministic Fake providers; they demonstrate actual local execution, not LLM performance.",
+    "DesignLens sources are synthetic; real user research has not been performed.",
+    "Aegis frame is native Unreal capture, not the separate portable simulation; it is not a performance measurement."
+  ]
+}

@@ -1,6 +1,33 @@
 # 验收与打磨记录
 
-最新验收：2026-09-10，v1.0。此记录区分规则测试、真实浏览器输入、开发夹具与自动控制器，避免把不同证据混为“真人完整通关”。
+## Engineering M8 · 本地完整交付验收（2026-09-10）
+
+完整五项检查实际通过：typecheck、lint、**146 单元 / 34 开发浏览器**、build；另行 **2 项生产浏览器通过（45.8 秒）**，无失败、跳过或 flaky。新生产流程真实打开五份 A–T 手册、架构 SVG、录屏预览，检查关闭后焦点恢复及手机尺寸。原始 [五项 gate](qa/engineering/m8-delivery/checks.json)、[unit](qa/engineering/m8-delivery/unit.json)、[开发浏览器](qa/engineering/m8-delivery/browser.json)、[生产浏览器](qa/engineering/m8-delivery/production-browser.json)。阶段日志中的 SHA 是父提交 `cd4ca2c` 加受测工作区，不冒充无修改的远端提交。
+
+桌面预渲染的 6 页（总览加 5 个项目）、100 个 A–T 章节、5 张 SVG 共 69 条连线在 Edge 的 1440×1000 与 390×844 尺寸检查通过；图关系与源定义一致、页面不依赖网络、无横向溢出或失效锚点。最终公开文件仍需与发布时的原始手册哈希匹配。
+
+M8 远端完整套件和最终公开发布正在验收；下方 M7 的 Linux 成功是 9 项开发 smoke，不能作为 34 项全量通过的替代。
+
+最新工程验收：2026-09-10，M7 实现 `cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46`。此记录区分规则测试、真实浏览器输入、开发夹具与自动控制器，避免把不同证据混为“真人完整通关”。
+
+## Engineering M1–M7 验收
+
+| 检查 | 最新本地结果 | 证据 |
+|---|---|---|
+| TypeScript / lint / production build | 全部 exit 0 | [M7 五项阶段检查](qa/engineering/m7-input-verified/checks.json) |
+| 单元与规则合同 | 146 passed，0 failed/pending | [原始 JSON](qa/engineering/m7-input-verified/unit.json) |
+| 开发浏览器完整回归 | 34 passed，0 failed/skipped/flaky | [原始 JSON](qa/engineering/m7-input-verified/browser.json) |
+| 独立生产浏览器 | 1 passed，0 failed/skipped/flaky | [原始 JSON](qa/engineering/m7-input-verified/production-browser.json) |
+| 全依赖 audit | 0 个已知漏洞 | [真实输出](qa/engineering/audit-m7.json)；[修复前与暴露范围](dependency-security.md) |
+| 长模拟 | 6 × 108,000 tick，0 pool misses | [原始 JSON](qa/engineering/soak-long.json)，合计三小时模拟时间，不是墙钟浏览器三小时 |
+
+每个 M1–M7 里程碑都运行 typecheck、lint、全部 unit、全部开发浏览器与 build。历史完整成功数量依次为 M1 93/25，M2 98/25，M3 115/27，M4 124/29，M5 128/32，M6 136/32，M7 146/34；各自日志与失败重跑保留在 `qa/engineering/`。数量按 unit/browser 分开计，不把参数化样本数和长模拟 tick 加入测试用例总数。
+
+本地阶段记录的是检查开始时的父提交，包含当时工作区改动；随后 M7 实现及原始日志提交为上面的完整 SHA。远端 CI 则在 checkout 后记录确切源 SHA 与干净状态。[M7 Linux 运行](https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005) 已在相同完整 SHA、干净 checkout 上通过：146 unit、9 开发 smoke、1 production，3 × 3,600 tick soak 与 audit 0；Node 24.20 / Linux / Playwright Chromium。该 run 是 smoke，不是全量开发 E2E。[永久原始证据](qa/engineering/ci-m7-success/parsed-summary.json)。最终 M8 交付结果另列。
+
+**保留的失败：** 首次 Linux [34447501573](https://github.com/QiQiyzhu/arc-shift/actions/runs/34447501573) 为 2/7 开发 smoke 通过，其余等待超时暴露 Phaser 重复平滑、合成焦点和固定时长假设。M7 第二轮本地 [32/34](qa/engineering/m7-input-final/browser.json) 失败于朝实体墙移动的测试前提、早于 Scene 创建的奖励夹具，实际截图保留并修正后完整重跑通过。输入另加入重连/无轮询间隙重建按钮基线，防止重复 Pause/Bomb，同时保留新键盘边沿。
+
+公开包用实际页面启动与三条 DEV 路由检查、QA 对象缺失断言验证隔离；字串扫描只是补充。API 手柄 fixture 未替代实体硬件。250 敌人固定步模拟有可复现的查询下降与 Engine P95 改善，浏览器 **没有一致 FPS 增益**；详见 [完整测量](performance-v2.md)。以下保留 v1.0 及更早版本的历史记录。
 
 ## v1.0 最终验收
 

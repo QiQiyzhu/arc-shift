@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="color-scheme" content="dark"><meta name="description" content="五个可复现的工程项目：ARC SHIFT、RepoPilot、OpsPilot AI、Aegis Arena 与 DesignLens AI。查看真实运行画面、源码、CI 和 A–T 面试手册。"><meta name="theme-color" content="#111614"><title>QiQiyzhu · 工程作品集</title><link rel="stylesheet" href="assets/showcase.css"><link rel="stylesheet" href="assets/readability.css"></head>
+<body><a class="skip-link" href="#projects">跳至项目</a>
+<header class="site-header"><a class="identity" href="#top" aria-label="QiQiyzhu 工程作品集首页"><span class="monogram" aria-hidden="true">Q<span>Y</span></span><span>QiQiyzhu<small>ENGINEERING PORTFOLIO</small></span></a><nav aria-label="主导航"><a href="#projects">项目</a><a href="#evidence">验收与复现</a><a class="" href="https://github.com/QiQiyzhu" target="_blank" rel="noopener noreferrer">GitHub<span aria-hidden="true">↗</span></a></nav></header>
+<main id="top">
+<section class="hero" aria-labelledby="hero-title"><div class="hero-copy"><div class="eyebrow"><span></span>SELECTED WORK / 2026</div><h1 id="hero-title">让作品，<br><em>经得起追问。</em></h1><p>五个可复现的工程项目，覆盖游戏系统、<br class="desktop-break">Agent 执行、RAG 与产品决策。<br>从真实运行画面，走到源码、验证与取舍。</p><div class="hero-actions"><a class="button primary" href="#projects">浏览项目 <span aria-hidden="true">↓</span></a><a class="quiet-link" href="#evidence">如何检查这些作品 <span aria-hidden="true">↗</span></a></div></div>
+<div class="hero-panel" aria-label="作品阅读路径"><div class="panel-label"><span>ENGINEERING RECORD</span><span class="record-light">● OPEN</span></div><div class="record-title">实现之后，<br>还有证据。</div><ol class="record-steps"><li><span class="step-code">01 / SOURCE</span><strong>读源码</strong><span>架构、关键路径与版本记录</span></li><li><span class="step-code">02 / EXECUTE</span><strong>看运行</strong><span>原生截图、真实录屏与复现步骤</span></li><li><span class="step-code">03 / VERIFY</span><strong>查验收</strong><span>测试、CI、失败样本与适用边界</span></li></ol><div class="record-footer"><span>CODE → RUN → EVIDENCE</span><span aria-hidden="true">↳</span></div></div>
+</section>
+<div class="portfolio-facts"><div><strong>05</strong><span>独立项目<br><small>可逐项检查</small></span></div><div><strong>A–T</strong><span>面试讲解手册<br><small>架构 · 代码 · 取舍</small></span></div><div><strong>RAW</strong><span>原始验收证据<br><small>区分实际与未测量</small></span></div><p>AI 辅助开发与文档整理<br><span>测试方法与适用范围见各项目记录。</span></p></div>
+<section id="projects" aria-labelledby="projects-title"><div class="section-heading"><div><div class="eyebrow">01 / SELECTED PROJECTS</div><h2 id="projects-title">五个方向，同一份工程自觉。</h2></div><span class="section-note">点开画面，查看原始尺寸</span></div><nav class="project-nav" aria-label="项目快速导航"><a href="#arc"><span>01</span>ARC//SHIFT</a><a href="#repopilot"><span>02</span>RepoPilot</a><a href="#opspilot"><span>03</span>OpsPilot AI</a><a href="#aegis"><span>04</span>Aegis Arena</a><a href="#designlens"><span>05</span>DesignLens AI</a></nav><article class="project" id="arc" style="--project-accent:#d5e994">
+  <div class="project-index"><span>01</span><span>GAMEPLAY & GAME ENGINEERING</span></div>
+  <div class="project-body">
+    <figure class="project-media">
+      <a class="image-link" href="assets/arc-shift.png" data-view="image" data-title="ARC//SHIFT · 实际游戏截图 / v1 混搭试炼模式" aria-label="放大查看 ARC//SHIFT 的真实截图">
+        <img src="assets/arc-shift.png" alt="ARC SHIFT v1 实际游戏截图：法器、圣剑、重炮混搭的试炼场" fetchpriority="high" width="1440" height="900">
+        <span class="expand" aria-hidden="true">⤢</span>
+      </a>
+      <figcaption><span class="frame-mark" aria-hidden="true"></span>实际游戏截图 / v1 混搭试炼模式</figcaption>
+      <details class="secondary-media"><summary>展开工程工作台 <span>DEV / 本机运行</span></summary><a class="image-link" href="assets/arc-content-editor.png" data-view="image" data-title="ARC//SHIFT · 本机开发内容编辑器"><img src="assets/arc-content-editor.png" alt="ARC SHIFT 实际开发内容编辑器：可校验的内容数据与编辑界面" loading="lazy" width="1440" height="900"><span class="expand" aria-hidden="true">⤢</span></a><p>此图来自实际开发工具。克隆工程分支后在本机 DEV 模式运行；公开游戏不开放这些工具。</p></details>
+    </figure>
+    <div class="project-info">
+      <div class="status"><span class="status-dot" aria-hidden="true"></span>在线可玩</div>
+      <h3>ARC//SHIFT</h3>
+      <p class="project-summary">让战斗、构筑与工程工具，运行在同一个可玩的系统里。</p>
+      <p class="description">圣剑、法器与重炮交叉构筑，穿过随机路线与异常区域。工程分支进一步加入确定性回放、调试器、内容编辑器与可配置输入。</p>
+      <ul class="tags" aria-label="ARC//SHIFT 技术与能力"><li>TypeScript</li><li>Phaser</li><li>Fixed step</li><li>Replay</li></ul>
+      <div class="proofs"><div><strong>可直接体验</strong><span>完整游戏循环、路线规划与混合构筑</span></div><div><strong>可查看源码</strong><span>模拟核心、回放链路与开发工具</span></div></div>
+      <div class="actions"><a class="button primary" href="/" >立即试玩<span aria-hidden="true">↗</span></a><a class="button" href="https://github.com/QiQiyzhu/arc-shift/tree/codex/engineering-v2" target="_blank" rel="noopener noreferrer">源码<span aria-hidden="true">↗</span></a></div>
+      <div class="project-links"><a href="./handbooks/ARC-SHIFT%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">A–T 面试手册 <span aria-hidden="true">→</span></a><a class="" href="https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering" target="_blank" rel="noopener noreferrer">原始证据<span aria-hidden="true">↗</span></a><a href="https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005" target="_blank" rel="noopener noreferrer">CI 已通过 ↗</a></div>
+    </div>
+  </div>
+  <div class="boundary"><span>范围与状态</span><p>截图保留真实 v1 玩法与本机工程工作台。M7 本地 146 单元 / 34 浏览器 / 1 生产检查通过，Linux smoke 通过；未宣称稳定 60 FPS 或实体手柄兼容。</p><span class="state-detail">工程验收 · Linux CI 已通过</span></div>
+</article>
+<article class="project" id="repopilot" style="--project-accent:#8fdbbd">
+  <div class="project-index"><span>02</span><span>CODING AGENT HARNESS</span></div>
+  <div class="project-body">
+    <figure class="project-media">
+      <a class="image-link" href="assets/repopilot.png" data-view="image" data-title="RepoPilot · 实际本机界面 / 已知修复任务的 MCP 轨迹" aria-label="放大查看 RepoPilot 的真实截图">
+        <img src="assets/repopilot.png" alt="RepoPilot 实际界面：任务执行状态、MCP 工具轨迹和验证标签" loading="lazy" width="1440" height="900">
+        <span class="expand" aria-hidden="true">⤢</span>
+      </a>
+      <figcaption><span class="frame-mark" aria-hidden="true"></span>实际本机界面 / 已知修复任务的 MCP 轨迹</figcaption>
+      
+    </figure>
+    <div class="project-info">
+      <div class="status"><span class="status-dot" aria-hidden="true"></span>本机 / Docker 复现</div>
+      <h3>RepoPilot</h3>
+      <p class="project-summary">代码修改有执行轨迹，也有独立验证。</p>
+      <p class="description">任务状态机串起上下文、工具、补丁、审批与测试。真实 MCP 会话、SSE 轨迹和持久化记录，让一次修复可以逐步检查。</p>
+      <ul class="tags" aria-label="RepoPilot 技术与能力"><li>Python</li><li>FastAPI</li><li>MCP stdio</li><li>SQLite</li></ul>
+      <div class="proofs"><div><strong>36 项任务契约</strong><span>正负对照与验收条件实际执行</span></div><div><strong>真实容器运行</strong><span>Nginx → MCP 修复 → 验证 → 重启持久化</span></div></div>
+      <div class="actions"><a class="button primary" href="assets/repopilot-demo.webm" data-view="video" data-title="RepoPilot · 实际本机录屏 / 30 秒">观看真实录屏<span aria-hidden="true">▷</span></a><a class="button" href="https://github.com/QiQiyzhu/repopilot/tree/6d6d6668f8e26c553d73bbcefb8c43ea858e216c" target="_blank" rel="noopener noreferrer">源码<span aria-hidden="true">↗</span></a></div>
+      <div class="project-links"><a href="./handbooks/RepoPilot%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">A–T 面试手册 <span aria-hidden="true">→</span></a><a class="" href="https://github.com/QiQiyzhu/repopilot/blob/6d6d6668f8e26c553d73bbcefb8c43ea858e216c/docs/container-runtime.md" target="_blank" rel="noopener noreferrer">原始证据<span aria-hidden="true">↗</span></a><a class="" href="https://github.com/QiQiyzhu/repopilot/actions/runs/34446220853" target="_blank" rel="noopener noreferrer">CI 已通过<span aria-hidden="true">↗</span></a></div>
+    </div>
+  </div>
+  <div class="boundary"><span>范围与状态</span><p>演示使用确定性 Fake provider，验证的是执行框架。真实 LLM 的编码成功率尚未测量。执行服务面向可信本机仓库。</p><span class="state-detail">Linux CI · 容器运行已验证</span></div>
+</article>
+<article class="project" id="opspilot" style="--project-accent:#a7d8ce">
+  <div class="project-index"><span>03</span><span>RAG & BUSINESS OPERATIONS</span></div>
+  <div class="project-body">
+    <figure class="project-media">
+      <a class="image-link" href="assets/opspilot.png" data-view="image" data-title="OpsPilot AI · 实际本机界面 / 模拟业务的人工审批" aria-label="放大查看 OpsPilot AI 的真实截图">
+        <img src="assets/opspilot.png" alt="OpsPilot AI 实际客服工作台：等待审批的模拟退款与政策证据" loading="lazy" width="1440" height="900">
+        <span class="expand" aria-hidden="true">⤢</span>
+      </a>
+      <figcaption><span class="frame-mark" aria-hidden="true"></span>实际本机界面 / 模拟业务的人工审批</figcaption>
+      
+    </figure>
+    <div class="project-info">
+      <div class="status"><span class="status-dot" aria-hidden="true"></span>本机 / Docker 复现</div>
+      <h3>OpsPilot AI</h3>
+      <p class="project-summary">从政策证据，到有审批与审计的业务动作。</p>
+      <p class="description">客服工作台把混合检索、Agent 执行、人工审批和数据库复核连接起来。退款与库存变更由服务端事务控制，保留前后状态和操作理由。</p>
+      <ul class="tags" aria-label="OpsPilot AI 技术与能力"><li>PostgreSQL</li><li>pgvector</li><li>ONNX</li><li>MCP / SSE</li></ul>
+      <div class="proofs"><div><strong>69 后端 + 8 浏览器</strong><span>真实 PostgreSQL、权限与并发事务检查</span></div><div><strong>360 次规则执行</strong><span>6 组 × 60 合成任务，保留消融失败</span></div></div>
+      <div class="actions"><a class="button primary" href="assets/opspilot-demo.webm" data-view="video" data-title="OpsPilot AI · 实际本机录屏 / 33 秒">观看真实录屏<span aria-hidden="true">▷</span></a><a class="button" href="https://github.com/QiQiyzhu/opspilot-ai/tree/4ae96c64fe440b7de2b24c6a33e587c6ecd5d36a" target="_blank" rel="noopener noreferrer">源码<span aria-hidden="true">↗</span></a></div>
+      <div class="project-links"><a href="./handbooks/OpsPilot%20AI%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">A–T 面试手册 <span aria-hidden="true">→</span></a><a class="" href="https://github.com/QiQiyzhu/opspilot-ai/blob/4ae96c64fe440b7de2b24c6a33e587c6ecd5d36a/docs/ci-validation.md" target="_blank" rel="noopener noreferrer">原始证据<span aria-hidden="true">↗</span></a><a class="" href="https://github.com/QiQiyzhu/opspilot-ai/actions/runs/34448735885" target="_blank" rel="noopener noreferrer">CI 已通过<span aria-hidden="true">↗</span></a></div>
+    </div>
+  </div>
+  <div class="boundary"><span>范围与状态</span><p>业务数据为模拟数据，不处理真实支付。Agent 评估采用 Fake provider；BGE ONNX 检索真实运行，不能等同于 LLM 效果。</p><span class="state-detail">Linux CI · 业务事务已验证</span></div>
+</article>
+<article class="project" id="aegis" style="--project-accent:#e0bb91">
+  <div class="project-index"><span>04</span><span>UNREAL ENGINE GAME AI LAB</span></div>
+  <div class="project-body">
+    <figure class="project-media">
+      <a class="image-link" href="assets/aegis-arena.png" data-view="image" data-title="Aegis Arena · UE 5.8.2 / D3D12 原生运行 · BT / EQS 诊断" aria-label="放大查看 Aegis Arena 的真实截图">
+        <img src="assets/aegis-arena.png" alt="UE 5.8.2 实际原生场景：竞技场、掩体、AI 角色和原生决策诊断" loading="lazy" width="1440" height="900">
+        <span class="expand" aria-hidden="true">⤢</span>
+      </a>
+      <figcaption><span class="frame-mark" aria-hidden="true"></span>UE 5.8.2 / D3D12 原生运行 · BT / EQS 诊断</figcaption>
+      
+    </figure>
+    <div class="project-info">
+      <div class="status"><span class="status-dot" aria-hidden="true"></span>UE 原生实验原型</div>
+      <h3>Aegis Arena</h3>
+      <p class="project-summary">把 AI 决策放进真实 Unreal 场景中观察。</p>
+      <p class="description">用 Utility、Behavior Tree 与 EQS 驱动角色选择和空间查询。原生场景显示决策、视线与导航状态，供比较策略行为和排查失败。</p>
+      <ul class="tags" aria-label="Aegis Arena 技术与能力"><li>UE 5.8.2</li><li>C++</li><li>Utility / BT</li><li>EQS / NavMesh</li></ul>
+      <div class="proofs"><div><strong>5 项 Automation</strong><span>UE Editor 实际编译与自动化通过</span></div><div><strong>真实场景运行</strong><span>动态导航、角色决策与原生画面</span></div></div>
+      <div class="actions"><a class="button primary" href="assets/aegis-arena.png" data-view="image" data-title="Aegis Arena · 原始截图">查看原生画面<span aria-hidden="true">↗</span></a><a class="button" href="https://github.com/QiQiyzhu/aegis-arena/tree/codex/aegis-v1" target="_blank" rel="noopener noreferrer">源码<span aria-hidden="true">↗</span></a></div>
+      <div class="project-links"><a href="./handbooks/Aegis%20Arena%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">A–T 面试手册 <span aria-hidden="true">→</span></a><a class="" href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/interview-dossier.md" target="_blank" rel="noopener noreferrer">原始证据<span aria-hidden="true">↗</span></a><span class="pending">最终 CI 待验收</span></div>
+    </div>
+  </div>
+  <div class="boundary"><span>范围与状态</span><p>这是游戏 AI 实验场，使用基础几何体。截图来自原生 UE 运行；跨平台便携模型与 UE 结果分开记录。性能与打包仍在验收。</p><span class="state-detail">运行截图已验证 · 打包验收中</span></div>
+</article>
+<article class="project" id="designlens" style="--project-accent:#aac9e3">
+  <div class="project-index"><span>05</span><span>EVIDENCE-DRIVEN PRODUCT DISCOVERY</span></div>
+  <div class="project-body">
+    <figure class="project-media">
+      <a class="image-link" href="assets/designlens.png" data-view="image" data-title="DesignLens AI · 实际本机界面 / DEMO · SYNTHETIC 研究素材" aria-label="放大查看 DesignLens AI 的真实截图">
+        <img src="assets/designlens.png" alt="DesignLens AI 实际研究工作台：明确标注合成来源和待开展的真实研究" loading="lazy" width="1440" height="900">
+        <span class="expand" aria-hidden="true">⤢</span>
+      </a>
+      <figcaption><span class="frame-mark" aria-hidden="true"></span>实际本机界面 / DEMO · SYNTHETIC 研究素材</figcaption>
+      
+    </figure>
+    <div class="project-info">
+      <div class="status"><span class="status-dot" aria-hidden="true"></span>本机原型可复现</div>
+      <h3>DesignLens AI</h3>
+      <p class="project-summary">每一个产品判断，都能追到原始证据。</p>
+      <p class="description">从来源摘录、机会评估，到 AI 可行性、版本化工作流和实验协议。人工确认与来源追溯贯穿过程，也保留不用 AI 的选项。</p>
+      <ul class="tags" aria-label="DesignLens AI 技术与能力"><li>React</li><li>FastAPI</li><li>Evidence</li><li>Experiments</li></ul>
+      <div class="proofs"><div><strong>43 后端 + 6 浏览器</strong><span>证据审核、版本持久化与工作流验收</span></div><div><strong>48 次合成执行</strong><span>12 个开发案例 × 4 种实现</span></div></div>
+      <div class="actions"><a class="button primary" href="assets/designlens.png" data-view="image" data-title="DesignLens AI · 原始截图">查看产品界面<span aria-hidden="true">↗</span></a><a class="button" href="https://github.com/QiQiyzhu/designlens-ai/tree/ff53bdc30a3ddf5f2b8db52fd6a15fa4a0e45803" target="_blank" rel="noopener noreferrer">源码<span aria-hidden="true">↗</span></a></div>
+      <div class="project-links"><a href="./handbooks/DesignLens%20AI%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">A–T 面试手册 <span aria-hidden="true">→</span></a><a class="" href="https://github.com/QiQiyzhu/designlens-ai/blob/ff53bdc30a3ddf5f2b8db52fd6a15fa4a0e45803/docs/validation-report.md" target="_blank" rel="noopener noreferrer">原始证据<span aria-hidden="true">↗</span></a><a class="" href="https://github.com/QiQiyzhu/designlens-ai/actions/runs/34443617295" target="_blank" rel="noopener noreferrer">CI 已通过<span aria-hidden="true">↗</span></a></div>
+    </div>
+  </div>
+  <div class="boundary"><span>范围与状态</span><p>尚未开展真人访谈与产品实验。默认采用确定性摘录；软件验证不代表用户收益、商业成效或模型智能。</p><span class="state-detail">Linux CI · 用户研究待开展</span></div>
+</article></section>
+<section id="evidence" class="evidence-section" aria-labelledby="evidence-title"><div class="section-heading"><div><div class="eyebrow">02 / INSPECT THE WORK</div><h2 id="evidence-title">看得到结果，也找得到依据。</h2></div></div><div class="evidence-grid"><article><div class="evidence-icon" aria-hidden="true">01</div><h3>先看实际运行</h3><p>ARC//SHIFT 可以在线试玩。其余项目提供真实本机界面、录屏或 UE 原生截图；这里是公开作品入口，后台应用需按仓库说明启动。</p><a href="#arc">打开游戏与演示 <span aria-hidden="true">→</span></a></article><article><div class="evidence-icon" aria-hidden="true">02</div><h3>再追到原始证据</h3><p>已完成的 CI 直接链接对应运行。评估报告保留实验方法和失败；Fake、合成数据、未开展研究与未完成验收均就近标注。</p><a href="assets-manifest.json">查看媒体来源清单 <span aria-hidden="true">→</span></a></article><article><div class="evidence-icon" aria-hidden="true">03</div><h3>最后深入 A–T 手册</h3><p>从架构和数据库，到关键代码、测试、性能、失败案例与面试追问。手册用于理解与复现，源码和原始记录是最终依据。</p><a href="./handbooks/index.html">浏览面试手册 <span aria-hidden="true">→</span></a></article></div><details class="reproduce"><summary><span>本机复现入口</span><span class="muted">环境、命令与限制，以各仓库 README 为准</span><span aria-hidden="true">+</span></summary><ul><li><a class="" href="https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/README.md" target="_blank" rel="noopener noreferrer">ARC//SHIFT 启动说明<span aria-hidden="true">↗</span></a></li><li><a class="" href="https://github.com/QiQiyzhu/repopilot/blob/6d6d6668f8e26c553d73bbcefb8c43ea858e216c/README.md" target="_blank" rel="noopener noreferrer">RepoPilot 启动说明<span aria-hidden="true">↗</span></a></li><li><a class="" href="https://github.com/QiQiyzhu/opspilot-ai/blob/4ae96c64fe440b7de2b24c6a33e587c6ecd5d36a/README.md" target="_blank" rel="noopener noreferrer">OpsPilot AI 启动说明<span aria-hidden="true">↗</span></a></li><li><a class="" href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/README.md" target="_blank" rel="noopener noreferrer">Aegis Arena 启动说明<span aria-hidden="true">↗</span></a></li><li><a class="" href="https://github.com/QiQiyzhu/designlens-ai/blob/ff53bdc30a3ddf5f2b8db52fd6a15fa4a0e45803/README.md" target="_blank" rel="noopener noreferrer">DesignLens AI 启动说明<span aria-hidden="true">↗</span></a></li></ul><p>本页不连接本机后台，也不要求输入 API Key。录屏按需加载，所有展示媒体来自项目的实际运行。</p></details></section>
+</main><footer class="site-footer"><span>QiQiyzhu <span class="footer-sep">/</span> ENGINEERING PORTFOLIO</span><span>证据状态 · 2026.09.10</span><a href="#top">回到顶部 ↑</a></footer>
+<dialog id="media-dialog" aria-labelledby="media-title"><div class="dialog-header"><h2 id="media-title">项目画面</h2><button id="close-media" type="button" aria-label="关闭媒体预览">关闭 <span aria-hidden="true">×</span></button></div><div id="media-content"></div><p class="dialog-note">项目实际运行媒体 · 原始文件可在新标签页查看或保存 <a id="media-original" target="_blank" rel="noopener">打开原文件 ↗</a></p></dialog>
+<script src="assets/viewer.js" defer></script></body></html>

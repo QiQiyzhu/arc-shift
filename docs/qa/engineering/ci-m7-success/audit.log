@@ -1,0 +1,9 @@
+Game, tooling and production acceptance	Audit locked dependencies	﻿2026-09-10T07:53:40.6278204Z ##[group]Run npm audit --audit-level=moderate
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6278817Z ^[[36;1mnpm audit --audit-level=moderate^[[0m
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6322590Z shell: /usr/bin/bash --noprofile --norc -e -o pipefail {0}
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6323053Z env:
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6323305Z   CI: true
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6323590Z   FULL_SUITE: false
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6323891Z   ARC_BENCH_LABEL: ci-34452226005-1
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:40.6324248Z ##[endgroup]
+Game, tooling and production acceptance	Audit locked dependencies	2026-09-10T07:53:41.1447449Z found 0 vulnerabilities
