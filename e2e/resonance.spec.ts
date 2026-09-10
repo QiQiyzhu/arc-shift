@@ -4,6 +4,9 @@ import fs from 'node:fs';
 test('six resonance trials render their real projectile forms and preserve an existing run', async ({
   page,
 }) => {
+  // Six complete practice sessions share this test. Software rendering plus the
+  // 50ms simulation delta cap can exceed the single-scenario default budget.
+  test.setTimeout(150000);
   await page.setViewportSize({ width: 1920, height: 1080 });
   const errors: string[] = [];
   page.on('pageerror', (e) => errors.push(e.message));
@@ -11,7 +14,9 @@ test('six resonance trials render their real projectile forms and preserve an ex
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
   await page.getByRole('button', { name: /余烬协议：/ }).click();
   await expect
-    .poll(() => page.evaluate(() => window.arcQA.engine.world.phase))
+    .poll(() => page.evaluate(() => window.arcQA.engine.world.phase), {
+      timeout: 15000,
+    })
     .toBe('playing');
   await page.getByRole('button', { name: '暂停', exact: true }).click();
   await page.getByRole('button', { name: '返回主界面', exact: true }).click();
@@ -36,7 +41,9 @@ test('six resonance trials render their real projectile forms and preserve an ex
       await page.getByRole('button', { name: '切换组合', exact: true }).click();
     await page.getByRole('button', { name: new RegExp(names[i]) }).click();
     await expect
-      .poll(() => page.evaluate(() => window.arcQA.engine.world.phase))
+      .poll(() => page.evaluate(() => window.arcQA.engine.world.phase), {
+        timeout: 15000,
+      })
       .toBe('playing');
     await expect
       .poll(() => page.evaluate(() => window.arcQA.engine.world.enemies.length))
