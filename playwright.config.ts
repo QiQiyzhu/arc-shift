@@ -1,7 +1,10 @@
 import { defineConfig } from '@playwright/test';
 export default defineConfig({
   testDir: './e2e',
-  timeout: 45000,
+  // CI uses software WebGL: preserve assertions while allowing simulation-driven
+  // transitions and multi-reload journeys to finish on a slower renderer.
+  timeout: process.env.CI ? 180000 : 45000,
+  expect: { timeout: process.env.CI ? 30000 : 5000 },
   workers: 1,
   reporter: [
     ['list'],
