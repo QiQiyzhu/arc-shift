@@ -25,6 +25,7 @@ import { buildCounts } from '../cards/system';
 import { roomChoices } from '../rooms/generator';
 import { activeSynergies, newSynergies, SYNERGIES } from '../cards/synergies';
 import { CampActions, WalletBar } from './EconomyPanels';
+import { protocolPreview } from '../cards/preview';
 export function ElementIcon({
   element,
   size = 24,
@@ -47,12 +48,14 @@ export function CardView({
   onSelect,
   index = 0,
   build = [],
+  preview,
 }: {
   card: Upgrade;
   owned?: boolean;
   onSelect?: () => void;
   index?: number;
   build?: readonly string[];
+  preview?: ReturnType<typeof protocolPreview>;
 }) {
   const el = ELEMENTS[card.element];
   const Glyph = card.id.includes('meteor')
@@ -105,6 +108,33 @@ export function CardView({
       <h3>{card.name}</h3>
       <p>{card.description}</p>
       <div className="card-preview">{card.preview}</div>
+      {preview && (
+        <div className="protocol-impact" aria-label="整合后变化">
+          {preview.changes.slice(0, 4).map((c) => (
+            <div key={c.label} className={c.benefit ? 'benefit' : 'tradeoff'}>
+              <span>{c.label}</span>
+              <b>
+                {c.before} → {c.after}
+              </b>
+            </div>
+          ))}
+          {preview.threshold && <p>{preview.threshold}</p>}
+          {preview.active.map((s) => (
+            <p key={s.id} className="benefit">
+              {s.description}
+            </p>
+          ))}
+          {!preview.active.length &&
+            preview.pending.slice(0, 1).map((s) => (
+              <p key={s.name}>
+                {s.name} · 还缺「{s.missing.join('、')}」
+              </p>
+            ))}
+          {preview.tradeoff && (
+            <p className="impact-note">{preview.tradeoff}</p>
+          )}
+        </div>
+      )}
       {newSynergies(build, card.id).map((s) => (
         <div className="synergy-preview" key={s.id}>
           ✦ 激活 {s.name}
@@ -166,6 +196,7 @@ export function CardDraft({ engine }: { engine: Engine }) {
               card={c}
               index={i}
               build={w.cards}
+              preview={protocolPreview(w, c.id)}
               onSelect={() => engine.chooseCard(c.id)}
             />
           ))}

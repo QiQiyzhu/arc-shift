@@ -205,7 +205,7 @@ export function UtilityPanel({
               <div className="switch-row">
                 <div>
                   <label htmlFor="motion-setting">减少动态效果</label>
-                  <p>关闭镜头震动，保留攻击预警。</p>
+                  <p>关闭震动、角色摆动与残影，减少装饰粒子；保留攻击预警。</p>
                 </div>
                 <Switch
                   id="motion-setting"
@@ -216,6 +216,20 @@ export function UtilityPanel({
                   }}
                 />
               </div>
+            </div>
+            <div className="switch-row">
+              <div>
+                <label htmlFor="focused-effects">战斗清晰模式</label>
+                <p>减少装饰粒子与普通伤害飘字，突出敌弹和玩家位置。</p>
+              </div>
+              <Switch
+                id="focused-effects"
+                checked={s.focusedEffects === true}
+                onCheckedChange={(v) => {
+                  s.focusedEffects = v;
+                  change();
+                }}
+              />
             </div>
             {controls && <InputSettings controls={controls} />}
             <div className="settings-note">

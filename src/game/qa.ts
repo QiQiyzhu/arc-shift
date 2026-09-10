@@ -2,9 +2,12 @@ import type { Engine } from './engine';
 import type { Synth } from '../audio/synth';
 import { expedition } from '../rooms/expedition';
 import { makeRoom } from '../rooms/generator';
+import type { FieldGuide } from './field-guide';
 /** Explicit development-only fixtures. Vite removes this import from production builds. */
 export function installQA(engine: Engine, synth: Synth) {
   const harness = {
+    guide: undefined as FieldGuide | undefined,
+    renderMetrics: undefined as (() => Record<string, number>) | undefined,
     engine,
     synth,
     nodes: () => expedition(engine.world.seed),

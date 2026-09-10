@@ -1,29 +1,29 @@
 {
-  "recordedAt": "2026-09-10T11:26:56.780Z",
+  "recordedAt": "2026-09-10T15:26:55.518Z",
   "methodology": "Headless browser rAF, actual renderer; fixed simulated input, high HP stress fixture, other project agents active",
   "enemies": 250,
   "finalEnemies": 250,
-  "maxProjectiles": 371,
+  "maxProjectiles": 372,
   "poolMisses": 0,
   "frameTimeMs": {
-    "p50": 34.700000000000045,
-    "p95": 76.39999999999964,
-    "p99": 90.20000000000073
+    "p50": 27.699999999999818,
+    "p95": 48.600000000000364,
+    "p99": 55.600000000000364
   },
   "engineUpdateMs": {
-    "p50": 0.7000000029802322,
-    "p95": 1.5,
-    "p99": 2.6000000089406967
+    "p50": 1,
+    "p95": 1.9000000059604645,
+    "p99": 3
   },
-  "fps": 25.162256615054922,
-  "sampleMs": 10015.00000000894,
+  "fps": 35.93899331001398,
+  "sampleMs": 10044.79999998808,
   "queries": {
-    "separation": 1039022,
-    "projectile": 88013
+    "separation": 1165657,
+    "projectile": 97545
   },
   "heap": {
-    "usedJSHeapSize": 214138169,
-    "totalJSHeapSize": 258029341,
+    "usedJSHeapSize": 114003335,
+    "totalJSHeapSize": 199223639,
     "jsHeapSizeLimit": 4395630592
   },
   "objectCount": "unavailable",

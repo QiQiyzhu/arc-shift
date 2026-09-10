@@ -1,0 +1,221 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\playwright.config.ts",
+    "rootDir": "C:/Users/yzhu/Documents/ChatGPT/New project/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "line"
+      ],
+      [
+        "json"
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/yzhu/Documents/ChatGPT/New project/outputs/qa/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/yzhu/Documents/ChatGPT/New project/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "competition-upgrade.spec.ts",
+      "file": "competition-upgrade.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "guided practice: real controls, forge selection, boss completion, preserved save",
+          "ok": false,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "failed",
+                  "duration": 9134,
+                  "error": {
+                    "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: '选择演练共鸣' })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '选择演练共鸣' })\u001b[22m\n",
+                    "stack": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: '选择演练共鸣' })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '选择演练共鸣' })\u001b[22m\n\n    at C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\e2e\\competition-upgrade.spec.ts:43:5",
+                    "location": {
+                      "file": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\e2e\\competition-upgrade.spec.ts",
+                      "column": 5,
+                      "line": 43
+                    },
+                    "snippet": "  41 |   await expect(\n  42 |     page.getByRole('dialog', { name: '选择演练共鸣' }),\n> 43 |   ).toBeVisible();\n     |     ^\n  44 |   await page.screenshot({ animations: 'disabled', path: `${out}/forge.png` });\n  45 |   await page.keyboard.press('Escape');\n  46 |   expect(await page.evaluate(() => window.arcQA.engine.world.phase)).toBe("
+                  },
+                  "errors": [
+                    {
+                      "location": {
+                        "file": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\e2e\\competition-upgrade.spec.ts",
+                        "column": 5,
+                        "line": 43
+                      },
+                      "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mlocator\u001b[39m\u001b[2m).\u001b[22mtoBeVisible\u001b[2m()\u001b[22m failed\n\nLocator:  getByRole('dialog', { name: '选择演练共鸣' })\nExpected: visible\nReceived: <element(s) not found>\nTimeout:  5000ms\n\nCall log:\n\u001b[2m  - Expect \"toBeVisible\" with timeout 5000ms\u001b[22m\n\u001b[2m  - waiting for getByRole('dialog', { name: '选择演练共鸣' })\u001b[22m\n\n\n  41 |   await expect(\n  42 |     page.getByRole('dialog', { name: '选择演练共鸣' }),\n> 43 |   ).toBeVisible();\n     |     ^\n  44 |   await page.screenshot({ animations: 'disabled', path: `${out}/forge.png` });\n  45 |   await page.keyboard.press('Escape');\n  46 |   expect(await page.evaluate(() => window.arcQA.engine.world.phase)).toBe(\n    at C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\e2e\\competition-upgrade.spec.ts:43:5"
+                    }
+                  ],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T15:10:27.866Z",
+                  "annotations": [],
+                  "attachments": [
+                    {
+                      "name": "screenshot",
+                      "contentType": "image/png",
+                      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\qa\\results\\competition-upgrade-guided-edd95-s-completion-preserved-save\\test-failed-1.png"
+                    },
+                    {
+                      "name": "error-context",
+                      "contentType": "text/markdown",
+                      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\qa\\results\\competition-upgrade-guided-edd95-s-completion-preserved-save\\error-context.md"
+                    }
+                  ],
+                  "errorLocation": {
+                    "file": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\e2e\\competition-upgrade.spec.ts",
+                    "column": 5,
+                    "line": 43
+                  }
+                }
+              ],
+              "status": "unexpected"
+            }
+          ],
+          "id": "576e579d8460027ba883-0f8cefd294b0063e57b5",
+          "file": "competition-upgrade.spec.ts",
+          "line": 7,
+          "column": 1
+        },
+        {
+          "title": "static terrain cache, idle HUD, same-seed restarts and missing-atlas fallback",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4718,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-10T15:11:03.004Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "576e579d8460027ba883-74bfa9f094e35fa4b462",
+          "file": "competition-upgrade.spec.ts",
+          "line": 98,
+          "column": 1
+        },
+        {
+          "title": "draft numerical preview remains readable at laptop resolution",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 1,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3707,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1882
+                    }
+                  ],
+                  "startTime": "2026-09-10T15:11:07.915Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "576e579d8460027ba883-023d4d0231052e5f9113",
+          "file": "competition-upgrade.spec.ts",
+          "line": 155,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-10T15:10:27.352Z",
+    "duration": 74839.85800000001,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 1,
+    "flaky": 0
+  }
+}

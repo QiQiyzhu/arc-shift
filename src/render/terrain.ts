@@ -3,6 +3,10 @@ import type { World } from '../game/world';
 import { zoneActive } from '../rooms/terrain';
 import { polygon } from './arena';
 export function drawTerrain(g: Phaser.GameObjects.Graphics, w: World) {
+  drawTerrainStatic(g, w);
+  drawTerrainZones(g, w);
+}
+export function drawTerrainStatic(g: Phaser.GameObjects.Graphics, w: World) {
   const color =
     w.room.biome === 'grove'
       ? 0x7ba99c
@@ -26,6 +30,8 @@ export function drawTerrain(g: Phaser.GameObjects.Graphics, w: World) {
     g.fillStyle(color, 0.08);
     polygon(g, b.x + b.w / 2, b.y + b.h / 2, 15, 4, Math.PI / 4);
   }
+}
+export function drawTerrainZones(g: Phaser.GameObjects.Graphics, w: World) {
   for (const z of w.terrain.zones) {
     const friendly = z.kind === 'blessing',
       active = zoneActive(w),

@@ -6,7 +6,14 @@ export default defineConfig({
   plugins: [react()],
   resolve: { alias: { '@': fileURLToPath(new URL('.', import.meta.url)) } },
   css: { postcss: { plugins: [tailwindcss()] } },
-  server: { host: '127.0.0.1', port: 5173, strictPort: true },
+  server: {
+    host: '127.0.0.1',
+    port: 5173,
+    strictPort: true,
+    // QA writes large screenshots while the server is running. On Windows,
+    // registering a watcher on a still-locked PNG can throw EBUSY and stop Vite.
+    watch: { ignored: ['**/docs/qa/**', '**/outputs/**', '**/work/**'] },
+  },
   build: {
     target: 'es2022',
     chunkSizeWarningLimit: 1700,

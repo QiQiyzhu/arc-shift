@@ -3,7 +3,9 @@ import { Engine } from './engine';
 import { Effects } from '../effects/particles';
 import { drawArena } from '../render/arena';
 import { drawActors } from '../render/actors';
-import { drawTerrain } from '../render/terrain';
+import { drawTerrainStatic, drawTerrainZones } from '../render/terrain';
+import { ActorSprites } from '../render/actor-sprites';
+import { ProjectileSprites } from '../render/projectile-sprites';
 import type { Input } from './types';
 import { ActionInput, type PadSnapshot } from '../input/actions';
 import { loadBindings } from '../input/bindings';
@@ -12,6 +14,27 @@ export class ArcScene extends Phaser.Scene {
   effects!: Effects;
   floor!: Phaser.GameObjects.Image;
   graphics!: Phaser.GameObjects.Graphics;
+  terrainGraphics!: Phaser.GameObjects.Graphics;
+  private actors?: ActorSprites;
+  private bullets?: ProjectileSprites;
+  private terrainImage?: Phaser.GameObjects.Image;
+  private terrainOwner?: object;
+  private worldOwner?: object;
+  readonly renderMetrics = {
+    frames: 0,
+    terrainBuilds: 0,
+    simulateMs: 0,
+    presentationMs: 0,
+    droppedMs: 0,
+  };
+  get displayMetrics() {
+    return {
+      ...this.renderMetrics,
+      actorImages: this.actors?.count || 0,
+      bulletImages: this.bullets?.count || 0,
+      children: this.children?.length || 0,
+    };
+  }
   readonly actions = new ActionInput(loadBindings());
   private accumulator = 0;
   private focused = !document.hidden;
@@ -61,6 +84,7 @@ export class ArcScene extends Phaser.Scene {
     else if (document.hasFocus()) this.onFocus();
   };
   inputBlocked = false;
+  pauseBlocked = false;
   /** Used only by the development QA page; production always owns its loop. */
   externalSimulation?: (dt: number, input: Input) => void;
   onTick: () => void = () => {};
@@ -68,6 +92,15 @@ export class ArcScene extends Phaser.Scene {
   onSuspend: () => void = () => {};
   reducedMotion = false;
   release = () => {
+    this.actors?.dispose();
+    this.actors = undefined;
+    this.bullets?.dispose();
+    this.bullets = undefined;
+    this.terrainImage?.destroy();
+    this.terrainImage = undefined;
+    if (this.textures?.exists('terrain-cache-v3'))
+      this.textures.remove('terrain-cache-v3');
+    this.terrainOwner = this.worldOwner = undefined;
     this.unsubscribe?.();
     this.unsubscribe = undefined;
     window.removeEventListener('blur', this.onBlur);
@@ -97,6 +130,7 @@ export class ArcScene extends Phaser.Scene {
     return key;
   }
   preload() {
+    this.load.image('actors-chroma-v2', '/art/actors-source-v2.png');
     this.load.image('sanctum', '/art/sanctum.webp');
     this.load.image('grove', '/art/grove.webp');
     this.load.image('foundry', '/art/foundry.webp');
@@ -107,7 +141,15 @@ export class ArcScene extends Phaser.Scene {
       .setOrigin(0)
       .setDisplaySize(1280, 720)
       .setDepth(0);
-    this.graphics = this.add.graphics().setDepth(2);
+    this.terrainGraphics = this.add.graphics().setDepth(1);
+    this.terrainImage = this.add
+      .image(0, 0, '__DEFAULT')
+      .setOrigin(0)
+      .setDepth(0.9)
+      .setVisible(false);
+    this.graphics = this.add.graphics().setDepth(3);
+    this.actors = new ActorSprites(this);
+    this.bullets = new ProjectileSprites(this);
     this.effects = new Effects(this);
     this.input.mouse!.disableContextMenu();
     window.addEventListener('keydown', this.onKeyDown);
@@ -143,15 +185,19 @@ export class ArcScene extends Phaser.Scene {
     this.onReady();
   }
   update(time: number, delta: number) {
+    const begin = performance.now();
     const dt = Math.min(delta / 1000, 0.05);
+    this.renderMetrics.droppedMs += Math.max(0, delta - 50);
     const w = this.engine.world;
     const p = this.input.activePointer;
     let pad: PadSnapshot | null = null;
     try {
-      pad =
-        Array.from(navigator.getGamepads?.() || []).find(
-          (g) => g?.connected && g.mapping === 'standard',
-        ) || null;
+      const pads = navigator.getGamepads?.() || [];
+      for (let i = 0; i < pads.length; i++)
+        if (pads[i]?.connected && pads[i]?.mapping === 'standard') {
+          pad = pads[i];
+          break;
+        }
     } catch {
       /* A restricted Gamepad API must not break keyboard/mouse play. */
     }
@@ -186,6 +232,7 @@ export class ArcScene extends Phaser.Scene {
       this.actions.consumePause() &&
       this.focused &&
       !this.inputBlocked &&
+      !this.pauseBlocked &&
       !(import.meta.env.DEV && this.externalSimulation)
     ) {
       this.engine.pause();
@@ -203,8 +250,16 @@ export class ArcScene extends Phaser.Scene {
       this.actions.consumeStep();
       this.accumulator -= 1 / 60;
     }
+    this.renderMetrics.simulateMs = performance.now() - begin;
+    const drawBegin = performance.now();
+    this.effects.reduced =
+      this.reducedMotion || this.engine.save.settings.focusedEffects === true;
     const stamp = `${w.seed}-${w.room.index}-${w.room.template}-${w.room.biome}`;
-    if (stamp !== this.stamp) {
+    if (
+      stamp !== this.stamp ||
+      this.worldOwner !== w ||
+      this.terrainOwner !== w.terrain
+    ) {
       this.floor.setTexture(this.arenaTexture(w.room.template, w.room.biome));
       this.floor
         .setDisplaySize(1280, 720)
@@ -215,12 +270,24 @@ export class ArcScene extends Phaser.Scene {
         );
       this.effects.clear();
       this.stamp = stamp;
+      this.worldOwner = w;
+      this.terrainOwner = w.terrain;
+      this.terrainImage?.setTexture('__DEFAULT');
+      if (this.textures.exists('terrain-cache-v3'))
+        this.textures.remove('terrain-cache-v3');
+      const source = this.make.graphics({ x: 0, y: 0 }, false);
+      drawTerrainStatic(source, w);
+      source.lineStyle(1, 0xd6b47c, 0.25);
+      source.strokeRoundedRect(76, 100, 1128, 532, 14);
+      source.generateTexture('terrain-cache-v3', 1280, 720);
+      source.destroy();
+      this.terrainImage?.setTexture('terrain-cache-v3').setVisible(true);
+      this.renderMetrics.terrainBuilds++;
     }
     this.graphics.clear();
-    drawTerrain(this.graphics, w);
-    this.graphics.lineStyle(1, 0xd6b47c, 0.25);
-    this.graphics.strokeRoundedRect(76, 100, 1128, 532, 14);
-    for (let i = 0; i < 20; i++) {
+    this.terrainGraphics.clear();
+    drawTerrainZones(this.terrainGraphics, w);
+    for (let i = 0; i < (this.effects.reduced ? 0 : 20); i++) {
       const x = 90 + ((i * 193 + time * 0.006) % 1100),
         y = 120 + ((i * 117 - time * 0.01 + 10000) % 490);
       this.graphics.fillStyle(
@@ -229,9 +296,26 @@ export class ArcScene extends Phaser.Scene {
       );
       this.graphics.fillCircle(x, y, i % 3 === 0 ? 1.5 : 1);
     }
-    drawActors(this.graphics, this.engine.world, time / 1000);
+    const illustrated =
+      this.actors?.update(w, time / 1000, dt, this.reducedMotion) || false;
+    const hostileSprites = this.bullets?.update(w) || false;
+    drawActors(
+      this.graphics,
+      this.engine.world,
+      time / 1000,
+      illustrated,
+      hostileSprites,
+      this.reducedMotion,
+    );
     this.effects.draw(this.graphics, dt);
     if (w.phase === 'playing') {
+      // A stable contact ring locates the player even inside a full resonance burst.
+      this.graphics.lineStyle(4, 0x081419, 0.95);
+      this.graphics.strokeCircle(w.player.x, w.player.y, 17);
+      this.graphics.lineStyle(1.5, 0xd5ffe8, 0.95);
+      this.graphics.strokeCircle(w.player.x, w.player.y, 17);
+      this.graphics.fillStyle(0xe4fff2, 1);
+      this.graphics.fillCircle(w.player.x, w.player.y, 2.5);
       this.graphics.lineStyle(1, 0xd0f7c0, 0.8);
       this.graphics.strokeCircle(input.aimX, input.aimY, 9);
       this.graphics.lineBetween(
@@ -247,6 +331,8 @@ export class ArcScene extends Phaser.Scene {
         input.aimY,
       );
     }
+    this.renderMetrics.presentationMs = performance.now() - drawBegin;
+    this.renderMetrics.frames++;
     this.onTick();
   }
 }

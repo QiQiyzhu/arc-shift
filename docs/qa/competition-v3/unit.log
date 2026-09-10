@@ -1,0 +1,5 @@
+
+> arc-shift@1.1.0 test
+> vitest run --reporter=json --outputFile=docs/qa/competition-v3/unit.json
+
+JSON report written to C:/Users/yzhu/Documents/ChatGPT/New project/docs/qa/competition-v3/unit.json

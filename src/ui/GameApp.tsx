@@ -28,10 +28,12 @@ import { UtilityPanel } from './SettingsPanel';
 import { Synth } from '../audio/synth';
 import { installWebMCP } from './webmcp';
 import { keyLabel, padLabel, type ButtonAction } from '../input/bindings';
+import { FieldGuide } from '../game/field-guide';
+import { FieldGuidePanel } from './FieldGuidePanel';
+import { hudSignature } from './hud-signature';
+import { roomWaveCount } from '../rooms/generator';
 const engine = new Engine();
 const synth = new Synth();
-if (import.meta.env.DEV && new URLSearchParams(location.search).has('qa'))
-  void import('../game/qa').then((m) => m.installQA(engine, synth));
 const formatTime = (s: number) =>
   `${Math.floor(s / 60)
     .toString()
@@ -43,12 +45,16 @@ export default function GameApp() {
   const [, render] = useState(0);
   const [loaded, setLoaded] = useState(false);
   const scene = useRef<ArcScene | null>(null);
+  const guide = useRef(new FieldGuide());
   const [utility, setUtility] = useState<
     'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp' | null
   >(null);
   useEffect(() => {
+    let disposed = false;
     const s = new ArcScene(engine);
-    s.onReady = () => setLoaded(true);
+    s.onReady = () => {
+      if (!disposed && scene.current === s) setLoaded(true);
+    };
     s.onSuspend = () =>
       synth.update(0, false, {
         phase: 'paused',
@@ -61,9 +67,21 @@ export default function GameApp() {
     const webOff = installWebMCP(engine);
     let last = 0,
       lastSound = performance.now();
+    let signature = '',
+      phase = engine.world.phase,
+      hudCommits = 0;
+    if (import.meta.env.DEV && new URLSearchParams(location.search).has('qa'))
+      void import('../game/qa').then((m) => {
+        if (disposed || scene.current !== s) return;
+        const qa = m.installQA(engine, synth);
+        qa.renderMetrics = () => ({ ...s.displayMetrics, hudCommits });
+        qa.guide = guide.current;
+      });
     s.onTick = () => {
       const now = performance.now();
-      synth.settings = { ...engine.save.settings };
+      guide.current.tick(engine);
+      s.pauseBlocked = guide.current.active && guide.current.step === 'forge';
+      synth.settings = engine.save.settings;
       s.reducedMotion = engine.save.settings.reducedMotion;
       synth.update(
         Math.min(0.1, (now - lastSound) / 1000),
@@ -80,8 +98,18 @@ export default function GameApp() {
         },
       );
       lastSound = now;
-      if (now - last > 80) {
-        render((n) => n + 1);
+      if (now - last > 80 || phase !== engine.world.phase) {
+        const next = hudSignature(
+          engine,
+          s.actions,
+          guide.current.active ? guide.current.step : '',
+        );
+        if (next !== signature) {
+          signature = next;
+          hudCommits++;
+          render((n) => n + 1);
+        }
+        phase = engine.world.phase;
         last = now;
       }
     };
@@ -100,12 +128,13 @@ export default function GameApp() {
       render: { powerPreference: 'high-performance' },
     });
     return () => {
+      disposed = true;
       off();
       webOff();
       s.release();
       synth.dispose();
       game.destroy(true);
-      scene.current = null;
+      if (scene.current === s) scene.current = null;
     };
   }, []);
   const w = engine.world,
@@ -137,6 +166,7 @@ export default function GameApp() {
   const start = () => {
     synth.unlock();
     synth.ui();
+    guide.current.stop();
     engine.start();
     render((n) => n + 1);
   };
@@ -161,7 +191,7 @@ export default function GameApp() {
           <span className="signal-dot" /> 网络异常 · 连接已建立
         </div>
         <div className="top-actions">
-          <span className="version">PILGRIMAGE / 1.0</span>
+          <span className="version">RESONANCE / 1.1</span>
           <button
             aria-label={engine.save.settings.muted ? '开启声音' : '静音'}
             onClick={() => {
@@ -196,7 +226,7 @@ export default function GameApp() {
             <img className="menu-keyart" src="/art/rift-keyart.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> THE LAST PILGRIMAGE · v1.0
+                <span /> THE LAST PILGRIMAGE · v1.1
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -207,7 +237,9 @@ export default function GameApp() {
                 <span>奥 术 跃 迁</span>
                 <i>钟声尽头，仍有人在等。</i>
               </div>
-              <p className="menu-description">圣所仍在等待，下一位归来的人。</p>
+              <p className="menu-description">
+                熔接圣剑、法器与重炮。改写你的下一次攻击。
+              </p>
               {engine.save.checkpoint && (
                 <button
                   className="start-button continue-primary"
@@ -241,6 +273,23 @@ export default function GameApp() {
                 <ArrowUpRight size={24} />
               </button>
               <div className="menu-secondary">
+                <button
+                  className="guide-entry"
+                  disabled={!loaded}
+                  onClick={() => {
+                    synth.unlock();
+                    synth.ui();
+                    guide.current.start(engine);
+                    render((n) => n + 1);
+                  }}
+                >
+                  <span>
+                    第一次跃迁 <b>行动演练</b>
+                  </span>
+                  <span>
+                    移动 → 共鸣 → Boss <ArrowRight size={17} />
+                  </span>
+                </button>
                 <button onClick={() => openUtility('camp')}>
                   <Hammer size={18} /> 营地与图鉴 <ChevronRight size={17} />
                 </button>
@@ -317,15 +366,17 @@ export default function GameApp() {
                 </div>
                 <h2>{w.room.name}</h2>
                 <p>
-                  {engine.practice
-                    ? `无尽试炼 · 波次 ${w.wave}`
-                    : w.room.kind === 'boss'
-                      ? '击败核心实体'
-                      : w.room.kind === 'challenge'
-                        ? `驻守中央符阵 ${w.challengeTime.toFixed(1)} / 18 秒`
-                        : w.phase === 'event'
-                          ? '此处暂时安全'
-                          : `清除异常 · 波次 ${w.wave} / ${w.campaign === 'pilgrimage' ? (w.room.kind === 'elite' ? 4 : 3) : w.room.index === 1 ? 4 : 8}`}
+                  {guide.current.active
+                    ? '行动演练 · 完成左侧目标'
+                    : engine.practice
+                      ? `无尽试炼 · 波次 ${w.wave}`
+                      : w.room.kind === 'boss'
+                        ? '击败核心实体'
+                        : w.room.kind === 'challenge'
+                          ? `驻守中央符阵 ${w.challengeTime.toFixed(1)} / 18 秒`
+                          : w.phase === 'event'
+                            ? '此处暂时安全'
+                            : `清除异常 · 波次 ${w.wave} / ${w.campaign === 'pilgrimage' ? (w.room.kind === 'elite' ? w.content.encounters[0].params.eliteWaves : w.content.encounters[0].params.combatWaves) : roomWaveCount(w.room.index)}`}
                 </p>
               </div>
               <div className="hud-right">
@@ -356,7 +407,7 @@ export default function GameApp() {
                 {controlLabel('Gravity', 'E')} 加速恢复
               </div>
             )}
-            {engine.practice && (
+            {engine.practice && !guide.current.active && (
               <div className="practice-banner">
                 <FlaskConical size={14} /> 无敌试炼 · 不影响存档{' '}
                 <button onClick={() => openUtility('lab')}>切换组合</button>
@@ -441,58 +492,59 @@ export default function GameApp() {
             </p>
           </div>
         )}
-        {w.phase === 'paused' && (
-          <div className="modal-shade">
-            <section className="pause-panel">
-              <div className="eyebrow">CONNECTION SUSPENDED</div>
-              <h2>行动已暂停</h2>
-              <p>
-                相位跃迁可以穿过敌人和弹幕。
-                <br />
-                近身脉冲清除弹幕，引力奇点在准星方向生成引力场。
-              </p>
-              <div className="control-grid">
-                <span>
-                  <kbd>{movementLabel}</kbd> 移动
-                </span>
-                <span>
-                  <kbd>{gamepad ? '右摇杆' : '鼠标'}</kbd> 瞄准
-                </span>
-                <span>
-                  <kbd>{controlLabel('PrimaryAttack', 'LMB')}</kbd> 持续射击
-                </span>
-                <span>
-                  <kbd>{controlLabel('Dash', 'SPACE')}</kbd> 闪避
-                </span>
-                <span>
-                  <kbd>
-                    {controlLabel('Pulse', 'Q')} /{' '}
-                    {controlLabel('Gravity', 'E')}
-                  </kbd>{' '}
-                  主动技能
-                </span>
-                <span>
-                  <kbd>{controlLabel('Pause', 'ESC')}</kbd> 暂停
-                </span>
-              </div>
-              <button className="start-button" onClick={() => engine.pause()}>
-                <span>
-                  <Play size={18} /> 继续行动
-                </span>
-                <ArrowRight size={20} />
-              </button>
-              <button
-                className="text-button"
-                onClick={() => {
-                  w.phase = 'menu';
-                  render((n) => n + 1);
-                }}
-              >
-                返回主界面
-              </button>
-            </section>
-          </div>
-        )}
+        {w.phase === 'paused' &&
+          !(guide.current.active && guide.current.step === 'forge') && (
+            <div className="modal-shade">
+              <section className="pause-panel">
+                <div className="eyebrow">CONNECTION SUSPENDED</div>
+                <h2>行动已暂停</h2>
+                <p>
+                  相位跃迁可以穿过敌人和弹幕。
+                  <br />
+                  近身脉冲清除弹幕，引力奇点在准星方向生成引力场。
+                </p>
+                <div className="control-grid">
+                  <span>
+                    <kbd>{movementLabel}</kbd> 移动
+                  </span>
+                  <span>
+                    <kbd>{gamepad ? '右摇杆' : '鼠标'}</kbd> 瞄准
+                  </span>
+                  <span>
+                    <kbd>{controlLabel('PrimaryAttack', 'LMB')}</kbd> 持续射击
+                  </span>
+                  <span>
+                    <kbd>{controlLabel('Dash', 'SPACE')}</kbd> 闪避
+                  </span>
+                  <span>
+                    <kbd>
+                      {controlLabel('Pulse', 'Q')} /{' '}
+                      {controlLabel('Gravity', 'E')}
+                    </kbd>{' '}
+                    主动技能
+                  </span>
+                  <span>
+                    <kbd>{controlLabel('Pause', 'ESC')}</kbd> 暂停
+                  </span>
+                </div>
+                <button className="start-button" onClick={() => engine.pause()}>
+                  <span>
+                    <Play size={18} /> 继续行动
+                  </span>
+                  <ArrowRight size={20} />
+                </button>
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    w.phase = 'menu';
+                    render((n) => n + 1);
+                  }}
+                >
+                  返回主界面
+                </button>
+              </section>
+            </div>
+          )}
         {w.phase === 'reward' && <CardDraft engine={engine} />}
         {w.phase === 'map' &&
           (w.campaign === 'pilgrimage' ? (
@@ -501,69 +553,102 @@ export default function GameApp() {
             <RouteMap engine={engine} />
           ))}
         {w.phase === 'event' && <EncounterPanel engine={engine} />}
-        {(w.phase === 'victory' || w.phase === 'gameover') && (
-          <div className={`modal-shade end-shade ${w.phase}`}>
-            <section className="pause-panel">
-              <div className="end-emblem">
-                <i />
-                <Orbit size={47} strokeWidth={1} />
-              </div>
-              <div className="eyebrow">
-                {w.phase === 'victory' ? 'NETWORK RESTORED' : 'CONNECTION LOST'}
-              </div>
-              <h2>
-                {w.phase === 'victory' ? '边界，已突破。' : '信号暂时中断。'}
-              </h2>
-              <p>
-                {w.phase === 'victory'
-                  ? '所有的灯都熄灭了。只有门后，响起了一次迟来的敲门声。'
-                  : '每一次重启，都是新的可能。'}
-              </p>
-              <div className="result-stats">
-                <div>
-                  <b>
-                    {w.room.index}
-                    <small>/ {w.campaign === 'pilgrimage' ? 12 : 8}</small>
-                  </b>
-                  <span>最深区域</span>
+        {(w.phase === 'victory' || w.phase === 'gameover') &&
+          !guide.current.active && (
+            <div className={`modal-shade end-shade ${w.phase}`}>
+              <section className="pause-panel">
+                <div className="end-emblem">
+                  <i />
+                  <Orbit size={47} strokeWidth={1} />
                 </div>
-                <div>
-                  <b>{w.kills}</b>
-                  <span>净化实体</span>
+                <div className="eyebrow">
+                  {w.phase === 'victory'
+                    ? 'NETWORK RESTORED'
+                    : 'CONNECTION LOST'}
                 </div>
-                <div>
-                  <b>{formatTime(w.elapsed)}</b>
-                  <span>行动时间</span>
+                <h2>
+                  {w.phase === 'victory' ? '边界，已突破。' : '信号暂时中断。'}
+                </h2>
+                <p>
+                  {w.phase === 'victory'
+                    ? '所有的灯都熄灭了。只有门后，响起了一次迟来的敲门声。'
+                    : '每一次重启，都是新的可能。'}
+                </p>
+                <div className="result-stats">
+                  <div>
+                    <b>
+                      {w.room.index}
+                      <small>/ {w.campaign === 'pilgrimage' ? 12 : 8}</small>
+                    </b>
+                    <span>最深区域</span>
+                  </div>
+                  <div>
+                    <b>{w.kills}</b>
+                    <span>净化实体</span>
+                  </div>
+                  <div>
+                    <b>{formatTime(w.elapsed)}</b>
+                    <span>行动时间</span>
+                  </div>
                 </div>
-              </div>
-              <div className="end-build">
-                <div className="shard-settlement">
-                  本次带回 {w.settlement} 碎片 · 途中已归档 {w.banked}
-                  <br />
-                  <small>
-                    营地余额 {engine.save.meta.shards} · 可用于升级下一次行动
-                  </small>
+                <div className="end-build">
+                  <div className="run-feedback">
+                    爆发反应 {w.reactionCount} 次 · 累计承伤{' '}
+                    {Math.round(w.damageTaken)}
+                    <br />
+                    <small>
+                      {w.damageTaken > p.maxHp
+                        ? '下次尝试：保留跃迁躲开红色预警，近身被包围时使用脉冲清弹。'
+                        : w.reactionCount === 0
+                          ? '想尝试爆发反应，可组合余烬协议与电弧引擎。此处只统计电浆、热裂变和坍缩，其他共鸣不计入。'
+                          : '已触发爆发反应（电浆、热裂变或坍缩）；可在协议档案查找更多组合。'}
+                    </small>
+                  </div>
+                  <div className="shard-settlement">
+                    本次带回 {w.settlement} 碎片 · 途中已归档 {w.banked}
+                    <br />
+                    <small>
+                      营地余额 {engine.save.meta.shards} · 可用于升级下一次行动
+                    </small>
+                  </div>
+                  {w.cards.length} 项协议已整合{' '}
+                  <span>
+                    总伤害 {Math.round(w.totalDamage).toLocaleString()}
+                  </span>
+                  <small>SEED {w.seed}</small>
                 </div>
-                {w.cards.length} 项协议已整合{' '}
-                <span>总伤害 {Math.round(w.totalDamage).toLocaleString()}</span>
-                <small>SEED {w.seed}</small>
-              </div>
-              <button className="start-button" onClick={start}>
-                <span>再次跃迁</span>
-                <ArrowUpRight />
-              </button>
-              <button
-                className="text-button"
-                onClick={() => {
-                  w.phase = 'menu';
-                  render((n) => n + 1);
-                }}
-              >
-                返回主界面
-              </button>
-            </section>
-          </div>
-        )}
+                <button className="start-button" onClick={start}>
+                  <span>再次跃迁</span>
+                  <ArrowUpRight />
+                </button>
+                <button
+                  className="text-button"
+                  onClick={() => {
+                    w.phase = 'menu';
+                    render((n) => n + 1);
+                  }}
+                >
+                  返回主界面
+                </button>
+              </section>
+            </div>
+          )}
+        <FieldGuidePanel
+          guide={guide.current}
+          engine={engine}
+          keys={{
+            move: movementLabel,
+            attack: controlLabel('PrimaryAttack', 'LMB'),
+            dash: controlLabel('Dash', 'SPACE'),
+            pulse: controlLabel('Pulse', 'Q'),
+          }}
+          refresh={() => render((n) => n + 1)}
+          exit={() => {
+            guide.current.stop();
+            w.phase = 'menu';
+            render((n) => n + 1);
+          }}
+        />
       </section>
       <footer className="bottombar">
         <span>

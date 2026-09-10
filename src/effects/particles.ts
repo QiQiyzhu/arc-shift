@@ -2,6 +2,7 @@ import type Phaser from 'phaser';
 import { Pool } from '../core/pool';
 import type { EffectEvent } from '../core/events';
 export class Effects {
+  reduced = false;
   particles = new Pool(650, () => ({
     active: false,
     x: 0,
@@ -40,6 +41,7 @@ export class Effects {
   }
   emit(e: EffectEvent) {
     if (e.x2 !== undefined) {
+      if (this.beams.length >= (this.reduced ? 12 : 48)) return;
       this.beams.push({
         x: e.x,
         y: e.y,
@@ -64,7 +66,7 @@ export class Effects {
                 : e.kind === 'phase' || e.kind === 'victory'
                   ? 65
                   : 9;
-    for (let i = 0; i < count; i++) {
+    for (let i = 0; i < Math.ceil(count * (this.reduced ? 0.25 : 1)); i++) {
       const p = this.particles.acquire();
       if (!p) break;
       const a = Math.random() * Math.PI * 2;
@@ -107,6 +109,7 @@ export class Effects {
     }
     if (
       (e.kind === 'hit' || e.kind === 'crit' || e.kind === 'hurt') &&
+      (!this.reduced || e.kind !== 'hit') &&
       e.amount
     ) {
       const t = this.labels.find((t) => !t.visible);
@@ -169,8 +172,10 @@ export class Effects {
         g.lineStyle(2, p.color, alpha * 0.6);
         g.strokeCircle(p.x, p.y, p.size * (1 - alpha * 0.7));
       } else {
-        g.fillStyle(p.color, alpha * 0.12);
-        g.fillCircle(p.x, p.y, p.size * 3);
+        if (!this.reduced) {
+          g.fillStyle(p.color, alpha * 0.12);
+          g.fillCircle(p.x, p.y, p.size * 3);
+        }
         g.fillStyle(p.color, alpha);
         g.fillRect(p.x, p.y, p.size, p.size);
       }
@@ -183,7 +188,9 @@ export class Effects {
       t.setAlpha(Math.min(1, life * 3));
       if (life <= 0) t.setVisible(false);
     }
-    this.beams = this.beams.filter((b) => b.life > 0);
+    let live = 0;
+    for (const beam of this.beams) if (beam.life > 0) this.beams[live++] = beam;
+    this.beams.length = live;
     for (const b of this.beams) {
       b.life -= dt;
       g.lineStyle(8, b.color, b.life * 0.7);
@@ -193,8 +200,8 @@ export class Effects {
       g.moveTo(b.x, b.y);
       for (let i = 1; i < 7; i++)
         g.lineTo(
-          b.x + ((b.x2 - b.x) * i) / 7 + (Math.random() - 0.5) * 18,
-          b.y + ((b.y2 - b.y) * i) / 7 + (Math.random() - 0.5) * 18,
+          b.x + ((b.x2 - b.x) * i) / 7 + (this.reduced ? 0 : (Math.random() - 0.5) * 18),
+          b.y + ((b.y2 - b.y) * i) / 7 + (this.reduced ? 0 : (Math.random() - 0.5) * 18),
         );
       g.lineTo(b.x2, b.y2);
       g.strokePath();

@@ -1,0 +1,100 @@
+{
+  "label": "before-terrain",
+  "recordedAt": "2026-09-10T14:41:42.379Z",
+  "source": {
+    "src/game/scene.ts": "77a93f4e1d2f69ef8b874d74774ba192746c4c54e89d982cb0fecd85d7cbd2fa",
+    "src/render/actors.ts": "15f6d77e2928adb06ccf93566dee337ed84dd0e38adad739a9a2029d803c732c",
+    "src/render/actor-sprites.ts": "66e56f86da964923284ab9abeb82cb84e3433100d0b1da29dadfac4e923635ac",
+    "src/render/terrain.ts": "746b5abab64d8a21900c4c2bdad984907070f66d7d073fce574d3990547ba055",
+    "src/ui/GameApp.tsx": "e78474672bb6079f6b3c2cc0a29012d76d7402f1c919db317512ecde9520e6e0"
+  },
+  "node": "v24.16.0",
+  "baseCommit": "9dab00284daf7087ed1505ba664306dbc486e02d",
+  "method": "3 fresh-page repetitions × 28/100/250 enemies; 1.2 s warm-up then 5 s wall-clock. Same deterministic input, 1440×900 headless Edge. Wall frames AND simulated ticks reported; not a fixed-work benchmark. No concurrent browser tests.",
+  "records": [
+    {
+      "repeat": 0,
+      "count": 100,
+      "terrainBlocks": 4,
+      "wallMs": 5019.400000008941,
+      "simulatedTicks": 302,
+      "simulatedSeconds": 5.0333333333333155,
+      "frames": 233,
+      "frameMs": {
+        "p50": 20.800000000000182,
+        "p95": 34.69999999999982,
+        "p99": 34.80000000000018
+      },
+      "slowFrames33": 0.08583690987124463,
+      "updateMs": {
+        "p50": 0.5,
+        "p95": 1.5999999940395355,
+        "p99": 2.0999999940395355
+      },
+      "finalEnemies": 100,
+      "projectiles": 70,
+      "poolMisses": 0,
+      "heapBytes": 220039246,
+      "scene": null,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 1,
+      "count": 100,
+      "terrainBlocks": 4,
+      "wallMs": 5001.200000005961,
+      "simulatedTicks": 301,
+      "simulatedSeconds": 5.01666666666665,
+      "frames": 229,
+      "frameMs": {
+        "p50": 20.800000000000182,
+        "p95": 34.70000000000027,
+        "p99": 41.69999999999982
+      },
+      "slowFrames33": 0.08733624454148471,
+      "updateMs": {
+        "p50": 0.5999999940395355,
+        "p95": 1.5999999940395355,
+        "p99": 2.2000000029802322
+      },
+      "finalEnemies": 100,
+      "projectiles": 70,
+      "poolMisses": 0,
+      "heapBytes": 209184893,
+      "scene": null,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 2,
+      "count": 100,
+      "terrainBlocks": 4,
+      "wallMs": 5015.80000000596,
+      "simulatedTicks": 303,
+      "simulatedSeconds": 5.049999999999983,
+      "frames": 198,
+      "frameMs": {
+        "p50": 20.900000000000546,
+        "p95": 34.80000000000018,
+        "p99": 41.69999999999982
+      },
+      "slowFrames33": 0.1919191919191919,
+      "updateMs": {
+        "p50": 0.5,
+        "p95": 1.300000011920929,
+        "p99": 1.7000000029802322
+      },
+      "finalEnemies": 100,
+      "projectiles": 69,
+      "poolMisses": 0,
+      "heapBytes": 217311786,
+      "scene": null,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    }
+  ]
+}

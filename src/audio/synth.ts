@@ -8,6 +8,7 @@ export interface SoundSettings {
   sfx: number;
   muted: boolean;
   reducedMotion: boolean;
+  focusedEffects?: boolean;
 }
 export const defaultSettings: SoundSettings = {
   master: 0.6,

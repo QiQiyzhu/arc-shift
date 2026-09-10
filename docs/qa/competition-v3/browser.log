@@ -1,0 +1,49 @@
+
+Running 37 tests using 1 worker
+
+[1A[2K(node:35576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:35576) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/37] e2e\competition-upgrade.spec.ts:7:1 › guided practice: real controls, forge selection, boss completion, preserved save
+[1A[2K[2/37] e2e\competition-upgrade.spec.ts:98:1 › static terrain cache, idle HUD, same-seed restarts and missing-atlas fallback
+[1A[2K[3/37] e2e\competition-upgrade.spec.ts:157:1 › draft numerical preview remains readable at laptop resolution
+[1A[2K[4/37] e2e\content-editor.spec.ts:3:1 › content form diff, validation, import/export and real sandbox remain isolated
+[1A[2K[5/37] e2e\content-editor.spec.ts:73:1 › malformed content and unknown references never replace the running pack
+[1A[2K[6/37] e2e\debugger.spec.ts:2:1 › DEV inspector steps real simulation, spawns Boss, grants once and draws overlays
+[1A[2K[7/37] e2e\engineering-performance.spec.ts:3:37 › engineering stress 28 enemies
+[1A[2K[8/37] e2e\engineering-performance.spec.ts:3:37 › engineering stress 100 enemies
+[1A[2K[9/37] e2e\engineering-performance.spec.ts:3:37 › engineering stress 250 enemies
+[1A[2K[10/37] e2e\expedition.spec.ts:42:1 › holy sword, actual consumable keys, pause-frozen bomb and weapon continuation
+[1A[2K[11/37] e2e\expedition.spec.ts:93:1 › camp choices, reroll, stock, bank and workshop persist through real page reloads
+[1A[2K[12/37] e2e\expedition.spec.ts:184:1 › trial inherits equipped weapon, switches to cannon and leaves the real save untouched
+[1A[2K[13/37] e2e\game.spec.ts:26:1 › settings and window blur freeze introductions; Escape only dismisses the dialog
+[1A[2K[14/37] e2e\game.spec.ts:92:1 › round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio
+[1A[2K[15/37] e2e\game.spec.ts:173:1 › round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume
+[1A[2K[16/37] e2e\game.spec.ts:257:1 › round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080
+[1A[2K[17/37] e2e\game.spec.ts:345:1 › mobile loads with controls guidance and no horizontal overflow
+[1A[2K[18/37] e2e\input.spec.ts:16:1 › rebinds controls in settings, rejects conflicts, preserves them on reload and restores defaults
+[1A[2K[19/37] e2e\input.spec.ts:61:1 › standard Gamepad API input drives real combat, resources, pause and disconnect fallback
+[1A[2K[20/37] e2e\performance.spec.ts:4:3 › ten-second baseline render sample with a crowded arena and active VFX
+[1A[2K[21/37] e2e\performance.spec.ts:4:3 › ten-second resonance render sample with a crowded arena and active VFX
+[1A[2K[22/37] e2e\performance.spec.ts:4:3 › ten-second sword render sample with a crowded arena and active VFX
+[1A[2K[23/37] e2e\performance.spec.ts:4:3 › ten-second cannon render sample with a crowded arena and active VFX
+[1A[2K[24/37] e2e\performance.spec.ts:4:3 › ten-second hybrid render sample with a crowded arena and active VFX
+[1A[2K[25/37] e2e\pilgrimage.spec.ts:26:1 › clean menu groups loadout, bestiary and memories into a navigable camp
+[1A[2K[26/37] e2e\pilgrimage.spec.ts:80:1 › full route previews locked nodes and travels legally into a free hybrid forge
+[1A[2K[27/37] e2e\pilgrimage.spec.ts:130:1 › resting preserves access to banking and completed treasure keeps its key chest
+[1A[2K[28/37] e2e\pilgrimage.spec.ts:173:1 › archive choice persists its lore and offered cards
+[1A[2K[29/37] e2e\pilgrimage.spec.ts:195:74 › matron has its own arena, attacks and escalating score
+[1A[2K[30/37] e2e\pilgrimage.spec.ts:195:74 › forgemaster has its own arena, attacks and escalating score
+[1A[2K[31/37] e2e\pilgrimage.spec.ts:225:1 › three-form trial fires actual hybrid attacks and does not change the profile
+[1A[2K[32/37] e2e\replay.spec.ts:3:1 › QA replay records real controls, exports, steps, ignores blur and replays at x4
+[1A[2K[33/37] e2e\replay.spec.ts:88:1 › replay import rejects incompatible versions without discarding the current session
+[1A[2K[34/37] e2e\resonance.spec.ts:3:1 › six resonance trials render their real projectile forms and preserve an existing run
+[1A[2K[35/37] e2e\resonance.spec.ts:97:1 › audio buses mute active voices, pause immediately, and survive context recreation
+[1A[2K[36/37] e2e\reward-layout.spec.ts:9:3 › long synergy reward keeps reroll reachable above the footer at 900px
+[1A[2K[37/37] e2e\reward-layout.spec.ts:9:3 › long synergy reward keeps reroll reachable above the footer at 768px
+[1A[2K  37 passed (5.8m)

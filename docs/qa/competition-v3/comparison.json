@@ -1,0 +1,154 @@
+{
+  "generatedAt": "2026-09-10T15:06:42.465Z",
+  "method": "Medians of three within-run P95 samples; sequential before/after on one device, not randomized. Fixed 5s wall duration with simulated ticks reported. Full effects in both modes. Actual renderer and source hashes are in each raw file.",
+  "rows": [
+    {
+      "count": 28,
+      "terrain": false,
+      "before": {
+        "p95MedianMs": 27.800000000000182,
+        "p95RangeMs": [
+          27.800000000000182,
+          34.599999999999454
+        ],
+        "p99MedianMs": 34.69999999999982,
+        "slowFrames33Median": 0.01107011070110701,
+        "simulatedTicks": [
+          303,
+          302,
+          302
+        ],
+        "updateP95MedianMs": 0.9000000059604645,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "after": {
+        "p95MedianMs": 27.700000000000273,
+        "p95RangeMs": [
+          27.699999999999818,
+          27.799999999999727
+        ],
+        "p99MedianMs": 27.800000000000182,
+        "slowFrames33Median": 0,
+        "simulatedTicks": [
+          302,
+          301,
+          302
+        ],
+        "updateP95MedianMs": 0.7999999970197678,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "p95ReductionPercent": 0.35971223021549786
+    },
+    {
+      "count": 100,
+      "terrain": false,
+      "before": {
+        "p95MedianMs": 34.69999999999982,
+        "p95RangeMs": [
+          34.69999999999982,
+          34.79999999999973
+        ],
+        "p99MedianMs": 41.69999999999982,
+        "slowFrames33Median": 0.1,
+        "simulatedTicks": [
+          304,
+          301,
+          302
+        ],
+        "updateP95MedianMs": 1.0999999940395355,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "after": {
+        "p95MedianMs": 27.800000000000182,
+        "p95RangeMs": [
+          27.800000000000182,
+          27.800000000000182
+        ],
+        "p99MedianMs": 27.900000000000546,
+        "slowFrames33Median": 0.00749063670411985,
+        "simulatedTicks": [
+          303,
+          302,
+          302
+        ],
+        "updateP95MedianMs": 1,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "p95ReductionPercent": 19.884726224782916
+    },
+    {
+      "count": 250,
+      "terrain": false,
+      "before": {
+        "p95MedianMs": 62.5,
+        "p95RangeMs": [
+          62.30000000000018,
+          62.5
+        ],
+        "p99MedianMs": 69.5,
+        "slowFrames33Median": 0.4230769230769231,
+        "simulatedTicks": [
+          291,
+          292,
+          292
+        ],
+        "updateP95MedianMs": 1.7000000029802322,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "after": {
+        "p95MedianMs": 34.70000000000027,
+        "p95RangeMs": [
+          34.69999999999982,
+          34.80000000000018
+        ],
+        "p99MedianMs": 41.69999999999982,
+        "slowFrames33Median": 0.08796296296296297,
+        "simulatedTicks": [
+          303,
+          302,
+          302
+        ],
+        "updateP95MedianMs": 1.7000000029802322,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "p95ReductionPercent": 44.47999999999956
+    },
+    {
+      "count": 100,
+      "terrain": true,
+      "before": {
+        "p95MedianMs": 34.70000000000027,
+        "p95RangeMs": [
+          34.69999999999982,
+          34.80000000000018
+        ],
+        "p99MedianMs": 41.69999999999982,
+        "slowFrames33Median": 0.08733624454148471,
+        "simulatedTicks": [
+          302,
+          301,
+          303
+        ],
+        "updateP95MedianMs": 1.5999999940395355,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "after": {
+        "p95MedianMs": 34.69999999999891,
+        "p95RangeMs": [
+          27.800000000000182,
+          34.69999999999982
+        ],
+        "p99MedianMs": 34.80000000000018,
+        "slowFrames33Median": 0.06611570247933884,
+        "simulatedTicks": [
+          302,
+          302,
+          302
+        ],
+        "updateP95MedianMs": 1.7000000029802322,
+        "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+      },
+      "p95ReductionPercent": 3.931533292966518e-12
+    }
+  ]
+}

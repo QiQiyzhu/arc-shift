@@ -1,0 +1,660 @@
+{
+  "label": "after-verified",
+  "recordedAt": "2026-09-10T15:22:56.621Z",
+  "source": {
+    "src/game/scene.ts": "2be68405a0a6559cc387008850b95d5ea2d7b0ed97d196e454a247126e970238",
+    "src/render/actors.ts": "26589d671fbaffe147857c1508ccaae9f6ea3770d73d873a45371204194551ad",
+    "src/render/actor-sprites.ts": "6eaecde9f5effb819db2aa762ad7c29306d3016937abcceab86a865cb5b247d0",
+    "src/render/terrain.ts": "1f72c580dcf07158156cd9fbabb5a83ad45a0159ecb9cce4bf803807e168644d",
+    "src/ui/GameApp.tsx": "e03b8c173a0c24ae900d57a67015fe9ddfcfe1b248eb2c3e797b000e4a9ec3b0",
+    "src/render/projectile-sprites.ts": "4d6cd677228ace90621485949e1448bb4a9a4b5ccbad5379abcafa2fb364c575",
+    "src/effects/particles.ts": "6b846016b2d94a4a7f00b5b1da91d5b663852c95ec00a6e0f7adc77a69c333eb",
+    "src/ui/hud-signature.ts": "ac8e67553b23348205e2074cd633dd788c92618f4ccd689142bf9f0b12dfb89a",
+    "src/game/qa.ts": "d7b61d3b73488a25824009ece7dd4ff48e556b7e45aff0cf23a68761be9c5f44",
+    "scripts/competition-benchmark.mjs": "b990f5b8fde2006c19409f2e2ba848ad950c0ebfbafa1152093051c3d9ffa364"
+  },
+  "node": "v24.16.0",
+  "baseCommit": "9dab00284daf7087ed1505ba664306dbc486e02d",
+  "method": "3 fresh-page repetitions × 28/100/250 enemies; 1.2 s warm-up then 5 s wall-clock. Same deterministic input, 1440×900 headless Edge. Wall frames AND simulated ticks reported; not a fixed-work benchmark. No concurrent browser tests. QA identity and advancing scene frames asserted.",
+  "records": [
+    {
+      "repeat": 0,
+      "sceneStart": {
+        "frames": 175,
+        "terrainBuilds": 2,
+        "simulateMs": 0.7999999970197678,
+        "presentationMs": 0.4000000059604645,
+        "droppedMs": 73.39999999999986,
+        "actorImages": 34,
+        "bulletImages": 0,
+        "children": 78,
+        "hudCommits": 16
+      },
+      "sceneEnd": {
+        "frames": 478,
+        "terrainBuilds": 2,
+        "simulateMs": 0.30000001192092896,
+        "presentationMs": 0.5,
+        "droppedMs": 73.39999999999986,
+        "actorImages": 34,
+        "bulletImages": 34,
+        "children": 112,
+        "hudCommits": 73
+      },
+      "sceneDelta": {
+        "frames": 303,
+        "terrainBuilds": 0,
+        "simulateMs": -0.4999999850988388,
+        "presentationMs": 0.09999999403953552,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 34,
+        "children": 34,
+        "hudCommits": 57
+      },
+      "count": 28,
+      "terrainBlocks": 0,
+      "wallMs": 5020.3,
+      "simulatedTicks": 302,
+      "simulatedSeconds": 5.0333333333333155,
+      "frames": 303,
+      "frameMs": {
+        "p50": 14,
+        "p95": 27.700000000000273,
+        "p99": 27.800000000000182
+      },
+      "slowFrames33": 0,
+      "updateMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.7999999970197678,
+        "p99": 0.9000000059604645
+      },
+      "finalEnemies": 28,
+      "projectiles": 107,
+      "poolMisses": 0,
+      "heapBytes": 131533263,
+      "scene": {
+        "frames": 478,
+        "terrainBuilds": 2,
+        "simulateMs": 0.30000001192092896,
+        "presentationMs": 0.5,
+        "droppedMs": 73.39999999999986,
+        "actorImages": 34,
+        "bulletImages": 34,
+        "children": 112,
+        "hudCommits": 73
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 0,
+      "sceneStart": {
+        "frames": 143,
+        "terrainBuilds": 2,
+        "simulateMs": 0.6000000089406967,
+        "presentationMs": 0.7000000029802322,
+        "droppedMs": 136.10000000000002,
+        "actorImages": 106,
+        "bulletImages": 0,
+        "children": 150,
+        "hudCommits": 15
+      },
+      "sceneEnd": {
+        "frames": 414,
+        "terrainBuilds": 2,
+        "simulateMs": 0.7000000029802322,
+        "presentationMs": 0.7000000029802322,
+        "droppedMs": 136.10000000000002,
+        "actorImages": 106,
+        "bulletImages": 118,
+        "children": 268,
+        "hudCommits": 72
+      },
+      "sceneDelta": {
+        "frames": 271,
+        "terrainBuilds": 0,
+        "simulateMs": 0.09999999403953552,
+        "presentationMs": 0,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 118,
+        "children": 118,
+        "hudCommits": 57
+      },
+      "count": 100,
+      "terrainBlocks": 0,
+      "wallMs": 5006.800000002981,
+      "simulatedTicks": 302,
+      "simulatedSeconds": 5.0333333333333155,
+      "frames": 271,
+      "frameMs": {
+        "p50": 20.700000000000273,
+        "p95": 27.800000000000182,
+        "p99": 27.899999999999636
+      },
+      "slowFrames33": 0.0036900369003690036,
+      "updateMs": {
+        "p50": 0.4000000059604645,
+        "p95": 1,
+        "p99": 1.2999999970197678
+      },
+      "finalEnemies": 100,
+      "projectiles": 79,
+      "poolMisses": 0,
+      "heapBytes": 156279837,
+      "scene": {
+        "frames": 414,
+        "terrainBuilds": 2,
+        "simulateMs": 0.7000000029802322,
+        "presentationMs": 0.7000000029802322,
+        "droppedMs": 136.10000000000002,
+        "actorImages": 106,
+        "bulletImages": 118,
+        "children": 268,
+        "hudCommits": 72
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 0,
+      "sceneStart": {
+        "frames": 56,
+        "terrainBuilds": 2,
+        "simulateMs": 1.4000000059604645,
+        "presentationMs": 1.2999999970197678,
+        "droppedMs": 135.89999999999998,
+        "actorImages": 256,
+        "bulletImages": 0,
+        "children": 300,
+        "hudCommits": 15
+      },
+      "sceneEnd": {
+        "frames": 268,
+        "terrainBuilds": 2,
+        "simulateMs": 1.6000000089406967,
+        "presentationMs": 1.2999999970197678,
+        "droppedMs": 135.89999999999998,
+        "actorImages": 256,
+        "bulletImages": 295,
+        "children": 595,
+        "hudCommits": 71
+      },
+      "sceneDelta": {
+        "frames": 212,
+        "terrainBuilds": 0,
+        "simulateMs": 0.20000000298023224,
+        "presentationMs": 0,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 295,
+        "children": 295,
+        "hudCommits": 56
+      },
+      "count": 250,
+      "terrainBlocks": 0,
+      "wallMs": 5025,
+      "simulatedTicks": 303,
+      "simulatedSeconds": 5.049999999999983,
+      "frames": 212,
+      "frameMs": {
+        "p50": 20.90000000000009,
+        "p95": 34.70000000000073,
+        "p99": 41.5
+      },
+      "slowFrames33": 0.12264150943396226,
+      "updateMs": {
+        "p50": 0.7999999970197678,
+        "p95": 1.7000000029802322,
+        "p99": 2.5
+      },
+      "finalEnemies": 250,
+      "projectiles": 68,
+      "poolMisses": 0,
+      "heapBytes": 210834636,
+      "scene": {
+        "frames": 268,
+        "terrainBuilds": 2,
+        "simulateMs": 1.6000000089406967,
+        "presentationMs": 1.2999999970197678,
+        "droppedMs": 135.89999999999998,
+        "actorImages": 256,
+        "bulletImages": 295,
+        "children": 595,
+        "hudCommits": 71
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 1,
+      "sceneStart": {
+        "frames": 206,
+        "terrainBuilds": 2,
+        "simulateMs": 0.5999999940395355,
+        "presentationMs": 0.20000000298023224,
+        "droppedMs": 144.4000000000001,
+        "actorImages": 34,
+        "bulletImages": 0,
+        "children": 78,
+        "hudCommits": 16
+      },
+      "sceneEnd": {
+        "frames": 540,
+        "terrainBuilds": 2,
+        "simulateMs": 0.09999999403953552,
+        "presentationMs": 0.29999999701976776,
+        "droppedMs": 144.4000000000001,
+        "actorImages": 34,
+        "bulletImages": 34,
+        "children": 112,
+        "hudCommits": 74
+      },
+      "sceneDelta": {
+        "frames": 334,
+        "terrainBuilds": 0,
+        "simulateMs": -0.5,
+        "presentationMs": 0.09999999403953552,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 34,
+        "children": 34,
+        "hudCommits": 58
+      },
+      "count": 28,
+      "terrainBlocks": 0,
+      "wallMs": 5006.29999999702,
+      "simulatedTicks": 302,
+      "simulatedSeconds": 5.0333333333333155,
+      "frames": 334,
+      "frameMs": {
+        "p50": 13.900000000000091,
+        "p95": 20.900000000000546,
+        "p99": 27.800000000000182
+      },
+      "slowFrames33": 0,
+      "updateMs": {
+        "p50": 0.29999999701976776,
+        "p95": 0.6000000089406967,
+        "p99": 0.8999999910593033
+      },
+      "finalEnemies": 28,
+      "projectiles": 101,
+      "poolMisses": 0,
+      "heapBytes": 140002081,
+      "scene": {
+        "frames": 540,
+        "terrainBuilds": 2,
+        "simulateMs": 0.09999999403953552,
+        "presentationMs": 0.29999999701976776,
+        "droppedMs": 144.4000000000001,
+        "actorImages": 34,
+        "bulletImages": 34,
+        "children": 112,
+        "hudCommits": 74
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 1,
+      "sceneStart": {
+        "frames": 90,
+        "terrainBuilds": 2,
+        "simulateMs": 0.9000000059604645,
+        "presentationMs": 1.8999999910593033,
+        "droppedMs": 102.59999999999991,
+        "actorImages": 106,
+        "bulletImages": 0,
+        "children": 150,
+        "hudCommits": 15
+      },
+      "sceneEnd": {
+        "frames": 338,
+        "terrainBuilds": 2,
+        "simulateMs": 0.5999999940395355,
+        "presentationMs": 0.7999999970197678,
+        "droppedMs": 102.59999999999991,
+        "actorImages": 106,
+        "bulletImages": 118,
+        "children": 268,
+        "hudCommits": 72
+      },
+      "sceneDelta": {
+        "frames": 248,
+        "terrainBuilds": 0,
+        "simulateMs": -0.30000001192092896,
+        "presentationMs": -1.0999999940395355,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 118,
+        "children": 118,
+        "hudCommits": 57
+      },
+      "count": 100,
+      "terrainBlocks": 0,
+      "wallMs": 5009.50000000894,
+      "simulatedTicks": 304,
+      "simulatedSeconds": 5.066666666666649,
+      "frames": 248,
+      "frameMs": {
+        "p50": 20.800000000000182,
+        "p95": 27.899999999999636,
+        "p99": 34.70000000000027
+      },
+      "slowFrames33": 0.036290322580645164,
+      "updateMs": {
+        "p50": 0.4000000059604645,
+        "p95": 1.199999988079071,
+        "p99": 1.5
+      },
+      "finalEnemies": 100,
+      "projectiles": 75,
+      "poolMisses": 0,
+      "heapBytes": 101889087,
+      "scene": {
+        "frames": 338,
+        "terrainBuilds": 2,
+        "simulateMs": 0.5999999940395355,
+        "presentationMs": 0.7999999970197678,
+        "droppedMs": 102.59999999999991,
+        "actorImages": 106,
+        "bulletImages": 118,
+        "children": 268,
+        "hudCommits": 72
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 1,
+      "sceneStart": {
+        "frames": 130,
+        "terrainBuilds": 2,
+        "simulateMs": 1.2999999970197678,
+        "presentationMs": 2.2999999970197678,
+        "droppedMs": 163.5000000000001,
+        "actorImages": 256,
+        "bulletImages": 0,
+        "children": 300,
+        "hudCommits": 15
+      },
+      "sceneEnd": {
+        "frames": 341,
+        "terrainBuilds": 2,
+        "simulateMs": 2.5,
+        "presentationMs": 1.5,
+        "droppedMs": 163.5000000000001,
+        "actorImages": 256,
+        "bulletImages": 295,
+        "children": 595,
+        "hudCommits": 70
+      },
+      "sceneDelta": {
+        "frames": 211,
+        "terrainBuilds": 0,
+        "simulateMs": 1.2000000029802322,
+        "presentationMs": -0.7999999970197678,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 295,
+        "children": 295,
+        "hudCommits": 55
+      },
+      "count": 250,
+      "terrainBlocks": 0,
+      "wallMs": 5022.7,
+      "simulatedTicks": 303,
+      "simulatedSeconds": 5.049999999999983,
+      "frames": 211,
+      "frameMs": {
+        "p50": 20.90000000000009,
+        "p95": 34.70000000000073,
+        "p99": 41.69999999999982
+      },
+      "slowFrames33": 0.10900473933649289,
+      "updateMs": {
+        "p50": 0.7999999970197678,
+        "p95": 1.7000000029802322,
+        "p99": 2.5999999940395355
+      },
+      "finalEnemies": 250,
+      "projectiles": 65,
+      "poolMisses": 0,
+      "heapBytes": 210209442,
+      "scene": {
+        "frames": 341,
+        "terrainBuilds": 2,
+        "simulateMs": 2.5,
+        "presentationMs": 1.5,
+        "droppedMs": 163.5000000000001,
+        "actorImages": 256,
+        "bulletImages": 295,
+        "children": 595,
+        "hudCommits": 70
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 2,
+      "sceneStart": {
+        "frames": 139,
+        "terrainBuilds": 2,
+        "simulateMs": 0.9000000059604645,
+        "presentationMs": 0.20000000298023224,
+        "droppedMs": 130.5,
+        "actorImages": 34,
+        "bulletImages": 0,
+        "children": 78,
+        "hudCommits": 16
+      },
+      "sceneEnd": {
+        "frames": 443,
+        "terrainBuilds": 2,
+        "simulateMs": 0.4000000059604645,
+        "presentationMs": 0.3999999910593033,
+        "droppedMs": 130.5,
+        "actorImages": 34,
+        "bulletImages": 34,
+        "children": 112,
+        "hudCommits": 74
+      },
+      "sceneDelta": {
+        "frames": 304,
+        "terrainBuilds": 0,
+        "simulateMs": -0.5,
+        "presentationMs": 0.19999998807907104,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 34,
+        "children": 34,
+        "hudCommits": 58
+      },
+      "count": 28,
+      "terrainBlocks": 0,
+      "wallMs": 5013.89999999702,
+      "simulatedTicks": 303,
+      "simulatedSeconds": 5.049999999999983,
+      "frames": 304,
+      "frameMs": {
+        "p50": 13.900000000000546,
+        "p95": 27.800000000000182,
+        "p99": 27.90000000000009
+      },
+      "slowFrames33": 0,
+      "updateMs": {
+        "p50": 0.3999999910593033,
+        "p95": 0.7999999970197678,
+        "p99": 1.0999999940395355
+      },
+      "finalEnemies": 28,
+      "projectiles": 110,
+      "poolMisses": 0,
+      "heapBytes": 153118604,
+      "scene": {
+        "frames": 443,
+        "terrainBuilds": 2,
+        "simulateMs": 0.4000000059604645,
+        "presentationMs": 0.3999999910593033,
+        "droppedMs": 130.5,
+        "actorImages": 34,
+        "bulletImages": 34,
+        "children": 112,
+        "hudCommits": 74
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 2,
+      "sceneStart": {
+        "frames": 145,
+        "terrainBuilds": 2,
+        "simulateMs": 0.4000000059604645,
+        "presentationMs": 0.7000000029802322,
+        "droppedMs": 116.60000000000002,
+        "actorImages": 106,
+        "bulletImages": 0,
+        "children": 150,
+        "hudCommits": 15
+      },
+      "sceneEnd": {
+        "frames": 424,
+        "terrainBuilds": 2,
+        "simulateMs": 0.7000000029802322,
+        "presentationMs": 0.5,
+        "droppedMs": 116.60000000000002,
+        "actorImages": 106,
+        "bulletImages": 118,
+        "children": 268,
+        "hudCommits": 73
+      },
+      "sceneDelta": {
+        "frames": 279,
+        "terrainBuilds": 0,
+        "simulateMs": 0.29999999701976776,
+        "presentationMs": -0.20000000298023224,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 118,
+        "children": 118,
+        "hudCommits": 58
+      },
+      "count": 100,
+      "terrainBlocks": 0,
+      "wallMs": 5015.300000002981,
+      "simulatedTicks": 302,
+      "simulatedSeconds": 5.0333333333333155,
+      "frames": 279,
+      "frameMs": {
+        "p50": 14.100000000000364,
+        "p95": 27.800000000000182,
+        "p99": 27.899999999999636
+      },
+      "slowFrames33": 0,
+      "updateMs": {
+        "p50": 0.4000000059604645,
+        "p95": 1,
+        "p99": 1.6000000089406967
+      },
+      "finalEnemies": 100,
+      "projectiles": 75,
+      "poolMisses": 0,
+      "heapBytes": 138467696,
+      "scene": {
+        "frames": 424,
+        "terrainBuilds": 2,
+        "simulateMs": 0.7000000029802322,
+        "presentationMs": 0.5,
+        "droppedMs": 116.60000000000002,
+        "actorImages": 106,
+        "bulletImages": 118,
+        "children": 268,
+        "hudCommits": 73
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    },
+    {
+      "repeat": 2,
+      "sceneStart": {
+        "frames": 69,
+        "terrainBuilds": 2,
+        "simulateMs": 0.7999999970197678,
+        "presentationMs": 1.5,
+        "droppedMs": 122.19999999999993,
+        "actorImages": 256,
+        "bulletImages": 0,
+        "children": 300,
+        "hudCommits": 15
+      },
+      "sceneEnd": {
+        "frames": 286,
+        "terrainBuilds": 2,
+        "simulateMs": 1,
+        "presentationMs": 1.2000000029802322,
+        "droppedMs": 122.19999999999993,
+        "actorImages": 256,
+        "bulletImages": 295,
+        "children": 595,
+        "hudCommits": 72
+      },
+      "sceneDelta": {
+        "frames": 217,
+        "terrainBuilds": 0,
+        "simulateMs": 0.20000000298023224,
+        "presentationMs": -0.29999999701976776,
+        "droppedMs": 0,
+        "actorImages": 0,
+        "bulletImages": 295,
+        "children": 295,
+        "hudCommits": 57
+      },
+      "count": 250,
+      "terrainBlocks": 0,
+      "wallMs": 5015.60000000298,
+      "simulatedTicks": 303,
+      "simulatedSeconds": 5.049999999999983,
+      "frames": 217,
+      "frameMs": {
+        "p50": 20.899999999999636,
+        "p95": 34.69999999999982,
+        "p99": 34.80000000000018
+      },
+      "slowFrames33": 0.08755760368663594,
+      "updateMs": {
+        "p50": 0.7999999970197678,
+        "p95": 1.5,
+        "p99": 2.5999999940395355
+      },
+      "finalEnemies": 250,
+      "projectiles": 65,
+      "poolMisses": 0,
+      "heapBytes": 203638065,
+      "scene": {
+        "frames": 286,
+        "terrainBuilds": 2,
+        "simulateMs": 1,
+        "presentationMs": 1.2000000029802322,
+        "droppedMs": 122.19999999999993,
+        "actorImages": 256,
+        "bulletImages": 295,
+        "children": 595,
+        "hudCommits": 72
+      },
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+      "errors": []
+    }
+  ]
+}

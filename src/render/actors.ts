@@ -21,6 +21,9 @@ export function drawActors(
   g: Phaser.GameObjects.Graphics,
   w: World,
   t: number,
+  illustrated = false,
+  hostileSprites = false,
+  reducedMotion = false,
 ) {
   drawSupplies(g, w, t);
   for (const h of w.hazards) {
@@ -106,122 +109,134 @@ export function drawActors(
         e.y + Math.sin(a) * 1100,
       );
     }
-    glow(g, e.x, e.y, e.radius, c, 0.065);
-    const angle = boss
-      ? t * 0.12
-      : Math.atan2(w.player.y - e.y, w.player.x - e.x);
-    g.lineStyle(2, c, 0.8);
-    g.fillStyle(e.flash > 0 ? 0xfaffff : 0x18242e, 0.95);
-    if (e.kind === 'hunter') {
-      polygon(g, e.x, e.y, e.radius, 4, angle);
-      g.fillStyle(c);
-      polygon(
-        g,
-        e.x + Math.cos(angle) * 4,
-        e.y + Math.sin(angle) * 4,
-        6,
-        3,
-        angle,
-      );
-    } else if (e.kind === 'lancer') {
-      polygon(g, e.x, e.y, e.radius, 3, angle);
-      g.lineStyle(1, c, 0.8);
-      polygon(
-        g,
-        e.x - 5 * Math.cos(angle),
-        e.y - 5 * Math.sin(angle),
-        e.radius * 0.5,
-        3,
-        angle,
-      );
-    } else if (e.kind === 'sentry') {
-      polygon(g, e.x, e.y, e.radius, 6, t * 0.4);
-      g.fillStyle(c, 0.9);
-      polygon(g, e.x, e.y, 7, 4, Math.PI / 4);
-    } else if (e.kind === 'conduit') {
-      polygon(g, e.x, e.y, e.radius, 4, Math.PI / 4);
-      g.lineStyle(3, c);
-      g.lineBetween(e.x - 8, e.y, e.x + 8, e.y);
-      g.lineBetween(e.x, e.y - 8, e.x, e.y + 8);
-      for (const n of w.enemies)
-        if (n !== e && Math.hypot(n.x - e.x, n.y - e.y) < 210) {
-          g.lineStyle(1, c, 0.15);
-          g.lineBetween(e.x, e.y, n.x, n.y);
-        }
-    } else if (e.kind === 'weaver') {
-      polygon(g, e.x, e.y, e.radius, 5, -t * 0.4);
-      g.lineStyle(1, c, 0.7);
-      g.strokeCircle(e.x, e.y, 9);
-    } else if (e.kind === 'bomber') {
-      polygon(g, e.x, e.y, e.radius, 6, Math.PI / 6);
-      for (let i = 0; i < 3; i++) {
-        const a = t * 0.7 + (i * Math.PI * 2) / 3;
-        g.fillStyle(c, 0.8);
-        g.fillCircle(e.x + Math.cos(a) * 10, e.y + Math.sin(a) * 10, 4);
-      }
-    } else if (e.kind === 'shade') {
-      g.fillStyle(0x283c5b, 0.65);
-      polygon(g, e.x - 7, e.y + 4, e.radius, 4, Math.PI / 4);
-      g.fillStyle(0x142130, 0.95);
-      polygon(g, e.x + 5, e.y - 3, e.radius * 0.8, 4, Math.PI / 4);
-      g.lineBetween(e.x - 3, e.y - 8, e.x + 5, e.y + 8);
-    } else if (e.kind === 'cantor' || e.kind === 'matron') {
-      const r = e.radius;
-      polygon(g, e.x, e.y, r * 0.68, 3, -Math.PI / 2);
-      g.strokeEllipse(e.x, e.y - r * 0.7, r * 1.3, r * 0.4);
-      for (let i = 0; i < (boss ? 8 : 3); i++) {
-        const a = t * 0.23 + (i * Math.PI * 2) / (boss ? 8 : 3),
-          x = e.x + Math.cos(a) * r,
-          y = e.y + Math.sin(a) * r;
-        g.fillStyle(c, 0.16);
-        polygon(g, x, y, boss ? 13 : 6, 4, a);
-        g.lineStyle(1, c, 0.42);
-        g.lineBetween(e.x, e.y, x, y);
-      }
-      g.fillStyle(c, 0.9);
-      g.fillCircle(e.x, e.y - 5, boss ? 6 : 3);
-    } else if (e.kind === 'forgemaster') {
-      polygon(g, e.x, e.y, e.radius, 6, Math.PI / 6);
-      g.fillStyle(0x50362a, 0.9);
-      g.fillRect(e.x - 32, e.y - 22, 64, 26);
-      g.strokeRect(e.x - 32, e.y - 22, 64, 26);
-      g.fillStyle(c, 0.5);
-      g.fillRect(e.x - 14, e.y + 5, 28, 25);
-      for (let i = -1; i <= 1; i++) {
-        g.lineStyle(4, c, 0.9);
-        g.lineBetween(e.x + i * 18, e.y - 15, e.x + i * 18, e.y + 14);
-      }
-      g.fillStyle(0xffe4a8, 0.85);
-      g.fillCircle(e.x, e.y, 7);
-    } else {
-      polygon(
-        g,
-        e.x,
-        e.y,
-        e.radius,
-        boss && e.kind === 'oracle' ? 8 : 6,
-        angle,
-      );
-      g.lineStyle(3, c);
-      polygon(g, e.x, e.y, e.radius * 0.72, 4, -angle);
-      g.fillStyle(c, 0.3);
-      polygon(g, e.x, e.y, e.radius * 0.38, 4, Math.PI / 4);
-      glow(g, e.x, e.y, 12, c, 0.3);
-      g.fillStyle(0xffffff);
-      g.fillCircle(e.x, e.y, 5);
-      for (let i = 0; i < 6; i++) {
-        const a = t * 0.4 + (i * Math.PI) / 3;
-        g.fillStyle(0x172531);
-        g.lineStyle(2, c, 0.7);
+    // Gameplay warnings are always drawn over the art; a missing atlas keeps
+    // the original geometry renderer as a fully playable fallback.
+    if (!illustrated) {
+      glow(g, e.x, e.y, e.radius, c, 0.065);
+      const angle = boss
+        ? t * 0.12
+        : Math.atan2(w.player.y - e.y, w.player.x - e.x);
+      g.lineStyle(2, c, 0.8);
+      g.fillStyle(e.flash > 0 ? 0xfaffff : 0x18242e, 0.95);
+      if (e.kind === 'hunter') {
+        polygon(g, e.x, e.y, e.radius, 4, angle);
+        g.fillStyle(c);
         polygon(
           g,
-          e.x + Math.cos(a) * (e.radius + 16),
-          e.y + Math.sin(a) * (e.radius + 16),
-          7,
-          4,
-          a,
+          e.x + Math.cos(angle) * 4,
+          e.y + Math.sin(angle) * 4,
+          6,
+          3,
+          angle,
         );
+      } else if (e.kind === 'lancer') {
+        polygon(g, e.x, e.y, e.radius, 3, angle);
+        g.lineStyle(1, c, 0.8);
+        polygon(
+          g,
+          e.x - 5 * Math.cos(angle),
+          e.y - 5 * Math.sin(angle),
+          e.radius * 0.5,
+          3,
+          angle,
+        );
+      } else if (e.kind === 'sentry') {
+        polygon(g, e.x, e.y, e.radius, 6, t * 0.4);
+        g.fillStyle(c, 0.9);
+        polygon(g, e.x, e.y, 7, 4, Math.PI / 4);
+      } else if (e.kind === 'conduit') {
+        polygon(g, e.x, e.y, e.radius, 4, Math.PI / 4);
+        g.lineStyle(3, c);
+        g.lineBetween(e.x - 8, e.y, e.x + 8, e.y);
+        g.lineBetween(e.x, e.y - 8, e.x, e.y + 8);
+        for (const n of w.enemies)
+          if (n !== e && Math.hypot(n.x - e.x, n.y - e.y) < 210) {
+            g.lineStyle(1, c, 0.15);
+            g.lineBetween(e.x, e.y, n.x, n.y);
+          }
+      } else if (e.kind === 'weaver') {
+        polygon(g, e.x, e.y, e.radius, 5, -t * 0.4);
+        g.lineStyle(1, c, 0.7);
+        g.strokeCircle(e.x, e.y, 9);
+      } else if (e.kind === 'bomber') {
+        polygon(g, e.x, e.y, e.radius, 6, Math.PI / 6);
+        for (let i = 0; i < 3; i++) {
+          const a = t * 0.7 + (i * Math.PI * 2) / 3;
+          g.fillStyle(c, 0.8);
+          g.fillCircle(e.x + Math.cos(a) * 10, e.y + Math.sin(a) * 10, 4);
+        }
+      } else if (e.kind === 'shade') {
+        g.fillStyle(0x283c5b, 0.65);
+        polygon(g, e.x - 7, e.y + 4, e.radius, 4, Math.PI / 4);
+        g.fillStyle(0x142130, 0.95);
+        polygon(g, e.x + 5, e.y - 3, e.radius * 0.8, 4, Math.PI / 4);
+        g.lineBetween(e.x - 3, e.y - 8, e.x + 5, e.y + 8);
+      } else if (e.kind === 'cantor' || e.kind === 'matron') {
+        const r = e.radius;
+        polygon(g, e.x, e.y, r * 0.68, 3, -Math.PI / 2);
+        g.strokeEllipse(e.x, e.y - r * 0.7, r * 1.3, r * 0.4);
+        for (let i = 0; i < (boss ? 8 : 3); i++) {
+          const a = t * 0.23 + (i * Math.PI * 2) / (boss ? 8 : 3),
+            x = e.x + Math.cos(a) * r,
+            y = e.y + Math.sin(a) * r;
+          g.fillStyle(c, 0.16);
+          polygon(g, x, y, boss ? 13 : 6, 4, a);
+          g.lineStyle(1, c, 0.42);
+          g.lineBetween(e.x, e.y, x, y);
+        }
+        g.fillStyle(c, 0.9);
+        g.fillCircle(e.x, e.y - 5, boss ? 6 : 3);
+      } else if (e.kind === 'forgemaster') {
+        polygon(g, e.x, e.y, e.radius, 6, Math.PI / 6);
+        g.fillStyle(0x50362a, 0.9);
+        g.fillRect(e.x - 32, e.y - 22, 64, 26);
+        g.strokeRect(e.x - 32, e.y - 22, 64, 26);
+        g.fillStyle(c, 0.5);
+        g.fillRect(e.x - 14, e.y + 5, 28, 25);
+        for (let i = -1; i <= 1; i++) {
+          g.lineStyle(4, c, 0.9);
+          g.lineBetween(e.x + i * 18, e.y - 15, e.x + i * 18, e.y + 14);
+        }
+        g.fillStyle(0xffe4a8, 0.85);
+        g.fillCircle(e.x, e.y, 7);
+      } else {
+        polygon(
+          g,
+          e.x,
+          e.y,
+          e.radius,
+          boss && e.kind === 'oracle' ? 8 : 6,
+          angle,
+        );
+        g.lineStyle(3, c);
+        polygon(g, e.x, e.y, e.radius * 0.72, 4, -angle);
+        g.fillStyle(c, 0.3);
+        polygon(g, e.x, e.y, e.radius * 0.38, 4, Math.PI / 4);
+        glow(g, e.x, e.y, 12, c, 0.3);
+        g.fillStyle(0xffffff);
+        g.fillCircle(e.x, e.y, 5);
+        for (let i = 0; i < 6; i++) {
+          const a = t * 0.4 + (i * Math.PI) / 3;
+          g.fillStyle(0x172531);
+          g.lineStyle(2, c, 0.7);
+          polygon(
+            g,
+            e.x + Math.cos(a) * (e.radius + 16),
+            e.y + Math.sin(a) * (e.radius + 16),
+            7,
+            4,
+            a,
+          );
+        }
       }
+    }
+    if (illustrated) {
+      g.lineStyle(
+        e.state === 'telegraph' ? 2 : 1,
+        c,
+        e.state === 'telegraph' ? 0.85 : 0.35,
+      );
+      g.strokeEllipse(e.x, e.y + 10, e.radius * 2, e.radius * 0.55);
     }
     if (e.shield > 0) {
       g.lineStyle(2, 0xa9e2d4, 0.65);
@@ -247,6 +262,7 @@ export function drawActors(
   }
   for (const b of w.projectiles.items) {
     if (!b.active) continue;
+    if (hostileSprites && b.enemy) continue;
     const a = Math.atan2(b.vy, b.vx);
     if (!b.enemy && b.shape === 'lance') {
       const tail = 65;
@@ -272,12 +288,20 @@ export function drawActors(
         b.y,
       );
     }
+    // Hostile bullets use an opaque rim and bright centre, keeping them legible
+    // against both painterly rooms and multicolour friendly resonance effects.
+    if (b.enemy) {
+      g.fillStyle(0x220b1c, 0.95);
+      g.fillCircle(b.x, b.y, b.radius + 2.2);
+      g.lineStyle(1.3, 0xff557e, 1);
+      g.strokeCircle(b.x, b.y, b.radius + 1.2);
+    }
     g.lineStyle(b.enemy ? 10 : 9, b.color, 0.08);
     g.lineBetween(b.x - Math.cos(a) * 27, b.y - Math.sin(a) * 27, b.x, b.y);
     g.lineStyle(b.enemy ? 4 : 3, b.color, 0.9);
     g.lineBetween(b.x - Math.cos(a) * 15, b.y - Math.sin(a) * 15, b.x, b.y);
     glow(g, b.x, b.y, b.radius, b.color, 0.14);
-    g.fillStyle(b.enemy ? b.color : b.accent);
+    g.fillStyle(b.enemy ? 0xfff1d9 : b.accent);
     g.fillCircle(b.x, b.y, b.radius * 0.65);
     if (!b.enemy && b.shape === 'meteor') {
       g.lineStyle(2, b.color, 0.8);
@@ -318,7 +342,7 @@ export function drawActors(
   w.forms
     .filter((f) => f !== w.weapon)
     .forEach((f, i) => {
-      const a = t * 0.6 + i * Math.PI,
+      const a = (reducedMotion ? 0 : t * 0.6) + i * Math.PI,
         x = p.x + Math.cos(a) * 42,
         y = p.y + Math.sin(a) * 34;
       const color =
@@ -363,29 +387,34 @@ export function drawActors(
   glow(g, p.x, p.y, 22, c, 0.09);
   g.lineStyle(1, c, 0.25);
   g.strokeEllipse(p.x, p.y + 15, 51, 24);
-  g.fillStyle(0x163c40);
-  g.lineStyle(2, c, 0.9);
-  // A hooded geometric arcanist: split coat, shoulder plates, face slit, floating catalyst.
-  const points = [
-    { x: p.x, y: p.y - 21 },
-    { x: p.x + 12, y: p.y - 8 },
-    { x: p.x + 18, y: p.y + 17 },
-    { x: p.x + 3, y: p.y + 12 },
-    { x: p.x, y: p.y + 21 },
-    { x: p.x - 16, y: p.y + 15 },
-    { x: p.x - 10, y: p.y - 9 },
-  ];
-  g.fillPoints(points, true);
-  g.strokePoints(points, true);
-  g.lineStyle(1, 0xe5c494, 0.8);
-  g.lineBetween(p.x - 6, p.y + 1, p.x - 11, p.y + 12);
-  g.lineBetween(p.x + 6, p.y + 1, p.x + 11, p.y + 12);
-  g.fillStyle(w.stats.accent, 0.7);
-  polygon(g, p.x, p.y + 5, 3, 4, 0);
-  g.fillStyle(0x07141d);
-  polygon(g, p.x, p.y - 8, 9, 4, Math.PI / 4);
-  g.lineStyle(3, 0xc9fff2);
-  g.lineBetween(p.x - 5, p.y - 8, p.x + 5, p.y - 8);
+  if (!illustrated) {
+    g.fillStyle(0x163c40);
+    g.lineStyle(2, c, 0.9);
+    // A hooded geometric arcanist: split coat, shoulder plates, face slit, floating catalyst.
+    const points = [
+      { x: p.x, y: p.y - 21 },
+      { x: p.x + 12, y: p.y - 8 },
+      { x: p.x + 18, y: p.y + 17 },
+      { x: p.x + 3, y: p.y + 12 },
+      { x: p.x, y: p.y + 21 },
+      { x: p.x - 16, y: p.y + 15 },
+      { x: p.x - 10, y: p.y - 9 },
+    ];
+    g.fillPoints(points, true);
+    g.strokePoints(points, true);
+    g.lineStyle(1, 0xe5c494, 0.8);
+    g.lineBetween(p.x - 6, p.y + 1, p.x - 11, p.y + 12);
+    g.lineBetween(p.x + 6, p.y + 1, p.x + 11, p.y + 12);
+    g.fillStyle(w.stats.accent, 0.7);
+    polygon(g, p.x, p.y + 5, 3, 4, 0);
+    g.fillStyle(0x07141d);
+    polygon(g, p.x, p.y - 8, 9, 4, Math.PI / 4);
+    g.lineStyle(3, 0xc9fff2);
+    g.lineBetween(p.x - 5, p.y - 8, p.x + 5, p.y - 8);
+  }
+  // The tiny foot marker stays tied to the actual player collision centre.
+  g.fillStyle(0xeaffef, 0.95);
+  g.fillCircle(p.x, p.y, 2.5);
   drawHeldWeapon(g, w);
   if (p.shield > 0) {
     g.lineStyle(2, 0xd3f5a3, 0.5);

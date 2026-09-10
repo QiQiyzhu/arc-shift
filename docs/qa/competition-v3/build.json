@@ -1,0 +1,36 @@
+{
+  "recordedAt": "2026-09-10T15:29:54.9011331Z",
+  "command": "npm run build",
+  "exitCode": 0,
+  "helperAttempt": "Sites build-site.mjs failed before compiling because its Windows npm shim resolved npm scripts under the project directory. The same package build script then passed directly.",
+  "validation": "tsc --noEmit and Vite production build completed; browser production acceptance recorded separately",
+  "fileCount": 87,
+  "totalBytes": 14791695.0,
+  "entries": [
+    {
+      "name": "game-Bs-CWcRi.js",
+      "bytes": 1680,
+      "sha256": "1cbf31b1ec60efcd349d8f481c3348017d1c277413f4bc5cfb4874476d4d2f79"
+    },
+    {
+      "name": "jsx-runtime-thYREygN.js",
+      "bytes": 190804,
+      "sha256": "2992a1d660b1cdce94c5370987d8ec1de1f9ef6719d3d23d738edec5d879c8b7"
+    },
+    {
+      "name": "lab-D30nt5j_.js",
+      "bytes": 76876,
+      "sha256": "2819d9c0760adfcba86b686e63900697ca4a4373e91f6a575bf6abb0dd01cb50"
+    },
+    {
+      "name": "page-BRJPnnYM.js",
+      "bytes": 1496424,
+      "sha256": "472e65f11f0d6be14200434b488f9eb5fba4bf1c69570d6cbba52ac712349aa5"
+    },
+    {
+      "name": "rules-BE1egm8v.js",
+      "bytes": 2739,
+      "sha256": "9acfb78ac5c7daca9037d2aa756ea9897f5cfb05eeecd72e391b9221f5790ee1"
+    }
+  ]
+}

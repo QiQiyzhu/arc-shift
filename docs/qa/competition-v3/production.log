@@ -1,0 +1,20 @@
+[1A[2K[2m[WebServer] [22m(node:35400) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+Running 5 tests using 1 worker
+
+[1A[2K(node:32600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K(node:32600) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+
+
+[1A[2K[1/5] e2e-production\decision-lab.spec.ts:2:1 › live geometry catches both defects, isolates game storage, and policy preferences expose trade-offs
+[1A[2K[2/5] e2e-production\decision-lab.spec.ts:48:1 › recorded cases preserve rejected green tests, retrieval regression, transaction and abstention evidence
+[1A[2K[3/5] e2e-production\guide.spec.ts:2:1 › published build guides real input through fusion without QA or save changes
+[1A[2K[4/5] e2e-production\isolation.spec.ts:2:1 › built public game loads and does not expose QA or development intervention routes
+[1A[2K[5/5] e2e-production\portfolio.spec.ts:2:1 › public portfolio connects five real project dossiers and accessible media
+[1A[2K  5 passed (43.4s)

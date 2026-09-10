@@ -114,6 +114,7 @@ export function parseSave(raw: string | null): SaveData {
       );
     settings.muted = v.settings.muted === true;
     settings.reducedMotion = v.settings.reducedMotion === true;
+    if (typeof v.settings.focusedEffects === 'boolean') settings.focusedEffects = v.settings.focusedEffects;
     const ids = new Set(CARDS.map((c) => c.id));
     const meta = {
       unlocked: known(
