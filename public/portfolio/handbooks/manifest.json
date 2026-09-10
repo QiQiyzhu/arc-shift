@@ -1,19 +1,20 @@
 {
-  "generatedAt": "2026-09-10T09:32:17.295Z",
+  "generatedAt": "2026-09-10T11:44:51.617Z",
   "renderer": "Mermaid 11.17.0, build-time Edge, inline SVG",
   "projects": [
     {
       "title": "ARC-SHIFT",
       "repo": "arc-shift",
       "branch": "codex/engineering-v2",
-      "status": "工程版 M8 本地与 Linux 全量均通过 146 单元、34 开发浏览器和 2 生产检查；提供公开游戏、工具截图、回放与性能原始记录",
+      "status": "新增决策实验室；本地完整回归 151 单元 / 34 开发浏览器 / 4 生产检查，原 M8 Linux 全量结果另行保留",
       "demo": "https://arc-shift.black-kid-3047.chatgpt.site/",
       "evidence": "https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa-report.md",
       "category": "ACTION ROGUELITE / GAME SYSTEMS",
       "ready": true,
-      "dossierSha256": "71aeb010e8256b1cdc72039a933afe2d6b94458f2e72b85840b6f5bc62440d8a",
-      "dossierNormalizedSha256": "6b86e2de8084924e4a8519bcf1156707d046986bdcb509c1a4be8b1ebf485255",
+      "dossierSha256": "7133839ca4dcafa5709125fa9b02d05514a80247f9d07ba30a049316cc8bb414",
+      "dossierNormalizedSha256": "2aa0b487cbccf48fa57ec2caf8035695d43e9e5ea974a0a2447d499458cbf7ec",
       "filename": "ARC-SHIFT 面试讲解.html",
+      "deepFilename": "ARC-SHIFT 深度讲解.html",
       "sections": 20,
       "diagrams": [
         {
@@ -33,14 +34,15 @@
       "title": "RepoPilot",
       "repo": "repopilot",
       "branch": "codex/repopilot-v1",
-      "status": "GitHub 已公开；最终 Linux CI 34446220853 成功，包含浏览器与实际容器运行验收",
+      "status": "Linux 94 后端 / 4 界面单元 / 7 浏览器通过（6 真实后端、1 提交契约）；DeepSeek 4 次真实调用完成一个受限修复夹具，独立 3 项测试通过",
       "demo": "http://127.0.0.1:5174/",
-      "evidence": "https://github.com/QiQiyzhu/repopilot/actions/runs/34446220853",
+      "evidence": "https://github.com/QiQiyzhu/repopilot/actions/runs/34472435383",
       "category": "CODING AGENT / MCP / EVALUATION",
       "ready": true,
-      "dossierSha256": "bd27e95a22d3571024d105e8bd5376e1abd914d47542a11f863eaf77020610f2",
-      "dossierNormalizedSha256": "bd27e95a22d3571024d105e8bd5376e1abd914d47542a11f863eaf77020610f2",
+      "dossierSha256": "0fec00f3cb8f1721f8a022eab8dc6154f53368d6c89753c574c60dd446fef083",
+      "dossierNormalizedSha256": "0fec00f3cb8f1721f8a022eab8dc6154f53368d6c89753c574c60dd446fef083",
       "filename": "RepoPilot 面试讲解.html",
+      "deepFilename": "RepoPilot 深度讲解.html",
       "sections": 20,
       "diagrams": [
         {
@@ -60,13 +62,14 @@
       "title": "Aegis Arena",
       "repo": "aegis-arena",
       "branch": "codex/aegis-v1",
-      "status": "UE 5.8.2 的 5 项 Core Automation、12 条真实 PIE 断言通过；完成 60 次原生策略评估、12 次渲染测量及 Development/Shipping 独立包验收",
+      "status": "325 C++ 断言与 16 Python 检查通过；60 次原生策略实验重新分析观测终点与时长，原生程序和 12 次渲染测量保留",
       "evidence": "https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/status.md",
       "category": "UNREAL ENGINE / UTILITY / BT / EQS",
       "ready": true,
-      "dossierSha256": "2f2d2bda7e18f0e134880bfb8dfc8e9b204dbcfc9429ec2c64111314e1e5c040",
-      "dossierNormalizedSha256": "d9e85e1355c153f4f9cc188b95e7f39f4ff0dd96e397dad4652e6093098936c2",
+      "dossierSha256": "78d66db53fbe6176e0fa342efb49a3161dc03a46e3578a4e68917a555f6f20a3",
+      "dossierNormalizedSha256": "78d66db53fbe6176e0fa342efb49a3161dc03a46e3578a4e68917a555f6f20a3",
       "filename": "Aegis Arena 面试讲解.html",
+      "deepFilename": "Aegis Arena 深度讲解.html",
       "sections": 20,
       "diagrams": [
         {
@@ -86,13 +89,14 @@
       "title": "DesignLens AI",
       "repo": "designlens-ai",
       "branch": "codex/designlens-v1",
-      "status": "工具方案与完整本地原型已完成，GitHub 与 Linux CI 已通过；真实用户研究尚未开展",
+      "status": "Linux 63 后端 / 6 浏览器通过；DeepSeek 3 次实际响应、2 个开发契约通过，真实参与者与产品研究结论仍为 0",
       "demo": "http://127.0.0.1:8001/",
       "category": "AI PRODUCT DISCOVERY / EXPERIMENTS",
       "ready": true,
-      "dossierSha256": "ead364e2f4dfe4e667fe94f9cfad8fc5b12313fab7efc06ad09f4f09bb09c145",
-      "dossierNormalizedSha256": "ead364e2f4dfe4e667fe94f9cfad8fc5b12313fab7efc06ad09f4f09bb09c145",
+      "dossierSha256": "df5486d6e10879a545654e630d64901e5f0e46a08ebd66bdfeb13d140dc23bce",
+      "dossierNormalizedSha256": "eb2f966bf785885b952fc574a74038d1f33b7813e97e6b7142439b8c9e51f19c",
       "filename": "DesignLens AI 面试讲解.html",
+      "deepFilename": "DesignLens AI 深度讲解.html",
       "sections": 20,
       "diagrams": [
         {
@@ -112,14 +116,15 @@
       "title": "OpsPilot AI",
       "repo": "opspilot-ai",
       "branch": "codex/opspilot-v1",
-      "status": "GitHub 与最终 Linux CI 已通过：69 后端、7 界面单元、8 浏览器测试；含真实容器/MCP/审批验收，模型评估使用 Fake Provider",
+      "status": "Linux 82 后端 / 7 界面单元 / 8 浏览器通过；DeepSeek 6 个合成意图样本匹配 5 个，语义错例与事务权限分开验证",
       "demo": "http://127.0.0.1:5176/",
-      "evidence": "https://github.com/QiQiyzhu/opspilot-ai/actions/runs/34448735885",
+      "evidence": "https://github.com/QiQiyzhu/opspilot-ai/actions/runs/34470994874",
       "category": "SUPPORT AGENT / HYBRID RAG / APPROVALS",
       "ready": true,
-      "dossierSha256": "5c2c9702fb063e018a17f6c51046b72fe3c5b3e7c365f5c7de4877f684ddde7a",
-      "dossierNormalizedSha256": "dd4cd38417a5df8b52f9d75fde29a665b2de103ed6a369afb91956534903c63c",
+      "dossierSha256": "099d2ba88d76936b666a6425d27e9b649b731663dba1dc69c8083ab410c26fcf",
+      "dossierNormalizedSha256": "cd5752ddfa315a77209ee7523a793e20f2dd98121614740dcb760ad6dbb565b5",
       "filename": "OpsPilot AI 面试讲解.html",
+      "deepFilename": "OpsPilot AI 深度讲解.html",
       "sections": 20,
       "diagrams": [
         {
@@ -127,13 +132,45 @@
           "nodes": 13,
           "edges": 17,
           "width": 1125.3909912109375,
-          "height": 971.258056640625,
+          "height": 996.758056640625,
           "layoutAdjusted": true,
           "asset": "diagrams/opspilot-ai-diagram-1.svg",
           "rendered": true,
-          "sourceSha256": "03e2d69daa23f4b7766a490436f0415f89c4bbdc11ad1a63920559f5760edfda"
+          "sourceSha256": "749c6bd799b05ea263b3e2966c6f0809ebda2ea9417579c302a23a2cdef2abb6"
         }
       ]
+    }
+  ],
+  "deepGuides": [
+    {
+      "title": "ARC-SHIFT 深度讲解",
+      "filename": "ARC-SHIFT 深度讲解.html",
+      "sourceSha256Lf": "b152465f3452b7986f2c93669b8429f977babf908933c1ab0d6efac59bb2e5a1",
+      "sections": 5
+    },
+    {
+      "title": "RepoPilot 深度讲解",
+      "filename": "RepoPilot 深度讲解.html",
+      "sourceSha256Lf": "10be88906e4be4ba5788d3f66de9f40dab0fdf817fd5280c7f1b21b637534662",
+      "sections": 7
+    },
+    {
+      "title": "Aegis Arena 深度讲解",
+      "filename": "Aegis Arena 深度讲解.html",
+      "sourceSha256Lf": "1c25396045460a707defb75258d011e752225805a36a16652a008bda5352ad05",
+      "sections": 4
+    },
+    {
+      "title": "DesignLens AI 深度讲解",
+      "filename": "DesignLens AI 深度讲解.html",
+      "sourceSha256Lf": "07dfded34c0ba99db57a6fb4510df2b661567f3eab8320b8208e0c2578015d45",
+      "sections": 7
+    },
+    {
+      "title": "OpsPilot AI 深度讲解",
+      "filename": "OpsPilot AI 深度讲解.html",
+      "sourceSha256Lf": "2bb209f675fa295fcf27349d76ed1fceeb36a40385087567c75e04070dfb2a99",
+      "sections": 6
     }
   ]
 }

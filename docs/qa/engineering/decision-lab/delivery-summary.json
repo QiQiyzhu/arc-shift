@@ -1,0 +1,54 @@
+{
+  "source_parent_commit": "2a3fe260511828509f29874144650367f330963c",
+  "source_worktree": "included uncommitted Decision Lab changes; final GitHub CI binds the committed revision",
+  "unit": 151,
+  "development_browser": 34,
+  "production_browser": 4,
+  "real_model_calls": 14,
+  "input_tokens": 12287,
+  "output_tokens": 696,
+  "cost": null,
+  "failure_retained": "decision-lab-first-failure",
+  "projects": {
+    "arc-shift": {
+      "id": "arc",
+      "directory": "New project",
+      "title": "ARC-SHIFT",
+      "sha": "codex/engineering-v2",
+      "ci": "34459299795",
+      "status": "新增决策实验室；本地完整回归 151 单元 / 34 开发浏览器 / 4 生产检查，原 M8 Linux 全量结果另行保留"
+    },
+    "aegis-arena": {
+      "id": "aegis",
+      "directory": "AegisArena",
+      "title": "Aegis Arena",
+      "sha": "daabbe2bee5ab2fe8336d04aa058c0da13f9722a",
+      "ci": "34463719748",
+      "status": "325 C++ 断言与 16 Python 检查通过；60 次原生策略实验重新分析观测终点与时长，原生程序和 12 次渲染测量保留"
+    },
+    "repopilot": {
+      "id": "repopilot",
+      "directory": "RepoPilot",
+      "title": "RepoPilot",
+      "sha": "1b20917ac999e880a30521eb92c52f4d9eab8d59",
+      "ci": "34472435383",
+      "status": "Linux 94 后端 / 4 界面单元 / 7 浏览器通过（6 真实后端、1 提交契约）；DeepSeek 4 次真实调用完成一个受限修复夹具，独立 3 项测试通过"
+    },
+    "opspilot-ai": {
+      "id": "opspilot",
+      "directory": "OpsPilotAI",
+      "title": "OpsPilot AI",
+      "sha": "9e905e759cd363346836c3d6abb006e115515351",
+      "ci": "34470994874",
+      "status": "Linux 82 后端 / 7 界面单元 / 8 浏览器通过；DeepSeek 6 个合成意图样本匹配 5 个，语义错例与事务权限分开验证"
+    },
+    "designlens-ai": {
+      "id": "designlens",
+      "directory": "DesignLensAI",
+      "title": "DesignLens AI",
+      "sha": "7c1f0858f39f1f6be680d82935bc021ebee8b089",
+      "ci": "34470687080",
+      "status": "Linux 63 后端 / 6 浏览器通过；DeepSeek 3 次实际响应、2 个开发契约通过，真实参与者与产品研究结论仍为 0"
+    }
+  }
+}

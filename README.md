@@ -4,6 +4,8 @@
 
 一个可直接在浏览器玩的原创动作构筑游戏：圣剑、法器弹幕与重炮混搭，沿十二层路线管理资源、协议和遗器。本轮在已有 v1.0 玩法上完成客户端工程升级，保留原玩法与美术，重点处理可复现性、参数工具、输入边界和性能证据。
 
+**新增 [决策实验室](https://arc-shift.black-kid-3047.chatgpt.site/lab/)**：直接操作真实网格函数，故意制造高速漏检与击退索引过期；查看五个项目的独立验收、策略取舍和三份真实 DeepSeek 执行记录。实验独立于游戏存档。[ARC 决策案例](docs/decision-case-study.md) · [30 秒 / 3 分钟 / 8 分钟讲解](docs/interview-deep-dive.md)。
+
 | 工程能力 | 实现与可核对的结果 |
 |---|---|
 | **Spatial Hash / Uniform Grid** | 保留 brute-force oracle；250 敌人固定夹具中分离/弹体几何测试减少 **92.53% / 97.68%**，Engine P95 **1.8786 → 1.0712 ms**。[原始数据与反例](docs/performance-v2.md) |

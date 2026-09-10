@@ -1,0 +1,69 @@
+{
+  "stage": "decision-lab",
+  "recordedAt": "2026-09-10T11:31:27.686Z",
+  "commit": "2a3fe260511828509f29874144650367f330963c",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 3957
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 3643
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/decision-lab/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 4807
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 316919
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 4504
+    }
+  ],
+  "bundles": [
+    {
+      "name": "game-CVgoKZdV.js",
+      "bytes": 1680,
+      "gzipBytes": 924
+    },
+    {
+      "name": "game-Dy6SmE_E.css",
+      "bytes": 187591,
+      "gzipBytes": 32858
+    },
+    {
+      "name": "jsx-runtime-thYREygN.js",
+      "bytes": 190804,
+      "gzipBytes": 59499
+    },
+    {
+      "name": "lab-2D79aMuf.css",
+      "bytes": 23497,
+      "gzipBytes": 5380
+    },
+    {
+      "name": "lab-D30nt5j_.js",
+      "bytes": 76876,
+      "gzipBytes": 23542
+    },
+    {
+      "name": "page-BpP-M_6k.js",
+      "bytes": 1477488,
+      "gzipBytes": 416537
+    },
+    {
+      "name": "rules-BE1egm8v.js",
+      "bytes": 2739,
+      "gzipBytes": 1227
+    }
+  ]
+}

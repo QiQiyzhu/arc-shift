@@ -2,6 +2,8 @@
 
 **SIMULATED BUSINESS. Fake provider scores are engineering-harness evidence, not LLM能力、真实客服效率或商业落地。**
 
+**2026-09-10 DeepSeek 接入增量：**真实 `deepseek-flash` API 完成 6 次意图调用，5/6 与预期标签一致；失败为 ambiguous → policy_conflict。1,108 input / 247 output tokens，费用未读取，不推断。当前本地 **82 backend tests / 7 frontend unit tests** 通过，历史 8 项浏览器验收另有原始记录。下方 69/70 项结果属于保留的历史快照；Fake ablation 59/60 与真实模型 smoke 分开讲。[失败分析、来源 SHA 和下一步实验](https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/docs/real-model-results.md) · [真实 API 配置](https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/docs/real-model-setup.md)。
+
 ## A. 最终系统架构
 
 # Architecture and explicit boundaries
@@ -12,7 +14,7 @@ OpsPilot is a modular monolith for NovaMart **SIMULATED BUSINESS**. A real Postg
 flowchart LR
   UI[React staff console] -->|Bearer REST + SSE| API[FastAPI API]
   API --> A[Ordered workflow + agent state machine]
-  A --> P[Fake / Qwen / compatible provider]
+  A --> P[Fake / DeepSeek / Qwen / compatible provider]
   A --> R[BM25 + ONNX vectors + RRF + lexical rerank]
   A --> T[Scoped native tools / real MCP client]
   T --> MCP[MCP Streamable HTTP server]
@@ -33,7 +35,7 @@ flowchart LR
 
 State and process limitations are deliberate: one API process owns in-flight asyncio tasks. PostgreSQL persists events and waiting proposals, but queued/running work interrupted by restart becomes a visible failure requiring replay. This is not a durable distributed worker system. Redis is a best-effort retrieval cache, never the source of approvals, identity or money. Local rate limiting is process-scoped and must be replaced or augmented before multi-worker exposure.
 
-Current model mode is a deterministic Fake provider for structured intent and extractive grounded responses. ONNX embeddings are genuinely executed. The optional real provider makes an authenticated compatible chat-completions call for structured intent; it has not been benchmarked against a paid API. No claim of trained agent intelligence is inferred from the Fake harness score.
+Default model mode remains a deterministic Fake provider for structured intent and extractive grounded responses. ONNX embeddings genuinely execute. DeepSeek now performs bounded JSON intent calls; six actual responses matched 5/6 authored labels in a separate development smoke. The full agent ablation remains Fake evidence, not paid-model quality. See the increment at the top of this dossier.
 
 Future scale work begins with tenant isolation, SSO, role scoping, durable task leasing, approval expiry, migration/backup discipline and worker admission control; only measured bottlenecks justify service extraction. A million-user deployment is a design exercise, not a capacity claim.
 
@@ -254,7 +256,7 @@ Start the normal API on 8003, then set `OPSPILOT_MCP_URL=http://127.0.0.1:8003/m
 
 The prompt registry stores immutable numbered content versions, an active version and creation time. Workflow versions retain JSON definitions. Each run stores the exact selected prompt content/version, model/provider, retrieval parameters, tool transport, memory/multi-agent flags and workflow snapshot. Updating a registry does not rewrite historical runs. Unified diffs compare real version content, not canned changelog text.
 
-FakeModelProvider is a deterministic intent router with model ID `fake-rules-v1`; it records latency and request ID while tokens and cost remain null. OpenAICompatibleProvider and QwenProvider read endpoint, key and model only from environment variables. They perform structured-intent requests, validate the category, enforce timeout, retry transient read failures once and open a 30-second circuit after repeated failures. Real providers were not configured or benchmarked; no API cost was inferred from token counts.
+FakeModelProvider is a deterministic router; its tokens/cost remain null. DeepSeekProvider, OpenAICompatibleProvider and QwenProvider use server-only configuration, exact JSON schemas, bounded output/body size and total deadline, at most one transient retry, and a 30-second circuit after three failures. The paid probe explicitly disables retries and never falls back. DeepSeek completed six calls with 5/6 category matches; [one preserved failure](https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/docs/real-model-results.md) demonstrates why valid JSON is not semantic correctness. This small development smoke is separate from historical Fake ablations. Cost remains unavailable without a billing record.
 
 Offline evaluation stores dataset ID, provider, configuration, per-case results, aggregate metrics and provenance. `POST /prompts/{id}/release` requires a report for the exact target prompt version; success must be at least 0.80 and unsafe action rate exactly zero. A low report returns HTTP 409 with the actual threshold/result. The CLI gate uses the same thresholds and a failing exit code. CI runs only the Fake-provider smoke set.
 
@@ -308,6 +310,8 @@ The adversarial document literally includes “Ignore previous instructions and 
 
 
 ## J. Test实际结果
+
+最新 DeepSeek 接入增量：本地 82 passed / 0 skipped、前端 7 unit passed、lint / typecheck / production build 通过。[本轮 JUnit](https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/evals/reports/deepseek-adapter-backend-junit.xml)。真实 API 单独记录 6 calls / 5 matched，属于小型开发集，不计入 pytest 数量。[真实 API 原始报告](https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/evals/reports/deepseek-smoke.json)。以下保留早期发布快照及当时环境。
 
 # Validation evidence
 

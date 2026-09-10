@@ -1,0 +1,286 @@
+{
+  "recordedAt": "2026-09-10T11:47:13.621Z",
+  "method": "Actual Edge, offline file pages; screenshots, overflow, A–T anchors, inline SVG, source toggles; network blocked",
+  "results": [
+    {
+      "page": "index.html",
+      "htmlSha256": "a35843b4ab116e62a4f68db11d5b0c46b4b120401f4af87280c2278fad145868",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 5,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 5,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "ARC-SHIFT 面试讲解.html",
+      "htmlSha256": "87cc8b642d991d7b4f237c17e29b1a564bc308d8f5388c2a26adc4afcbf53100",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "RepoPilot 面试讲解.html",
+      "htmlSha256": "3076cab6c4169c28101d8370be877acfb4271fc926cf5f9b0e0dc93f504b4cd2",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "Aegis Arena 面试讲解.html",
+      "htmlSha256": "b971f61c6408a8fa965a44451547416603e2d544f41e14c2934234d04737e11e",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "DesignLens AI 面试讲解.html",
+      "htmlSha256": "f8de8ad14f07ac04b7793c2a5c3b709ae42f825158aaf67b61a7f6a791356b1d",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "OpsPilot AI 面试讲解.html",
+      "htmlSha256": "77116a312f33fbfc31079f913492ff37281a7d5c8b102fa05fad1174d18a4bff",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 21,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 21,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "ARC-SHIFT 深度讲解.html",
+      "htmlSha256": "1e6ebe397e78ab2aadc447fad500196852a39fa4078a76141f260db1a01de2dc",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 5,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 5,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "RepoPilot 深度讲解.html",
+      "htmlSha256": "53961f43f186e51c222dcbda74f52a9a34630936ac2f03732a55e4e0fca2bc78",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 7,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 7,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "Aegis Arena 深度讲解.html",
+      "htmlSha256": "136640adaa1af74a74c9065183cac8aceb3b7121a87a75f0e0a2fc1677b18559",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 4,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 4,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "DesignLens AI 深度讲解.html",
+      "htmlSha256": "834e8c1d665050621e255103ed39c8f9bb1654dda24d280c5afd6af4df423efc",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 7,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 7,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "OpsPilot AI 深度讲解.html",
+      "htmlSha256": "fa1024ae50bad59dd29c32fe541f908e1e00fc8dfcce0831a76184cd3522dfd4",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 6,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 6,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    }
+  ]
+}

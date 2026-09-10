@@ -1,5 +1,7 @@
 # ARC//SHIFT · A–T 中文面试讲解
 
+> **Decision Lab 增量验收：151 单元 / 34 开发浏览器 / 4 生产浏览器通过。** 新增 5 项几何与偏好规则测试、2 项生产交互流程，typecheck / lint / build 均通过；记录见 [本轮结果](qa/engineering/decision-lab/delivery-summary.json)。另有 [30 秒 / 3 分钟 / 8 分钟深度讲解](interview-deep-dive.md)。下文 M8 数量是保留的历史基线，不是当前新增后的总数。
+
 > **工程交付讲解 · 2026-09-10。** M8 完整本地验收为 **146 单元 / 34 开发浏览器 / 另行 2 生产浏览器**通过，typecheck、lint、build 通过。M7 定向修复后的依赖审计为 0。原始阶段日志记录提交前工作区及其父提交；不能把父提交误认为完整受测代码。公开版的准确源码、CI 与交付状态统一见 [验收记录](qa-report.md)。
 >
 > 本文保留 A–T 二十节。ARC 是浏览器单机游戏，对不存在的数据库、RAG、LLM Agent、LLMOps 和相关评测明确写 N/A。本人采用第一人称项目介绍前，须实际读码与复现；AI-assisted 分工不省略。
@@ -158,6 +160,8 @@ AI-assisted 开发记录的是谁生成/审查/修正了什么，而非生产模
 [导入与资源限制](../src/replay/replay.ts)、[Content schema](../src/content/schema.ts)、[生产构建报告](qa/engineering/bundle.json)。依赖审计曾检出 6 个受影响包条目（4 high、2 moderate，涉及 sharp/mocker 工具链）；定向升级后 [实际审计为 0](qa/engineering/audit-m7.json)，完整 M7 回归通过。audit 0 只表示该次依赖数据库检查无已报告项，不是无漏洞证明。[修复与暴露范围](dependency-security.md)。
 
 ## J. Test 数量与实际结果
+
+当前新增实验室后为 **151 单元、34 DEV 浏览器、4 生产浏览器**。首次生产用例因种子选择器使用了错误的精确标签及文件名假设而失败；保留 [失败记录](qa/engineering/decision-lab-first-failure/production.json)，修正定位并增加历史返回行为后四项均通过。实验室没有修改游戏规则，也没有将候选检查减少率报告为帧率收益。
 
 | 检查 | M8 完整本地结果 | 原始证据 |
 |---|---|---|

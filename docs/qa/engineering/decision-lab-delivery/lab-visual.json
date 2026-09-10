@@ -1,0 +1,55 @@
+[
+  {
+    "id": "arc",
+    "width": 1440,
+    "overflow": 0
+  },
+  {
+    "id": "aegis",
+    "width": 1440,
+    "overflow": 0
+  },
+  {
+    "id": "repopilot",
+    "width": 1440,
+    "overflow": 0
+  },
+  {
+    "id": "opspilot",
+    "width": 1440,
+    "overflow": 0
+  },
+  {
+    "id": "designlens",
+    "width": 1440,
+    "overflow": 0
+  },
+  {
+    "id": "arc",
+    "width": 390,
+    "overflow": 0
+  },
+  {
+    "id": "aegis",
+    "width": 390,
+    "overflow": 0
+  },
+  {
+    "id": "repopilot",
+    "width": 390,
+    "overflow": 0
+  },
+  {
+    "id": "opspilot",
+    "width": 390,
+    "overflow": 0
+  },
+  {
+    "id": "designlens",
+    "width": 390,
+    "overflow": 0
+  },
+  {
+    "errors": []
+  }
+]

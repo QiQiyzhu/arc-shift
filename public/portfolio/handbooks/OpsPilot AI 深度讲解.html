@@ -1,0 +1,73 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>OpsPilot AI · 深度讲解 · 工程面试手册</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f3ee;color:#1d2c35;font:16px/1.85 system-ui,'Microsoft YaHei',sans-serif}a{color:#206d66;text-decoration:none}a:hover{text-decoration:underline}aside{position:fixed;inset:0 auto 0 0;width:260px;padding:36px 24px;background:#142630;color:#e5ece7;overflow:auto}aside a{display:block;color:#c8d9d6;font-size:12px;margin:9px 0;line-height:1.65}aside strong{display:block;font-size:20px;line-height:1.4;margin:20px 0}aside small{color:#8ea9af;font-size:11px;letter-spacing:.12em}main{margin-left:260px;max-width:1150px;padding:50px 64px 120px}h1{font-size:34px;line-height:1.4;letter-spacing:-.04em;margin:0 0 26px}h2{font-size:25px;line-height:1.5;margin:60px 0 20px;border-top:1px solid #cbd4cd;padding-top:28px;scroll-margin-top:20px}h3{font-size:20px}p{margin:16px 0}pre{background:#192e39;color:#dce9e5;padding:22px;border-radius:10px;font-size:12px;line-height:1.75;overflow:auto}code{font:13px/1.7 ui-monospace,Consolas,monospace;overflow-wrap:anywhere}p code,li code,td code{background:#e5e9e2;padding:2px 5px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.7;display:block;overflow:auto;margin:24px 0}th{text-align:left;background:#dbe4dc;color:#27413a}td,th{padding:13px 16px;border-bottom:1px solid #d5ddd4;min-width:100px;vertical-align:top}tr:nth-child(even) td{background:#eaf0e8}blockquote{border-left:3px solid #4e9380;margin:26px 0;padding:1px 22px;background:#e6eee5}li{margin:10px 0}.cover{border:1px solid #ccd7ca;border-radius:8px;background:#e7eee3;padding:18px 24px;font-size:13px;margin-bottom:30px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.card{padding:28px;background:white;border:1px solid #d0d9ce;border-radius:10px}.card h2{margin:0 0 10px;padding:0;border:0;font-size:24px}.card p{font-size:14px}.card a{display:inline-block;margin:6px 15px 0 0}.muted{color:#71817e}button{font:inherit;border:1px solid #9db7aa;border-radius:6px;color:#335447;background:#edf3e9;padding:8px 14px;cursor:pointer}.print{position:fixed;right:20px;top:20px;font-size:12px}@media(max-width:900px){aside{position:static;width:auto;padding:22px}aside nav{display:none}main{margin:0;padding:30px 22px}.grid{grid-template-columns:1fr}.print{display:none}}@media print{aside,.print{display:none}main{margin:0;padding:0;max-width:none}body{font-size:11pt;background:white}h2{break-before:page}pre{white-space:pre-wrap;background:#eef2ef;color:#1b3034}table{font-size:9pt;display:table}a{color:inherit}}main{max-width:1320px;min-width:0;padding-top:58px}h1{font-size:38px}p,li,td,th,h1,h2,h3,a{overflow-wrap:anywhere}pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #70a78e;outline-offset:4px}table{margin:0;display:table}.table-wrap{overflow:auto;max-width:100%;margin:24px 0;border:1px solid #d5ddd4;border-radius:8px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{display:flex;flex-direction:column;min-width:0;border-radius:12px;background:#fff}.card p{flex:1;font-size:13px;color:#607567}.card .links{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px}.card .links a{margin:0}.card .tag{font-size:10px;letter-spacing:.05em;color:#668c78}.card h2{margin:12px 0}.local-demo{font-size:11px;color:#6f7d71;margin-top:16px;padding-top:12px;border-top:1px solid #edf0e9}.local-demo code{font-size:11px}.eyebrow{font-size:11px;letter-spacing:.14em;color:#738575}.stats{display:flex;gap:36px;margin:26px 0 34px}.stats strong{display:block;font-size:28px;line-height:1.4}.stats span{font-size:12px;color:#78887c}.cover p{margin:8px 0}.meta{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;margin-top:12px;color:#718174}.diagram{margin:26px 0;border:1px solid #d5dfd0;border-radius:12px;background:#fff;overflow:hidden}.diagram-view{padding:24px 16px;overflow:auto;max-width:100%}.diagram svg{display:block;width:auto;height:auto;max-width:100%;margin:auto}.diagram figcaption{padding:12px 20px;background:#eff4ea;border-top:1px solid #dfe7d8;display:flex;justify-content:space-between;gap:18px;font-size:11px;color:#697e6a}.diagram figcaption a{flex-shrink:0}.diagram details{padding:10px 20px;font-size:12px;border-top:1px solid #e5ebe0}.diagram summary{cursor:pointer;color:#496d55}.diagram pre{font-size:11px;margin-bottom:10px}.diagram-error{padding:18px;color:#805523}.mobile-nav{display:none}footer{margin-top:50px;padding-top:18px;border-top:1px solid #d4ded0;color:#7c8d7a;font-size:11px}img{max-width:100%;height:auto}@media(max-width:900px){main{padding:30px 22px 80px}.grid{grid-template-columns:1fr}.mobile-nav{display:block;margin-bottom:20px;font-size:13px}h1{font-size:30px}.diagram-view{padding:18px 8px}.diagram svg{min-width:min(1100px,var(--diagram-natural-width,1100px))}.diagram figcaption{display:block}.diagram figcaption a{display:block;margin-top:5px}}@media print{main{padding:0}.diagram{break-inside:avoid}.diagram details,.mobile-nav{display:none}.card{break-inside:avoid}}aside a{font-size:14px}.card p{font-size:16px}.card .tag,.eyebrow,.local-demo,.local-demo code,.diagram figcaption,footer,aside small{font-size:12px}.cover{font-size:14px}.print{font-size:14px}</style></head><body><aside><small>ENGINEERING PORTFOLIO / 2026</small><strong>OpsPilot AI · 深度讲解</strong><a href="index.html">← 项目总览</a><nav aria-label="章节目录"><a href="#deep-1">30 秒版本</a><a href="#deep-2">3 分钟版本</a><a href="#deep-3">8 分钟深挖路线</a><a href="#deep-4">被拒方案、反例和取舍</a><a href="#deep-5">五个追问</a><a href="#deep-6">下一实验与讲述边界</a></nav></aside><button class="print" onclick="window.print()">打印 / 保存 PDF</button><main><a class="mobile-nav" href="index.html">← 项目总览</a><div class="eyebrow">30 SEC / 3 MIN / 8 MIN</div><div class="cover"><strong>沿一个反例，讲清一次技术选择</strong><p>Linux 82 后端 / 7 界面单元 / 8 浏览器通过；DeepSeek 6 个合成意图样本匹配 5 个，语义错例与事务权限分开验证。</p><div class="meta"><a href="OpsPilot%20AI%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">完整 A–T 手册 →</a><a href="https://arc-shift.black-kid-3047.chatgpt.site/lab/#opspilot">打开决策实验室 ↗</a></div></div><h1 id="deep-0">OpsPilot：从一个检索失败讲清业务权限</h1><p><a href="https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/docs/decision-case-study.md">完整案例</a> · <a href="https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/evals/reports/decision-case.json">逐条证据</a> · <a href="https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/backend/business.py">核心实现</a></p>
+<p>**真实模型增量：**另有 DeepSeek Flash 的 6 次真实意图调用，5/6 标签匹配，1 次把 ambiguous 分为 policy_conflict。它揭示“JSON 合法但语义错误”；不替代下方历史检索/事务实验，也不构成完整 Agent 评测。<a href="https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/docs/real-model-results.md">原始输出、tokens、来源和失败分析</a>。</p>
+<h2 id="deep-1">30 秒版本</h2><p>“我把模型理解、证据检索和业务授权分开验证。真实 BGE 检索的 4 条无答案只拒答 1 条；DeepSeek 的 6 次真实调用也有一次 JSON 合法但分类错。它们都不能授权退款。执行必须经过角色、当前政策、事务与独立验证；真实 PostgreSQL 证明待审零退款、越权 403、重放一条账及资格过期 409。业务是模拟的，六条模型开发例不能代表生产准确率。”</p>
+<h2 id="deep-2">3 分钟版本</h2><p><strong>第一分钟：先承认失败。</strong> 打开 <code>rag_29</code>，读问题、gold 无答案与返回段落，说明它不是语言模型幻觉测试，而是实际检索拒答失败。再切 <code>rag_02</code>：hybrid 第 1、rerank 第 4，解释为什么不能只按 MRR 选系统。原始 report 保留 120 行，不只挑成功例。</p>
+<p><strong>第二分钟：展示一道真实边界。</strong> 打开 <code>boundary_execution.steps</code>。同一套可执行政策下，检索命中与 31 天订单的 409 同时成立。合格订单的提案没有改业务状态，操作员也不能批准。审阅员执行后读取独立 verifier，核对批准金额 12900 分、记录/订单关联，而不是只读工具返回的“success”。同 key 重放只有 1 refund 与 1 audit。</p>
+<p><strong>第三分钟：讲被拒方案和代价。</strong> 分数阈值不能定义操作权限；第二个 Agent 也不能授予它。六次真实 DeepSeek 意图调用的错例说明 schema 也不能替代语义评测。保留人工门槛带来等待，规则和文档需要版本管理。下一步是独立留出集与人工审阅；不能把开发集调全过就宣布完成。真实模型完整 Agent ablation、真实退款到账和生产吞吐仍没有执行证据。</p>
+<h2 id="deep-3">8 分钟深挖路线</h2><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>打开什么</th>
+<th>需要讲清的推理</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0:00–1:00</td>
+<td>数据集、<code>provenance</code></td>
+<td>26 可答+4 无答案；AI-reviewed；本地真实 ONNX；不是用户研究</td>
+</tr>
+<tr>
+<td>1:00–2:15</td>
+<td><code>rag_29</code> 四种结果</td>
+<td>词汇 OR 向量阈值如何放进错误上下文；这是观察和机制解释，不是模型因果实验</td>
+</tr>
+<tr>
+<td>2:15–3:15</td>
+<td><code>rag_02</code> 与汇总表</td>
+<td>MRR 与 K3 覆盖的取舍；保留 K5 的有限理由；不能比较跨算法分数大小</td>
+</tr>
+<tr>
+<td>3:15–4:30</td>
+<td><code>propose</code>、<code>eligibility_in_session</code></td>
+<td>模型仅建议；当前订单、年龄、可执行政策决定资格；提案保留证据和参数</td>
+</tr>
+<tr>
+<td>4:30–5:45</td>
+<td><code>_decide_transaction</code></td>
+<td>审阅身份来自服务端；run→proposal→order 锁顺序；执行时复查；账本和审计原子提交</td>
+</tr>
+<tr>
+<td>5:45–6:45</td>
+<td>实测 stale-eligibility 与 verifier</td>
+<td>只改变签收时间也能拒绝旧提案；核对账本金额/关联；submitted 不等于银行结算</td>
+</tr>
+<tr>
+<td>6:45–7:20</td>
+<td>已有并发/变异测试</td>
+<td>顺序演示与并发证据分开；正确性结论限定到被验证不变量</td>
+</tr>
+<tr>
+<td>7:20–8:00</td>
+<td>下一实验与开放项</td>
+<td>拒答仍弱；保持人审；先独立留出标签再校准，不承诺通用准确率</td>
+</tr>
+</tbody></table>
+<h2 id="deep-4">被拒方案、反例和取舍</h2><ul>
+<li><strong>“MRR 高就自动执行”</strong>：<code>rag_29</code> 的返回结果直接反驳；检索目标和授权目标不同。</li>
+<li><strong>“把 rerank 去掉就解决了”</strong>：hybrid K3 较强，但 MRR 更低，无答案仍 1/4。没有一种模式在当前所有维度占优。</li>
+<li><strong>“只要版本没变，就信已批准快照”</strong>：资格随时间变化；新增回归不修改 order.version 也应拒绝执行。</li>
+<li><strong>“全部交给第二个 Agent 审查”</strong>：现有 Fake full 与 multi 同为 59/60，只能说明这套脚本下没有增益，不能得出真实多 Agent 无用；更不能替代权限控制。</li>
+<li><strong>“库存 verifier 比当前库存就够”</strong>：其他订单会合法改库存。已有实现校验提案专属 movement 的数量与前后算术，限定在已提交预留证据。</li>
+</ul>
+<h2 id="deep-5">五个追问</h2><ol>
+<li><strong>为什么无答案不混进 Recall？</strong> 无 gold 的问题没有相关段落排名；混入会掩盖拒答失败。因此 26 条计算 Recall/MRR，4 条单列拒答，数量太小不做显著性结论。</li>
+<li><strong>词汇分数大于零为什么危险？</strong> 当前 OR 过滤允许任何正词汇信号进入，即使语义很弱。调整需要新的近领域反例和误拒答权衡；这里没有声称已修好。</li>
+<li><strong>审批开始后订单又变化怎么办？</strong> 执行事务获取锁后重新读资格/版本/政策。取消还与审批共享 run 级线性化顺序；实际 barrier 测试验证两种顺序，不能仅检查 cancel 先结束的情况。</li>
+<li><strong>数据库提交了，但用户没有收到响应怎么办？</strong> 重放按幂等 key 返回已有提案，再独立验证；本演示观察到账本和审计各一条。持久任务调度和真实外部支付幂等仍是后续工作。</li>
+<li><strong>你到底证明了什么？</strong> 证明特定模拟订单的服务端防线真实生效、历史开发检索确有取舍。没有证明 LLM 推理效果、完整生产安全、真实结算或业务 ROI。</li>
+</ol>
+<p>可追加 30 秒：“真实模型不是换个按钮就完成升级。我先限制单次输出、总超时和付费尝试数，再保留 request ID、实际 usage 和失败类别。<code>ambiguous</code> 被分为 <code>policy_conflict</code> 的错例通过了 schema，说明下一步要先冻结标签定义和留出集，再比较模型；不能改预期答案来追求 100%。”</p>
+<h2 id="deep-6">下一实验与讲述边界</h2><p>按<a href="https://github.com/QiQiyzhu/opspilot-ai/blob/codex/opspilot-v1/docs/decision-case-study.md#5-%E5%A4%8D%E7%8E%B0%E4%B8%8E%E4%B8%8B%E4%B8%80%E6%AC%A1%E8%83%BD%E6%8E%A8%E7%BF%BB%E6%9C%AC%E5%86%B3%E7%AD%96%E7%9A%84%E5%AE%9E%E9%AA%8C">案例的预备协议</a>冻结校准/留出集，保留同意流程和人工标签状态。若门槛提升拒答却使可答覆盖明显下降，保留现状或把更多请求转人工；若任何安全不变量失败，先阻止执行发布，不用平均分抵消。研究和实验仍标记计划。</p>
+<p>以上为 AI-assisted 工程案例，不是代写工作经历。只有本人读懂调用链、能现场解释原始失败并复现实验后，才使用第一人称讲述。</p>
+<footer>内容与架构图均可离线阅读 · 外部证据链接需要网络 · 2026-09-10</footer></main></body></html>

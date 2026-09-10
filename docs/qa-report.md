@@ -1,5 +1,17 @@
 # 验收与打磨记录
 
+## Decision Lab 与真实模型展示增量（2026-09-10）
+
+本地完整五项检查通过：typecheck、lint、**151 单元 / 34 DEV 浏览器**、build；另行 **4 项生产浏览器检查通过**。新增实验直接复用几何函数并保留全量 oracle，验证两种漏检反例、偏好排序与零权重、历史返回、存档隔离、三项目实际调用回执和手机布局。原始 [五项记录](qa/engineering/decision-lab/checks.json)、[单元](qa/engineering/decision-lab/unit.json)、[游戏流程](qa/engineering/decision-lab/browser.json)、[生产](qa/engineering/decision-lab/production.json)。源码是记录中的父提交加当时工作区，随后提交的 CI 可从仓库 Actions 核对。
+
+首次生产检查有 1 项测试定位失败：精确 label 包含了选项内容，种子也被错误假设为原始文件名。修正 locator、依据实际 episode 文件核对，并修复返回无 hash 时的案例切换。保留 [首次失败](qa/engineering/decision-lab-first-failure/production.json)。本轮整套 DEV 测试生成的三份 `browser-current-*.json` 也原样保留；它们不是隔离的前后对照，不能据此宣布帧率改善。
+
+桌面及公开手册包含 **11 页、100 个 A–T 章节、5 份深度讲解、5 张架构 SVG**。Edge 在 1440 与 390 像素宽度离线核验，无报错、外部依赖请求、横向溢出或失效内部锚点。来源文本、桌面/公开 HTML 和原始媒体哈希绑定见 [产物核验](qa/engineering/decision-lab-delivery/artifact-binding.json)。决策实验室另对五个案例逐一检查桌面和手机布局。
+
+RepoPilot、OpsPilot 与 DesignLens 新增的 **DeepSeek 真实调用**独立于旧 Fake / extractive 记录：受限代码任务 1 个通过；6 个客服开发样本匹配 5 个；3 个证据开发契约通过 2 个。连同首次连通性探针共 14 请求，12,287 输入 / 696 输出 tokens，账单费用未知。它们不是独立模型能力基准或真人研究。公开回执在 `public/portfolio/cases`，由 `node scripts/verify-portfolio-evidence.mjs` 逐项校验数值、哈希和范围；网页只读取记录，不调用付费服务或执行退款。
+
+[打开决策实验室](https://arc-shift.black-kid-3047.chatgpt.site/lab/) · [30 秒 / 3 分钟 / 8 分钟讲解](interview-deep-dive.md)。下面保留 M8 与此前所有里程碑结果，不将旧数量改写成新运行。
+
 ## Engineering M8 · 本地与 Linux 完整交付验收（2026-09-10）
 
 完整五项检查实际通过：typecheck、lint、**146 单元 / 34 开发浏览器**、build；另行 **2 项生产浏览器通过（45.8 秒）**，无失败、跳过或 flaky。新生产流程真实打开五份 A–T 手册、架构 SVG、录屏预览，检查关闭后焦点恢复及手机尺寸。原始 [五项 gate](qa/engineering/m8-delivery/checks.json)、[unit](qa/engineering/m8-delivery/unit.json)、[开发浏览器](qa/engineering/m8-delivery/browser.json)、[生产浏览器](qa/engineering/m8-delivery/production-browser.json)。阶段日志中的 SHA 是父提交 `cd4ca2c` 加受测工作区，不冒充无修改的远端提交。

@@ -1,0 +1,75 @@
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>DesignLens AI · 深度讲解 · 工程面试手册</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f3ee;color:#1d2c35;font:16px/1.85 system-ui,'Microsoft YaHei',sans-serif}a{color:#206d66;text-decoration:none}a:hover{text-decoration:underline}aside{position:fixed;inset:0 auto 0 0;width:260px;padding:36px 24px;background:#142630;color:#e5ece7;overflow:auto}aside a{display:block;color:#c8d9d6;font-size:12px;margin:9px 0;line-height:1.65}aside strong{display:block;font-size:20px;line-height:1.4;margin:20px 0}aside small{color:#8ea9af;font-size:11px;letter-spacing:.12em}main{margin-left:260px;max-width:1150px;padding:50px 64px 120px}h1{font-size:34px;line-height:1.4;letter-spacing:-.04em;margin:0 0 26px}h2{font-size:25px;line-height:1.5;margin:60px 0 20px;border-top:1px solid #cbd4cd;padding-top:28px;scroll-margin-top:20px}h3{font-size:20px}p{margin:16px 0}pre{background:#192e39;color:#dce9e5;padding:22px;border-radius:10px;font-size:12px;line-height:1.75;overflow:auto}code{font:13px/1.7 ui-monospace,Consolas,monospace;overflow-wrap:anywhere}p code,li code,td code{background:#e5e9e2;padding:2px 5px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.7;display:block;overflow:auto;margin:24px 0}th{text-align:left;background:#dbe4dc;color:#27413a}td,th{padding:13px 16px;border-bottom:1px solid #d5ddd4;min-width:100px;vertical-align:top}tr:nth-child(even) td{background:#eaf0e8}blockquote{border-left:3px solid #4e9380;margin:26px 0;padding:1px 22px;background:#e6eee5}li{margin:10px 0}.cover{border:1px solid #ccd7ca;border-radius:8px;background:#e7eee3;padding:18px 24px;font-size:13px;margin-bottom:30px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.card{padding:28px;background:white;border:1px solid #d0d9ce;border-radius:10px}.card h2{margin:0 0 10px;padding:0;border:0;font-size:24px}.card p{font-size:14px}.card a{display:inline-block;margin:6px 15px 0 0}.muted{color:#71817e}button{font:inherit;border:1px solid #9db7aa;border-radius:6px;color:#335447;background:#edf3e9;padding:8px 14px;cursor:pointer}.print{position:fixed;right:20px;top:20px;font-size:12px}@media(max-width:900px){aside{position:static;width:auto;padding:22px}aside nav{display:none}main{margin:0;padding:30px 22px}.grid{grid-template-columns:1fr}.print{display:none}}@media print{aside,.print{display:none}main{margin:0;padding:0;max-width:none}body{font-size:11pt;background:white}h2{break-before:page}pre{white-space:pre-wrap;background:#eef2ef;color:#1b3034}table{font-size:9pt;display:table}a{color:inherit}}main{max-width:1320px;min-width:0;padding-top:58px}h1{font-size:38px}p,li,td,th,h1,h2,h3,a{overflow-wrap:anywhere}pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #70a78e;outline-offset:4px}table{margin:0;display:table}.table-wrap{overflow:auto;max-width:100%;margin:24px 0;border:1px solid #d5ddd4;border-radius:8px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{display:flex;flex-direction:column;min-width:0;border-radius:12px;background:#fff}.card p{flex:1;font-size:13px;color:#607567}.card .links{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px}.card .links a{margin:0}.card .tag{font-size:10px;letter-spacing:.05em;color:#668c78}.card h2{margin:12px 0}.local-demo{font-size:11px;color:#6f7d71;margin-top:16px;padding-top:12px;border-top:1px solid #edf0e9}.local-demo code{font-size:11px}.eyebrow{font-size:11px;letter-spacing:.14em;color:#738575}.stats{display:flex;gap:36px;margin:26px 0 34px}.stats strong{display:block;font-size:28px;line-height:1.4}.stats span{font-size:12px;color:#78887c}.cover p{margin:8px 0}.meta{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;margin-top:12px;color:#718174}.diagram{margin:26px 0;border:1px solid #d5dfd0;border-radius:12px;background:#fff;overflow:hidden}.diagram-view{padding:24px 16px;overflow:auto;max-width:100%}.diagram svg{display:block;width:auto;height:auto;max-width:100%;margin:auto}.diagram figcaption{padding:12px 20px;background:#eff4ea;border-top:1px solid #dfe7d8;display:flex;justify-content:space-between;gap:18px;font-size:11px;color:#697e6a}.diagram figcaption a{flex-shrink:0}.diagram details{padding:10px 20px;font-size:12px;border-top:1px solid #e5ebe0}.diagram summary{cursor:pointer;color:#496d55}.diagram pre{font-size:11px;margin-bottom:10px}.diagram-error{padding:18px;color:#805523}.mobile-nav{display:none}footer{margin-top:50px;padding-top:18px;border-top:1px solid #d4ded0;color:#7c8d7a;font-size:11px}img{max-width:100%;height:auto}@media(max-width:900px){main{padding:30px 22px 80px}.grid{grid-template-columns:1fr}.mobile-nav{display:block;margin-bottom:20px;font-size:13px}h1{font-size:30px}.diagram-view{padding:18px 8px}.diagram svg{min-width:min(1100px,var(--diagram-natural-width,1100px))}.diagram figcaption{display:block}.diagram figcaption a{display:block;margin-top:5px}}@media print{main{padding:0}.diagram{break-inside:avoid}.diagram details,.mobile-nav{display:none}.card{break-inside:avoid}}aside a{font-size:14px}.card p{font-size:16px}.card .tag,.eyebrow,.local-demo,.local-demo code,.diagram figcaption,footer,aside small{font-size:12px}.cover{font-size:14px}.print{font-size:14px}</style></head><body><aside><small>ENGINEERING PORTFOLIO / 2026</small><strong>DesignLens AI · 深度讲解</strong><a href="index.html">← 项目总览</a><nav aria-label="章节目录"><a href="#deep-1">30 秒版本</a><a href="#deep-2">3 分钟版本</a><a href="#deep-3">8 分钟深挖路线</a><a href="#deep-4">被拒方案和明确代价</a><a href="#deep-5">五个追问</a><a href="#deep-6">下一实验与停止点</a><a href="#deep-7">面试追问：接通 DeepSeek 后，结论为什么没有自动升级</a></nav></aside><button class="print" onclick="window.print()">打印 / 保存 PDF</button><main><a class="mobile-nav" href="index.html">← 项目总览</a><div class="eyebrow">30 SEC / 3 MIN / 8 MIN</div><div class="cover"><strong>沿一个反例，讲清一次技术选择</strong><p>Linux 63 后端 / 6 浏览器通过；DeepSeek 3 次实际响应、2 个开发契约通过，真实参与者与产品研究结论仍为 0。</p><div class="meta"><a href="DesignLens%20AI%20%E9%9D%A2%E8%AF%95%E8%AE%B2%E8%A7%A3.html">完整 A–T 手册 →</a><a href="https://arc-shift.black-kid-3047.chatgpt.site/lab/#designlens">打开决策实验室 ↗</a></div></div><h1 id="deep-0">DesignLens：从“引用是对的”讲到“现在不能做决定”</h1><p><a href="https://github.com/QiQiyzhu/designlens-ai/blob/codex/designlens-v1/docs/decision-case-study.md">完整案例</a> · <a href="https://github.com/QiQiyzhu/designlens-ai/blob/codex/designlens-v1/reports/decision-case.json">真实执行数据</a> · <a href="https://github.com/QiQiyzhu/designlens-ai/blob/codex/designlens-v1/docs/research/arc-shift-plan.md">研究准备</a></p>
+<h2 id="deep-1">30 秒版本</h2><p>“我给这个产品保留了一条不漂亮的结果：问题问武器共鸣，结构化提取却原样引用了发票日期。引文和格式都正确，仍然不相关，所以我没有把有引用当作可以做产品决策。加检索和 context 条件后，这个合成案例会在模型前停止；有内容的候选则停在人审。12/12 只是开发规则通过，10 条还待审批，真实用户数和有效产品决策数都是零。下一步是带停止规则的真实研究，而不是先把 AI 功能做出来再找证据。”</p>
+<h2 id="deep-2">3 分钟版本</h2><p><strong>第一分钟，展示反例。</strong> 打开 <code>irrelevant</code> 的四个 variants，先让面试官看到“发票周二到达”的原始来源，再看 V2 的 valid grounding=true 与 abstention=false。说明我修正的是判断层次：格式、可追溯性和相关性不能用一个分数替代。V1/V2 由确定性 extractor 的 output_mode 驱动，不是一次 LLM 提示词能力提升。</p>
+<p><strong>第二分钟，展示停止。</strong> Workflow 只有 Input、Retrieval、Condition 三步，零上下文直接 abstained；有内容的 route 请求则停在人审。服务端对未审观察拒绝创建机会；就算机会确认过，来源后来被否决也不能创建实验。本轮实际 HTTP 422 和 SQLite 状态可看，不只是 Figma 上一个禁用按钮。</p>
+<p><strong>第三分钟，展示研究决定。</strong> 目前没有真实数据，所以不替用户选 AI build advisor。先做 4–6 位 PM 探索访谈和独立的 8–12 位玩家定性计划，人数是目标。记录任务、原话、独立参与者和反例；不足时补采样或保留未决定，非 AI 方案能解决时就停止增加 AI。最后才设计小型可用性试验，结果空着直到真正发生。</p>
+<h2 id="deep-3">8 分钟深挖路线</h2><table>
+<thead>
+<tr>
+<th>时间</th>
+<th>展示材料</th>
+<th>要解释的决策</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0:00–1:00</td>
+<td>项目问题假设与研究状态</td>
+<td>证据交接丢失是待验证问题；没有用户不是应编造用户的理由</td>
+</tr>
+<tr>
+<td>1:00–2:15</td>
+<td><code>irrelevant</code> 原文、V2 输出及 checks</td>
+<td>无 unsupported_claims 仍可能错误；引文真实性与任务相关性不同</td>
+</tr>
+<tr>
+<td>2:15–3:00</td>
+<td><code>citation</code> 的 V1</td>
+<td>文本输出不满足引用 schema；这是契约比较，不是模型智力排名</td>
+</tr>
+<tr>
+<td>3:00–4:00</td>
+<td>Workflow trace 与 <code>empty</code></td>
+<td>条件在 provider 前停止，避免补写；关键词方法的语义局限还在</td>
+</tr>
+<tr>
+<td>4:00–5:00</td>
+<td>12×4 汇总与 pending</td>
+<td>2 条 abstained、10 条待审；规则通过不等于完成，更不等于真实效果</td>
+</tr>
+<tr>
+<td>5:00–6:00</td>
+<td>本轮 HTTP/SQLite 边界</td>
+<td>已确认机会遇到后续反证仍会被阻止；否则“人审”会变成永久通行证</td>
+</tr>
+<tr>
+<td>6:00–7:15</td>
+<td>采样/停止规则表</td>
+<td>任务先于 AI 方案；计独立参与者、保存矛盾、区分同意与访谈完成</td>
+</tr>
+<tr>
+<td>7:15–8:00</td>
+<td>非 AI 比较与下一实验</td>
+<td>标签/规则方案可以胜出；无反复需求就停止扩展产品；没有显著性声明</td>
+</tr>
+</tbody></table>
+<h2 id="deep-4">被拒方案和明确代价</h2><ol>
+<li><strong>只让模型加引用</strong>：本案例显示引用有效也可能答非所问；需要相关性和人判断。当前关键词过滤只是窄范围改进，不是通用语义判定。</li>
+<li><strong>用合成 12/12 当产品成功</strong>：12 是开发 fixture 数，10 条未审，真实参与者 0；技术契约和业务验证要各自计数。</li>
+<li><strong>把访谈计划写成案例成果</strong>：会把招募目标偷换成样本。<code>metadata-not-outcome</code> 明确保留 planned；North Star 不因此增加。</li>
+<li><strong>先做自主 Agent 找功能</strong>：没有自主工具调用的真实需求证据，增加不可控变量。当前拒绝任意 MCP/Agent 执行，仍可比较 No AI、Rules、Search、RAG 等方案。</li>
+<li><strong>一次接受的观察永远有效</strong>：后来否决应重开机会；否则流程形式上有人审、实质上仍可用过期证据推进。</li>
+</ol>
+<p>这种选择牺牲了“一键自动出结论”的顺滑感，需要人做真实判断。SQLite 和单人本地工作区适合展示决策链，尚不能承担无保护的真实研究托管。</p>
+<h2 id="deep-5">五个追问</h2><ol>
+<li><strong>Prompt V2 提升 11 个 case，算提示词优化吗？</strong> 只能叫输出契约从 plain 改 structured 的实际确定性对比。extractor 不理解 prompt prose；没有推理模型调用，不能声称 LLM 质量提升。</li>
+<li><strong>为什么 RAG 能过滤这条发票材料？会漏相关证据吗？</strong> 当前本地词汇检索与问题没有有效交集，所以上下文为空；它可能漏同义表达，也可能收偶然重叠。必须新建真实问题验证，不把一条成功等同语义理解。</li>
+<li><strong>人确认了为什么还拦实验？</strong> 支持该确认的 insight 后来变成 rejected。代码重新读取来源状态，返回 422；原确认不是绕过新反证的永久授权。</li>
+<li><strong>要访谈多少人才够？</strong> 4–6 位 PM、8–12 位玩家是准备目标，不是统计证明。按任务与熟悉度覆盖采样，观察重复问题和反例；遇到薄弱分层补采样，达到预定上限仍不清楚就保留结论不足。不能用重复评论冒充独立人数。</li>
+<li><strong>什么时候应该不用 AI？</strong> 若固定标签/规则能提供必要信息、任务重复性高且维护成本低，先试它；若探索访谈连问题都未证实，暂不选任何干预。No AI 是会被实际比较的方案，不是文档装饰。</li>
+</ol>
+<h2 id="deep-6">下一实验与停止点</h2><p>先执行<a href="https://github.com/QiQiyzhu/designlens-ai/blob/codex/designlens-v1/docs/decision-case-study.md#4-%E4%BB%8E%E5%BE%85%E8%AE%BF%E8%B0%88%E8%BD%AC%E4%B8%BA%E9%87%87%E6%A0%B7%E4%B8%8E%E5%81%9C%E6%AD%A2%E8%A7%84%E5%88%99">已准备的研究协议</a>，得到同意、任务观察和真实材料。反复问题未出现就停止产品扩展；出现后再比较当前方法与证据包，对照非 AI 方案。拒绝把任务时间差预填为“提升 X%”，也不把小型定性试验包装成统计 A/B。</p>
+<p>以上为 AI-assisted 方案与实现的讲解材料。只有本人读懂、复现、能解释反例和局限后才用第一人称陈述；它不能代替真实调研、任职经历或产品上线结果。</p>
+<h2 id="deep-7">面试追问：接通 DeepSeek 后，结论为什么没有自动升级</h2><p>新增 <a href="https://github.com/QiQiyzhu/designlens-ai/blob/codex/designlens-v1/docs/real-model-setup.md">DeepSeek 服务端适配与最多三次探针</a>，模型响应、引用合法性、任务相关性、人工判断、真实用户价值是五层不同证据。远程模型可以产生候选；HTTP 200 不代表 schema 合格，schema 合格不代表相关，相关也不代表需求已经验证。模型调用发生在合成来源上时，真实参与者仍为 0。传输层用 19 项额外检查覆盖错误地址、429、截断、拒答、超时、调用上限和零调用预检；这些不是模型质量评测。</p>
+<p>可以这样讲设计取舍：先保留可重复的 extractor 基线，再把真实模型接到同一引用和人审边界中；成本与失败可见之后，才有依据决定模型的额外不确定性是否值得。相同的历史结果不会因为换了 Provider 就被改写成一次新的模型成绩。</p>
+<p>首次 <a href="https://github.com/QiQiyzhu/designlens-ai/blob/codex/designlens-v1/docs/real-model-results.md">真实 DeepSeek 回执</a> 已产生：3 次响应、2 例契约通过。第三例把敌意材料直接弃答，违反原有引用覆盖契约；这不是泄密失败，也不能改成安全能力成功率。把它拿给面试官看，说明你会先区分“安全边界”与“完成研究任务”的评价目标，再设计新的样本和标准，而不会看到结果后修改旧分母。合计 874 token、人工评价仍 pending、真实研究人数仍为 0。</p>
+<footer>内容与架构图均可离线阅读 · 外部证据链接需要网络 · 2026-09-10</footer></main></body></html>

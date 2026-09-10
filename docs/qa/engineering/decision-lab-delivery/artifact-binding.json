@@ -1,0 +1,40 @@
+{
+  "recordedAt": "2026-09-10T11:47:38.643964+00:00",
+  "method": "Actual offline Edge at 1440 and 390 pixels; all authored HTML equals public copy; source LF hashes and original media bytes verified",
+  "pages": 11,
+  "aToTChapters": 100,
+  "deepGuides": 5,
+  "originalMedia": 8,
+  "bindings": [
+    {
+      "repository": "arc-shift",
+      "dossierNormalizedSha256": "2aa0b487cbccf48fa57ec2caf8035695d43e9e5ea974a0a2447d499458cbf7ec",
+      "deepGuideSha256Lf": "b152465f3452b7986f2c93669b8429f977babf908933c1ab0d6efac59bb2e5a1"
+    },
+    {
+      "repository": "repopilot",
+      "dossierNormalizedSha256": "0fec00f3cb8f1721f8a022eab8dc6154f53368d6c89753c574c60dd446fef083",
+      "deepGuideSha256Lf": "10be88906e4be4ba5788d3f66de9f40dab0fdf817fd5280c7f1b21b637534662"
+    },
+    {
+      "repository": "aegis-arena",
+      "dossierNormalizedSha256": "78d66db53fbe6176e0fa342efb49a3161dc03a46e3578a4e68917a555f6f20a3",
+      "deepGuideSha256Lf": "1c25396045460a707defb75258d011e752225805a36a16652a008bda5352ad05"
+    },
+    {
+      "repository": "designlens-ai",
+      "dossierNormalizedSha256": "eb2f966bf785885b952fc574a74038d1f33b7813e97e6b7142439b8c9e51f19c",
+      "deepGuideSha256Lf": "07dfded34c0ba99db57a6fb4510df2b661567f3eab8320b8208e0c2578015d45"
+    },
+    {
+      "repository": "opspilot-ai",
+      "dossierNormalizedSha256": "cd5752ddfa315a77209ee7523a793e20f2dd98121614740dcb760ad6dbb565b5",
+      "deepGuideSha256Lf": "2bb209f675fa295fcf27349d76ed1fceeb36a40385087567c75e04070dfb2a99"
+    }
+  ],
+  "zip": {
+    "bytes": 311782,
+    "sha256": "2b55870a581e3c66213dda7f4f643cfc46e445d594afa14abefa2fbe3e2e40d5",
+    "htmlPages": 11
+  }
+}

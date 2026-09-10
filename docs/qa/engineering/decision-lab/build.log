@@ -1,0 +1,39 @@
+
+> arc-shift@1.0.0 build
+> tsc --noEmit && vite build
+
+vite v8.2.2 building client environment for production...
+transforming...
+✓ 2060 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                                                     0.71 kB │ gzip:   0.52 kB
+dist/lab/index.html                                                 0.77 kB │ gzip:   0.52 kB
+dist/assets/space-grotesk-vietnamese-700-normal-DMty7AZE.woff2      4.20 kB
+dist/assets/space-grotesk-vietnamese-400-normal-B7xT_GF5.woff2      4.29 kB
+dist/assets/space-grotesk-vietnamese-500-normal-BmEvtly_.woff2      4.32 kB
+dist/assets/space-grotesk-vietnamese-700-normal-Duxec5Rn.woff       5.58 kB
+dist/assets/space-grotesk-vietnamese-500-normal-BTqKIpxg.woff       5.71 kB
+dist/assets/space-grotesk-vietnamese-400-normal-BIWiOVfw.woff       5.72 kB
+dist/assets/space-grotesk-latin-ext-700-normal-BQnZhY3m.woff2      11.99 kB
+dist/assets/space-grotesk-latin-ext-400-normal-CfP_5XZW.woff2      12.25 kB
+dist/assets/space-grotesk-latin-ext-500-normal-DUe3BAxM.woff2      12.27 kB
+dist/assets/space-grotesk-latin-700-normal-RjhwGPKo.woff2          12.84 kB
+dist/assets/space-grotesk-latin-500-normal-lFbtlQH6.woff2          13.31 kB
+dist/assets/space-grotesk-latin-400-normal-CJ-V5oYT.woff2          13.38 kB
+dist/assets/space-grotesk-latin-700-normal-CwsQ-cCU.woff           16.41 kB
+dist/assets/space-grotesk-latin-ext-700-normal-HVCqSBdx.woff       16.46 kB
+dist/assets/space-grotesk-latin-ext-400-normal-DRPE3kg4.woff       16.78 kB
+dist/assets/space-grotesk-latin-ext-500-normal-3dgZTiw9.woff       16.78 kB
+dist/assets/space-grotesk-latin-500-normal-CNSSEhBt.woff           16.98 kB
+dist/assets/space-grotesk-latin-400-normal-BnQMeOim.woff           17.00 kB
+dist/assets/lab-2D79aMuf.css                                       23.49 kB │ gzip:   5.41 kB
+dist/assets/game-Dy6SmE_E.css                                     187.59 kB │ gzip:  32.98 kB
+dist/assets/game-CVgoKZdV.js                                        1.68 kB │ gzip:   0.92 kB
+dist/assets/rules-BE1egm8v.js                                       2.73 kB │ gzip:   1.23 kB
+dist/assets/lab-D30nt5j_.js                                        76.87 kB │ gzip:  23.52 kB
+dist/assets/jsx-runtime-thYREygN.js                               190.80 kB │ gzip:  60.15 kB
+dist/assets/page-BpP-M_6k.js                                    1,477.48 kB │ gzip: 418.86 kB
+
+✓ built in 677ms
+

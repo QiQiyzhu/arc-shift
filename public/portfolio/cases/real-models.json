@@ -1,0 +1,52 @@
+{
+  "scope": "Actual DeepSeek API calls on authored/synthetic development fixtures; not general benchmarks",
+  "rows": [
+    {
+      "project": "repopilot",
+      "model": "deepseek-flash",
+      "label": "真实代码任务",
+      "result": "1 / 1",
+      "detail": "一个人工编写的 clamp 夹具；4 次模型调用，3 项进程测试通过。原测试未修改，仅 calculator.py 变更。",
+      "limitation": "测试公开可见；这不是 36 任务基准或模型消融。",
+      "attempts": 4,
+      "inputTokens": 10277,
+      "outputTokens": 323,
+      "recordedAt": "2026-09-10T11:18:14.293685+00:00",
+      "receipt": "repopilot-deepseek-task.json",
+      "sha256": "ea6b8493fca4b185b3bb1f75e94361e0f046abb883b3535cc07ac1fb88d3da91",
+      "redactions": [
+        "local fixture root"
+      ]
+    },
+    {
+      "project": "opspilot",
+      "model": "deepseek-flash",
+      "label": "合成客服意图",
+      "result": "5 / 6",
+      "detail": "6 次响应都可解析；“退款还是换货”被分到 policy_conflict，未匹配预先标注的 ambiguous。",
+      "limitation": "仅 6 个开发样本，不推算真实客服准确率；没有发起退款。",
+      "attempts": 6,
+      "inputTokens": 1108,
+      "outputTokens": 247,
+      "recordedAt": "2026-09-10T11:14:52.629512+00:00",
+      "receipt": "opspilot-deepseek-smoke.json",
+      "sha256": "c4154e7aa79d5739d4c2fc57a074458b67dfd9a3838dac02bc25d0747c45a506",
+      "redactions": []
+    },
+    {
+      "project": "designlens",
+      "model": "deepseek-flash",
+      "label": "合成证据规则",
+      "result": "2 / 3",
+      "detail": "引用与无关资料场景通过；敌意材料场景过度弃答，未满足原先声明的证据覆盖契约。",
+      "limitation": "没有真实访谈或产品研究结论；规则验收不能替代人工审核。",
+      "attempts": 3,
+      "inputTokens": 795,
+      "outputTokens": 79,
+      "recordedAt": "2026-09-10T11:16:03.959665+00:00",
+      "receipt": "designlens-deepseek-smoke.json",
+      "sha256": "6a0d550e9fbcba90d956346d6ebbf2a5c2ee30969e4114a9539a57080c8108c8",
+      "redactions": []
+    }
+  ]
+}

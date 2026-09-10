@@ -1,0 +1,212 @@
+# Page snapshot
+
+```yaml
+- generic [ref=e2]:
+  - link "跳至实验" [ref=e3] [cursor=pointer]:
+    - /url: "#decision-content"
+  - banner [ref=e4]:
+    - link "QY ENGINEERING / DECISION LAB" [ref=e5] [cursor=pointer]:
+      - /url: /portfolio/
+      - text: QY
+      - generic [ref=e6] [cursor=pointer]: ENGINEERING / DECISION LAB
+    - link "返回作品集 ↗" [ref=e7] [cursor=pointer]:
+      - /url: /portfolio/
+  - main [ref=e8]:
+    - generic [ref=e9]:
+      - generic [ref=e10]: DECISION LAB / 2026
+      - heading "把一个技术选择， 推到它的边界。" [level=1] [ref=e11]:
+        - text: 把一个技术选择，
+        - emphasis [ref=e12]: 推到它的边界。
+      - paragraph [ref=e13]:
+        - text: 改变约束，找到反例，再检查证据。
+        - text: 五个项目，五次可以亲手审视的决定。
+    - navigation "选择决策案例" [ref=e14]:
+      - button "01 / ARC//SHIFT 快，但漏了一个目标？" [ref=e15] [cursor=pointer]:
+        - generic [ref=e16] [cursor=pointer]: 01 / ARC//SHIFT
+        - strong [ref=e17] [cursor=pointer]: 快，但漏了一个目标？
+      - button "02 / AEGIS ARENA 同伴存活，算赢了吗？" [pressed] [ref=e18] [cursor=pointer]:
+        - generic [ref=e19] [cursor=pointer]: 02 / AEGIS ARENA
+        - strong [ref=e20] [cursor=pointer]: 同伴存活，算赢了吗？
+      - button "03 / REPOPILOT 测试全绿，就该收吗？" [ref=e21] [cursor=pointer]:
+        - generic [ref=e22] [cursor=pointer]: 03 / REPOPILOT
+        - strong [ref=e23] [cursor=pointer]: 测试全绿，就该收吗？
+      - button "04 / OPSPILOT AI 找到政策，就能退款？" [ref=e24] [cursor=pointer]:
+        - generic [ref=e25] [cursor=pointer]: 04 / OPSPILOT AI
+        - strong [ref=e26] [cursor=pointer]: 找到政策，就能退款？
+      - button "05 / DESIGNLENS AI 引用正确，就可信了？" [ref=e27] [cursor=pointer]:
+        - generic [ref=e28] [cursor=pointer]: 05 / DESIGNLENS AI
+        - strong [ref=e29] [cursor=pointer]: 引用正确，就可信了？
+    - region "同伴活着， 队伍却更好吗？" [ref=e31]:
+      - generic [ref=e32]:
+        - generic [ref=e33]:
+          - generic [ref=e34]: 02 / AEGIS ARENA · OBSERVED ENDPOINTS
+          - heading "同伴活着， 队伍却更好吗？" [level=2] [ref=e35]:
+            - text: 同伴活着，
+            - text: 队伍却更好吗？
+        - paragraph [ref=e36]: 两种策略、30 对原生实验，两边都是 0 / 30 胜。改变你重视的结果，看看“更好”的排序怎样变化，再检查单次反例。
+      - generic [ref=e37]: 原始 UE 实验数据 · 本页只重新加权已观测终点，不会重新运行、训练或改变 AI 策略。
+      - generic [ref=e38]:
+        - generic [ref=e39]:
+          - generic [ref=e40]:
+            - generic [ref=e41]: POLICY TRADE-OFF / 30 PAIRED SEEDS
+            - generic [ref=e42]: 胜利：Priority 0 · Utility 0
+          - generic [ref=e43]:
+            - generic [ref=e44]:
+              - generic [ref=e45]: PRIORITY
+              - strong [ref=e46]: "0.602"
+            - generic [ref=e47]:
+              - generic [ref=e48]: UTILITY
+              - strong [ref=e49]: "0.465"
+            - paragraph [ref=e50]:
+              - text: Priority 排在前面
+              - generic [ref=e51]: 无量纲偏好指数，允许负数，不是胜率。
+          - generic [ref=e52]:
+            - generic [ref=e53]:
+              - text: 逐对差值
+              - combobox "逐对差值" [ref=e54]:
+                - option "结束时同伴仍存活"
+                - option "累计己方输出" [selected]
+                - option "累计玩家承伤"
+                - option "本轮持续时间"
+            - generic [ref=e55]: Utility − Priority
+          - img "30 对实验的累计己方输出差值，Utility 减 Priority" [ref=e56]:
+            - generic [ref=e57]: "+128"
+            - generic [ref=e58]: "0"
+            - generic [ref=e59]: −128
+            - generic [ref=e62]: "1001"
+            - generic [ref=e81]: "1010"
+            - generic [ref=e102]: "1020"
+            - generic [ref=e123]: "1030"
+            - generic [ref=e124]: 浅绿 = 按该指标方向较优 · 橙色 = 较差 · 白框 = 当前查看的种子
+          - paragraph [ref=e125]: 脚本玩家与同伴造成的实际累计伤害；暴露时长不同。 这些终点的观测时长不同，不能直接推断策略的因果保护能力。
+        - complementary "策略偏好控制" [ref=e126]:
+          - generic [ref=e127]: WHAT DOES BETTER MEAN?
+          - heading "先声明偏好， 再讨论谁更好。" [level=3] [ref=e128]:
+            - text: 先声明偏好，
+            - text: 再讨论谁更好。
+          - generic [ref=e129]:
+            - button "优先结束时同伴存活" [ref=e130] [cursor=pointer]
+            - button "优先输出与坚持" [active] [ref=e131] [cursor=pointer]
+            - button "优先降低累计玩家承伤" [ref=e132] [cursor=pointer]
+          - generic [ref=e133]:
+            - text: 结束时同伴仍存活
+            - status "结束时同伴仍存活 10" [ref=e134]: "10"
+            - slider [ref=e135]: "10"
+          - generic [ref=e136]:
+            - text: 累计己方输出
+            - status "累计己方输出 45" [ref=e137]: "45"
+            - slider [ref=e138]: "45"
+          - generic [ref=e139]:
+            - text: 累计玩家承伤
+            - status "累计玩家承伤 25" [ref=e140]: "25"
+            - slider [ref=e141]: "25"
+          - generic [ref=e142]:
+            - text: 本轮持续时间
+            - status "本轮持续时间 20" [ref=e143]: "20"
+            - slider [ref=e144]: "20"
+          - group [ref=e145]
+      - generic [ref=e147]:
+        - generic [ref=e148]: 指标陷阱
+        - paragraph [ref=e149]: 同伴死亡从 25 / 30 变为 6 / 30，但 Utility 的平均观测窗口也从 25.38 秒缩短到 21.76 秒。“终局时还活着”不等于“能活更久”。先检查结束条件和暴露时长，再解释改进。
+      - generic [ref=e150]:
+        - generic [ref=e151]:
+          - generic [ref=e152]:
+            - generic [ref=e153]: INSPECT A COUNTEREXAMPLE
+            - heading "均值之外，查看一对真实记录。" [level=3] [ref=e154]
+          - generic [ref=e155]:
+            - text: 种子
+            - combobox "种子" [ref=e156]:
+              - option "1001"
+              - option "1002"
+              - option "1003"
+              - option "1004"
+              - option "1005"
+              - option "1006"
+              - option "1007"
+              - option "1008"
+              - option "1009"
+              - option "1010"
+              - option "1011"
+              - option "1012"
+              - option "1013"
+              - option "1014"
+              - option "1015"
+              - option "1016"
+              - option "1017"
+              - option "1018"
+              - option "1019"
+              - option "1020"
+              - option "1021"
+              - option "1022"
+              - option "1023"
+              - option "1024" [selected]
+              - option "1025"
+              - option "1026"
+              - option "1027"
+              - option "1028"
+              - option "1029"
+              - option "1030"
+        - generic [ref=e157]:
+          - button "1027 / Utility 同伴反而死亡" [ref=e158] [cursor=pointer]
+          - button "1024 / 保住同伴的输出代价" [pressed] [ref=e159] [cursor=pointer]
+          - button "1003 / 更高承伤也可能伴随更长战斗" [ref=e160] [cursor=pointer]
+          - button "1021 / 时限与死亡不可混为一谈" [ref=e161] [cursor=pointer]
+        - table [ref=e163]:
+          - rowgroup [ref=e164]:
+            - row "观测终点 Priority Utility 差值 U − P" [ref=e165]:
+              - cell "观测终点" [ref=e166]
+              - cell "Priority" [ref=e167]
+              - cell "Utility" [ref=e168]
+              - cell "差值 U − P" [ref=e169]
+          - rowgroup [ref=e170]:
+            - row "结束时同伴仍存活 0 1 +1.00" [ref=e171]:
+              - cell "结束时同伴仍存活" [ref=e172]
+              - cell "0" [ref=e173]
+              - cell "1" [ref=e174]
+              - cell "+1.00" [ref=e175]
+            - row "累计己方输出 284.00 156.00 -128.00" [ref=e176]:
+              - cell "累计己方输出" [ref=e177]
+              - cell "284.00" [ref=e178]
+              - cell "156.00" [ref=e179]
+              - cell "-128.00" [ref=e180]
+            - row "累计玩家承伤 100.00 122.00 +22.00" [ref=e181]:
+              - cell "累计玩家承伤" [ref=e182]
+              - cell "100.00" [ref=e183]
+              - cell "122.00" [ref=e184]
+              - cell "+22.00" [ref=e185]
+            - row "本轮持续时间 32.00 25.00 -7.00" [ref=e186]:
+              - cell "本轮持续时间" [ref=e187]
+              - cell "32.00" [ref=e188]
+              - cell "25.00" [ref=e189]
+              - cell "-7.00" [ref=e190]
+        - paragraph [ref=e191]: 同伴端点由死亡变存活，但输出少128、玩家累计承伤多22，本轮早7秒结束。
+        - generic [ref=e192]:
+          - link "种子 1024 / Priority 原始 JSON ↗" [ref=e193] [cursor=pointer]:
+            - /url: https://github.com/QiQiyzhu/aegis-arena/blob/v1.0.0-native/evidence/unreal/evaluation/priority/raw/episode-023.json
+          - link "Utility 原始 JSON ↗" [ref=e194] [cursor=pointer]:
+            - /url: https://github.com/QiQiyzhu/aegis-arena/blob/v1.0.0-native/evidence/unreal/evaluation/utility/raw/episode-023.json
+      - generic [ref=e195]:
+        - article [ref=e196]:
+          - generic [ref=e197]: DECISION
+          - heading "不把一个漂亮指标当成目标" [level=3] [ref=e198]
+          - paragraph [ref=e199]: 终局同伴状态、输出、玩家承伤与持续时间一起看。偏好分数只是公开讨论取舍的工具，不能为某种策略制造客观“总冠军”。
+        - article [ref=e200]:
+          - generic [ref=e201]: ACCEPTANCE
+          - heading "测试说成功，先问是否执行" [level=3] [ref=e202]
+          - paragraph [ref=e203]: 曾有错误地图缺少测试 Actor，Automation JSON 却报 Success。最终门槛增加真实 PIE 世界、已开始运行的标记和 12 条具名断言，拒绝零执行成功。
+        - article [ref=e204]:
+          - generic [ref=e205]: NEXT EXPERIMENT
+          - heading "统一观察窗口，单独记录死亡时刻" [level=3] [ref=e206]
+          - paragraph [ref=e207]: 固定随访窗口、明确终止原因，并记录事件时间，再比较保护能力。加入未参与调参的种子，避免把这 30 对样本当作外推结论。
+      - generic [ref=e208]:
+        - link "完整决策案例 ↗" [ref=e209] [cursor=pointer]:
+          - /url: https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/decision-case-study.md
+        - link "3 分钟与 8 分钟讲解 ↗" [ref=e210] [cursor=pointer]:
+          - /url: https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/interview-deep-dive.md
+        - link "下载真实原生程序 ↗" [ref=e211] [cursor=pointer]:
+          - /url: https://github.com/QiQiyzhu/aegis-arena/releases/tag/v1.0.0-native
+    - generic [ref=e212]:
+      - generic [ref=e213]: AI 辅助实现 · 方法、来源与未验证范围随案例说明
+      - link "阅读完整 A–T 手册 ↗" [ref=e214] [cursor=pointer]:
+        - /url: /portfolio/handbooks/
+```

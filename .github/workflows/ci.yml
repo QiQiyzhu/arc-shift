@@ -66,6 +66,8 @@ jobs:
         run: npm run lint 2>&1 | tee outputs/qa/lint.log
       - name: Unit and simulation contracts
         run: npm test -- --reporter=verbose 2>&1 | tee outputs/qa/unit-tests.log
+      - name: Verify recorded experiment provenance
+        run: node scripts/verify-portfolio-evidence.mjs 2>&1 | tee outputs/qa/portfolio-evidence.log
       - name: Headless simulation soak
         run: |
           touch outputs/qa/soak.started
