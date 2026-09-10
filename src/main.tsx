@@ -8,7 +8,7 @@ import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 const root = createRoot(document.getElementById('root')!);
 if (import.meta.env.DEV && location.pathname.startsWith('/dev/')) {
-  const page = location.pathname === '/dev/content-editor' ? import('./dev/ContentEditor') : import('./dev/DevApp');
+  const page = location.pathname === '/dev/content-editor' ? import('./dev/ContentEditor') : location.pathname === '/dev/debugger' ? import('./dev/Debugger') : import('./dev/DevApp');
   void page.then(({ default: DevApp }) =>
     root.render(
       <React.StrictMode>

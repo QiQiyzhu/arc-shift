@@ -1008,6 +1008,14 @@ kbd {
   width: min(1060px, 90%);
   text-align: center;
 }
+.draft-panel {
+  max-height: calc(100% - 32px);
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding: 18px 8px;
+  scroll-padding-block: 18px;
+}
 .draft-panel > .eyebrow,
 .map-panel > .eyebrow {
   justify-content: center;

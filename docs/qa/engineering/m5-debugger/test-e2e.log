@@ -1,0 +1,103 @@
+
+> arc-shift@1.0.0 test:e2e
+> playwright test
+
+
+Running 30 tests using 1 worker
+
+  ok  1 e2e\content-editor.spec.ts:3:1 › content form diff, validation, import/export and real sandbox remain isolated (8.7s)
+  ok  2 e2e\content-editor.spec.ts:73:1 › malformed content and unknown references never replace the running pack (1.6s)
+  ok  3 e2e\debugger.spec.ts:2:1 › DEV inspector steps real simulation, spawns Boss, grants once and draws overlays (4.2s)
+  ok  4 e2e\engineering-performance.spec.ts:3:37 › engineering stress 28 enemies (12.4s)
+  ok  5 e2e\engineering-performance.spec.ts:3:37 › engineering stress 100 enemies (12.1s)
+  ok  6 e2e\engineering-performance.spec.ts:3:37 › engineering stress 250 enemies (13.0s)
+  ok  7 e2e\expedition.spec.ts:42:1 › holy sword, actual consumable keys, pause-frozen bomb and weapon continuation (9.2s)
+  x   8 e2e\expedition.spec.ts:93:1 › camp choices, reroll, stock, bank and workshop persist through real page reloads (45.3s)
+  ok  9 e2e\expedition.spec.ts:184:1 › trial inherits equipped weapon, switches to cannon and leaves the real save untouched (7.0s)
+  ok 10 e2e\game.spec.ts:9:1 › settings and window blur freeze introductions; Escape only dismisses the dialog (15.9s)
+  ok 11 e2e\game.spec.ts:72:1 › round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio (7.8s)
+  ok 12 e2e\game.spec.ts:138:1 › round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume (12.4s)
+  ok 13 e2e\game.spec.ts:221:1 › round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080 (18.6s)
+  ok 14 e2e\game.spec.ts:309:1 › mobile loads with controls guidance and no horizontal overflow (2.7s)
+  ok 15 e2e\performance.spec.ts:4:3 › ten-second baseline render sample with a crowded arena and active VFX (16.2s)
+  ok 16 e2e\performance.spec.ts:4:3 › ten-second resonance render sample with a crowded arena and active VFX (15.8s)
+  ok 17 e2e\performance.spec.ts:4:3 › ten-second sword render sample with a crowded arena and active VFX (16.4s)
+  ok 18 e2e\performance.spec.ts:4:3 › ten-second cannon render sample with a crowded arena and active VFX (16.2s)
+  ok 19 e2e\performance.spec.ts:4:3 › ten-second hybrid render sample with a crowded arena and active VFX (15.8s)
+  ok 20 e2e\pilgrimage.spec.ts:26:1 › clean menu groups loadout, bestiary and memories into a navigable camp (3.4s)
+  ok 21 e2e\pilgrimage.spec.ts:80:1 › full route previews locked nodes and travels legally into a free hybrid forge (3.9s)
+  ok 22 e2e\pilgrimage.spec.ts:130:1 › resting preserves access to banking and completed treasure keeps its key chest (3.1s)
+  ok 23 e2e\pilgrimage.spec.ts:173:1 › archive choice persists its lore and offered cards (3.0s)
+  ok 24 e2e\pilgrimage.spec.ts:195:74 › matron has its own arena, attacks and escalating score (9.6s)
+  ok 25 e2e\pilgrimage.spec.ts:195:74 › forgemaster has its own arena, attacks and escalating score (7.6s)
+  ok 26 e2e\pilgrimage.spec.ts:225:1 › three-form trial fires actual hybrid attacks and does not change the profile (5.8s)
+  ok 27 e2e\replay.spec.ts:3:1 › QA replay records real controls, exports, steps, ignores blur and replays at x4 (11.5s)
+  ok 28 e2e\replay.spec.ts:74:1 › replay import rejects incompatible versions without discarding the current session (1.1s)
+  ok 29 e2e\resonance.spec.ts:3:1 › six resonance trials render their real projectile forms and preserve an existing run (35.0s)
+  ok 30 e2e\resonance.spec.ts:90:1 › audio buses mute active voices, pause immediately, and survive context recreation (6.5s)
+
+
+  1) e2e\expedition.spec.ts:93:1 › camp choices, reroll, stock, bank and workshop persist through real page reloads 
+
+    [31mTest timeout of 45000ms exceeded.[39m
+
+    Error: locator.click: Test timeout of 45000ms exceeded.
+    Call log:
+    [2m  - waiting for getByRole('button', { name: /12 金币 · 重抽协议/ })[22m
+    [2m    - locator resolved to <button>…</button>[22m
+    [2m  - attempting click action[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is visible, enabled and stable[22m
+    [2m      - scrolling into view if needed[22m
+    [2m      - done scrolling[22m
+    [2m      - <footer class="bottombar">…</footer> intercepts pointer events[22m
+    [2m    - retrying click action[22m
+    [2m    - waiting 20ms[22m
+    [2m    2 × waiting for element to be visible, enabled and stable[22m
+    [2m      - element is visible, enabled and stable[22m
+    [2m      - scrolling into view if needed[22m
+    [2m      - done scrolling[22m
+    [2m      - <footer class="bottombar">…</footer> intercepts pointer events[22m
+    [2m    - retrying click action[22m
+    [2m      - waiting 100ms[22m
+    [2m    62 × waiting for element to be visible, enabled and stable[22m
+    [2m       - element is visible, enabled and stable[22m
+    [2m       - scrolling into view if needed[22m
+    [2m       - done scrolling[22m
+    [2m       - <footer class="bottombar">…</footer> intercepts pointer events[22m
+    [2m     - retrying click action[22m
+    [2m       - waiting 500ms[22m
+    [2m    - waiting for element to be visible, enabled and stable[22m
+    [2m    - element is visible, enabled and stable[22m
+    [2m    - scrolling into view if needed[22m
+
+
+      157 |     a.engine.clear();
+      158 |   });
+    > 159 |   await page.getByRole('button', { name: /12 金币 · 重抽协议/ }).click();
+          |                                                            ^
+      160 |   const hand = await page.evaluate(() =>
+      161 |     window.arcQA.engine.world.rewards.map((c) => c.id),
+      162 |   );
+        at C:\Users\yzhu\Documents\ChatGPT\New project\e2e\expedition.spec.ts:159:60
+
+    attachment #1: screenshot (image/png) ──────────────────────────────────────────────────────────
+    outputs\qa\results\expedition-camp-choices-re-cce64-t-through-real-page-reloads\test-failed-1.png
+    ────────────────────────────────────────────────────────────────────────────────────────────────
+
+    Error Context: outputs\qa\results\expedition-camp-choices-re-cce64-t-through-real-page-reloads\error-context.md
+
+  1 failed
+    e2e\expedition.spec.ts:93:1 › camp choices, reroll, stock, bank and workshop persist through real page reloads 
+  29 passed (5.8m)
+
+[2m[WebServer] [22m(node:31064) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+[2m[WebServer] [22m(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:43156) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)
+(node:46460) Warning: The 'NO_COLOR' env is ignored due to the 'FORCE_COLOR' env being set.
+(Use `node --trace-warnings ...` to show where the warning was created)

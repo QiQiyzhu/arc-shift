@@ -1,0 +1,15 @@
+# Development simulation inspector
+
+Open `/dev/debugger` through `npm run dev`. This standalone QA Engine uses a blank in-memory save with persistence disabled. It preserves the ordinary room transition, then runs the real gameplay systems in training mode. It is not attached to the public player's live session.
+
+The overlay displays rolling frame mean/FPS, measured engine-step P95, fixed tick, RNG state, enemy/hazard/projectile/FX counts, pool misses and capacities, occupied grid cells and cumulative separation/swept-query counts. The controls pause, advance one neutral fixed tick, choose 0.25/0.5/1/2× simulation speed, spawn any existing enemy/Boss up to a 300-entity cap, grant a validated protocol, change weapon and inspect an enemy's FSM, timer, phase, attack index, health and statuses.
+
+F3 toggles the overlay. Hitboxes show enemy/projectile circles, swept projectile segments, sword sectors and hazard ranges. The player's outer 14-unit circle is used for projectile collisions; the inner 12-unit circle is the hazard margin. Grid drawing reads the existing cells without rebuilding them, and labels are capped at 60. Everything is presentation-only and consumes no game RNG.
+
+`debug-session.ts` owns the control accumulator. A quarter-speed frame retains latched skill edges until its next actual 1/60 update; double speed consumes each edge on the first step only. Pause clears fractional debt and pending edges. Single tick deliberately uses neutral input and remains paused. Manual interventions are not claimed to be replay-compatible recordings.
+
+Granting a protocol shares the validated `grantProtocol` mutation with Engine rewards, including one-time ice-shell health and content-specific stat derivation. Meta discovery and persistence remain Engine concerns. Unknown and duplicate protocols do not mutate state.
+
+Four unit tests cover pause/step, slow-motion latching, double-speed edge consumption, metrics that leave the world checksum unchanged, duplicate grants and entity/ID bounds. One actual browser test spawns a Boss, grants health once, changes weapon, runs beyond the room transition, observes populated grid cells, toggles overlays and verifies untouched storage. The complete five-check stage report is under `docs/qa/engineering/m5-debugger-final/`: 128 unit and 32 browser tests passed, together with typecheck, lint and build. The earlier failed `m5-debugger/` report is retained: long reward synergy explanations hid the reroll button behind the HUD. The reward panel now scrolls within the arena, with two additional real-pointer regressions at 900- and 768-pixel viewport heights.
+
+The readings are local rolling diagnostics, not performance claims: frame statistics include display/host conditions; step P95 covers only the latest 240 engine calls; the 120-frame display mean is not a long-duration FPS benchmark. Training restores health, so this is not evidence of player survival or balance. The DEV branch in `src/main.tsx` excludes the debugger imports and route UI from production builds.

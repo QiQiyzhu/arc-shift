@@ -4,6 +4,18 @@ import type { Stats, Element } from '../game/types';
 import { CARDS } from './catalog';
 import { DEFAULT_CONTENT, type ContentPack } from '../content/schema';
 import { SYNERGIES } from './synergies';
+import type { World } from '../game/world';
+/** Shared validated mutation; persistence/discovery remain an Engine concern. */
+export function grantProtocol(w: World, id: string): boolean {
+  if (!CARDS.some(c => c.id === id) || w.cards.includes(id)) return false;
+  w.cards.push(id);
+  w.stats = deriveStats(w.cards, w.level, w.relics, w.content);
+  if (id === 'ice-shell') {
+    w.player.maxHp += 40;
+    w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
+  }
+  return true;
+}
 export function buildCounts(ids: readonly string[]): Record<Element, number> {
   const counts = { fire: 0, storm: 0, frost: 0, void: 0, shift: 0 };
   for (const id of ids) {

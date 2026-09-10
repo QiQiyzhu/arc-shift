@@ -83,6 +83,7 @@ export default function DevApp() {
         <a href="/">ARC//SHIFT</a>
         <b>ENGINEERING / QA REPLAY</b>
         <a href="/dev/content-editor">Content editor</a>
+        <a href="/dev/debugger">Debugger</a>
       </header>
       <div className="dev-title">
         <div>

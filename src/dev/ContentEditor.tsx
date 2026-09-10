@@ -105,6 +105,7 @@ export default function ContentEditor() {
         <a href="/">ARC//SHIFT</a>
         <b>ENGINEERING / CONTENT LAB</b>
         <a href="/dev/replay">Replay viewer</a>
+        <a href="/dev/debugger">Debugger</a>
       </header>
       <div className="dev-title">
         <div>

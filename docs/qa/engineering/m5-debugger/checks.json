@@ -1,0 +1,44 @@
+{
+  "stage": "m5-debugger",
+  "recordedAt": "2026-09-10T06:28:58.859Z",
+  "commit": "8952c105c739a4604114cf1634bfebc21f97ea79",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 4872
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 1756
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m5-debugger/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 5628
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 1,
+      "elapsedMs": 347916
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6IBUiNml.css",
+      "bytes": 186303,
+      "gzipBytes": 32582
+    },
+    {
+      "name": "index-DQwtE5yH.js",
+      "bytes": 192226,
+      "gzipBytes": 60074
+    },
+    {
+      "name": "page-DhOVo7dH.js",
+      "bytes": 1471463,
+      "gzipBytes": 413910
+    }
+  ]
+}

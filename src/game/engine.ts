@@ -7,7 +7,7 @@ import { Random, distance } from '../core/math';
 import { makeRoom, roomWaveCount, roomChoices } from '../rooms/generator';
 import type { EnemyKind, Input, Room, RoomKind } from './types';
 import type { GameCommand, SimulationObserver } from '../core/replay-contract';
-import { deriveStats, rewardChoices } from '../cards/system';
+import { deriveStats, rewardChoices, grantProtocol } from '../cards/system';
 import { loadSave, writeSave, type SaveData } from '../core/save';
 import {
   SHOP,
@@ -120,13 +120,7 @@ export class Engine {
   }
   private integrateCard(id: string) {
     const w = this.world;
-    if (w.cards.includes(id)) return;
-    w.cards.push(id);
-    w.stats = deriveStats(w.cards, w.level, w.relics, w.content);
-    if (id === 'ice-shell') {
-      w.player.maxHp += 40;
-      w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
-    }
+    if (!grantProtocol(w, id)) return;
     if (!this.practice && !this.save.meta.discovered.includes(id))
       this.save.meta.discovered.push(id);
   }
