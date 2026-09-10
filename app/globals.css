@@ -1410,6 +1410,15 @@ kbd {
   border-top: 1px solid #2b4037;
   padding-top: 18px;
 }
+.input-settings { margin: 18px 0; border-top: 1px solid #2b4037; padding-top: 16px; }
+.input-settings summary { cursor: pointer; font-size: 14px; color: #d3e9bf; }
+.input-settings summary span { float: right; color: #8aab9f; font-size: 11px; }
+.input-settings p { color: #92aa9e; font-size: 12px; line-height: 1.8; margin: 14px 0; }
+.binding-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px 18px; margin: 16px 0; }
+.binding-grid label, .input-deadzone { display: flex; align-items: center; justify-content: space-between; gap: 10px; font-size: 12px; }
+.input-settings select { max-width: 112px; background: #1b302d; border: 1px solid #425d51; color: #d4e8da; padding: 6px; border-radius: 3px; }
+.binding-reset { border: 1px solid #607d69; background: #192c25; color: #cae5ae; padding: 8px 12px; font-size: 12px; }
+@media (max-width: 520px) { .binding-grid { grid-template-columns: 1fr; } }
 .library-dialog {
   width: min(1140px, 94vw) !important;
 }

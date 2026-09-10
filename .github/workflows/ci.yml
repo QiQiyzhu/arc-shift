@@ -40,6 +40,8 @@ jobs:
           cache: npm
       - name: Install locked dependencies
         run: npm ci
+      - name: Audit locked dependencies
+        run: npm audit --audit-level=moderate
       - name: Record the tested source and environment
         run: |
           mkdir -p outputs/qa
@@ -88,7 +90,7 @@ jobs:
           if [[ "$FULL_SUITE" == 'true' ]]; then
             npx playwright test --workers=1 --trace=retain-on-failure 2>&1 | tee outputs/qa/browser.log
           else
-            npx playwright test e2e/game.spec.ts e2e/replay.spec.ts --workers=1 --trace=retain-on-failure 2>&1 | tee outputs/qa/browser.log
+            npx playwright test e2e/game.spec.ts e2e/replay.spec.ts e2e/input.spec.ts --workers=1 --trace=retain-on-failure 2>&1 | tee outputs/qa/browser.log
           fi
       - name: Collect only reports created by this run
         if: always()

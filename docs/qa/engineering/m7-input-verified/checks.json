@@ -1,0 +1,49 @@
+{
+  "stage": "m7-input-verified",
+  "recordedAt": "2026-09-10T07:52:01.294Z",
+  "commit": "5cf8270c6174bfe7532a7dd03b5a44d5b8f5ede1",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 8375
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 2717
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m7-input-verified/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 8602
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 404030
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 6649
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6_rRk6vB.css",
+      "bytes": 187276,
+      "gzipBytes": 32809
+    },
+    {
+      "name": "index-LqCAtE_v.js",
+      "bytes": 192226,
+      "gzipBytes": 60074
+    },
+    {
+      "name": "page-C-FSyDQ9.js",
+      "bytes": 1480121,
+      "gzipBytes": 417472
+    }
+  ]
+}

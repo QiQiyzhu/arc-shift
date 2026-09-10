@@ -4,6 +4,24 @@ const dir = 'outputs/qa';
 fs.mkdirSync(dir, { recursive: true });
 const snapshot = (p: Page) => p.evaluate(() => window.arcQA.snapshot());
 const fix = <T>(p: Page, fn: () => T) => p.evaluate(fn);
+// These are simulation transitions, not promises of GPU throughput. Keep a
+// bounded deadline and include the live tick/timer when an entry really stalls.
+async function waitForPhase(page: Page, phase: 'playing' | 'reward') {
+  await expect
+    .poll(
+      () =>
+        page.evaluate(() => {
+          const w = window.arcQA.engine.world;
+          return {
+            phase: w.phase,
+            tick: w.tick,
+            transitionTimer: w.transitionTimer,
+          };
+        }),
+      { timeout: 15000, message: `Simulation reaches ${phase}` },
+    )
+    .toMatchObject({ phase });
+}
 test('settings and window blur freeze introductions; Escape only dismisses the dialog', async ({
   page,
 }) => {
@@ -25,7 +43,7 @@ test('settings and window blur freeze introductions; Escape only dismisses the d
   await page.waitForTimeout(120);
   expect((await snapshot(page)).phase).toBe('paused');
   await page.getByRole('button', { name: '继续行动', exact: true }).click();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
   await fix(page, () => window.arcQA.room(8, 'boss'));
   await page.getByRole('button', { name: '系统设置', exact: true }).click();
   const bossTime = await fix(
@@ -43,14 +61,17 @@ test('settings and window blur freeze introductions; Escape only dismisses the d
   await page.evaluate(() => window.dispatchEvent(new Event('blur')));
   await page.waitForTimeout(3100);
   expect((await snapshot(page)).phase).toBe('paused');
+  // A synthetic blur also changes Phaser's focus state. Clicking an already
+  // focused document cannot supply the matching native focus event for us.
+  await page.evaluate(() => window.dispatchEvent(new Event('focus')));
   await page.getByRole('button', { name: '继续行动', exact: true }).click();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
 });
 async function start(page: Page) {
   await page.goto('/?qa');
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
   await page.getByRole('button', { name: /余烬协议：/ }).click();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
 }
 test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio', async ({
   page,
@@ -78,8 +99,16 @@ test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized
   });
   const before = await snapshot(page);
   await page.keyboard.down('d');
-  await page.waitForTimeout(260);
-  await page.keyboard.up('d');
+  try {
+    await expect
+      .poll(async () => (await snapshot(page)).player.x, {
+        timeout: 2000,
+        intervals: [50, 100],
+      })
+      .toBeGreaterThan(before.player.x + 35);
+  } finally {
+    await page.keyboard.up('d');
+  }
   expect((await snapshot(page)).player.x).toBeGreaterThan(before.player.x + 35);
   const canvas = await page.locator('canvas').boundingBox();
   const pos = (x: number, y: number) => ({
@@ -96,11 +125,26 @@ test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized
     .toBeGreaterThan(30);
   await page.mouse.up();
   await page.keyboard.press('Space');
-  await page.waitForTimeout(50);
-  expect((await snapshot(page)).player.dashCd).toBeGreaterThan(0.7);
+  await expect
+    .poll(async () => (await snapshot(page)).player.dashCd, {
+      timeout: 2000,
+      intervals: [50, 100],
+    })
+    .toBeGreaterThan(0.7);
   await page.keyboard.press('q');
   await page.keyboard.press('e');
-  await page.waitForTimeout(120);
+  await expect
+    .poll(async () => (await snapshot(page)).player.qCd, {
+      timeout: 2000,
+      intervals: [50, 100],
+    })
+    .toBeGreaterThan(4);
+  await expect
+    .poll(async () => (await snapshot(page)).player.eCd, {
+      timeout: 2000,
+      intervals: [50, 100],
+    })
+    .toBeGreaterThan(8);
   const active = await snapshot(page);
   expect(active.player.qCd).toBeGreaterThan(4);
   expect(active.player.eCd).toBeGreaterThan(8);
@@ -112,7 +156,7 @@ test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized
   await page.waitForTimeout(300);
   expect((await snapshot(page)).time).toBe(pause.time);
   await page.getByRole('button', { name: '继续行动', exact: true }).click();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
   expect(errors).toEqual([]);
 });
 test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume', async ({
@@ -138,7 +182,7 @@ test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save 
   await page.waitForTimeout(600);
   await page.screenshot({ path: `${dir}/round2-draft-1440.png` });
   await page.getByRole('button', { name: /电弧引擎：/ }).click();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
   await fix(page, () => {
     const a = window.arcQA;
     a.engine.world.enemies = [];
@@ -151,13 +195,14 @@ test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save 
   await page.locator('.draft-cards .protocol-card').first().click();
   await expect(page.locator('.pilgrimage-map')).toBeVisible();
   await page.screenshot({ path: `${dir}/round2-map-1440.png` });
-  await page.getByRole('button',{name:'前往此处',exact:true}).click();
+  await page.getByRole('button', { name: '前往此处', exact: true }).click();
   await expect.poll(async () => (await snapshot(page)).room).toBe(2);
   await page.reload();
   await page.getByRole('button', { name: /继续行动/ }).click();
   await expect.poll(async () => (await snapshot(page)).room).toBe(2);
   expect((await snapshot(page)).cards.length).toBe(2);
   await fix(page, () => window.arcQA.room(3, 'elite'));
+  await waitForPhase(page, 'playing');
   await expect
     .poll(async () => (await snapshot(page)).enemyCount)
     .toBeGreaterThan(0);
@@ -171,7 +216,7 @@ test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save 
     a.engine.world.player.hp = 40;
     a.room(3, 'heal');
   });
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('reward');
+  await waitForPhase(page, 'reward');
   expect((await snapshot(page)).player.hp).toBe(102);
 });
 test('round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080', async ({
@@ -189,7 +234,7 @@ test('round 3: two bosses, phase transition, defeat, restart and victory at 1920
   ).toBe(2);
   await fix(page, () => window.arcQA.room(4, 'boss'));
   await expect(page.getByText('WARNING // 核心实体已激活')).toBeVisible();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
   await fix(page, () => {
     const w = window.arcQA.engine.world;
     w.player.invulnerable = 60;
@@ -201,7 +246,7 @@ test('round 3: two bosses, phase transition, defeat, restart and victory at 1920
   await page.waitForTimeout(300);
   await page.screenshot({ path: `${dir}/round3-warden-1920.png` });
   await fix(page, () => window.arcQA.room(8, 'boss'));
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
   await fix(page, () => {
     const w = window.arcQA.engine.world;
     w.player.invulnerable = 60;
@@ -225,7 +270,7 @@ test('round 3: two bosses, phase transition, defeat, restart and victory at 1920
   expect(await fix(page, () => window.arcQA.engine.save.meta.wins)).toBe(1);
   await page.getByRole('button', { name: '再次跃迁', exact: true }).click();
   await page.getByRole('button', { name: /冰霜编码：/ }).click();
-  await expect.poll(async () => (await snapshot(page)).phase).toBe('playing');
+  await waitForPhase(page, 'playing');
   await fix(page, () => {
     const w = window.arcQA.engine.world;
     w.player.hp = 1;

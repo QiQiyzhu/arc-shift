@@ -30,6 +30,7 @@ export function ArenaCanvas({
       scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
       scene,
       audio: { noAudio: true },
+      fps: { smoothStep: false },
     });
     return () => {
       notify.current?.(null);

@@ -1,8 +1,8 @@
 {
-  "recordedAt": "2026-09-10T06:55:09.865Z",
+  "recordedAt": "2026-09-10T07:52:42.150Z",
   "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code.",
-  "totalBytes": 3073830,
-  "javascriptBytes": 1664223,
+  "totalBytes": 3082750,
+  "javascriptBytes": 1672347,
   "productionDebugMarkers": [],
   "files": [
     {
@@ -22,22 +22,22 @@
       "bytes": 276558
     },
     {
-      "path": "dist/assets/index-Ba8hR3IU.js",
+      "path": "dist/assets/index-6_rRk6vB.css",
+      "bytes": 187276,
+      "gzipBytes": 32809,
+      "brotliBytes": 27275
+    },
+    {
+      "path": "dist/assets/index-LqCAtE_v.js",
       "bytes": 192226,
       "gzipBytes": 60074,
-      "brotliBytes": 51745
+      "brotliBytes": 51754
     },
     {
-      "path": "dist/assets/index-CQDW605J.css",
-      "bytes": 186480,
-      "gzipBytes": 32625,
-      "brotliBytes": 27162
-    },
-    {
-      "path": "dist/assets/page-CDvrXlQO.js",
-      "bytes": 1471997,
-      "gzipBytes": 414084,
-      "brotliBytes": 332579
+      "path": "dist/assets/page-C-FSyDQ9.js",
+      "bytes": 1480121,
+      "gzipBytes": 417472,
+      "brotliBytes": 334997
     },
     {
       "path": "dist/assets/space-grotesk-latin-400-normal-BnQMeOim.woff",
@@ -118,8 +118,8 @@
     {
       "path": "dist/index.html",
       "bytes": 635,
-      "gzipBytes": 491,
-      "brotliBytes": 286
+      "gzipBytes": 489,
+      "brotliBytes": 288
     },
     {
       "path": "dist/licenses/base-ui.txt",

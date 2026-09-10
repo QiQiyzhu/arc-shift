@@ -1,0 +1,44 @@
+{
+  "stage": "m7-input-final",
+  "recordedAt": "2026-09-10T07:40:27.972Z",
+  "commit": "5cf8270c6174bfe7532a7dd03b5a44d5b8f5ede1",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 7237
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 3791
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m7-input-final/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 9252
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 1,
+      "elapsedMs": 373680
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6_rRk6vB.css",
+      "bytes": 187276,
+      "gzipBytes": 32809
+    },
+    {
+      "name": "index-ChbDBbPs.js",
+      "bytes": 192226,
+      "gzipBytes": 60074
+    },
+    {
+      "name": "page-CMEQPd-1.js",
+      "bytes": 1479412,
+      "gzipBytes": 417222
+    }
+  ]
+}

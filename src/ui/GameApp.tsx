@@ -27,6 +27,7 @@ import { LORE, isBoss } from '../progression/catalog';
 import { UtilityPanel } from './SettingsPanel';
 import { Synth } from '../audio/synth';
 import { installWebMCP } from './webmcp';
+import { keyLabel, padLabel, type ButtonAction } from '../input/bindings';
 const engine = new Engine();
 const synth = new Synth();
 if (import.meta.env.DEV && new URLSearchParams(location.search).has('qa'))
@@ -91,6 +92,8 @@ export default function GameApp() {
       height: 720,
       backgroundColor: '#080e14',
       antialias: true,
+      // ArcScene owns fixed-step accumulation; avoid a second startup/focus delta smoother.
+      fps: { smoothStep: false },
       scale: { mode: Phaser.Scale.FIT, autoCenter: Phaser.Scale.CENTER_BOTH },
       scene: s,
       audio: { noAudio: true },
@@ -107,6 +110,30 @@ export default function GameApp() {
   }, []);
   const w = engine.world,
     p = w.player;
+  const controls = scene.current?.actions,
+    config = controls?.bindings;
+  const gamepad = controls?.connected && controls.lastDevice === 'gamepad';
+  const movementLabel = gamepad
+    ? '左摇杆'
+    : config
+      ? [
+          config.keys.MoveUp[0],
+          config.keys.MoveLeft[0],
+          config.keys.MoveDown[0],
+          config.keys.MoveRight[0],
+        ]
+          .map(keyLabel)
+          .join(' ')
+      : 'WASD';
+  const controlLabel = (action: ButtonAction, fallback: string) => {
+    if (!config) return fallback;
+    if (gamepad) return padLabel(config.gamepad[action]);
+    return config.keys[action][0]
+      ? keyLabel(config.keys[action][0])
+      : config.mouseAttack === 0
+        ? 'LMB'
+        : 'RMB';
+  };
   const start = () => {
     synth.unlock();
     synth.ui();
@@ -274,7 +301,14 @@ export default function GameApp() {
                 {p.shield > 0 && (
                   <span className="shield-tag">护盾 +{p.shield}</span>
                 )}
-                <WalletBar engine={engine} interactive />
+                <WalletBar
+                  engine={engine}
+                  interactive
+                  labels={{
+                    bomb: controlLabel('Bomb', 'B'),
+                    potion: controlLabel('Potion', 'R'),
+                  }}
+                />
               </div>
               <div className="room-hud">
                 <div className="hud-caption">
@@ -317,7 +351,10 @@ export default function GameApp() {
             <BuildHUD cards={w.cards} />
             <HybridHUD engine={engine} />
             {w.fieldBuff && (
-              <div className="field-buff">祝祷符阵 · Q / E 加速恢复</div>
+              <div className="field-buff">
+                祝祷符阵 · {controlLabel('Pulse', 'Q')} /{' '}
+                {controlLabel('Gravity', 'E')} 加速恢复
+              </div>
             )}
             {engine.practice && (
               <div className="practice-banner">
@@ -343,42 +380,37 @@ export default function GameApp() {
                 <Skill
                   icon={<WeaponIcon id={w.weapon} />}
                   label={WEAPONS.find((item) => item.id === w.weapon)!.name}
-                  keycap="LMB"
+                  keycap={controlLabel('PrimaryAttack', 'LMB')}
                   value={0}
                   max={1}
                 />
                 <Skill
                   icon={<Wind />}
                   label="相位跃迁"
-                  keycap="SPACE"
+                  keycap={controlLabel('Dash', 'SPACE')}
                   value={p.dashCd}
                   max={w.stats.dashCooldown}
                 />
                 <Skill
                   icon={<Zap />}
                   label="湮灭脉冲"
-                  keycap="Q"
+                  keycap={controlLabel('Pulse', 'Q')}
                   value={p.qCd}
                   max={w.stats.qCooldown}
                 />
                 <Skill
                   icon={<Orbit />}
                   label="引力奇点"
-                  keycap="E"
+                  keycap={controlLabel('Gravity', 'E')}
                   value={p.eCd}
                   max={w.stats.eCooldown}
                 />
               </div>
               <div className="move-tip">
                 <span>
-                  <kbd>W</kbd>
+                  <kbd>{movementLabel}</kbd>
                 </span>
-                <span>
-                  <kbd>A</kbd>
-                  <kbd>S</kbd>
-                  <kbd>D</kbd>
-                </span>
-                <small>移动 / 鼠标瞄准</small>
+                <small>移动 / {gamepad ? '右摇杆' : '鼠标'}瞄准</small>
               </div>
             </div>
           </>
@@ -415,27 +447,32 @@ export default function GameApp() {
               <div className="eyebrow">CONNECTION SUSPENDED</div>
               <h2>行动已暂停</h2>
               <p>
-                空间键闪避可以穿过敌人和弹幕。
-                <br />Q 释放近身脉冲并清除弹幕，E 在准星方向生成引力场。
+                相位跃迁可以穿过敌人和弹幕。
+                <br />
+                近身脉冲清除弹幕，引力奇点在准星方向生成引力场。
               </p>
               <div className="control-grid">
                 <span>
-                  <kbd>WASD</kbd> 移动
+                  <kbd>{movementLabel}</kbd> 移动
                 </span>
                 <span>
-                  <kbd>鼠标</kbd> 瞄准
+                  <kbd>{gamepad ? '右摇杆' : '鼠标'}</kbd> 瞄准
                 </span>
                 <span>
-                  <kbd>左键</kbd> 持续射击
+                  <kbd>{controlLabel('PrimaryAttack', 'LMB')}</kbd> 持续射击
                 </span>
                 <span>
-                  <kbd>SPACE</kbd> 闪避
+                  <kbd>{controlLabel('Dash', 'SPACE')}</kbd> 闪避
                 </span>
                 <span>
-                  <kbd>Q / E</kbd> 主动技能
+                  <kbd>
+                    {controlLabel('Pulse', 'Q')} /{' '}
+                    {controlLabel('Gravity', 'E')}
+                  </kbd>{' '}
+                  主动技能
                 </span>
                 <span>
-                  <kbd>ESC</kbd> 暂停
+                  <kbd>{controlLabel('Pause', 'ESC')}</kbd> 暂停
                 </span>
               </div>
               <button className="start-button" onClick={() => engine.pause()}>
@@ -533,7 +570,9 @@ export default function GameApp() {
           <i /> ALL SYSTEMS UNSTABLE
         </span>
         <span>
-          WASD 移动 <i>·</i> 左键攻击 <i>·</i> B 炸弹 <i>·</i> R 灵药
+          {movementLabel} 移动 <i>·</i> {controlLabel('PrimaryAttack', 'LMB')}{' '}
+          攻击 <i>·</i> {controlLabel('Bomb', 'B')} 炸弹 <i>·</i>{' '}
+          {controlLabel('Potion', 'R')} 灵药
         </span>
         <span>
           ARCANE RESEARCH COLLECTIVE <b>© 2026</b>
@@ -543,6 +582,7 @@ export default function GameApp() {
         建议使用桌面浏览器与键鼠游玩。横向屏幕体验更佳。
       </div>
       <UtilityPanel
+        controls={scene.current?.actions}
         key={utility || 'closed'}
         mode={utility}
         onClose={() => {

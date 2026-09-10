@@ -5,18 +5,45 @@ import { drawArena } from '../render/arena';
 import { drawActors } from '../render/actors';
 import { drawTerrain } from '../render/terrain';
 import type { Input } from './types';
+import { ActionInput, type PadSnapshot } from '../input/actions';
+import { loadBindings } from '../input/bindings';
 export class ArcScene extends Phaser.Scene {
   engine: Engine;
   effects!: Effects;
   floor!: Phaser.GameObjects.Image;
   graphics!: Phaser.GameObjects.Graphics;
-  private keys!: Record<string, Phaser.Input.Keyboard.Key>;
+  readonly actions = new ActionInput(loadBindings());
   private accumulator = 0;
+  private focused = !document.hidden;
+  private baselinePadOnFocus = false;
   private stamp = '';
-  private edges = { dash: false, q: false, e: false, bomb: false, heal: false };
-  private pauseEdge = false;
   private unsubscribe?: () => void;
+  private onKeyDown = (event: KeyboardEvent) => {
+    const target = event.target as HTMLElement | null;
+    if (
+      !this.focused ||
+      this.inputBlocked ||
+      target?.closest?.('input,textarea,select,[contenteditable="true"]')
+    )
+      return;
+    if (event.repeat || event.ctrlKey || event.metaKey || event.altKey) return;
+    // Space/arrows remain reserved against page scrolling or activating a stale
+    // focused HUD button, even after the player rebinds their gameplay action.
+    if (
+      (this.actions.isBound(event.code) ||
+        ['Space', 'ArrowUp', 'ArrowDown', 'ArrowLeft', 'ArrowRight'].includes(
+          event.code,
+        )) &&
+      this.engine.world.phase !== 'menu'
+    )
+      event.preventDefault();
+    this.actions.keyDown(event.code);
+  };
+  private onKeyUp = (event: KeyboardEvent) => this.actions.keyUp(event.code);
   private onBlur = () => {
+    this.focused = false;
+    this.actions.suppress();
+    this.accumulator = 0;
     if (import.meta.env.DEV && this.externalSimulation) return;
     if (
       ['playing', 'transition', 'bossIntro'].includes(this.engine.world.phase)
@@ -24,8 +51,14 @@ export class ArcScene extends Phaser.Scene {
       this.engine.pause();
     this.onSuspend();
   };
+  private onFocus = () => {
+    const focused = !document.hidden;
+    if (focused && !this.focused) this.baselinePadOnFocus = true;
+    this.focused = focused;
+  };
   private onVisibility = () => {
     if (document.hidden) this.onBlur();
+    else if (document.hasFocus()) this.onFocus();
   };
   inputBlocked = false;
   /** Used only by the development QA page; production always owns its loop. */
@@ -38,7 +71,11 @@ export class ArcScene extends Phaser.Scene {
     this.unsubscribe?.();
     this.unsubscribe = undefined;
     window.removeEventListener('blur', this.onBlur);
+    window.removeEventListener('focus', this.onFocus);
     document.removeEventListener('visibilitychange', this.onVisibility);
+    window.removeEventListener('keydown', this.onKeyDown);
+    window.removeEventListener('keyup', this.onKeyUp);
+    this.actions.suppress();
   };
   constructor(
     engine: Engine,
@@ -72,34 +109,9 @@ export class ArcScene extends Phaser.Scene {
       .setDepth(0);
     this.graphics = this.add.graphics().setDepth(2);
     this.effects = new Effects(this);
-    this.keys = this.input.keyboard!.addKeys(
-      'W,A,S,D,SPACE,Q,E,B,R,ESC,UP,DOWN,LEFT,RIGHT',
-    ) as typeof this.keys;
-    this.input.keyboard!.addCapture(['SPACE', 'UP', 'DOWN', 'LEFT', 'RIGHT']);
     this.input.mouse!.disableContextMenu();
-    // Key-down events latch even when down/up both arrive before the next rendered frame.
-    this.keys.SPACE.on('down', () => {
-      this.edges.dash = true;
-    });
-    this.keys.Q.on('down', () => {
-      this.edges.q = true;
-    });
-    this.keys.E.on('down', () => {
-      this.edges.e = true;
-    });
-    this.keys.B.on('down', () => {
-      this.edges.bomb = true;
-    });
-    this.keys.R.on('down', () => {
-      this.edges.heal = true;
-    });
-    this.keys.ESC.on('down', () => {
-      if (
-        !this.inputBlocked &&
-        !(import.meta.env.DEV && this.externalSimulation)
-      )
-        this.pauseEdge = true;
-    });
+    window.addEventListener('keydown', this.onKeyDown);
+    window.addEventListener('keyup', this.onKeyUp);
     this.unsubscribe = this.engine.world.bus.on((e) => {
       this.effects.emit(e);
       if (
@@ -112,6 +124,7 @@ export class ArcScene extends Phaser.Scene {
         );
     });
     window.addEventListener('blur', this.onBlur);
+    window.addEventListener('focus', this.onFocus);
     document.addEventListener('visibilitychange', this.onVisibility);
     this.events.once('shutdown', this.release);
     this.events.once('destroy', this.release);
@@ -133,46 +146,61 @@ export class ArcScene extends Phaser.Scene {
     const dt = Math.min(delta / 1000, 0.05);
     const w = this.engine.world;
     const p = this.input.activePointer;
-    const input: Input = {
-      x:
-        Number(this.keys.D.isDown || this.keys.RIGHT.isDown) -
-        Number(this.keys.A.isDown || this.keys.LEFT.isDown),
-      y:
-        Number(this.keys.S.isDown || this.keys.DOWN.isDown) -
-        Number(this.keys.W.isDown || this.keys.UP.isDown),
-      aimX: p.worldX,
-      aimY: p.worldY,
-      fire: p.leftButtonDown(),
-      ...this.edges,
-    };
-    if (this.inputBlocked) {
-      this.edges = {
-        dash: false,
-        q: false,
-        e: false,
-        bomb: false,
-        heal: false,
-      };
-      this.pauseEdge = false;
+    let pad: PadSnapshot | null = null;
+    try {
+      pad =
+        Array.from(navigator.getGamepads?.() || []).find(
+          (g) => g?.connected && g.mapping === 'standard',
+        ) || null;
+    } catch {
+      /* A restricted Gamepad API must not break keyboard/mouse play. */
+    }
+    this.actions.pollGamepad(pad, this.baselinePadOnFocus);
+    if (pad) this.baselinePadOnFocus = false;
+    if (this.inputBlocked || !this.focused) {
+      this.actions.suppress();
       this.accumulator = 0;
     }
-    if (this.pauseEdge) {
-      this.engine.pause();
-      this.pauseEdge = false;
+    const input = this.actions.sample(
+      {
+        x: p.worldX,
+        y: p.worldY,
+        fire:
+          this.actions.mouseAttack === 0
+            ? p.leftButtonDown()
+            : p.rightButtonDown(),
+      },
+      w.player,
+    );
+    if (!this.focused) {
+      input.x = input.y = 0;
+      input.fire =
+        input.dash =
+        input.q =
+        input.e =
+        input.bomb =
+        input.heal =
+          false;
     }
-    if (!this.inputBlocked) this.accumulator += dt;
+    if (
+      this.actions.consumePause() &&
+      this.focused &&
+      !this.inputBlocked &&
+      !(import.meta.env.DEV && this.externalSimulation)
+    ) {
+      this.engine.pause();
+    }
+    if (
+      !this.inputBlocked &&
+      (this.focused || (import.meta.env.DEV && this.externalSimulation))
+    )
+      this.accumulator += dt;
     while (this.accumulator >= 1 / 60) {
       if (import.meta.env.DEV && this.externalSimulation)
         this.externalSimulation(1 / 60, input);
       else this.engine.update(1 / 60, input);
       input.dash = input.q = input.e = input.bomb = input.heal = false;
-      this.edges = {
-        dash: false,
-        q: false,
-        e: false,
-        bomb: false,
-        heal: false,
-      };
+      this.actions.consumeStep();
       this.accumulator -= 1 / 60;
     }
     const stamp = `${w.seed}-${w.room.index}-${w.room.template}-${w.room.biome}`;

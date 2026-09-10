@@ -19,16 +19,20 @@ import {
   MemoryCollection,
 } from './PilgrimagePanels';
 import { WeaponPicker, Workshop } from './EconomyPanels';
+import { InputSettings } from './InputSettings';
+import type { ActionInput } from '../input/actions';
 export function UtilityPanel({
   mode: requestedMode,
   onClose,
   engine,
   synth,
+  controls,
 }: {
   mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp' | null;
   onClose: () => void;
   engine: Engine;
   synth: Synth;
+  controls?: ActionInput;
 }) {
   const [, render] = useState(0);
   const [campTab, setCampTab] = useState('workshop');
@@ -213,6 +217,7 @@ export function UtilityPanel({
                 />
               </div>
             </div>
+            {controls && <InputSettings controls={controls} />}
             <div className="settings-note">
               {engine.storageAvailable
                 ? '设置已自动保存'
@@ -265,6 +270,10 @@ export function UtilityPanel({
           </>
         ) : (
           <>
+            <p>
+              以下为默认操作；可在「系统设置 →
+              操作设置」修改，战斗界面显示当前按键。
+            </p>
             <div className="control-grid">
               <span>
                 <kbd>WASD</kbd> 移动

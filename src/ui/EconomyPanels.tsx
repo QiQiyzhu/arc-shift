@@ -54,9 +54,11 @@ export function WeaponPicker({
 export function WalletBar({
   engine,
   interactive = false,
+  labels = { bomb: '炸弹', potion: '灵药' },
 }: {
   engine: Engine;
   interactive?: boolean;
+  labels?: { bomb: string; potion: string };
 }) {
   const w = engine.world;
   return (
@@ -70,7 +72,7 @@ export function WalletBar({
         <small>钥匙</small>
       </span>
       <button
-        title="B 投放炸弹：0.8 秒后爆破并清弹，不伤自身；也可用于营地破锁"
+        title="投放炸弹：0.8 秒后爆破并清弹，不伤自身；也可用于营地破锁"
         disabled={
           !interactive ||
           w.phase !== 'playing' ||
@@ -87,10 +89,10 @@ export function WalletBar({
         aria-label="投放炸弹"
       >
         <Bomb size={15} /> <b>{w.wallet.bombs}</b>
-        <small>B</small>
+        <small>{labels.bomb}</small>
       </button>
       <button
-        title="R 使用灵药：恢复 40 生命，满血不消耗"
+        title="使用灵药：恢复 40 生命，满血不消耗"
         disabled={
           !interactive ||
           w.phase !== 'playing' ||
@@ -101,7 +103,7 @@ export function WalletBar({
         aria-label="使用灵药"
       >
         <FlaskConical size={15} /> <b>{w.wallet.tonics}</b>
-        <small>R</small>
+        <small>{labels.potion}</small>
       </button>
       <span
         className="shard-count"
