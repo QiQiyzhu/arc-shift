@@ -1,0 +1,161 @@
+{
+  "recordedAt": "2026-09-10T08:55:33.005Z",
+  "method": "Actual Edge, offline file pages; screenshots, overflow, A–T anchors, inline SVG, source toggles; network blocked",
+  "results": [
+    {
+      "page": "index.html",
+      "htmlSha256": "7fcc8392d8842f4d34c02a4a960e0f47d5127b352db8748eabdca22bcd640b3a",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 5,
+        "dossierChapters": 0
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 0,
+        "headings": 5,
+        "dossierChapters": 0
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "ARC-SHIFT 面试讲解.html",
+      "htmlSha256": "6c9b0a44307d6673d77c82b7a9184ca9b5230524f881320001bd31a2b780b684",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "RepoPilot 面试讲解.html",
+      "htmlSha256": "672f0748b6971081bf3d52cbd0613a5ce0fa21f4c60ae46bb73fe6c9445950c7",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "Aegis Arena 面试讲解.html",
+      "htmlSha256": "7281dc465759ecb0467b2431f06bc69265a34f45ca23600063d5c61d23f17935",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "DesignLens AI 面试讲解.html",
+      "htmlSha256": "8b18585e2802d9edb08efef01db337475354ead574dff8639ee6d84cedf95897",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 20,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    },
+    {
+      "page": "OpsPilot AI 面试讲解.html",
+      "htmlSha256": "119b30542840d7ad8e5f9a216754dc44e6da4bc6c9f458c4f1c4abfc6d6ff418",
+      "desktop": {
+        "width": 1440,
+        "scrollWidth": 1440,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 21,
+        "dossierChapters": 20,
+        "graphRelationsMatchSource": true
+      },
+      "mobile": {
+        "width": 390,
+        "scrollWidth": 390,
+        "localLinks": 0,
+        "brokenAnchors": 0,
+        "svg": 1,
+        "headings": 21,
+        "dossierChapters": 20
+      },
+      "pageErrors": [],
+      "networkRequests": [],
+      "passed": true
+    }
+  ]
+}

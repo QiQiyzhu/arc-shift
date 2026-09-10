@@ -1,0 +1,37 @@
+{
+  "recordedAt": "2026-09-10T08:59:05.212255+00:00",
+  "method": "Recomputed actual file hashes; exact offline-verified HTML equals public HTML; normalized source hash handles Git line endings; original media bytes unchanged",
+  "projects": [
+    {
+      "repository": "arc-shift",
+      "sourceNormalizedSha256": "ba110cbcd8f7676c76f90f5a17ad0f7508dec1c30028e4bd9dd43a3d5afbec08",
+      "desktopEqualsPublic": true
+    },
+    {
+      "repository": "repopilot",
+      "sourceNormalizedSha256": "bd27e95a22d3571024d105e8bd5376e1abd914d47542a11f863eaf77020610f2",
+      "desktopEqualsPublic": true
+    },
+    {
+      "repository": "aegis-arena",
+      "sourceNormalizedSha256": "d9e85e1355c153f4f9cc188b95e7f39f4ff0dd96e397dad4652e6093098936c2",
+      "desktopEqualsPublic": true
+    },
+    {
+      "repository": "designlens-ai",
+      "sourceNormalizedSha256": "ead364e2f4dfe4e667fe94f9cfad8fc5b12313fab7efc06ad09f4f09bb09c145",
+      "desktopEqualsPublic": true
+    },
+    {
+      "repository": "opspilot-ai",
+      "sourceNormalizedSha256": "dd4cd38417a5df8b52f9d75fde29a665b2de103ed6a369afb91956534903c63c",
+      "desktopEqualsPublic": true
+    }
+  ],
+  "media": {
+    "count": 8,
+    "verified": true
+  },
+  "pages": 6,
+  "chapters": 100
+}

@@ -1,0 +1,410 @@
+{
+  "kind": "DERIVED summary; copied raw files retain exact bytes and have SHA256 below",
+  "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34455609035",
+  "runId": 34455609035,
+  "runAttempt": 1,
+  "sourceCommit": "bbed8d1d7ace02ace2273b3609846f846ce83173",
+  "conclusion": "failure",
+  "scope": "workflow_dispatch full suite + six-seed long simulation",
+  "sourceDirtyBeforeVerification": false,
+  "environment": {
+    "recordedAt": "2026-09-10T08:31:43.846Z",
+    "sourceCommit": "bbed8d1d7ace02ace2273b3609846f846ce83173",
+    "sourceDirtyBeforeVerification": false,
+    "event": "workflow_dispatch",
+    "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34455609035",
+    "runAttempt": "1",
+    "fullSuite": true,
+    "node": "v24.20.0",
+    "platform": "linux",
+    "cpu": "Intel(R) Xeon(R) 6973P-C",
+    "browser": "Playwright-managed Chromium",
+    "workers": 1
+  },
+  "unit": {
+    "passed": 146,
+    "failed": 0,
+    "skipped": 0,
+    "testFilesPassed": 15,
+    "durationSeconds": 6.01,
+    "source": "unit-tests.log"
+  },
+  "developmentBrowser": {
+    "startTime": "2026-09-10T08:33:51.074Z",
+    "duration": 531726.598,
+    "expected": 29,
+    "skipped": 0,
+    "unexpected": 5,
+    "flaky": 0,
+    "globalErrors": [],
+    "files": [
+      "content-editor.spec.ts",
+      "debugger.spec.ts",
+      "engineering-performance.spec.ts",
+      "expedition.spec.ts",
+      "game.spec.ts",
+      "input.spec.ts",
+      "performance.spec.ts",
+      "pilgrimage.spec.ts",
+      "replay.spec.ts",
+      "resonance.spec.ts",
+      "reward-layout.spec.ts"
+    ],
+    "results": [
+      {
+        "file": "performance.spec.ts",
+        "title": "ten-second baseline render sample with a crowded arena and active VFX",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": [
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts",
+                  "column": 27,
+                  "line": 169
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m63\u001b[39m\n\n  167 |     );\n  168 |     await page.screenshot({ path: `outputs/qa/v1-stress-${fixture}.png` });\n> 169 |     expect(result.frames).toBeGreaterThan(100);\n      |                           ^\n  170 |     expect(result.poolMisses).toBe(0);\n  171 |     expect(result.phase).toBe('playing');\n  172 |   });\n    at /home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts:169:27"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "performance.spec.ts",
+        "title": "ten-second resonance render sample with a crowded arena and active VFX",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": [
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts",
+                  "column": 27,
+                  "line": 169
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m82\u001b[39m\n\n  167 |     );\n  168 |     await page.screenshot({ path: `outputs/qa/v1-stress-${fixture}.png` });\n> 169 |     expect(result.frames).toBeGreaterThan(100);\n      |                           ^\n  170 |     expect(result.poolMisses).toBe(0);\n  171 |     expect(result.phase).toBe('playing');\n  172 |   });\n    at /home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts:169:27"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "performance.spec.ts",
+        "title": "ten-second cannon render sample with a crowded arena and active VFX",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": [
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts",
+                  "column": 27,
+                  "line": 169
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m94\u001b[39m\n\n  167 |     );\n  168 |     await page.screenshot({ path: `outputs/qa/v1-stress-${fixture}.png` });\n> 169 |     expect(result.frames).toBeGreaterThan(100);\n      |                           ^\n  170 |     expect(result.poolMisses).toBe(0);\n  171 |     expect(result.phase).toBe('playing');\n  172 |   });\n    at /home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts:169:27"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "performance.spec.ts",
+        "title": "ten-second hybrid render sample with a crowded arena and active VFX",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": [
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts",
+                  "column": 27,
+                  "line": 169
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBeGreaterThan\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m)\u001b[22m\n\nExpected: > \u001b[32m100\u001b[39m\nReceived:   \u001b[31m63\u001b[39m\n\n  167 |     );\n  168 |     await page.screenshot({ path: `outputs/qa/v1-stress-${fixture}.png` });\n> 169 |     expect(result.frames).toBeGreaterThan(100);\n      |                           ^\n  170 |     expect(result.poolMisses).toBe(0);\n  171 |     expect(result.phase).toBe('playing');\n  172 |   });\n    at /home/runner/work/arc-shift/arc-shift/e2e/performance.spec.ts:169:27"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "resonance.spec.ts",
+        "title": "six resonance trials render their real projectile forms and preserve an existing run",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "timedOut",
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+              },
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/resonance.spec.ts",
+                  "column": 24,
+                  "line": 39
+                },
+                "message": "Error: page.evaluate: Target page, context or browser has been closed\n\n  37 |     await page.getByRole('button', { name: new RegExp(names[i]) }).click();\n  38 |     await expect\n> 39 |       .poll(() => page.evaluate(() => window.arcQA.engine.world.phase))\n     |                        ^\n  40 |       .toBe('playing');\n  41 |     await expect\n  42 |       .poll(() => page.evaluate(() => window.arcQA.engine.world.enemies.length))\n    at Object.generator (/home/runner/work/arc-shift/arc-shift/e2e/resonance.spec.ts:39:24)"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "productionBrowser": {
+    "startTime": "2026-09-10T08:33:41.328Z",
+    "duration": 9111.676,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "globalErrors": [],
+    "files": [
+      "isolation.spec.ts",
+      "portfolio.spec.ts"
+    ],
+    "results": []
+  },
+  "soak": {
+    "mode": "long",
+    "passed": true,
+    "seeds": [
+      17,
+      293,
+      701,
+      991,
+      4211,
+      73009
+    ],
+    "samples": [
+      {
+        "seed": 17,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 6607.744199,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 169,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "293e14dc"
+      },
+      {
+        "seed": 293,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 6364.062636999999,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 169,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "f1a6c641"
+      },
+      {
+        "seed": 701,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 6413.697732999999,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 163,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "83e739cc"
+      },
+      {
+        "seed": 991,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 6872.7657249999975,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 168,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "5a038b03"
+      },
+      {
+        "seed": 4211,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 7466.026614999999,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 161,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "74774435"
+      },
+      {
+        "seed": 73009,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 7468.789614000001,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 169,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "b41785ce"
+      }
+    ],
+    "totalCompletedTicks": 648000,
+    "totalSimulatedSeconds": 10800,
+    "totalElapsedMs": 41193.086523,
+    "totalPoolMisses": 0,
+    "source": "soak.json",
+    "limitation": "Fixed 60 Hz headless simulation, high-HP enemy fixtures, invulnerable practice player; no rendering, no real-time waiting. Heap snapshots are observed process memory, not a leak verdict. Other workloads may be active."
+  },
+  "audit": {
+    "reportedVulnerabilities": 0,
+    "source": "audit.log",
+    "extraction": "Matching Audit locked dependencies step lines from downloaded gh job.log; timestamps and prefixes unchanged"
+  },
+  "otherChecks": {
+    "Audit locked dependencies": "success",
+    "Typecheck": "success",
+    "Lint": "success",
+    "Headless simulation soak": "success",
+    "Production build": "success",
+    "Measure the production bundle and check DEV markers": "success",
+    "Production browser acceptance": "success",
+    "Browser smoke or full regression": "failure"
+  },
+  "bundle": {
+    "totalBytes": 11857096,
+    "javascriptBytes": 1674080,
+    "productionDebugMarkers": [],
+    "source": "bundle.json",
+    "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code."
+  },
+  "rawManifest": [
+    {
+      "file": "github.json",
+      "sourceWithinDownload": "github.json",
+      "bytes": 4092,
+      "sha256": "f6196ffffc83b05c5af08870bc7ef92273b47ad7f63d3c1a6fe489ce0fac076e"
+    },
+    {
+      "file": "artifacts.json",
+      "sourceWithinDownload": "artifacts.json",
+      "bytes": 1455,
+      "sha256": "adff8d24208fc22ac3537c7d3f9f80c720d93ee970d788f4d50bc982df31cadd"
+    },
+    {
+      "file": "environment.json",
+      "sourceWithinDownload": "artifact/outputs/qa/ci-environment.json",
+      "bytes": 445,
+      "sha256": "9f86662b46c6bccf9b1d8409cb1f8717335687ee4784f5ded9cb93bc6076d82d"
+    },
+    {
+      "file": "unit-tests.log",
+      "sourceWithinDownload": "artifact/outputs/qa/unit-tests.log",
+      "bytes": 23070,
+      "sha256": "abfad7a7ffcf01ea9283b8069a1d8b56568b96b6f2316cb7e58a71added1e994"
+    },
+    {
+      "file": "browser.json",
+      "sourceWithinDownload": "artifact/outputs/qa/browser-results.json",
+      "bytes": 72777,
+      "sha256": "0c31d7c1df9ca95959d466eae587f14612b390f7402aa6ae5e1addbac45191dc"
+    },
+    {
+      "file": "production-browser.json",
+      "sourceWithinDownload": "artifact/outputs/qa/production-results.json",
+      "bytes": 6295,
+      "sha256": "cb34abe91cae969041d3668c1497cad240e9098587a23fa7feb6817bf442f809"
+    },
+    {
+      "file": "soak.json",
+      "sourceWithinDownload": "artifact/outputs/qa/soak.json",
+      "bytes": 40643,
+      "sha256": "b9f63a32817ac5a66911cde9c5f81ff04e432332e0368d7c7b69622ec684b89d"
+    },
+    {
+      "file": "bundle.json",
+      "sourceWithinDownload": "artifact/outputs/qa/bundle.json",
+      "bytes": 7258,
+      "sha256": "914d4ed6b26a075877effdf9b1ab35b18e6ef80a3dfbd75f1a69dea0b55e59cd"
+    },
+    {
+      "file": "audit.log",
+      "sourceWithinDownload": "audit.log",
+      "bytes": 1117,
+      "sha256": "763bf2da2f1d3a7e772c3c830af84d0335997a41a79545a674f765a4fa1b6a31"
+    },
+    {
+      "file": "typecheck.log",
+      "sourceWithinDownload": "artifact/outputs/qa/typecheck.log",
+      "bytes": 45,
+      "sha256": "38fabde74c3f8e89a3ebc30a26a65d10b309ef85886fe012c240c2a8d1133c2e"
+    },
+    {
+      "file": "lint.log",
+      "sourceWithinDownload": "artifact/outputs/qa/lint.log",
+      "bytes": 128,
+      "sha256": "9149405feeb93c0151435d66a23ccf5c856faf7035aadf0a6a9aa0f72d558727"
+    },
+    {
+      "file": "build.log",
+      "sourceWithinDownload": "artifact/outputs/qa/build.log",
+      "bytes": 2004,
+      "sha256": "2e908d9c570083a31ac7539639b94c7c922864dd684251f921ae87f7e9d812dc"
+    },
+    {
+      "file": "render-v1-baseline.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-baseline.json",
+      "bytes": 478,
+      "sha256": "03b4f275906c5455f102650737edf165dd290b340cb9bb6de22d24d16b4f6c2b"
+    },
+    {
+      "file": "render-v1-cannon.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-cannon.json",
+      "bytes": 464,
+      "sha256": "eab11d4a1a2281936a0fa66b64e7183eb814daa34058cc1a7e565d8388bf4cd8"
+    },
+    {
+      "file": "render-v1-hybrid.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-hybrid.json",
+      "bytes": 436,
+      "sha256": "80e2882f9914032d402e5987ecacf82ebe30255396c9ba725dc5342b075f8a8d"
+    },
+    {
+      "file": "render-v1-resonance.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-resonance.json",
+      "bytes": 469,
+      "sha256": "e468097f7ab818aca7d96997b96bb854bb16ab267cc9baef5017a8c01f045b9b"
+    },
+    {
+      "file": "render-v1-sword.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-sword.json",
+      "bytes": 455,
+      "sha256": "d81d3120130dbc467007ac1bc456fc178c7b7dafbb1dc2a7891ccdc34ed5f963"
+    }
+  ],
+  "repositoryModified": false,
+  "newTestsRun": false,
+  "failureNotes": {
+    "performance": "Four 10-second 1920x1080 render samples fail frames>100: baseline 63, resonance 82, cannon 94, hybrid 63. Sword 104 passes. All five raw samples show phase playing, poolMisses 0 and active projectiles. Observed 6.21/8.15/9.34/6.22 FPS is real Linux CI measurement; do not call this stable 60 FPS.",
+    "resonance": "One aggregate six-trial test exceeded total 45000ms while waiting for playing; four completed trial screenshots exist; failure snapshot shows entering-sector overlay. No evidence in this artifact that all six trial mechanics are broken. Total-budget timeout must be distinguished from an individual failed gameplay assertion.",
+    "artifacts": "Complete downloaded verification artifact, including 5 trace.zip files and screenshot/error contexts, remains in artifact/outputs/qa/results. No browser or trace player was launched during this audit."
+  }
+}

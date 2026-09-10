@@ -21,9 +21,9 @@
 | portable C++ 严格编译 | 325 个断言通过 | 纯规则与模拟器，不是 325 个独立测试用例 |
 | Python integration | 9 个 unittest case 通过 | CLI、验证、真实二进制 JSON/CSV 与报告协议 |
 | GitHub Actions | Ubuntu GCC 13.3 / Python 3.11 成功 | 新机器 portable 可复现；不运行 UE |
-| UE 5.8.2 Game Development / Shipping | 两个目标均真实编译链接成功，最近回归 102.71s / 48.61s | MSVC 14.50.35738 + SDK 26100 能编译 native gameplay |
-| Shipping 静态二进制检查 | 8 个开发入口标记在 Dev 存在、Shipping 缺失 | 不等于已经 cook、启动或交互验收 |
-| UE Editor / 资产 / 原生测试 | 真实编译，10 个原生资产；5 Core Automation + 1 Functional Test 通过 | 独立于 portable 测试 |
+| UE 5.8.2 Game Development / Shipping | 两个目标真实 build/cook/stage，UAT 153.34s / 128.22s | MSVC 14.50.35738 + SDK 26100 能编译 native gameplay |
+| Shipping 静态二进制检查 | 9 个开发入口标记在 Dev 存在、Shipping 缺失 | 静态 gate 与独立 Dev 两轮场景、Shipping 实机启动/入口检查共同记录 |
+| UE Editor / 资产 / 原生测试 | 真实编译，10 个原生资产；5 Core Automation + 1 Functional Test（12条PIE世界断言）通过 | 独立于 portable 测试 |
 | UE 场景 / 实渲染 | 60 个 native policy episode + 12 个 rendered performance episode 通过；实机 PNG/GIF | NullRHI 策略吞吐不是 FPS，2fps GIF 是抽帧采样 |
 | RL / imitation | 未实现、未训练 | 简历不写 RL 成果 |
 
@@ -153,7 +153,7 @@ AI-assisted development log 记录 AI 帮助的范围、真实执行过的命令
 - BT action 在冷却期间仍保持攻击分支；不能把“尚未准备好开火”当作应转入 Patrol。
 - 运行 preflight 检查资产、地图和 NavMesh。自动启动等待导航有 30 秒上限，失败有非零退出码。
 
-恢复策略不是任意重试：配置错误直接失败；无 NavMesh 是结构问题；EQS 没有可行点会返回 BT failure，让既有 selector 执行授权 LastKnown 的 Investigate 等回退；pending 查询和有效移动仍保持成功，查询受限频约束。对某种失败无限重试会掩盖坏场景。
+恢复策略不是任意重试：配置错误直接失败；无 NavMesh 是结构问题；EQS 没有可行点会返回 BT failure，让既有 selector 执行授权 LastKnown 的 Investigate 等回退；pending 查询、有效移动和接受半径内的已到达点仍保持成功，查询受限频约束。对某种失败无限重试会掩盖坏场景。
 
 ## I. Security · 边界与构建配置
 
@@ -202,7 +202,7 @@ portable 实验使用 seeds 1001–1030，每个 seed 比较 priority 与 utilit
 
 **不能说**：胜率显著提升、模型比 UE 更快、所有场景优于 BT、收益具有商业泛化能力。小样本区间重叠；更完整的配对统计、效应大小和独立 holdout 是后续工作。报告路径 `evidence/portable/evaluation/`。
 
-原生结果使用 `engine=unreal-runtime` 的独立目录。最终 60 次 UE episode（相同 30 seeds，每策略各一次）：两组均 0/30 胜利，priority / utility 队友死亡为 21 / 10，玩家承伤均值 109.95 / 123.48，盟友输出均值 166.93 / 135.87。压力场景有胜率下界效应，不能据此说 Utility 全面更强。使用 1/60 固定游戏步长和 NullRHI，严格不等同渲染性能。见 [原生评估](https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/native-evaluation.md) 与对应 raw JSON/CSV。
+原生结果使用 `engine=unreal-runtime` 的独立目录。最终 60 次 UE episode（相同 30 seeds，每策略各一次）：两组均 0/30 胜利，priority / utility 队友死亡为 25 / 6，玩家承伤均值 106.68 / 126.06，盟友输出均值 170.46 / 139.40。压力场景有胜率下界效应，不能据此说 Utility 全面更强。使用 1/60 固定游戏步长和 NullRHI，严格不等同渲染性能。见 [原生评估](https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/native-evaluation.md) 与对应 raw JSON/CSV。
 
 ## L. Ablation · 策略对照与未执行消融
 
@@ -224,7 +224,7 @@ portable 实验使用 seeds 1001–1030，每个 seed 比较 priority 与 utilit
 
 portable 性能报告是固定步长 C++ 模型 CPU 时间，20 次 episode，初始敌人 1/10/25/50，每档 5 个 seeds。高负载可能提前死亡，故不是持续 UE 大量 Bot 压测。真实报告在 `evidence/portable/performance/`，不要把微秒结果标成 Unreal Game Thread。
 
-Unreal 已实际采样：RTX 4060 Laptop / D3D12 / UE 5.8.2 Editor Game，1280×720 offscreen，四档各 3×15 秒，另有两个盟友，首秒排除。四档平均 episode frame P95 为 4.646 / 4.769 / 4.897 / 4.936ms；这不是 pooled P95、Shipping FPS 或优化提升，最终四档 EQS 完成数为 2 / 19 / 49 / 50、零失败，但查询数量有限，不代表最坏战术负载。见 [原始报告与边界](https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/performance.md)。
+Unreal 已实际采样：RTX 4060 Laptop / D3D12 / UE 5.8.2 Editor Game，1280×720 offscreen，四档各 3×15 秒，另有两个盟友，首秒排除。四档平均 episode frame P95 为 4.042 / 4.171 / 4.261 / 4.325ms；这不是 pooled P95、Shipping FPS 或优化提升，最终四档 EQS 完成数为 2 / 14 / 44 / 45，失败数 0 / 0 / 0 / 0，但查询数量有限，不代表最坏战术负载。见 [原始报告与边界](https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/performance.md)。
 
 采样定义：
 
@@ -250,7 +250,7 @@ Unreal 已实际采样：RTX 4060 Laptop / D3D12 / UE 5.8.2 Editor Game，1280×
 9. **保存后的导航冷启动**：空 Recast 已保存数据不会自动当作新生成对象重建；改为取得 NavData 后一次异步 rebuild，wall-clock 超时，不能同步阻塞主线程。
 10. **真实截图黑镜头**：Python Rotator 用命名参数；更关键是不能用第一个 CameraActor，引擎有辅助动画相机。用 runtime tag 选择并核验实际 PlayerViewPoint，重新目视原生 PNG。
 
-11. **EQS 查询中心停留出生点**：Controller 默认不跟随 Pawn，查询网格因此过时；真实坐标和 FailedTestIndex 确认后开启 bAttachToPawn，并增加原生移动 Querier 回归。失败率从约 57%–60% 降至约 0.9%–1.4%，但不据此声称策略全面更优。
+11. **EQS 查询中心停留出生点**：Controller 默认不跟随 Pawn，查询网格因此过时；真实坐标和 FailedTestIndex 确认后开启 bAttachToPawn，并增加原生移动 Querier 回归。失败率从约 57%–60% 降至约 0.9%–1.8%，但不据此声称策略全面更优。
 12. **测试 JSON 假阳性**：UE 报 Success 但实际没有运行 test actor。显式预载地图、要求 PIE world，并校验十二条断言和成功标记；两项 Python gate 回归拒绝这种报告。
 
 ## O. Unfinished · 未完成项
@@ -260,9 +260,9 @@ Unreal 已实际采样：RTX 4060 Laptop / D3D12 / UE 5.8.2 Editor Game，1280×
 | 优先级 | 问题 | 验收标准 |
 | --- | --- | --- |
 | 已完成 | UE Editor / 原生基础验收 | Editor build、资产生成、5 Automation、1 Functional Test 与 60 场景报告均真实完成 |
-| P0 | 可交付可玩打包 | 新输出目录启动成功；材质、地图、AI资产均被 cook；无编辑器依赖 |
+| 已完成 | 原生独立打包与启动 | Dev 无 Editor 跑两轮；Shipping 真正显示地图/AI，HUD与console关闭；下载见 release.md |
 | P1 | 性能外推与长时间追踪 | 四档短时实渲染已完成；仍需长 warm-up、独立复测与 Insights，不宣称商业性能 |
-| P1 | BT/EQS 视觉证据 | 真正引擎内 graph / selected-point 可见；不伪造截图 |
+| 已完成 / P2 | BT/EQS runtime 视觉证据 | 真实最近 BT 动作、Query ID、候选分数已截图；Editor debugger graph 录像仍未做 |
 | P1 | 多样场景泛化 | 更多几何布局和独立 holdout；当前一张 Arena 不能证明泛化 |
 | P2 | 控制与表现 | primitive 演示，不是完整动作商业游戏；输入与瞄准还需玩家测试 |
 | P2 | RL 可行性 | 若未来引擎实验插件真实可跑，再独立训练和评估；当前没有结果 |
@@ -338,7 +338,7 @@ std::size_t chooseAction(const std::array<double, 4>& score,
 4. **Damage 感知能直接锁定目标吗？** 可以记录被报告的历史来源位置，不能凭伤害事件获得持续视觉跟踪。
 5. **为什么 ally health 可以读取？** 只有当前可观察且已授权的盟友进入 DTO；未知盟友不产生支援分数。
 6. **EQS 与导航有什么区别？** EQS 选择有评分的目标位置；NavMesh/PathFollowing 找路径与执行移动。
-7. **EQS 没有结果怎么办？** 完成 pending 状态、记录失败、不使用无效点；把没有可用动作的 BT 分支标记失败，让 selector 回退；pending 或有效移动不应误判失败。不能瞬移到假位置。
+7. **EQS 没有结果怎么办？** 完成 pending 状态、记录失败、不使用无效点；把没有可用动作的 BT 分支标记失败，让 selector 回退；pending、有效移动或已到达接受范围不应误判失败。不能瞬移到假位置。
 8. **Utility 高分为什么没执行？** 检查授权条件、BT 分支、动作合法性和冷却；评分与执行是不同层。
 9. **为何使用 hysteresis？** 避免相近分数不断切换；阈值过大会变迟钝，需要消融验证。
 10. **Director 会读取真值吗？** Director 是有明确授权的 encounter 系统，可用全局负载/玩家状态；Companion 的授权不同，不能混为一谈。
@@ -360,7 +360,7 @@ std::size_t chooseAction(const std::array<double, 4>& score,
 - 构建 C++17 可移植游戏 AI 规则与评估模型，并通过 GCC/Clang 严格编译、325 个断言及 9 个 Python integration case，GitHub Actions 提供可复现运行证据。
 - 实现基于授权观察的 Companion Utility 策略与优先级基线，在 30 个配对 seeds、60 次 portable episode 上记录胜率、承伤和队友死亡，保留原始 JSON/CSV 与置信区间。
 - 实现 EMA、hysteresis、cooldown 与 clamp 组成的有界 Encounter Director，并为调整冷却期间仍需施加敌人数上限的边界增加回归验证。
-- 使用 Unreal 5.8.2 C++ 实现 Perception、Blackboard/Behavior Tree、EQS 与场景评测；真实生成 10 个原生资产，通过 5 项 Core Automation 和 1 项 World Functional Test，并保留 60 局原生策略实验的 JSON/CSV。
+- 使用 Unreal 5.8.2 C++ 实现 Perception、Blackboard/Behavior Tree、EQS 与场景评测；真实生成 10 个原生资产，通过 5 项 Core Automation 和 1 项 World Functional Test，其中 Functional 执行12条PIE世界断言，并保留60局原生策略实验的JSON/CSV。
 - 建立清晰区分 portable 与 Unreal 的实验交付流程，保存源码/二进制 provenance、原始 episode、失败日志、工具链条件与已知限制，避免以模拟器结果替代引擎证据。
 
-不要添加不存在的用户量、性能提升百分比、线上可用性、商业 RL 或“独立从零手写全部代码”。简历中的原生结果对应仓库原始报告；打包、长时间性能和交互验收以最新状态清单为准。
+不要添加不存在的用户量、性能提升百分比、线上可用性、商业 RL 或“独立从零手写全部代码”。简历中的原生结果对应仓库原始报告；Dev/Shipping独立包已实际运行；长时间性能与完整交互覆盖仍以状态清单明确边界。

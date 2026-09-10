@@ -1,6 +1,6 @@
 # ARC//SHIFT · A–T 中文面试讲解
 
-> **工程交付讲解 · 2026-09-10。** M7 实现已提交为 `cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46`。完整本地验收为 **146 单元 / 34 开发浏览器 / 另行 1 生产浏览器**通过，typecheck、lint、build 通过，依赖审计 0。原始阶段日志记录提交前工作区及其父提交；不能把父提交误认为完整受测代码。最终公开版的 CI 与交付状态统一见 [验收记录](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa-report.md)。
+> **工程交付讲解 · 2026-09-10。** M8 完整本地验收为 **146 单元 / 34 开发浏览器 / 另行 2 生产浏览器**通过，typecheck、lint、build 通过。M7 定向修复后的依赖审计为 0。原始阶段日志记录提交前工作区及其父提交；不能把父提交误认为完整受测代码。公开版的准确源码、CI 与交付状态统一见 [验收记录](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa-report.md)。
 >
 > 本文保留 A–T 二十节。ARC 是浏览器单机游戏，对不存在的数据库、RAG、LLM Agent、LLMOps 和相关评测明确写 N/A。本人采用第一人称项目介绍前，须实际读码与复现；AI-assisted 分工不省略。
 
@@ -22,8 +22,8 @@ flowchart TD
   Engine --> Bus[表现事件]
   Bus --> Visual[Phaser 绘制 / 粒子 / WebAudio]
   Engine --> Save[校验后的本地 SaveData]
-  Engine -->|观察输入和结果| Recorder[ReplayRecorder / Player]
-  Recorder -->|回放输入和命令| Engine
+  Engine -->|记录| Recorder[ReplayRecorder / Player]
+  Recorder -->|回放| Engine
   Dev[DEV 内容编辑器 / 回放页 / 调试器] -->|独立 Engine，禁止存档写入| Engine
 ```
 
@@ -159,14 +159,16 @@ AI-assisted 开发记录的是谁生成/审查/修正了什么，而非生产模
 
 ## J. Test 数量与实际结果
 
-| 检查 | M7 最终本地结果 | 原始证据 |
+| 检查 | M8 完整本地结果 | 原始证据 |
 |---|---|---|
-| TypeScript / lint / build | 全部 exit 0 | [checks.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m7-input-verified/checks.json) |
-| Vitest 单元/模拟合同 | 146 passed，0 failed，0 pending | [unit.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m7-input-verified/unit.json) |
-| 开发模式 Playwright | 34 passed，0 failed，0 skipped，0 flaky | [browser.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m7-input-verified/browser.json) |
-| 独立生产浏览器检查 | 1 passed，0 failed，0 skipped，0 flaky | [production-browser.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m7-input-verified/production-browser.json) |
+| TypeScript / lint / build | 全部 exit 0 | [checks.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m8-delivery/checks.json) |
+| Vitest 单元/模拟合同 | 146 passed，0 failed，0 pending | [unit.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m8-delivery/unit.json) |
+| 开发模式 Playwright | 34 passed，0 failed，0 skipped，0 flaky | [browser.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m8-delivery/browser.json) |
+| 独立生产浏览器检查 | 2 passed，0 failed，0 skipped，0 flaky | [production-browser.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m8-delivery/production-browser.json) |
 | npm audit | 0 个已知漏洞条目 | [实际输出](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/audit-m7.json) |
 | 六种子长模拟 | 6 × 108,000 tick 完成，0 pool misses | [soak-long.json](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/soak-long.json) |
+| M8 Linux 完整套件 | 146 单元 / 34 开发浏览器 / 2 生产通过，0 skipped/flaky；六种子 648,000 tick，audit 0 | [精确源码运行](https://github.com/QiQiyzhu/arc-shift/actions/runs/34459299795)、[永久原始证据](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/ci-m8-full-success/parsed-summary.json) |
+| M8 跨平台采样判定修复后 | 五项 gate 全通过，146 单元 / 34 开发浏览器 | [实际完整回归](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m8-ci-portability/checks.json) |
 
 M7 完整阶段记录父提交 `5cf8270` 加当时工作区，随后实现与日志提交为 `cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46`。M6 的 136/32/1 是历史基线；M7 初轮 144/34 之后又增加焦点/重连回归。单元、浏览器流程、三份 replay fixture、六组 soak 分属不同层级，不应相加成夸张的总测试数。手柄用例通过受控浏览器 API 快照驱动，**实体 USB/Bluetooth 手柄未测**。
 
@@ -219,6 +221,8 @@ M7 完整阶段记录父提交 `5cf8270` 加当时工作区，随后实现与日
 | 真实失败 | 根因/修复方向 | 证据与可讲内容 |
 |---|---|---|
 | 首版 Grid 更慢 | 网格维护、重复分配与排序开销；缓存占据格子，只在跨格重查询 | [4.135ms 回退](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/engine-spatial-first.json)：少做几何测试不保证总耗时下降 |
+| M8 第二次 Linux 全量 31/34 | 多刷新流程累计 45 秒超时、两种 Boss 入场超过默认 5 秒；实际为 SwiftShader 低帧率环境 | [原始失败与 trace](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/ci-m8-second-failure/parsed-summary.json)：调整 CI 等待预算，保留全部断言及真实帧率；以 CI=true 本地完整 146/34 再验通过，远端结果另列 |
+| M8 首次 Linux 全量 29/34 | 四个固定十秒样本不足 100 帧，六试炼第五轮触发 45 秒总预算 | [原始失败](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/ci-m8-first-failure/parsed-summary.json)：保留实际低 FPS；改为有限采样/模拟推进/池状态验收，六轮断言不变并单独设总预算。修复后的本地五项 gate 已再次通过，远端以验收记录为准 |
 | 暂停音量未立即归零 | 已挂起的 AudioContext 时间轴不能完成预期渐变；暂停路径即时归零 | [M1 audit](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/baseline-audit.json)、[音频生命周期回归](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/tests/audio-lifecycle.test.ts)：API 状态与时钟语义需一起验证 |
 | 旧 E2E 错把 HP 固定为 120 | 获得 ice-shell 后真实最大生命变为 160，测试合同错误 | 同一 [audit](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/baseline-audit.json)：不是所有失败都应该修改游戏以迎合断言 |
 | 回放会被非记录状态干扰 | 菜单布景/失焦暂停/命令结果遗漏等在 M3 审查暴露；隔离 Engine、校验有序结果和状态范围 | [AI 修正记录](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/ai-development-log.md)、[Replay 测试](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/tests/replay.test.ts)：有 seed 不足以形成回放 |
@@ -565,9 +569,9 @@ AI 参与主要实现、重构、测试、性能脚本、文档和审查；记�
 
 ## T. 5 条严格真实的简历 Bullet
 
-**使用前提：本人已逐行读懂 P/Q 的关键路径，亲自复现对应命令，能口述 R/S 的反例与取舍，并如实保留 AI-assisted。以下是可审核草稿，不是对本人已经具备这些能力的断言。** 数字采用已有原始证据的 M2/M4/M6/M7；Linux 与公开交付证据另见验收记录，不把模拟样本当业务收益。不得添加未经实际证明的商业收益、留存、玩家评价、全平台兼容或“独立手写”。
+**使用前提：本人已逐行读懂 P/Q 的关键路径，亲自复现对应命令，能口述 R/S 的反例与取舍，并如实保留 AI-assisted。以下是可审核草稿，不是对本人已经具备这些能力的断言。** 数字采用已有原始证据的 M2/M4/M6/M7/M8；Linux 与公开交付证据另见验收记录，不把模拟样本当业务收益。不得添加未经实际证明的商业收益、留存、玩家评价、全平台兼容或“独立手写”。
 
-1. **AI-assisted 迭代 TypeScript/Phaser 动作构筑客户端**，将战斗规则保持在可直接运行于 Node 的 Engine/World 中，使用固定 60Hz 模拟及有序命令边界；M7 本地完成 146 项单元、34 项开发浏览器及另行 1 项生产浏览器测试。[源码](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/src/game/engine.ts)、[M7 检查](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m7-input-verified/checks.json)。
+1. **AI-assisted 迭代 TypeScript/Phaser 动作构筑客户端**，将战斗规则保持在可直接运行于 Node 的 Engine/World 中，使用固定 60Hz 模拟及有序命令边界；M8 本地完成 146 项单元、34 项开发浏览器及另行 2 项生产浏览器测试。[源码](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/src/game/engine.ts)、[M8 检查](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/m8-delivery/checks.json)。
 2. **AI-assisted 实现并验证 Uniform Grid 碰撞候选优化**，保留暴力算法与随机布局/高速弹体对照；250 敌人固定夹具中分离/弹体候选测试下降 92.53%/97.68%，Engine P95 从 1.8786ms 降至 1.0712ms；浏览器帧率未获得一致提升。[原始对照](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa/engineering/spatial-comparison.json)、[完整局限](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/performance-v2.md)。
 3. **AI-assisted 构建同版本 QA 回放工具**，记录固定步输入、路线/奖励/消费等有序命令及返回结果，加入版本/资源校验、完整核心状态 checksum、导入导出与失同步停播；提交战斗、Boss 和商店路线三份回放 fixture，不将其描述为联网 lockstep。[回放设计](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/replay.md)、[fixtures](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/tests/fixtures/replays)。
 4. **AI-assisted 建立封闭参数内容工作台**，支持已有敌人/武器/协议/遭遇/Boss 参数的校验、diff、导入导出与独立 Engine 沙盒，利用 500 组历史构筑输出哈希验证默认数值提取等价；行为与新 ID 仍由代码定义。[工作台](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/content-editor.md)、[等价测试](https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/tests/content.test.ts)。

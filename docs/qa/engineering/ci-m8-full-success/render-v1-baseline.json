@@ -1,0 +1,21 @@
+{
+  "sampleMs": 10223.50000000007,
+  "frames": 45,
+  "medianFrameMs": 250,
+  "p95FrameMs": 300,
+  "p99FrameMs": 300,
+  "averageFps": 4.401623710079689,
+  "maxEnemies": 28,
+  "maxProjectiles": 45,
+  "poolMisses": 0,
+  "phase": "playing",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "reactionCount": 18,
+  "simulatedTicks": 135,
+  "simulatedSeconds": 2.2499999999999925,
+  "webGLRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+}

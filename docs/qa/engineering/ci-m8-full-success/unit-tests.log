@@ -1,0 +1,159 @@
+
+> arc-shift@1.0.0 test
+> vitest run --reporter=verbose
+
+
+[1m[30m[46m RUN [49m[39m[22m [36mv4.1.11 [39m[90m/home/runner/work/arc-shift/arc-shift[39m
+
+ [32m✓[39m tests/economy.test.ts[2m > [22mv0.2 saves preserve progress and receive safe v0.3 defaults[32m 8[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mwallets and preparations reject nonfinite, fractional and oversized values[32m 0[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mkeys grant one extra protocol and a chest cannot also be bombed or refreshed[32m 5[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mbombing a chest consumes the shared battle inventory and destroys its protocol[32m 2[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mshop stock, affordability, health and consumable caps survive continuation[32m 6[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mblood pact is optional, cannot kill, bypasses shield and is once per altar[32m 3[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mbank transfer is atomic with the checkpoint and cannot be claimed again after reload[32m 3[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mvictory returns all carried shards plus its bonus exactly once[32m 1[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mworkshop preparation affects a new run but never retroactively changes an old checkpoint[32m 4[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mpaid rerolls are capped and the purchased hand is identical after reload[32m 4[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mtrial kills and economic actions never write resources into the real profile[32m 3[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mordinary enemies have a per-room gold budget and bounded pickups[32m 5[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mboss reinforcements cannot farm loot, experience, level healing or lifesteal[32m 4[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22mbomb fuse pauses outside simulation and tonic consumption respects health[32m 2[2mms[22m[39m
+ [32m✓[39m tests/economy.test.ts[2m > [22ma blank profile requires no account, migration reward or automatic starting grant[32m 0[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mseeded twelve-layer graphs are connected, reproducible and converge on three bosses[32m 144[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22monly a connected next node can be entered through travel and route persists[32m 9[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mforges retain the primary weapon, grant one free early form, and cannot be replayed[32m 3[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mlater forge purchases and invalid choices settle atomically[32m 2[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mblood, archive and bell events preserve their exact choice and reward on reload[32m 10[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22ma treasure chest uses keys or bombs independently from its one weapon reward[32m 3[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22munfinished events and shop stock survive reload without granting their main reward[32m 2[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mcorrupt route order and contradictory event phases discard only the checkpoint[32m 3[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mboss-gated relics require an actual defeat and shards, then affect only new runs[32m 1[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mkiln-heart entry shield is not multiplied by repeating resume[32m 2[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mactual boss deaths award unlocks in new and resumed legacy campaigns[32m 8[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mall three primaries fire the acquired secondary forms without changing primary cooldown[32m 2[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mslow mixed builds retain sword finishers and fragment children never recurse[32m 29[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22msolid terrain blocks movement, swept projectiles and sword damage across cover[32m 6[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mtraps have a grace window, then hurt; blessing accelerates skills[32m 1[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mchallenge rewards are finite and objective completion is required after the last wave[32m 66[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mnew enemies attack with finite state and remain outside solid terrain[32m 86[2mms[22m[39m
+ [32m✓[39m tests/pilgrimage.test.ts[2m > [22mboss and biome scores have distinct motifs, bounded voices and an Oracle release[32m 32[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mround trips combat with Dash/Q/E and copies each catch-up input before mutation[33m 391[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mretains an entire down/up between 144 Hz renders until a simulation tick consumes it once[32m 5[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mheld keys, catch-up steps and independent pause consumption do not repeat skills[32m 4[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mapplies conflict-free bindings atomically and does not leak mutable configuration references[32m 4[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22muses deadzones, finite axes and a player-relative last aim direction with mouse fallback[32m 2[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mpolls all standard buttons, ignores hold-repeat and keeps keyboard edges on disconnect[32m 1[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mdialog suppression clears queued actions and does not reinterpret a held pad button as a new press[32m 0[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mrebaselines a held pad after a focus polling gap without swallowing a new keyboard action[32m 1[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mreconnecting or replacing a held controller does not repeat pause or spend another bomb[32m 1[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mpreserves core simulation results for the same legacy keyboard/mouse actions[32m 96[2mms[22m[39m
+ [32m✓[39m tests/input.test.ts[2m > [22mfalls back safely for corrupt or inaccessible binding storage without touching gameplay saves[32m 3[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mreplays Boss intro pause/resume and actual Boss behavior from a validated entry checkpoint[32m 186[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mhandles event checkpoint and ordered decisions before the first tick[32m 46[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mhandles reward checkpoint and ordered decisions before the first tick[32m 35[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mhandles map checkpoint and ordered decisions before the first tick[32m 31[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mdamage and collision[2m > [22mapplies critical boundary and scales damage once[32m 3[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mdamage and collision[2m > [22mprevents tunnelling for a fast projectile[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mdamage and collision[2m > [22muses shield first and ignores damage during invulnerability[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mdamage and collision[2m > [22mdoes not allow post-mortem lifesteal[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mdamage and collision[2m > [22mkeeps a bounced shot inside the arena on its first collision[32m 5[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mdamage and collision[2m > [22mhits each target once per piercing projectile[32m 7[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mnormalizes diagonal speed and brakes promptly[32m 7[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mdash preserves a longer pre-existing invincibility window[32m 3[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mcannot dash again during cooldown and cannot cross walls[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mbasic pulse damages, slows, and cancels enemy projectiles[32m 2[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mfire dash at a wall cannot stack a hazard every tick[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mhostile circle only damages after its telegraph ends[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mmovement, skills and hazards[2m > [22mcooldowns clamp exactly to zero[32m 0[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mAI and terminal state[2m > [22mcharger snapshots aim and recovers after a charge[32m 2[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mAI and terminal state[2m > [22mboss phase cancels old hazards and hostile bullets[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mAI and terminal state[2m > [22mlaser geometry warns on both sides with shared width[32m 1[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mAI and terminal state[2m > [22mpaused and reward states freeze all simulation timers[32m 3[2mms[22m[39m
+ [32m✓[39m tests/combat.test.ts[2m > [22mAI and terminal state[2m > [22mengine resolves death once without later combat updates[32m 1[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mrecords treasure key spending and event choice[32m 31[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mrecords treasure bomb spending and event choice[32m 41[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22misolates progression and never reads or writes browser storage during playback[32m 28[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mall 780 pairs derive the same mechanics and palette regardless of acquisition order[32m 64[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mshape, trajectory and payload modifiers remain simultaneously enabled[32m 2[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mthermal reaction needs previous statuses, has a cooldown and never triggers from secondary damage[32m 2[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mfragment children inherit payload but cannot recursively split[32m 8[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mprism extends lifetime only on the first bounce and retains hit history[32m 1[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mecho has exactly three secondary shots per dash window[32m 2[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mpractice preserves checkpoint, discoveries and run statistics[32m 25[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mreports the first failing checkpoint when a legal input is tampered with[32m 65[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mrejects incompatible versions, malformed streams, huge input and altered initial profiles[32m 32[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mpreserves Set order, pool allocation cursor and private pause state in canonical checksums[32m 25[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mrejects variable timesteps before advancing the simulation[32m 31[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mnormalizes negative-zero seeds before recording[32m 29[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mrejects checksum floods and malformed legacy room behavior references before boot[32m 28[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mchecks command outcomes and retains intentionally rejected attempts[32m 34[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mpreserves 500 pre-editor build derivations byte for byte[32m 43[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mround trips, canonicalizes record order, and detaches/freezes valid content[32m 7[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mrejects duplicate IDs, unknown fields, missing values, bounds and bad JSON before apply[32m 6[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mrejects missing, self, cyclic and prototype-chain references[32m 4[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mapplies enemy, weapon, protocol and encounter edits through the real engine[32m 11[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mtuned sword sectors and cannon explosions reach live attack geometry[32m 1[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mtuned Boss thresholds and recovery change the real state machine[32m 3[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22medited prerequisite gates actual reward offers and appears in the semantic diff[32m 44[2mms[22m[39m
+ [32m✓[39m tests/content.test.ts[2m > [22mrejects custom replay packs while allowing normalized default imports[32m 48[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mall trial builds and maximal modifier stacks remain finite and bounded[33m 1159[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mmusic has a stable beat grid, repeatable phrases and bounded step voices[32m 2[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22ma plasma reaction killing the original target settles death exactly once[32m 3[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22morbiting rounds detach on a wall bounce instead of burning all bounces in place[32m 1[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mfragment lifetime also updates the inherited return threshold[32m 1[2mms[22m[39m
+ [32m✓[39m tests/resonance.test.ts[2m > [22mreturning rounds survive walls in all four directions, including near-wall origins[32m 10[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mdata-driven builds[2m > [22mcontains 40 unique protocols evenly across five branches[32m 4[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mdata-driven builds[2m > [22mnever offers owned or unusable dependent cards across 100 seeds[32m 261[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mdata-driven builds[2m > [22mkeeps reward randomness independent from combat RNG[32m 1[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mdata-driven builds[2m > [22mthree same-element protocols activate a real mechanical synergy[32m 1[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mdata-driven builds[2m > [22minvalid or double card picks cannot grant rewards[32m 4[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mrun generation and persistence[2m > [22malways routes through both bosses[32m 3[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mrun generation and persistence[2m > [22mroom templates reproduce by seed and expose legal alternatives[32m 1[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mrun generation and persistence[2m > [22mrecovers safely from malformed, future, or corrupt saves[32m 2[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mrun generation and persistence[2m > [22mclamps settings and rejects invalid checkpoint[32m 1[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mrun generation and persistence[2m > [22mresumes with identical checkpoint build and health[32m 7[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mbounded resources and events[2m > [22mpool never allocates past capacity, reuses released objects, and reports saturation[32m 1[2mms[22m[39m
+ [32m✓[39m tests/progression.test.ts[2m > [22mbounded resources and events[2m > [22munsubscribed event listeners cannot accumulate effects[32m 0[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22msword sector includes target radius at its edges and rejects rear or distant targets[32m 2[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22msword has a real windup, locks aim, hits only once per swing and cuts front bullets[32m 5[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22msword rejects circles outside the curved sector corner[32m 0[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22ma pierce-only protocol creates a penetrating rune blade alongside the sword[32m 1[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22mthird slash is a stronger wider finisher and a broken combo resets[32m 1[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22msword trajectory cards add secondary rune blades without replacing melee[32m 1[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22mcannon uses slower larger rounds and secondary splash damages neighbours once[32m 4[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22mcannon state is fully reset when a pooled round is reused by an enemy[32m 2[2mms[22m[39m
+ [32m✓[39m tests/weapons.test.ts[2m > [22mall three weapons combine with all trial recipes and the maximal stack without exhausting the projectile pool[33m 1092[2mms[22m[39m
+ [32m✓[39m tests/save-compatibility.test.ts[2m > [22mmigrates the original v1 shape without changing its legacy Boss or offset room seed[32m 7[2mms[22m[39m
+ [32m✓[39m tests/save-compatibility.test.ts[2m > [22mretains economy-era resources and progression across normalize/resume/re-save[32m 3[2mms[22m[39m
+ [32m✓[39m tests/save-compatibility.test.ts[2m > [22mrebuilds pilgrimage geometry from its deterministic graph and rejects an impossible route[32m 3[2mms[22m[39m
+ [32m✓[39m tests/save-compatibility.test.ts[2m > [22mdrops a corrupt legacy checkpoint without losing valid settings or meta progression[32m 6[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mkeeps long fractional-pointer recordings within their own export/import contract[33m 2143[2mms[22m[39m
+ [32m✓[39m tests/replay.test.ts[2m > [22mdeterministic QA replay[2m > [22mstops at the per-tick decision budget with a valid completed prefix[32m 39[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22mpausing an entry or boss introduction freezes and restores its exact stage[32m 4[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22mlevel-up and resume derive identical split-shot damage[32m 4[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22mcheckpoint retains shields and reward/map stages[32m 6[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22mfailed resume cannot unlock a terminal settlement[32m 1[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22mshift ice only applies its state through dash[32m 1[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22melite rewards guarantee at least one rare or epic option[32m 36[2mms[22m[39m
+ [32m✓[39m tests/regressions.test.ts[2m > [22man eight-area run offers only two optional safe rooms[32m 2[2mms[22m[39m
+ [32m✓[39m tests/debug-session.test.ts[2m > [22mpause does not advance and single step is exactly one neutral tick[32m 6[2mms[22m[39m
+ [32m✓[39m tests/debug-session.test.ts[2m > [22mslow motion retains edges until the next fixed tick and pause clears pending edges[32m 6[2mms[22m[39m
+ [32m✓[39m tests/debug-session.test.ts[2m > [22m2x advances two fixed ticks while consuming a bomb edge once[32m 4[2mms[22m[39m
+ [32m✓[39m tests/debug-session.test.ts[2m > [22mdiagnostics do not alter simulation checksums; manual commands validate and cap entities[32m 37[2mms[22m[39m
+ [32m✓[39m tests/spatial-grid.test.ts[2m > [22mrandom swept queries contain every narrow-phase hit, including negative cells and large circles[33m 720[2mms[22m[39m
+ [32m✓[39m tests/stability.test.ts[2m > [22mreplays committed combat input/checksum history without regeneration[32m 149[2mms[22m[39m
+ [32m✓[39m tests/audio-lifecycle.test.ts[2m > [22mpause latches silence while the audio clock is suspended and later resumes the mix[32m 5[2mms[22m[39m
+ [32m✓[39m tests/stability.test.ts[2m > [22mreplays committed boss input/checksum history without regeneration[32m 92[2mms[22m[39m
+ [32m✓[39m tests/stability.test.ts[2m > [22mreplays committed shop-route input/checksum history without regeneration[32m 48[2mms[22m[39m
+ [32m✓[39m tests/spatial-grid.test.ts[2m > [22mmoving across cell boundaries removes stale membership and retains source order[32m 1[2mms[22m[39m
+ [32m✓[39m tests/spatial-grid.test.ts[2m > [22mdynamic separation exactly matches the sequential brute oracle across dense random layouts[33m 811[2mms[22m[39m
+ [32m✓[39m tests/stability.test.ts[2m > [22msimulates 12 randomized new-run seeds with bounded finite state and resumable checkpoints[33m 1572[2mms[22m[39m
+ [32m✓[39m tests/spatial-grid.test.ts[2m > [22mhigh speed, piercing, knockback, fragments and pool reuse retain identical damage semantics[33m 1715[2mms[22m[39m
+ [32m✓[39m tests/spatial-grid.test.ts[2m > [22mcomplete seeded engine steps match with the grid and brute-force collision modes[33m 2898[2mms[22m[39m
+
+[2m Test Files [22m [1m[32m15 passed[39m[22m[90m (15)[39m
+[2m      Tests [22m [1m[32m146 passed[39m[22m[90m (146)[39m
+[2m   Start at [22m 09:12:29
+[2m   Duration [22m 9.53s[2m (transform 881ms, setup 0ms, import 1.89s, tests 14.85s, environment 2ms)[22m
+

@@ -1,0 +1,14 @@
+{
+  "recordedAt": "2026-09-10T09:12:21.172Z",
+  "sourceCommit": "8b4728bbde1c33b0205f40bdc8b6b8bfdd4e1a03",
+  "sourceDirtyBeforeVerification": false,
+  "event": "workflow_dispatch",
+  "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34459299795",
+  "runAttempt": "1",
+  "fullSuite": true,
+  "node": "v24.20.0",
+  "platform": "linux",
+  "cpu": "AMD EPYC 9V74 80-Core Processor",
+  "browser": "Playwright-managed Chromium",
+  "workers": 1
+}

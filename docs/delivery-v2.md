@@ -4,7 +4,7 @@
 
 ## A. 修改文件清单
 
-本轮在已有游戏上迭代，没有重写项目。已用 `git diff --name-status b17f4c24cf95a02d3197ec493026b6f23c8f2c3e HEAD` 核对改动；审读时 HEAD 为上述 M7 提交。完整逐文件变化见 [基线 → codex/engineering-v2 对比](https://github.com/QiQiyzhu/arc-shift/compare/b17f4c24cf95a02d3197ec493026b6f23c8f2c3e...codex%2Fengineering-v2)。分支链接会随后续提交更新，最终发布应同时记录确定的源码 SHA。
+本轮在已有游戏上迭代，没有重写项目。已用 `git diff --name-status b17f4c24cf95a02d3197ec493026b6f23c8f2c3e HEAD` 核对改动；初次审读时 HEAD 为 M7 提交 `cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46`。完整逐文件变化见 [基线 → codex/engineering-v2 对比](https://github.com/QiQiyzhu/arc-shift/compare/b17f4c24cf95a02d3197ec493026b6f23c8f2c3e...codex%2Fengineering-v2)。分支链接会随后续提交更新，最终发布应同时记录确定的源码 SHA。
 
 | 工程模块 | 新增/修改的关键文件 | 实际变化 |
 |---|---|---|
@@ -51,7 +51,7 @@ M8 交付另含 [工程案例](engineering-case-study.md)、[内容管线](conte
 | M7 完整本地 | **146 单元 / 34 开发浏览器 / 另行 1 生产浏览器通过**；typecheck/lint/build 通过；audit 0 | [阶段检查](qa/engineering/m7-input-verified/checks.json)、[unit](qa/engineering/m7-input-verified/unit.json)、[开发浏览器](qa/engineering/m7-input-verified/browser.json)、[生产浏览器](qa/engineering/m7-input-verified/production-browser.json)、[audit](qa/engineering/audit-m7.json) |
 | M7 精确提交 Linux **smoke** | 146 单元、9 开发 smoke、1 生产浏览器通过；0 skipped/flaky；audit 0 | [run 34452226005](https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005)、[环境](qa/engineering/ci-m7-success/environment.json)、[原始证据](qa/engineering/ci-m7-success) |
 | M8 最终本地完整验收 | **146 单元 / 34 开发浏览器 / 2 生产浏览器通过**，无失败/跳过/flaky；五项 gate 通过 | [阶段](qa/engineering/m8-delivery/checks.json)、[unit](qa/engineering/m8-delivery/unit.json)、[开发](qa/engineering/m8-delivery/browser.json)、[生产](qa/engineering/m8-delivery/production-browser.json) |
-| M8 Linux full suite 与生产交付 | 以实际远端运行及部署验收为准 | [最终 CI 与发布记录](qa-report.md)；不以 M7 的 9 项 smoke 代替全量 |
+| M8 Linux full suite 与生产交付 | 精确源码全量 146 单元 / 34 开发 / 2 生产通过，audit 0，六种子长模拟通过 | [最终 CI 与发布记录](qa-report.md)；不以 M7 的 9 项 smoke 代替全量 |
 
 M7 本地报告记录提交前父提交 `5cf8270` 加工作区，随后完整实现提交为 `cd4ca2cc…`；Linux smoke 在该精确提交、干净工作区运行，Node v24.20.0、Linux AMD EPYC 7763、Playwright Chromium、1 worker。首个 Linux 失败 [run 34447501573](https://github.com/QiQiyzhu/arc-shift/actions/runs/34447501573) 与 [原始报告](qa/engineering/ci-first-failure) 保留，没有用成功运行覆盖失败历史。
 

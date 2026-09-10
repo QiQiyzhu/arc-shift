@@ -1,0 +1,35 @@
+{
+  "recordedAt": "2026-09-10T09:12:49.536Z",
+  "methodology": "Headless browser rAF, actual renderer; fixed simulated input, high HP stress fixture, other project agents active",
+  "enemies": 100,
+  "finalEnemies": 100,
+  "maxProjectiles": 207,
+  "poolMisses": 0,
+  "frameTimeMs": {
+    "p50": 20.900000000000546,
+    "p95": 48.70000000000073,
+    "p99": 55.70000000000073
+  },
+  "engineUpdateMs": {
+    "p50": 0.3999999910593033,
+    "p95": 1,
+    "p99": 1.5
+  },
+  "fps": 36.82671483749534,
+  "sampleMs": 10019.899999994039,
+  "queries": {
+    "separation": 199430,
+    "projectile": 86728
+  },
+  "heap": {
+    "usedJSHeapSize": 152528103,
+    "totalJSHeapSize": 224744879,
+    "jsHeapSizeLimit": 4395630592
+  },
+  "objectCount": "unavailable",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+  "viewport": [
+    1440,
+    900
+  ]
+}

@@ -1,17 +1,18 @@
 {
-  "generatedAt": "2026-09-10T08:18:13.101Z",
+  "generatedAt": "2026-09-10T09:32:17.295Z",
   "renderer": "Mermaid 11.17.0, build-time Edge, inline SVG",
   "projects": [
     {
       "title": "ARC-SHIFT",
       "repo": "arc-shift",
       "branch": "codex/engineering-v2",
-      "status": "工程版 M7 已通过 146 单元、34 浏览器和 1 生产检查，Linux CI 成功；公开工具截图与代码可供复现",
+      "status": "工程版 M8 本地与 Linux 全量均通过 146 单元、34 开发浏览器和 2 生产检查；提供公开游戏、工具截图、回放与性能原始记录",
       "demo": "https://arc-shift.black-kid-3047.chatgpt.site/",
-      "evidence": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34452226005",
+      "evidence": "https://github.com/QiQiyzhu/arc-shift/blob/codex/engineering-v2/docs/qa-report.md",
       "category": "ACTION ROGUELITE / GAME SYSTEMS",
       "ready": true,
-      "dossierSha256": "57e02305a62ff84ec9ee76a8d749aa9838a376b2265a94c84c454a1cc0476859",
+      "dossierSha256": "71aeb010e8256b1cdc72039a933afe2d6b94458f2e72b85840b6f5bc62440d8a",
+      "dossierNormalizedSha256": "6b86e2de8084924e4a8519bcf1156707d046986bdcb509c1a4be8b1ebf485255",
       "filename": "ARC-SHIFT 面试讲解.html",
       "sections": 20,
       "diagrams": [
@@ -24,7 +25,7 @@
           "layoutAdjusted": false,
           "asset": "diagrams/arc-shift-diagram-1.svg",
           "rendered": true,
-          "sourceSha256": "1e19d06ff204be06f453b6eb16f31d08ab0a1ba69043b7172a940dbcf0683ea3"
+          "sourceSha256": "d04b08236a147a6f9a82fda261e11e416540c2a76fc3f1a0bd149a21f1d4edf4"
         }
       ]
     },
@@ -38,6 +39,7 @@
       "category": "CODING AGENT / MCP / EVALUATION",
       "ready": true,
       "dossierSha256": "bd27e95a22d3571024d105e8bd5376e1abd914d47542a11f863eaf77020610f2",
+      "dossierNormalizedSha256": "bd27e95a22d3571024d105e8bd5376e1abd914d47542a11f863eaf77020610f2",
       "filename": "RepoPilot 面试讲解.html",
       "sections": 20,
       "diagrams": [
@@ -58,10 +60,12 @@
       "title": "Aegis Arena",
       "repo": "aegis-arena",
       "branch": "codex/aegis-v1",
-      "status": "UE Editor 编译与 5 项 Automation 已通过；Runtime 与 Package 仍在验收",
+      "status": "UE 5.8.2 的 5 项 Core Automation、12 条真实 PIE 断言通过；完成 60 次原生策略评估、12 次渲染测量及 Development/Shipping 独立包验收",
+      "evidence": "https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/status.md",
       "category": "UNREAL ENGINE / UTILITY / BT / EQS",
       "ready": true,
-      "dossierSha256": "eefb9ec0540085c34063cd94645156bb6b61cab478d039a8702e73e50ed4bbb5",
+      "dossierSha256": "2f2d2bda7e18f0e134880bfb8dfc8e9b204dbcfc9429ec2c64111314e1e5c040",
+      "dossierNormalizedSha256": "d9e85e1355c153f4f9cc188b95e7f39f4ff0dd96e397dad4652e6093098936c2",
       "filename": "Aegis Arena 面试讲解.html",
       "sections": 20,
       "diagrams": [
@@ -87,6 +91,7 @@
       "category": "AI PRODUCT DISCOVERY / EXPERIMENTS",
       "ready": true,
       "dossierSha256": "ead364e2f4dfe4e667fe94f9cfad8fc5b12313fab7efc06ad09f4f09bb09c145",
+      "dossierNormalizedSha256": "ead364e2f4dfe4e667fe94f9cfad8fc5b12313fab7efc06ad09f4f09bb09c145",
       "filename": "DesignLens AI 面试讲解.html",
       "sections": 20,
       "diagrams": [
@@ -113,6 +118,7 @@
       "category": "SUPPORT AGENT / HYBRID RAG / APPROVALS",
       "ready": true,
       "dossierSha256": "5c2c9702fb063e018a17f6c51046b72fe3c5b3e7c365f5c7de4877f684ddde7a",
+      "dossierNormalizedSha256": "dd4cd38417a5df8b52f9d75fde29a665b2de103ed6a369afb91956534903c63c",
       "filename": "OpsPilot AI 面试讲解.html",
       "sections": 20,
       "diagrams": [

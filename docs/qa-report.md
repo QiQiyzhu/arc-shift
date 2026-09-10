@@ -1,12 +1,29 @@
 # 验收与打磨记录
 
-## Engineering M8 · 本地完整交付验收（2026-09-10）
+## Engineering M8 · 本地与 Linux 完整交付验收（2026-09-10）
 
 完整五项检查实际通过：typecheck、lint、**146 单元 / 34 开发浏览器**、build；另行 **2 项生产浏览器通过（45.8 秒）**，无失败、跳过或 flaky。新生产流程真实打开五份 A–T 手册、架构 SVG、录屏预览，检查关闭后焦点恢复及手机尺寸。原始 [五项 gate](qa/engineering/m8-delivery/checks.json)、[unit](qa/engineering/m8-delivery/unit.json)、[开发浏览器](qa/engineering/m8-delivery/browser.json)、[生产浏览器](qa/engineering/m8-delivery/production-browser.json)。阶段日志中的 SHA 是父提交 `cd4ca2c` 加受测工作区，不冒充无修改的远端提交。
 
-桌面预渲染的 6 页（总览加 5 个项目）、100 个 A–T 章节、5 张 SVG 共 69 条连线在 Edge 的 1440×1000 与 390×844 尺寸检查通过；图关系与源定义一致、页面不依赖网络、无横向溢出或失效锚点。最终公开文件仍需与发布时的原始手册哈希匹配。
+桌面预渲染的 6 页（总览加 5 个项目）、100 个 A–T 章节、5 张 SVG 共 69 条连线在 Edge 的 1440×1000 与 390×844 尺寸检查通过；图关系与源定义一致、页面不依赖网络、无横向溢出或失效锚点。最终公开文件与桌面手册及源文本哈希的匹配结果见交付产物记录。
 
-M8 远端完整套件和最终公开发布正在验收；下方 M7 的 Linux 成功是 9 项开发 smoke，不能作为 34 项全量通过的替代。
+M8 Linux **完整套件已通过**：[运行 34459299795](https://github.com/QiQiyzhu/arc-shift/actions/runs/34459299795) 在干净源码 `8b4728bbde1c33b0205f40bdc8b6b8bfdd4e1a03` 上完成 **146 单元 / 34 开发浏览器 / 2 生产浏览器**，无失败、跳过或 flaky；typecheck、lint、build、audit 0、生产 DEV 隔离检查通过。六种子合计 648,000 tick、模拟 10,800 秒、零 pool miss；墙钟总耗时 55.795 秒，不能称为三小时浏览器运行。[永久原始报告、环境与校验值](qa/engineering/ci-m8-full-success/parsed-summary.json)。
+
+本地另以 CI 等待配置通过 [完整五项检查](qa/engineering/m8-ci-budget/checks.json)。最终手册和原始媒体的来源哈希、桌面与公开 HTML 一致性、离线布局检查及生产浏览器结果归档于 [交付产物记录](qa/engineering/m8-final-artifacts/)。此次 Linux 全量绑定上述游戏/测试源码；随后交付提交只整合文档、证据和公开展示资产，其日常 CI 与全量运行分别保留。公开入口为 [五项目作品集](https://arc-shift.black-kid-3047.chatgpt.site/portfolio/) 和 [游戏](https://arc-shift.black-kid-3047.chatgpt.site/)，展示中的其它后台应用提供真实媒体与本机复现。
+
+
+### 首次 Linux full 的真实失败与修复
+
+[34455609035](https://github.com/QiQiyzhu/arc-shift/actions/runs/34455609035) 在干净源码 `bbed8d1d7ace02ace2273b3609846f846ce83173` 上完成：146 单元通过、29 开发浏览器通过 / 5 失败、2 生产通过；6 × 108,000 tick 长模拟、audit 0、typecheck/lint/build/DEV marker 检查通过。失败不能被其它步骤通过抵消。[原始记录与摘要](qa/engineering/ci-m8-first-failure/parsed-summary.json)。
+
+四个十秒渲染样本的帧数为 63/82/94/63，低于原先写死的 100；baseline/resonance/cannon/hybrid 实际平均 FPS 约 6.21/8.15/9.34/6.22，sword 104 帧通过。五个场景均保持 playing、有实际弹体且 0 pool miss。该次没有记录具体 GL 后端，不能仅凭 Linux 名称判断渲染设备。另一个失败来自六试炼第五轮撞到 45 秒全测试预算，保留了 [实际截图](qa/engineering/ci-m8-first-failure/resonance-timeout.png)；不是某项技能断言失败。
+
+修复仍采样实际十秒，保留所有低 FPS，不延长采样来凑帧数。通用功能门槛检查样本有限且大于零、真实 tick/elapsed 推进、playing 与 pool 状态；额外记录实际 WebGL renderer。六试炼只获得独立 150 秒预算及 15 秒 playing 状态等待，六轮弹体/存档/池断言都保留。修复后 [完整本地五项 gate](qa/engineering/m8-ci-portability/checks.json) 再次通过 146 单元 / 34 开发浏览器；[本次本地样本](qa/engineering/m8-ci-portability/render-v1-baseline.json) 实际显示 Intel UHD / ANGLE D3D11，不与 Aegis 的 RTX 4060 / D3D12 混用。新的远端 full 运行绑定源码 `f25385f8ca552ee5b257fca1fe63c74eee21dc78`，结果另列。
+
+### 第二次 Linux full：软件渲染与累计等待预算
+
+[34457142276](https://github.com/QiQiyzhu/arc-shift/actions/runs/34457142276) 在干净源码 `f25385f8ca552ee5b257fca1fe63c74eee21dc78` 上为 146 单元 / 31 开发通过、3 开发失败 / 2 生产通过。前次五项失败均已通过；本次失败为多次刷新经营流程耗尽 45 秒总预算，以及两种 Boss 入场仍处于 bossIntro 时达到默认 5 秒等待。[原始报告与环境](qa/engineering/ci-m8-second-failure/parsed-summary.json)、[经营流程 trace](qa/engineering/ci-m8-second-failure/camp-test-trace.ndjson) 保留。trace 显示末次刷新已成功，累计 deadline 在随后“继续行动”点击期间触发，后续存档及 18 金币按钮断言没有单项错误。
+
+本次真实 renderer 为 ANGLE / SwiftShader，五场景平均 FPS 为 3.18–5.50，均有正向模拟推进、playing 和零 pool miss；这是低帧率观测，不是性能改善。CI 专用总预算调整为 180 秒、默认状态断言为 30 秒，本地默认仍为 45 / 5 秒；所有经营、Boss、战斗和存档断言保留，没有添加 retry 或 skip。实际以 `CI=true` 再跑 [本地完整五项检查](qa/engineering/m8-ci-budget/checks.json)，146 单元 / 34 开发浏览器通过。最终远端完整结果另列。
 
 最新工程验收：2026-09-10，M7 实现 `cd4ca2cc8cf59a0ff9f045b97635e1d5dd34fc46`。此记录区分规则测试、真实浏览器输入、开发夹具与自动控制器，避免把不同证据混为“真人完整通关”。
 

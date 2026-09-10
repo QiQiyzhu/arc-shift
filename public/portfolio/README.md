@@ -4,7 +4,7 @@ This directory is the public showcase for five separate repositories. The actual
 
 - `index.html` and `assets/*.css` / `viewer.js`: authored static presentation and an accessible native-dialog media viewer, with no remote script, analytics or API dependency.
 - `assets-manifest.json`: byte size, SHA256, repository-relative origin and source reference for every copied original screenshot/recording. Recordings load on request.
-- `handbooks/`: A–T dossiers rendered from each repository's `docs/interview-dossier.md`. The manifest records the raw source document hashes and Mermaid source/render statistics. Diagrams are inline SVG; pages can be saved and read offline.
+- `handbooks/`: A–T dossiers rendered from each repository's `docs/interview-dossier.md`. The manifest records the original local byte hash (`dossierSha256`) and the UTF-8/LF normalized hash (`dossierNormalizedSha256`, portable across Git line-ending conversion), plus Mermaid source/render statistics. Diagrams are inline SVG; pages can be saved and read offline.
 
 The Desktop copies and their original local generator are maintained beside the five workspaces. Public output contains no machine filesystem paths, secrets or local administration endpoints. Sources and actual evidence remain in the respective GitHub repositories.
 

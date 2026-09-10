@@ -1,0 +1,21 @@
+{
+  "sampleMs": 10003.89999998808,
+  "frames": 887,
+  "medianFrameMs": 7,
+  "p95FrameMs": 27.69999999999891,
+  "p99FrameMs": 34.70000000000073,
+  "averageFps": 88.6654204861161,
+  "maxEnemies": 28,
+  "maxProjectiles": 56,
+  "poolMisses": 0,
+  "phase": "playing",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/152.0.0.0 Safari/537.36 Edg/152.0.0.0",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "reactionCount": 38,
+  "simulatedTicks": 601,
+  "simulatedSeconds": 8.750000000000014,
+  "webGLRenderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+}

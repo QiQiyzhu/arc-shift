@@ -1,0 +1,469 @@
+{
+  "kind": "DERIVED summary; copied raw files retain exact bytes and have SHA256 below",
+  "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34457142276",
+  "runId": 34457142276,
+  "runAttempt": 1,
+  "sourceCommit": "f25385f8ca552ee5b257fca1fe63c74eee21dc78",
+  "conclusion": "failure",
+  "scope": "workflow_dispatch full suite + six-seed long simulation",
+  "sourceDirtyBeforeVerification": false,
+  "environment": {
+    "recordedAt": "2026-09-10T08:48:42.514Z",
+    "sourceCommit": "f25385f8ca552ee5b257fca1fe63c74eee21dc78",
+    "sourceDirtyBeforeVerification": false,
+    "event": "workflow_dispatch",
+    "runUrl": "https://github.com/QiQiyzhu/arc-shift/actions/runs/34457142276",
+    "runAttempt": "1",
+    "fullSuite": true,
+    "node": "v24.20.0",
+    "platform": "linux",
+    "cpu": "AMD EPYC 7763 64-Core Processor",
+    "browser": "Playwright-managed Chromium",
+    "workers": 1
+  },
+  "renderSamples": [
+    {
+      "file": "render-v1-baseline.json",
+      "sampleMs": 10243.8,
+      "frames": 43,
+      "medianFrameMs": 216.70000000000073,
+      "p95FrameMs": 300,
+      "p99FrameMs": 316.7000000000007,
+      "averageFps": 4.197661024229291,
+      "maxEnemies": 28,
+      "maxProjectiles": 46,
+      "poolMisses": 0,
+      "phase": "playing",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reactionCount": 19,
+      "simulatedTicks": 129,
+      "simulatedSeconds": 2.1499999999999924,
+      "webGLRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "file": "render-v1-cannon.json",
+      "sampleMs": 10188.2,
+      "frames": 54,
+      "medianFrameMs": 183.3000000000029,
+      "p95FrameMs": 283.2999999999993,
+      "p99FrameMs": 283.3000000000029,
+      "averageFps": 5.300249308023006,
+      "maxEnemies": 28,
+      "maxProjectiles": 41,
+      "poolMisses": 0,
+      "phase": "playing",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reactionCount": 10,
+      "simulatedTicks": 162,
+      "simulatedSeconds": 2.499999999999996,
+      "webGLRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "file": "render-v1-hybrid.json",
+      "sampleMs": 10049.100000000024,
+      "frames": 32,
+      "medianFrameMs": 333.2000000000007,
+      "p95FrameMs": 366.7000000000007,
+      "p99FrameMs": 383.40000000000146,
+      "averageFps": 3.18436476898428,
+      "maxEnemies": 28,
+      "maxProjectiles": 122,
+      "poolMisses": 0,
+      "phase": "playing",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reactionCount": 28,
+      "simulatedTicks": 96,
+      "simulatedSeconds": 1.5999999999999943,
+      "webGLRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "file": "render-v1-resonance.json",
+      "sampleMs": 10161.7,
+      "frames": 52,
+      "medianFrameMs": 183.39999999999964,
+      "p95FrameMs": 283.2999999999993,
+      "p99FrameMs": 283.40000000000146,
+      "averageFps": 5.117254002775126,
+      "maxEnemies": 28,
+      "maxProjectiles": 90,
+      "poolMisses": 0,
+      "phase": "playing",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reactionCount": 10,
+      "simulatedTicks": 156,
+      "simulatedSeconds": 2.549999999999996,
+      "webGLRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    },
+    {
+      "file": "render-v1-sword.json",
+      "sampleMs": 10008.199999999906,
+      "frames": 55,
+      "medianFrameMs": 183.29999999999927,
+      "p95FrameMs": 250,
+      "p99FrameMs": 250,
+      "averageFps": 5.495493695170013,
+      "maxEnemies": 28,
+      "maxProjectiles": 44,
+      "poolMisses": 0,
+      "phase": "playing",
+      "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+      "viewport": [
+        1920,
+        1080
+      ],
+      "reactionCount": 5,
+      "simulatedTicks": 165,
+      "simulatedSeconds": 2.6999999999999953,
+      "webGLRenderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)"
+    }
+  ],
+  "unit": {
+    "passed": 146,
+    "failed": 0,
+    "skipped": 0,
+    "testFilesPassed": 15,
+    "durationSeconds": 9.47,
+    "source": "unit-tests.log"
+  },
+  "developmentBrowser": {
+    "startTime": "2026-09-10T08:50:54.794Z",
+    "duration": 842978.184,
+    "expected": 31,
+    "skipped": 0,
+    "unexpected": 3,
+    "flaky": 0,
+    "globalErrors": [],
+    "files": [
+      "content-editor.spec.ts",
+      "debugger.spec.ts",
+      "engineering-performance.spec.ts",
+      "expedition.spec.ts",
+      "game.spec.ts",
+      "input.spec.ts",
+      "performance.spec.ts",
+      "pilgrimage.spec.ts",
+      "replay.spec.ts",
+      "resonance.spec.ts",
+      "reward-layout.spec.ts"
+    ],
+    "results": [
+      {
+        "file": "expedition.spec.ts",
+        "title": "camp choices, reroll, stock, bank and workshop persist through real page reloads",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "timedOut",
+            "errors": [
+              {
+                "message": "\u001b[31mTest timeout of 45000ms exceeded.\u001b[39m"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "pilgrimage.spec.ts",
+        "title": "matron has its own arena, attacks and escalating score",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": [
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/pilgrimage.spec.ts",
+                  "column": 5,
+                  "line": 168
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"playing\"\u001b[39m\nReceived: \u001b[31m\"bossIntro\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  166 |       a.engine.world.player.invulnerable = 999;\n  167 |     });\n> 168 |     await expect.poll(() => phase(page)).toBe('playing');\n      |     ^\n  169 |     await expect\n  170 |       .poll(() => page.evaluate(() => window.arcQA.synth.nowPlaying))\n  171 |       .toBe(boss);\n    at /home/runner/work/arc-shift/arc-shift/e2e/pilgrimage.spec.ts:168:5"
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "file": "pilgrimage.spec.ts",
+        "title": "forgemaster has its own arena, attacks and escalating score",
+        "status": "unexpected",
+        "results": [
+          {
+            "status": "failed",
+            "errors": [
+              {
+                "location": {
+                  "file": "/home/runner/work/arc-shift/arc-shift/e2e/pilgrimage.spec.ts",
+                  "column": 5,
+                  "line": 168
+                },
+                "message": "Error: \u001b[2mexpect(\u001b[22m\u001b[31mreceived\u001b[39m\u001b[2m).\u001b[22mtoBe\u001b[2m(\u001b[22m\u001b[32mexpected\u001b[39m\u001b[2m) // Object.is equality\u001b[22m\n\nExpected: \u001b[32m\"playing\"\u001b[39m\nReceived: \u001b[31m\"bossIntro\"\u001b[39m\n\nCall Log:\n- Timeout 5000ms exceeded while waiting on the predicate\n\n  166 |       a.engine.world.player.invulnerable = 999;\n  167 |     });\n> 168 |     await expect.poll(() => phase(page)).toBe('playing');\n      |     ^\n  169 |     await expect\n  170 |       .poll(() => page.evaluate(() => window.arcQA.synth.nowPlaying))\n  171 |       .toBe(boss);\n    at /home/runner/work/arc-shift/arc-shift/e2e/pilgrimage.spec.ts:168:5"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  },
+  "productionBrowser": {
+    "startTime": "2026-09-10T08:50:37.953Z",
+    "duration": 15877.289,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0,
+    "globalErrors": [],
+    "files": [
+      "isolation.spec.ts",
+      "portfolio.spec.ts"
+    ],
+    "results": []
+  },
+  "soak": {
+    "mode": "long",
+    "passed": true,
+    "seeds": [
+      17,
+      293,
+      701,
+      991,
+      4211,
+      73009
+    ],
+    "samples": [
+      {
+        "seed": 17,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 9705.668529999999,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 169,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "293e14dc"
+      },
+      {
+        "seed": 293,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 9550.165934,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 169,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "f1a6c641"
+      },
+      {
+        "seed": 701,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 9692.569964999999,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 163,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "83e739cc"
+      },
+      {
+        "seed": 991,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 9555.540449,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 168,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "5a038b03"
+      },
+      {
+        "seed": 4211,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 9454.252312999997,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 161,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "74774435"
+      },
+      {
+        "seed": 73009,
+        "requestedTicks": 108000,
+        "completedTicks": 108000,
+        "simulatedSeconds": 1800,
+        "elapsedMs": 9619.892251999998,
+        "peak": {
+          "enemies": 28,
+          "projectiles": 169,
+          "hazards": 17
+        },
+        "poolMisses": 0,
+        "finalChecksum": "b41785ce"
+      }
+    ],
+    "totalCompletedTicks": 648000,
+    "totalSimulatedSeconds": 10800,
+    "totalElapsedMs": 57578.08944299999,
+    "totalPoolMisses": 0,
+    "source": "soak.json",
+    "limitation": "Fixed 60 Hz headless simulation, high-HP enemy fixtures, invulnerable practice player; no rendering, no real-time waiting. Heap snapshots are observed process memory, not a leak verdict. Other workloads may be active."
+  },
+  "audit": {
+    "reportedVulnerabilities": 0,
+    "source": "audit.log",
+    "extraction": "Matching Audit locked dependencies step lines from downloaded gh job.log; timestamps and prefixes unchanged"
+  },
+  "otherChecks": {
+    "Audit locked dependencies": "success",
+    "Typecheck": "success",
+    "Lint": "success",
+    "Headless simulation soak": "success",
+    "Production build": "success",
+    "Measure the production bundle and check DEV markers": "success",
+    "Production browser acceptance": "success",
+    "Browser smoke or full regression": "failure"
+  },
+  "bundle": {
+    "totalBytes": 11857096,
+    "javascriptBytes": 1674080,
+    "productionDebugMarkers": [],
+    "source": "bundle.json",
+    "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code."
+  },
+  "rawManifest": [
+    {
+      "file": "github.json",
+      "sourceWithinDownload": "github.json",
+      "bytes": 4092,
+      "sha256": "1adb79665b0cca7f7872a0d61a3bab328385aee5474a283ef9ce1fbff14fc19e"
+    },
+    {
+      "file": "artifacts.json",
+      "sourceWithinDownload": "artifacts.json",
+      "bytes": 1454,
+      "sha256": "6b414cc5e4feb31b0c546e9f92d5571ac254850573a8ebd6cbbf10f712ea10be"
+    },
+    {
+      "file": "environment.json",
+      "sourceWithinDownload": "artifact/outputs/qa/ci-environment.json",
+      "bytes": 452,
+      "sha256": "d2ba4100549c02af60a3a71f69808519857d43f61c7a797ed557637bfc9404cd"
+    },
+    {
+      "file": "unit-tests.log",
+      "sourceWithinDownload": "artifact/outputs/qa/unit-tests.log",
+      "bytes": 23080,
+      "sha256": "657a309ae6223fb9fad56cad90dd2b8cfea081a5c401c716801d04acb77630a2"
+    },
+    {
+      "file": "browser.json",
+      "sourceWithinDownload": "artifact/outputs/qa/browser-results.json",
+      "bytes": 69321,
+      "sha256": "153005ad79b1a628c9e99490fca4f8f5d417a05fccef22878b770501767c5fae"
+    },
+    {
+      "file": "production-browser.json",
+      "sourceWithinDownload": "artifact/outputs/qa/production-results.json",
+      "bytes": 6277,
+      "sha256": "840e7ff66f992b6a08348c8ab7b61347c34c6129f9883fb20b5ac202fad38c02"
+    },
+    {
+      "file": "soak.json",
+      "sourceWithinDownload": "artifact/outputs/qa/soak.json",
+      "bytes": 40647,
+      "sha256": "60de0156ae49161f33eb4e26541a0d9970b064f2202d042f240d817f4406869c"
+    },
+    {
+      "file": "bundle.json",
+      "sourceWithinDownload": "artifact/outputs/qa/bundle.json",
+      "bytes": 7258,
+      "sha256": "eb06002417096178e66d8b30a36cd5ea59f578a7c4706c312026309c2eba8761"
+    },
+    {
+      "file": "audit.log",
+      "sourceWithinDownload": "audit.log",
+      "bytes": 1117,
+      "sha256": "22a1241b355269c2846597426364423edc92fdbca510b6d44375c8eaec8396b4"
+    },
+    {
+      "file": "typecheck.log",
+      "sourceWithinDownload": "artifact/outputs/qa/typecheck.log",
+      "bytes": 45,
+      "sha256": "38fabde74c3f8e89a3ebc30a26a65d10b309ef85886fe012c240c2a8d1133c2e"
+    },
+    {
+      "file": "lint.log",
+      "sourceWithinDownload": "artifact/outputs/qa/lint.log",
+      "bytes": 127,
+      "sha256": "16924dc3b20bbc910ace5c7c31c1f4436487732677ff175a2074fc427817becd"
+    },
+    {
+      "file": "build.log",
+      "sourceWithinDownload": "artifact/outputs/qa/build.log",
+      "bytes": 2004,
+      "sha256": "6a5f1940caedc18cafc41b2a7cd8138ecb6aab34c4cae4b856afa19c985ade9a"
+    },
+    {
+      "file": "render-v1-baseline.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-baseline.json",
+      "bytes": 634,
+      "sha256": "7827f428ff5a8105005e8273be9c2ba245aa13735550e083bcaeec8ecfd5e610"
+    },
+    {
+      "file": "render-v1-cannon.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-cannon.json",
+      "bytes": 646,
+      "sha256": "dcacc2446d9789ef884885281220adbb0b49a5277dd7cead0a2a9761cbb81625"
+    },
+    {
+      "file": "render-v1-hybrid.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-hybrid.json",
+      "bytes": 658,
+      "sha256": "0b6f62fea14a12dab1dd905901a45b68c7cef91fc8fccf0b509124ebcc39928e"
+    },
+    {
+      "file": "render-v1-resonance.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-resonance.json",
+      "bytes": 648,
+      "sha256": "0f0894c1c5e8917e78b3e0f70fd6ea4bb1c77605919d55c6d5fcde83f29cd669"
+    },
+    {
+      "file": "render-v1-sword.json",
+      "sourceWithinDownload": "artifact/outputs/qa/render-v1-sword.json",
+      "bytes": 630,
+      "sha256": "e91a4aac1b6d144710e75ab896eff2c6aa9a14eedcbe4b777ddc00589156534c"
+    }
+  ],
+  "repositoryModified": false,
+  "newTestsRun": false
+}

@@ -1,0 +1,49 @@
+{
+  "stage": "m8-ci-budget",
+  "recordedAt": "2026-09-10T09:17:40.493Z",
+  "commit": "8b4728bbde1c33b0205f40bdc8b6b8bfdd4e1a03",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 3885
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 1195
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m8-ci-budget/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 5068
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 325718
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 5048
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-Bnke9NCk.css",
+      "bytes": 187416,
+      "gzipBytes": 32848
+    },
+    {
+      "name": "index-COfphcW_.js",
+      "bytes": 192226,
+      "gzipBytes": 60073
+    },
+    {
+      "name": "page-CgDm0mCJ.js",
+      "bytes": 1480121,
+      "gzipBytes": 417471
+    }
+  ]
+}

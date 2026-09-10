@@ -1,4 +1,4 @@
-<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aegis Arena · 工程面试手册</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f3ee;color:#1d2c35;font:16px/1.85 system-ui,'Microsoft YaHei',sans-serif}a{color:#206d66;text-decoration:none}a:hover{text-decoration:underline}aside{position:fixed;inset:0 auto 0 0;width:260px;padding:36px 24px;background:#142630;color:#e5ece7;overflow:auto}aside a{display:block;color:#c8d9d6;font-size:12px;margin:9px 0;line-height:1.65}aside strong{display:block;font-size:20px;line-height:1.4;margin:20px 0}aside small{color:#8ea9af;font-size:11px;letter-spacing:.12em}main{margin-left:260px;max-width:1150px;padding:50px 64px 120px}h1{font-size:34px;line-height:1.4;letter-spacing:-.04em;margin:0 0 26px}h2{font-size:25px;line-height:1.5;margin:60px 0 20px;border-top:1px solid #cbd4cd;padding-top:28px;scroll-margin-top:20px}h3{font-size:20px}p{margin:16px 0}pre{background:#192e39;color:#dce9e5;padding:22px;border-radius:10px;font-size:12px;line-height:1.75;overflow:auto}code{font:13px/1.7 ui-monospace,Consolas,monospace;overflow-wrap:anywhere}p code,li code,td code{background:#e5e9e2;padding:2px 5px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.7;display:block;overflow:auto;margin:24px 0}th{text-align:left;background:#dbe4dc;color:#27413a}td,th{padding:13px 16px;border-bottom:1px solid #d5ddd4;min-width:100px;vertical-align:top}tr:nth-child(even) td{background:#eaf0e8}blockquote{border-left:3px solid #4e9380;margin:26px 0;padding:1px 22px;background:#e6eee5}li{margin:10px 0}.cover{border:1px solid #ccd7ca;border-radius:8px;background:#e7eee3;padding:18px 24px;font-size:13px;margin-bottom:30px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.card{padding:28px;background:white;border:1px solid #d0d9ce;border-radius:10px}.card h2{margin:0 0 10px;padding:0;border:0;font-size:24px}.card p{font-size:14px}.card a{display:inline-block;margin:6px 15px 0 0}.muted{color:#71817e}button{font:inherit;border:1px solid #9db7aa;border-radius:6px;color:#335447;background:#edf3e9;padding:8px 14px;cursor:pointer}.print{position:fixed;right:20px;top:20px;font-size:12px}@media(max-width:900px){aside{position:static;width:auto;padding:22px}aside nav{display:none}main{margin:0;padding:30px 22px}.grid{grid-template-columns:1fr}.print{display:none}}@media print{aside,.print{display:none}main{margin:0;padding:0;max-width:none}body{font-size:11pt;background:white}h2{break-before:page}pre{white-space:pre-wrap;background:#eef2ef;color:#1b3034}table{font-size:9pt;display:table}a{color:inherit}}main{max-width:1320px;min-width:0;padding-top:58px}h1{font-size:38px}p,li,td,th,h1,h2,h3,a{overflow-wrap:anywhere}pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #70a78e;outline-offset:4px}table{margin:0;display:table}.table-wrap{overflow:auto;max-width:100%;margin:24px 0;border:1px solid #d5ddd4;border-radius:8px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{display:flex;flex-direction:column;min-width:0;border-radius:12px;background:#fff}.card p{flex:1;font-size:13px;color:#607567}.card .links{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px}.card .links a{margin:0}.card .tag{font-size:10px;letter-spacing:.05em;color:#668c78}.card h2{margin:12px 0}.local-demo{font-size:11px;color:#6f7d71;margin-top:16px;padding-top:12px;border-top:1px solid #edf0e9}.local-demo code{font-size:11px}.eyebrow{font-size:11px;letter-spacing:.14em;color:#738575}.stats{display:flex;gap:36px;margin:26px 0 34px}.stats strong{display:block;font-size:28px;line-height:1.4}.stats span{font-size:12px;color:#78887c}.cover p{margin:8px 0}.meta{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;margin-top:12px;color:#718174}.diagram{margin:26px 0;border:1px solid #d5dfd0;border-radius:12px;background:#fff;overflow:hidden}.diagram-view{padding:24px 16px;overflow:auto;max-width:100%}.diagram svg{display:block;width:auto;height:auto;max-width:100%;margin:auto}.diagram figcaption{padding:12px 20px;background:#eff4ea;border-top:1px solid #dfe7d8;display:flex;justify-content:space-between;gap:18px;font-size:11px;color:#697e6a}.diagram figcaption a{flex-shrink:0}.diagram details{padding:10px 20px;font-size:12px;border-top:1px solid #e5ebe0}.diagram summary{cursor:pointer;color:#496d55}.diagram pre{font-size:11px;margin-bottom:10px}.diagram-error{padding:18px;color:#805523}.mobile-nav{display:none}footer{margin-top:50px;padding-top:18px;border-top:1px solid #d4ded0;color:#7c8d7a;font-size:11px}img{max-width:100%;height:auto}@media(max-width:900px){main{padding:30px 22px 80px}.grid{grid-template-columns:1fr}.mobile-nav{display:block;margin-bottom:20px;font-size:13px}h1{font-size:30px}.diagram-view{padding:18px 8px}.diagram svg{min-width:min(1100px,var(--diagram-natural-width,1100px))}.diagram figcaption{display:block}.diagram figcaption a{display:block;margin-top:5px}}@media print{main{padding:0}.diagram{break-inside:avoid}.diagram details,.mobile-nav{display:none}.card{break-inside:avoid}}aside a{font-size:14px}.card p{font-size:16px}.card .tag,.eyebrow,.local-demo,.local-demo code,.diagram figcaption,footer,aside small{font-size:12px}.cover{font-size:14px}.print{font-size:14px}</style></head><body><aside><small>ENGINEERING PORTFOLIO / 2026</small><strong>Aegis Arena</strong><a href="index.html">← 项目总览</a><nav aria-label="章节目录"><a href="#section-1">A. 架构、项目定位与证据边界</a><a href="#section-3">B. 目录树与职责</a><a href="#section-4">C. Schema、结构与单位</a><a href="#section-5">D. RAG · N/A</a><a href="#section-6">E. 游戏 Agent</a><a href="#section-7">F. MCP · 运行时 N/A</a><a href="#section-8">G. LLMOps · N/A 与实际实验工程</a><a href="#section-9">H. Reliability · 生命周期与恢复</a><a href="#section-10">I. Security · 边界与构建配置</a><a href="#section-11">J. Test · 分层验证</a><a href="#section-12">K. RAG benchmark · N/A；实际游戏 AI 评估</a><a href="#section-13">L. Ablation · 策略对照与未执行消融</a><a href="#section-14">M. Performance · 测量方法与边界</a><a href="#section-15">N. Failures · 真实失败与修复</a><a href="#section-16">O. Unfinished · 未完成项</a><a href="#section-17">P. 10 个必须逐行理解的 native / core 文件</a><a href="#section-18">Q. 5 个游戏 / 工具呈现入口</a><a href="#section-19">R. 10 个手写代码练习</a><a href="#section-20">S. 20 个追问</a><a href="#section-21">T. 5 条真实简历 bullet</a></nav></aside><button class="print" onclick="window.print()">打印 / 保存 PDF</button><main><a class="mobile-nav" href="index.html">← 项目总览</a><div class="eyebrow">A–T / SYSTEMS, EVIDENCE & TRADE-OFFS</div><div class="cover"><strong>当前交付状态</strong><p>UE Editor 编译与 5 项 Automation 已通过；Runtime 与 Package 仍在验收。</p><p>合成数据、规则执行和真实模型结果分别看待。本页与架构图可离线阅读，外链需要网络。</p><div class="meta"><a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/interview-dossier.md">GitHub 原始手册 ↗</a><span>2026-09-10 更新</span></div></div><h1 id="section-0">Aegis Arena · 面试讲解材料 A–T</h1>
+<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Aegis Arena · 工程面试手册</title><style>*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:#f4f3ee;color:#1d2c35;font:16px/1.85 system-ui,'Microsoft YaHei',sans-serif}a{color:#206d66;text-decoration:none}a:hover{text-decoration:underline}aside{position:fixed;inset:0 auto 0 0;width:260px;padding:36px 24px;background:#142630;color:#e5ece7;overflow:auto}aside a{display:block;color:#c8d9d6;font-size:12px;margin:9px 0;line-height:1.65}aside strong{display:block;font-size:20px;line-height:1.4;margin:20px 0}aside small{color:#8ea9af;font-size:11px;letter-spacing:.12em}main{margin-left:260px;max-width:1150px;padding:50px 64px 120px}h1{font-size:34px;line-height:1.4;letter-spacing:-.04em;margin:0 0 26px}h2{font-size:25px;line-height:1.5;margin:60px 0 20px;border-top:1px solid #cbd4cd;padding-top:28px;scroll-margin-top:20px}h3{font-size:20px}p{margin:16px 0}pre{background:#192e39;color:#dce9e5;padding:22px;border-radius:10px;font-size:12px;line-height:1.75;overflow:auto}code{font:13px/1.7 ui-monospace,Consolas,monospace;overflow-wrap:anywhere}p code,li code,td code{background:#e5e9e2;padding:2px 5px;border-radius:3px}table{border-collapse:collapse;width:100%;font-size:13px;line-height:1.7;display:block;overflow:auto;margin:24px 0}th{text-align:left;background:#dbe4dc;color:#27413a}td,th{padding:13px 16px;border-bottom:1px solid #d5ddd4;min-width:100px;vertical-align:top}tr:nth-child(even) td{background:#eaf0e8}blockquote{border-left:3px solid #4e9380;margin:26px 0;padding:1px 22px;background:#e6eee5}li{margin:10px 0}.cover{border:1px solid #ccd7ca;border-radius:8px;background:#e7eee3;padding:18px 24px;font-size:13px;margin-bottom:30px}.grid{display:grid;grid-template-columns:1fr 1fr;gap:22px}.card{padding:28px;background:white;border:1px solid #d0d9ce;border-radius:10px}.card h2{margin:0 0 10px;padding:0;border:0;font-size:24px}.card p{font-size:14px}.card a{display:inline-block;margin:6px 15px 0 0}.muted{color:#71817e}button{font:inherit;border:1px solid #9db7aa;border-radius:6px;color:#335447;background:#edf3e9;padding:8px 14px;cursor:pointer}.print{position:fixed;right:20px;top:20px;font-size:12px}@media(max-width:900px){aside{position:static;width:auto;padding:22px}aside nav{display:none}main{margin:0;padding:30px 22px}.grid{grid-template-columns:1fr}.print{display:none}}@media print{aside,.print{display:none}main{margin:0;padding:0;max-width:none}body{font-size:11pt;background:white}h2{break-before:page}pre{white-space:pre-wrap;background:#eef2ef;color:#1b3034}table{font-size:9pt;display:table}a{color:inherit}}main{max-width:1320px;min-width:0;padding-top:58px}h1{font-size:38px}p,li,td,th,h1,h2,h3,a{overflow-wrap:anywhere}pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}a:focus-visible,summary:focus-visible,button:focus-visible{outline:3px solid #70a78e;outline-offset:4px}table{margin:0;display:table}.table-wrap{overflow:auto;max-width:100%;margin:24px 0;border:1px solid #d5ddd4;border-radius:8px}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.card{display:flex;flex-direction:column;min-width:0;border-radius:12px;background:#fff}.card p{flex:1;font-size:13px;color:#607567}.card .links{display:flex;flex-wrap:wrap;gap:8px 18px;font-size:13px}.card .links a{margin:0}.card .tag{font-size:10px;letter-spacing:.05em;color:#668c78}.card h2{margin:12px 0}.local-demo{font-size:11px;color:#6f7d71;margin-top:16px;padding-top:12px;border-top:1px solid #edf0e9}.local-demo code{font-size:11px}.eyebrow{font-size:11px;letter-spacing:.14em;color:#738575}.stats{display:flex;gap:36px;margin:26px 0 34px}.stats strong{display:block;font-size:28px;line-height:1.4}.stats span{font-size:12px;color:#78887c}.cover p{margin:8px 0}.meta{display:flex;flex-wrap:wrap;gap:10px 20px;font-size:12px;margin-top:12px;color:#718174}.diagram{margin:26px 0;border:1px solid #d5dfd0;border-radius:12px;background:#fff;overflow:hidden}.diagram-view{padding:24px 16px;overflow:auto;max-width:100%}.diagram svg{display:block;width:auto;height:auto;max-width:100%;margin:auto}.diagram figcaption{padding:12px 20px;background:#eff4ea;border-top:1px solid #dfe7d8;display:flex;justify-content:space-between;gap:18px;font-size:11px;color:#697e6a}.diagram figcaption a{flex-shrink:0}.diagram details{padding:10px 20px;font-size:12px;border-top:1px solid #e5ebe0}.diagram summary{cursor:pointer;color:#496d55}.diagram pre{font-size:11px;margin-bottom:10px}.diagram-error{padding:18px;color:#805523}.mobile-nav{display:none}footer{margin-top:50px;padding-top:18px;border-top:1px solid #d4ded0;color:#7c8d7a;font-size:11px}img{max-width:100%;height:auto}@media(max-width:900px){main{padding:30px 22px 80px}.grid{grid-template-columns:1fr}.mobile-nav{display:block;margin-bottom:20px;font-size:13px}h1{font-size:30px}.diagram-view{padding:18px 8px}.diagram svg{min-width:min(1100px,var(--diagram-natural-width,1100px))}.diagram figcaption{display:block}.diagram figcaption a{display:block;margin-top:5px}}@media print{main{padding:0}.diagram{break-inside:avoid}.diagram details,.mobile-nav{display:none}.card{break-inside:avoid}}aside a{font-size:14px}.card p{font-size:16px}.card .tag,.eyebrow,.local-demo,.local-demo code,.diagram figcaption,footer,aside small{font-size:12px}.cover{font-size:14px}.print{font-size:14px}</style></head><body><aside><small>ENGINEERING PORTFOLIO / 2026</small><strong>Aegis Arena</strong><a href="index.html">← 项目总览</a><nav aria-label="章节目录"><a href="#section-1">A. 架构、项目定位与证据边界</a><a href="#section-3">B. 目录树与职责</a><a href="#section-4">C. Schema、结构与单位</a><a href="#section-5">D. RAG · N/A</a><a href="#section-6">E. 游戏 Agent</a><a href="#section-7">F. MCP · 运行时 N/A</a><a href="#section-8">G. LLMOps · N/A 与实际实验工程</a><a href="#section-9">H. Reliability · 生命周期与恢复</a><a href="#section-10">I. Security · 边界与构建配置</a><a href="#section-11">J. Test · 分层验证</a><a href="#section-12">K. RAG benchmark · N/A；实际游戏 AI 评估</a><a href="#section-13">L. Ablation · 策略对照与未执行消融</a><a href="#section-14">M. Performance · 测量方法与边界</a><a href="#section-15">N. Failures · 真实失败与修复</a><a href="#section-16">O. Unfinished · 未完成项</a><a href="#section-17">P. 10 个必须逐行理解的 native / core 文件</a><a href="#section-18">Q. 5 个游戏 / 工具呈现入口</a><a href="#section-19">R. 10 个手写代码练习</a><a href="#section-20">S. 20 个追问</a><a href="#section-21">T. 5 条真实简历 bullet</a></nav></aside><button class="print" onclick="window.print()">打印 / 保存 PDF</button><main><a class="mobile-nav" href="index.html">← 项目总览</a><div class="eyebrow">A–T / SYSTEMS, EVIDENCE & TRADE-OFFS</div><div class="cover"><strong>当前交付状态</strong><p>UE 5.8.2 的 5 项 Core Automation、12 条真实 PIE 断言通过；完成 60 次原生策略评估、12 次渲染测量及 Development/Shipping 独立包验收。</p><p>合成数据、规则执行和真实模型结果分别看待。本页与架构图可离线阅读，外链需要网络。</p><div class="meta"><a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/interview-dossier.md">GitHub 原始手册 ↗</a><a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/status.md">原始验收记录 ↗</a><span>2026-09-10 更新</span></div></div><h1 id="section-0">Aegis Arena · 面试讲解材料 A–T</h1>
 <p>这份材料用于理解、演示和答辩，不是可以不经理解直接背诵的工作经历。项目由 AI 辅助实现；候选人应亲自复现命令、逐行解释核心代码，并准确陈述独立完成与协作完成的部分。所有数字必须保留对应运行环境，不能把 portable 模型结果包装成 Unreal 结果。</p>
 <h2 id="section-1">A. 架构、项目定位与证据边界</h2>
 <p><strong>一句话</strong>：Aegis Arena 是一个规模受控的 Unreal C++ 游戏 AI 实验场，把感知、决策、动作执行和评估数据分开，比较 Companion 的优先级策略与 Utility 策略。</p>
@@ -36,17 +36,17 @@
 </tr>
 <tr>
 <td>UE 5.8.2 Game Development / Shipping</td>
-<td>两个目标均真实编译链接成功，最近回归 102.71s / 48.61s</td>
+<td>两个目标真实 build/cook/stage，UAT 153.34s / 128.22s</td>
 <td>MSVC 14.50.35738 + SDK 26100 能编译 native gameplay</td>
 </tr>
 <tr>
 <td>Shipping 静态二进制检查</td>
-<td>8 个开发入口标记在 Dev 存在、Shipping 缺失</td>
-<td>不等于已经 cook、启动或交互验收</td>
+<td>9 个开发入口标记在 Dev 存在、Shipping 缺失</td>
+<td>静态 gate 与独立 Dev 两轮场景、Shipping 实机启动/入口检查共同记录</td>
 </tr>
 <tr>
 <td>UE Editor / 资产 / 原生测试</td>
-<td>真实编译，10 个原生资产；5 Core Automation + 1 Functional Test 通过</td>
+<td>真实编译，10 个原生资产；5 Core Automation + 1 Functional Test（12条PIE世界断言）通过</td>
 <td>独立于 portable 测试</td>
 </tr>
 <tr>
@@ -184,7 +184,7 @@ Config/                      # 输入、默认地图、导航、渲染
 <li>BT action 在冷却期间仍保持攻击分支；不能把“尚未准备好开火”当作应转入 Patrol。</li>
 <li>运行 preflight 检查资产、地图和 NavMesh。自动启动等待导航有 30 秒上限，失败有非零退出码。</li>
 </ul>
-<p>恢复策略不是任意重试：配置错误直接失败；无 NavMesh 是结构问题；EQS 没有可行点会返回 BT failure，让既有 selector 执行授权 LastKnown 的 Investigate 等回退；pending 查询和有效移动仍保持成功，查询受限频约束。对某种失败无限重试会掩盖坏场景。</p>
+<p>恢复策略不是任意重试：配置错误直接失败；无 NavMesh 是结构问题；EQS 没有可行点会返回 BT failure，让既有 selector 执行授权 LastKnown 的 Investigate 等回退；pending 查询、有效移动和接受半径内的已到达点仍保持成功，查询受限频约束。对某种失败无限重试会掩盖坏场景。</p>
 <h2 id="section-10">I. Security · 边界与构建配置</h2>
 <p>本项目没有账户、在线数据库或认证。安全面主要是工具执行、输入配置和调试入口。</p>
 <ol>
@@ -248,7 +248,7 @@ python scripts/verify_portable.py --full</code></pre><p>这两条命令不要求
 </tbody></table></div>
 <p><strong>能说</strong>：在这套 portable 场景中，Utility 更倾向保全队友；存在任务与生存的 trade-off。</p>
 <p><strong>不能说</strong>：胜率显著提升、模型比 UE 更快、所有场景优于 BT、收益具有商业泛化能力。小样本区间重叠；更完整的配对统计、效应大小和独立 holdout 是后续工作。报告路径 <code>evidence/portable/evaluation/</code>。</p>
-<p>原生结果使用 <code>engine=unreal-runtime</code> 的独立目录。最终 60 次 UE episode（相同 30 seeds，每策略各一次）：两组均 0/30 胜利，priority / utility 队友死亡为 21 / 10，玩家承伤均值 109.95 / 123.48，盟友输出均值 166.93 / 135.87。压力场景有胜率下界效应，不能据此说 Utility 全面更强。使用 1/60 固定游戏步长和 NullRHI，严格不等同渲染性能。见 <a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/native-evaluation.md">原生评估</a> 与对应 raw JSON/CSV。</p>
+<p>原生结果使用 <code>engine=unreal-runtime</code> 的独立目录。最终 60 次 UE episode（相同 30 seeds，每策略各一次）：两组均 0/30 胜利，priority / utility 队友死亡为 25 / 6，玩家承伤均值 106.68 / 126.06，盟友输出均值 170.46 / 139.40。压力场景有胜率下界效应，不能据此说 Utility 全面更强。使用 1/60 固定游戏步长和 NullRHI，严格不等同渲染性能。见 <a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/native-evaluation.md">原生评估</a> 与对应 raw JSON/CSV。</p>
 <h2 id="section-13">L. Ablation · 策略对照与未执行消融</h2>
 <p>已做的是 <strong>priority vs utility 策略对照</strong>，它不是完整多因素消融。两组共享模型、种子、敌人、地图；主要变化是 Companion policy。</p>
 <p>下一步高价值消融方案（尚不能写成实验结果）：</p>
@@ -289,7 +289,7 @@ python scripts/verify_portable.py --full</code></pre><p>这两条命令不要求
 <p>先预设主要指标，再选择独立 seed；调参用训练/开发 seeds，最终评估用未参与调参的一组，不能拿表现最好的 seed 做唯一宣传。</p>
 <h2 id="section-14">M. Performance · 测量方法与边界</h2>
 <p>portable 性能报告是固定步长 C++ 模型 CPU 时间，20 次 episode，初始敌人 1/10/25/50，每档 5 个 seeds。高负载可能提前死亡，故不是持续 UE 大量 Bot 压测。真实报告在 <code>evidence/portable/performance/</code>，不要把微秒结果标成 Unreal Game Thread。</p>
-<p>Unreal 已实际采样：RTX 4060 Laptop / D3D12 / UE 5.8.2 Editor Game，1280×720 offscreen，四档各 3×15 秒，另有两个盟友，首秒排除。四档平均 episode frame P95 为 4.646 / 4.769 / 4.897 / 4.936ms；这不是 pooled P95、Shipping FPS 或优化提升，最终四档 EQS 完成数为 2 / 19 / 49 / 50、零失败，但查询数量有限，不代表最坏战术负载。见 <a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/performance.md">原始报告与边界</a>。</p>
+<p>Unreal 已实际采样：RTX 4060 Laptop / D3D12 / UE 5.8.2 Editor Game，1280×720 offscreen，四档各 3×15 秒，另有两个盟友，首秒排除。四档平均 episode frame P95 为 4.042 / 4.171 / 4.261 / 4.325ms；这不是 pooled P95、Shipping FPS 或优化提升，最终四档 EQS 完成数为 2 / 14 / 44 / 45，失败数 0 / 0 / 0 / 0，但查询数量有限，不代表最坏战术负载。见 <a href="https://github.com/QiQiyzhu/aegis-arena/blob/codex/aegis-v1/docs/performance.md">原始报告与边界</a>。</p>
 <p>采样定义：</p>
 <ul>
 <li>Native <code>ObserveAndUtility</code> 范围测量决策 CPU；不是整个 AI 系统耗时。</li>
@@ -322,7 +322,7 @@ python scripts/verify_portable.py --full</code></pre><p>这两条命令不要求
 </li>
 <li><p><strong>真实截图黑镜头</strong>：Python Rotator 用命名参数；更关键是不能用第一个 CameraActor，引擎有辅助动画相机。用 runtime tag 选择并核验实际 PlayerViewPoint，重新目视原生 PNG。</p>
 </li>
-<li><p><strong>EQS 查询中心停留出生点</strong>：Controller 默认不跟随 Pawn，查询网格因此过时；真实坐标和 FailedTestIndex 确认后开启 bAttachToPawn，并增加原生移动 Querier 回归。失败率从约 57%–60% 降至约 0.9%–1.4%，但不据此声称策略全面更优。</p>
+<li><p><strong>EQS 查询中心停留出生点</strong>：Controller 默认不跟随 Pawn，查询网格因此过时；真实坐标和 FailedTestIndex 确认后开启 bAttachToPawn，并增加原生移动 Querier 回归。失败率从约 57%–60% 降至约 0.9%–1.8%，但不据此声称策略全面更优。</p>
 </li>
 <li><p><strong>测试 JSON 假阳性</strong>：UE 报 Success 但实际没有运行 test actor。显式预载地图、要求 PIE world，并校验十二条断言和成功标记；两项 Python gate 回归拒绝这种报告。</p>
 </li>
@@ -343,9 +343,9 @@ python scripts/verify_portable.py --full</code></pre><p>这两条命令不要求
 <td>Editor build、资产生成、5 Automation、1 Functional Test 与 60 场景报告均真实完成</td>
 </tr>
 <tr>
-<td>P0</td>
-<td>可交付可玩打包</td>
-<td>新输出目录启动成功；材质、地图、AI资产均被 cook；无编辑器依赖</td>
+<td>已完成</td>
+<td>原生独立打包与启动</td>
+<td>Dev 无 Editor 跑两轮；Shipping 真正显示地图/AI，HUD与console关闭；下载见 release.md</td>
 </tr>
 <tr>
 <td>P1</td>
@@ -353,9 +353,9 @@ python scripts/verify_portable.py --full</code></pre><p>这两条命令不要求
 <td>四档短时实渲染已完成；仍需长 warm-up、独立复测与 Insights，不宣称商业性能</td>
 </tr>
 <tr>
-<td>P1</td>
-<td>BT/EQS 视觉证据</td>
-<td>真正引擎内 graph / selected-point 可见；不伪造截图</td>
+<td>已完成 / P2</td>
+<td>BT/EQS runtime 视觉证据</td>
+<td>真实最近 BT 动作、Query ID、候选分数已截图；Editor debugger graph 录像仍未做</td>
 </tr>
 <tr>
 <td>P1</td>
@@ -469,7 +469,7 @@ std::size_t chooseAction(const std::array&lt;double, 4&gt;&amp; score,
 <li><strong>Damage 感知能直接锁定目标吗？</strong> 可以记录被报告的历史来源位置，不能凭伤害事件获得持续视觉跟踪。</li>
 <li><strong>为什么 ally health 可以读取？</strong> 只有当前可观察且已授权的盟友进入 DTO；未知盟友不产生支援分数。</li>
 <li><strong>EQS 与导航有什么区别？</strong> EQS 选择有评分的目标位置；NavMesh/PathFollowing 找路径与执行移动。</li>
-<li><strong>EQS 没有结果怎么办？</strong> 完成 pending 状态、记录失败、不使用无效点；把没有可用动作的 BT 分支标记失败，让 selector 回退；pending 或有效移动不应误判失败。不能瞬移到假位置。</li>
+<li><strong>EQS 没有结果怎么办？</strong> 完成 pending 状态、记录失败、不使用无效点；把没有可用动作的 BT 分支标记失败，让 selector 回退；pending、有效移动或已到达接受范围不应误判失败。不能瞬移到假位置。</li>
 <li><strong>Utility 高分为什么没执行？</strong> 检查授权条件、BT 分支、动作合法性和冷却；评分与执行是不同层。</li>
 <li><strong>为何使用 hysteresis？</strong> 避免相近分数不断切换；阈值过大会变迟钝，需要消融验证。</li>
 <li><strong>Director 会读取真值吗？</strong> Director 是有明确授权的 encounter 系统，可用全局负载/玩家状态；Companion 的授权不同，不能混为一谈。</li>
@@ -490,8 +490,8 @@ std::size_t chooseAction(const std::array&lt;double, 4&gt;&amp; score,
 <li>构建 C++17 可移植游戏 AI 规则与评估模型，并通过 GCC/Clang 严格编译、325 个断言及 9 个 Python integration case，GitHub Actions 提供可复现运行证据。</li>
 <li>实现基于授权观察的 Companion Utility 策略与优先级基线，在 30 个配对 seeds、60 次 portable episode 上记录胜率、承伤和队友死亡，保留原始 JSON/CSV 与置信区间。</li>
 <li>实现 EMA、hysteresis、cooldown 与 clamp 组成的有界 Encounter Director，并为调整冷却期间仍需施加敌人数上限的边界增加回归验证。</li>
-<li>使用 Unreal 5.8.2 C++ 实现 Perception、Blackboard/Behavior Tree、EQS 与场景评测；真实生成 10 个原生资产，通过 5 项 Core Automation 和 1 项 World Functional Test，并保留 60 局原生策略实验的 JSON/CSV。</li>
+<li>使用 Unreal 5.8.2 C++ 实现 Perception、Blackboard/Behavior Tree、EQS 与场景评测；真实生成 10 个原生资产，通过 5 项 Core Automation 和 1 项 World Functional Test，其中 Functional 执行12条PIE世界断言，并保留60局原生策略实验的JSON/CSV。</li>
 <li>建立清晰区分 portable 与 Unreal 的实验交付流程，保存源码/二进制 provenance、原始 episode、失败日志、工具链条件与已知限制，避免以模拟器结果替代引擎证据。</li>
 </ul>
-<p>不要添加不存在的用户量、性能提升百分比、线上可用性、商业 RL 或“独立从零手写全部代码”。简历中的原生结果对应仓库原始报告；打包、长时间性能和交互验收以最新状态清单为准。</p>
+<p>不要添加不存在的用户量、性能提升百分比、线上可用性、商业 RL 或“独立从零手写全部代码”。简历中的原生结果对应仓库原始报告；Dev/Shipping独立包已实际运行；长时间性能与完整交互覆盖仍以状态清单明确边界。</p>
 <footer>内容与架构图均可离线阅读 · 外部证据链接需要网络 · 2026-09-10</footer></main></body></html>

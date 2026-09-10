@@ -1,0 +1,18 @@
+{
+  "sampleMs": 10087.6,
+  "frames": 104,
+  "medianFrameMs": 100,
+  "p95FrameMs": 133.39999999999964,
+  "p99FrameMs": 149.90000000000146,
+  "averageFps": 10.309687140647924,
+  "maxEnemies": 28,
+  "maxProjectiles": 44,
+  "poolMisses": 0,
+  "phase": "playing",
+  "userAgent": "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/140.0.7339.186 Safari/537.36",
+  "viewport": [
+    1920,
+    1080
+  ],
+  "reactionCount": 16
+}

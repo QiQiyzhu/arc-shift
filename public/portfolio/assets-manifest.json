@@ -1,7 +1,7 @@
 {
   "version": 1,
   "asOf": "2026-09-10",
-  "totalMediaBytes": 7935399.0,
+  "totalMediaBytes": 7952343,
   "assets": [
     {
       "file": "assets/arc-shift.png",
@@ -75,9 +75,9 @@
       "source": "docs/media/unreal-arena.png",
       "sourceKind": "Actual UE 5.8.2 D3D12 capture with runtime BT/EQS diagnostics; not Editor Debugger",
       "repository": "https://github.com/QiQiyzhu/aegis-arena",
-      "ref": "codex/aegis-v1",
-      "bytes": 596833,
-      "sha256": "bb4d745e9d6f26d2f276aff6ac8473cb7ffa57732210083fbd3d9ba444c895f3",
+      "ref": "68f7431271f5464c48c215f433a613aee63ca67b",
+      "bytes": 613777,
+      "sha256": "3b59700f98121c65be550f3b0c5f79039fb1166f3dadd98d454c921ea60814cd",
       "editing": "None; copied byte-for-byte"
     },
     {
