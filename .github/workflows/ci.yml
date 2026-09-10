@@ -1,0 +1,123 @@
+name: Engineering verification
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+    inputs:
+      full_suite:
+        description: Run every browser scenario and the six-seed long soak
+        type: boolean
+        default: true
+  # GitHub schedules execute the workflow on the repository's default branch.
+  schedule:
+    - cron: '23 3 * * 1'
+
+permissions:
+  contents: read
+
+concurrency:
+  group: arc-engineering-${{ github.event_name }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Game, tooling and production acceptance
+    runs-on: ubuntu-latest
+    timeout-minutes: 35
+    defaults:
+      run:
+        shell: bash
+    env:
+      CI: 'true'
+      FULL_SUITE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.full_suite) }}
+      ARC_BENCH_LABEL: ci-${{ github.run_id }}-${{ github.run_attempt }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '24'
+          cache: npm
+      - name: Install locked dependencies
+        run: npm ci
+      - name: Record the tested source and environment
+        run: |
+          mkdir -p outputs/qa
+          node --input-type=module <<'NODE' > outputs/qa/ci-environment.json
+          import { execFileSync } from 'node:child_process';
+          import os from 'node:os';
+          console.log(JSON.stringify({
+            recordedAt: new Date().toISOString(),
+            sourceCommit: execFileSync('git', ['rev-parse', 'HEAD'], { encoding: 'utf8' }).trim(),
+            sourceDirtyBeforeVerification: Boolean(execFileSync('git', ['status', '--porcelain'], { encoding: 'utf8' }).trim()),
+            event: process.env.GITHUB_EVENT_NAME,
+            runUrl: `${process.env.GITHUB_SERVER_URL}/${process.env.GITHUB_REPOSITORY}/actions/runs/${process.env.GITHUB_RUN_ID}`,
+            runAttempt: process.env.GITHUB_RUN_ATTEMPT,
+            fullSuite: process.env.FULL_SUITE === 'true',
+            node: process.version, platform: process.platform, cpu: os.cpus()[0]?.model,
+            browser: 'Playwright-managed Chromium', workers: 1,
+          }, null, 2));
+          NODE
+      - name: Typecheck
+        run: npm run typecheck 2>&1 | tee outputs/qa/typecheck.log
+      - name: Lint
+        run: npm run lint 2>&1 | tee outputs/qa/lint.log
+      - name: Unit and simulation contracts
+        run: npm test -- --reporter=verbose 2>&1 | tee outputs/qa/unit-tests.log
+      - name: Headless simulation soak
+        run: |
+          touch outputs/qa/soak.started
+          if [[ "$FULL_SUITE" == 'true' ]]; then
+            node scripts/soak.cjs --long 2>&1 | tee outputs/qa/soak.log
+          else
+            node scripts/soak.cjs 2>&1 | tee outputs/qa/soak.log
+          fi
+      - name: Production build
+        id: production_build
+        run: npm run build 2>&1 | tee outputs/qa/build.log
+      - name: Measure the production bundle and check DEV markers
+        run: |
+          touch outputs/qa/bundle.started
+          node scripts/bundle-report.mjs 2>&1 | tee outputs/qa/bundle.log
+      - name: Install Linux Chromium
+        run: npx playwright install --with-deps chromium
+      - name: Production browser acceptance
+        run: npx playwright test --config playwright.production.config.ts --workers=1 --trace=retain-on-failure 2>&1 | tee outputs/qa/production-browser.log
+      - name: Browser smoke or full regression
+        run: |
+          if [[ "$FULL_SUITE" == 'true' ]]; then
+            npx playwright test --workers=1 --trace=retain-on-failure 2>&1 | tee outputs/qa/browser.log
+          else
+            npx playwright test e2e/game.spec.ts e2e/replay.spec.ts --workers=1 --trace=retain-on-failure 2>&1 | tee outputs/qa/browser.log
+          fi
+      - name: Collect only reports created by this run
+        if: always()
+        run: |
+          mkdir -p outputs/qa
+          mode=smoke
+          if [[ "$FULL_SUITE" == 'true' ]]; then mode=long; fi
+          report="docs/qa/engineering/soak-${mode}.json"
+          if [[ -f outputs/qa/soak.started && "$report" -nt outputs/qa/soak.started ]]; then
+            cp "$report" outputs/qa/soak.json
+          fi
+          if [[ -f outputs/qa/bundle.started && docs/qa/engineering/bundle.json -nt outputs/qa/bundle.started ]]; then
+            cp docs/qa/engineering/bundle.json outputs/qa/bundle.json
+          fi
+      - name: Upload results, traces and failure screenshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-verification-${{ github.run_id }}-${{ github.run_attempt }}
+          path: |
+            outputs/qa/
+            docs/qa/engineering/browser-${{ env.ARC_BENCH_LABEL }}-*.json
+          if-no-files-found: warn
+          retention-days: 30
+      - name: Upload the tested production build
+        if: ${{ always() && steps.production_build.outcome == 'success' }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: arc-production-${{ github.run_id }}-${{ github.run_attempt }}
+          path: dist/
+          if-no-files-found: error
+          retention-days: 14

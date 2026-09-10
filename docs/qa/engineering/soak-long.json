@@ -1,0 +1,1599 @@
+{
+  "recordedAt": "2026-09-10T06:46:01.207Z",
+  "sourceCommit": "9c43394c964edce03cf21ba04c53d25ac1ac58c8",
+  "sourceDirty": true,
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900HX"
+  },
+  "method": "Fixed 60 Hz headless simulation, high-HP enemy fixtures, invulnerable practice player; no rendering, no real-time waiting. Heap snapshots are observed process memory, not a leak verdict. Other workloads may be active.",
+  "mode": "long",
+  "samples": [
+    {
+      "seed": 17,
+      "requestedTicks": 108000,
+      "completedTicks": 108000,
+      "simulatedSeconds": 1800,
+      "elapsedMs": 9156.987,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 169,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 113733632,
+          "heapTotal": 71680000,
+          "heapUsed": 44615928,
+          "external": 2139669,
+          "arrayBuffers": 29351
+        },
+        {
+          "tick": 3601,
+          "rss": 151273472,
+          "heapTotal": 109166592,
+          "heapUsed": 67910952,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 7201,
+          "rss": 153653248,
+          "heapTotal": 109690880,
+          "heapUsed": 64114344,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 10801,
+          "rss": 153214976,
+          "heapTotal": 110215168,
+          "heapUsed": 55996936,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 14401,
+          "rss": 153833472,
+          "heapTotal": 110739456,
+          "heapUsed": 43893208,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 18001,
+          "rss": 154722304,
+          "heapTotal": 111263744,
+          "heapUsed": 55389176,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 21601,
+          "rss": 155275264,
+          "heapTotal": 112050176,
+          "heapUsed": 45004424,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 25201,
+          "rss": 155906048,
+          "heapTotal": 112574464,
+          "heapUsed": 71027256,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 28801,
+          "rss": 156561408,
+          "heapTotal": 113098752,
+          "heapUsed": 56245120,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 32401,
+          "rss": 156311552,
+          "heapTotal": 113885184,
+          "heapUsed": 56130040,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 36001,
+          "rss": 156995584,
+          "heapTotal": 114409472,
+          "heapUsed": 58542280,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 39601,
+          "rss": 157945856,
+          "heapTotal": 114933760,
+          "heapUsed": 63821320,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 43201,
+          "rss": 158679040,
+          "heapTotal": 115720192,
+          "heapUsed": 55804328,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 46801,
+          "rss": 159272960,
+          "heapTotal": 116244480,
+          "heapUsed": 76694392,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 50401,
+          "rss": 159870976,
+          "heapTotal": 117030912,
+          "heapUsed": 58270288,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 54001,
+          "rss": 160579584,
+          "heapTotal": 117555200,
+          "heapUsed": 72393824,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 57601,
+          "rss": 161202176,
+          "heapTotal": 118079488,
+          "heapUsed": 69696520,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 61201,
+          "rss": 161521664,
+          "heapTotal": 118865920,
+          "heapUsed": 67529288,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 64801,
+          "rss": 162160640,
+          "heapTotal": 119390208,
+          "heapUsed": 51265032,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 68401,
+          "rss": 162820096,
+          "heapTotal": 119914496,
+          "heapUsed": 84507000,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 72001,
+          "rss": 163426304,
+          "heapTotal": 120700928,
+          "heapUsed": 55696472,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 75601,
+          "rss": 164081664,
+          "heapTotal": 121225216,
+          "heapUsed": 83911032,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 79201,
+          "rss": 164691968,
+          "heapTotal": 122011648,
+          "heapUsed": 86260336,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 82801,
+          "rss": 165326848,
+          "heapTotal": 122535936,
+          "heapUsed": 64341640,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 86401,
+          "rss": 166092800,
+          "heapTotal": 123060224,
+          "heapUsed": 64645088,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 90001,
+          "rss": 166883328,
+          "heapTotal": 123846656,
+          "heapUsed": 86393808,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 93601,
+          "rss": 167538688,
+          "heapTotal": 124370944,
+          "heapUsed": 87762408,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 97201,
+          "rss": 168144896,
+          "heapTotal": 125157376,
+          "heapUsed": 77641560,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 100801,
+          "rss": 168796160,
+          "heapTotal": 125681664,
+          "heapUsed": 68555624,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 104401,
+          "rss": 169385984,
+          "heapTotal": 126205952,
+          "heapUsed": 60924496,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 108000,
+          "rss": 170127360,
+          "heapTotal": 126992384,
+          "heapUsed": 64591400,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "293e14dc"
+    },
+    {
+      "seed": 293,
+      "requestedTicks": 108000,
+      "completedTicks": 108000,
+      "simulatedSeconds": 1800,
+      "elapsedMs": 11664.939900000001,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 169,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 171634688,
+          "heapTotal": 128004096,
+          "heapUsed": 74475088,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3601,
+          "rss": 173350912,
+          "heapTotal": 128827392,
+          "heapUsed": 78460184,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 7201,
+          "rss": 172498944,
+          "heapTotal": 129351680,
+          "heapUsed": 77291576,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 10801,
+          "rss": 178655232,
+          "heapTotal": 129875968,
+          "heapUsed": 70612344,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 14401,
+          "rss": 179245056,
+          "heapTotal": 130662400,
+          "heapUsed": 65349760,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 18001,
+          "rss": 179900416,
+          "heapTotal": 131186688,
+          "heapUsed": 74748368,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 21601,
+          "rss": 180510720,
+          "heapTotal": 131973120,
+          "heapUsed": 79390632,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 25201,
+          "rss": 181174272,
+          "heapTotal": 132497408,
+          "heapUsed": 81903584,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 28801,
+          "rss": 181768192,
+          "heapTotal": 133021696,
+          "heapUsed": 80967992,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 32401,
+          "rss": 182374400,
+          "heapTotal": 133808128,
+          "heapUsed": 87458240,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 36001,
+          "rss": 183013376,
+          "heapTotal": 134332416,
+          "heapUsed": 94660920,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 39601,
+          "rss": 183668736,
+          "heapTotal": 134856704,
+          "heapUsed": 69901920,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 43201,
+          "rss": 184242176,
+          "heapTotal": 135643136,
+          "heapUsed": 72623072,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 46801,
+          "rss": 184913920,
+          "heapTotal": 136167424,
+          "heapUsed": 86382752,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 50401,
+          "rss": 185503744,
+          "heapTotal": 136691712,
+          "heapUsed": 92416992,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 54001,
+          "rss": 186093568,
+          "heapTotal": 137478144,
+          "heapUsed": 93252064,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 57601,
+          "rss": 181739520,
+          "heapTotal": 138002432,
+          "heapUsed": 73473176,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 61201,
+          "rss": 182329344,
+          "heapTotal": 138526720,
+          "heapUsed": 71237520,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 64801,
+          "rss": 182984704,
+          "heapTotal": 139313152,
+          "heapUsed": 101721632,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 68401,
+          "rss": 183062528,
+          "heapTotal": 139837440,
+          "heapUsed": 72004424,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 72001,
+          "rss": 183676928,
+          "heapTotal": 140623872,
+          "heapUsed": 75344840,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 75601,
+          "rss": 184307712,
+          "heapTotal": 141148160,
+          "heapUsed": 85541696,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 79201,
+          "rss": 184963072,
+          "heapTotal": 141672448,
+          "heapUsed": 104349368,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 82801,
+          "rss": 185548800,
+          "heapTotal": 142458880,
+          "heapUsed": 82357936,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 86401,
+          "rss": 186208256,
+          "heapTotal": 142983168,
+          "heapUsed": 98008624,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 90001,
+          "rss": 186961920,
+          "heapTotal": 143769600,
+          "heapUsed": 99273400,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 93601,
+          "rss": 187670528,
+          "heapTotal": 144293888,
+          "heapUsed": 80650144,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 97201,
+          "rss": 188284928,
+          "heapTotal": 144818176,
+          "heapUsed": 89332040,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 100801,
+          "rss": 188870656,
+          "heapTotal": 145604608,
+          "heapUsed": 93360496,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 104401,
+          "rss": 189538304,
+          "heapTotal": 146128896,
+          "heapUsed": 98034664,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 108000,
+          "rss": 190468096,
+          "heapTotal": 146653184,
+          "heapUsed": 98814944,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "f1a6c641"
+    },
+    {
+      "seed": 701,
+      "requestedTicks": 108000,
+      "completedTicks": 108000,
+      "simulatedSeconds": 1800,
+      "elapsedMs": 15483.158500000001,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 163,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 191856640,
+          "heapTotal": 147140608,
+          "heapUsed": 105997624,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3601,
+          "rss": 192290816,
+          "heapTotal": 147701760,
+          "heapUsed": 102722824,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 7201,
+          "rss": 192946176,
+          "heapTotal": 148226048,
+          "heapUsed": 99182504,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 10801,
+          "rss": 193523712,
+          "heapTotal": 149012480,
+          "heapUsed": 108750256,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 14401,
+          "rss": 194191360,
+          "heapTotal": 149536768,
+          "heapUsed": 107624200,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 18001,
+          "rss": 194785280,
+          "heapTotal": 150323200,
+          "heapUsed": 89599792,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 21601,
+          "rss": 195436544,
+          "heapTotal": 150847488,
+          "heapUsed": 88470080,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 25201,
+          "rss": 196026368,
+          "heapTotal": 151371776,
+          "heapUsed": 90504536,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 28801,
+          "rss": 196624384,
+          "heapTotal": 152158208,
+          "heapUsed": 89558208,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 32401,
+          "rss": 197279744,
+          "heapTotal": 152682496,
+          "heapUsed": 95012336,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 36001,
+          "rss": 197955584,
+          "heapTotal": 153206784,
+          "heapUsed": 103718080,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 39601,
+          "rss": 198512640,
+          "heapTotal": 153993216,
+          "heapUsed": 109137512,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 43201,
+          "rss": 199200768,
+          "heapTotal": 154517504,
+          "heapUsed": 89668752,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 46801,
+          "rss": 199790592,
+          "heapTotal": 155041792,
+          "heapUsed": 102145192,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 50401,
+          "rss": 200388608,
+          "heapTotal": 155828224,
+          "heapUsed": 95347392,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 54001,
+          "rss": 201052160,
+          "heapTotal": 156352512,
+          "heapUsed": 104141120,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 57601,
+          "rss": 201641984,
+          "heapTotal": 156876800,
+          "heapUsed": 117811944,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 61201,
+          "rss": 202297344,
+          "heapTotal": 157663232,
+          "heapUsed": 98793288,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 64801,
+          "rss": 202870784,
+          "heapTotal": 158187520,
+          "heapUsed": 101713464,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 68401,
+          "rss": 203460608,
+          "heapTotal": 158711808,
+          "heapUsed": 102284808,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 72001,
+          "rss": 204136448,
+          "heapTotal": 159498240,
+          "heapUsed": 106530848,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 75601,
+          "rss": 204730368,
+          "heapTotal": 160022528,
+          "heapUsed": 104533064,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 79201,
+          "rss": 205365248,
+          "heapTotal": 160808960,
+          "heapUsed": 116674352,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 82801,
+          "rss": 206041088,
+          "heapTotal": 161333248,
+          "heapUsed": 122772032,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 86401,
+          "rss": 206630912,
+          "heapTotal": 161857536,
+          "heapUsed": 98006712,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 90001,
+          "rss": 207286272,
+          "heapTotal": 162643968,
+          "heapUsed": 94090696,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 93601,
+          "rss": 207876096,
+          "heapTotal": 163168256,
+          "heapUsed": 110333184,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 97201,
+          "rss": 208474112,
+          "heapTotal": 163954688,
+          "heapUsed": 127718008,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 100801,
+          "rss": 209121280,
+          "heapTotal": 164478976,
+          "heapUsed": 125794248,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 104401,
+          "rss": 209711104,
+          "heapTotal": 165003264,
+          "heapUsed": 129003352,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 108000,
+          "rss": 210317312,
+          "heapTotal": 165789696,
+          "heapUsed": 126688984,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "83e739cc"
+    },
+    {
+      "seed": 991,
+      "requestedTicks": 108000,
+      "completedTicks": 108000,
+      "simulatedSeconds": 1800,
+      "elapsedMs": 8590.5377,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 168,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 210649088,
+          "heapTotal": 165789696,
+          "heapUsed": 100193240,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3601,
+          "rss": 211484672,
+          "heapTotal": 166576128,
+          "heapUsed": 128680376,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 7201,
+          "rss": 212144128,
+          "heapTotal": 167100416,
+          "heapUsed": 103442376,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 10801,
+          "rss": 212934656,
+          "heapTotal": 167886848,
+          "heapUsed": 106663848,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 14401,
+          "rss": 213610496,
+          "heapTotal": 168411136,
+          "heapUsed": 100254656,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 18001,
+          "rss": 281878528,
+          "heapTotal": 236044288,
+          "heapUsed": 110586192,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 21601,
+          "rss": 282533888,
+          "heapTotal": 236830720,
+          "heapUsed": 154407880,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 25201,
+          "rss": 283123712,
+          "heapTotal": 237355008,
+          "heapUsed": 127548632,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 28801,
+          "rss": 283717632,
+          "heapTotal": 238141440,
+          "heapUsed": 154782880,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 32401,
+          "rss": 284368896,
+          "heapTotal": 238665728,
+          "heapUsed": 130324696,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 36001,
+          "rss": 284958720,
+          "heapTotal": 239190016,
+          "heapUsed": 169234848,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 39601,
+          "rss": 285589504,
+          "heapTotal": 239976448,
+          "heapUsed": 141594072,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 43201,
+          "rss": 286269440,
+          "heapTotal": 240500736,
+          "heapUsed": 120939952,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 46801,
+          "rss": 286859264,
+          "heapTotal": 241025024,
+          "heapUsed": 167447304,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 50401,
+          "rss": 287444992,
+          "heapTotal": 241811456,
+          "heapUsed": 130680376,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 54001,
+          "rss": 288141312,
+          "heapTotal": 242335744,
+          "heapUsed": 162071264,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 57601,
+          "rss": 288731136,
+          "heapTotal": 242860032,
+          "heapUsed": 130146904,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 61201,
+          "rss": 289386496,
+          "heapTotal": 243646464,
+          "heapUsed": 169574272,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 64801,
+          "rss": 289976320,
+          "heapTotal": 244170752,
+          "heapUsed": 136854512,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 68401,
+          "rss": 290570240,
+          "heapTotal": 244957184,
+          "heapUsed": 174210992,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 72001,
+          "rss": 291221504,
+          "heapTotal": 245481472,
+          "heapUsed": 157163112,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 75601,
+          "rss": 291811328,
+          "heapTotal": 246005760,
+          "heapUsed": 130398368,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 79201,
+          "rss": 292454400,
+          "heapTotal": 246792192,
+          "heapUsed": 177501880,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 82801,
+          "rss": 293122048,
+          "heapTotal": 247316480,
+          "heapUsed": 160414160,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 86401,
+          "rss": 293724160,
+          "heapTotal": 248102912,
+          "heapUsed": 134632536,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 90001,
+          "rss": 294367232,
+          "heapTotal": 248627200,
+          "heapUsed": 170636408,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 93601,
+          "rss": 295022592,
+          "heapTotal": 249151488,
+          "heapUsed": 149448456,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 97201,
+          "rss": 295677952,
+          "heapTotal": 249937920,
+          "heapUsed": 118575496,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 100801,
+          "rss": 296267776,
+          "heapTotal": 250462208,
+          "heapUsed": 163171136,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 104401,
+          "rss": 296882176,
+          "heapTotal": 251248640,
+          "heapUsed": 137266776,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 108000,
+          "rss": 297512960,
+          "heapTotal": 251772928,
+          "heapUsed": 174800832,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "5a038b03"
+    },
+    {
+      "seed": 4211,
+      "requestedTicks": 108000,
+      "completedTicks": 108000,
+      "simulatedSeconds": 1800,
+      "elapsedMs": 6041.954299999998,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 161,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 298913792,
+          "heapTotal": 252260352,
+          "heapUsed": 181962096,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3601,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 144197176,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 7201,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 176579992,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 10801,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 145244848,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 14401,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 177259632,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 18001,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 148440712,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 21601,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 174159832,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 25201,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 153409000,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 28801,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 177356184,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 32401,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 157618304,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 36001,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 129310096,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 39601,
+          "rss": 298754048,
+          "heapTotal": 252035072,
+          "heapUsed": 170132712,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 43201,
+          "rss": 298819584,
+          "heapTotal": 252035072,
+          "heapUsed": 145089080,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 46801,
+          "rss": 298819584,
+          "heapTotal": 252035072,
+          "heapUsed": 121420632,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 50401,
+          "rss": 298819584,
+          "heapTotal": 252035072,
+          "heapUsed": 148955520,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 54001,
+          "rss": 298819584,
+          "heapTotal": 252035072,
+          "heapUsed": 124750480,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 57601,
+          "rss": 298819584,
+          "heapTotal": 252035072,
+          "heapUsed": 176095864,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 61201,
+          "rss": 298844160,
+          "heapTotal": 252297216,
+          "heapUsed": 148914520,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 64801,
+          "rss": 298885120,
+          "heapTotal": 252297216,
+          "heapUsed": 123121312,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 68401,
+          "rss": 298950656,
+          "heapTotal": 252297216,
+          "heapUsed": 164424208,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 72001,
+          "rss": 299016192,
+          "heapTotal": 252297216,
+          "heapUsed": 130956032,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 75601,
+          "rss": 299081728,
+          "heapTotal": 252297216,
+          "heapUsed": 161544432,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 79201,
+          "rss": 299118592,
+          "heapTotal": 252559360,
+          "heapUsed": 139334064,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 82801,
+          "rss": 299212800,
+          "heapTotal": 252559360,
+          "heapUsed": 120293384,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 86401,
+          "rss": 299278336,
+          "heapTotal": 252559360,
+          "heapUsed": 151728520,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 90001,
+          "rss": 299343872,
+          "heapTotal": 252559360,
+          "heapUsed": 173454712,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 93601,
+          "rss": 299368448,
+          "heapTotal": 252821504,
+          "heapUsed": 152093712,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 97201,
+          "rss": 299474944,
+          "heapTotal": 252821504,
+          "heapUsed": 118314888,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 100801,
+          "rss": 299540480,
+          "heapTotal": 252821504,
+          "heapUsed": 162840256,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 104401,
+          "rss": 299606016,
+          "heapTotal": 252821504,
+          "heapUsed": 135330304,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 108000,
+          "rss": 299626496,
+          "heapTotal": 253083648,
+          "heapUsed": 174152168,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "74774435"
+    },
+    {
+      "seed": 73009,
+      "requestedTicks": 108000,
+      "completedTicks": 108000,
+      "simulatedSeconds": 1800,
+      "elapsedMs": 6162.292000000001,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 169,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 301264896,
+          "heapTotal": 253571072,
+          "heapUsed": 181339024,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3601,
+          "rss": 301162496,
+          "heapTotal": 253607936,
+          "heapUsed": 163149376,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 7201,
+          "rss": 301162496,
+          "heapTotal": 253607936,
+          "heapUsed": 129998120,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 10801,
+          "rss": 301162496,
+          "heapTotal": 253607936,
+          "heapUsed": 172442800,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 14401,
+          "rss": 301162496,
+          "heapTotal": 253607936,
+          "heapUsed": 134937680,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 18001,
+          "rss": 301166592,
+          "heapTotal": 253607936,
+          "heapUsed": 181227280,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 21601,
+          "rss": 301178880,
+          "heapTotal": 253607936,
+          "heapUsed": 151041472,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 25201,
+          "rss": 301199360,
+          "heapTotal": 253607936,
+          "heapUsed": 127946152,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 28801,
+          "rss": 301215744,
+          "heapTotal": 253607936,
+          "heapUsed": 154424840,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 32401,
+          "rss": 301281280,
+          "heapTotal": 253607936,
+          "heapUsed": 126886680,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 36001,
+          "rss": 301281280,
+          "heapTotal": 253607936,
+          "heapUsed": 161855568,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 39601,
+          "rss": 301281280,
+          "heapTotal": 253607936,
+          "heapUsed": 135558208,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 43201,
+          "rss": 301346816,
+          "heapTotal": 253607936,
+          "heapUsed": 175908368,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 46801,
+          "rss": 301346816,
+          "heapTotal": 253607936,
+          "heapUsed": 158033736,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 50401,
+          "rss": 301412352,
+          "heapTotal": 253607936,
+          "heapUsed": 122836688,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 54001,
+          "rss": 301477888,
+          "heapTotal": 253607936,
+          "heapUsed": 167477976,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 57601,
+          "rss": 301543424,
+          "heapTotal": 253607936,
+          "heapUsed": 151343328,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 61201,
+          "rss": 301674496,
+          "heapTotal": 253870080,
+          "heapUsed": 122352696,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 64801,
+          "rss": 301805568,
+          "heapTotal": 253870080,
+          "heapUsed": 148764648,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 68401,
+          "rss": 301854720,
+          "heapTotal": 254132224,
+          "heapUsed": 124928536,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 72001,
+          "rss": 302002176,
+          "heapTotal": 254132224,
+          "heapUsed": 176675144,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 75601,
+          "rss": 302075904,
+          "heapTotal": 254394368,
+          "heapUsed": 147663176,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 79201,
+          "rss": 302198784,
+          "heapTotal": 254394368,
+          "heapUsed": 129792160,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 82801,
+          "rss": 302329856,
+          "heapTotal": 254394368,
+          "heapUsed": 167130696,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 86401,
+          "rss": 302460928,
+          "heapTotal": 254656512,
+          "heapUsed": 132934704,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 90001,
+          "rss": 302592000,
+          "heapTotal": 254656512,
+          "heapUsed": 167042656,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 93601,
+          "rss": 302657536,
+          "heapTotal": 254918656,
+          "heapUsed": 161556416,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 97201,
+          "rss": 302788608,
+          "heapTotal": 254918656,
+          "heapUsed": 134983720,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 100801,
+          "rss": 302891008,
+          "heapTotal": 255180800,
+          "heapUsed": 168506168,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 104401,
+          "rss": 303050752,
+          "heapTotal": 255180800,
+          "heapUsed": 147682792,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 108000,
+          "rss": 303149056,
+          "heapTotal": 255442944,
+          "heapUsed": 184244592,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "b41785ce"
+    }
+  ],
+  "passed": true
+}

@@ -89,6 +89,17 @@ const known = (value: unknown, ids: readonly string[]) =>
         ),
       ]
     : [];
+/** Legacy rooms are stored directly; pilgrimage rooms are rebuilt from their graph.
+ * Reject corrupt references while retaining valid older room seeds/layouts. */
+function validLegacyRoom(room: Room): boolean {
+  return Number.isSafeInteger(room.seed) &&
+    Number.isInteger(room.template) && room.template >= 0 && room.template <= 3 &&
+    typeof room.name === 'string' && room.name.length <= 200 &&
+    typeof room.subtitle === 'string' && room.subtitle.length <= 500 &&
+    (room.bossKind === undefined || BOSSES.includes(room.bossKind)) &&
+    (room.biome === undefined || ['sanctum', 'grove', 'foundry'].includes(room.biome)) &&
+    (room.modifier === undefined || ['none', 'haste', 'thorns', 'fervor'].includes(room.modifier));
+}
 export function parseSave(raw: string | null): SaveData {
   const fallback = blankSave();
   if (!raw) return fallback;
@@ -145,7 +156,7 @@ export function parseSave(raw: string | null): SaveData {
     const c = v.checkpoint;
     if (
       c &&
-      Number.isInteger(c.seed) &&
+      Number.isSafeInteger(c.seed) &&
       c.room &&
       Number.isInteger(c.room.index) &&
       c.room.index >= 1 &&
@@ -162,9 +173,10 @@ export function parseSave(raw: string | null): SaveData {
         'archive',
         'challenge',
       ].includes(c.room.kind) &&
+      (c.campaign === 'pilgrimage' || validLegacyRoom(c.room)) &&
       Array.isArray(c.cards) &&
       c.cards.every((id: unknown) => typeof id === 'string' && ids.has(id)) &&
-      typeof c.hp === 'number' &&
+      typeof c.hp === 'number' && Number.isFinite(c.hp) &&
       c.hp > 0
     ) {
       cp = {

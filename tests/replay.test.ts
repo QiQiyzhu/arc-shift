@@ -230,7 +230,7 @@ describe('deterministic QA replay', () => {
     const bad = JSON.parse(JSON.stringify(data));
     bad.initial.save.checkpoint.room.bossKind = 'unknown';
     expect(() => importReplay(JSON.stringify(bad))).toThrow(
-      'Invalid legacy room',
+      'Initial profile failed save validation',
     );
   });
   it('checks command outcomes and retains intentionally rejected attempts', () => {

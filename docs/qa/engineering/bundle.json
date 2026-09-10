@@ -1,0 +1,145 @@
+{
+  "recordedAt": "2026-09-10T06:55:09.865Z",
+  "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code.",
+  "totalBytes": 3073830,
+  "javascriptBytes": 1664223,
+  "productionDebugMarkers": [],
+  "files": [
+    {
+      "path": "dist/art/foundry.webp",
+      "bytes": 225914
+    },
+    {
+      "path": "dist/art/grove.webp",
+      "bytes": 341504
+    },
+    {
+      "path": "dist/art/rift-keyart.webp",
+      "bytes": 161028
+    },
+    {
+      "path": "dist/art/sanctum.webp",
+      "bytes": 276558
+    },
+    {
+      "path": "dist/assets/index-Ba8hR3IU.js",
+      "bytes": 192226,
+      "gzipBytes": 60074,
+      "brotliBytes": 51745
+    },
+    {
+      "path": "dist/assets/index-CQDW605J.css",
+      "bytes": 186480,
+      "gzipBytes": 32625,
+      "brotliBytes": 27162
+    },
+    {
+      "path": "dist/assets/page-CDvrXlQO.js",
+      "bytes": 1471997,
+      "gzipBytes": 414084,
+      "brotliBytes": 332579
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-400-normal-BnQMeOim.woff",
+      "bytes": 17004
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-400-normal-CJ-V5oYT.woff2",
+      "bytes": 13388
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-500-normal-CNSSEhBt.woff",
+      "bytes": 16988
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-500-normal-lFbtlQH6.woff2",
+      "bytes": 13312
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-700-normal-CwsQ-cCU.woff",
+      "bytes": 16416
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-700-normal-RjhwGPKo.woff2",
+      "bytes": 12840
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-400-normal-CfP_5XZW.woff2",
+      "bytes": 12256
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-400-normal-DRPE3kg4.woff",
+      "bytes": 16788
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-500-normal-3dgZTiw9.woff",
+      "bytes": 16788
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-500-normal-DUe3BAxM.woff2",
+      "bytes": 12272
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-700-normal-BQnZhY3m.woff2",
+      "bytes": 11992
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-700-normal-HVCqSBdx.woff",
+      "bytes": 16460
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-400-normal-B7xT_GF5.woff2",
+      "bytes": 4296
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-400-normal-BIWiOVfw.woff",
+      "bytes": 5728
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-500-normal-BmEvtly_.woff2",
+      "bytes": 4324
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-500-normal-BTqKIpxg.woff",
+      "bytes": 5716
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-700-normal-DMty7AZE.woff2",
+      "bytes": 4204
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-700-normal-Duxec5Rn.woff",
+      "bytes": 5588
+    },
+    {
+      "path": "dist/favicon.svg",
+      "bytes": 239
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 635,
+      "gzipBytes": 491,
+      "brotliBytes": 286
+    },
+    {
+      "path": "dist/licenses/base-ui.txt",
+      "bytes": 1072
+    },
+    {
+      "path": "dist/licenses/lucide.txt",
+      "bytes": 3208
+    },
+    {
+      "path": "dist/licenses/phaser.txt",
+      "bytes": 1120
+    },
+    {
+      "path": "dist/licenses/react.txt",
+      "bytes": 1088
+    },
+    {
+      "path": "dist/licenses/space-grotesk.txt",
+      "bytes": 4401
+    }
+  ]
+}

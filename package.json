@@ -15,7 +15,9 @@
     "test:watch": "vitest",
     "typecheck": "tsc --noEmit",
     "test:e2e": "playwright test",
-    "test:simulation": "node scripts/simulate.cjs"
+    "test:simulation": "node scripts/simulate.cjs",
+    "test:soak": "node scripts/soak.cjs",
+    "bundle:report": "node scripts/bundle-report.mjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

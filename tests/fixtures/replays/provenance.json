@@ -1,0 +1,26 @@
+{
+  "generatedAt": "2026-09-10T06:43:56.516Z",
+  "sourceCommit": "9c43394c964edce03cf21ba04c53d25ac1ac58c8",
+  "sourceDirty": true,
+  "method": "AI-authored deterministic scenarios generated once from the current source. Tests consume committed histories; no regeneration in CI. Not player recordings.",
+  "evidence": [
+    {
+      "name": "combat",
+      "durationTicks": 600,
+      "events": 608,
+      "finalChecksum": "a5342d7d"
+    },
+    {
+      "name": "boss",
+      "durationTicks": 601,
+      "events": 610,
+      "finalChecksum": "95843f49"
+    },
+    {
+      "name": "shop-route",
+      "durationTicks": 600,
+      "events": 611,
+      "finalChecksum": "f1610ffc"
+    }
+  ]
+}

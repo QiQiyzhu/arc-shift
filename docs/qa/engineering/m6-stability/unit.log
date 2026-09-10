@@ -1,0 +1,6 @@
+
+> arc-shift@1.0.0 test
+> vitest run --reporter=json --outputFile=docs/qa/engineering/m6-stability/unit.json
+
+JSON report written to C:/Users/yzhu/Documents/ChatGPT/New project/docs/qa/engineering/m6-stability/unit.json
+

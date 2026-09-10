@@ -1,0 +1,49 @@
+{
+  "stage": "m6-stability-final",
+  "recordedAt": "2026-09-10T06:54:41.522Z",
+  "commit": "9c43394c964edce03cf21ba04c53d25ac1ac58c8",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 3677
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 1018
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m6-stability-final/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 5575
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 339095
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 9730
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-Ba8hR3IU.js",
+      "bytes": 192226,
+      "gzipBytes": 60074
+    },
+    {
+      "name": "index-CQDW605J.css",
+      "bytes": 186480,
+      "gzipBytes": 32625
+    },
+    {
+      "name": "page-CDvrXlQO.js",
+      "bytes": 1471997,
+      "gzipBytes": 414084
+    }
+  ]
+}

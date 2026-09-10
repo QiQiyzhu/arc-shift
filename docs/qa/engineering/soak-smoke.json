@@ -1,0 +1,111 @@
+{
+  "recordedAt": "2026-09-10T06:55:06.446Z",
+  "sourceCommit": "9c43394c964edce03cf21ba04c53d25ac1ac58c8",
+  "sourceDirty": true,
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900HX"
+  },
+  "method": "Fixed 60 Hz headless simulation, high-HP enemy fixtures, invulnerable practice player; no rendering, no real-time waiting. Heap snapshots are observed process memory, not a leak verdict. Other workloads may be active.",
+  "mode": "smoke",
+  "samples": [
+    {
+      "seed": 17,
+      "requestedTicks": 3600,
+      "completedTicks": 3600,
+      "simulatedSeconds": 60,
+      "elapsedMs": 363.99940000000015,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 160,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 116170752,
+          "heapTotal": 73777152,
+          "heapUsed": 40736328,
+          "external": 2139982,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3600,
+          "rss": 153833472,
+          "heapTotal": 111525888,
+          "heapUsed": 45820992,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "57cc8bde"
+    },
+    {
+      "seed": 293,
+      "requestedTicks": 3600,
+      "completedTicks": 3600,
+      "simulatedSeconds": 60,
+      "elapsedMs": 292.6392999999998,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 152,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 156946432,
+          "heapTotal": 112279552,
+          "heapUsed": 56874496,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3600,
+          "rss": 156487680,
+          "heapTotal": 112574464,
+          "heapUsed": 60407224,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "e33464e0"
+    },
+    {
+      "seed": 701,
+      "requestedTicks": 3600,
+      "completedTicks": 3600,
+      "simulatedSeconds": 60,
+      "elapsedMs": 268.81629999999996,
+      "peak": {
+        "enemies": 28,
+        "projectiles": 161,
+        "hazards": 17
+      },
+      "heap": [
+        {
+          "tick": 1,
+          "rss": 156807168,
+          "heapTotal": 113065984,
+          "heapUsed": 67650560,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        },
+        {
+          "tick": 3600,
+          "rss": 158568448,
+          "heapTotal": 113623040,
+          "heapUsed": 68692016,
+          "external": 2139281,
+          "arrayBuffers": 28923
+        }
+      ],
+      "poolMisses": 0,
+      "finalChecksum": "1a168a1c"
+    }
+  ],
+  "passed": true
+}
