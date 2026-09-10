@@ -1,0 +1,44 @@
+{
+  "stage": "m1-baseline",
+  "recordedAt": "2026-09-10T04:42:17.162Z",
+  "commit": "b17f4c24cf95a02d3197ec493026b6f23c8f2c3e",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 6356
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 3859
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m1-baseline/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 3954
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 298771
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 6126
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6IBUiNml.css",
+      "bytes": 186303,
+      "gzipBytes": 32582
+    },
+    {
+      "name": "index-DBA9_Z3_.js",
+      "bytes": 1652324,
+      "gzipBytes": 470099
+    }
+  ]
+}

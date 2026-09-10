@@ -109,6 +109,12 @@ export class Synth {
       if (node) {
         const p = node.gain;
         p.cancelScheduledValues(c.currentTime);
+        // A suspended audio clock cannot advance a ramp; pause must latch now.
+        if (paused && node === this.musicGain) {
+          p.value = 0;
+          p.setValueAtTime(0, c.currentTime);
+          continue;
+        }
         p.setValueAtTime(p.value, c.currentTime);
         p.linearRampToValueAtTime(value, c.currentTime + 0.012);
       }
@@ -294,11 +300,13 @@ export class Synth {
     },
   ) {
     const c = this.context;
-    if (!c || c.state !== 'running') return;
+    if (!c) return;
     const paused =
       mood?.phase === 'paused' ||
       mood?.phase === 'gameover' ||
       mood?.phase === 'victory';
+    this.syncMix(paused);
+    if (c.state !== 'running') return;
     const boss = mood?.kind === 'boss' ? mood.boss : undefined;
     const roomKey = `${mood?.biome || 'sanctum'}/${boss || ''}`;
     const requested = musicProfile(mood?.biome, boss, mood?.bossPhase);
@@ -308,7 +316,6 @@ export class Synth {
       this.step = 0;
       this.nextStep = c.currentTime + 0.03;
     }
-    this.syncMix(paused);
     if (paused || this.settings.muted) {
       this.nextStep = c.currentTime + 0.03;
       this.wasPaused = true;

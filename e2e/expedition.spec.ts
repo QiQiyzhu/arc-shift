@@ -132,6 +132,7 @@ test('camp choices, reroll, stock, bank and workshop persist through real page r
     12,
   );
   await page.screenshot({ path: 'outputs/qa/v03/camp.png' });
+  const checkpointMaxHp = await page.evaluate(() => window.arcQA.engine.world.player.maxHp);
   await page.reload();
   await page.screenshot({ path: 'outputs/qa/v03/menu.png' });
   await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
@@ -142,7 +143,7 @@ test('camp choices, reroll, stock, bank and workshop persist through real page r
   await page.getByRole('button', { name: /继续行动/ }).click();
   expect(
     await page.evaluate(() => window.arcQA.engine.world.player.maxHp),
-  ).toBe(120);
+  ).toBe(checkpointMaxHp);
   await expect(
     page.getByRole('button', { name: '本区已完成归档' }),
   ).toBeDisabled();

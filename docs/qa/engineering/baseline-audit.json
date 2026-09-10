@@ -1,0 +1,11 @@
+{
+  "sourceCommit": "b17f4c24cf95a02d3197ec493026b6f23c8f2c3e",
+  "date": "2026-09-10",
+  "initialUnit": { "passed": 92, "failed": 0 },
+  "initialBrowser": { "passed": 23, "failed": 2, "includesNewStressScenarios": 3 },
+  "failures": [
+    { "test": "camp choices ... persist", "expected": 120, "actual": 160, "cause": "Seed-dependent ice-shell card increases max HP; the test hardcoded 120", "fix": "Compare resumed HP capacity to the actual checkpoint capacity before a meta upgrade" },
+    { "test": "audio buses ... pause immediately", "expected": 0, "actual": 0.41999998688697815, "cause": "Suspended audio clock prevented the scheduled mute; update returned before syncMix", "fix": "Apply pause mix before the running-state guard and latch music gain to zero while paused" }
+  ],
+  "validation": "See m1-baseline checks for the subsequent full-suite result; initial failures are retained here."
+}

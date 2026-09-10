@@ -176,6 +176,7 @@ export function updateProjectiles(w: World, dt: number) {
     } else {
       for (const e of w.enemies) {
         if (e.hp <= 0 || b.hits.has(e.id)) continue;
+        w.queries.projectile++;
         if (
           segmentHits(b.oldX, b.oldY, b.x, b.y, e.x, e.y, e.radius + b.radius)
         ) {

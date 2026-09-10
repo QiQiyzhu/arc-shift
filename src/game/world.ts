@@ -6,6 +6,7 @@ import { ENEMIES } from '../data/enemies';
 import { makeRoom } from '../rooms/generator';
 import { terrainFor, safePosition } from '../rooms/terrain';
 import { isBoss } from '../progression/catalog';
+import { newQueryMetrics } from '../core/metrics';
 import {
   emptyPreparation,
   startingWallet,
@@ -24,6 +25,7 @@ import type {
   Upgrade,
 } from './types';
 export class World {
+  queries = newQueryMetrics();
   campaign: 'legacy' | 'pilgrimage' = 'legacy';
   route: string[] = [];
   forms: WeaponId[] = [];

@@ -415,6 +415,7 @@ export function updateEnemies(w: World, dt: number) {
       const a = w.enemies[i],
         b = w.enemies[j];
       if (a.hp <= 0 || b.hp <= 0 || a.radius > 30 || b.radius > 30) continue;
+      w.queries.separation++;
       const dist = distance(a, b);
       const overlap = a.radius + b.radius - dist;
       if (overlap > 0 && dist > 0) {
