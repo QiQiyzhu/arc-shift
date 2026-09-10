@@ -201,10 +201,40 @@ export function CardDraft({ engine }: { engine: Engine }) {
     </div>
   );
 }
-const ROOM_INFO: Record<
+export const ROOM_INFO: Record<
   RoomKind,
   { name: string; reward: string; risk: string; Icon: typeof Target }
 > = {
+  event: {
+    name: '遗迹',
+    reward: '生命、金币与未知协议的交换',
+    risk: '代价由你选择',
+    Icon: Sparkles,
+  },
+  shop: {
+    name: '行商',
+    reward: '购买补给 · 安全归档碎片',
+    risk: '安全区域',
+    Icon: Gem,
+  },
+  forge: {
+    name: '工坊',
+    reward: '熔接武装 · 混搭流派',
+    risk: '首次早期熔接免费，后续 18 金币',
+    Icon: Split,
+  },
+  archive: {
+    name: '档案',
+    reward: '记忆残片 · 4 碎片 · 协议 ×1',
+    risk: '安全区域',
+    Icon: Radio,
+  },
+  challenge: {
+    name: '守点',
+    reward: '驻守 18 秒 · 5 碎片 · 协议 ×1',
+    risk: '守住中央符阵；最多五波敌人',
+    Icon: Target,
+  },
   combat: {
     name: '战斗',
     reward: '协议 ×1 · 恢复 12 生命',

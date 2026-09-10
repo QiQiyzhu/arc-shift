@@ -17,7 +17,10 @@ require.extensions['.ts'] = (module, file) =>
     file,
   );
 const { Engine } = require(path.join(root, 'src/game/engine.ts'));
-const { roomChoices } = require(path.join(root, 'src/rooms/generator.ts'));
+const { availableNodes } = require(path.join(root, 'src/rooms/expedition.ts'));
+const { crossesBlock, blocked } = require(
+  path.join(root, 'src/rooms/terrain.ts'),
+);
 const { laserGeometry } = require(path.join(root, 'src/combat/geometry.ts'));
 const store = new Map();
 global.localStorage = {
@@ -106,7 +109,11 @@ function inputFor(w) {
     tx = 640 + 430 * Math.cos(angle + 0.5),
     ty = 360 + 205 * Math.sin(angle + 0.5);
   const danger = (x, y, horizon) => {
-    let score = 0;
+    let score = blocked(x, y, 20, w.terrain.blocks) ? 4000 : 0;
+    for (const z of w.terrain.zones)
+      if (z.kind !== 'blessing' && (w.roomTime + horizon) % 4 > 2.6)
+        score +=
+          Math.max(0, z.r + 30 - Math.hypot(x - z.x, y - z.y)) ** 2 * 0.13;
     for (const e of enemies) {
       const d = Math.hypot(
         x - (e.x + e.vx * (e.state === 'attack' ? horizon : 0)),
@@ -151,6 +158,7 @@ function inputFor(w) {
       const x = p.x + dx * w.stats.speed * horizon,
         y = p.y + dy * w.stats.speed * horizon;
       score += danger(x, y, horizon);
+      if (crossesBlock(p.x, p.y, x, y, 18, w.terrain.blocks)) score += 1800;
       score +=
         Math.max(0, 110 - x) ** 2 * 0.08 +
         Math.max(0, x - 1170) ** 2 * 0.08 +
@@ -159,7 +167,10 @@ function inputFor(w) {
     }
     const x = p.x + dx * w.stats.speed * 0.5,
       y = p.y + dy * w.stats.speed * 0.5;
-    score += Math.hypot(x - tx, y - ty) * (w.weapon === 'sword' ? 0.02 : 0.22);
+    score +=
+      w.room.kind === 'challenge'
+        ? Math.max(0, Math.hypot(x - 640, y - 365) - 60) * 1.4
+        : Math.hypot(x - tx, y - ty) * (w.weapon === 'sword' ? 0.02 : 0.22);
     if (target) {
       const d = Math.hypot(target.x - x, target.y - y);
       score +=
@@ -178,6 +189,7 @@ function inputFor(w) {
       dx <= 1180 &&
       dy >= 125 &&
       dy <= 605 &&
+      !crossesBlock(p.x, p.y, dx, dy, 18, w.terrain.blocks) &&
       danger(dx, dy, 0.25) < near + 15;
   }
   const dist = target ? Math.hypot(target.x - p.x, target.y - p.y) : Infinity;
@@ -220,6 +232,37 @@ function simulate(seed, route) {
             )[0].id;
       assert(e.chooseCard(choice));
     }
+    if (w.phase === 'event') {
+      if (w.room.kind === 'shop') {
+        if (w.player.hp <= w.player.maxHp - 30) e.buy('heal');
+        if (w.wallet.tonics === 0) e.buy('tonic');
+        if (w.wallet.shards >= 5) e.bankShards();
+      }
+      if (w.room.kind === 'treasure') e.openChest('key');
+      if (w.room.kind === 'heal' && w.wallet.shards >= 5) e.bankShards();
+      const missing = ['arc', 'sword', 'cannon'].find(
+        (f) => !w.forms.includes(f),
+      );
+      const choice =
+        ['forge', 'treasure'].includes(w.room.kind) &&
+        missing &&
+        (w.room.kind === 'treasure' ||
+          w.room.index <= 3 ||
+          w.wallet.coins >= 18)
+          ? 'form:' + missing
+          : w.room.kind === 'heal'
+            ? 'rest'
+            : w.room.kind === 'archive'
+              ? 'read'
+              : w.room.kind === 'forge'
+                ? 'repair'
+                : w.room.kind === 'treasure'
+                  ? 'salvage'
+                  : w.room.kind === 'event' && w.wallet.coins >= 10
+                    ? 'bell'
+                    : 'leave';
+      assert(e.resolveEvent(choice), 'Event failed ' + choice);
+    }
     if (w.phase === 'map') {
       e.openChest('key');
       if (w.player.hp <= w.player.maxHp - 30) e.buy('heal');
@@ -233,13 +276,37 @@ function simulate(seed, route) {
         kills: w.kills,
         card: w.cards.at(-1),
       });
-      const choices = roomChoices(w.room.index + 1, w.seed);
-      e.enter(
+      const choices = availableNodes(w.seed, w.room.nodeId);
+      const priority =
         route === 'combat'
-          ? choices[0]
-          : choices.find((r) => ['heal', 'treasure'].includes(r.kind)) ||
-              choices[0],
-      );
+          ? [
+              'elite',
+              'challenge',
+              'forge',
+              'combat',
+              'archive',
+              'treasure',
+              'event',
+              'shop',
+              'heal',
+              'boss',
+            ]
+          : [
+              'forge',
+              'heal',
+              'treasure',
+              'archive',
+              'shop',
+              'combat',
+              'event',
+              'challenge',
+              'elite',
+              'boss',
+            ];
+      const next = [...choices].sort(
+        (a, b) => priority.indexOf(a.room.kind) - priority.indexOf(b.room.kind),
+      )[0];
+      assert(next && e.travel(next.id), 'No legal route from ' + w.room.nodeId);
     }
     if (ticks % 3 === 0) input = inputFor(w);
     if (w.phase === 'playing') {
@@ -277,6 +344,9 @@ function simulate(seed, route) {
     settlement: w.settlement,
     wallet: w.wallet,
     build: w.cards,
+    forms: w.forms,
+    path: w.route,
+    bosses: e.save.meta.bosses,
     inputs: { dashes, qs, es },
     peakEnemies: highestEntities,
     peakProjectiles: highestBullets,
@@ -296,10 +366,13 @@ for (const route of ['safe', 'combat'])
     results.push(simulate(seed, route));
 fs.mkdirSync('outputs/qa', { recursive: true });
 fs.writeFileSync(
-  path.join('outputs/qa', 'bot-v03-' + weapon + '-' + initial + '.json'),
+  path.join('outputs/qa', 'bot-v1-' + weapon + '-' + initial + '.json'),
   JSON.stringify(results, null, 2),
 );
 assert(
-  results.every((r) => r.result === 'victory'),
+  results.every(
+    (r) =>
+      r.result === 'victory' && r.path.length === 12 && r.bosses.length === 3,
+  ),
   'A full-run simulation failed',
 );

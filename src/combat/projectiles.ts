@@ -2,6 +2,7 @@ import { segmentHits } from './rules';
 import { distance } from '../core/math';
 import { hitEnemy, hurtPlayer } from './damage';
 import type { World } from '../game/world';
+import { crossesBlock } from '../rooms/terrain';
 export function shoot(
   w: World,
   x: number,
@@ -35,6 +36,7 @@ export function shoot(
     generation,
     bounced: false,
     blastRadius: 0,
+    fragment: enemy || generation > 0 ? 0 : w.stats.fragment,
     returningStarted: false,
     wave: enemy ? 0 : w.stats.wave,
     orbit: !enemy && w.stats.orbit && generation === 0,
@@ -114,6 +116,21 @@ export function updateProjectiles(w: World, dt: number) {
       b.x += b.vx * dt;
       b.y += b.vy * dt;
     }
+    if (
+      w.terrain.blocks.length &&
+      crossesBlock(b.oldX, b.oldY, b.x, b.y, b.radius, w.terrain.blocks)
+    ) {
+      if (b.bounce > 0) {
+        b.x = b.oldX;
+        b.y = b.oldY;
+        b.vx = -b.vx;
+        b.vy = -b.vy;
+        b.bounce--;
+        b.orbit = false;
+        b.bounced = true;
+      } else b.active = false;
+    }
+    if (!b.active) continue;
     if (b.x < 70 || b.x > 1210 || b.y < 90 || b.y > 640) {
       if (b.bounce > 0) {
         if (b.x < 70) b.vx = Math.abs(b.vx);
@@ -181,13 +198,13 @@ export function updateProjectiles(w: World, dt: number) {
             if (w.stats.burn) e.burn = Math.max(e.burn, 2);
             if (w.has('ice-touch')) e.slow = Math.max(e.slow, 1.5);
           }
-          if (b.generation === 0 && w.stats.fragment && b.hits.size === 1) {
-            for (let i = 0; i < w.stats.fragment; i++) {
+          if (b.generation === 0 && b.fragment && b.hits.size === 1) {
+            for (let i = 0; i < b.fragment; i++) {
               const child = shoot(
                 w,
                 b.x,
                 b.y,
-                Math.atan2(b.vy, b.vx) + (i - 1) * 0.85,
+                Math.atan2(b.vy, b.vx) + (i - (b.fragment - 1) / 2) * 0.85,
                 false,
                 b.damage * 0.28,
                 b.speed * 0.8,

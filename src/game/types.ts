@@ -4,6 +4,7 @@ export type Phase =
   | 'paused'
   | 'reward'
   | 'map'
+  | 'event'
   | 'transition'
   | 'bossIntro'
   | 'victory'
@@ -16,8 +17,15 @@ export type EnemyKind =
   | 'lancer'
   | 'weaver'
   | 'conduit'
+  | 'bomber'
+  | 'cantor'
+  | 'shade'
   | 'warden'
+  | 'matron'
+  | 'forgemaster'
   | 'oracle';
+export type BossKind = 'warden' | 'matron' | 'forgemaster' | 'oracle';
+export type Biome = 'sanctum' | 'grove' | 'foundry';
 export type AIState =
   | 'idle'
   | 'chase'
@@ -26,7 +34,17 @@ export type AIState =
   | 'cooldown'
   | 'recover'
   | 'dead';
-export type RoomKind = 'combat' | 'elite' | 'heal' | 'treasure' | 'boss';
+export type RoomKind =
+  | 'combat'
+  | 'elite'
+  | 'heal'
+  | 'treasure'
+  | 'boss'
+  | 'event'
+  | 'shop'
+  | 'forge'
+  | 'archive'
+  | 'challenge';
 export interface Input {
   x: number;
   y: number;
@@ -81,6 +99,7 @@ export interface Enemy {
   elite: boolean;
   summoned: boolean;
   reactionCd: number;
+  shield: number;
 }
 export interface Projectile {
   active: boolean;
@@ -110,6 +129,7 @@ export interface Projectile {
   returningStarted: boolean;
   shape: 'bolt' | 'meteor' | 'lance' | 'crystal' | 'blade' | 'shell';
   blastRadius: number;
+  fragment: number;
   accent: number;
 }
 export interface Hazard {
@@ -124,6 +144,11 @@ export interface Hazard {
   tick: number;
 }
 export interface Room {
+  nodeId?: string;
+  lane?: number;
+  biome?: Biome;
+  bossKind?: BossKind;
+  modifier?: 'none' | 'haste' | 'thorns' | 'fervor';
   index: number;
   kind: RoomKind;
   name: string;

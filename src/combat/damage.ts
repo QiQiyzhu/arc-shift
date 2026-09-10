@@ -5,6 +5,7 @@ import { ENEMIES } from '../data/enemies';
 import type { Enemy } from '../game/types';
 import type { World } from '../game/world';
 import { dropLoot } from '../economy/loot';
+import { isBoss } from '../progression/catalog';
 export function hurtPlayer(w: World, amount: number) {
   const p = w.player;
   if (p.invulnerable > 0 || w.phase !== 'playing') return;
@@ -25,6 +26,9 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
     w.rng.next(),
   );
   let damage = c.damage;
+  const absorbed = Math.min(e.shield, damage);
+  e.shield -= absorbed;
+  damage -= absorbed;
   if (w.has('ice-brittle') && e.slow > 0) damage *= 1.25;
   if (w.has('void-execute') && e.hp / e.maxHp < 0.25) damage *= 1.5;
   const dealt = Math.min(e.hp, damage);
@@ -63,7 +67,7 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
         if (n !== e && distance(n, e) < 85) hitEnemy(w, n, base * 0.65, false);
     }
     const a = Math.atan2(e.y - w.player.y, e.x - w.player.x);
-    if (!['warden', 'oracle'].includes(e.kind)) {
+    if (!isBoss(e.kind)) {
       e.x += Math.cos(a) * 6;
       e.y += Math.sin(a) * 6;
     }
@@ -167,7 +171,7 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
         w.xp -= w.level * 55;
         w.level++;
         w.player.hp = clamp(w.player.hp + 8, 0, w.player.maxHp);
-        w.stats = deriveStats(w.cards, w.level);
+        w.stats = deriveStats(w.cards, w.level, w.relics);
         w.emit('reward', w.player.x, w.player.y, 0xc7f794);
       }
       if (w.stats.lifesteal > 0)

@@ -1,4 +1,5 @@
-import { attack, throwBomb, drinkTonic } from '../combat/weapons';
+import { attack, fireSupports, throwBomb, drinkTonic } from '../combat/weapons';
+import { moveOnTerrain } from '../rooms/terrain';
 import { clamp, direction, distance } from '../core/math';
 import { cooldown } from '../combat/rules';
 import { shoot } from '../combat/projectiles';
@@ -30,6 +31,8 @@ export function updatePlayer(w: World, input: Input, dt: number) {
     p.invulnerable = Math.max(p.invulnerable, s.dashDuration + 0.06);
     p.dashCd = s.dashCooldown;
     w.emit('dash', p.x, p.y);
+    if (w.relics.includes('hourglass'))
+      w.supportCd = { arc: 0, sword: 0, cannon: 0 };
     if (w.has('shift-reload') && w.has('storm-arc'))
       w.echo = { x: p.x, y: p.y, time: 0.7, shots: 3 };
     if (w.has('shift-echo'))
@@ -75,9 +78,14 @@ export function updatePlayer(w: World, input: Input, dt: number) {
         tick: 0.1,
       });
   }
-  p.x = clamp(p.x + p.vx * dt, 88, 1192);
-  p.y = clamp(p.y + p.vy * dt, 112, 620);
+  if (w.campaign === 'pilgrimage')
+    moveOnTerrain(w, p, p.x + p.vx * dt, p.y + p.vy * dt, 13);
+  else {
+    p.x = clamp(p.x + p.vx * dt, 88, 1192);
+    p.y = clamp(p.y + p.vy * dt, 112, 620);
+  }
   if (input.fire && p.shotCd === 0) attack(w);
+  fireSupports(w, dt, input.fire);
   if (input.bomb) throwBomb(w, input.aimX, input.aimY);
   if (input.heal) drinkTonic(w);
   if (input.fire && s.familiar && w.companionCd === 0) {

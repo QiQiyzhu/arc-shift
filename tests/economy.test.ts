@@ -14,6 +14,7 @@ function camp(index = 1) {
   const e = new Engine();
   e.start(31337);
   e.chooseCard('fire-ember');
+  e.world.campaign = 'legacy';
   e.enter(makeRoom(index, 'combat', 31337));
   e.world.phase = 'playing';
   e.world.enemies = [];

@@ -4,6 +4,8 @@ import { Random } from '../core/math';
 import { baseStats } from '../combat/rules';
 import { ENEMIES } from '../data/enemies';
 import { makeRoom } from '../rooms/generator';
+import { terrainFor, safePosition } from '../rooms/terrain';
+import { isBoss } from '../progression/catalog';
 import {
   emptyPreparation,
   startingWallet,
@@ -22,6 +24,17 @@ import type {
   Upgrade,
 } from './types';
 export class World {
+  campaign: 'legacy' | 'pilgrimage' = 'legacy';
+  route: string[] = [];
+  forms: WeaponId[] = [];
+  relics: string[] = [];
+  supportCd = { arc: 0, sword: 0, cannon: 0 };
+  terrain = terrainFor(makeRoom(1, 'combat', 7));
+  terrainTick = 0;
+  fieldBuff = false;
+  eventDone = false;
+  challengeTime = 0;
+  encountered = new Set<EnemyKind>();
   weapon: WeaponId = 'arc';
   preparation = emptyPreparation();
   wallet = startingWallet();
@@ -125,6 +138,7 @@ export class World {
     shape: 'bolt',
     accent: 0xe3fffa,
     blastRadius: 0,
+    fragment: 0,
   }));
   nextId = 0;
   has(id: string) {
@@ -147,7 +161,7 @@ export class World {
     summoned = false,
   ) {
     const d = ENEMIES[kind];
-    const boss = kind === 'warden' || kind === 'oracle';
+    const boss = isBoss(kind);
     const mult = boss ? 1 : 1 + (this.room.index - 1) * 0.15;
     const hp = d.hp * mult * (elite ? 1.65 : 1);
     const e: Enemy = {
@@ -176,12 +190,20 @@ export class World {
       elite,
       summoned,
       reactionCd: 0,
+      shield: 0,
     };
+    if (this.campaign === 'pilgrimage') {
+      Object.assign(e, safePosition(this, x, y, e.radius));
+      if (this.room.modifier === 'haste') e.speed *= 1.2;
+      if (this.room.modifier === 'thorns') e.shield = 18;
+      if (this.room.modifier === 'fervor') e.damage *= 1.15;
+    }
+    this.encountered.add(kind);
     this.enemies.push(e);
     this.emit('room', x, y, d.color);
     return e;
   }
   get boss() {
-    return this.enemies.find((e) => e.kind === 'warden' || e.kind === 'oracle');
+    return this.enemies.find((e) => isBoss(e.kind));
   }
 }

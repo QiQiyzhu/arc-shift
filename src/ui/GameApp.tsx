@@ -12,17 +12,18 @@ import {
   Wind,
   Pause,
   Play,
-  BookOpen,
   FlaskConical,
   Shield,
   Hammer,
 } from 'lucide-react';
-import { WeaponPicker, WeaponIcon, WalletBar } from './EconomyPanels';
+import { WeaponIcon, WalletBar } from './EconomyPanels';
 import { WEAPONS } from '../economy/catalog';
 import { Engine } from '../game/engine';
 import { ArcScene } from '../game/scene';
 import { ENEMIES } from '../data/enemies';
 import { CardDraft, RouteMap, BuildHUD } from './ProtocolPanels';
+import { ExpeditionMap, EncounterPanel, HybridHUD } from './PilgrimagePanels';
+import { LORE, isBoss } from '../progression/catalog';
 import { UtilityPanel } from './SettingsPanel';
 import { Synth } from '../audio/synth';
 import { installWebMCP } from './webmcp';
@@ -42,7 +43,7 @@ export default function GameApp() {
   const [loaded, setLoaded] = useState(false);
   const scene = useRef<ArcScene | null>(null);
   const [utility, setUtility] = useState<
-    'settings' | 'library' | 'help' | 'lab' | 'workshop' | null
+    'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp' | null
   >(null);
   useEffect(() => {
     const s = new ArcScene(engine);
@@ -70,6 +71,11 @@ export default function GameApp() {
           phase: engine.world.phase,
           kind: engine.world.room.kind,
           bossPhase: engine.world.boss?.phase || 0,
+          biome: engine.world.room.biome,
+          boss:
+            engine.world.boss && isBoss(engine.world.boss.kind)
+              ? engine.world.boss.kind
+              : undefined,
         },
       );
       lastSound = now;
@@ -108,7 +114,7 @@ export default function GameApp() {
     render((n) => n + 1);
   };
   const openUtility = (
-    mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop',
+    mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp',
   ) => {
     synth.unlock();
     if (['playing', 'transition', 'bossIntro'].includes(w.phase))
@@ -128,7 +134,7 @@ export default function GameApp() {
           <span className="signal-dot" /> 网络异常 · 连接已建立
         </div>
         <div className="top-actions">
-          <span className="version">RELIQUARY / 03</span>
+          <span className="version">PILGRIMAGE / 1.0</span>
           <button
             aria-label={engine.save.settings.muted ? '开启声音' : '静音'}
             onClick={() => {
@@ -163,7 +169,7 @@ export default function GameApp() {
             <img className="menu-keyart" src="/art/rift-keyart.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> CHAPTER III · RELIQUARY
+                <span /> THE LAST PILGRIMAGE · v1.0
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -172,22 +178,32 @@ export default function GameApp() {
               </h1>
               <div className="cn-title">
                 <span>奥 术 跃 迁</span>
-                <i>带回火种，再赴深渊。</i>
+                <i>钟声尽头，仍有人在等。</i>
               </div>
-              <p className="menu-description">
-                圣剑、法器与重炮，选择你的破局之道。
-                <br />
-                每一枚金币，每一次血誓，都改变下一步。
-              </p>
-              <WeaponPicker
-                value={engine.save.meta.weapon}
-                onChange={(id) => {
-                  engine.selectWeapon(id);
-                  render((n) => n + 1);
-                }}
-              />
+              <p className="menu-description">圣所仍在等待，下一位归来的人。</p>
+              {engine.save.checkpoint && (
+                <button
+                  className="start-button continue-primary"
+                  disabled={!loaded}
+                  onClick={() => {
+                    synth.unlock();
+                    engine.resume();
+                  }}
+                >
+                  <span>
+                    <Play size={18} />
+                    继续行动
+                  </span>
+                  <span>
+                    第 {engine.save.checkpoint.room.index} 层{' '}
+                    <ArrowRight size={18} />
+                  </span>
+                </button>
+              )}
               <button
-                className="start-button"
+                className={
+                  engine.save.checkpoint ? 'new-journey-button' : 'start-button'
+                }
                 onClick={start}
                 disabled={!loaded}
               >
@@ -198,42 +214,17 @@ export default function GameApp() {
                 <ArrowUpRight size={24} />
               </button>
               <div className="menu-secondary">
-                <button onClick={() => openUtility('workshop')}>
-                  <Hammer size={16} /> 行者营地{' '}
-                  <span className="camp-badge">{engine.save.meta.shards}</span>
+                <button onClick={() => openUtility('camp')}>
+                  <Hammer size={18} /> 营地与图鉴 <ChevronRight size={17} />
                 </button>
-                <button disabled={!loaded} onClick={() => openUtility('lab')}>
-                  <FlaskConical size={16} /> 协议试炼 <ChevronRight size={14} />
-                </button>
-                <button onClick={() => openUtility('library')}>
-                  <BookOpen size={16} /> 协议档案 <ChevronRight size={14} />
-                </button>
-                <button onClick={() => openUtility('help')}>
-                  操作指南 <ChevronRight size={14} />
+                <button onClick={() => openUtility('settings')}>
+                  <Settings2 size={17} /> 设置
                 </button>
               </div>
               <div className="edition-note">
-                3 种武装 <span> / </span> 40 项协议 <span> / </span> 局内经营 ·
-                局外成长
-              </div>
-              <div className="continue-row">
-                {engine.save.checkpoint && (
-                  <button
-                    onClick={() => {
-                      synth.unlock();
-                      engine.resume();
-                    }}
-                  >
-                    继续行动 <ArrowRight size={13} /> 区域 0
-                    {engine.save.checkpoint.room.index}
-                  </button>
-                )}
-                {engine.save.meta.bestRoom > 0 && (
-                  <span>
-                    最深记录 {engine.save.meta.bestRoom} / 8 · 通关{' '}
-                    {engine.save.meta.wins} 次
-                  </span>
-                )}
+                当前行装 ·{' '}
+                {WEAPONS.find((x) => x.id === engine.save.meta.weapon)!.name}
+                {engine.save.meta.equipped ? ' · 携带遗器' : ''}
               </div>
               <div className="menu-coordinates">
                 <span>35° 40′ N / UNKNOWN</span>
@@ -288,7 +279,7 @@ export default function GameApp() {
               <div className="room-hud">
                 <div className="hud-caption">
                   SECTOR {String(w.room.index).padStart(2, '0')}{' '}
-                  <span>/ 08</span>
+                  <span>/ {w.campaign === 'pilgrimage' ? '12' : '08'}</span>
                 </div>
                 <h2>{w.room.name}</h2>
                 <p>
@@ -296,7 +287,11 @@ export default function GameApp() {
                     ? `无尽试炼 · 波次 ${w.wave}`
                     : w.room.kind === 'boss'
                       ? '击败核心实体'
-                      : `清除异常 · 波次 ${w.wave} / ${w.room.index === 1 ? 4 : 8}`}
+                      : w.room.kind === 'challenge'
+                        ? `驻守中央符阵 ${w.challengeTime.toFixed(1)} / 18 秒`
+                        : w.phase === 'event'
+                          ? '此处暂时安全'
+                          : `清除异常 · 波次 ${w.wave} / ${w.campaign === 'pilgrimage' ? (w.room.kind === 'elite' ? 4 : 3) : w.room.index === 1 ? 4 : 8}`}
                 </p>
               </div>
               <div className="hud-right">
@@ -320,6 +315,10 @@ export default function GameApp() {
               </div>
             )}
             <BuildHUD cards={w.cards} />
+            <HybridHUD engine={engine} />
+            {w.fieldBuff && (
+              <div className="field-buff">祝祷符阵 · Q / E 加速恢复</div>
+            )}
             {engine.practice && (
               <div className="practice-banner">
                 <FlaskConical size={14} /> 无敌试炼 · 不影响存档{' '}
@@ -394,7 +393,20 @@ export default function GameApp() {
                 : `ENTERING SECTOR 0${w.room.index}`}
             </span>
             <h2>{w.room.name}</h2>
-            <p>{w.room.subtitle}</p>
+            <p>
+              {w.room.kind === 'boss'
+                ? LORE.find(
+                    (l) =>
+                      l.id ===
+                      (w.room.bossKind ||
+                        (w.room.index === 4 ? 'warden' : 'oracle')),
+                  )?.text
+                : w.room.biome === 'grove'
+                  ? '她让所有的名字，都长成了树。'
+                  : w.room.biome === 'foundry'
+                    ? '没有居民的城，仍然需要温暖。'
+                    : w.room.subtitle}
+            </p>
           </div>
         )}
         {w.phase === 'paused' && (
@@ -445,7 +457,13 @@ export default function GameApp() {
           </div>
         )}
         {w.phase === 'reward' && <CardDraft engine={engine} />}
-        {w.phase === 'map' && <RouteMap engine={engine} />}
+        {w.phase === 'map' &&
+          (w.campaign === 'pilgrimage' ? (
+            <ExpeditionMap key={w.room.nodeId} engine={engine} />
+          ) : (
+            <RouteMap engine={engine} />
+          ))}
+        {w.phase === 'event' && <EncounterPanel engine={engine} />}
         {(w.phase === 'victory' || w.phase === 'gameover') && (
           <div className={`modal-shade end-shade ${w.phase}`}>
             <section className="pause-panel">
@@ -461,14 +479,14 @@ export default function GameApp() {
               </h2>
               <p>
                 {w.phase === 'victory'
-                  ? '零号神谕已被净化。你的协议改写了这个世界。'
+                  ? '所有的灯都熄灭了。只有门后，响起了一次迟来的敲门声。'
                   : '每一次重启，都是新的可能。'}
               </p>
               <div className="result-stats">
                 <div>
                   <b>
                     {w.room.index}
-                    <small>/ 8</small>
+                    <small>/ {w.campaign === 'pilgrimage' ? 12 : 8}</small>
                   </b>
                   <span>最深区域</span>
                 </div>

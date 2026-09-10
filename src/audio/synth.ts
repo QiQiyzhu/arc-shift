@@ -1,6 +1,7 @@
 import type { EffectEvent } from '../core/events';
-import type { Phase, RoomKind } from '../game/types';
-import { midi, scoreStep, STEP_SECONDS } from './score';
+import type { Phase, RoomKind, Biome, BossKind } from '../game/types';
+import { midi, scoreStep, stepSeconds } from './score';
+import { MUSIC, musicProfile } from './profiles';
 export interface SoundSettings {
   master: number;
   music: number;
@@ -10,7 +11,7 @@ export interface SoundSettings {
 }
 export const defaultSettings: SoundSettings = {
   master: 0.6,
-  music: 0.32,
+  music: 0.42,
   sfx: 0.65,
   muted: false,
   reducedMotion: false,
@@ -40,6 +41,11 @@ export class Synth {
   private lastSkill = -1;
   private nextStep = 0;
   private step = 0;
+  private score = MUSIC.sanctum;
+  private scoreRoom = '';
+  get nowPlaying() {
+    return this.score.id;
+  }
   private mixStamp = '';
   private wasPaused = false;
   unlock() {
@@ -273,19 +279,35 @@ export class Synth {
       this.tone(55, 110, 1.1, 0.12, 'sawtooth');
       this.noise(0.16, 0.06, 450);
     } else if (e.kind === 'victory') {
-      [50, 57, 62, 65, 69].forEach((n) =>
-        this.tone(midi(n), midi(n), 2.5, 0.035),
-      );
+      [50, 57, 62, 64].forEach((n) => this.tone(midi(n), midi(n), 2.5, 0.035));
     }
   }
   update(
     _dt: number,
     playing: boolean,
-    mood?: { phase: Phase; kind: RoomKind; bossPhase: number },
+    mood?: {
+      phase: Phase;
+      kind: RoomKind;
+      bossPhase: number;
+      biome?: Biome;
+      boss?: BossKind;
+    },
   ) {
     const c = this.context;
     if (!c || c.state !== 'running') return;
-    const paused = mood?.phase === 'paused' || mood?.phase === 'gameover';
+    const paused =
+      mood?.phase === 'paused' ||
+      mood?.phase === 'gameover' ||
+      mood?.phase === 'victory';
+    const boss = mood?.kind === 'boss' ? mood.boss : undefined;
+    const roomKey = `${mood?.biome || 'sanctum'}/${boss || ''}`;
+    const requested = musicProfile(mood?.biome, boss, mood?.bossPhase);
+    if (roomKey !== this.scoreRoom) {
+      this.scoreRoom = roomKey;
+      this.score = requested;
+      this.step = 0;
+      this.nextStep = c.currentTime + 0.03;
+    }
     this.syncMix(paused);
     if (paused || this.settings.muted) {
       this.nextStep = c.currentTime + 0.03;
@@ -303,7 +325,8 @@ export class Synth {
     let scheduled = 0;
     while (this.nextStep < c.currentTime + 0.1 && scheduled++ < 4) {
       const at = Math.max(c.currentTime, this.nextStep);
-      for (const n of scoreStep(this.step, intensity))
+      if (this.step % 16 === 0) this.score = requested;
+      for (const n of scoreStep(this.step, intensity, this.score))
         this.tone(
           midi(n.note),
           midi(n.note),
@@ -315,14 +338,16 @@ export class Synth {
         );
       const beat = this.step % 16;
       if (intensity > 0) {
-        if (beat % 8 === 0 || (intensity > 1 && beat === 14))
-          this.tone(125, 42, 0.16, 0.15, 'sine', true, at);
-        if (beat === 4 || beat === 12) this.noise(0.09, 0.045, 1300, true, at);
-        if (beat % (intensity > 1 ? 1 : 2) === 0)
-          this.noise(0.025, beat % 2 ? 0.008 : 0.014, 6500, true, at);
+        const percussion = this.score.percussion;
+        if (this.score.kick.includes(beat))
+          this.tone(125, 42, 0.16, 0.18 * percussion, 'sine', true, at);
+        if (this.score.snare.includes(beat))
+          this.noise(0.09, 0.055 * percussion, 1300, true, at);
+        if (beat % this.score.hatEvery === 0)
+          this.noise(0.025, 0.02 * percussion, 6500, true, at);
       }
       this.step++;
-      this.nextStep += STEP_SECONDS;
+      this.nextStep += stepSeconds(this.score);
     }
   }
   ui() {

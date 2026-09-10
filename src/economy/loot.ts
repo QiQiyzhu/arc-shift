@@ -1,12 +1,13 @@
 import type { World } from '../game/world';
 import type { Enemy } from '../game/types';
 import { LIMITS, type Wallet } from './catalog';
+import { isBoss } from '../progression/catalog';
 export function grant(w: World, kind: keyof Wallet, amount: number) {
   w.wallet[kind] = Math.min(LIMITS[kind], w.wallet[kind] + amount);
 }
 export function dropLoot(w: World, e: Enemy) {
   if (e.summoned) return;
-  const boss = e.kind === 'warden' || e.kind === 'oracle';
+  const boss = isBoss(e.kind);
   const drop = (kind: keyof Wallet, amount: number, offset = 0) => {
     if (kind === 'coins' && !boss) {
       amount = Math.min(

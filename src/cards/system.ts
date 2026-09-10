@@ -11,7 +11,11 @@ export function buildCounts(ids: readonly string[]): Record<Element, number> {
   }
   return counts;
 }
-export function deriveStats(ids: readonly string[], level = 1): Stats {
+export function deriveStats(
+  ids: readonly string[],
+  level = 1,
+  relics: readonly string[] = [],
+): Stats {
   const s = baseStats(),
     has = (id: string) => ids.includes(id);
   s.damage += (level - 1) * 1.5;
@@ -92,6 +96,8 @@ export function deriveStats(ids: readonly string[], level = 1): Stats {
   if (c.frost >= 3 && s.slow) s.slow += 0.1;
   if (c.void >= 3) s.eCooldown *= 0.8;
   if (c.shift >= 3) s.damage += 4;
+  if (relics.includes('hourglass')) s.dashCooldown *= 0.85;
+  if (relics.includes('oracle-eye')) s.crit += 0.12;
   return s;
 }
 export function rewardChoices(

@@ -68,7 +68,8 @@ export function drawActors(
     if (e.state === 'telegraph') {
       const a = Math.atan2(e.aimY - e.y, e.aimX - e.x);
       const charge =
-        e.kind === 'lancer' || (e.kind === 'warden' && e.attackIndex % 3 === 2);
+        e.kind === 'lancer' ||
+        (['warden', 'forgemaster'].includes(e.kind) && e.attackIndex % 3 === 2);
       g.lineStyle(charge ? 24 : 2, 0xff677f, charge ? 0.13 : 0.65);
       g.lineBetween(
         e.x,
@@ -151,6 +152,47 @@ export function drawActors(
       polygon(g, e.x, e.y, e.radius, 5, -t * 0.4);
       g.lineStyle(1, c, 0.7);
       g.strokeCircle(e.x, e.y, 9);
+    } else if (e.kind === 'bomber') {
+      polygon(g, e.x, e.y, e.radius, 6, Math.PI / 6);
+      for (let i = 0; i < 3; i++) {
+        const a = t * 0.7 + (i * Math.PI * 2) / 3;
+        g.fillStyle(c, 0.8);
+        g.fillCircle(e.x + Math.cos(a) * 10, e.y + Math.sin(a) * 10, 4);
+      }
+    } else if (e.kind === 'shade') {
+      g.fillStyle(0x283c5b, 0.65);
+      polygon(g, e.x - 7, e.y + 4, e.radius, 4, Math.PI / 4);
+      g.fillStyle(0x142130, 0.95);
+      polygon(g, e.x + 5, e.y - 3, e.radius * 0.8, 4, Math.PI / 4);
+      g.lineBetween(e.x - 3, e.y - 8, e.x + 5, e.y + 8);
+    } else if (e.kind === 'cantor' || e.kind === 'matron') {
+      const r = e.radius;
+      polygon(g, e.x, e.y, r * 0.68, 3, -Math.PI / 2);
+      g.strokeEllipse(e.x, e.y - r * 0.7, r * 1.3, r * 0.4);
+      for (let i = 0; i < (boss ? 8 : 3); i++) {
+        const a = t * 0.23 + (i * Math.PI * 2) / (boss ? 8 : 3),
+          x = e.x + Math.cos(a) * r,
+          y = e.y + Math.sin(a) * r;
+        g.fillStyle(c, 0.16);
+        polygon(g, x, y, boss ? 13 : 6, 4, a);
+        g.lineStyle(1, c, 0.42);
+        g.lineBetween(e.x, e.y, x, y);
+      }
+      g.fillStyle(c, 0.9);
+      g.fillCircle(e.x, e.y - 5, boss ? 6 : 3);
+    } else if (e.kind === 'forgemaster') {
+      polygon(g, e.x, e.y, e.radius, 6, Math.PI / 6);
+      g.fillStyle(0x50362a, 0.9);
+      g.fillRect(e.x - 32, e.y - 22, 64, 26);
+      g.strokeRect(e.x - 32, e.y - 22, 64, 26);
+      g.fillStyle(c, 0.5);
+      g.fillRect(e.x - 14, e.y + 5, 28, 25);
+      for (let i = -1; i <= 1; i++) {
+        g.lineStyle(4, c, 0.9);
+        g.lineBetween(e.x + i * 18, e.y - 15, e.x + i * 18, e.y + 14);
+      }
+      g.fillStyle(0xffe4a8, 0.85);
+      g.fillCircle(e.x, e.y, 7);
     } else {
       polygon(
         g,
@@ -180,6 +222,10 @@ export function drawActors(
           a,
         );
       }
+    }
+    if (e.shield > 0) {
+      g.lineStyle(2, 0xa9e2d4, 0.65);
+      g.strokeCircle(e.x, e.y, e.radius + 6);
     }
     if (e.elite) {
       g.lineStyle(1, 0xeaffad, 0.7);
@@ -269,6 +315,25 @@ export function drawActors(
     }
   }
   const p = w.player;
+  w.forms
+    .filter((f) => f !== w.weapon)
+    .forEach((f, i) => {
+      const a = t * 0.6 + i * Math.PI,
+        x = p.x + Math.cos(a) * 42,
+        y = p.y + Math.sin(a) * 34;
+      const color =
+        f === 'cannon' ? 0xffbe91 : f === 'sword' ? 0xffe1a4 : 0x9cead9;
+      g.lineStyle(1, color, 0.65);
+      g.fillStyle(color, 0.2);
+      polygon(
+        g,
+        x,
+        y,
+        f === 'sword' ? 9 : 7,
+        f === 'cannon' ? 6 : 4,
+        f === 'sword' ? Math.PI / 4 : a,
+      );
+    });
   drawSwordArc(g, w);
   const c =
     p.dashTime > 0 ? 0xe4ffde : w.cards.length ? w.stats.primary : 0x83efdb;

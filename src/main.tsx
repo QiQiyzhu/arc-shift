@@ -3,6 +3,7 @@ import { createRoot } from 'react-dom/client';
 import App from '../app/page';
 import '../app/globals.css';
 import '../app/expedition.css';
+import '../app/pilgrimage.css';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';

@@ -18,6 +18,9 @@ import {
 } from '../economy/catalog';
 import { grant, updatePickups } from '../economy/loot';
 import { updateWeapon } from '../combat/weapons';
+import { expedition, availableNodes } from '../rooms/expedition';
+import { terrainFor, updateTerrain } from '../rooms/terrain';
+import { RELICS, LORE } from '../progression/catalog';
 export class Engine {
   world = new World();
   private settled = false;
@@ -37,11 +40,21 @@ export class Engine {
     this.world.seed = seed;
     this.world.rng = new Random(seed);
     this.world.weapon = this.save.meta.weapon;
+    this.world.campaign = 'pilgrimage';
+    this.world.forms = [this.world.weapon];
+    this.world.relics =
+      this.save.meta.equipped &&
+      this.save.meta.unlocked.includes(this.save.meta.equipped)
+        ? [this.save.meta.equipped]
+        : [];
     this.world.preparation = { ...this.save.meta.preparation };
     this.world.wallet = startingWallet(this.world.preparation);
     this.world.player.maxHp = this.world.player.hp =
       120 + this.world.preparation.vitality * 10;
-    this.world.room = makeRoom(1, 'combat', seed);
+    if (this.world.weapon === 'sword' && this.world.relics.includes('vow-edge'))
+      this.world.player.shield = 15;
+    this.world.room = expedition(seed)[0].room;
+    this.world.route = [this.world.room.nodeId!];
     this.world.phase = 'reward';
     this.world.rewardContext = 'start';
     this.world.rewards = rewardChoices([], seed, 0, true);
@@ -70,7 +83,7 @@ export class Engine {
     const w = this.world;
     if (w.cards.includes(id)) return;
     w.cards.push(id);
-    w.stats = deriveStats(w.cards, w.level);
+    w.stats = deriveStats(w.cards, w.level, w.relics);
     if (id === 'ice-shell') {
       w.player.maxHp += 40;
       w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
@@ -82,6 +95,11 @@ export class Engine {
     if (this.practice) return;
     const w = this.world;
     this.save.checkpoint = {
+      campaign: w.campaign,
+      route: [...w.route],
+      forms: [...w.forms],
+      relics: [...w.relics],
+      eventDone: w.eventDone,
       weapon: w.weapon,
       preparation: { ...w.preparation },
       wallet: { ...w.wallet },
@@ -89,7 +107,13 @@ export class Engine {
       rerolls: w.rerolls,
       banked: w.banked,
       progress:
-        w.phase === 'reward' ? 'reward' : w.phase === 'map' ? 'map' : 'entry',
+        w.phase === 'reward'
+          ? 'reward'
+          : w.phase === 'map'
+            ? 'map'
+            : w.phase === 'event'
+              ? 'event'
+              : 'entry',
       seed: w.seed,
       room: w.room,
       cards: [...w.cards],
@@ -123,6 +147,11 @@ export class Engine {
       totalDamage: c.totalDamage,
       damageTaken: c.damageTaken,
       weapon: weaponId(c.weapon),
+      campaign: c.campaign || 'legacy',
+      route: [...(c.route || [])],
+      forms: [...(c.forms || [weaponId(c.weapon)])],
+      relics: [...(c.relics || [])],
+      eventDone: c.eventDone || false,
       preparation: {
         ...(c.preparation || { vitality: 0, flask: 0, stipend: 0 }),
       },
@@ -132,13 +161,18 @@ export class Engine {
       banked: c.banked || 0,
     });
     w.rng = new Random(c.seed + c.room.index * 1129);
-    w.stats = deriveStats(w.cards, w.level);
+    w.stats = deriveStats(w.cards, w.level, w.relics);
     w.player.maxHp =
       120 + w.preparation.vitality * 10 + (w.has('ice-shell') ? 40 : 0);
     w.player.hp = Math.min(w.player.maxHp, c.hp);
     w.player.shield = c.shield || 0;
-    if (c.progress === 'map' || c.progress === 'reward') {
+    if (
+      c.progress === 'map' ||
+      c.progress === 'reward' ||
+      c.progress === 'event'
+    ) {
       w.room = c.room;
+      w.terrain = terrainFor(w.room);
       w.phase = c.progress;
       w.rewardContext = 'clear';
       w.rewards = rewardChoices(
@@ -148,12 +182,26 @@ export class Engine {
         false,
         w.room.kind === 'elite',
       );
-    } else this.enter(c.room);
+    } else this.enter(c.room, true);
     return true;
   }
-  enter(room: Room) {
+  enter(room: Room, resuming = false) {
     const w = this.world;
     w.room = room;
+    w.terrain = terrainFor(room);
+    w.terrainTick = 0;
+    w.fieldBuff = false;
+    w.eventDone = false;
+    w.challengeTime = 0;
+    w.supportCd = { arc: 0, sword: 0, cannon: 0 };
+    if (w.campaign === 'pilgrimage' && !this.practice)
+      this.remember(
+        room.biome === 'grove'
+          ? 'grove'
+          : room.biome === 'foundry'
+            ? 'foundry'
+            : 'threshold',
+      );
     w.roomTime = 0;
     w.wave = 0;
     w.spawnTimer = 1.1;
@@ -171,7 +219,9 @@ export class Engine {
     w.roomCoinDrops = 0;
     w.echo = { x: 0, y: 0, time: 0, shots: 0 };
     w.companionCd = 0;
-    w.rng = new Random(w.seed + room.index * 1129);
+    w.rng = new Random(
+      (w.campaign === 'pilgrimage' ? room.seed : w.seed) + room.index * 1129,
+    );
     Object.assign(w.player, {
       x: 640,
       y: 440,
@@ -185,9 +235,26 @@ export class Engine {
       shotCd: 0,
     });
     w.phase = room.kind === 'boss' ? 'bossIntro' : 'transition';
+    if (
+      w.campaign === 'pilgrimage' &&
+      ['heal', 'treasure', 'event', 'shop', 'forge', 'archive'].includes(
+        room.kind,
+      )
+    )
+      w.phase = 'event';
     w.transitionTimer = room.kind === 'boss' ? 2.8 : 1.3;
     if (room.kind === 'boss')
-      w.spawn(room.index === 4 ? 'warden' : 'oracle', 640, 270);
+      w.spawn(
+        room.bossKind || (room.index === 4 ? 'warden' : 'oracle'),
+        640,
+        270,
+      );
+    if (
+      !resuming &&
+      w.relics.includes('kiln-heart') &&
+      ['combat', 'elite', 'challenge', 'boss'].includes(room.kind)
+    )
+      w.player.shield = Math.min(30, w.player.shield + 10);
     w.emit('room', 640, 350);
     this.checkpoint();
   }
@@ -216,6 +283,11 @@ export class Engine {
     w.roomTime += dt;
     updatePlayer(w, input, dt);
     updateWeapon(w, dt);
+    updateTerrain(w, dt);
+    if (w.player.hp <= 0) {
+      this.finish();
+      return;
+    }
     updateEnemies(w, dt);
     if (w.player.hp > 0) updateProjectiles(w, dt);
     if (w.player.hp > 0) updateHazards(w, dt);
@@ -229,17 +301,37 @@ export class Engine {
       return;
     }
     w.spawnTimer -= dt;
-    const maxWaves = this.practice ? Infinity : roomWaveCount(w.room.index);
+    const maxWaves = this.practice
+      ? Infinity
+      : w.room.kind === 'challenge'
+        ? 5
+        : w.campaign === 'pilgrimage'
+          ? w.room.kind === 'elite'
+            ? 4
+            : 3
+          : roomWaveCount(w.room.index);
+    if (w.room.kind === 'challenge') {
+      if (Math.hypot(w.player.x - 640, w.player.y - 365) < 100)
+        w.challengeTime += dt;
+      if (w.challengeTime >= 18) {
+        this.clear();
+        return;
+      }
+    }
     if (
       w.wave < maxWaves &&
       w.spawnTimer <= 0 &&
-      (!this.practice || w.enemies.length < 22)
+      (!(this.practice || w.room.kind === 'challenge') || w.enemies.length < 22)
     ) {
       this.spawnWave();
       w.wave++;
       w.spawnTimer = 9;
     }
-    if (w.wave >= maxWaves && w.enemies.length === 0) {
+    if (
+      w.room.kind !== 'challenge' &&
+      w.wave >= maxWaves &&
+      w.enemies.length === 0
+    ) {
       w.clearTimer += dt;
       if (w.clearTimer > 0.7) this.clear();
     }
@@ -249,7 +341,17 @@ export class Engine {
     const kinds: EnemyKind[] = ['hunter', 'sentry', 'lancer'];
     if (w.room.index >= 3) kinds.push('weaver');
     if (w.room.index >= 5) kinds.push('conduit');
-    const count = 4 + w.room.index + (w.room.kind === 'elite' ? 3 : 0);
+    if (w.campaign === 'pilgrimage') {
+      if (w.room.biome === 'grove') kinds.push('cantor', 'shade');
+      if (w.room.biome === 'foundry') kinds.push('bomber', 'shade');
+      if (w.room.kind === 'challenge') kinds.push('bomber');
+    }
+    const count =
+      4 +
+      (w.campaign === 'pilgrimage'
+        ? Math.ceil(w.room.index / 2)
+        : w.room.index) +
+      (w.room.kind === 'elite' ? 3 : 0);
     for (let i = 0; i < count; i++) {
       const angle = w.rng.next() * Math.PI * 2;
       let x = 640 + Math.cos(angle) * 480,
@@ -269,15 +371,40 @@ export class Engine {
     w.bombs = [];
     w.swing = null;
     updatePickups(w, 0, true);
+    if (!this.practice) {
+      for (const kind of w.encountered)
+        if (!this.save.meta.enemies.includes(kind))
+          this.save.meta.enemies.push(kind);
+      if (w.room.kind === 'boss') {
+        const boss =
+          w.room.bossKind || (w.room.index === 4 ? 'warden' : 'oracle');
+        if (!this.save.meta.bosses.includes(boss))
+          this.save.meta.bosses.push(boss);
+        this.remember(boss);
+      }
+    }
+    w.enemies = [];
     grant(w, 'coins', w.room.kind === 'treasure' ? 16 : 4);
     grant(
       w,
       'shards',
-      w.room.kind === 'elite' ? 3 : w.room.kind === 'boss' ? 4 : 1,
+      w.room.kind === 'challenge'
+        ? 5
+        : w.room.kind === 'elite'
+          ? 3
+          : w.room.kind === 'boss'
+            ? 4
+            : 1,
     );
     if (w.room.kind === 'treasure') grant(w, 'keys', 1);
-    w.player.hp = Math.min(w.player.maxHp, w.player.hp + 12);
-    w.phase = w.room.index === 8 ? 'victory' : 'reward';
+    w.player.hp = Math.min(
+      w.player.maxHp,
+      w.player.hp + 12 + (w.relics.includes('choir-vial') ? 8 : 0),
+    );
+    w.phase =
+      w.room.index === (w.campaign === 'pilgrimage' ? 12 : 8)
+        ? 'victory'
+        : 'reward';
     w.rewardContext = 'clear';
     w.rewards = rewardChoices(
       w.cards,
@@ -334,6 +461,121 @@ export class Engine {
     this.persist();
     return true;
   }
+  remember(id: string) {
+    if (
+      !this.practice &&
+      LORE.some((l) => l.id === id) &&
+      !this.save.meta.lore.includes(id)
+    )
+      this.save.meta.lore.push(id);
+  }
+  travel(id: string) {
+    const w = this.world;
+    if (w.phase !== 'map' || w.campaign !== 'pilgrimage' || this.practice)
+      return false;
+    const node = availableNodes(w.seed, w.room.nodeId || '').find(
+      (n) => n.id === id,
+    );
+    if (!node) return false;
+    w.route.push(node.id);
+    this.enter(node.room);
+    return true;
+  }
+  unlockRelic(id: string) {
+    const item = RELICS.find((r) => r.id === id),
+      m = this.save.meta;
+    if (
+      this.world.phase !== 'menu' ||
+      !item ||
+      m.unlocked.includes(id) ||
+      m.shards < item.cost ||
+      (item.boss && !m.bosses.includes(item.boss))
+    )
+      return false;
+    m.shards -= item.cost;
+    m.unlocked.push(id);
+    this.persist();
+    return true;
+  }
+  equipRelic(id: string | null) {
+    if (
+      this.world.phase !== 'menu' ||
+      (id !== null && !this.save.meta.unlocked.includes(id))
+    )
+      return false;
+    this.save.meta.equipped = id;
+    this.persist();
+    return true;
+  }
+  addForm(form: string) {
+    const w = this.world;
+    if (
+      !['arc', 'sword', 'cannon'].includes(form) ||
+      w.forms.includes(weaponId(form))
+    )
+      return false;
+    w.forms.push(weaponId(form));
+    this.remember(w.forms.length === 3 ? 'triad' : 'forge');
+    if (form === 'sword' && w.relics.includes('vow-edge'))
+      w.player.shield = Math.min(30, w.player.shield + 15);
+    return true;
+  }
+  resolveEvent(choice: string) {
+    const w = this.world;
+    if (w.phase !== 'event' || w.eventDone || this.practice) return false;
+    const kind = w.room.kind;
+    let reward = false;
+    if (
+      choice.startsWith('form:') &&
+      (kind === 'forge' || kind === 'treasure')
+    ) {
+      const cost =
+        kind === 'treasure' || (w.room.index <= 3 && w.forms.length === 1)
+          ? 0
+          : 18;
+      if (w.wallet.coins < cost || !this.addForm(choice.slice(5))) return false;
+      w.wallet.coins -= cost;
+    } else if (choice === 'rest' && kind === 'heal')
+      w.player.hp = Math.min(w.player.maxHp, w.player.hp + 55);
+    else if (choice === 'bottle' && kind === 'heal' && w.wallet.tonics < 3)
+      grant(w, 'tonics', 1);
+    else if (choice === 'salvage' && kind === 'treasure') {
+      grant(w, 'coins', 20);
+      grant(w, 'shards', 3);
+    } else if (choice === 'read' && kind === 'archive') {
+      this.remember('archive');
+      grant(w, 'shards', 4);
+      reward = true;
+    } else if (choice === 'blood' && kind === 'event' && w.player.hp > 30) {
+      w.player.hp -= 30;
+      grant(w, 'coins', 24);
+      grant(w, 'shards', 3);
+      this.remember('blood');
+    } else if (choice === 'bell' && kind === 'event' && w.wallet.coins >= 10) {
+      w.wallet.coins -= 10;
+      reward = true;
+      this.remember('bell');
+    } else if (choice === 'repair' && kind === 'forge')
+      w.player.hp = Math.min(w.player.maxHp, w.player.hp + 25);
+    else if (choice.startsWith('relic:') && kind === 'forge') {
+      const id = choice.slice(6);
+      if (
+        !this.save.meta.unlocked.includes(id) ||
+        w.relics.includes(id) ||
+        w.wallet.coins < 25
+      )
+        return false;
+      w.wallet.coins -= 25;
+      w.relics.push(id);
+      w.stats = deriveStats(w.cards, w.level, w.relics);
+    } else if (choice !== 'leave') return false;
+    w.eventDone = true;
+    w.phase = reward ? 'reward' : 'map';
+    w.rewardContext = 'clear';
+    if (reward) w.rewards = rewardChoices(w.cards, w.seed, w.room.index);
+    this.checkpoint();
+    return true;
+  }
   upgradePreparation(id: keyof Preparation) {
     if (this.world.phase !== 'menu') return false;
     const item = WORKSHOP.find((x) => x.id === id);
@@ -351,8 +593,10 @@ export class Engine {
       item = SHOP.find((x) => x.id === id);
     if (
       this.practice ||
-      w.phase !== 'map' ||
-      ![2, 5, 7].includes(w.room.index) ||
+      !['map', 'event'].includes(w.phase) ||
+      !(w.campaign === 'pilgrimage'
+        ? w.room.kind === 'shop'
+        : [2, 5, 7].includes(w.room.index)) ||
       !item ||
       w.campUsed.includes(id) ||
       w.wallet.coins < item.cost
@@ -379,8 +623,10 @@ export class Engine {
       resource = method === 'key' ? 'keys' : 'bombs';
     if (
       this.practice ||
-      w.phase !== 'map' ||
-      ![1, 3, 6].includes(w.room.index) ||
+      !['map', 'event'].includes(w.phase) ||
+      !(w.campaign === 'pilgrimage'
+        ? w.room.kind === 'treasure'
+        : [1, 3, 6].includes(w.room.index)) ||
       w.campUsed.includes('chest') ||
       w.wallet[resource] < 1
     )
@@ -409,7 +655,7 @@ export class Engine {
     if (
       this.practice ||
       w.phase !== 'map' ||
-      ![3, 6].includes(w.room.index) ||
+      !(w.campaign === 'legacy' && [3, 6].includes(w.room.index)) ||
       w.campUsed.includes('altar') ||
       w.player.hp <= 30
     )
@@ -426,8 +672,10 @@ export class Engine {
     const w = this.world;
     if (
       this.practice ||
-      w.phase !== 'map' ||
-      ![2, 4, 7].includes(w.room.index) ||
+      !['map', 'event'].includes(w.phase) ||
+      !(w.campaign === 'pilgrimage'
+        ? ['shop', 'heal', 'boss'].includes(w.room.kind)
+        : [2, 4, 7].includes(w.room.index)) ||
       w.campUsed.includes('bank') ||
       w.wallet.shards === 0 ||
       w.wallet.coins < 8
@@ -466,7 +714,11 @@ export class Engine {
     this.checkpoint();
     return true;
   }
-  startPractice(cards: readonly string[], weapon = this.save.meta.weapon) {
+  startPractice(
+    cards: readonly string[],
+    weapon = this.save.meta.weapon,
+    hybrid = false,
+  ) {
     this.practice = true;
     this.settled = false;
     const bus = this.world.bus;
@@ -475,6 +727,12 @@ export class Engine {
     w.bus = bus;
     w.seed = 20260909;
     w.weapon = weapon;
+    w.forms = hybrid
+      ? [
+          weapon,
+          ...(['arc', 'sword', 'cannon'] as const).filter((f) => f !== weapon),
+        ]
+      : [weapon];
     w.cards = [...cards];
     w.level = 4;
     w.stats = deriveStats(w.cards, w.level);

@@ -120,6 +120,7 @@ test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save 
 }) => {
   await page.goto('/?qa');
   await page.screenshot({ path: `${dir}/round2-menu-1440.png` });
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '协议档案', exact: true }).click();
   await expect(page.getByRole('dialog')).toBeVisible();
   for (const name of ['火焰', '雷电', '冰霜', '虚空', '跃迁']) {
@@ -148,9 +149,9 @@ test('round 2: menu, draft, 40-card library, settings, route, elite, heal, save 
   await page.waitForTimeout(200);
   expect((await snapshot(page)).time).toBe(frozen.time);
   await page.locator('.draft-cards .protocol-card').first().click();
-  await expect(page.locator('.map-panel')).toBeVisible();
+  await expect(page.locator('.pilgrimage-map')).toBeVisible();
   await page.screenshot({ path: `${dir}/round2-map-1440.png` });
-  await page.locator('.route-card').first().click();
+  await page.getByRole('button',{name:'前往此处',exact:true}).click();
   await expect.poll(async () => (await snapshot(page)).room).toBe(2);
   await page.reload();
   await page.getByRole('button', { name: /继续行动/ }).click();

@@ -9,7 +9,15 @@ import {
   type Preparation,
 } from '../economy/catalog';
 import type { WeaponId } from '../game/types';
+import { expedition } from '../rooms/expedition';
+import { RELICS, LORE, BOSSES } from '../progression/catalog';
+import { ENEMIES } from '../data/enemies';
 export interface Checkpoint {
+  campaign?: 'legacy' | 'pilgrimage';
+  route?: string[];
+  forms?: WeaponId[];
+  relics?: string[];
+  eventDone?: boolean;
   weapon?: WeaponId;
   preparation?: Preparation;
   wallet?: Wallet;
@@ -17,7 +25,7 @@ export interface Checkpoint {
   rerolls?: number;
   banked?: number;
   shield?: number;
-  progress?: 'entry' | 'reward' | 'map';
+  progress?: 'entry' | 'reward' | 'map' | 'event';
   seed: number;
   room: Room;
   cards: string[];
@@ -42,6 +50,11 @@ export interface SaveData {
     shards: number;
     preparation: Preparation;
     weapon: WeaponId;
+    unlocked: string[];
+    equipped: string | null;
+    bosses: string[];
+    lore: string[];
+    enemies: string[];
   };
   checkpoint: Checkpoint | null;
 }
@@ -58,11 +71,24 @@ export const blankSave = (): SaveData => ({
     shards: 0,
     preparation: normalizePreparation(null),
     weapon: 'arc',
+    unlocked: [],
+    equipped: null,
+    bosses: [],
+    lore: [],
+    enemies: [],
   },
   checkpoint: null,
 });
 const finite = (v: unknown, defaultValue = 0) =>
   typeof v === 'number' && Number.isFinite(v) ? v : defaultValue;
+const known = (value: unknown, ids: readonly string[]) =>
+  Array.isArray(value)
+    ? [
+        ...new Set<string>(
+          value.filter((x) => typeof x === 'string' && ids.includes(x)),
+        ),
+      ]
+    : [];
 export function parseSave(raw: string | null): SaveData {
   const fallback = blankSave();
   if (!raw) return fallback;
@@ -79,12 +105,34 @@ export function parseSave(raw: string | null): SaveData {
     settings.reducedMotion = v.settings.reducedMotion === true;
     const ids = new Set(CARDS.map((c) => c.id));
     const meta = {
+      unlocked: known(
+        v.meta.unlocked,
+        RELICS.map((r) => r.id),
+      ),
+      equipped:
+        typeof v.meta.equipped === 'string' &&
+        known(
+          v.meta.unlocked,
+          RELICS.map((r) => r.id),
+        ).includes(v.meta.equipped)
+          ? v.meta.equipped
+          : null,
+      bosses: Array.isArray(v.meta.bosses)
+        ? known(v.meta.bosses, BOSSES)
+        : v.meta.wins > 0
+          ? ['warden', 'oracle']
+          : [],
+      lore: known(
+        v.meta.lore,
+        LORE.map((l) => l.id),
+      ),
+      enemies: known(v.meta.enemies, Object.keys(ENEMIES)),
       shards: Math.max(0, Math.min(99999, Math.floor(finite(v.meta.shards)))),
       preparation: normalizePreparation(v.meta.preparation),
       weapon: weaponId(v.meta.weapon),
       runs: Math.max(0, finite(v.meta.runs)),
       wins: Math.max(0, finite(v.meta.wins)),
-      bestRoom: Math.max(0, Math.min(8, finite(v.meta.bestRoom))),
+      bestRoom: Math.max(0, Math.min(12, finite(v.meta.bestRoom))),
       bestTime: Math.max(0, finite(v.meta.bestTime)),
       totalKills: Math.max(0, finite(v.meta.totalKills)),
       discovered: Array.isArray(v.meta.discovered)
@@ -101,14 +149,41 @@ export function parseSave(raw: string | null): SaveData {
       c.room &&
       Number.isInteger(c.room.index) &&
       c.room.index >= 1 &&
-      c.room.index <= 8 &&
-      ['combat', 'elite', 'treasure', 'heal', 'boss'].includes(c.room.kind) &&
+      c.room.index <= (c.campaign === 'pilgrimage' ? 12 : 8) &&
+      [
+        'combat',
+        'elite',
+        'treasure',
+        'heal',
+        'boss',
+        'event',
+        'shop',
+        'forge',
+        'archive',
+        'challenge',
+      ].includes(c.room.kind) &&
       Array.isArray(c.cards) &&
       c.cards.every((id: unknown) => typeof id === 'string' && ids.has(id)) &&
       typeof c.hp === 'number' &&
       c.hp > 0
     ) {
       cp = {
+        campaign: c.campaign === 'pilgrimage' ? 'pilgrimage' : 'legacy',
+        route: known(
+          c.route,
+          expedition(c.seed).map((n) => n.id),
+        ),
+        forms: [
+          ...new Set([
+            weaponId(c.weapon),
+            ...known(c.forms, ['arc', 'sword', 'cannon']),
+          ]),
+        ] as WeaponId[],
+        relics: known(
+          c.relics,
+          RELICS.map((r) => r.id),
+        ),
+        eventDone: c.eventDone === true,
         weapon: weaponId(c.weapon),
         preparation: normalizePreparation(c.preparation),
         wallet: normalizeWallet(c.wallet),
@@ -134,7 +209,9 @@ export function parseSave(raw: string | null): SaveData {
         rerolls: Math.max(0, Math.min(3, Math.floor(finite(c.rerolls)))),
         banked: Math.max(0, Math.min(9999, Math.floor(finite(c.banked)))),
         progress:
-          c.progress === 'reward' || c.progress === 'map'
+          c.progress === 'reward' ||
+          c.progress === 'map' ||
+          c.progress === 'event'
             ? c.progress
             : 'entry',
         seed: c.seed,
@@ -149,6 +226,33 @@ export function parseSave(raw: string | null): SaveData {
         totalDamage: Math.max(0, finite(c.totalDamage)),
         damageTaken: Math.max(0, finite(c.damageTaken)),
       };
+      if (cp.campaign === 'pilgrimage') {
+        const graph = expedition(cp.seed),
+          canonical = graph.find((n) => n.id === c.room.nodeId),
+          route = cp.route || [];
+        const support =
+          canonical &&
+          ['heal', 'treasure', 'event', 'shop', 'forge', 'archive'].includes(
+            canonical.room.kind,
+          );
+        const validRoute =
+          route[0] === graph[0].id &&
+          route.at(-1) === canonical?.id &&
+          route.every(
+            (id, i) =>
+              i === 0 ||
+              graph.find((n) => n.id === route[i - 1])?.next.includes(id),
+          );
+        if (
+          !canonical ||
+          c.room.index !== canonical.depth ||
+          !validRoute ||
+          (cp.progress === 'event' && (!support || cp.eventDone)) ||
+          (support && cp.progress !== 'event' && !cp.eventDone)
+        )
+          cp = null;
+        else cp.room = canonical.room;
+      }
     }
     return { version: 1, settings, meta, checkpoint: cp };
   } catch {

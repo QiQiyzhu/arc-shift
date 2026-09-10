@@ -13,19 +13,27 @@ import { CARDS, ELEMENTS } from '../cards/catalog';
 import { SYNERGIES, TRIAL_BUILDS } from '../cards/synergies';
 import { CardView } from './ProtocolPanels';
 import type { Element } from '../game/types';
+import {
+  RelicCollection,
+  EnemyCollection,
+  MemoryCollection,
+} from './PilgrimagePanels';
 import { WeaponPicker, Workshop } from './EconomyPanels';
 export function UtilityPanel({
-  mode,
+  mode: requestedMode,
   onClose,
   engine,
   synth,
 }: {
-  mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop' | null;
+  mode: 'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp' | null;
   onClose: () => void;
   engine: Engine;
   synth: Synth;
 }) {
   const [, render] = useState(0);
+  const [campTab, setCampTab] = useState('workshop');
+  const [hybrid, setHybrid] = useState(false);
+  const mode = requestedMode === 'camp' ? campTab : requestedMode;
   const [filter, setFilter] = useState<Element>('fire');
   const [trialWeapon, setTrialWeapon] = useState(
     engine.practice ? engine.world.weapon : engine.save.meta.weapon,
@@ -38,41 +46,103 @@ export function UtilityPanel({
   };
   return (
     <Dialog
-      open={mode !== null}
+      open={requestedMode !== null}
       onOpenChange={(open) => {
         if (!open) onClose();
       }}
     >
       <DialogContent
-        className={`utility-dialog ${mode === 'library' || mode === 'lab' || mode === 'workshop' ? 'library-dialog' : ''}`}
+        className={`utility-dialog ${mode !== 'settings' && mode !== 'help' ? 'library-dialog' : ''}`}
       >
         <DialogTitle>
-          {mode === 'workshop'
-            ? '行者营地'
-            : mode === 'lab'
-              ? '协议试炼'
-              : mode === 'settings'
-                ? '系统设置'
-                : mode === 'library'
-                  ? '协议档案'
-                  : '行动指南'}
+          {mode === 'relics'
+            ? '遗器陈列'
+            : mode === 'codex'
+              ? '异常图鉴'
+              : mode === 'lore'
+                ? '记忆残片'
+                : mode === 'workshop'
+                  ? '行者营地'
+                  : mode === 'lab'
+                    ? '协议试炼'
+                    : mode === 'settings'
+                      ? '系统设置'
+                      : mode === 'library'
+                        ? '协议档案'
+                        : '行动指南'}
         </DialogTitle>
         <DialogDescription>
-          {mode === 'workshop'
-            ? '将带回的碎片刻入行装。武装免费选择，准备升级只影响新行动。'
-            : mode === 'lab'
-              ? '选择一套组合，立即感受叠加后的弹道。无敌试炼，不覆盖你的行动存档。'
-              : mode === 'settings'
-                ? '调整声音与战斗反馈。设置保存在当前设备。'
-                : mode === 'library'
-                  ? '40 项协议，5 种元素。弹体形态、轨迹与命中效果可以自由叠加。'
-                  : '观察预警，保留一次闪避，在敌人恢复时输出。'}
+          {mode === 'relics'
+            ? '以碎片唤醒旧物，部分遗器需要击破对应核心。'
+            : mode === 'lore'
+              ? '沿途拾得的只言片语。'
+              : mode === 'codex'
+                ? '记录实体的招式与留下的痕迹。'
+                : mode === 'workshop'
+                  ? '将带回的碎片刻入行装。武装免费选择，准备升级只影响新行动。'
+                  : mode === 'lab'
+                    ? '选择一套组合，立即感受叠加后的弹道。无敌试炼，不覆盖你的行动存档。'
+                    : mode === 'settings'
+                      ? '调整声音与战斗反馈。设置保存在当前设备。'
+                      : mode === 'library'
+                        ? '40 项协议，5 种元素。弹体形态、轨迹与命中效果可以自由叠加。'
+                        : '观察预警，保留一次闪避，在敌人恢复时输出。'}
         </DialogDescription>
-        {mode === 'workshop' ? (
-          <Workshop engine={engine} refresh={() => render((n) => n + 1)} />
+        {requestedMode === 'camp' && (
+          <nav className="camp-tabs" aria-label="营地分类">
+            {[
+              ['workshop', '行装养成'],
+              ['relics', '遗器'],
+              ['library', '协议档案'],
+              ['codex', '异常图鉴'],
+              ['lore', '记忆残片'],
+              ['lab', '协议试炼'],
+              ['help', '操作指南'],
+            ].map(([id, label]) => (
+              <button
+                key={id}
+                className={mode === id ? 'active' : ''}
+                onClick={() => setCampTab(id)}
+              >
+                {label}
+              </button>
+            ))}
+          </nav>
+        )}
+        {mode === 'relics' ? (
+          <RelicCollection
+            engine={engine}
+            refresh={() => render((n) => n + 1)}
+          />
+        ) : mode === 'codex' ? (
+          <EnemyCollection engine={engine} />
+        ) : mode === 'lore' ? (
+          <MemoryCollection engine={engine} />
+        ) : mode === 'workshop' ? (
+          <>
+            <WeaponPicker
+              value={engine.save.meta.weapon}
+              onChange={(id) => {
+                engine.selectWeapon(id);
+                setTrialWeapon(id);
+                render((n) => n + 1);
+              }}
+            />
+            <Workshop engine={engine} refresh={() => render((n) => n + 1)} />
+          </>
         ) : mode === 'lab' ? (
           <>
             <WeaponPicker value={trialWeapon} onChange={setTrialWeapon} />
+            <div className="switch-row">
+              <label htmlFor="hybrid-trial">
+                三重共鸣 · 同时试用法器、圣剑与重炮
+              </label>
+              <Switch
+                id="hybrid-trial"
+                checked={hybrid}
+                onCheckedChange={setHybrid}
+              />
+            </div>
             <p className="weapon-trial-note">
               圣剑的元素作用于剑弧，弹道协议增加次生剑气；重炮的弹道与爆破可叠加。试炼不影响资源和营地。
             </p>
@@ -83,7 +153,7 @@ export function UtilityPanel({
                   className={`trial-card trial-${i}`}
                   onClick={() => {
                     synth.unlock();
-                    engine.startPractice(b.cards, trialWeapon);
+                    engine.startPractice(b.cards, trialWeapon, hybrid);
                     onClose();
                   }}
                 >
@@ -227,7 +297,7 @@ export function UtilityPanel({
             <div className="help-details">
               <p>
                 <b>三种武装</b> ·
-                主菜单选择法器、圣剑或重炮。圣剑前摇后挥砍，可斩掉前方敌弹；不能斩除激光。弹道卡增加符文剑气，元素卡强化剑弧。
+                营地选择初始法器、圣剑或重炮。局内工坊与武库可熔接其他武装，按住攻击自动轮替副武装。圣剑＋法器的第三斩发出扇形剑气；圣剑＋重炮产生爆破剑弧；重炮＋法器追加弹片。圣剑前摇后挥砍，可斩掉前方敌弹；不能斩除激光。弹道卡增加符文剑气，元素卡强化剑弧。
               </p>
               <p>
                 <b>消耗品</b> · B 在准星方向投放炸弹，0.8
@@ -255,8 +325,10 @@ export function UtilityPanel({
                 在瞄准方向投放引力场，牵引普通敌人并持续造成伤害。冷却 10 秒。
               </p>
               <p>
-                <b>完整行动</b> · 战斗 → 三选一协议 → 路径选择。第 4 和第 8
-                区域是核心 Boss；失败后可开始新行动。
+                <b>完整行动</b> · 全图预览 → 沿连线选择节点 → 战斗或遭遇。第
+                4、8、12 层为核心。中央祝祷符阵加速
+                Q/E；红色陷阱周期触发；实体墙体会阻挡移动、闪避和子弹。守点需在中央半径
+                100 内累计驻守 18 秒。
               </p>
               <p>
                 <b>进度保存</b> ·

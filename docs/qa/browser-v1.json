@@ -1,0 +1,145 @@
+{
+  "version": "1.0.0",
+  "stats": {
+    "startTime": "2026-09-10T03:40:38.495Z",
+    "duration": 234267.679,
+    "expected": 22,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  },
+  "tests": [
+    {
+      "file": "expedition.spec.ts",
+      "title": "holy sword, actual consumable keys, pause-frozen bomb and weapon continuation",
+      "status": "expected",
+      "durationMs": 8206
+    },
+    {
+      "file": "expedition.spec.ts",
+      "title": "camp choices, reroll, stock, bank and workshop persist through real page reloads",
+      "status": "expected",
+      "durationMs": 10932
+    },
+    {
+      "file": "expedition.spec.ts",
+      "title": "trial inherits equipped weapon, switches to cannon and leaves the real save untouched",
+      "status": "expected",
+      "durationMs": 6320
+    },
+    {
+      "file": "game.spec.ts",
+      "title": "settings and window blur freeze introductions; Escape only dismisses the dialog",
+      "status": "expected",
+      "durationMs": 15494
+    },
+    {
+      "file": "game.spec.ts",
+      "title": "round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio",
+      "status": "expected",
+      "durationMs": 6867
+    },
+    {
+      "file": "game.spec.ts",
+      "title": "round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume",
+      "status": "expected",
+      "durationMs": 12198
+    },
+    {
+      "file": "game.spec.ts",
+      "title": "round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080",
+      "status": "expected",
+      "durationMs": 18110
+    },
+    {
+      "file": "game.spec.ts",
+      "title": "mobile loads with controls guidance and no horizontal overflow",
+      "status": "expected",
+      "durationMs": 1238
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "ten-second baseline render sample with a crowded arena and active VFX",
+      "status": "expected",
+      "durationMs": 15655
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "ten-second resonance render sample with a crowded arena and active VFX",
+      "status": "expected",
+      "durationMs": 15519
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "ten-second sword render sample with a crowded arena and active VFX",
+      "status": "expected",
+      "durationMs": 15456
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "ten-second cannon render sample with a crowded arena and active VFX",
+      "status": "expected",
+      "durationMs": 15388
+    },
+    {
+      "file": "performance.spec.ts",
+      "title": "ten-second hybrid render sample with a crowded arena and active VFX",
+      "status": "expected",
+      "durationMs": 15506
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "clean menu groups loadout, bestiary and memories into a navigable camp",
+      "status": "expected",
+      "durationMs": 2911
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "full route previews locked nodes and travels legally into a free hybrid forge",
+      "status": "expected",
+      "durationMs": 3540
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "resting preserves access to banking and completed treasure keeps its key chest",
+      "status": "expected",
+      "durationMs": 2482
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "archive choice persists its lore and offered cards",
+      "status": "expected",
+      "durationMs": 2497
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "matron has its own arena, attacks and escalating score",
+      "status": "expected",
+      "durationMs": 9273
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "forgemaster has its own arena, attacks and escalating score",
+      "status": "expected",
+      "durationMs": 7287
+    },
+    {
+      "file": "pilgrimage.spec.ts",
+      "title": "three-form trial fires actual hybrid attacks and does not change the profile",
+      "status": "expected",
+      "durationMs": 5430
+    },
+    {
+      "file": "resonance.spec.ts",
+      "title": "six resonance trials render their real projectile forms and preserve an existing run",
+      "status": "expected",
+      "durationMs": 34644
+    },
+    {
+      "file": "resonance.spec.ts",
+      "title": "audio buses mute active voices, pause immediately, and survive context recreation",
+      "status": "expected",
+      "durationMs": 6536
+    }
+  ]
+}

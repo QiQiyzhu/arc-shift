@@ -1,0 +1,575 @@
+.menu-copy {
+  max-width: 610px;
+}
+.menu-copy h1 {
+  font-size: clamp(80px, 8.8vw, 134px);
+  line-height: 0.89;
+}
+.menu-copy .menu-description {
+  margin: 22px 0 26px;
+  font-size: 16px;
+  letter-spacing: 2px;
+}
+.menu-secondary {
+  margin-top: 24px;
+  gap: 26px;
+}
+.menu-secondary button {
+  font-size: 16px;
+}
+.edition-note {
+  margin-top: 25px;
+  color: #a4b4b0;
+}
+.scene-label {
+  opacity: 0.7;
+}
+.new-journey-button {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #49615b;
+  padding: 15px 22px;
+  width: 100%;
+  max-width: 382px;
+  margin-top: 12px;
+  color: #c8d6c5;
+}
+.continue-primary > span:last-child {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 14px;
+}
+.camp-tabs {
+  display: flex;
+  gap: 4px;
+  flex-wrap: wrap;
+  border-bottom: 1px solid #354b48;
+  padding-bottom: 13px;
+  margin: 5px 0 18px;
+}
+.camp-tabs button {
+  padding: 10px 14px;
+  font-size: 14px;
+  color: #a3b6b1;
+  border-bottom: 2px solid transparent;
+}
+.camp-tabs button.active {
+  color: #e7d3a6;
+  border-color: #dfc293;
+  background: #26312e;
+}
+.hybrid-hud {
+  position: absolute;
+  left: 3.5%;
+  bottom: 112px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  pointer-events: none;
+}
+.hybrid-hud > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 9px;
+  border: 1px solid #99b09b44;
+  background: #081116cf;
+  font-size: 12px;
+}
+.hybrid-hud svg {
+  width: 16px;
+  height: 16px;
+}
+.hybrid-hud small {
+  color: #e1c08b;
+}
+.hybrid-hud > b {
+  font-size: 12px;
+  color: #d9c394;
+}
+.field-buff {
+  position: absolute;
+  bottom: 155px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: #b8ead5;
+  background: #0b201cdd;
+  padding: 8px 14px;
+  font-size: 14px;
+  pointer-events: none;
+}
+.phase-map .hybrid-hud,
+.phase-event .hybrid-hud,
+.phase-reward .hybrid-hud {
+  display: none;
+}
+.pilgrimage-shade,
+.encounter-shade {
+  align-items: center;
+  overflow-y: auto;
+  background: #080f16ed;
+  backdrop-filter: blur(10px);
+  padding: 26px;
+}
+.pilgrimage-map {
+  width: min(1160px, 100%);
+  margin: auto;
+}
+.map-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 20px;
+}
+.pilgrimage-map h2,
+.encounter-panel h2 {
+  font-size: 36px;
+  font-weight: 500;
+  margin: 8px 0 9px;
+  letter-spacing: 3px;
+}
+.pilgrimage-map > p {
+  color: #acbdb7;
+  font-size: 15px;
+  margin: 0 0 17px;
+}
+.route-biomes {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  text-align: center;
+  margin-top: 18px;
+}
+.route-biomes span {
+  border-top: 1px solid #71817355;
+  padding-top: 12px;
+  font-size: 16px;
+  letter-spacing: 3px;
+}
+.route-biomes small {
+  display: block;
+  letter-spacing: 2px;
+  margin-top: 5px;
+  font-size: 12px;
+  opacity: 0.6;
+}
+.route-scroll {
+  overflow-x: auto;
+}
+.route-graph {
+  position: relative;
+  height: 285px;
+  min-width: 900px;
+}
+.route-graph > svg {
+  position: absolute;
+  width: 100%;
+  height: 285px;
+}
+.route-graph line {
+  stroke: #405453;
+  stroke-width: 1.4;
+  opacity: 0.42;
+}
+.route-graph line.visited {
+  stroke: #d2b982;
+  stroke-width: 2;
+  opacity: 0.7;
+}
+.route-graph line.reachable {
+  stroke: #c9dfb2;
+  stroke-width: 2;
+  opacity: 0.9;
+}
+.route-stop {
+  position: absolute;
+  transform: translate(-50%, -18px);
+  width: 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  z-index: 1;
+}
+.route-stop > i {
+  height: 36px;
+  width: 36px;
+  display: grid;
+  place-items: center;
+  background: #102025;
+  border: 1px solid #49605e;
+  border-radius: 50%;
+  font-style: normal;
+  color: #9dafac;
+}
+.route-stop.core > i {
+  border-radius: 3px;
+  border-color: #b59095;
+  color: #dfb4b3;
+}
+.route-stop > span {
+  font-size: 12px;
+  background: #0a1219;
+  padding: 2px 4px;
+  white-space: nowrap;
+  margin-top: 5px;
+  color: #9caeaa;
+}
+.route-stop > small {
+  font-family: 'Space Grotesk', sans-serif;
+  color: #6e8680;
+  font-size: 12px;
+}
+.route-stop.reachable > i {
+  border-color: #cee4b2;
+  color: #e6efc9;
+  box-shadow: 0 0 17px #c8ef9c18;
+}
+.route-stop.selected > i {
+  outline: 2px solid #e1c389;
+  outline-offset: 4px;
+}
+.route-stop.visited > i {
+  background: #33372c;
+  color: #d9c899;
+}
+.route-inspector {
+  border: 1px solid #b49c6555;
+  background: #1c2625;
+  display: flex;
+  align-items: center;
+  gap: 22px;
+  padding: 18px 24px;
+  color: #d3bc92;
+}
+.route-inspector > div {
+  flex: 1;
+}
+.route-inspector span,
+.route-inspector small {
+  font-size: 13px;
+  color: #a8b9ac;
+}
+.route-inspector h3 {
+  font-size: 21px;
+  margin: 5px 0;
+  color: #e4e9dc;
+}
+.route-inspector p {
+  font-size: 14px;
+  margin: 3px 0;
+  color: #b7c8bd;
+}
+.journey-button {
+  display: flex;
+  gap: 22px;
+  align-items: center;
+  background: #d5ddb7;
+  color: #18231d;
+  padding: 14px 20px;
+  font-size: 15px;
+  font-weight: 600;
+}
+.journey-button:disabled {
+  cursor: default;
+}
+.map-legend {
+  display: flex;
+  gap: 25px;
+  justify-content: center;
+  color: #8ea39b;
+  font-size: 12px;
+  margin: 18px 0 0;
+}
+.pilgrimage-map .camp-actions {
+  margin: 14px 0 0;
+}
+.pilgrimage-map .camp-heading,
+.pilgrimage-map .camp-message {
+  display: none;
+}
+.pilgrimage-map .camp-grid {
+  grid-template-columns: 1fr;
+}
+.pilgrimage-map .camp-bank {
+  display: grid;
+  grid-template-columns: 30px 130px 1fr auto;
+  gap: 14px;
+  align-items: center;
+  padding: 12px;
+}
+.pilgrimage-map .camp-bank h3,
+.pilgrimage-map .camp-bank p {
+  margin: 0;
+}
+.encounter-panel {
+  max-width: 860px;
+  width: 100%;
+  margin: auto;
+  padding: 24px 0;
+}
+.encounter-panel > .eyebrow {
+  font-size: 12px;
+  color: #cbb88c;
+}
+.fragment-quote {
+  font-size: 17px;
+  line-height: 1.9;
+  color: #c5cbbf;
+  max-width: 680px;
+  border-left: 2px solid #ad9575;
+  padding-left: 22px;
+  margin: 23px 0 25px;
+}
+.encounter-choices {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 12px;
+  margin: 24px 0 14px;
+}
+.encounter-choice {
+  display: grid;
+  grid-template-columns: 1fr 20px;
+  text-align: left;
+  gap: 10px;
+  padding: 20px;
+  background: #1a2829;
+  border: 1px solid #53615a;
+  color: #e1dbc4;
+}
+.encounter-choice b {
+  font-size: 18px;
+  font-weight: 500;
+}
+.encounter-choice span {
+  grid-row: 2;
+  font-size: 14px;
+  color: #9eb4ae;
+  line-height: 1.7;
+}
+.encounter-choice svg {
+  grid-column: 2;
+  grid-row: 1/3;
+  align-self: center;
+}
+.encounter-choice:hover:not(:disabled) {
+  background: #273932;
+  border-color: #d0bd8b;
+}
+.encounter-leave {
+  display: flex;
+  gap: 14px;
+  align-items: center;
+  margin: 25px 0 13px !important;
+  font-size: 16px;
+}
+.encounter-note {
+  font-size: 12px;
+  color: #90a69b;
+}
+.encounter-panel .camp-actions {
+  margin: 15px 0;
+}
+.encounter-panel .camp-heading > span {
+  display: none;
+}
+.archive-summary {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  color: #d4bb95;
+  font-size: 16px;
+  margin: 12px 0 24px;
+}
+.archive-summary span {
+  font-size: 14px;
+  color: #a4b8b1;
+}
+.relic-grid,
+.memory-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+.relic-grid article,
+.memory-grid article {
+  background: #152225;
+  border: 1px solid #344841;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.relic-grid article.equipped {
+  border-color: #d2bd86;
+  box-shadow: inset 0 3px #d2bd86;
+}
+.relic-grid small,
+.memory-grid small {
+  color: #9aaa9d;
+  font-size: 12px;
+}
+.relic-grid h3,
+.memory-grid h3 {
+  font-size: 20px;
+  margin: 0;
+  font-weight: 500;
+  color: #e0d5b6;
+}
+.relic-grid p,
+.memory-grid p {
+  font-size: 15px;
+  line-height: 1.8;
+  margin: 0;
+  color: #b7c9bf;
+}
+.relic-grid blockquote {
+  font-size: 14px;
+  line-height: 1.8;
+  margin: 7px 0 18px;
+  color: #9aaba2;
+  border-left: 1px solid #72694e;
+  padding-left: 13px;
+  flex: 1;
+}
+.relic-grid button {
+  padding: 11px;
+  border: 1px solid #a5a787;
+  color: #d6dbb7;
+  font-size: 14px;
+}
+.memory-grid article {
+  min-height: 195px;
+}
+.memory-grid .locked {
+  opacity: 0.58;
+}
+.memory-grid svg {
+  color: #cfb37e;
+}
+.utility-dialog .switch-row {
+  margin-bottom: 14px;
+}
+@media (max-width: 1000px) {
+  .pilgrimage-shade,
+  .encounter-shade {
+    padding: 22px;
+  }
+  .route-biomes small {
+    display: none;
+  }
+  .map-title {
+    align-items: start;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .map-title .wallet-bar {
+    margin: 0 0 12px;
+  }
+  .relic-grid,
+  .memory-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .route-inspector {
+    gap: 12px;
+    padding: 15px;
+  }
+  .map-legend {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .hybrid-hud {
+    bottom: 105px;
+  }
+  .pilgrimage-map .camp-bank {
+    display: block;
+  }
+  .pilgrimage-map .camp-bank > svg {
+    display: none;
+  }
+}
+@media (max-width: 600px) {
+  .pilgrimage-shade,
+  .encounter-shade {
+    padding: 18px;
+    display: block;
+  }
+  .route-inspector {
+    flex-wrap: wrap;
+  }
+  .route-inspector > svg {
+    display: none;
+  }
+  .route-inspector > div {
+    min-width: 180px;
+  }
+  .journey-button {
+    width: 100%;
+    justify-content: space-between;
+  }
+  .route-biomes span {
+    font-size: 13px;
+    letter-spacing: 0;
+  }
+  .encounter-choices,
+  .relic-grid,
+  .memory-grid {
+    grid-template-columns: 1fr;
+  }
+  .archive-summary {
+    flex-wrap: wrap;
+  }
+  .pilgrimage-map h2,
+  .encounter-panel h2 {
+    font-size: 29px;
+  }
+  .hybrid-hud {
+    display: none;
+  }
+  .menu-copy .menu-description {
+    font-size: 14px;
+  }
+  .camp-tabs {
+    gap: 0;
+  }
+  .camp-tabs button {
+    padding: 9px 10px;
+  }
+  .menu-secondary button {
+    font-size: 14px;
+  }
+  .route-scroll {
+    border: 1px solid #34494255;
+  }
+  .map-legend {
+    justify-content: start;
+  }
+  .fragment-quote {
+    font-size: 16px;
+  }
+  .encounter-panel {
+    padding: 0;
+  }
+}
+.phase-map .hud-top,
+.phase-map .hud-bottom,
+.phase-map .build-hud,
+.phase-event .hud-top,
+.phase-event .hud-bottom,
+.phase-event .build-hud {
+  visibility: hidden;
+}
+.game-shell:not(.phase-menu) .mobile-notice {
+  display: none;
+}
+.pilgrimage-shade,
+.encounter-shade {
+  display: flex;
+  flex-direction: column;
+  background: #091219f7;
+}
+.pilgrimage-map,
+.encounter-panel {
+  flex-shrink: 0;
+}

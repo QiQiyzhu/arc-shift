@@ -159,7 +159,7 @@ it('all trial builds and maximal modifier stacks remain finite and bounded', () 
   }
 });
 it('music has a stable beat grid, repeatable phrases and bounded step voices', () => {
-  expect(STEP_SECONDS).toBeCloseTo(0.13392857);
+  expect(STEP_SECONDS).toBeCloseTo(60 / 88 / 4);
   expect(scoreStep(0, 1)).toEqual(scoreStep(64, 1));
   for (let i = 0; i < 64; i++)
     expect(scoreStep(i, 3).length).toBeLessThanOrEqual(5);

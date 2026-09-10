@@ -16,7 +16,13 @@ interface RenderSample {
   viewport: number[];
   reactionCount: number;
 }
-for (const fixture of ['baseline', 'resonance', 'sword', 'cannon'] as const) {
+for (const fixture of [
+  'baseline',
+  'resonance',
+  'sword',
+  'cannon',
+  'hybrid',
+] as const) {
   test(`ten-second ${fixture} render sample with a crowded arena and active VFX`, async ({
     page,
   }) => {
@@ -52,7 +58,16 @@ for (const fixture of ['baseline', 'resonance', 'sword', 'cannon'] as const) {
             'shift-rear',
           ],
           fixture === 'sword' || fixture === 'cannon' ? fixture : 'arc',
+          fixture === 'hybrid',
         );
+      if (fixture === 'hybrid') {
+        const a = window.arcQA,
+          node = a
+            .nodes()
+            .find((n) => n.depth === 9 && n.room.kind === 'combat')!;
+        a.node(node.id);
+        a.engine.world.phase = 'playing';
+      }
       const w = window.arcQA.engine.world;
       w.enemies = [];
       w.wave = 99;
@@ -80,7 +95,18 @@ for (const fixture of ['baseline', 'resonance', 'sword', 'cannon'] as const) {
       for (let i = 0; i < 28; i++) {
         const a = (i * Math.PI * 2) / 28;
         const e = w.spawn(
-          (['hunter', 'sentry', 'lancer', 'weaver', 'conduit'] as const)[i % 5],
+          (
+            [
+              'hunter',
+              'sentry',
+              'lancer',
+              'weaver',
+              'conduit',
+              'bomber',
+              'cantor',
+              'shade',
+            ] as const
+          )[i % 8],
           640 + Math.cos(a) * 350,
           360 + Math.sin(a) * 200,
         );
@@ -136,10 +162,10 @@ for (const fixture of ['baseline', 'resonance', 'sword', 'cannon'] as const) {
     await page.mouse.up();
     fs.mkdirSync('outputs/qa', { recursive: true });
     fs.writeFileSync(
-      `outputs/qa/render-v03-${fixture}.json`,
+      `outputs/qa/render-v1-${fixture}.json`,
       JSON.stringify(result, null, 2),
     );
-    await page.screenshot({ path: `outputs/qa/v03-stress-${fixture}.png` });
+    await page.screenshot({ path: `outputs/qa/v1-stress-${fixture}.png` });
     expect(result.frames).toBeGreaterThan(100);
     expect(result.poolMisses).toBe(0);
     expect(result.phase).toBe('playing');

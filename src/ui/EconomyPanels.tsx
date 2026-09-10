@@ -174,7 +174,7 @@ export function Workshop({
       <div className="economy-explainer">
         <b>带回什么，由你决定。</b>
         <p>
-          第 2、4、7 区清场后可花 8
+          在行商、篝火或核心清场后的中继站可花 8
           金币归档全部随身碎片。未归档碎片在失败时保留一半；通关全部带回并额外获得
           8 枚。新开行动会放弃旧行动中未归档的资源。
         </p>
@@ -185,10 +185,15 @@ export function Workshop({
 export function CampActions({ engine }: { engine: Engine }) {
   const w = engine.world,
     used = (id: string) => w.campUsed.includes(id);
-  const chest = [1, 3, 6].includes(w.room.index),
-    shop = [2, 5, 7].includes(w.room.index),
-    bank = [2, 4, 7].includes(w.room.index),
-    altar = [3, 6].includes(w.room.index);
+  const legacy = w.campaign === 'legacy',
+    chest = legacy
+      ? [1, 3, 6].includes(w.room.index)
+      : w.room.kind === 'treasure',
+    shop = legacy ? [2, 5, 7].includes(w.room.index) : w.room.kind === 'shop',
+    bank = legacy
+      ? [2, 4, 7].includes(w.room.index)
+      : ['shop', 'heal', 'boss'].includes(w.room.kind),
+    altar = legacy && [3, 6].includes(w.room.index);
   const preview =
     chest && !used('chest')
       ? rewardChoices(w.cards, w.seed + 8171, w.room.index)[0]

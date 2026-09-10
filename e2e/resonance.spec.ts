@@ -18,6 +18,7 @@ test('six resonance trials render their real projectile forms and preserve an ex
   const saved = await page.evaluate(() =>
     JSON.stringify(window.arcQA.engine.save),
   );
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
   await expect(page.locator('.trial-card')).toHaveCount(6);
   fs.mkdirSync('outputs/qa/v02', { recursive: true });
@@ -85,6 +86,7 @@ test('audio buses mute active voices, pause immediately, and survive context rec
   page.on('pageerror', (e) => errors.push(e.message));
   await page.goto('/?qa');
   expect(await page.evaluate(() => window.arcQA.synth.context)).toBeNull();
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
   await page.getByRole('button', { name: /电浆圣歌/ }).click();
   await expect

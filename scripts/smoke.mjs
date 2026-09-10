@@ -25,7 +25,9 @@ try {
   });
   const response = await page.goto(new URL('?qa', url).href);
   assert.equal(response.status(), 200);
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '装备黎明圣剑', exact: true }).click();
+  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
   assert.equal(
     await page.evaluate(() => 'arcQA' in window),
@@ -63,10 +65,13 @@ try {
     localStorage.getItem('arcshift.save.v1'),
   );
   assert.equal(JSON.parse(checkpoint).checkpoint.weapon, 'sword');
-  await page.getByRole('button', { name: /行者营地/ }).click();
+  assert.equal(JSON.parse(checkpoint).checkpoint.campaign, 'pilgrimage');
+  assert.deepEqual(JSON.parse(checkpoint).checkpoint.route, ['1:1']);
+  assert.deepEqual(JSON.parse(checkpoint).checkpoint.forms, ['sword']);
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '升级生命刻印' }).waitFor();
-  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
+  await page.getByRole('switch', { name: /三重共鸣/ }).click();
   await page.getByRole('button', { name: '装备裂核重炮', exact: true }).click();
   await page.getByRole('button', { name: /相位织雨/ }).click();
   await page.locator('.phase-playing').waitFor();
@@ -92,7 +97,7 @@ try {
     pauseAndResume: true,
     checkpointRetained: true,
     resonanceTrial: true,
-    version: '0.3.0',
+    version: '1.0.0',
     swordCheckpoint: true,
     cannonTrial: true,
     workshop: true,

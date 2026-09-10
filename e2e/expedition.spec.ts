@@ -5,9 +5,11 @@ const phase = (page: Page) =>
   page.evaluate(() => window.arcQA.engine.world.phase);
 async function start(page: Page, weapon = '黎明圣剑') {
   await page.goto('/?qa');
+  await page.getByRole('button', {name:'营地与图鉴',exact:true}).click();
   await page
     .getByRole('button', { name: `装备${weapon}`, exact: true })
     .click();
+  await page.keyboard.press('Escape');
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
   await page.getByRole('button', { name: /余烬协议：/ }).click();
   await expect.poll(() => phase(page)).toBe('playing');
@@ -132,7 +134,7 @@ test('camp choices, reroll, stock, bank and workshop persist through real page r
   await page.screenshot({ path: 'outputs/qa/v03/camp.png' });
   await page.reload();
   await page.screenshot({ path: 'outputs/qa/v03/menu.png' });
-  await page.getByRole('button', { name: /行者营地/ }).click();
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '升级生命刻印' }).click();
   await expect(page.locator('.workshop-balance > b')).toHaveText('4');
   await page.screenshot({ path: 'outputs/qa/v03/workshop.png' });
@@ -172,6 +174,7 @@ test('trial inherits equipped weapon, switches to cannon and leaves the real sav
   page,
 }) => {
   await page.goto('/?qa');
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '装备黎明圣剑' }).click();
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
   await expect(

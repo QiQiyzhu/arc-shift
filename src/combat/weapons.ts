@@ -3,6 +3,8 @@ import { shoot } from './projectiles';
 import { hitEnemy } from './damage';
 import { clamp, distance } from '../core/math';
 import { segmentHits } from './rules';
+import type { WeaponId } from '../game/types';
+import { crossesBlock } from '../rooms/terrain';
 
 // The same circular sector drives sword hit tests and the visible attack arc.
 export function inSwordArc(
@@ -41,19 +43,34 @@ export function inSwordArc(
     radius,
   );
 }
-export function attack(w: World) {
+export function attack(
+  w: World,
+  form: WeaponId = w.weapon,
+  power = 1,
+  support = false,
+) {
   const p = w.player,
-    s = w.stats;
-  if (w.weapon === 'sword') {
+    s = {
+      ...w.stats,
+      damage:
+        w.stats.damage *
+        power *
+        (w.relics.includes('oracle-eye') && w.forms.length === 3 ? 1.15 : 1),
+    };
+  const previousCd = p.shotCd;
+  if (form === 'sword') {
     w.combo = w.comboTime > 0 ? (w.combo + 1) % 3 : 0;
-    w.comboTime = 1.2;
+    w.comboTime = Math.max(1.2, s.rate * 3 + 0.15);
     const finisher = w.combo === 2;
     w.swing = {
       x: p.x,
       y: p.y,
       angle: p.angle,
       age: 0,
-      range: (finisher ? 155 : 120) + (s.shotSize > 4 ? 22 : 0),
+      range:
+        (finisher ? 155 : 120) +
+        (s.shotSize > 4 ? 22 : 0) +
+        (w.relics.includes('vow-edge') ? 24 : 0),
       arc: (finisher ? 2.6 : 1.9) + (s.projectiles - 1) * 0.13,
       damage:
         s.damage * (finisher ? 3.3 : 2.1) * (1 + (s.projectiles - 1) * 0.12),
@@ -69,6 +86,22 @@ export function attack(w: World) {
       color: 0xffe1a0,
       weapon: 'sword',
     });
+    if (finisher && w.forms.includes('arc')) {
+      for (let i = -2; i <= 2; i++) {
+        const b = shoot(
+          w,
+          p.x,
+          p.y,
+          p.angle + i * 0.25,
+          false,
+          s.damage * 0.55,
+          s.shotSpeed,
+          s.accent,
+          1,
+        );
+        if (b) b.shape = 'blade';
+      }
+    }
     // Trajectory protocols add secondary rune blades; the main sword remains melee.
     if (
       s.homing ||
@@ -99,7 +132,7 @@ export function attack(w: World) {
       }
     }
   } else {
-    const heavy = w.weapon === 'cannon';
+    const heavy = form === 'cannon';
     p.shotCd = s.rate * (heavy ? 4.2 : 1);
     for (let i = 0; i < s.projectiles; i++) {
       const b = shoot(
@@ -116,6 +149,7 @@ export function attack(w: World) {
         b.shape = 'shell';
         b.radius = s.shotSize * 1.5 + 4;
         b.blastRadius = 72 + (s.shotSize > 4 ? 18 : 0);
+        if (w.forms.includes('arc')) b.fragment = Math.max(b.fragment, 4);
       }
     }
     w.bus.emit({
@@ -124,8 +158,12 @@ export function attack(w: World) {
       y: p.y + Math.sin(p.angle) * 24,
       color: s.primary,
       element: s.element,
-      weapon: w.weapon,
+      weapon: form,
     });
+  }
+  if (support) {
+    p.shotCd = previousCd;
+    return;
   }
   if (w.has('shift-reload') && p.dashCd > s.dashCooldown - 0.7) p.shotCd *= 0.5;
   // These triggers run once per attack, regardless of enemy count or pellet count.
@@ -156,6 +194,23 @@ export function attack(w: World) {
     );
   }
 }
+export function fireSupports(w: World, dt: number, fire: boolean) {
+  for (const form of ['arc', 'sword', 'cannon'] as const) {
+    w.supportCd[form] = Math.max(0, w.supportCd[form] - dt);
+    if (
+      form === w.weapon ||
+      !w.forms.includes(form) ||
+      !fire ||
+      w.supportCd[form] > 0
+    )
+      continue;
+    attack(w, form, w.relics.includes('glass-engine') ? 0.7 : 0.55, true);
+    w.supportCd[form] = Math.max(
+      0.18,
+      w.stats.rate * { arc: 1.5, sword: 3, cannon: 4.8 }[form],
+    );
+  }
+}
 export function drinkTonic(w: World) {
   if (
     w.phase !== 'playing' ||
@@ -165,7 +220,10 @@ export function drinkTonic(w: World) {
   )
     return false;
   w.wallet.tonics--;
-  w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
+  w.player.hp = Math.min(
+    w.player.maxHp,
+    w.player.hp + 40 + (w.relics.includes('choir-vial') ? 10 : 0),
+  );
   w.emit('skill', w.player.x, w.player.y, 0x9aefc2, 65);
   return true;
 }
@@ -199,11 +257,18 @@ export function updateWeapon(w: World, dt: number) {
         if (
           e.hp <= 0 ||
           swing.hits.has(e.id) ||
+          crossesBlock(swing.x, swing.y, e.x, e.y, 0.5, w.terrain.blocks) ||
           !inSwordArc(e.x, e.y, e.radius, swing)
         )
           continue;
         swing.hits.add(e.id);
         hitEnemy(w, e, swing.damage);
+        if (w.forms.includes('cannon') && swing.hits.size === 1) {
+          w.emit('bomb', e.x, e.y, 0xffbc78, 90);
+          for (const n of w.enemies)
+            if (n !== e && n.hp > 0 && distance(n, e) < 90 + n.radius)
+              hitEnemy(w, n, swing.damage * 0.4, false);
+        }
         if (w.stats.fragment && !swing.fragmented) {
           swing.fragmented = true;
           for (let i = 0; i < 3; i++) {
@@ -227,7 +292,12 @@ export function updateWeapon(w: World, dt: number) {
         }
       }
       for (const b of w.projectiles.items)
-        if (b.active && b.enemy && inSwordArc(b.x, b.y, b.radius, swing)) {
+        if (
+          b.active &&
+          b.enemy &&
+          inSwordArc(b.x, b.y, b.radius, swing) &&
+          !crossesBlock(swing.x, swing.y, b.x, b.y, 1, w.terrain.blocks)
+        ) {
           b.active = false;
           w.emit('pickup', b.x, b.y, 0xffe1a0);
         }
@@ -241,7 +311,13 @@ export function updateWeapon(w: World, dt: number) {
     w.emit('bomb', b.x, b.y, 0xffc77c, 170);
     for (const e of w.enemies)
       if (e.hp > 0 && distance(e, b) < 170 + e.radius)
-        hitEnemy(w, e, 40 + w.stats.damage * 5, false);
+        hitEnemy(
+          w,
+          e,
+          (40 + w.stats.damage * 5) *
+            (w.relics.includes('kiln-heart') ? 1.35 : 1),
+          false,
+        );
     for (const shot of w.projectiles.items)
       if (shot.active && shot.enemy && distance(shot, b) < 185)
         shot.active = false;

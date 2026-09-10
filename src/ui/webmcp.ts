@@ -1,5 +1,6 @@
 import type { Engine } from '../game/engine';
 import { roomChoices } from '../rooms/generator';
+import { availableNodes } from '../rooms/expedition';
 interface MCP {
   registerTool(
     tool: {
@@ -24,6 +25,9 @@ export function installWebMCP(engine: Engine) {
       health: Math.ceil(w.player.hp),
       kills: w.kills,
       protocols: w.cards,
+      forms: w.forms,
+      campaign: w.campaign,
+      route: w.route,
       choices:
         w.phase === 'reward'
           ? w.rewards.map((c) => ({
@@ -32,7 +36,9 @@ export function installWebMCP(engine: Engine) {
               effect: c.preview,
             }))
           : w.phase === 'map'
-            ? roomChoices(w.room.index + 1, w.seed)
+            ? w.campaign === 'pilgrimage'
+              ? availableNodes(w.seed, w.room.nodeId!)
+              : roomChoices(w.room.index + 1, w.seed)
             : [],
     };
   };

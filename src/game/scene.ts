@@ -3,6 +3,7 @@ import { Engine } from './engine';
 import { Effects } from '../effects/particles';
 import { drawArena } from '../render/arena';
 import { drawActors } from '../render/actors';
+import { drawTerrain } from '../render/terrain';
 import type { Input } from './types';
 export class ArcScene extends Phaser.Scene {
   engine: Engine;
@@ -40,7 +41,8 @@ export class ArcScene extends Phaser.Scene {
     super('ARC');
     this.engine = engine;
   }
-  private arenaTexture(template = 0) {
+  private arenaTexture(template = 0, biome = 'sanctum') {
+    if (this.textures.exists(biome)) return biome;
     if (this.textures.exists('sanctum')) return 'sanctum';
     const key = `arena-floor-${template}`;
     if (!this.textures.exists(key)) {
@@ -53,6 +55,8 @@ export class ArcScene extends Phaser.Scene {
   }
   preload() {
     this.load.image('sanctum', '/art/sanctum.webp');
+    this.load.image('grove', '/art/grove.webp');
+    this.load.image('foundry', '/art/foundry.webp');
   }
   create() {
     this.floor = this.add
@@ -157,16 +161,21 @@ export class ArcScene extends Phaser.Scene {
       };
       this.accumulator -= 1 / 60;
     }
-    const stamp = `${w.seed}-${w.room.index}-${w.room.template}`;
+    const stamp = `${w.seed}-${w.room.index}-${w.room.template}-${w.room.biome}`;
     if (stamp !== this.stamp) {
-      this.floor.setTexture(this.arenaTexture(w.room.template));
+      this.floor.setTexture(this.arenaTexture(w.room.template, w.room.biome));
       this.floor
         .setDisplaySize(1280, 720)
-        .setTint([0xd9e4de, 0xf1d2ae, 0xc5d9f1, 0xdfc4f2][w.room.template % 4]);
+        .setTint(
+          w.room.biome && w.room.biome !== 'sanctum'
+            ? 0xe4e4dc
+            : [0xd9e4de, 0xf1d2ae, 0xc5d9f1, 0xdfc4f2][w.room.template % 4],
+        );
       this.effects.clear();
       this.stamp = stamp;
     }
     this.graphics.clear();
+    drawTerrain(this.graphics, w);
     this.graphics.lineStyle(1, 0xd6b47c, 0.25);
     this.graphics.strokeRoundedRect(76, 100, 1128, 532, 14);
     for (let i = 0; i < 20; i++) {
