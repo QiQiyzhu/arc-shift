@@ -3,10 +3,11 @@ import { World } from '../game/world';
 import { blankSave, parseSave, type SaveData } from '../core/save';
 import type { GameCommand, SimulationObserver } from '../core/replay-contract';
 import type { Input } from '../game/types';
+import { DEFAULT_CONTENT, contentDiff } from '../content/schema';
 
 export const REPLAY_VERSION = 1;
 export const GAME_VERSION = '1.0-engineering.1';
-export const CONTENT_VERSION = 'builtin-2026-09-10';
+export const CONTENT_VERSION = 'builtin-2026-09-10-tuning1';
 export const FIXED_DT = 1 / 60;
 export const MAX_REPLAY_TICKS = 108000;
 export const MAX_REPLAY_BYTES = 32 * 1024 * 1024;
@@ -95,6 +96,10 @@ export class ReplayRecorder implements SimulationObserver {
     mode: Replay['initial']['mode'] = 'new-run',
     readonly interval = 120,
   ) {
+    if (contentDiff(DEFAULT_CONTENT, engine.content).length)
+      throw Error(
+        'Custom sandbox content cannot be recorded with the built-in replay version',
+      );
     if (!Number.isInteger(seed) || seed < 0 || seed > 1e8)
       throw Error('Invalid replay seed');
     seed = seed === 0 ? 0 : seed;

@@ -11,18 +11,8 @@ import {
 import { ArenaCanvas } from './ArenaCanvas';
 import { availableNodes } from '../rooms/expedition';
 import { SHOP } from '../economy/catalog';
+import { downloadJSON } from './files';
 import './dev.css';
-
-export function downloadJSON(value: unknown, name: string) {
-  const url = URL.createObjectURL(
-    new Blob([JSON.stringify(value)], { type: 'application/json' }),
-  );
-  const link = document.createElement('a');
-  link.href = url;
-  link.download = name;
-  link.click();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
 export default function DevApp() {
   const [engine, setEngine] = useState(
     () => new Engine({ save: blankSave(), persistence: false }),

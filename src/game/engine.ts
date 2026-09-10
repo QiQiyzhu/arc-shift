@@ -22,6 +22,7 @@ import { updateWeapon } from '../combat/weapons';
 import { expedition, availableNodes } from '../rooms/expedition';
 import { terrainFor, updateTerrain } from '../rooms/terrain';
 import { RELICS, LORE } from '../progression/catalog';
+import { DEFAULT_CONTENT, validateContent, type ContentPack } from '../content/schema';
 export class Engine {
   world = new World();
   private settled = false;
@@ -31,6 +32,7 @@ export class Engine {
   practice = false;
   persistenceEnabled = true;
   observer?: SimulationObserver;
+  readonly content: ContentPack;
   private decision<T extends boolean | void>(
     command: GameCommand,
     perform: () => T,
@@ -40,7 +42,11 @@ export class Engine {
     this.observer?.command(command, result);
     return result;
   }
-  constructor(options?: { save?: SaveData; persistence?: boolean }) {
+  constructor(options?: { save?: SaveData; persistence?: boolean; content?: ContentPack }) {
+    const content = options?.content ? validateContent(options.content) : { ok: true as const, value: DEFAULT_CONTENT };
+    if (!content.ok) throw Error(content.errors.join('\n'));
+    this.content = content.value;
+    this.world = new World(this.content);
     this.save = options?.save ? structuredClone(options.save) : loadSave();
     this.persistenceEnabled = options?.persistence ?? true;
   }
@@ -65,7 +71,7 @@ export class Engine {
     this.practice = false;
     this.settled = false;
     const bus = this.world.bus;
-    this.world = new World();
+    this.world = new World(this.content);
     this.world.bus = bus;
     this.world.seed = seed;
     this.world.rng = new Random(seed);
@@ -87,7 +93,7 @@ export class Engine {
     this.world.route = [this.world.room.nodeId!];
     this.world.phase = 'reward';
     this.world.rewardContext = 'start';
-    this.world.rewards = rewardChoices([], seed, 0, true);
+    this.world.rewards = rewardChoices([], seed, 0, true, false, this.content);
     this.save.meta.runs++;
     this.save.checkpoint = null;
     this.persist();
@@ -116,7 +122,7 @@ export class Engine {
     const w = this.world;
     if (w.cards.includes(id)) return;
     w.cards.push(id);
-    w.stats = deriveStats(w.cards, w.level, w.relics);
+    w.stats = deriveStats(w.cards, w.level, w.relics, w.content);
     if (id === 'ice-shell') {
       w.player.maxHp += 40;
       w.player.hp = Math.min(w.player.maxHp, w.player.hp + 40);
@@ -169,7 +175,7 @@ export class Engine {
     this.practice = false;
     this.settled = false;
     const bus = this.world.bus;
-    this.world = new World();
+    this.world = new World(this.content);
     const w = this.world;
     w.bus = bus;
     Object.assign(w, {
@@ -196,7 +202,7 @@ export class Engine {
       banked: c.banked || 0,
     });
     w.rng = new Random(c.seed + c.room.index * 1129);
-    w.stats = deriveStats(w.cards, w.level, w.relics);
+    w.stats = deriveStats(w.cards, w.level, w.relics, w.content);
     w.player.maxHp =
       120 + w.preparation.vitality * 10 + (w.has('ice-shell') ? 40 : 0);
     w.player.hp = Math.min(w.player.maxHp, c.hp);
@@ -216,6 +222,7 @@ export class Engine {
         w.room.index,
         false,
         w.room.kind === 'elite',
+        w.content,
       );
     } else this.enter(c.room, true);
     return true;
@@ -345,11 +352,11 @@ export class Engine {
     const maxWaves = this.practice
       ? Infinity
       : w.room.kind === 'challenge'
-        ? 5
+        ? w.content.encounters[0].params.challengeWaves
         : w.campaign === 'pilgrimage'
           ? w.room.kind === 'elite'
-            ? 4
-            : 3
+            ? w.content.encounters[0].params.eliteWaves
+            : w.content.encounters[0].params.combatWaves
           : roomWaveCount(w.room.index);
     if (w.room.kind === 'challenge') {
       if (Math.hypot(w.player.x - 640, w.player.y - 365) < 100)
@@ -366,7 +373,7 @@ export class Engine {
     ) {
       this.spawnWave();
       w.wave++;
-      w.spawnTimer = 9;
+      w.spawnTimer = w.content.encounters[0].params.interval;
     }
     if (
       w.room.kind !== 'challenge' &&
@@ -379,7 +386,7 @@ export class Engine {
   }
   spawnWave() {
     const w = this.world;
-    const kinds: EnemyKind[] = ['hunter', 'sentry', 'lancer'];
+    const kinds: EnemyKind[] = [...w.content.encounters[0].pool];
     if (w.room.index >= 3) kinds.push('weaver');
     if (w.room.index >= 5) kinds.push('conduit');
     if (w.campaign === 'pilgrimage') {
@@ -388,11 +395,11 @@ export class Engine {
       if (w.room.kind === 'challenge') kinds.push('bomber');
     }
     const count =
-      4 +
+      w.content.encounters[0].params.baseCount +
       (w.campaign === 'pilgrimage'
         ? Math.ceil(w.room.index / 2)
         : w.room.index) +
-      (w.room.kind === 'elite' ? 3 : 0);
+      (w.room.kind === 'elite' ? w.content.encounters[0].params.eliteBonus : 0);
     for (let i = 0; i < count; i++) {
       const angle = w.rng.next() * Math.PI * 2;
       let x = 640 + Math.cos(angle) * 480,
@@ -453,6 +460,7 @@ export class Engine {
       w.room.index,
       false,
       w.room.kind === 'elite',
+      w.content,
     );
     w.emit(
       w.phase === 'victory' ? 'victory' : 'reward',
@@ -635,12 +643,12 @@ export class Engine {
         return false;
       w.wallet.coins -= 25;
       w.relics.push(id);
-      w.stats = deriveStats(w.cards, w.level, w.relics);
+      w.stats = deriveStats(w.cards, w.level, w.relics, w.content);
     } else if (choice !== 'leave') return false;
     w.eventDone = true;
     w.phase = reward ? 'reward' : 'map';
     w.rewardContext = 'clear';
-    if (reward) w.rewards = rewardChoices(w.cards, w.seed, w.room.index);
+    if (reward) w.rewards = rewardChoices(w.cards, w.seed, w.room.index, false, false, w.content);
     this.checkpoint();
     return true;
   }
@@ -710,7 +718,7 @@ export class Engine {
     w.wallet[resource]--;
     w.campUsed.push('chest');
     if (method === 'key') {
-      const card = rewardChoices(w.cards, w.seed + 8171, w.room.index)[0];
+      const card = rewardChoices(w.cards, w.seed + 8171, w.room.index, false, false, w.content)[0];
       if (card) {
         this.integrateCard(card.id);
         w.campMessage = `封存箱已开启：获得「${card.name}」。`;
@@ -795,6 +803,7 @@ export class Engine {
       w.room.index,
       false,
       w.room.kind === 'elite',
+      w.content,
     );
     this.checkpoint();
     return true;
@@ -809,7 +818,7 @@ export class Engine {
     this.practice = true;
     this.settled = false;
     const bus = this.world.bus;
-    this.world = new World();
+    this.world = new World(this.content);
     const w = this.world;
     w.bus = bus;
     w.seed = 20260909;
@@ -822,7 +831,7 @@ export class Engine {
       : [weapon];
     w.cards = [...cards];
     w.level = 4;
-    w.stats = deriveStats(w.cards, w.level);
+    w.stats = deriveStats(w.cards, w.level, [], w.content);
     w.player.maxHp = w.player.hp = cards.includes('ice-shell') ? 160 : 120;
     this.enter(makeRoom(3, 'combat', w.seed));
   }

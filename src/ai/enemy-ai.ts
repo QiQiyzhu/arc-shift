@@ -38,10 +38,11 @@ function radial(w: World, e: Enemy, count: number, offset = 0) {
 }
 function updateBoss(w: World, e: Enemy, dt: number) {
   const hp = e.hp / e.maxHp;
-  const phase = hp < 0.3 ? 3 : hp < 0.65 ? 2 : 1;
+  const tuning = w.content.bosses.find(row => row.id === e.kind)!.params;
+  const phase = hp < tuning.phase3At ? 3 : hp < tuning.phase2At ? 2 : 1;
   if (phase > e.phase) {
     e.phase = phase;
-    changeState(e, 'recover', 1.8);
+    changeState(e, 'recover', tuning.phaseRecovery);
     w.projectiles.items.forEach((b) => {
       if (b.enemy) b.active = false;
     });

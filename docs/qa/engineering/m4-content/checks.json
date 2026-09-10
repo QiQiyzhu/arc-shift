@@ -1,0 +1,49 @@
+{
+  "stage": "m4-content",
+  "recordedAt": "2026-09-10T06:11:39.709Z",
+  "commit": "434ea9a8826f27a657f74adb00906be8957b87cb",
+  "checks": [
+    {
+      "command": "npm run typecheck",
+      "exitCode": 0,
+      "elapsedMs": 6282
+    },
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedMs": 4317
+    },
+    {
+      "command": "npm test -- --reporter=json --outputFile=docs/qa/engineering/m4-content/unit.json",
+      "exitCode": 0,
+      "elapsedMs": 8277
+    },
+    {
+      "command": "npm run test:e2e",
+      "exitCode": 0,
+      "elapsedMs": 329569
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedMs": 7489
+    }
+  ],
+  "bundles": [
+    {
+      "name": "index-6IBUiNml.css",
+      "bytes": 186303,
+      "gzipBytes": 32582
+    },
+    {
+      "name": "index-DQwtE5yH.js",
+      "bytes": 192226,
+      "gzipBytes": 60074
+    },
+    {
+      "name": "page-DhOVo7dH.js",
+      "bytes": 1471463,
+      "gzipBytes": 413910
+    }
+  ]
+}

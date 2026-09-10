@@ -2,7 +2,7 @@ import { EventBus, type EffectEvent } from '../core/events';
 import { Pool } from '../core/pool';
 import { Random } from '../core/math';
 import { baseStats } from '../combat/rules';
-import { ENEMIES } from '../data/enemies';
+import { DEFAULT_CONTENT, type ContentPack } from '../content/schema';
 import { makeRoom } from '../rooms/generator';
 import { terrainFor, safePosition } from '../rooms/terrain';
 import { isBoss } from '../progression/catalog';
@@ -26,6 +26,7 @@ import type {
   Upgrade,
 } from './types';
 export class World {
+  constructor(readonly content: ContentPack = DEFAULT_CONTENT) {}
   tick = 0;
   queries = newQueryMetrics();
   collisionMode: 'grid' | 'brute' = 'grid';
@@ -166,7 +167,7 @@ export class World {
     elite = false,
     summoned = false,
   ) {
-    const d = ENEMIES[kind];
+    const d = this.content.enemies.find(row => row.id === kind)!.params;
     const boss = isBoss(kind);
     const mult = boss ? 1 : 1 + (this.room.index - 1) * 0.15;
     const hp = d.hp * mult * (elite ? 1.65 : 1);

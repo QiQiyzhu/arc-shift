@@ -171,7 +171,7 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
         w.xp -= w.level * 55;
         w.level++;
         w.player.hp = clamp(w.player.hp + 8, 0, w.player.maxHp);
-        w.stats = deriveStats(w.cards, w.level, w.relics);
+        w.stats = deriveStats(w.cards, w.level, w.relics, w.content);
         w.emit('reward', w.player.x, w.player.y, 0xc7f794);
       }
       if (w.stats.lifesteal > 0)

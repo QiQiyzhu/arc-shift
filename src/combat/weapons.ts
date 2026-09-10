@@ -49,13 +49,15 @@ export function attack(
   power = 1,
   support = false,
 ) {
+  const tuning = w.content.weapons.find(row => row.id === form)!.params;
   const p = w.player,
     s = {
       ...w.stats,
       damage:
         w.stats.damage *
         power *
-        (w.relics.includes('oracle-eye') && w.forms.length === 3 ? 1.15 : 1),
+        (w.relics.includes('oracle-eye') && w.forms.length === 3 ? 1.15 : 1) * tuning.damage,
+      shotSpeed: w.stats.shotSpeed * tuning.projectileSpeed,
     };
   const previousCd = p.shotCd;
   if (form === 'sword') {
@@ -68,10 +70,10 @@ export function attack(
       angle: p.angle,
       age: 0,
       range:
-        (finisher ? 155 : 120) +
+        ((finisher ? 155 : 120) +
         (s.shotSize > 4 ? 22 : 0) +
-        (w.relics.includes('vow-edge') ? 24 : 0),
-      arc: (finisher ? 2.6 : 1.9) + (s.projectiles - 1) * 0.13,
+        (w.relics.includes('vow-edge') ? 24 : 0)) * tuning.range,
+      arc: Math.min(Math.PI * 2, ((finisher ? 2.6 : 1.9) + (s.projectiles - 1) * 0.13) * tuning.arc),
       damage:
         s.damage * (finisher ? 3.3 : 2.1) * (1 + (s.projectiles - 1) * 0.12),
       combo: w.combo,
@@ -148,7 +150,7 @@ export function attack(
       if (b && heavy) {
         b.shape = 'shell';
         b.radius = s.shotSize * 1.5 + 4;
-        b.blastRadius = 72 + (s.shotSize > 4 ? 18 : 0);
+        b.blastRadius = (72 + (s.shotSize > 4 ? 18 : 0)) * tuning.blast;
         if (w.forms.includes('arc')) b.fragment = Math.max(b.fragment, 4);
       }
     }
@@ -165,6 +167,7 @@ export function attack(
     p.shotCd = previousCd;
     return;
   }
+  p.shotCd *= tuning.cooldown;
   if (w.has('shift-reload') && p.dashCd > s.dashCooldown - 0.7) p.shotCd *= 0.5;
   // These triggers run once per attack, regardless of enemy count or pellet count.
   if (s.rear)
@@ -207,7 +210,7 @@ export function fireSupports(w: World, dt: number, fire: boolean) {
     attack(w, form, w.relics.includes('glass-engine') ? 0.7 : 0.55, true);
     w.supportCd[form] = Math.max(
       0.18,
-      w.stats.rate * { arc: 1.5, sword: 3, cannon: 4.8 }[form],
+      w.stats.rate * { arc: 1.5, sword: 3, cannon: 4.8 }[form] * w.content.weapons.find(row => row.id === form)!.params.cooldown,
     );
   }
 }
