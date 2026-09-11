@@ -90,7 +90,15 @@ export class Effects {
       });
     }
     if (
-      ['skill', 'reward', 'phase', 'kill', 'victory', 'bomb'].includes(e.kind)
+      [
+        'skill',
+        'reward',
+        'phase',
+        'kill',
+        'victory',
+        'bomb',
+        'impact',
+      ].includes(e.kind)
     ) {
       const p = this.particles.acquire();
       if (p)
@@ -99,8 +107,8 @@ export class Effects {
           y: e.y,
           vx: 0,
           vy: 0,
-          life: 0.5,
-          maxLife: 0.5,
+          life: e.kind === 'impact' ? 0.12 : 0.5,
+          maxLife: e.kind === 'impact' ? 0.12 : 0.5,
           size: e.amount || 75,
           color: e.color,
           ring: true,
@@ -200,8 +208,12 @@ export class Effects {
       g.moveTo(b.x, b.y);
       for (let i = 1; i < 7; i++)
         g.lineTo(
-          b.x + ((b.x2 - b.x) * i) / 7 + (this.reduced ? 0 : (Math.random() - 0.5) * 18),
-          b.y + ((b.y2 - b.y) * i) / 7 + (this.reduced ? 0 : (Math.random() - 0.5) * 18),
+          b.x +
+            ((b.x2 - b.x) * i) / 7 +
+            (this.reduced ? 0 : (Math.random() - 0.5) * 18),
+          b.y +
+            ((b.y2 - b.y) * i) / 7 +
+            (this.reduced ? 0 : (Math.random() - 0.5) * 18),
         );
       g.lineTo(b.x2, b.y2);
       g.strokePath();

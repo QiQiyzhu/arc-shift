@@ -13,7 +13,9 @@ export type EffectEvent = {
     | 'room'
     | 'pickup'
     | 'slash'
-    | 'bomb';
+    | 'bomb'
+    | 'impact';
+  // Local contact emphasis; never changes the rendering frame delta.
   weapon?: import('../game/types').WeaponId;
   element?: import('../game/types').Element;
   reaction?: string;

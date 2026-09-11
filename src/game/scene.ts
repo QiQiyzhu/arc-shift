@@ -158,11 +158,14 @@ export class ArcScene extends Phaser.Scene {
       this.effects.emit(e);
       if (
         !this.reducedMotion &&
-        (e.kind === 'crit' || e.kind === 'hurt' || e.kind === 'phase')
+        (e.kind === 'crit' ||
+          e.kind === 'hurt' ||
+          e.kind === 'phase' ||
+          (e.kind === 'impact' && !this.engine.save.settings.focusedEffects))
       )
         this.cameras.main.shake(
-          e.kind === 'phase' ? 180 : 70,
-          e.kind === 'hurt' ? 0.003 : 0.0012,
+          e.kind === 'phase' ? 180 : e.kind === 'impact' ? 40 : 70,
+          e.kind === 'hurt' ? 0.003 : e.kind === 'impact' ? 0.0008 : 0.0012,
         );
     });
     window.addEventListener('blur', this.onBlur);

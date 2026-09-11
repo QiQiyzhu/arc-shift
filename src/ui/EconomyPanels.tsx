@@ -31,7 +31,7 @@ export function WeaponPicker({
   onChange: (id: WeaponId) => void;
 }) {
   return (
-    <div className="weapon-picker" aria-label="选择行动武装">
+    <div className="weapon-picker" aria-label="选择演练武装">
       {WEAPONS.map((item) => (
         <button
           key={item.id}

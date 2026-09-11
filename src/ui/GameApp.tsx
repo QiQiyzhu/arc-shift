@@ -32,6 +32,10 @@ import { FieldGuide } from '../game/field-guide';
 import { FieldGuidePanel } from './FieldGuidePanel';
 import { hudSignature } from './hud-signature';
 import { roomWaveCount } from '../rooms/generator';
+import { CoachPanel } from './CoachPanel';
+import { validateCards } from '../coach/knowledge';
+import { deriveStats } from '../cards/system';
+import type { World } from '../game/world';
 const engine = new Engine();
 const synth = new Synth();
 const formatTime = (s: number) =>
@@ -46,6 +50,13 @@ export default function GameApp() {
   const [loaded, setLoaded] = useState(false);
   const scene = useRef<ArcScene | null>(null);
   const guide = useRef(new FieldGuide());
+  const [coachOpen, setCoachOpen] = useState(false);
+  const coachPause = useRef<{ world: World; resume: boolean } | null>(null);
+  const coachTrial = useRef<{
+    world: World;
+    title: string;
+    done: boolean;
+  } | null>(null);
   const [utility, setUtility] = useState<
     'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp' | null
   >(null);
@@ -80,7 +91,20 @@ export default function GameApp() {
     s.onTick = () => {
       const now = performance.now();
       guide.current.tick(engine);
-      s.pauseBlocked = guide.current.active && guide.current.step === 'forge';
+      const trial = coachTrial.current;
+      if (
+        trial &&
+        (trial.world !== engine.world || engine.world.phase === 'menu')
+      )
+        coachTrial.current = null;
+      else if (trial && (trial.done || engine.world.elapsed >= 30)) {
+        trial.done = true;
+        if (['playing', 'transition', 'bossIntro'].includes(engine.world.phase))
+          engine.pause();
+      }
+      s.pauseBlocked =
+        (guide.current.active && guide.current.step === 'forge') ||
+        coachTrial.current?.done === true;
       synth.settings = engine.save.settings;
       s.reducedMotion = engine.save.settings.reducedMotion;
       synth.update(
@@ -179,6 +203,29 @@ export default function GameApp() {
     if (scene.current) scene.current.inputBlocked = true;
     setUtility(mode);
   };
+  const openCoach = () => {
+    synth.unlock();
+    const resume = ['playing', 'transition', 'bossIntro'].includes(
+      engine.world.phase,
+    );
+    coachPause.current = { world: engine.world, resume };
+    if (resume) engine.pause();
+    if (scene.current) scene.current.inputBlocked = true;
+    setCoachOpen(true);
+  };
+  const closeCoach = () => {
+    setCoachOpen(false);
+    if (
+      coachPause.current?.resume &&
+      coachPause.current.world === engine.world &&
+      engine.world.phase === 'paused'
+    )
+      engine.pause();
+    coachPause.current = null;
+    requestAnimationFrame(() => {
+      if (scene.current) scene.current.inputBlocked = false;
+    });
+  };
   return (
     <main
       className={`game-shell phase-${w.phase}${engine.practice ? ' is-practice' : ''}`}
@@ -191,7 +238,19 @@ export default function GameApp() {
           <span className="signal-dot" /> 网络异常 · 连接已建立
         </div>
         <div className="top-actions">
-          <span className="version">RESONANCE / 1.1</span>
+          <span className="version">TACTICAL / 1.2</span>
+          <button
+            aria-label="打开战术教练"
+            disabled={
+              !loaded ||
+              guide.current.active ||
+              !!coachTrial.current ||
+              !!utility
+            }
+            onClick={openCoach}
+          >
+            <Orbit size={18} />
+          </button>
           <button
             aria-label={engine.save.settings.muted ? '开启声音' : '静音'}
             onClick={() => {
@@ -226,7 +285,7 @@ export default function GameApp() {
             <img className="menu-keyart" src="/art/rift-keyart.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> THE LAST PILGRIMAGE · v1.1
+                <span /> THE LAST PILGRIMAGE · v1.2
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -293,13 +352,12 @@ export default function GameApp() {
                 <button onClick={() => openUtility('camp')}>
                   <Hammer size={18} /> 营地与图鉴 <ChevronRight size={17} />
                 </button>
-                <button onClick={() => openUtility('settings')}>
-                  <Settings2 size={17} /> 设置
+                <button onClick={openCoach} disabled={!loaded}>
+                  <Orbit size={17} /> 战术教练
                 </button>
               </div>
               <div className="edition-note">
-                当前行装 ·{' '}
-                {WEAPONS.find((x) => x.id === engine.save.meta.weapon)!.name}
+                新行动随机初始武器 · 每次构筑，从意外开始
                 {engine.save.meta.equipped ? ' · 携带遗器' : ''}
               </div>
               <div className="menu-coordinates">
@@ -369,7 +427,9 @@ export default function GameApp() {
                   {guide.current.active
                     ? '行动演练 · 完成左侧目标'
                     : engine.practice
-                      ? `无尽试炼 · 波次 ${w.wave}`
+                      ? coachTrial.current
+                        ? '战术验证场 · 30 秒演练'
+                        : `无尽试炼 · 波次 ${w.wave}`
                       : w.room.kind === 'boss'
                         ? '击败核心实体'
                         : w.room.kind === 'challenge'
@@ -381,7 +441,11 @@ export default function GameApp() {
               </div>
               <div className="hud-right">
                 <span>{formatTime(w.elapsed)}</span>
-                <button aria-label="暂停" onClick={() => engine.pause()}>
+                <button
+                  aria-label="暂停"
+                  disabled={coachTrial.current?.done === true}
+                  onClick={() => engine.pause()}
+                >
                   <Pause size={17} />
                 </button>
               </div>
@@ -399,7 +463,7 @@ export default function GameApp() {
                 </div>
               </div>
             )}
-            <BuildHUD cards={w.cards} />
+            <BuildHUD cards={w.cards} weapon={w.weapon} />
             <HybridHUD engine={engine} />
             {w.fieldBuff && (
               <div className="field-buff">
@@ -407,20 +471,22 @@ export default function GameApp() {
                 {controlLabel('Gravity', 'E')} 加速恢复
               </div>
             )}
-            {engine.practice && !guide.current.active && (
-              <div className="practice-banner">
-                <FlaskConical size={14} /> 无敌试炼 · 不影响存档{' '}
-                <button onClick={() => openUtility('lab')}>切换组合</button>
-                <button
-                  onClick={() => {
-                    w.phase = 'menu';
-                    render((n) => n + 1);
-                  }}
-                >
-                  退出试炼
-                </button>
-              </div>
-            )}
+            {engine.practice &&
+              !guide.current.active &&
+              !coachTrial.current && (
+                <div className="practice-banner">
+                  <FlaskConical size={14} /> 无敌试炼 · 不影响存档{' '}
+                  <button onClick={() => openUtility('lab')}>切换组合</button>
+                  <button
+                    onClick={() => {
+                      w.phase = 'menu';
+                      render((n) => n + 1);
+                    }}
+                  >
+                    退出试炼
+                  </button>
+                </div>
+              )}
             <div className="hud-bottom">
               <div className="kill-count">
                 <span>已净化</span>
@@ -493,6 +559,7 @@ export default function GameApp() {
           </div>
         )}
         {w.phase === 'paused' &&
+          !coachTrial.current?.done &&
           !(guide.current.active && guide.current.step === 'forge') && (
             <div className="modal-shade">
               <section className="pause-panel">
@@ -545,7 +612,9 @@ export default function GameApp() {
               </section>
             </div>
           )}
-        {w.phase === 'reward' && <CardDraft engine={engine} />}
+        {w.phase === 'reward' && (
+          <CardDraft engine={engine} onCoach={openCoach} />
+        )}
         {w.phase === 'map' &&
           (w.campaign === 'pilgrimage' ? (
             <ExpeditionMap key={w.room.nodeId} engine={engine} />
@@ -633,6 +702,34 @@ export default function GameApp() {
               </section>
             </div>
           )}
+        {coachTrial.current && w.phase !== 'menu' && (
+          <aside className="coach-trial" aria-label="战术演练">
+            <span>TACTICAL FIELD TEST · 无敌</span>
+            <h3>{coachTrial.current.title}</h3>
+            <p>
+              {coachTrial.current.done
+                ? '本次演练完成'
+                : `${Math.min(30, Math.floor(w.elapsed))} / 30 秒 · 自由走位并攻击`}
+            </p>
+            <p>
+              净化 {w.kills} · 实际伤害 {Math.round(w.totalDamage)}
+              <br />
+              按当前键位操作；暂停会冻结计时。存档保持不变。
+            </p>
+            <button
+              onClick={() => {
+                coachTrial.current = null;
+                w.phase = 'menu';
+                openCoach();
+                render((n) => n + 1);
+              }}
+            >
+              {coachTrial.current.done
+                ? '带着体验返回教练'
+                : '结束演练并返回教练'}
+            </button>
+          </aside>
+        )}
         <FieldGuidePanel
           guide={guide.current}
           engine={engine}
@@ -666,6 +763,44 @@ export default function GameApp() {
       <div className="mobile-notice">
         建议使用桌面浏览器与键鼠游玩。横向屏幕体验更佳。
       </div>
+      {coachOpen && (
+        <CoachPanel
+          engine={engine}
+          onClose={closeCoach}
+          onSelect={(id) => {
+            const chosen = engine.chooseCard(id);
+            if (chosen) closeCoach();
+            return chosen;
+          }}
+          onTrial={(candidate, b) => {
+            if (
+              engine.world.phase !== 'menu' ||
+              !validateCards(candidate.cards, engine.content)
+            )
+              return;
+            closeCoach();
+            guide.current.stop();
+            engine.startPractice(candidate.cards, b.weapon);
+            const trialWorld = engine.world;
+            trialWorld.forms = [...b.forms];
+            trialWorld.level = b.level;
+            trialWorld.relics = [...b.relics];
+            trialWorld.stats = deriveStats(
+              trialWorld.cards,
+              b.level,
+              trialWorld.relics,
+              trialWorld.content,
+            );
+            trialWorld.room.name = '战术验证场';
+            coachTrial.current = {
+              world: trialWorld,
+              title: candidate.label,
+              done: false,
+            };
+            render((n) => n + 1);
+          }}
+        />
+      )}
       <UtilityPanel
         controls={scene.current?.actions}
         key={utility || 'closed'}

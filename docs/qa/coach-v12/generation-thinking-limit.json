@@ -1,0 +1,58 @@
+{
+  "recordedAt": "2026-09-11T06:40:35.004Z",
+  "contentHash": "4b820eb4957c572ff8a8bdc53a151d1d3e8e276e87f789e2eeb141f87c95d29c",
+  "receipts": [
+    {
+      "weapon": "arc",
+      "goal": "single",
+      "attempt": 0,
+      "requestedModel": "deepseek-flash",
+      "responseModel": "deepseek-flash",
+      "latencyMs": 9737,
+      "usage": {
+        "prompt_tokens": 929,
+        "completion_tokens": 1600,
+        "total_tokens": 2529,
+        "prompt_tokens_details": {
+          "cached_tokens": 0
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1600
+        },
+        "prompt_cache_hit_tokens": 0,
+        "prompt_cache_miss_tokens": 929
+      },
+      "finishReason": "length",
+      "prompt": "为ARC-SHIFT生成一套中文战术。武器 arc，目标 单体输出。只用检索事实中存在的ID，4到6张不同协议，并包含递归前置。引用2到6个在卡组里或已满足条件的共鸣事实ID。返回JSON对象，恰好有id,title,weapon,goal,cards,evidence,explanation,caution。id必须是arc-single，weapon=arc，goal=single。title中文不超过22字符，explanation和caution各不超过100中文字符，说明操作和一个真实代价。不虚构百分比、胜率、测试结果。禁止宣称必胜/最佳/已实测。回旋弹不会重复命中同一敌人。微型分裂弹不会再次分裂或触发反应。此处战斗固定步，无实时LLM。圣剑第三斩剑气承接弹道，重炮对基础伤害和间隔有自身倍率。检索事实：\n[{\"id\":\"fire-meteor\",\"title\":\"赤核陨星\",\"text\":\"弹体变为缓慢的大型陨星；可叠加追踪、反弹与多发。\",\"requires\":null,\"parameters\":{\"shotSize\":9,\"shotSpeed\":0.66,\"damage\":1.65,\"rate\":1.4}},{\"id\":\"fire-ember\",\"title\":\"余烬协议\",\"text\":\"奥术弹点燃敌人，持续 3 秒。\",\"requires\":null,\"parameters\":{\"burn\":8}},{\"id\":\"fire-fuel\",\"title\":\"恒星燃料\",\"text\":\"强化已激活的燃烧，让余烬更具杀伤。\",\"requires\":\"fire-ember\",\"parameters\":{\"burn\":18}},{\"id\":\"storm-lance\",\"title\":\"贯星光矛\",\"text\":\"高速光矛穿过敌群，仍可叠加多发与反弹；射击间隔增加。\",\"requires\":null,\"parameters\":{\"shotSpeed\":2.4,\"pierce\":3,\"rate\":1.35,\"damage\":1.15}},{\"id\":\"storm-arc\",\"title\":\"电弧引擎\",\"text\":\"直接命中有 33% 概率将电弧传至附近敌人。\",\"requires\":null,\"parameters\":{\"chain\":2}},{\"id\":\"storm-critical\",\"title\":\"临界电压\",\"text\":\"暴击率提升，暴击会电击目标周围敌人。\",\"requires\":null,\"parameters\":{\"crit\":0.22}},{\"id\":\"storm-surge\",\"title\":\"超频脉冲\",\"text\":\"缩短基础射击间隔。\",\"requires\":null,\"parameters\":{\"rate\":0.78}},{\"id\":\"ice-touch\",\"title\":\"冰霜编码\",\"text\":\"直接命中施加寒冷，持续 2.5 秒。\",\"requires\":null,\"parameters\":{\"slow\":0.35}},{\"id\":\"ice-brittle\",\"title\":\"脆化解析\",\"text\":\"对寒冷目标造成更多伤害。\",\"requires\":\"ice-touch\",\"parameters\":{}},{\"id\":\"ice-pierce\",\"title\":\"永冻长针\",\"text\":\"提高基础伤害，奥术弹穿透一名敌人。\",\"requires\":null,\"parameters\":{\"pierce\":1,\"damage\":4}},{\"id\":\"void-seek\",\"title\":\"引力偏移\",\"text\":\"奥术弹逐渐弯向最近的敌人。\",\"requires\":null,\"parameters\":{\"homing\":1}},{\"id\":\"void-echo\",\"title\":\"因果回响\",\"text\":\"更频繁地释放湮灭脉冲，提高基础伤害。\",\"requires\":null,\"parameters\":{\"qCooldown\":0.65,\"damage\":4}},{\"id\":\"plasma\",\"title\":\"电浆回路\",\"text\":\"电弧命中燃烧目标时，将 1 秒燃烧转化为小范围电浆爆发。\",\"requires\":[\"fire-ember\",\"storm-arc\"],\"parameters\":{}},{\"id\":\"superconductor\",\"title\":\"超导棱晶\",\"text\":\"电弧优先连接寒冷目标，并可额外跳跃一次。\",\"requires\":[\"ice-touch\",\"storm-arc\"],\"parameters\":{}},{\"id\":\"thermal\",\"title\":\"热裂变\",\"text\":\"再次命中燃烧且寒冷的敌人，消耗旧状态引发热冲击；每目标 1.2 秒一次。\",\"requires\":[\"fire-ember\",\"ice-touch\"],\"parameters\":{}}]",
+      "response": "",
+      "accepted": false,
+      "validationError": "Incomplete completion"
+    },
+    {
+      "weapon": "arc",
+      "goal": "single",
+      "attempt": 1,
+      "requestedModel": "deepseek-flash",
+      "responseModel": "deepseek-flash",
+      "latencyMs": 9606,
+      "usage": {
+        "prompt_tokens": 943,
+        "completion_tokens": 1600,
+        "total_tokens": 2543,
+        "prompt_tokens_details": {
+          "cached_tokens": 768
+        },
+        "completion_tokens_details": {
+          "reasoning_tokens": 1600
+        },
+        "prompt_cache_hit_tokens": 768,
+        "prompt_cache_miss_tokens": 175
+      },
+      "finishReason": "length",
+      "prompt": "为ARC-SHIFT生成一套中文战术。武器 arc，目标 单体输出。只用检索事实中存在的ID，4到6张不同协议，并包含递归前置。引用2到6个在卡组里或已满足条件的共鸣事实ID。返回JSON对象，恰好有id,title,weapon,goal,cards,evidence,explanation,caution。id必须是arc-single，weapon=arc，goal=single。title中文不超过22字符，explanation和caution各不超过100中文字符，说明操作和一个真实代价。不虚构百分比、胜率、测试结果。禁止宣称必胜/最佳/已实测。回旋弹不会重复命中同一敌人。微型分裂弹不会再次分裂或触发反应。此处战斗固定步，无实时LLM。圣剑第三斩剑气承接弹道，重炮对基础伤害和间隔有自身倍率。检索事实：\n[{\"id\":\"fire-meteor\",\"title\":\"赤核陨星\",\"text\":\"弹体变为缓慢的大型陨星；可叠加追踪、反弹与多发。\",\"requires\":null,\"parameters\":{\"shotSize\":9,\"shotSpeed\":0.66,\"damage\":1.65,\"rate\":1.4}},{\"id\":\"fire-ember\",\"title\":\"余烬协议\",\"text\":\"奥术弹点燃敌人，持续 3 秒。\",\"requires\":null,\"parameters\":{\"burn\":8}},{\"id\":\"fire-fuel\",\"title\":\"恒星燃料\",\"text\":\"强化已激活的燃烧，让余烬更具杀伤。\",\"requires\":\"fire-ember\",\"parameters\":{\"burn\":18}},{\"id\":\"storm-lance\",\"title\":\"贯星光矛\",\"text\":\"高速光矛穿过敌群，仍可叠加多发与反弹；射击间隔增加。\",\"requires\":null,\"parameters\":{\"shotSpeed\":2.4,\"pierce\":3,\"rate\":1.35,\"damage\":1.15}},{\"id\":\"storm-arc\",\"title\":\"电弧引擎\",\"text\":\"直接命中有 33% 概率将电弧传至附近敌人。\",\"requires\":null,\"parameters\":{\"chain\":2}},{\"id\":\"storm-critical\",\"title\":\"临界电压\",\"text\":\"暴击率提升，暴击会电击目标周围敌人。\",\"requires\":null,\"parameters\":{\"crit\":0.22}},{\"id\":\"storm-surge\",\"title\":\"超频脉冲\",\"text\":\"缩短基础射击间隔。\",\"requires\":null,\"parameters\":{\"rate\":0.78}},{\"id\":\"ice-touch\",\"title\":\"冰霜编码\",\"text\":\"直接命中施加寒冷，持续 2.5 秒。\",\"requires\":null,\"parameters\":{\"slow\":0.35}},{\"id\":\"ice-brittle\",\"title\":\"脆化解析\",\"text\":\"对寒冷目标造成更多伤害。\",\"requires\":\"ice-touch\",\"parameters\":{}},{\"id\":\"ice-pierce\",\"title\":\"永冻长针\",\"text\":\"提高基础伤害，奥术弹穿透一名敌人。\",\"requires\":null,\"parameters\":{\"pierce\":1,\"damage\":4}},{\"id\":\"void-seek\",\"title\":\"引力偏移\",\"text\":\"奥术弹逐渐弯向最近的敌人。\",\"requires\":null,\"parameters\":{\"homing\":1}},{\"id\":\"void-echo\",\"title\":\"因果回响\",\"text\":\"更频繁地释放湮灭脉冲，提高基础伤害。\",\"requires\":null,\"parameters\":{\"qCooldown\":0.65,\"damage\":4}},{\"id\":\"plasma\",\"title\":\"电浆回路\",\"text\":\"电弧命中燃烧目标时，将 1 秒燃烧转化为小范围电浆爆发。\",\"requires\":[\"fire-ember\",\"storm-arc\"],\"parameters\":{}},{\"id\":\"superconductor\",\"title\":\"超导棱晶\",\"text\":\"电弧优先连接寒冷目标，并可额外跳跃一次。\",\"requires\":[\"ice-touch\",\"storm-arc\"],\"parameters\":{}},{\"id\":\"thermal\",\"title\":\"热裂变\",\"text\":\"再次命中燃烧且寒冷的敌人，消耗旧状态引发热冲击；每目标 1.2 秒一次。\",\"requires\":[\"fire-ember\",\"ice-touch\"],\"parameters\":{}}]",
+      "response": "",
+      "accepted": false,
+      "validationError": "Incomplete completion"
+    }
+  ]
+}

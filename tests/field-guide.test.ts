@@ -44,7 +44,7 @@ describe('guided practice is isolated from the ongoing campaign', () => {
     expect(guide.choose(engine, 'plasma')).toBe(true);
     expect(guide.choose(engine, 'prism')).toBe(false);
     expect(w.phase).toBe('playing');
-    expect(w.forms).toEqual(['sword', 'arc', 'cannon']);
+    expect(w.forms).toEqual(['sword']);
     w.kills += 4;
     guide.tick(engine);
     expect(guide.step).toBe('boss');

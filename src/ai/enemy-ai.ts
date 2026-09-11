@@ -38,7 +38,7 @@ function radial(w: World, e: Enemy, count: number, offset = 0) {
 }
 function updateBoss(w: World, e: Enemy, dt: number) {
   const hp = e.hp / e.maxHp;
-  const tuning = w.content.bosses.find(row => row.id === e.kind)!.params;
+  const tuning = w.content.bosses.find((row) => row.id === e.kind)!.params;
   const phase = hp < tuning.phase3At ? 3 : hp < tuning.phase2At ? 2 : 1;
   if (phase > e.phase) {
     e.phase = phase;
@@ -245,7 +245,7 @@ export function updateEnemies(w: World, dt: number) {
       oldY = e.y;
     let teleported = false;
     e.age += dt;
-    e.timer -= dt;
+    e.impactCooldown = cooldown(e.impactCooldown, dt);
     e.flash = cooldown(e.flash, dt);
     e.slow = cooldown(e.slow, dt);
     e.burn = cooldown(e.burn, dt);
@@ -257,6 +257,11 @@ export function updateEnemies(w: World, dt: number) {
       }
     }
     if (e.hp <= 0) continue;
+    if (e.stagger > 0) {
+      e.stagger = cooldown(e.stagger, dt);
+      continue;
+    }
+    e.timer -= dt;
     const boss = isBoss(e.kind);
     if (boss) {
       updateBoss(w, e, dt);
@@ -411,7 +416,7 @@ export function updateEnemies(w: World, dt: number) {
     if (e.state !== 'idle' && distance(e, w.player) < e.radius + 13)
       hurtPlayer(w, e.damage);
   }
-  if(w.collisionMode === 'brute') separateBruteForce(w);
+  if (w.collisionMode === 'brute') separateBruteForce(w);
   else separateWithGrid(w);
   w.enemies = w.enemies.filter((e) => e.hp > 0);
   if (w.campaign === 'pilgrimage')

@@ -6,6 +6,7 @@ import type { Enemy } from '../game/types';
 import type { World } from '../game/world';
 import { dropLoot } from '../economy/loot';
 import { isBoss } from '../progression/catalog';
+import { moveOnTerrain } from '../rooms/terrain';
 export function hurtPlayer(w: World, amount: number) {
   const p = w.player;
   if (p.invulnerable > 0 || w.phase !== 'playing') return;
@@ -68,8 +69,13 @@ export function hitEnemy(w: World, e: Enemy, base: number, proc = true) {
     }
     const a = Math.atan2(e.y - w.player.y, e.x - w.player.x);
     if (!isBoss(e.kind)) {
-      e.x += Math.cos(a) * 6;
-      e.y += Math.sin(a) * 6;
+      moveOnTerrain(
+        w,
+        e,
+        e.x + Math.cos(a) * 6,
+        e.y + Math.sin(a) * 6,
+        e.radius,
+      );
     }
     if (w.stats.burn > 0) e.burn = 3;
     if (w.has('ice-touch')) e.slow = 2.5;

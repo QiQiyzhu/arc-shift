@@ -28,13 +28,15 @@ export const GUIDE_BUILDS = [
   {
     id: 'plasma',
     name: '电浆剑舞',
-    detail: '圣剑斩弹 · 电弧引燃 · 重炮收尾',
+    detail: '同一斩击铺燃烧，电弧消耗状态引爆敌群',
+    weapon: 'sword',
     cards: ['fire-ember', 'storm-arc', 'storm-conduct', 'fire-blast'],
   },
   {
     id: 'prism',
     name: '折光弹幕',
-    detail: '分裂追踪 · 墙面反弹 · 剑气穿透',
+    detail: '同一弹体反弹后更强追踪，但逐次损失伤害',
+    weapon: 'arc',
     cards: ['fire-split', 'ice-prism', 'void-seek', 'storm-needle'],
   },
 ] as const;
@@ -153,8 +155,8 @@ export class FieldGuide {
       return false;
     const w = engine.world;
     for (const card of build.cards) grantProtocol(w, card);
-    w.forms = ['sword', 'arc', 'cannon'];
-    w.weapon = 'sword';
+    w.weapon = build.weapon;
+    w.forms = [build.weapon];
     w.player.shotCd = 0;
     this.build = build.name;
     this.kills = w.kills;

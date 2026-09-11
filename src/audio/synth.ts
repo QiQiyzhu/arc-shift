@@ -246,6 +246,8 @@ export class Synth {
     } else if (e.kind === 'slash') {
       this.noise(0.13, 0.075, 2400);
       this.tone(820, 240, 0.13, 0.045, 'triangle');
+    } else if (e.kind === 'impact') {
+      this.tone(115, 48, 0.045, 0.07, 'triangle');
     } else if (e.kind === 'pickup') {
       if (now - this.lastHit < 0.07) return;
       this.lastHit = now;

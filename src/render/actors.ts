@@ -263,6 +263,11 @@ export function drawActors(
   for (const b of w.projectiles.items) {
     if (!b.active) continue;
     if (hostileSprites && b.enemy) continue;
+    if (b.impactPause > 0) {
+      g.lineStyle(2, 0xffefc3, 0.9);
+      g.strokeCircle(b.x, b.y, b.radius + 5);
+      g.lineBetween(b.x - b.radius - 9, b.y, b.x + b.radius + 9, b.y);
+    }
     const a = Math.atan2(b.vy, b.vx);
     if (!b.enemy && b.shape === 'lance') {
       const tail = 65;

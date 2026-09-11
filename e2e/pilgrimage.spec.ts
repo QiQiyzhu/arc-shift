@@ -13,6 +13,9 @@ async function run(page: Page, seed = 20260908) {
   await page.evaluate((seed) => {
     const a = window.arcQA;
     a.engine.start(seed);
+    // Controlled route fixture, independent of the random initial weapon.
+    a.engine.world.weapon = 'arc';
+    a.engine.world.forms = ['arc'];
     a.engine.chooseCard('fire-ember');
   }, seed);
 }
@@ -45,8 +48,11 @@ test('clean menu groups loadout, bestiary and memories into a navigable camp', a
   await page.setViewportSize({ width: 1440, height: 900 });
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
   await page.getByRole('button', { name: /余烬协议：/ }).click();
-  expect(await page.evaluate(() => window.arcQA.engine.world.weapon)).toBe(
+  expect(await page.evaluate(() => window.arcQA.engine.save.meta.weapon)).toBe(
     'sword',
+  );
+  expect(['arc', 'sword', 'cannon']).toContain(
+    await page.evaluate(() => window.arcQA.engine.world.weapon),
   );
 });
 test('full route previews locked nodes and travels legally into a free hybrid forge', async ({
@@ -185,13 +191,13 @@ for (const [seed, boss] of [
     ).toBe(2);
     expect(errors).toEqual([]);
   });
-test('three-form trial fires actual hybrid attacks and does not change the profile', async ({
+test('form modifiers reshape the primary projectile and do not change the profile', async ({
   page,
 }) => {
   await ready(page);
   await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
-  await page.getByRole('switch', { name: /三重共鸣/ }).click();
+  await page.getByRole('switch', { name: /形态改写/ }).click();
   const save = await page.evaluate(() =>
     JSON.stringify(window.arcQA.engine.save),
   );
@@ -209,11 +215,12 @@ test('three-form trial fires actual hybrid attacks and does not change the profi
       page.evaluate(
         () =>
           window.arcQA.engine.world.projectiles.items.filter(
-            (p) => p.active && p.shape === 'shell',
+            (p) => p.active && p.shape === 'blade' && p.blastRadius > 0,
           ).length,
       ),
     )
     .toBeGreaterThan(0);
+  expect(await page.evaluate(() => window.arcQA.engine.world.swing)).toBeNull();
   await page.screenshot({ path: 'outputs/qa/v1/hybrid.png' });
   await page.mouse.up();
   expect(

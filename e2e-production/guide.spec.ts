@@ -35,7 +35,7 @@ test('published build guides real input through fusion without QA or save change
     page.getByText('给自己留一条退路', { exact: false }),
   ).toBeVisible();
   await page.keyboard.press('q');
-  const forge = page.getByRole('dialog', { name: '把三种武装，写成一种打法' });
+  const forge = page.getByRole('dialog', { name: '让协议，改写同一次攻击' });
   await expect(forge).toBeVisible();
   await page.keyboard.press('Escape');
   await expect(forge).toBeVisible();

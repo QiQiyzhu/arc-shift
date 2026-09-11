@@ -35,7 +35,6 @@ export class World {
   route: string[] = [];
   forms: WeaponId[] = [];
   relics: string[] = [];
-  supportCd = { arc: 0, sword: 0, cannon: 0 };
   terrain = terrainFor(makeRoom(1, 'combat', 7));
   terrainTick = 0;
   fieldBuff = false;
@@ -71,6 +70,7 @@ export class World {
     combo: number;
     hits: Set<number>;
     fragmented: boolean;
+    impactPause: number;
   } | null = null;
   combo = 0;
   comboTime = 0;
@@ -146,6 +146,7 @@ export class World {
     accent: 0xe3fffa,
     blastRadius: 0,
     fragment: 0,
+    impactPause: 0,
   }));
   nextId = 0;
   has(id: string) {
@@ -167,7 +168,7 @@ export class World {
     elite = false,
     summoned = false,
   ) {
-    const d = this.content.enemies.find(row => row.id === kind)!.params;
+    const d = this.content.enemies.find((row) => row.id === kind)!.params;
     const boss = isBoss(kind);
     const mult = boss ? 1 : 1 + (this.room.index - 1) * 0.15;
     const hp = d.hp * mult * (elite ? 1.65 : 1);
@@ -198,6 +199,8 @@ export class World {
       summoned,
       reactionCd: 0,
       shield: 0,
+      stagger: 0,
+      impactCooldown: 0,
     };
     if (this.campaign === 'pilgrimage') {
       Object.assign(e, safePosition(this, x, y, e.radius));

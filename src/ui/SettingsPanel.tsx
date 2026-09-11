@@ -83,7 +83,7 @@ export function UtilityPanel({
               : mode === 'codex'
                 ? '记录实体的招式与留下的痕迹。'
                 : mode === 'workshop'
-                  ? '将带回的碎片刻入行装。武装免费选择，准备升级只影响新行动。'
+                  ? '将带回的碎片刻入行装。这里的武装用于营地推演；正式行动随机起始。准备升级只影响新行动。'
                   : mode === 'lab'
                     ? '选择一套组合，立即感受叠加后的弹道。无敌试炼，不覆盖你的行动存档。'
                     : mode === 'settings'
@@ -139,7 +139,7 @@ export function UtilityPanel({
             <WeaponPicker value={trialWeapon} onChange={setTrialWeapon} />
             <div className="switch-row">
               <label htmlFor="hybrid-trial">
-                三重共鸣 · 同时试用法器、圣剑与重炮
+                形态改写 · 将另外两种武装的特性融入主攻击
               </label>
               <Switch
                 id="hybrid-trial"
@@ -157,7 +157,11 @@ export function UtilityPanel({
                   className={`trial-card trial-${i}`}
                   onClick={() => {
                     synth.unlock();
-                    engine.startPractice(b.cards, trialWeapon, hybrid);
+                    engine.startPractice(
+                      b.cards,
+                      'weapon' in b ? b.weapon : trialWeapon,
+                      hybrid,
+                    );
                     onClose();
                   }}
                 >
@@ -320,7 +324,7 @@ export function UtilityPanel({
             <div className="help-details">
               <p>
                 <b>三种武装</b> ·
-                营地选择初始法器、圣剑或重炮。局内工坊与武库可熔接其他武装，按住攻击自动轮替副武装。圣剑＋法器的第三斩发出扇形剑气；圣剑＋重炮产生爆破剑弧；重炮＋法器追加弹片。圣剑前摇后挥砍，可斩掉前方敌弹；不能斩除激光。弹道卡增加符文剑气，元素卡强化剑弧。
+                正式行动随机获得法器、圣剑或重炮；相同种子保持相同武器，读档保留原武器。工坊熔接会改造主攻击的弹体或命中效果。近距离剑击推开普通敌人，短促顿挫不会冻结玩家移动；首领抵抗击退。陨星＋光矛形成停留后贯穿的重弹。回旋＋冰霜把圣剑第三斩改为回收冰刃，失去这次宽扇面攻击和扫弹。激光不能斩除。
               </p>
               <p>
                 <b>消耗品</b> · B 在准星方向投放炸弹，0.8

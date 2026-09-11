@@ -1,0 +1,2733 @@
+{
+  "measuredAt": "2026-09-11T07:24:49.385Z",
+  "node": "v24.16.0",
+  "platform": "win32",
+  "scope": "9 recipes + 3 baselines, 72 deterministic 12-second samples. One local CPU run, not human play or a win-rate evaluation.",
+  "results": [
+    {
+      "build": {
+        "cards": [],
+        "relics": [],
+        "forms": [
+          "arc"
+        ],
+        "weapon": "arc",
+        "level": 4,
+        "content": {
+          "schemaVersion": 1,
+          "enemies": [
+            {
+              "id": "hunter",
+              "params": {
+                "hp": 52,
+                "speed": 100,
+                "damage": 9,
+                "radius": 17
+              }
+            },
+            {
+              "id": "sentry",
+              "params": {
+                "hp": 65,
+                "speed": 64,
+                "damage": 10,
+                "radius": 19
+              }
+            },
+            {
+              "id": "lancer",
+              "params": {
+                "hp": 95,
+                "speed": 70,
+                "damage": 17,
+                "radius": 22
+              }
+            },
+            {
+              "id": "weaver",
+              "params": {
+                "hp": 105,
+                "speed": 52,
+                "damage": 18,
+                "radius": 21
+              }
+            },
+            {
+              "id": "conduit",
+              "params": {
+                "hp": 86,
+                "speed": 70,
+                "damage": 7,
+                "radius": 18
+              }
+            },
+            {
+              "id": "warden",
+              "params": {
+                "hp": 3600,
+                "speed": 62,
+                "damage": 22,
+                "radius": 49
+              }
+            },
+            {
+              "id": "bomber",
+              "params": {
+                "hp": 115,
+                "speed": 62,
+                "damage": 16,
+                "radius": 21
+              }
+            },
+            {
+              "id": "cantor",
+              "params": {
+                "hp": 130,
+                "speed": 54,
+                "damage": 12,
+                "radius": 23
+              }
+            },
+            {
+              "id": "shade",
+              "params": {
+                "hp": 90,
+                "speed": 80,
+                "damage": 15,
+                "radius": 18
+              }
+            },
+            {
+              "id": "matron",
+              "params": {
+                "hp": 5200,
+                "speed": 48,
+                "damage": 20,
+                "radius": 48
+              }
+            },
+            {
+              "id": "forgemaster",
+              "params": {
+                "hp": 5400,
+                "speed": 56,
+                "damage": 22,
+                "radius": 50
+              }
+            },
+            {
+              "id": "oracle",
+              "params": {
+                "hp": 6500,
+                "speed": 55,
+                "damage": 24,
+                "radius": 52
+              }
+            }
+          ],
+          "weapons": [
+            {
+              "id": "arc",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1
+              }
+            },
+            {
+              "id": "sword",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1,
+                "range": 1,
+                "arc": 1
+              }
+            },
+            {
+              "id": "cannon",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1,
+                "blast": 1
+              }
+            }
+          ],
+          "cards": [
+            {
+              "id": "fire-meteor",
+              "requires": null,
+              "params": {
+                "shotSize": 9,
+                "shotSpeed": 0.66,
+                "damage": 1.65,
+                "rate": 1.4
+              }
+            },
+            {
+              "id": "fire-bloom",
+              "requires": null,
+              "params": {
+                "fragment": 3
+              }
+            },
+            {
+              "id": "fire-ember",
+              "requires": null,
+              "params": {
+                "burn": 8
+              }
+            },
+            {
+              "id": "fire-fuel",
+              "requires": "fire-ember",
+              "params": {
+                "burn": 18
+              }
+            },
+            {
+              "id": "fire-funeral",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "fire-split",
+              "requires": null,
+              "params": {
+                "projectiles": 3,
+                "damage": 0.75
+              }
+            },
+            {
+              "id": "fire-blast",
+              "requires": null,
+              "params": {
+                "explosion": 1
+              }
+            },
+            {
+              "id": "fire-dash",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "storm-lance",
+              "requires": null,
+              "params": {
+                "shotSpeed": 2.4,
+                "pierce": 3,
+                "rate": 1.35,
+                "damage": 1.15
+              }
+            },
+            {
+              "id": "storm-familiar",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "storm-arc",
+              "requires": null,
+              "params": {
+                "chain": 2
+              }
+            },
+            {
+              "id": "storm-conduct",
+              "requires": "storm-arc",
+              "params": {
+                "chain": 2
+              }
+            },
+            {
+              "id": "storm-static",
+              "requires": "storm-arc",
+              "params": {}
+            },
+            {
+              "id": "storm-critical",
+              "requires": null,
+              "params": {
+                "crit": 0.22
+              }
+            },
+            {
+              "id": "storm-surge",
+              "requires": null,
+              "params": {
+                "rate": 0.78
+              }
+            },
+            {
+              "id": "storm-needle",
+              "requires": null,
+              "params": {
+                "pierce": 2
+              }
+            },
+            {
+              "id": "frost-wave",
+              "requires": null,
+              "params": {
+                "wave": 1
+              }
+            },
+            {
+              "id": "frost-fan",
+              "requires": null,
+              "params": {
+                "projectiles": 2,
+                "damage": 0.7
+              }
+            },
+            {
+              "id": "ice-touch",
+              "requires": null,
+              "params": {
+                "slow": 0.35
+              }
+            },
+            {
+              "id": "ice-brittle",
+              "requires": "ice-touch",
+              "params": {}
+            },
+            {
+              "id": "ice-shatter",
+              "requires": "ice-touch",
+              "params": {}
+            },
+            {
+              "id": "ice-pierce",
+              "requires": null,
+              "params": {
+                "pierce": 1,
+                "damage": 4
+              }
+            },
+            {
+              "id": "ice-shell",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "ice-prism",
+              "requires": null,
+              "params": {
+                "bounce": 2
+              }
+            },
+            {
+              "id": "void-orbit",
+              "requires": null,
+              "params": {
+                "pierce": 2,
+                "rate": 1.2
+              }
+            },
+            {
+              "id": "void-return",
+              "requires": null,
+              "params": {
+                "damage": 0.9
+              }
+            },
+            {
+              "id": "void-seek",
+              "requires": null,
+              "params": {
+                "homing": 1
+              }
+            },
+            {
+              "id": "void-horizon",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "void-execute",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "void-leech",
+              "requires": null,
+              "params": {
+                "lifesteal": 1
+              }
+            },
+            {
+              "id": "void-singularity",
+              "requires": null,
+              "params": {
+                "eCooldown": 0.65
+              }
+            },
+            {
+              "id": "void-echo",
+              "requires": null,
+              "params": {
+                "qCooldown": 0.65,
+                "damage": 4
+              }
+            },
+            {
+              "id": "shift-echo",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-rear",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-quick",
+              "requires": null,
+              "params": {
+                "dashCooldown": 0.7
+              }
+            },
+            {
+              "id": "shift-shield",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-nova",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-ice",
+              "requires": null,
+              "params": {
+                "slow": 0.35
+              }
+            },
+            {
+              "id": "shift-reload",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-stride",
+              "requires": null,
+              "params": {
+                "speed": 1.18
+              }
+            }
+          ],
+          "encounters": [
+            {
+              "id": "standard",
+              "pool": [
+                "hunter",
+                "sentry",
+                "lancer"
+              ],
+              "params": {
+                "combatWaves": 3,
+                "eliteWaves": 4,
+                "challengeWaves": 5,
+                "interval": 9,
+                "baseCount": 4,
+                "eliteBonus": 3
+              }
+            }
+          ],
+          "bosses": [
+            {
+              "id": "warden",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "matron",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "forgemaster",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "oracle",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            }
+          ]
+        },
+        "offered": [],
+        "source": "camp"
+      },
+      "goal": "single",
+      "result": {
+        "gameVersion": "1.2-protocol.1",
+        "version": "coach-range-2",
+        "seeds": [
+          73129,
+          41717,
+          90311
+        ],
+        "ticks": 720,
+        "baseline": {
+          "candidate": {
+            "id": "baseline",
+            "label": "当前构筑",
+            "cards": []
+          },
+          "samples": [
+            {
+              "seed": 73129,
+              "scene": "single",
+              "damage": 1859,
+              "dps": 154.91666666666666,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 41717,
+              "scene": "single",
+              "damage": 1827,
+              "dps": 152.25,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 90311,
+              "scene": "single",
+              "damage": 1747,
+              "dps": 145.58333333333334,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 73129,
+              "scene": "swarm",
+              "damage": 4340,
+              "dps": 361.6666666666667,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 41717,
+              "scene": "swarm",
+              "damage": 4290,
+              "dps": 357.5,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 90311,
+              "scene": "swarm",
+              "damage": 4259,
+              "dps": 354.9166666666667,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            }
+          ],
+          "single": 150.91666666666666,
+          "swarm": 358.0277777777778,
+          "dash": 1.2,
+          "speed": 250,
+          "maxHpBonus": 0,
+          "synergies": []
+        },
+        "rows": [
+          {
+            "candidate": {
+              "id": "arc-swarm",
+              "label": "电弧链群清场",
+              "cards": [
+                "fire-ember",
+                "storm-arc",
+                "storm-conduct",
+                "storm-needle",
+                "fire-split",
+                "fire-bloom"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 3597,
+                "dps": 299.75,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 3597,
+                "dps": 299.75,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 3584,
+                "dps": 298.6666666666667,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 21947,
+                "dps": 1828.9166666666667,
+                "reactions": 117,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 21495,
+                "dps": 1791.25,
+                "reactions": 115,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 21067,
+                "dps": 1755.5833333333333,
+                "reactions": 116,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 299.3888888888889,
+            "swarm": 1791.9166666666667,
+            "dash": 1.2,
+            "speed": 250,
+            "maxHpBonus": 0,
+            "synergies": [
+              "plasma"
+            ]
+          },
+          {
+            "candidate": {
+              "id": "arc-mobility",
+              "label": "电弧位移循环",
+              "cards": [
+                "shift-quick",
+                "shift-stride",
+                "shift-reload",
+                "storm-arc",
+                "shift-rear",
+                "void-seek"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 3268,
+                "dps": 272.3333333333333,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 3173,
+                "dps": 264.4166666666667,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 3192,
+                "dps": 266,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 6924,
+                "dps": 577,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 7133,
+                "dps": 594.4166666666666,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 7058,
+                "dps": 588.1666666666666,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 267.5833333333333,
+            "swarm": 586.5277777777777,
+            "dash": 0.84,
+            "speed": 295,
+            "maxHpBonus": 0,
+            "synergies": [
+              "afterimage"
+            ]
+          },
+          {
+            "candidate": {
+              "id": "arc-single",
+              "label": "电弧单体连锁输出",
+              "cards": [
+                "fire-ember",
+                "fire-fuel",
+                "storm-arc",
+                "storm-critical",
+                "storm-surge",
+                "void-seek"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 2737,
+                "dps": 228.08333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 2689,
+                "dps": 224.08333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 2690,
+                "dps": 224.16666666666666,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 9630,
+                "dps": 802.5,
+                "reactions": 12,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 10139,
+                "dps": 844.9166666666666,
+                "reactions": 16,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 11718,
+                "dps": 976.5,
+                "reactions": 16,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 225.44444444444446,
+            "swarm": 874.6388888888888,
+            "dash": 1.2,
+            "speed": 250,
+            "maxHpBonus": 0,
+            "synergies": [
+              "plasma"
+            ]
+          }
+        ]
+      },
+      "elapsedMs": 334.67359999999996
+    },
+    {
+      "build": {
+        "cards": [],
+        "relics": [],
+        "forms": [
+          "sword"
+        ],
+        "weapon": "sword",
+        "level": 4,
+        "content": {
+          "schemaVersion": 1,
+          "enemies": [
+            {
+              "id": "hunter",
+              "params": {
+                "hp": 52,
+                "speed": 100,
+                "damage": 9,
+                "radius": 17
+              }
+            },
+            {
+              "id": "sentry",
+              "params": {
+                "hp": 65,
+                "speed": 64,
+                "damage": 10,
+                "radius": 19
+              }
+            },
+            {
+              "id": "lancer",
+              "params": {
+                "hp": 95,
+                "speed": 70,
+                "damage": 17,
+                "radius": 22
+              }
+            },
+            {
+              "id": "weaver",
+              "params": {
+                "hp": 105,
+                "speed": 52,
+                "damage": 18,
+                "radius": 21
+              }
+            },
+            {
+              "id": "conduit",
+              "params": {
+                "hp": 86,
+                "speed": 70,
+                "damage": 7,
+                "radius": 18
+              }
+            },
+            {
+              "id": "warden",
+              "params": {
+                "hp": 3600,
+                "speed": 62,
+                "damage": 22,
+                "radius": 49
+              }
+            },
+            {
+              "id": "bomber",
+              "params": {
+                "hp": 115,
+                "speed": 62,
+                "damage": 16,
+                "radius": 21
+              }
+            },
+            {
+              "id": "cantor",
+              "params": {
+                "hp": 130,
+                "speed": 54,
+                "damage": 12,
+                "radius": 23
+              }
+            },
+            {
+              "id": "shade",
+              "params": {
+                "hp": 90,
+                "speed": 80,
+                "damage": 15,
+                "radius": 18
+              }
+            },
+            {
+              "id": "matron",
+              "params": {
+                "hp": 5200,
+                "speed": 48,
+                "damage": 20,
+                "radius": 48
+              }
+            },
+            {
+              "id": "forgemaster",
+              "params": {
+                "hp": 5400,
+                "speed": 56,
+                "damage": 22,
+                "radius": 50
+              }
+            },
+            {
+              "id": "oracle",
+              "params": {
+                "hp": 6500,
+                "speed": 55,
+                "damage": 24,
+                "radius": 52
+              }
+            }
+          ],
+          "weapons": [
+            {
+              "id": "arc",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1
+              }
+            },
+            {
+              "id": "sword",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1,
+                "range": 1,
+                "arc": 1
+              }
+            },
+            {
+              "id": "cannon",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1,
+                "blast": 1
+              }
+            }
+          ],
+          "cards": [
+            {
+              "id": "fire-meteor",
+              "requires": null,
+              "params": {
+                "shotSize": 9,
+                "shotSpeed": 0.66,
+                "damage": 1.65,
+                "rate": 1.4
+              }
+            },
+            {
+              "id": "fire-bloom",
+              "requires": null,
+              "params": {
+                "fragment": 3
+              }
+            },
+            {
+              "id": "fire-ember",
+              "requires": null,
+              "params": {
+                "burn": 8
+              }
+            },
+            {
+              "id": "fire-fuel",
+              "requires": "fire-ember",
+              "params": {
+                "burn": 18
+              }
+            },
+            {
+              "id": "fire-funeral",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "fire-split",
+              "requires": null,
+              "params": {
+                "projectiles": 3,
+                "damage": 0.75
+              }
+            },
+            {
+              "id": "fire-blast",
+              "requires": null,
+              "params": {
+                "explosion": 1
+              }
+            },
+            {
+              "id": "fire-dash",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "storm-lance",
+              "requires": null,
+              "params": {
+                "shotSpeed": 2.4,
+                "pierce": 3,
+                "rate": 1.35,
+                "damage": 1.15
+              }
+            },
+            {
+              "id": "storm-familiar",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "storm-arc",
+              "requires": null,
+              "params": {
+                "chain": 2
+              }
+            },
+            {
+              "id": "storm-conduct",
+              "requires": "storm-arc",
+              "params": {
+                "chain": 2
+              }
+            },
+            {
+              "id": "storm-static",
+              "requires": "storm-arc",
+              "params": {}
+            },
+            {
+              "id": "storm-critical",
+              "requires": null,
+              "params": {
+                "crit": 0.22
+              }
+            },
+            {
+              "id": "storm-surge",
+              "requires": null,
+              "params": {
+                "rate": 0.78
+              }
+            },
+            {
+              "id": "storm-needle",
+              "requires": null,
+              "params": {
+                "pierce": 2
+              }
+            },
+            {
+              "id": "frost-wave",
+              "requires": null,
+              "params": {
+                "wave": 1
+              }
+            },
+            {
+              "id": "frost-fan",
+              "requires": null,
+              "params": {
+                "projectiles": 2,
+                "damage": 0.7
+              }
+            },
+            {
+              "id": "ice-touch",
+              "requires": null,
+              "params": {
+                "slow": 0.35
+              }
+            },
+            {
+              "id": "ice-brittle",
+              "requires": "ice-touch",
+              "params": {}
+            },
+            {
+              "id": "ice-shatter",
+              "requires": "ice-touch",
+              "params": {}
+            },
+            {
+              "id": "ice-pierce",
+              "requires": null,
+              "params": {
+                "pierce": 1,
+                "damage": 4
+              }
+            },
+            {
+              "id": "ice-shell",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "ice-prism",
+              "requires": null,
+              "params": {
+                "bounce": 2
+              }
+            },
+            {
+              "id": "void-orbit",
+              "requires": null,
+              "params": {
+                "pierce": 2,
+                "rate": 1.2
+              }
+            },
+            {
+              "id": "void-return",
+              "requires": null,
+              "params": {
+                "damage": 0.9
+              }
+            },
+            {
+              "id": "void-seek",
+              "requires": null,
+              "params": {
+                "homing": 1
+              }
+            },
+            {
+              "id": "void-horizon",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "void-execute",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "void-leech",
+              "requires": null,
+              "params": {
+                "lifesteal": 1
+              }
+            },
+            {
+              "id": "void-singularity",
+              "requires": null,
+              "params": {
+                "eCooldown": 0.65
+              }
+            },
+            {
+              "id": "void-echo",
+              "requires": null,
+              "params": {
+                "qCooldown": 0.65,
+                "damage": 4
+              }
+            },
+            {
+              "id": "shift-echo",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-rear",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-quick",
+              "requires": null,
+              "params": {
+                "dashCooldown": 0.7
+              }
+            },
+            {
+              "id": "shift-shield",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-nova",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-ice",
+              "requires": null,
+              "params": {
+                "slow": 0.35
+              }
+            },
+            {
+              "id": "shift-reload",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-stride",
+              "requires": null,
+              "params": {
+                "speed": 1.18
+              }
+            }
+          ],
+          "encounters": [
+            {
+              "id": "standard",
+              "pool": [
+                "hunter",
+                "sentry",
+                "lancer"
+              ],
+              "params": {
+                "combatWaves": 3,
+                "eliteWaves": 4,
+                "challengeWaves": 5,
+                "interval": 9,
+                "baseCount": 4,
+                "eliteBonus": 3
+              }
+            }
+          ],
+          "bosses": [
+            {
+              "id": "warden",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "matron",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "forgemaster",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "oracle",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            }
+          ]
+        },
+        "offered": [],
+        "source": "camp"
+      },
+      "goal": "single",
+      "result": {
+        "gameVersion": "1.2-protocol.1",
+        "version": "coach-range-2",
+        "seeds": [
+          73129,
+          41717,
+          90311
+        ],
+        "ticks": 720,
+        "baseline": {
+          "candidate": {
+            "id": "baseline",
+            "label": "当前构筑",
+            "cards": []
+          },
+          "samples": [
+            {
+              "seed": 73129,
+              "scene": "single",
+              "damage": 1577,
+              "dps": 131.41666666666666,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 41717,
+              "scene": "single",
+              "damage": 1611,
+              "dps": 134.25,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 90311,
+              "scene": "single",
+              "damage": 1577,
+              "dps": 131.41666666666666,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 73129,
+              "scene": "swarm",
+              "damage": 12691,
+              "dps": 1057.5833333333333,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 41717,
+              "scene": "swarm",
+              "damage": 12705,
+              "dps": 1058.75,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 90311,
+              "scene": "swarm",
+              "damage": 12396,
+              "dps": 1033,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            }
+          ],
+          "single": 132.3611111111111,
+          "swarm": 1049.7777777777776,
+          "dash": 1.2,
+          "speed": 250,
+          "maxHpBonus": 0,
+          "synergies": []
+        },
+        "rows": [
+          {
+            "candidate": {
+              "id": "sword-single",
+              "label": "圣剑单体贯星燃烧流",
+              "cards": [
+                "fire-ember",
+                "fire-fuel",
+                "storm-lance",
+                "storm-surge",
+                "void-seek",
+                "ice-touch"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 2267,
+                "dps": 188.91666666666666,
+                "reactions": 8,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 2166,
+                "dps": 180.5,
+                "reactions": 8,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 2205,
+                "dps": 183.75,
+                "reactions": 8,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 26199,
+                "dps": 2183.25,
+                "reactions": 63,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 25862,
+                "dps": 2155.1666666666665,
+                "reactions": 63,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 25902,
+                "dps": 2158.5,
+                "reactions": 63,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 184.38888888888889,
+            "swarm": 2165.6388888888887,
+            "dash": 1.2,
+            "speed": 250,
+            "maxHpBonus": 0,
+            "synergies": [
+              "thermal"
+            ]
+          },
+          {
+            "candidate": {
+              "id": "sword-swarm",
+              "label": "圣剑电弧星火清群",
+              "cards": [
+                "fire-ember",
+                "storm-arc",
+                "storm-conduct",
+                "storm-needle",
+                "fire-bloom",
+                "fire-split"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 2146,
+                "dps": 178.83333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 2014,
+                "dps": 167.83333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 2128,
+                "dps": 177.33333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 27382,
+                "dps": 2281.8333333333335,
+                "reactions": 105,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 29563,
+                "dps": 2463.5833333333335,
+                "reactions": 119,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 29834,
+                "dps": 2486.1666666666665,
+                "reactions": 118,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 174.66666666666666,
+            "swarm": 2410.527777777778,
+            "dash": 1.2,
+            "speed": 250,
+            "maxHpBonus": 0,
+            "synergies": [
+              "plasma"
+            ]
+          },
+          {
+            "candidate": {
+              "id": "sword-mobility",
+              "label": "相位剑舞·位移连射",
+              "cards": [
+                "shift-quick",
+                "shift-stride",
+                "shift-reload",
+                "storm-arc",
+                "shift-rear",
+                "shift-ice"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 1884,
+                "dps": 157,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 2007,
+                "dps": 167.25,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 1926,
+                "dps": 160.5,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 18817,
+                "dps": 1568.0833333333333,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 18798,
+                "dps": 1566.5,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 18913,
+                "dps": 1576.0833333333333,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 161.58333333333334,
+            "swarm": 1570.222222222222,
+            "dash": 0.84,
+            "speed": 295,
+            "maxHpBonus": 0,
+            "synergies": [
+              "afterimage"
+            ]
+          }
+        ]
+      },
+      "elapsedMs": 226.63850000000002
+    },
+    {
+      "build": {
+        "cards": [],
+        "relics": [],
+        "forms": [
+          "cannon"
+        ],
+        "weapon": "cannon",
+        "level": 4,
+        "content": {
+          "schemaVersion": 1,
+          "enemies": [
+            {
+              "id": "hunter",
+              "params": {
+                "hp": 52,
+                "speed": 100,
+                "damage": 9,
+                "radius": 17
+              }
+            },
+            {
+              "id": "sentry",
+              "params": {
+                "hp": 65,
+                "speed": 64,
+                "damage": 10,
+                "radius": 19
+              }
+            },
+            {
+              "id": "lancer",
+              "params": {
+                "hp": 95,
+                "speed": 70,
+                "damage": 17,
+                "radius": 22
+              }
+            },
+            {
+              "id": "weaver",
+              "params": {
+                "hp": 105,
+                "speed": 52,
+                "damage": 18,
+                "radius": 21
+              }
+            },
+            {
+              "id": "conduit",
+              "params": {
+                "hp": 86,
+                "speed": 70,
+                "damage": 7,
+                "radius": 18
+              }
+            },
+            {
+              "id": "warden",
+              "params": {
+                "hp": 3600,
+                "speed": 62,
+                "damage": 22,
+                "radius": 49
+              }
+            },
+            {
+              "id": "bomber",
+              "params": {
+                "hp": 115,
+                "speed": 62,
+                "damage": 16,
+                "radius": 21
+              }
+            },
+            {
+              "id": "cantor",
+              "params": {
+                "hp": 130,
+                "speed": 54,
+                "damage": 12,
+                "radius": 23
+              }
+            },
+            {
+              "id": "shade",
+              "params": {
+                "hp": 90,
+                "speed": 80,
+                "damage": 15,
+                "radius": 18
+              }
+            },
+            {
+              "id": "matron",
+              "params": {
+                "hp": 5200,
+                "speed": 48,
+                "damage": 20,
+                "radius": 48
+              }
+            },
+            {
+              "id": "forgemaster",
+              "params": {
+                "hp": 5400,
+                "speed": 56,
+                "damage": 22,
+                "radius": 50
+              }
+            },
+            {
+              "id": "oracle",
+              "params": {
+                "hp": 6500,
+                "speed": 55,
+                "damage": 24,
+                "radius": 52
+              }
+            }
+          ],
+          "weapons": [
+            {
+              "id": "arc",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1
+              }
+            },
+            {
+              "id": "sword",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1,
+                "range": 1,
+                "arc": 1
+              }
+            },
+            {
+              "id": "cannon",
+              "params": {
+                "damage": 1,
+                "cooldown": 1,
+                "projectileSpeed": 1,
+                "blast": 1
+              }
+            }
+          ],
+          "cards": [
+            {
+              "id": "fire-meteor",
+              "requires": null,
+              "params": {
+                "shotSize": 9,
+                "shotSpeed": 0.66,
+                "damage": 1.65,
+                "rate": 1.4
+              }
+            },
+            {
+              "id": "fire-bloom",
+              "requires": null,
+              "params": {
+                "fragment": 3
+              }
+            },
+            {
+              "id": "fire-ember",
+              "requires": null,
+              "params": {
+                "burn": 8
+              }
+            },
+            {
+              "id": "fire-fuel",
+              "requires": "fire-ember",
+              "params": {
+                "burn": 18
+              }
+            },
+            {
+              "id": "fire-funeral",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "fire-split",
+              "requires": null,
+              "params": {
+                "projectiles": 3,
+                "damage": 0.75
+              }
+            },
+            {
+              "id": "fire-blast",
+              "requires": null,
+              "params": {
+                "explosion": 1
+              }
+            },
+            {
+              "id": "fire-dash",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "storm-lance",
+              "requires": null,
+              "params": {
+                "shotSpeed": 2.4,
+                "pierce": 3,
+                "rate": 1.35,
+                "damage": 1.15
+              }
+            },
+            {
+              "id": "storm-familiar",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "storm-arc",
+              "requires": null,
+              "params": {
+                "chain": 2
+              }
+            },
+            {
+              "id": "storm-conduct",
+              "requires": "storm-arc",
+              "params": {
+                "chain": 2
+              }
+            },
+            {
+              "id": "storm-static",
+              "requires": "storm-arc",
+              "params": {}
+            },
+            {
+              "id": "storm-critical",
+              "requires": null,
+              "params": {
+                "crit": 0.22
+              }
+            },
+            {
+              "id": "storm-surge",
+              "requires": null,
+              "params": {
+                "rate": 0.78
+              }
+            },
+            {
+              "id": "storm-needle",
+              "requires": null,
+              "params": {
+                "pierce": 2
+              }
+            },
+            {
+              "id": "frost-wave",
+              "requires": null,
+              "params": {
+                "wave": 1
+              }
+            },
+            {
+              "id": "frost-fan",
+              "requires": null,
+              "params": {
+                "projectiles": 2,
+                "damage": 0.7
+              }
+            },
+            {
+              "id": "ice-touch",
+              "requires": null,
+              "params": {
+                "slow": 0.35
+              }
+            },
+            {
+              "id": "ice-brittle",
+              "requires": "ice-touch",
+              "params": {}
+            },
+            {
+              "id": "ice-shatter",
+              "requires": "ice-touch",
+              "params": {}
+            },
+            {
+              "id": "ice-pierce",
+              "requires": null,
+              "params": {
+                "pierce": 1,
+                "damage": 4
+              }
+            },
+            {
+              "id": "ice-shell",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "ice-prism",
+              "requires": null,
+              "params": {
+                "bounce": 2
+              }
+            },
+            {
+              "id": "void-orbit",
+              "requires": null,
+              "params": {
+                "pierce": 2,
+                "rate": 1.2
+              }
+            },
+            {
+              "id": "void-return",
+              "requires": null,
+              "params": {
+                "damage": 0.9
+              }
+            },
+            {
+              "id": "void-seek",
+              "requires": null,
+              "params": {
+                "homing": 1
+              }
+            },
+            {
+              "id": "void-horizon",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "void-execute",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "void-leech",
+              "requires": null,
+              "params": {
+                "lifesteal": 1
+              }
+            },
+            {
+              "id": "void-singularity",
+              "requires": null,
+              "params": {
+                "eCooldown": 0.65
+              }
+            },
+            {
+              "id": "void-echo",
+              "requires": null,
+              "params": {
+                "qCooldown": 0.65,
+                "damage": 4
+              }
+            },
+            {
+              "id": "shift-echo",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-rear",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-quick",
+              "requires": null,
+              "params": {
+                "dashCooldown": 0.7
+              }
+            },
+            {
+              "id": "shift-shield",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-nova",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-ice",
+              "requires": null,
+              "params": {
+                "slow": 0.35
+              }
+            },
+            {
+              "id": "shift-reload",
+              "requires": null,
+              "params": {}
+            },
+            {
+              "id": "shift-stride",
+              "requires": null,
+              "params": {
+                "speed": 1.18
+              }
+            }
+          ],
+          "encounters": [
+            {
+              "id": "standard",
+              "pool": [
+                "hunter",
+                "sentry",
+                "lancer"
+              ],
+              "params": {
+                "combatWaves": 3,
+                "eliteWaves": 4,
+                "challengeWaves": 5,
+                "interval": 9,
+                "baseCount": 4,
+                "eliteBonus": 3
+              }
+            }
+          ],
+          "bosses": [
+            {
+              "id": "warden",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "matron",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "forgemaster",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            },
+            {
+              "id": "oracle",
+              "params": {
+                "phase2At": 0.65,
+                "phase3At": 0.3,
+                "phaseRecovery": 1.8
+              }
+            }
+          ]
+        },
+        "offered": [],
+        "source": "camp"
+      },
+      "goal": "single",
+      "result": {
+        "gameVersion": "1.2-protocol.1",
+        "version": "coach-range-2",
+        "seeds": [
+          73129,
+          41717,
+          90311
+        ],
+        "ticks": 720,
+        "baseline": {
+          "candidate": {
+            "id": "baseline",
+            "label": "当前构筑",
+            "cards": []
+          },
+          "samples": [
+            {
+              "seed": 73129,
+              "scene": "single",
+              "damage": 1779,
+              "dps": 148.25,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 41717,
+              "scene": "single",
+              "damage": 1593,
+              "dps": 132.75,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 90311,
+              "scene": "single",
+              "damage": 1593,
+              "dps": 132.75,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 73129,
+              "scene": "swarm",
+              "damage": 7665,
+              "dps": 638.75,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 41717,
+              "scene": "swarm",
+              "damage": 7492,
+              "dps": 624.3333333333334,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            },
+            {
+              "seed": 90311,
+              "scene": "swarm",
+              "damage": 7479,
+              "dps": 623.25,
+              "reactions": 0,
+              "ticks": 720,
+              "poolMisses": 0,
+              "casts": {
+                "pulse": 2,
+                "well": 2,
+                "dash": 0
+              }
+            }
+          ],
+          "single": 137.91666666666666,
+          "swarm": 628.7777777777778,
+          "dash": 1.2,
+          "speed": 250,
+          "maxHpBonus": 0,
+          "synergies": []
+        },
+        "rows": [
+          {
+            "candidate": {
+              "id": "cannon-swarm",
+              "label": "电弧星火群清",
+              "cards": [
+                "fire-ember",
+                "storm-arc",
+                "storm-conduct",
+                "fire-bloom",
+                "fire-split",
+                "storm-needle"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 3425,
+                "dps": 285.4166666666667,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 3331,
+                "dps": 277.5833333333333,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 3331,
+                "dps": 277.5833333333333,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 51299,
+                "dps": 4274.916666666667,
+                "reactions": 114,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 49925,
+                "dps": 4160.416666666667,
+                "reactions": 109,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 52051,
+                "dps": 4337.583333333333,
+                "reactions": 111,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 280.1944444444444,
+            "swarm": 4257.63888888889,
+            "dash": 1.2,
+            "speed": 250,
+            "maxHpBonus": 0,
+            "synergies": [
+              "plasma"
+            ]
+          },
+          {
+            "candidate": {
+              "id": "cannon-single",
+              "label": "重炮单体：陨星燃烧贯星",
+              "cards": [
+                "fire-ember",
+                "fire-fuel",
+                "fire-meteor",
+                "storm-lance",
+                "void-seek",
+                "storm-surge"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 2669,
+                "dps": 222.41666666666666,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 2787,
+                "dps": 232.25,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 2551,
+                "dps": 212.58333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 32768,
+                "dps": 2730.6666666666665,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 33147,
+                "dps": 2762.25,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 32979,
+                "dps": 2748.25,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 222.41666666666666,
+            "swarm": 2747.055555555555,
+            "dash": 1.2,
+            "speed": 250,
+            "maxHpBonus": 0,
+            "synergies": [
+              "pinning"
+            ]
+          },
+          {
+            "candidate": {
+              "id": "cannon-mobility",
+              "label": "炮击位移循环",
+              "cards": [
+                "shift-quick",
+                "shift-stride",
+                "shift-reload",
+                "shift-rear",
+                "void-seek",
+                "ice-touch"
+              ]
+            },
+            "samples": [
+              {
+                "seed": 73129,
+                "scene": "single",
+                "damage": 2373,
+                "dps": 197.75,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "single",
+                "damage": 2223,
+                "dps": 185.25,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "single",
+                "damage": 2148,
+                "dps": 179,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 73129,
+                "scene": "swarm",
+                "damage": 9444,
+                "dps": 787,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 41717,
+                "scene": "swarm",
+                "damage": 9195,
+                "dps": 766.25,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              },
+              {
+                "seed": 90311,
+                "scene": "swarm",
+                "damage": 9178,
+                "dps": 764.8333333333334,
+                "reactions": 0,
+                "ticks": 720,
+                "poolMisses": 0,
+                "casts": {
+                  "pulse": 2,
+                  "well": 2,
+                  "dash": 0
+                }
+              }
+            ],
+            "single": 187.33333333333334,
+            "swarm": 772.6944444444445,
+            "dash": 0.84,
+            "speed": 295,
+            "maxHpBonus": 0,
+            "synergies": []
+          }
+        ]
+      },
+      "elapsedMs": 199.53909999999996
+    }
+  ]
+}

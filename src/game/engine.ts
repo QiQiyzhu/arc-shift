@@ -22,7 +22,11 @@ import { updateWeapon } from '../combat/weapons';
 import { expedition, availableNodes } from '../rooms/expedition';
 import { terrainFor, updateTerrain } from '../rooms/terrain';
 import { RELICS, LORE } from '../progression/catalog';
-import { DEFAULT_CONTENT, validateContent, type ContentPack } from '../content/schema';
+import {
+  DEFAULT_CONTENT,
+  validateContent,
+  type ContentPack,
+} from '../content/schema';
 export class Engine {
   world = new World();
   private settled = false;
@@ -42,8 +46,14 @@ export class Engine {
     this.observer?.command(command, result);
     return result;
   }
-  constructor(options?: { save?: SaveData; persistence?: boolean; content?: ContentPack }) {
-    const content = options?.content ? validateContent(options.content) : { ok: true as const, value: DEFAULT_CONTENT };
+  constructor(options?: {
+    save?: SaveData;
+    persistence?: boolean;
+    content?: ContentPack;
+  }) {
+    const content = options?.content
+      ? validateContent(options.content)
+      : { ok: true as const, value: DEFAULT_CONTENT };
     if (!content.ok) throw Error(content.errors.join('\n'));
     this.content = content.value;
     this.world = new World(this.content);
@@ -75,7 +85,10 @@ export class Engine {
     this.world.bus = bus;
     this.world.seed = seed;
     this.world.rng = new Random(seed);
-    this.world.weapon = this.save.meta.weapon;
+    // Independent seeded stream: camp practice preferences do not choose a campaign's start.
+    this.world.weapon = (['arc', 'sword', 'cannon'] as const)[
+      new Random(seed ^ 0x5f3759df).int(0, 2)
+    ];
     this.world.campaign = 'pilgrimage';
     this.world.forms = [this.world.weapon];
     this.world.relics =
@@ -229,7 +242,6 @@ export class Engine {
     w.fieldBuff = false;
     w.eventDone = false;
     w.challengeTime = 0;
-    w.supportCd = { arc: 0, sword: 0, cannon: 0 };
     if (w.campaign === 'pilgrimage' && !this.practice)
       this.remember(
         room.biome === 'grove'
@@ -642,7 +654,15 @@ export class Engine {
     w.eventDone = true;
     w.phase = reward ? 'reward' : 'map';
     w.rewardContext = 'clear';
-    if (reward) w.rewards = rewardChoices(w.cards, w.seed, w.room.index, false, false, w.content);
+    if (reward)
+      w.rewards = rewardChoices(
+        w.cards,
+        w.seed,
+        w.room.index,
+        false,
+        false,
+        w.content,
+      );
     this.checkpoint();
     return true;
   }
@@ -712,7 +732,14 @@ export class Engine {
     w.wallet[resource]--;
     w.campUsed.push('chest');
     if (method === 'key') {
-      const card = rewardChoices(w.cards, w.seed + 8171, w.room.index, false, false, w.content)[0];
+      const card = rewardChoices(
+        w.cards,
+        w.seed + 8171,
+        w.room.index,
+        false,
+        false,
+        w.content,
+      )[0];
       if (card) {
         this.integrateCard(card.id);
         w.campMessage = `封存箱已开启：获得「${card.name}」。`;

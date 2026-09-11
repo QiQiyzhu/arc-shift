@@ -49,13 +49,15 @@ export function FieldGuidePanel({
       keys.pulse,
     ],
     forge: [
-      '把三种武装，写成一种打法',
-      '选择一套共鸣。按住攻击时，主武装与副武装共享元素和弹道。',
+      '让协议，改写同一次攻击',
+      '选择一种组合，观察元素、轨迹和命中规则如何相互作用。',
       '共鸣',
     ],
     resonance: [
       '现在，让组合真正运转',
-      '圣剑是主武装：靠近敌人按住攻击，法器与重炮会自动接入；第三斩发出剑气。',
+      guide.build === '电浆剑舞'
+        ? '用圣剑近身点燃敌人，再由电弧连接燃烧目标，观察电浆如何消耗状态爆发。'
+        : '用法器选好角度。追踪弹反弹后更快转向，但每次反弹损失部分伤害。',
       keys.attack,
     ],
     boss: [
@@ -65,7 +67,7 @@ export function FieldGuidePanel({
     ],
     complete: [
       '你已经掌握跃迁的语言',
-      '正式行动里，寻找武库与工坊逐步熔接武装，再用协议改写它们。',
+      '正式行动随机起始武器；用协议改写攻击，再在工坊选择适合当前打法的形态修饰。',
       '完成',
     ],
   }[guide.step];
@@ -152,7 +154,7 @@ export function FieldGuidePanel({
       <p>{content[1]}</p>
       {guide.step === 'resonance' && (
         <div className="guide-live">
-          {activeSynergies(w.cards)
+          {activeSynergies(w.cards, w.weapon)
             .map((s) => s.name)
             .join(' · ')}
           <b>爆发反应 {w.reactionCount}</b>

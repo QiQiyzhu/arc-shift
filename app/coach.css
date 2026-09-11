@@ -1,0 +1,416 @@
+.coach-panel {
+  width: min(1180px, 94vw) !important;
+  max-width: 1180px !important;
+  max-height: 90dvh;
+  overflow: auto;
+  background: #0d1c20 !important;
+  color: #e2e9db !important;
+  border: 1px solid #728577 !important;
+  padding: 32px !important;
+  gap: 12px !important;
+  border-radius: 3px !important;
+  font-size: 16px;
+  box-shadow: 0 35px 100px #0009;
+}
+.coach-panel [data-slot='dialog-title'] {
+  font-size: 32px;
+  line-height: 1.25;
+  color: #f2edda;
+}
+.coach-panel [data-slot='dialog-description'] {
+  color: #b2c6bf;
+  font-size: 16px;
+  line-height: 1.6;
+  max-width: 800px;
+}
+.coach-kicker {
+  display: flex;
+  gap: 9px;
+  align-items: center;
+  color: #cfce9d;
+  font:
+    12px/1.5 'Space Grotesk',
+    sans-serif;
+  letter-spacing: 2px;
+}
+.coach-kicker span {
+  margin-left: auto;
+  margin-right: 18px;
+  letter-spacing: 0;
+  color: #a3bcb2;
+  font-size: 13px;
+}
+.coach-context {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 22px;
+  padding: 12px 0;
+  border-bottom: 1px solid #354f4d;
+  font-size: 14px;
+  color: #b2c9c2;
+}
+.coach-context span:first-child {
+  color: #e4d2a0;
+}
+.coach-controls {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: end;
+  gap: 16px;
+  padding: 10px 0 20px;
+}
+.coach-controls .coach-goals {
+  display: flex;
+  border: 1px solid #48605a;
+}
+.coach-controls .coach-goals button {
+  padding: 12px 14px;
+  font-size: 14px;
+  color: #b9ccc5;
+}
+.coach-controls button[aria-pressed='true'] {
+  color: #142725;
+  background: #cdddaf;
+}
+.coach-controls label {
+  display: grid;
+  gap: 6px;
+  font-size: 13px;
+  color: #a6bdb4;
+  flex: 1;
+  min-width: 170px;
+}
+.coach-controls input {
+  padding: 10px 12px;
+  background: #07171c;
+  color: #edf3e6;
+  border: 1px solid #48605a;
+  min-width: 0;
+  font-size: 15px;
+}
+.coach-run {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  padding: 12px 18px;
+  background: #e5c995;
+  color: #142222;
+  font-size: 15px;
+  font-weight: 600;
+}
+.coach-run:disabled {
+  opacity: 0.6;
+}
+.coach-panel button:focus-visible,
+.coach-panel input:focus-visible,
+.coach-panel summary:focus-visible {
+  outline: 2px solid #d3e9ac;
+  outline-offset: 4px;
+}
+.coach-panel button:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+.coach-columns {
+  display: grid;
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  gap: 30px;
+}
+.coach-section-title {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: space-between;
+}
+.coach-section-title h3 {
+  font-size: 18px;
+  margin: 0;
+  font-weight: 600;
+}
+.coach-section-title span {
+  font-size: 12px;
+  color: #a3b6ae;
+}
+.coach-note {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #a5bbb2;
+  margin: 10px 0 18px;
+}
+.coach-empty {
+  min-height: 260px;
+  border: 1px dashed #49605a;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  padding: 28px;
+  gap: 16px;
+  background: radial-gradient(circle at 85% 35%, #283f3577, transparent 65%);
+}
+.coach-empty svg {
+  color: #dbce9a;
+}
+.coach-empty strong {
+  font-size: 22px;
+}
+.coach-empty p {
+  line-height: 1.75;
+  font-size: 15px;
+  color: #afc3ba;
+  max-width: 340px;
+}
+.coach-baseline {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 14px 12px;
+  background: #21332e;
+  font-size: 13px;
+  color: #bad0c1;
+}
+.coach-baseline b {
+  font-weight: 500;
+}
+.coach-result {
+  padding: 18px 16px;
+  border: 1px solid #3c5550;
+  margin-top: 12px;
+  background: #10252a;
+}
+.coach-result.is-first {
+  border-left: 3px solid #d7d7a0;
+  background: #18322f;
+}
+.coach-result-heading {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+}
+.coach-result-heading > span {
+  color: #94aca0;
+  font-family: 'Space Grotesk', sans-serif;
+  font-size: 14px;
+}
+.coach-result h4,
+.coach-strategy h4 {
+  font-size: 19px;
+  line-height: 1.4;
+  margin: 0;
+  font-weight: 600;
+}
+.coach-result-heading small {
+  margin-left: auto;
+  color: #d7d7a0;
+  font-size: 12px;
+}
+.coach-bars {
+  height: 3px;
+  background: #071b20;
+  margin: 16px 0;
+}
+.coach-bars i {
+  display: block;
+  height: 100%;
+  background: #d0d9a3;
+}
+.coach-result dl {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 10px;
+  margin: 14px 0;
+}
+.coach-result dt {
+  font-size: 12px;
+  color: #a1b6ab;
+}
+.coach-result dd {
+  font:
+    22px/1.5 'Space Grotesk',
+    sans-serif;
+  color: #edf3df;
+}
+.coach-result p {
+  font-size: 13px;
+  line-height: 1.7;
+  color: #b5c6bc;
+  margin: 8px 0;
+}
+.coach-result p.coach-synergy {
+  color: #d8cc9e;
+}
+.coach-result button {
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 12px 0 0;
+  color: #e9d5a7;
+  border-top: 1px solid #3f5850;
+  margin-top: 12px;
+}
+.coach-strategy {
+  padding: 18px 0;
+  border-bottom: 1px solid #344f48;
+}
+.coach-strategy > div > span {
+  font-size: 12px;
+  color: #b5c890;
+  display: block;
+  margin-bottom: 6px;
+}
+.coach-strategy p {
+  font-size: 14px;
+  line-height: 1.75;
+  margin: 12px 0;
+  color: #bbcbc3;
+}
+.coach-strategy p.coach-caution {
+  color: #d8c19b;
+}
+.coach-strategy > small {
+  font-size: 12px;
+  color: #93aca0;
+  display: block;
+  margin-bottom: 12px;
+}
+.coach-strategy summary,
+.coach-method summary {
+  cursor: pointer;
+  color: #d4d8b7;
+  font-size: 14px;
+  line-height: 1.7;
+}
+.coach-strategy details p {
+  border-left: 2px solid #607969;
+  padding-left: 12px;
+}
+.coach-method {
+  margin-top: 18px;
+  padding: 14px 0;
+  border-top: 1px solid #354d46;
+}
+.coach-method p {
+  font-size: 14px;
+  line-height: 1.75;
+  color: #acc0b4;
+  margin-top: 12px;
+}
+.coach-export {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: #d5dcba;
+  font-size: 14px;
+  margin-top: 20px;
+}
+.coach-bottom {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  padding-top: 18px;
+  border-top: 1px solid #3a5149;
+  margin-top: 10px;
+  color: #acbdb0;
+  font-size: 13px;
+}
+.coach-bottom button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: #dfd4af;
+  font-size: 14px;
+}
+.coach-error {
+  background: #45342a;
+  color: #ffe0b1;
+  padding: 12px 16px;
+  font-size: 14px;
+}
+.coach-progress {
+  padding: 10px 14px;
+  border: 1px solid #577165;
+  color: #d5e7b7;
+  font-size: 14px;
+}
+.coach-progress i {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #d5e7b7;
+  margin-right: 10px;
+}
+.coach-draft-link {
+  color: #dfcd9f;
+  border: 1px solid #566958;
+  padding: 7px 14px;
+  margin: 0 0 14px;
+  font-size: 14px;
+}
+.coach-trial {
+  position: absolute;
+  z-index: 6;
+  left: 3.5%;
+  top: 27%;
+  max-width: 310px;
+  padding: 20px;
+  background: #10242bed;
+  border-left: 3px solid #d4d39d;
+  color: #e0e9d7;
+}
+.coach-trial h3 {
+  font-size: 20px;
+  margin: 10px 0;
+}
+.coach-trial p {
+  font-size: 14px;
+  line-height: 1.7;
+  color: #b6c9bf;
+}
+.coach-trial button {
+  margin-top: 16px;
+  color: #e2d299;
+  font-size: 14px;
+}
+.coach-trial > span {
+  font:
+    13px/1.5 'Space Grotesk',
+    sans-serif;
+  color: #d7cea1;
+}
+@media (max-width: 900px) {
+  .coach-panel {
+    padding: 24px !important;
+  }
+  .coach-columns {
+    grid-template-columns: 1fr;
+  }
+  .coach-kicker span {
+    display: none;
+  }
+  .coach-controls {
+    gap: 12px;
+  }
+  .coach-controls .coach-goals {
+    width: 100%;
+  }
+  .coach-controls .coach-goals button {
+    flex: 1;
+  }
+  .coach-result-heading {
+    flex-wrap: wrap;
+  }
+  .coach-result-heading small {
+    margin-left: 0;
+  }
+  .coach-result dl {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .coach-panel * {
+    scroll-behavior: auto !important;
+  }
+}

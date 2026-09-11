@@ -5,6 +5,7 @@ import { clamp, distance } from '../core/math';
 import { segmentHits } from './rules';
 import type { WeaponId } from '../game/types';
 import { crossesBlock } from '../rooms/terrain';
+import { impact } from './impact';
 
 // The same circular sector drives sword hit tests and the visible attack arc.
 export function inSwordArc(
@@ -43,27 +44,25 @@ export function inSwordArc(
     radius,
   );
 }
-export function attack(
-  w: World,
-  form: WeaponId = w.weapon,
-  power = 1,
-  support = false,
-) {
-  const tuning = w.content.weapons.find(row => row.id === form)!.params;
+export function attack(w: World, form: WeaponId = w.weapon, power = 1) {
+  const tuning = w.content.weapons.find((row) => row.id === form)!.params;
   const p = w.player,
     s = {
       ...w.stats,
       damage:
         w.stats.damage *
         power *
-        (w.relics.includes('oracle-eye') && w.forms.length === 3 ? 1.15 : 1) * tuning.damage,
+        (w.relics.includes('oracle-eye') && w.forms.length === 3 ? 1.15 : 1) *
+        (w.relics.includes('glass-engine') && w.forms.length > 1 ? 1.12 : 1) *
+        tuning.damage,
       shotSpeed: w.stats.shotSpeed * tuning.projectileSpeed,
     };
-  const previousCd = p.shotCd;
   if (form === 'sword') {
     w.combo = w.comboTime > 0 ? (w.combo + 1) % 3 : 0;
     w.comboTime = Math.max(1.2, s.rate * 3 + 0.15);
     const finisher = w.combo === 2;
+    const returningFinisher =
+      finisher && w.has('void-return') && w.has('ice-touch');
     w.swing = {
       x: p.x,
       y: p.y,
@@ -71,14 +70,19 @@ export function attack(
       age: 0,
       range:
         ((finisher ? 155 : 120) +
-        (s.shotSize > 4 ? 22 : 0) +
-        (w.relics.includes('vow-edge') ? 24 : 0)) * tuning.range,
-      arc: Math.min(Math.PI * 2, ((finisher ? 2.6 : 1.9) + (s.projectiles - 1) * 0.13) * tuning.arc),
+          (s.shotSize > 4 ? 22 : 0) +
+          (w.relics.includes('vow-edge') ? 24 : 0)) *
+        tuning.range,
+      arc: Math.min(
+        Math.PI * 2,
+        ((finisher ? 2.6 : 1.9) + (s.projectiles - 1) * 0.13) * tuning.arc,
+      ),
       damage:
         s.damage * (finisher ? 3.3 : 2.1) * (1 + (s.projectiles - 1) * 0.12),
       combo: w.combo,
       hits: new Set(),
       fragmented: false,
+      impactPause: 0,
     };
     p.shotCd = Math.max(0.24, s.rate * (finisher ? 3.3 : 2.5));
     w.bus.emit({
@@ -88,7 +92,28 @@ export function attack(
       color: 0xffe1a0,
       weapon: 'sword',
     });
-    if (finisher && w.forms.includes('arc')) {
+    if (returningFinisher) {
+      // Replace the third melee sector: the lost close sweep is the tradeoff.
+      w.swing = null;
+      const b = shoot(
+        w,
+        p.x,
+        p.y,
+        p.angle,
+        false,
+        s.damage * 3.3,
+        s.shotSpeed * 0.85,
+        0xbde9ff,
+        1,
+      );
+      if (b) {
+        b.shape = 'blade';
+        b.returning = true;
+        b.pierce = Math.max(2, b.pierce);
+        b.orbit = false;
+      }
+    }
+    if (!returningFinisher && finisher && w.forms.includes('arc')) {
       for (let i = -2; i <= 2; i++) {
         const b = shoot(
           w,
@@ -106,14 +131,15 @@ export function attack(
     }
     // Trajectory protocols add secondary rune blades; the main sword remains melee.
     if (
-      s.homing ||
-      s.bounce ||
-      s.orbit ||
-      s.returning ||
-      s.wave ||
-      s.lance ||
-      s.pierce > 0 ||
-      s.projectiles > 1
+      !returningFinisher &&
+      (s.homing ||
+        s.bounce ||
+        s.orbit ||
+        s.returning ||
+        s.wave ||
+        s.lance ||
+        s.pierce > 0 ||
+        s.projectiles > 1)
     ) {
       for (let i = 0; i < s.projectiles; i++) {
         const b = shoot(
@@ -152,6 +178,24 @@ export function attack(
         b.radius = s.shotSize * 1.5 + 4;
         b.blastRadius = (72 + (s.shotSize > 4 ? 18 : 0)) * tuning.blast;
         if (w.forms.includes('arc')) b.fragment = Math.max(b.fragment, 4);
+        if (w.forms.includes('sword')) {
+          b.shape = 'blade';
+          b.pierce += 1;
+          b.blastRadius *= 0.7;
+        }
+      } else if (b) {
+        if (w.forms.includes('sword')) {
+          b.shape = 'blade';
+          b.pierce += 1;
+          p.shotCd = s.rate * 1.18;
+        }
+        if (w.forms.includes('cannon')) {
+          b.blastRadius = 38;
+          b.radius += 2;
+          b.speed *= 0.82;
+          b.vx *= 0.82;
+          b.vy *= 0.82;
+        }
       }
     }
     w.bus.emit({
@@ -162,10 +206,6 @@ export function attack(
       element: s.element,
       weapon: form,
     });
-  }
-  if (support) {
-    p.shotCd = previousCd;
-    return;
   }
   p.shotCd *= tuning.cooldown;
   if (w.has('shift-reload') && p.dashCd > s.dashCooldown - 0.7) p.shotCd *= 0.5;
@@ -194,23 +234,6 @@ export function attack(
       s.shotSpeed,
       s.primary,
       1,
-    );
-  }
-}
-export function fireSupports(w: World, dt: number, fire: boolean) {
-  for (const form of ['arc', 'sword', 'cannon'] as const) {
-    w.supportCd[form] = Math.max(0, w.supportCd[form] - dt);
-    if (
-      form === w.weapon ||
-      !w.forms.includes(form) ||
-      !fire ||
-      w.supportCd[form] > 0
-    )
-      continue;
-    attack(w, form, w.relics.includes('glass-engine') ? 0.7 : 0.55, true);
-    w.supportCd[form] = Math.max(
-      0.18,
-      w.stats.rate * { arc: 1.5, sword: 3, cannon: 4.8 }[form] * w.content.weapons.find(row => row.id === form)!.params.cooldown,
     );
   }
 }
@@ -254,7 +277,9 @@ export function updateWeapon(w: World, dt: number) {
   w.bombCd = Math.max(0, w.bombCd - dt);
   const swing = w.swing;
   if (swing) {
-    swing.age += dt;
+    if (swing.impactPause > 0)
+      swing.impactPause = Math.max(0, swing.impactPause - dt);
+    else swing.age += dt;
     if (swing.age >= 0.055 && swing.age <= 0.19) {
       for (const e of w.enemies) {
         if (
@@ -266,6 +291,25 @@ export function updateWeapon(w: World, dt: number) {
           continue;
         swing.hits.add(e.id);
         hitEnemy(w, e, swing.damage);
+        const close = distance(e, w.player) < 90;
+        impact(
+          w,
+          e,
+          Math.atan2(e.y - swing.y, e.x - swing.x),
+          swing.combo === 2 ? (close ? 42 : 30) : close ? 26 : 18,
+          swing.combo === 2 ? 0.065 : 0.04,
+        );
+        if (swing.hits.size === 1) {
+          swing.impactPause = swing.combo === 2 ? 0.05 : 0.033;
+          w.bus.emit({
+            kind: 'impact',
+            x: e.x,
+            y: e.y,
+            color: 0xffebbf,
+            amount: swing.combo === 2 ? 32 : 22,
+            weapon: 'sword',
+          });
+        }
         if (w.forms.includes('cannon') && swing.hits.size === 1) {
           w.emit('bomb', e.x, e.y, 0xffbc78, 90);
           for (const n of w.enemies)

@@ -118,7 +118,15 @@ export class ActorSprites {
         .setPosition(enemy.x, enemy.y + 8 + bob)
         .setFlipX(enemy.aimX < enemy.x)
         .setAlpha(enemy.kind === 'shade' ? 0.78 : 1)
-        .setAngle(reducedMotion ? 0 : Math.sin(time * 4 + enemy.id) * 1.3);
+        .setAngle(
+          reducedMotion
+            ? 0
+            : enemy.stagger > 0
+              ? enemy.aimX < enemy.x
+                ? -4
+                : 4
+              : Math.sin(time * 4 + enemy.id) * 1.3,
+        );
       if (enemy.flash > 0) image.setTint(0xffd5aa);
       else if (enemy.slow > 0) image.setTint(0xa4d9ff);
       else if (enemy.kind === 'forgemaster') image.setTint(0xffc08e);

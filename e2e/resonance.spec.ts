@@ -25,7 +25,7 @@ test('six resonance trials render their real projectile forms and preserve an ex
   );
   await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page.getByRole('button', { name: '协议试炼', exact: true }).click();
-  await expect(page.locator('.trial-card')).toHaveCount(6);
+  await expect(page.locator('.trial-card')).toHaveCount(8);
   fs.mkdirSync('outputs/qa/v02', { recursive: true });
   await page.screenshot({ path: 'outputs/qa/v02/trials.png' });
   const names = [

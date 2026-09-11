@@ -9,7 +9,7 @@ const { makeRoom } = require('../src/rooms/generator.ts');
 const { expedition, availableNodes } = require('../src/rooms/expedition.ts');
 // Never regenerate expected checksums as part of a test or CI invocation.
 if (!process.argv.includes('--write-reviewed-fixtures')) throw Error('Explicit --write-reviewed-fixtures required; inspect the resulting diff.');
-const dir = 'tests/fixtures/replays';
+const dir = 'tests/fixtures/replays/v12';
 fs.mkdirSync(dir, { recursive: true });
 const create = () => new Engine({ save: blankSave(), persistence: false });
 const evidence = [];

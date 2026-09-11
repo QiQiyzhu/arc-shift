@@ -16,7 +16,8 @@ import {
   moveOnTerrain,
   updateTerrain,
 } from '../src/rooms/terrain';
-import { attack, fireSupports, updateWeapon } from '../src/combat/weapons';
+import { attack, updateWeapon } from '../src/combat/weapons';
+import { updatePlayer } from '../src/systems/player';
 import { updateEnemies } from '../src/ai/enemy-ai';
 import { deriveStats } from '../src/cards/system';
 import { updateProjectiles } from '../src/combat/projectiles';
@@ -36,6 +37,9 @@ const nil = {
 function fixture(kind: RoomKind, depth?: number, seed = 20260908) {
   const e = new Engine();
   e.start(seed);
+  // Fixed primary for forge/economy fixtures; random-start behavior has its own tests.
+  e.world.weapon = 'arc';
+  e.world.forms = ['arc'];
   e.chooseCard('fire-ember');
   const graph = expedition(seed),
     n = graph.find(
@@ -193,46 +197,68 @@ it('kiln-heart entry shield is not multiplied by repeating resume', () => {
   expect(r.world.player.shield).toBe(10);
   expect(reload(r).world.player.shield).toBe(10);
 });
-it('actual boss deaths award unlocks in new and resumed legacy campaigns',()=>{
-  for(const legacy of [false,true]) {
-    const e=fixture('boss',4),w=e.world;
-    if(legacy){w.campaign='legacy';e.enter(makeRoom(4,'boss',w.seed));}
-    w.phase='playing';w.boss!.hp=1;hitEnemy(w,w.boss!,50,false);e.update(1/60,nil);
-    expect(e.save.meta.bosses).toContain('warden');expect(e.save.meta.lore).toContain('warden');
+it('actual boss deaths award unlocks in new and resumed legacy campaigns', () => {
+  for (const legacy of [false, true]) {
+    const e = fixture('boss', 4),
+      w = e.world;
+    if (legacy) {
+      w.campaign = 'legacy';
+      e.enter(makeRoom(4, 'boss', w.seed));
+    }
+    w.phase = 'playing';
+    w.boss!.hp = 1;
+    hitEnemy(w, w.boss!, 50, false);
+    e.update(1 / 60, nil);
+    expect(e.save.meta.bosses).toContain('warden');
+    expect(e.save.meta.lore).toContain('warden');
     expect(parseSave(JSON.stringify(e.save)).meta.bosses).toContain('warden');
   }
-  const e=new Engine();e.save.meta.unlocked=['vow-edge'];e.save.meta.equipped='vow-edge';e.selectWeapon('sword');e.start(7);e.chooseCard('fire-ember');expect(e.world.player.shield).toBe(15);expect(reload(e).world.player.shield).toBe(15);
+  const e = new Engine();
+  e.save.meta.unlocked = ['vow-edge'];
+  e.save.meta.equipped = 'vow-edge';
+  for (let seed = 0; seed < 100; seed++) {
+    e.start(seed);
+    if (e.world.weapon === 'sword') break;
+  }
+  e.chooseCard(e.world.rewards[0].id);
+  expect(e.world.player.shield).toBe(15);
+  expect(reload(e).world.player.shield).toBe(15);
 });
-it('all three primaries fire the acquired secondary forms without changing primary cooldown', () => {
+it('acquired forms modify only the primary attack instead of firing three independent weapons', () => {
   for (const weapon of ['arc', 'sword', 'cannon'] as WeaponId[]) {
     const w = new World();
     w.weapon = weapon;
     w.forms = ['arc', 'sword', 'cannon'];
     w.player.shotCd = 0.7;
-    fireSupports(w, 1 / 60, false);
+    updatePlayer(w, nil, 1 / 60);
     expect(w.projectiles.count).toBe(0);
     expect(w.swing).toBeNull();
-    fireSupports(w, 1 / 60, true);
-    expect(w.player.shotCd).toBe(0.7);
+    updatePlayer(w, { ...nil, fire: true }, 1 / 60);
+    expect(w.projectiles.count).toBe(0);
     attack(w);
-    expect(w.swing).not.toBeNull();
-    expect(
-      w.projectiles.items.some((p) => p.active && p.shape === 'shell'),
-    ).toBe(true);
-    expect(
-      w.projectiles.items.some((p) => p.active && p.shape !== 'shell'),
-    ).toBe(true);
+    if (weapon === 'sword') {
+      expect(w.swing).not.toBeNull();
+      expect(w.projectiles.count).toBe(0);
+    } else {
+      expect(w.swing).toBeNull();
+      expect(w.projectiles.count).toBe(1);
+      const shot = w.projectiles.items.find((b) => b.active)!;
+      expect(shot.shape).toBe('blade');
+      expect(shot.pierce).toBeGreaterThan(0);
+      expect(shot.blastRadius).toBeGreaterThan(0);
+    }
   }
 });
 it('slow mixed builds retain sword finishers and fragment children never recurse', () => {
   const w = new World();
+  w.weapon = 'sword';
   w.forms = ['arc', 'sword', 'cannon'];
   w.cards = ['fire-meteor', 'storm-lance', 'void-orbit'];
   w.stats = deriveStats(w.cards);
   let finishers = 0;
   for (let i = 0; i < 300; i++) {
     const old = w.combo;
-    fireSupports(w, 1 / 60, true);
+    updatePlayer(w, { ...nil, fire: true }, 1 / 60);
     if (w.combo === 2 && old !== 2) finishers++;
     updateWeapon(w, 1 / 60);
     updateProjectiles(w, 1 / 60);

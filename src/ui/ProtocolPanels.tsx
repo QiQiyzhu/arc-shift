@@ -18,7 +18,7 @@ import {
   Radio,
   Crosshair,
 } from 'lucide-react';
-import type { Element, Upgrade, RoomKind } from '../game/types';
+import type { Element, Upgrade, RoomKind, WeaponId } from '../game/types';
 import type { Engine } from '../game/engine';
 import { ELEMENTS } from '../cards/catalog';
 import { buildCounts } from '../cards/system';
@@ -26,6 +26,7 @@ import { roomChoices } from '../rooms/generator';
 import { activeSynergies, newSynergies, SYNERGIES } from '../cards/synergies';
 import { CampActions, WalletBar } from './EconomyPanels';
 import { protocolPreview } from '../cards/preview';
+import { WEAPONS } from '../economy/catalog';
 export function ElementIcon({
   element,
   size = 24,
@@ -49,6 +50,7 @@ export function CardView({
   index = 0,
   build = [],
   preview,
+  weapon,
 }: {
   card: Upgrade;
   owned?: boolean;
@@ -56,6 +58,7 @@ export function CardView({
   index?: number;
   build?: readonly string[];
   preview?: ReturnType<typeof protocolPreview>;
+  weapon?: WeaponId;
 }) {
   const el = ELEMENTS[card.element];
   const Glyph = card.id.includes('meteor')
@@ -135,12 +138,12 @@ export function CardView({
           )}
         </div>
       )}
-      {newSynergies(build, card.id).map((s) => (
+      {newSynergies(build, card.id, weapon).map((s) => (
         <div className="synergy-preview" key={s.id}>
           ✦ 激活 {s.name}
         </div>
       ))}
-      {!newSynergies(build, card.id).length &&
+      {!newSynergies(build, card.id, weapon).length &&
         SYNERGIES.filter((s) => s.requires.some((id) => id === card.id))
           .slice(0, 1)
           .map((s) => (
@@ -169,7 +172,13 @@ export function CardView({
     </button>
   );
 }
-export function CardDraft({ engine }: { engine: Engine }) {
+export function CardDraft({
+  engine,
+  onCoach,
+}: {
+  engine: Engine;
+  onCoach?: () => void;
+}) {
   const w = engine.world;
   return (
     <div className="modal-shade draft-shade">
@@ -186,9 +195,14 @@ export function CardDraft({ engine }: { engine: Engine }) {
         </h2>
         <p>
           {w.rewardContext === 'start'
-            ? '选择一种元素，开始这次跃迁。'
+            ? `本次随机武器：${WEAPONS.find((x) => x.id === w.weapon)!.name}。选择一种元素，开始跃迁。`
             : '形态 × 弹道 × 元素。预览这次选择将激活的共鸣。'}
         </p>
+        {onCoach && (
+          <button className="coach-draft-link" onClick={onCoach}>
+            让战术教练比较这三张
+          </button>
+        )}
         <div className="draft-cards">
           {w.rewards.map((c, i) => (
             <CardView
@@ -196,6 +210,7 @@ export function CardDraft({ engine }: { engine: Engine }) {
               card={c}
               index={i}
               build={w.cards}
+              weapon={w.weapon}
               preview={protocolPreview(w, c.id)}
               onSelect={() => engine.chooseCard(c.id)}
             />
@@ -359,7 +374,13 @@ export function RouteMap({ engine }: { engine: Engine }) {
     </div>
   );
 }
-export function BuildHUD({ cards }: { cards: string[] }) {
+export function BuildHUD({
+  cards,
+  weapon,
+}: {
+  cards: string[];
+  weapon: WeaponId;
+}) {
   const counts = buildCounts(cards);
   return (
     <aside className="build-hud">
@@ -380,7 +401,7 @@ export function BuildHUD({ cards }: { cards: string[] }) {
             </i>
           </div>
         ))}
-      {activeSynergies(cards).map((s) => (
+      {activeSynergies(cards, weapon).map((s) => (
         <div
           className="fusion-hud"
           key={s.id}

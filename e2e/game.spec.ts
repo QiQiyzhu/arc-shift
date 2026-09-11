@@ -92,6 +92,8 @@ test('round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized
     w.wave = 4;
     w.spawnTimer = 999;
     const e = w.spawn('sentry', 900, 410);
+    // This is a long-range input fixture; production initial weapons are random.
+    w.weapon = 'arc'; w.forms = ['arc'];
     e.hp = e.maxHp = 800;
     e.speed = 0;
     e.timer = 999;

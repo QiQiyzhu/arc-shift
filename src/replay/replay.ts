@@ -6,7 +6,7 @@ import type { Input } from '../game/types';
 import { DEFAULT_CONTENT, contentDiff } from '../content/schema';
 
 export const REPLAY_VERSION = 1;
-export const GAME_VERSION = '1.0-engineering.1';
+export const GAME_VERSION = '1.2-protocol.1';
 export const CONTENT_VERSION = 'builtin-2026-09-10-tuning1';
 export const FIXED_DT = 1 / 60;
 export const MAX_REPLAY_TICKS = 108000;

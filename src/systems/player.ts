@@ -1,4 +1,4 @@
-import { attack, fireSupports, throwBomb, drinkTonic } from '../combat/weapons';
+import { attack, throwBomb, drinkTonic } from '../combat/weapons';
 import { moveOnTerrain } from '../rooms/terrain';
 import { clamp, direction, distance } from '../core/math';
 import { cooldown } from '../combat/rules';
@@ -31,8 +31,7 @@ export function updatePlayer(w: World, input: Input, dt: number) {
     p.invulnerable = Math.max(p.invulnerable, s.dashDuration + 0.06);
     p.dashCd = s.dashCooldown;
     w.emit('dash', p.x, p.y);
-    if (w.relics.includes('hourglass'))
-      w.supportCd = { arc: 0, sword: 0, cannon: 0 };
+    if (w.relics.includes('hourglass')) p.shotCd = Math.max(0, p.shotCd - 0.18);
     if (w.has('shift-reload') && w.has('storm-arc'))
       w.echo = { x: p.x, y: p.y, time: 0.7, shots: 3 };
     if (w.has('shift-echo'))
@@ -85,7 +84,6 @@ export function updatePlayer(w: World, input: Input, dt: number) {
     p.y = clamp(p.y + p.vy * dt, 112, 620);
   }
   if (input.fire && p.shotCd === 0) attack(w);
-  fireSupports(w, dt, input.fire);
   if (input.bomb) throwBomb(w, input.aimX, input.aimY);
   if (input.heal) drinkTonic(w);
   if (input.fire && s.familiar && w.companionCd === 0) {

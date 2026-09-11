@@ -1,6 +1,6 @@
 {
   "name": "arc-shift",
-  "version": "1.1.0",
+  "version": "1.2.0",
   "private": true,
   "engines": {
     "node": ">=22.13.0"
@@ -17,7 +17,9 @@
     "test:e2e": "playwright test",
     "test:simulation": "node scripts/simulate.cjs",
     "test:soak": "node scripts/soak.cjs",
-    "bundle:report": "node scripts/bundle-report.mjs"
+    "bundle:report": "node scripts/bundle-report.mjs",
+    "coach:generate": "node scripts/coach-generate.cjs",
+    "coach:evaluate": "node scripts/coach-evaluate.cjs"
   },
   "dependencies": {
     "@base-ui/react": "1.7.0",

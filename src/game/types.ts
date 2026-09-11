@@ -100,6 +100,8 @@ export interface Enemy {
   summoned: boolean;
   reactionCd: number;
   shield: number;
+  stagger: number;
+  impactCooldown: number;
 }
 export interface Projectile {
   active: boolean;
@@ -131,6 +133,7 @@ export interface Projectile {
   blastRadius: number;
   fragment: number;
   accent: number;
+  impactPause: number;
 }
 export interface Hazard {
   x: number;

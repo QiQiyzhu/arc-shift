@@ -39,7 +39,7 @@ test('guided practice: real controls, forge selection, boss completion, preserve
   ).toBeVisible();
   await page.keyboard.press('q');
   await expect(
-    page.getByRole('dialog', { name: '把三种武装，写成一种打法' }),
+    page.getByRole('dialog', { name: '让协议，改写同一次攻击' }),
   ).toBeVisible();
   await page.screenshot({ animations: 'disabled', path: `${out}/forge.png` });
   await page.keyboard.press('Escape');

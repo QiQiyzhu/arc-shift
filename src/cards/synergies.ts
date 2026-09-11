@@ -1,4 +1,23 @@
+import type { WeaponId } from '../game/types';
 export const SYNERGIES = [
+  {
+    id: 'pinning',
+    name: '钉穿重弹',
+    weapons: ['arc', 'cannon'],
+    color: '#ffd3a2',
+    requires: ['fire-meteor', 'storm-lance'],
+    description:
+      '主弹命中后停留 0.05 秒再贯穿；保留射击间隔代价，停留不会重复伤害同一敌人。',
+  },
+  {
+    id: 'frost-return',
+    name: '回锋冰刃',
+    weapons: ['sword'],
+    color: '#bde9ff',
+    requires: ['void-return', 'ice-touch'],
+    description:
+      '圣剑限定：第三斩改为穿透回收冰刃，失去本次宽扇面斩击与扫弹；回程不重复命中同一目标。',
+  },
   {
     id: 'plasma',
     name: '电浆回路',
@@ -43,15 +62,46 @@ export const SYNERGIES = [
     description: 'Dash 后的前 3 次射击，在起点额外发射一枚继承弹道的电针。',
   },
 ] as const;
-export function activeSynergies(ids: readonly string[]) {
-  return SYNERGIES.filter((s) => s.requires.every((id) => ids.includes(id)));
+export function synergyApplies(
+  s: (typeof SYNERGIES)[number],
+  weapon?: WeaponId,
+) {
+  return (
+    !('weapons' in s) ||
+    (!!weapon && (s.weapons as readonly WeaponId[]).includes(weapon))
+  );
 }
-export function newSynergies(ids: readonly string[], candidate: string) {
-  return activeSynergies([...ids, candidate]).filter(
+export function activeSynergies(ids: readonly string[], weapon?: WeaponId) {
+  return SYNERGIES.filter(
+    (s) =>
+      synergyApplies(s, weapon) && s.requires.every((id) => ids.includes(id)),
+  );
+}
+export function newSynergies(
+  ids: readonly string[],
+  candidate: string,
+  weapon?: WeaponId,
+) {
+  return activeSynergies([...ids, candidate], weapon).filter(
     (s) => !s.requires.every((id) => ids.includes(id)),
   );
 }
 export const TRIAL_BUILDS = [
+  {
+    name: '钉穿重弹',
+    subtitle: '停留 · 贯穿 · 重击',
+    description:
+      '陨星和光矛改变同一枚弹体：命中后短暂停留，再贯穿后方目标。发射间隔更长，站位决定贯穿效果。',
+    cards: ['fire-meteor', 'storm-lance', 'void-seek'],
+  },
+  {
+    name: '回锋冰刃',
+    subtitle: '圣剑体验 · 第三斩变形',
+    weapon: 'sword',
+    description:
+      '前两斩近身推开敌人；第三斩化为回收冰刃，失去宽扇面攻击与扫弹。回程不会重复命中同一目标。',
+    cards: ['void-return', 'ice-touch', 'storm-surge'],
+  },
   {
     name: '三相炼星',
     subtitle: '重弹 · 扇射 · 热裂变',

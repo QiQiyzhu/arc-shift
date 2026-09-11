@@ -6,14 +6,21 @@ import { Random } from '../src/core/math';
 import { stressInput } from '../src/dev/benchmark';
 import { ReplayPlayer, checksum } from '../src/replay/replay';
 
-it.each(['combat', 'boss', 'shop-route'])('replays committed %s input/checksum history without regeneration', (name) => {
-  const raw = readFileSync(`tests/fixtures/replays/${name}.json`, 'utf8');
-  const player = new ReplayPlayer(raw);
-  while (!player.finished && !player.desync) player.step();
-  expect(player.desync).toBeNull();
-  expect(player.finished).toBe(true);
-  const fixture = JSON.parse(raw);
-  expect(checksum(player.engine)).toBe(fixture.events.at(-1).checksum);
+it.each(['combat', 'boss', 'shop-route'])(
+  'replays committed %s input/checksum history without regeneration',
+  (name) => {
+    const raw = readFileSync(`tests/fixtures/replays/v12/${name}.json`, 'utf8');
+    const player = new ReplayPlayer(raw);
+    while (!player.finished && !player.desync) player.step();
+    expect(player.desync).toBeNull();
+    expect(player.finished).toBe(true);
+    const fixture = JSON.parse(raw);
+    expect(checksum(player.engine)).toBe(fixture.events.at(-1).checksum);
+  },
+);
+it('explicitly rejects pre-v1.2 histories without altering their checksums', () => {
+  const raw = readFileSync('tests/fixtures/replays/combat.json', 'utf8');
+  expect(() => new ReplayPlayer(raw)).toThrow();
 });
 it('simulates 12 randomized new-run seeds with bounded finite state and resumable checkpoints', () => {
   const rng = new Random(917031);

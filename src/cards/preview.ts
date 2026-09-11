@@ -2,7 +2,7 @@ import type { World } from '../game/world';
 import type { Stats } from '../game/types';
 import { CARDS, ELEMENTS } from './catalog';
 import { buildCounts, deriveStats } from './system';
-import { newSynergies, SYNERGIES } from './synergies';
+import { newSynergies, SYNERGIES, synergyApplies } from './synergies';
 
 /** Uses the same validated parameters as gameplay, including relics and level.
  * Values are protocol base stats, not a misleading estimate of combat DPS. */
@@ -67,10 +67,12 @@ export function protocolPreview(w: World, id: string) {
     count >= 2
       ? `${ELEMENTS[card.element].name} ${count} → ${count + 1}：${enabled ? ELEMENTS[card.element].synergy : '已集齐同系协议；还需获得对应基础状态效果才能触发加成。'}`
       : '';
-  const active = newSynergies(w.cards, id);
+  const active = newSynergies(w.cards, id, w.weapon);
   const pending = SYNERGIES.filter(
     (s) =>
-      s.requires.includes(id as never) && !active.some((a) => a.id === s.id),
+      synergyApplies(s, w.weapon) &&
+      s.requires.includes(id as never) &&
+      !active.some((a) => a.id === s.id),
   )
     .map((s) => ({
       name: s.name,

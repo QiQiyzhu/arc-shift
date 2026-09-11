@@ -40,8 +40,10 @@ const nil = {
 function clean(seed) {
   store.clear();
   const e = new Engine();
-  e.selectWeapon(weapon);
   e.start(seed);
+  // Controlled benchmark override, not the production random-start policy.
+  e.world.weapon = weapon;
+  e.world.forms = [weapon];
   return e;
 }
 function segmentDist(px, py, a, b, c, d) {
@@ -332,6 +334,8 @@ function simulate(seed, route) {
   const result = {
     initial,
     weapon,
+    weaponPolicy:
+      'Explicit benchmark fixture override; production starts randomly by seed',
     seed,
     route,
     result: w.phase,

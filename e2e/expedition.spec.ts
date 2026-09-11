@@ -5,12 +5,18 @@ const phase = (page: Page) =>
   page.evaluate(() => window.arcQA.engine.world.phase);
 async function start(page: Page, weapon = '黎明圣剑') {
   await page.goto('/?qa');
-  await page.getByRole('button', {name:'营地与图鉴',exact:true}).click();
+  await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();
   await page
     .getByRole('button', { name: `装备${weapon}`, exact: true })
     .click();
   await page.keyboard.press('Escape');
   await page.getByRole('button', { name: '开始行动', exact: true }).click();
+  await page.evaluate((name) => {
+    const e = window.arcQA.engine;
+    e.world.weapon =
+      name === '黎明圣剑' ? 'sword' : name === '裂核重炮' ? 'cannon' : 'arc';
+    e.world.forms = [e.world.weapon];
+  }, weapon); // Controlled weapon fixture; production starting weapon is random.
   await page.getByRole('button', { name: /余烬协议：/ }).click();
   await expect.poll(() => phase(page)).toBe('playing');
 }
@@ -119,10 +125,12 @@ test('camp choices, reroll, stock, bank and workshop persist through real page r
     page.getByRole('button', { name: '钥匙 ×1 · 解锁协议' }),
   ).toBeDisabled();
   await camp(page, 3);
-  const hpBeforePact=await page.evaluate(()=>window.arcQA.engine.world.player.hp);
+  const hpBeforePact = await page.evaluate(
+    () => window.arcQA.engine.world.player.hp,
+  );
   await page.getByRole('button', { name: '生命 −30 · 缔结血誓' }).click();
   expect(await page.evaluate(() => window.arcQA.engine.world.player.hp)).toBe(
-    hpBeforePact-30,
+    hpBeforePact - 30,
   );
   await page.screenshot({ path: 'outputs/qa/v03/altar.png' });
   await camp(page, 2);
@@ -133,7 +141,9 @@ test('camp choices, reroll, stock, bank and workshop persist through real page r
     12,
   );
   await page.screenshot({ path: 'outputs/qa/v03/camp.png' });
-  const checkpointMaxHp = await page.evaluate(() => window.arcQA.engine.world.player.maxHp);
+  const checkpointMaxHp = await page.evaluate(
+    () => window.arcQA.engine.world.player.maxHp,
+  );
   await page.reload();
   await page.screenshot({ path: 'outputs/qa/v03/menu.png' });
   await page.getByRole('button', { name: '营地与图鉴', exact: true }).click();

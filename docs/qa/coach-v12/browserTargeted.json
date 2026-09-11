@@ -1,0 +1,198 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\playwright.config.ts",
+    "rootDir": "C:/Users/yzhu/Documents/ChatGPT/New project/e2e",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "outputs/qa/browser-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/yzhu/Documents/ChatGPT/New project/outputs/qa/results",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/yzhu/Documents/ChatGPT/New project/e2e",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run dev -- --host 127.0.0.1",
+      "url": "http://127.0.0.1:5173",
+      "reuseExistingServer": true
+    }
+  },
+  "suites": [
+    {
+      "title": "combat-feel.spec.ts",
+      "file": "combat-feel.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "return-blade demo starts through the actual menu, changes the third attack and preserves the save",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 5018,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 1901
+                    },
+                    {
+                      "title": "Expect \"poll toBe\"",
+                      "duration": 877
+                    }
+                  ],
+                  "startTime": "2026-09-11T07:34:22.949Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "95789494b1546975a3df-30c5587828095167b379",
+          "file": "combat-feel.spec.ts",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "game.spec.ts",
+      "file": "game.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6315,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 1901
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 180
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 886
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 58
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 76
+                    },
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 7
+                    },
+                    {
+                      "title": "Simulation reaches playing",
+                      "duration": 4
+                    }
+                  ],
+                  "startTime": "2026-09-11T07:34:28.164Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8b1bb1493a64c9fc3ab6-49bca23011d025af675b",
+          "file": "game.spec.ts",
+          "line": 92,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-11T07:34:22.342Z",
+    "duration": 42627.729999999996,
+    "expected": 2,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}

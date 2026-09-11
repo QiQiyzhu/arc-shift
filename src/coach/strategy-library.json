@@ -1,0 +1,211 @@
+{
+  "version": 1,
+  "generatedAt": "2026-09-11T06:47:39.232Z",
+  "models": ["deepseek-flash"],
+  "plans": [
+    {
+      "id": "arc-single",
+      "title": "电弧单体连锁输出",
+      "weapon": "arc",
+      "goal": "single",
+      "cards": [
+        "fire-ember",
+        "fire-fuel",
+        "storm-arc",
+        "storm-critical",
+        "storm-surge",
+        "void-seek"
+      ],
+      "evidence": [
+        "fire-ember",
+        "storm-arc",
+        "plasma",
+        "storm-critical",
+        "void-seek"
+      ],
+      "explanation": "余烬协议点燃目标，恒星燃料强化燃烧；临界电压提高暴击，超频脉冲加快射击，引力偏移辅助追踪。直接命中可能引出电弧，电弧连接已燃烧的其他敌人时可触发电浆回路。",
+      "caution": "持续命中维持燃烧；追踪只会逐渐转向，仍需调整准星。电弧与暴击的范围伤害需要附近有其他敌人，孤立单体无法享受这部分收益。"
+    },
+    {
+      "id": "arc-swarm",
+      "title": "电弧链群清场",
+      "weapon": "arc",
+      "goal": "swarm",
+      "cards": [
+        "fire-ember",
+        "storm-arc",
+        "storm-conduct",
+        "storm-needle",
+        "fire-split",
+        "fire-bloom"
+      ],
+      "evidence": [
+        "plasma",
+        "fire-ember",
+        "storm-arc",
+        "storm-conduct",
+        "storm-needle",
+        "fire-bloom"
+      ],
+      "explanation": "三重星火扇射与导电针阵穿透扩大直接命中覆盖；余烬铺燃烧，电弧引擎配合并联回路连接敌群。星火胚芽补充微型弹，电弧连接已燃烧目标时可触发电浆回路。",
+      "caution": "敌群分散会限制电弧连接，扇射也可能让弹体错过小目标。微型弹能继承元素状态，但不会再次分裂或触发电弧、热裂变等派生反应。"
+    },
+    {
+      "id": "arc-mobility",
+      "title": "电弧位移循环",
+      "weapon": "arc",
+      "goal": "mobility",
+      "cards": [
+        "shift-quick",
+        "shift-stride",
+        "shift-reload",
+        "storm-arc",
+        "shift-rear",
+        "void-seek"
+      ],
+      "evidence": [
+        "shift-quick",
+        "shift-stride",
+        "shift-reload",
+        "storm-arc",
+        "afterimage",
+        "void-seek"
+      ],
+      "explanation": "快速重编译缩短跃迁冷却，轻量化躯壳提高移速；跃迁后利用越界射击的短时加速开火。主弹可触发电弧，双向因果补充背弹，引力偏移辅助追踪；瞬电残响在跃迁起点补发电针。",
+      "caution": "瞬电残响只覆盖跃迁后短时间内最多三次攻击；电针随开火发射，无需先命中。背弹和电针属于次生弹，可施加元素状态，但不会再引出电弧；仍需主弹命中建立连锁。"
+    },
+    {
+      "id": "sword-single",
+      "title": "圣剑单体贯星燃烧流",
+      "weapon": "sword",
+      "goal": "single",
+      "cards": [
+        "fire-ember",
+        "fire-fuel",
+        "storm-lance",
+        "storm-surge",
+        "void-seek",
+        "ice-touch"
+      ],
+      "evidence": [
+        "fire-ember",
+        "fire-fuel",
+        "storm-lance",
+        "void-seek",
+        "ice-touch",
+        "thermal"
+      ],
+      "explanation": "以近战斩击持续点燃并施加寒冷，恒星燃料强化燃烧；光矛与追踪协议为斩击附加的次生符文刃提供穿透、弹速和转向。超频缩短攻击间隔，连续斩击维持输出。",
+      "caution": "热裂变需再次直接命中同时燃烧且寒冷的同一目标，额外冲击只伤害周围其他敌人，不能增加孤立单体伤害。追踪作用于符文刃，斩击本体仍需控制距离与朝向。"
+    },
+    {
+      "id": "sword-swarm",
+      "title": "圣剑电弧星火清群",
+      "weapon": "sword",
+      "goal": "swarm",
+      "cards": [
+        "fire-ember",
+        "storm-arc",
+        "storm-conduct",
+        "storm-needle",
+        "fire-bloom",
+        "fire-split"
+      ],
+      "evidence": [
+        "fire-ember",
+        "storm-arc",
+        "storm-conduct",
+        "fire-bloom",
+        "plasma"
+      ],
+      "explanation": "斩击直接命中可点燃并引出电弧，并联回路扩大连锁覆盖。多发协议扩大斩击扇面并增加次生符文刃，导电针阵提供穿透，星火胚芽补充微型弹。电弧连接燃烧目标时可触发电浆回路。",
+      "caution": "电弧依赖直接命中且有概率门槛；符文刃与微型弹可以铺元素状态，但不会再引出电弧。剑气的第三斩齐射需要已熔接奥术武装，纯圣剑不能依赖该效果。"
+    },
+    {
+      "id": "sword-mobility",
+      "title": "相位剑舞·位移连射",
+      "weapon": "sword",
+      "goal": "mobility",
+      "cards": [
+        "shift-quick",
+        "shift-stride",
+        "shift-reload",
+        "storm-arc",
+        "shift-rear",
+        "shift-ice"
+      ],
+      "evidence": [
+        "shift-quick",
+        "shift-stride",
+        "shift-reload",
+        "storm-arc",
+        "afterimage"
+      ],
+      "explanation": "用快速重编译与轻量化躯壳调整进退，跃迁后利用越界射击加快斩击。零度闪移减速附近敌人；近战直接命中可引出电弧，双向因果与瞬电残响补充背弹和起点电针。",
+      "caution": "跃迁后的攻击加速与残响窗口有限，冷却期间仍能正常移动和斩击。电弧并非必定触发，背弹和电针也不会继续引出电弧；贴近前应保留脱离空间。"
+    },
+    {
+      "id": "cannon-single",
+      "title": "重炮单体：陨星燃烧贯星",
+      "weapon": "cannon",
+      "goal": "single",
+      "cards": [
+        "fire-ember",
+        "fire-fuel",
+        "fire-meteor",
+        "storm-lance",
+        "void-seek",
+        "storm-surge"
+      ],
+      "evidence": ["fire-ember", "fire-fuel", "storm-lance", "void-seek"],
+      "explanation": "赤核陨星提高炮击伤害与弹体体积，贯星光矛叠加穿透和弹速，超频脉冲缩短攻击间隔。余烬与恒星燃料维持燃烧，引力偏移让炮弹逐渐转向目标，帮助走位时持续命中。",
+      "caution": "陨星与光矛都会拉长射击间隔，超频只抵消其中一部分；两者弹速效果叠加，不能仅按陨星判断整套弹速。追踪不保证命中，孤立目标也无法利用穿透清群。"
+    },
+    {
+      "id": "cannon-swarm",
+      "title": "电弧星火群清",
+      "weapon": "cannon",
+      "goal": "swarm",
+      "cards": [
+        "fire-ember",
+        "storm-arc",
+        "storm-conduct",
+        "fire-bloom",
+        "fire-split",
+        "storm-needle"
+      ],
+      "evidence": [
+        "fire-ember",
+        "storm-arc",
+        "fire-bloom",
+        "storm-conduct",
+        "plasma"
+      ],
+      "explanation": "炮弹与溅射铺燃烧，直接命中可能引出电弧，并联回路扩大连锁覆盖。扇射、穿透和首次命中的微型弹扩展命中面；电弧连接已燃烧目标时触发电浆回路的范围爆发。",
+      "caution": "保持敌群相对集中才能利用连锁与溅射。微型弹能铺元素状态，但不会再次分裂或触发派生反应；扇射会降低单发伤害，且散开的炮弹可能错过远处小目标。"
+    },
+    {
+      "id": "cannon-mobility",
+      "title": "炮击位移循环",
+      "weapon": "cannon",
+      "goal": "mobility",
+      "cards": [
+        "shift-quick",
+        "shift-stride",
+        "shift-reload",
+        "shift-rear",
+        "void-seek",
+        "ice-touch"
+      ],
+      "evidence": [
+        "shift-quick",
+        "shift-stride",
+        "shift-reload",
+        "void-seek",
+        "ice-touch"
+      ],
+      "explanation": "快速重编译缩短跃迁冷却，轻量化躯壳帮助重炮换位；跃迁后利用越界射击的短时加速开火，双向因果补充背弹。引力偏移辅助炮弹转向，冰霜通过命中与炮弹溅射减速敌人。",
+      "caution": "追踪需要转向时间，背弹从身后发出，命中仍受站位与方向影响。跃迁后的加速窗口有限，重炮射击与跃迁各有冷却；窗口外仍可正常移动和开火。"
+    }
+  ]
+}

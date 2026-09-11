@@ -8,6 +8,7 @@ import { WEAPONS } from '../economy/catalog';
 import { RELICS, LORE, ENEMY_NOTES } from '../progression/catalog';
 import { ENEMIES } from '../data/enemies';
 import type { EnemyKind } from '../game/types';
+import { fusionDescription } from '../combat/fusion';
 
 const modifiers = {
   none: '无额外异变',
@@ -23,13 +24,11 @@ export function HybridHUD({ engine }: { engine: Engine }) {
         <span key={id}>
           <WeaponIcon id={id} />
           {WEAPONS.find((x) => x.id === id)!.name}
-          <small>{i === 0 ? '主' : '副'}</small>
+          <small>{i === 0 ? '主' : '改造'}</small>
         </span>
       ))}
       {w.forms.length > 1 && (
-        <b title="按住攻击时副武装自动轮替；共享元素与弹道协议">
-          共鸣 {w.forms.length}/3
-        </b>
+        <b title={fusionDescription(w.weapon, w.forms)}>形态改写</b>
       )}
     </div>
   );
@@ -216,7 +215,7 @@ export function EncounterPanel({ engine }: { engine: Engine }) {
               action(
                 `form:${f.id}`,
                 `熔接${f.name}`,
-                `${cost === 0 ? '免费' : `${cost} 金币`} · 保留现有武装，共享元素与弹道`,
+                `${cost === 0 ? '免费' : `${cost} 金币`} · ${fusionDescription(w.weapon, [w.weapon, f.id])}`,
                 w.wallet.coins < cost,
               ),
             )}
