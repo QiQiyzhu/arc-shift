@@ -1,0 +1,16 @@
+{
+  "production": true,
+  "viewport": [
+    1366,
+    768
+  ],
+  "errors": [],
+  "checks": [
+    "main menu entry",
+    "trial canvas loads",
+    "real Escape pause",
+    "QA global absent",
+    "protected exit",
+    "DEV editor absent"
+  ]
+}

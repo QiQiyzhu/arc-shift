@@ -1,0 +1,41 @@
+{
+  "created": "2026-09-18",
+  "pdfPages": 10,
+  "video": {
+    "durationSeconds": 125.93,
+    "width": 1920,
+    "height": 1080,
+    "container": "MP4",
+    "codec": "H.264 + AAC",
+    "capture": "Actual browser game, scripted keyboard and pointer; no game-state writes",
+    "audio": "Game Web Audio, gain +8dB; decoded peak -3.0 dBFS"
+  },
+  "files": [
+    {
+      "file": "output/pdf/ARC-SHIFT_策划作品集.pdf",
+      "bytes": 4834806,
+      "sha256": "76016f81c32d7a55a4dd189e2c1f5e74c1e6fda9e944b1c036307de2a7ddb91c"
+    },
+    {
+      "file": "output/video/ARC-SHIFT_策划Demo.mp4",
+      "bytes": 10433518,
+      "sha256": "bc89f2bd338a4d7a4a0e150d69bfb5fa88f779808ab789e85b83a45319f5ef67"
+    }
+  ],
+  "verification": {
+    "unitPassed": 218,
+    "unitFailed": 0,
+    "browserFlow": 7,
+    "updatedTrialChecks": 2,
+    "productionChecks": 6,
+    "numericSamples": 24,
+    "numericTicks": 17280,
+    "numericReproduction": "all measurements equal"
+  },
+  "limits": [
+    "No human player research",
+    "AI-assisted implementation, text and generated environment",
+    "Earlier performance evidence is dated 2026-09-17 and uses matched fixed workload; not this recording FPS",
+    "Existing actor atlas original generation receipt not recovered"
+  ]
+}

@@ -96,7 +96,7 @@ export class ReplayRecorder implements SimulationObserver {
     mode: Replay['initial']['mode'] = 'new-run',
     readonly interval = 120,
   ) {
-    if (engine.world.challengeRules)
+    if (engine.world.challengeRules || engine.world.scenario)
       throw Error('Activity sessions cannot use ordinary run replays');
     if (contentDiff(DEFAULT_CONTENT, engine.content).length)
       throw Error(

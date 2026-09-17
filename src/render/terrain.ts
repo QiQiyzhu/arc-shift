@@ -14,6 +14,33 @@ export function drawTerrainStatic(g: Phaser.GameObjects.Graphics, w: World) {
         ? 0xc28a68
         : 0xaba280;
   for (const b of w.terrain.blocks) {
+    if (w.scenario === 'build-trial') {
+      // Baked with the room: no per-frame decorative geometry allocation.
+      if (b.w === 130) {
+        g.fillStyle(0x05131d, 0.35);
+        g.fillRoundedRect(b.x, b.y, b.w, b.h, 16);
+        g.lineStyle(2, 0xb9a56d, 0.65);
+        g.strokeRoundedRect(b.x, b.y, b.w, b.h, 16);
+        g.lineStyle(1, 0x85d6d6, 0.3);
+        g.strokeRoundedRect(b.x + 5, b.y + 5, b.w - 10, b.h - 10, 12);
+      } else {
+        g.fillStyle(0x010a12, 0.7);
+        g.fillRoundedRect(b.x - 4, b.y + 7, b.w + 8, b.h + 8, 8);
+        g.fillStyle(0x283d47, 1);
+        g.fillRoundedRect(b.x, b.y, b.w, b.h, 7);
+        g.fillStyle(0x14242d, 1);
+        g.fillRoundedRect(b.x + 5, b.y + 5, b.w - 10, b.h - 10, 5);
+        g.lineStyle(2, 0xc8b784, 0.9);
+        g.strokeRoundedRect(b.x, b.y, b.w, b.h, 7);
+        g.lineStyle(1, 0x79bfcb, 0.45);
+        g.strokeRoundedRect(b.x + 9, b.y + 9, b.w - 18, b.h - 18, 4);
+        g.lineStyle(2, 0x9ce0e0, 0.75);
+        g.fillStyle(0x9ce0e0, 0.1);
+        polygon(g, b.x + b.w / 2, b.y + b.h / 2, 14, 6, Math.PI / 6);
+        g.strokeCircle(b.x + b.w / 2, b.y + b.h / 2, 7);
+      }
+      continue;
+    }
     g.fillStyle(0x020609, 0.8);
     g.fillRect(b.x - 5, b.y + 5, b.w + 10, b.h + 7);
     g.fillStyle(0x11191b, 1);

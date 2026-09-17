@@ -93,6 +93,7 @@ export class ArcScene extends Phaser.Scene {
   onReady: () => void = () => {};
   onSuspend: () => void = () => {};
   reducedMotion = false;
+  arenaSkin?: 'observatory';
   release = () => {
     this.actors?.dispose();
     this.actors = undefined;
@@ -120,6 +121,7 @@ export class ArcScene extends Phaser.Scene {
     this.engine = engine;
   }
   private arenaTexture(template = 0, biome = 'sanctum') {
+    if(this.arenaSkin&&this.textures.exists(this.arenaSkin))return this.arenaSkin;
     if (this.textures.exists(biome)) return biome;
     if (this.textures.exists('sanctum')) return 'sanctum';
     const key = `arena-floor-${template}`;
@@ -132,6 +134,7 @@ export class ArcScene extends Phaser.Scene {
     return key;
   }
   preload() {
+    if(this.arenaSkin)this.load.image('observatory','/art/observatory-v3.webp');
     this.load.image('actors-chroma-v2', '/art/actors-source-v2.png');
     this.load.image('sanctum', '/art/sanctum.webp');
     this.load.image('grove', '/art/grove.webp');

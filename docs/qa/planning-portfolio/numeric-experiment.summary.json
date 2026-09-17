@@ -1,0 +1,499 @@
+{
+  "experiment": "arc-shift-six-energy-coach-range-20260918",
+  "startedAt": "2026-09-17T19:39:53.465Z",
+  "finishedAt": "2026-09-17T19:39:53.893Z",
+  "scenarioVersion": "coach-range-2",
+  "rawFile": "D:\\CodexData\\PlanningPortfolio\\arc-shift-20260918\\numeric-experiment.raw.json",
+  "rawSha256": "c7b617dd50d4c645f83baf6cab475d1d45aacfd2060d1886efc64fbc385a1bdc",
+  "rows": [
+    {
+      "id": "baseline",
+      "label": "Empty baseline",
+      "cards": [],
+      "energyCost": 0,
+      "single": {
+        "mean": 137.25,
+        "min": 132.25,
+        "max": 141,
+        "perSeed": [
+          141,
+          138.5,
+          132.25
+        ]
+      },
+      "swarm": {
+        "mean": 328.25,
+        "min": 325.3333333333333,
+        "max": 331.6666666666667,
+        "perSeed": [
+          331.6666666666667,
+          327.75,
+          325.3333333333333
+        ]
+      },
+      "reactionsTotal": 0,
+      "ticksPerSample": [
+        720,
+        720,
+        720,
+        720,
+        720,
+        720
+      ],
+      "ticksTotal": 4320,
+      "poolMissesTotal": 0,
+      "castsPerSample": [
+        {
+          "scene": "single",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        }
+      ],
+      "activeSynergies": []
+    },
+    {
+      "id": "build-a",
+      "label": "A: split + ember + frost",
+      "cards": [
+        {
+          "id": "fire-split",
+          "name": "三重星火",
+          "cost": 3
+        },
+        {
+          "id": "fire-ember",
+          "name": "余烬协议",
+          "cost": 2
+        },
+        {
+          "id": "ice-touch",
+          "name": "冰霜编码",
+          "cost": 1
+        }
+      ],
+      "energyCost": 6,
+      "single": {
+        "mean": 275.86111111111114,
+        "min": 272.75,
+        "max": 277.9166666666667,
+        "perSeed": [
+          276.9166666666667,
+          277.9166666666667,
+          272.75
+        ]
+      },
+      "swarm": {
+        "mean": 496,
+        "min": 494.6666666666667,
+        "max": 497.5,
+        "perSeed": [
+          497.5,
+          494.6666666666667,
+          495.8333333333333
+        ]
+      },
+      "reactionsTotal": 60,
+      "ticksPerSample": [
+        720,
+        720,
+        720,
+        720,
+        720,
+        720
+      ],
+      "ticksTotal": 4320,
+      "poolMissesTotal": 0,
+      "castsPerSample": [
+        {
+          "scene": "single",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        }
+      ],
+      "activeSynergies": [
+        "thermal"
+      ]
+    },
+    {
+      "id": "build-b",
+      "label": "B: chain + rate + homing",
+      "cards": [
+        {
+          "id": "storm-arc",
+          "name": "电弧引擎",
+          "cost": 2
+        },
+        {
+          "id": "storm-surge",
+          "name": "超频脉冲",
+          "cost": 2
+        },
+        {
+          "id": "void-seek",
+          "name": "引力偏移",
+          "cost": 2
+        }
+      ],
+      "energyCost": 6,
+      "single": {
+        "mean": 162.3611111111111,
+        "min": 159.41666666666666,
+        "max": 164.41666666666666,
+        "perSeed": [
+          164.41666666666666,
+          163.25,
+          159.41666666666666
+        ]
+      },
+      "swarm": {
+        "mean": 406.5,
+        "min": 401.9166666666667,
+        "max": 411.9166666666667,
+        "perSeed": [
+          411.9166666666667,
+          405.6666666666667,
+          401.9166666666667
+        ]
+      },
+      "reactionsTotal": 0,
+      "ticksPerSample": [
+        720,
+        720,
+        720,
+        720,
+        720,
+        720
+      ],
+      "ticksTotal": 4320,
+      "poolMissesTotal": 0,
+      "castsPerSample": [
+        {
+          "scene": "single",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        }
+      ],
+      "activeSynergies": []
+    },
+    {
+      "id": "build-c",
+      "label": "C: ember + rate + chain",
+      "cards": [
+        {
+          "id": "fire-ember",
+          "name": "余烬协议",
+          "cost": 2
+        },
+        {
+          "id": "storm-surge",
+          "name": "超频脉冲",
+          "cost": 2
+        },
+        {
+          "id": "storm-arc",
+          "name": "电弧引擎",
+          "cost": 2
+        }
+      ],
+      "energyCost": 6,
+      "single": {
+        "mean": 170.36111111111111,
+        "min": 164.91666666666666,
+        "max": 173.75,
+        "perSeed": [
+          172.41666666666666,
+          164.91666666666666,
+          173.75
+        ]
+      },
+      "swarm": {
+        "mean": 487.88888888888886,
+        "min": 477,
+        "max": 500.3333333333333,
+        "perSeed": [
+          486.3333333333333,
+          477,
+          500.3333333333333
+        ]
+      },
+      "reactionsTotal": 33,
+      "ticksPerSample": [
+        720,
+        720,
+        720,
+        720,
+        720,
+        720
+      ],
+      "ticksTotal": 4320,
+      "poolMissesTotal": 0,
+      "castsPerSample": [
+        {
+          "scene": "single",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "single",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 73129,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 41717,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        },
+        {
+          "scene": "swarm",
+          "seed": 90311,
+          "pulse": 2,
+          "well": 2,
+          "dash": 0
+        }
+      ],
+      "activeSynergies": [
+        "plasma"
+      ]
+    }
+  ],
+  "aggregate": {
+    "builds": 4,
+    "samples": 24,
+    "ticks": 17280,
+    "poolMisses": 0
+  },
+  "priceSensitivity": {
+    "current": {
+      "includingEmpty": 36,
+      "nonempty": 35,
+      "spendingExactlySix": 8,
+      "containingFireSplit": 10,
+      "bySlotsUsed": {
+        "0": 1,
+        "1": 6,
+        "2": 15,
+        "3": 14,
+        "4": 0
+      }
+    },
+    "hypothetical": {
+      "includingEmpty": 42,
+      "nonempty": 41,
+      "spendingExactlySix": 10,
+      "containingFireSplit": 16,
+      "bySlotsUsed": {
+        "0": 1,
+        "1": 6,
+        "2": 15,
+        "3": 20,
+        "4": 0
+      }
+    },
+    "newlyFeasible": [
+      {
+        "cards": [
+          "fire-ember",
+          "storm-arc",
+          "fire-split"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "fire-ember",
+          "fire-split",
+          "storm-surge"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "storm-arc",
+          "fire-split",
+          "storm-surge"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "fire-ember",
+          "fire-split",
+          "void-seek"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "storm-arc",
+          "fire-split",
+          "void-seek"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "fire-split",
+          "storm-surge",
+          "void-seek"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      }
+    ]
+  },
+  "limitations": [
+    "This is coach-range-2 automated deterministic simulation, not human play, a live level, or a win-rate measurement.",
+    "Each scene runs 720 fixed ticks at 60 Hz (12 simulated seconds), three fixed seeds; only six samples per build.",
+    "Arc weapon, level 3, no relics, forms [arc], offered [], source camp, exact DEFAULT_TRIAL.content captured here.",
+    "One stationary sentry or eight tightly clustered stationary sentries with 100,000,000 HP, zero speed, zero damage, suppressed attack timers. No kills, moving-target test, or survival pressure.",
+    "Player is stationary at (640,430), aims at (640,350), fires continuously, requests Q and E every tick so they cast when available, and never dashes. DPS includes skills, statuses, and reactions.",
+    "Blocks and zones are removed. Target positions are reset each tick, suppressing spatial consequences of knockback, attraction, and crowd control.",
+    "Swarm DPS is total damage across all eight targets divided by 12 seconds, not per-target DPS.",
+    "The seeds vary random rolls in the same geometry and input policy; they are not independent players or a representative gameplay distribution.",
+    "Zero projectile pool misses only checks pool capacity under these fixed workloads; it is not browser FPS, renderer performance, or a general stress-test result.",
+    "The three six-energy builds are selected examples, not exhaustive build optimization. A stationary target does not adequately value slowing, homing, mobility, terrain, or robustness to aim errors.",
+    "Price sensitivity is a combinatorial enumeration with unchanged combat content. More legal loadouts is not evidence that those loadouts are balanced or that the game is more fun."
+  ]
+}

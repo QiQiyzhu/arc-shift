@@ -1,0 +1,2560 @@
+{
+  "schemaVersion": 1,
+  "experiment": "arc-shift-six-energy-coach-range-20260918",
+  "startedAt": "2026-09-17T19:39:53.465Z",
+  "finishedAt": "2026-09-17T19:39:53.893Z",
+  "provenance": {
+    "repository": "C:/Users/yzhu/Documents/ChatGPT/New project",
+    "branch": "codex/planning-portfolio",
+    "head": "737b6f5ce2324fe879a8eb89d15bd155fe55ec43",
+    "statusAtStart": "M src/dev/ContentEditor.tsx\n M src/game/scene.ts\n M src/game/world.ts\n M src/main.tsx\n M src/render/terrain.ts\n M src/replay/replay.ts\n M src/ui/GameApp.tsx\n?? e2e/trial.spec.ts\n?? output/\n?? public/art/observatory-v3.webp\n?? scripts/record-trial.mjs\n?? src/dev/TrialEditor.tsx\n?? src/trial/\n?? tests/trial.test.ts",
+    "nodeVersion": "v24.16.0",
+    "gameVersion": "1.2-protocol.1",
+    "contentVersionLabel": "builtin-2026-09-10-tuning1",
+    "scenarioVersion": "coach-range-2",
+    "sourceHashesBefore": {
+      "scripts/ts-register.cjs": "e3d02b180cb7470509d8c55da97fcb494a2c5c978c5eee81fa520c2d3b7fd8d0",
+      "src/ai/enemy-ai.ts": "cd89ea611fffa5bca8f4aca1ad8a9d4f88c80894f69c8d72e1cb7b640a6dd4e1",
+      "src/audio/profiles.ts": "bdc37d0136161141d3d813392da4a354a1d709db3572f037a619ea08b93f88f1",
+      "src/audio/score.ts": "18bb18a0768fa7369280aa7d8d9073b223c3597b861425d5bd3cec4f2544d80a",
+      "src/audio/synth.ts": "314d231531186dd72885562ce897c001e291870db480cc7111ade6a8f8f0e45a",
+      "src/cards/catalog.ts": "4a525a08367ddc6450b09e794d6fb85d9580566fad1bbfe4ef3cce9c6ee5279f",
+      "src/cards/synergies.ts": "56b8206bdada18453743c648c61cf1306eec341246268c03c22280c4b3be60a7",
+      "src/cards/system.ts": "f11666458b72886f1ef370cf3229dca5496a63151fe3fb46e5b5048c0a0835e5",
+      "src/coach/knowledge.ts": "3fcbcf08be7bcbd6d94c95d596aff9030e3c92c2164bc37229b269484ce42c8a",
+      "src/coach/simulation.ts": "a8d73aa2abeab6c170c0fd234c78cfd03dbb97d6458d892a11a1bd215f5dd016",
+      "src/combat/damage.ts": "60e8e60b4c0c1777f5af7bc1b214f756c7d43412040aec4aa4f63c9d4a58dbfc",
+      "src/combat/geometry.ts": "c70c4c8dfff53b61ec122879bdc448685afb0c8eeaa9020314eab4239eaa8a6d",
+      "src/combat/impact.ts": "c66d57e099014baee78c81761cd729762e9969fc2fb4610b015e1e505ebe5813",
+      "src/combat/projectiles.ts": "2f3483bc7db9a5b8b0f8dbe3b15330d28c8b671c7b54f49ced76a21436081e6b",
+      "src/combat/rules.ts": "8488549eb7906596407c0ed515187f4ce5843086f0555b22875f1cc61e3c2c8a",
+      "src/combat/separation.ts": "b72b89227c9db7a131c226cfcfd8c9b9913ed84623326ee244d5bee390fa9172",
+      "src/combat/weapons.ts": "4f5f832391d1d390099e403abcc6f08fcaefeb3bb4a3ebb06b82a860594a8c0b",
+      "src/content/schema.ts": "eb75c840e513b0794d586e9a6cc6ccf6729d54597b441acd5b6c2adea079f94d",
+      "src/core/events.ts": "fa07fbb1c7121e70f000ca8aaabcdf9a8fac74902ae231ddc2971c2faf2280bb",
+      "src/core/math.ts": "5e0c28a0a0b2412a3e98c76cc6805ae04e5dfcdb64ea340ab381809c4295eb45",
+      "src/core/metrics.ts": "83ff6f8b31c93bd81ae7460730ef738aa186503388b174b9fb119b6ee596aa71",
+      "src/core/pool.ts": "446f07a074e18dcdd16aa741a0f70e9bfebaf86c4606be366b2c7c5a2bda92d6",
+      "src/core/save.ts": "db59b20a864ef88eba171f1589d11a61397d0d49875438c7429468a085819f9c",
+      "src/core/spatial-grid.ts": "820aa9b097122c06a780fbf442d5a4c0c46d9cdb1d10b538ee2857c314a4c348",
+      "src/data/enemies.ts": "037e23b5149d747dc80a37728864407996b862a02e97aed831a795f430fa1feb",
+      "src/economy/catalog.ts": "bc4fa53b16931a133d41aff015cf1605b3cbcf3480cbe0d006e9d70dd15682ab",
+      "src/economy/loot.ts": "d63488f459136b98367dbbeb1023ce7559781335ebccf4901c0860f436927504",
+      "src/game/engine.ts": "1e3488c1138300d40a3f7990c68722a83ef345570702cf57a7f340b475c93b41",
+      "src/game/world.ts": "057dbb196464b3e4ab6eefda65974796e29b1e4eab5a721425d0a842c6e3a7d1",
+      "src/progression/catalog.ts": "1788029fd51cec264aa24d4c0994b2f4c550cc98da3e3afffe8f47dfa0deb64d",
+      "src/replay/replay.ts": "d077898f979a9e6d648e2cbb81393c1a168b3c183c217fa1629814f63372ec10",
+      "src/rooms/expedition.ts": "e92277b1b857f23780ec931a2b3eef439dfd4a76af1e4aa3fa0613affab58d7a",
+      "src/rooms/generator.ts": "40c7e79ba6106a0e5f80c38a1677ef54c657a3c87236c0559c80a15b3bff2d56",
+      "src/rooms/terrain.ts": "54e357fb97b35bf9a6aa86d2df212a2c85c30765498216721a85ba48634fad5d",
+      "src/systems/hazards.ts": "0ad56800ad6c6fe103189fefa87d4351b171b4df50d3aab0cd02b1c6fb0dedbc",
+      "src/systems/player.ts": "3a29db43581c06b1e4b4b7edf984de6418417879840a9d85802b9b094de66c20",
+      "src/trial/config.ts": "43000ec0dcad387f73192169353fa9de5f83aaa4f91e45c3dfaede64e96be09a"
+    },
+    "sourceHashesAfter": {
+      "scripts/ts-register.cjs": "e3d02b180cb7470509d8c55da97fcb494a2c5c978c5eee81fa520c2d3b7fd8d0",
+      "src/ai/enemy-ai.ts": "cd89ea611fffa5bca8f4aca1ad8a9d4f88c80894f69c8d72e1cb7b640a6dd4e1",
+      "src/audio/profiles.ts": "bdc37d0136161141d3d813392da4a354a1d709db3572f037a619ea08b93f88f1",
+      "src/audio/score.ts": "18bb18a0768fa7369280aa7d8d9073b223c3597b861425d5bd3cec4f2544d80a",
+      "src/audio/synth.ts": "314d231531186dd72885562ce897c001e291870db480cc7111ade6a8f8f0e45a",
+      "src/cards/catalog.ts": "4a525a08367ddc6450b09e794d6fb85d9580566fad1bbfe4ef3cce9c6ee5279f",
+      "src/cards/synergies.ts": "56b8206bdada18453743c648c61cf1306eec341246268c03c22280c4b3be60a7",
+      "src/cards/system.ts": "f11666458b72886f1ef370cf3229dca5496a63151fe3fb46e5b5048c0a0835e5",
+      "src/coach/knowledge.ts": "3fcbcf08be7bcbd6d94c95d596aff9030e3c92c2164bc37229b269484ce42c8a",
+      "src/coach/simulation.ts": "a8d73aa2abeab6c170c0fd234c78cfd03dbb97d6458d892a11a1bd215f5dd016",
+      "src/combat/damage.ts": "60e8e60b4c0c1777f5af7bc1b214f756c7d43412040aec4aa4f63c9d4a58dbfc",
+      "src/combat/geometry.ts": "c70c4c8dfff53b61ec122879bdc448685afb0c8eeaa9020314eab4239eaa8a6d",
+      "src/combat/impact.ts": "c66d57e099014baee78c81761cd729762e9969fc2fb4610b015e1e505ebe5813",
+      "src/combat/projectiles.ts": "2f3483bc7db9a5b8b0f8dbe3b15330d28c8b671c7b54f49ced76a21436081e6b",
+      "src/combat/rules.ts": "8488549eb7906596407c0ed515187f4ce5843086f0555b22875f1cc61e3c2c8a",
+      "src/combat/separation.ts": "b72b89227c9db7a131c226cfcfd8c9b9913ed84623326ee244d5bee390fa9172",
+      "src/combat/weapons.ts": "4f5f832391d1d390099e403abcc6f08fcaefeb3bb4a3ebb06b82a860594a8c0b",
+      "src/content/schema.ts": "eb75c840e513b0794d586e9a6cc6ccf6729d54597b441acd5b6c2adea079f94d",
+      "src/core/events.ts": "fa07fbb1c7121e70f000ca8aaabcdf9a8fac74902ae231ddc2971c2faf2280bb",
+      "src/core/math.ts": "5e0c28a0a0b2412a3e98c76cc6805ae04e5dfcdb64ea340ab381809c4295eb45",
+      "src/core/metrics.ts": "83ff6f8b31c93bd81ae7460730ef738aa186503388b174b9fb119b6ee596aa71",
+      "src/core/pool.ts": "446f07a074e18dcdd16aa741a0f70e9bfebaf86c4606be366b2c7c5a2bda92d6",
+      "src/core/save.ts": "db59b20a864ef88eba171f1589d11a61397d0d49875438c7429468a085819f9c",
+      "src/core/spatial-grid.ts": "820aa9b097122c06a780fbf442d5a4c0c46d9cdb1d10b538ee2857c314a4c348",
+      "src/data/enemies.ts": "037e23b5149d747dc80a37728864407996b862a02e97aed831a795f430fa1feb",
+      "src/economy/catalog.ts": "bc4fa53b16931a133d41aff015cf1605b3cbcf3480cbe0d006e9d70dd15682ab",
+      "src/economy/loot.ts": "d63488f459136b98367dbbeb1023ce7559781335ebccf4901c0860f436927504",
+      "src/game/engine.ts": "1e3488c1138300d40a3f7990c68722a83ef345570702cf57a7f340b475c93b41",
+      "src/game/world.ts": "057dbb196464b3e4ab6eefda65974796e29b1e4eab5a721425d0a842c6e3a7d1",
+      "src/progression/catalog.ts": "1788029fd51cec264aa24d4c0994b2f4c550cc98da3e3afffe8f47dfa0deb64d",
+      "src/replay/replay.ts": "d077898f979a9e6d648e2cbb81393c1a168b3c183c217fa1629814f63372ec10",
+      "src/rooms/expedition.ts": "e92277b1b857f23780ec931a2b3eef439dfd4a76af1e4aa3fa0613affab58d7a",
+      "src/rooms/generator.ts": "40c7e79ba6106a0e5f80c38a1677ef54c657a3c87236c0559c80a15b3bff2d56",
+      "src/rooms/terrain.ts": "54e357fb97b35bf9a6aa86d2df212a2c85c30765498216721a85ba48634fad5d",
+      "src/systems/hazards.ts": "0ad56800ad6c6fe103189fefa87d4351b171b4df50d3aab0cd02b1c6fb0dedbc",
+      "src/systems/player.ts": "3a29db43581c06b1e4b4b7edf984de6418417879840a9d85802b9b094de66c20",
+      "src/trial/config.ts": "43000ec0dcad387f73192169353fa9de5f83aaa4f91e45c3dfaede64e96be09a"
+    },
+    "changedDuringRun": [],
+    "scriptSha256": "4d8ae61d2a1faab15258cb2bccad93353adbb8e939ef9b6d77418d54c9a2b0db",
+    "snapshotSha256": "efae5b06591dc0d141f853cadf13a1d267cad50044baae7ea279332776678af6",
+    "trialSha256": "0f09459c5eb7b41f0f1a08d2fb6da0ddde36d0e306aea15365195dacc80b4866"
+  },
+  "scenario": {
+    "seeds": [
+      73129,
+      41717,
+      90311
+    ],
+    "ticksPerSample": 720,
+    "dt": 0.016666666666666666,
+    "durationSeconds": 12,
+    "player": {
+      "x": 640,
+      "y": 430,
+      "aimX": 640,
+      "aimY": 350,
+      "fire": true,
+      "q": true,
+      "e": true,
+      "dash": false
+    },
+    "singleTargets": [
+      [
+        640,
+        350
+      ]
+    ],
+    "swarmTargets": [
+      [
+        640,
+        350
+      ],
+      [
+        604,
+        342
+      ],
+      [
+        676,
+        342
+      ],
+      [
+        568,
+        330
+      ],
+      [
+        712,
+        330
+      ],
+      [
+        592,
+        304
+      ],
+      [
+        688,
+        304
+      ],
+      [
+        640,
+        280
+      ]
+    ],
+    "targets": {
+      "kind": "sentry",
+      "hp": 100000000,
+      "maxHp": 100000000,
+      "speed": 0,
+      "damage": 0,
+      "stateResetEachTick": "recover",
+      "timerResetEachTick": 1000000
+    }
+  },
+  "snapshot": {
+    "cards": [],
+    "relics": [],
+    "forms": [
+      "arc"
+    ],
+    "weapon": "arc",
+    "level": 3,
+    "content": {
+      "schemaVersion": 1,
+      "enemies": [
+        {
+          "id": "hunter",
+          "params": {
+            "hp": 130,
+            "speed": 100,
+            "damage": 9,
+            "radius": 17
+          }
+        },
+        {
+          "id": "sentry",
+          "params": {
+            "hp": 163,
+            "speed": 64,
+            "damage": 10,
+            "radius": 19
+          }
+        },
+        {
+          "id": "lancer",
+          "params": {
+            "hp": 238,
+            "speed": 70,
+            "damage": 17,
+            "radius": 22
+          }
+        },
+        {
+          "id": "weaver",
+          "params": {
+            "hp": 263,
+            "speed": 52,
+            "damage": 18,
+            "radius": 21
+          }
+        },
+        {
+          "id": "conduit",
+          "params": {
+            "hp": 86,
+            "speed": 70,
+            "damage": 7,
+            "radius": 18
+          }
+        },
+        {
+          "id": "warden",
+          "params": {
+            "hp": 4200,
+            "speed": 62,
+            "damage": 22,
+            "radius": 49
+          }
+        },
+        {
+          "id": "bomber",
+          "params": {
+            "hp": 115,
+            "speed": 62,
+            "damage": 16,
+            "radius": 21
+          }
+        },
+        {
+          "id": "cantor",
+          "params": {
+            "hp": 130,
+            "speed": 54,
+            "damage": 12,
+            "radius": 23
+          }
+        },
+        {
+          "id": "shade",
+          "params": {
+            "hp": 90,
+            "speed": 80,
+            "damage": 15,
+            "radius": 18
+          }
+        },
+        {
+          "id": "matron",
+          "params": {
+            "hp": 5200,
+            "speed": 48,
+            "damage": 20,
+            "radius": 48
+          }
+        },
+        {
+          "id": "forgemaster",
+          "params": {
+            "hp": 5400,
+            "speed": 56,
+            "damage": 22,
+            "radius": 50
+          }
+        },
+        {
+          "id": "oracle",
+          "params": {
+            "hp": 6500,
+            "speed": 55,
+            "damage": 24,
+            "radius": 52
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "id": "arc",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1
+          }
+        },
+        {
+          "id": "sword",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1,
+            "range": 1,
+            "arc": 1
+          }
+        },
+        {
+          "id": "cannon",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1,
+            "blast": 1
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "fire-meteor",
+          "requires": null,
+          "params": {
+            "shotSize": 9,
+            "shotSpeed": 0.66,
+            "damage": 1.65,
+            "rate": 1.4
+          }
+        },
+        {
+          "id": "fire-bloom",
+          "requires": null,
+          "params": {
+            "fragment": 3
+          }
+        },
+        {
+          "id": "fire-ember",
+          "requires": null,
+          "params": {
+            "burn": 8
+          }
+        },
+        {
+          "id": "fire-fuel",
+          "requires": "fire-ember",
+          "params": {
+            "burn": 18
+          }
+        },
+        {
+          "id": "fire-funeral",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "fire-split",
+          "requires": null,
+          "params": {
+            "projectiles": 3,
+            "damage": 0.75
+          }
+        },
+        {
+          "id": "fire-blast",
+          "requires": null,
+          "params": {
+            "explosion": 1
+          }
+        },
+        {
+          "id": "fire-dash",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "storm-lance",
+          "requires": null,
+          "params": {
+            "shotSpeed": 2.4,
+            "pierce": 3,
+            "rate": 1.35,
+            "damage": 1.15
+          }
+        },
+        {
+          "id": "storm-familiar",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "storm-arc",
+          "requires": null,
+          "params": {
+            "chain": 2
+          }
+        },
+        {
+          "id": "storm-conduct",
+          "requires": "storm-arc",
+          "params": {
+            "chain": 2
+          }
+        },
+        {
+          "id": "storm-static",
+          "requires": "storm-arc",
+          "params": {}
+        },
+        {
+          "id": "storm-critical",
+          "requires": null,
+          "params": {
+            "crit": 0.22
+          }
+        },
+        {
+          "id": "storm-surge",
+          "requires": null,
+          "params": {
+            "rate": 0.78
+          }
+        },
+        {
+          "id": "storm-needle",
+          "requires": null,
+          "params": {
+            "pierce": 2
+          }
+        },
+        {
+          "id": "frost-wave",
+          "requires": null,
+          "params": {
+            "wave": 1
+          }
+        },
+        {
+          "id": "frost-fan",
+          "requires": null,
+          "params": {
+            "projectiles": 2,
+            "damage": 0.7
+          }
+        },
+        {
+          "id": "ice-touch",
+          "requires": null,
+          "params": {
+            "slow": 0.35
+          }
+        },
+        {
+          "id": "ice-brittle",
+          "requires": "ice-touch",
+          "params": {}
+        },
+        {
+          "id": "ice-shatter",
+          "requires": "ice-touch",
+          "params": {}
+        },
+        {
+          "id": "ice-pierce",
+          "requires": null,
+          "params": {
+            "pierce": 1,
+            "damage": 4
+          }
+        },
+        {
+          "id": "ice-shell",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "ice-prism",
+          "requires": null,
+          "params": {
+            "bounce": 2
+          }
+        },
+        {
+          "id": "void-orbit",
+          "requires": null,
+          "params": {
+            "pierce": 2,
+            "rate": 1.2
+          }
+        },
+        {
+          "id": "void-return",
+          "requires": null,
+          "params": {
+            "damage": 0.9
+          }
+        },
+        {
+          "id": "void-seek",
+          "requires": null,
+          "params": {
+            "homing": 1
+          }
+        },
+        {
+          "id": "void-horizon",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "void-execute",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "void-leech",
+          "requires": null,
+          "params": {
+            "lifesteal": 1
+          }
+        },
+        {
+          "id": "void-singularity",
+          "requires": null,
+          "params": {
+            "eCooldown": 0.65
+          }
+        },
+        {
+          "id": "void-echo",
+          "requires": null,
+          "params": {
+            "qCooldown": 0.65,
+            "damage": 4
+          }
+        },
+        {
+          "id": "shift-echo",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-rear",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-quick",
+          "requires": null,
+          "params": {
+            "dashCooldown": 0.7
+          }
+        },
+        {
+          "id": "shift-shield",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-nova",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-ice",
+          "requires": null,
+          "params": {
+            "slow": 0.35
+          }
+        },
+        {
+          "id": "shift-reload",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-stride",
+          "requires": null,
+          "params": {
+            "speed": 1.18
+          }
+        }
+      ],
+      "encounters": [
+        {
+          "id": "standard",
+          "pool": [
+            "hunter",
+            "sentry",
+            "lancer"
+          ],
+          "params": {
+            "combatWaves": 3,
+            "eliteWaves": 4,
+            "challengeWaves": 5,
+            "interval": 9,
+            "baseCount": 4,
+            "eliteBonus": 3
+          }
+        }
+      ],
+      "bosses": [
+        {
+          "id": "warden",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "matron",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "forgemaster",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "oracle",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        }
+      ]
+    },
+    "offered": [],
+    "source": "camp"
+  },
+  "trial": {
+    "schemaVersion": 1,
+    "seed": 812831,
+    "slots": 4,
+    "repairCost": 2,
+    "repairHealth": 35,
+    "content": {
+      "schemaVersion": 1,
+      "enemies": [
+        {
+          "id": "hunter",
+          "params": {
+            "hp": 130,
+            "speed": 100,
+            "damage": 9,
+            "radius": 17
+          }
+        },
+        {
+          "id": "sentry",
+          "params": {
+            "hp": 163,
+            "speed": 64,
+            "damage": 10,
+            "radius": 19
+          }
+        },
+        {
+          "id": "lancer",
+          "params": {
+            "hp": 238,
+            "speed": 70,
+            "damage": 17,
+            "radius": 22
+          }
+        },
+        {
+          "id": "weaver",
+          "params": {
+            "hp": 263,
+            "speed": 52,
+            "damage": 18,
+            "radius": 21
+          }
+        },
+        {
+          "id": "conduit",
+          "params": {
+            "hp": 86,
+            "speed": 70,
+            "damage": 7,
+            "radius": 18
+          }
+        },
+        {
+          "id": "warden",
+          "params": {
+            "hp": 4200,
+            "speed": 62,
+            "damage": 22,
+            "radius": 49
+          }
+        },
+        {
+          "id": "bomber",
+          "params": {
+            "hp": 115,
+            "speed": 62,
+            "damage": 16,
+            "radius": 21
+          }
+        },
+        {
+          "id": "cantor",
+          "params": {
+            "hp": 130,
+            "speed": 54,
+            "damage": 12,
+            "radius": 23
+          }
+        },
+        {
+          "id": "shade",
+          "params": {
+            "hp": 90,
+            "speed": 80,
+            "damage": 15,
+            "radius": 18
+          }
+        },
+        {
+          "id": "matron",
+          "params": {
+            "hp": 5200,
+            "speed": 48,
+            "damage": 20,
+            "radius": 48
+          }
+        },
+        {
+          "id": "forgemaster",
+          "params": {
+            "hp": 5400,
+            "speed": 56,
+            "damage": 22,
+            "radius": 50
+          }
+        },
+        {
+          "id": "oracle",
+          "params": {
+            "hp": 6500,
+            "speed": 55,
+            "damage": 24,
+            "radius": 52
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "id": "arc",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1
+          }
+        },
+        {
+          "id": "sword",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1,
+            "range": 1,
+            "arc": 1
+          }
+        },
+        {
+          "id": "cannon",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1,
+            "blast": 1
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "fire-meteor",
+          "requires": null,
+          "params": {
+            "shotSize": 9,
+            "shotSpeed": 0.66,
+            "damage": 1.65,
+            "rate": 1.4
+          }
+        },
+        {
+          "id": "fire-bloom",
+          "requires": null,
+          "params": {
+            "fragment": 3
+          }
+        },
+        {
+          "id": "fire-ember",
+          "requires": null,
+          "params": {
+            "burn": 8
+          }
+        },
+        {
+          "id": "fire-fuel",
+          "requires": "fire-ember",
+          "params": {
+            "burn": 18
+          }
+        },
+        {
+          "id": "fire-funeral",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "fire-split",
+          "requires": null,
+          "params": {
+            "projectiles": 3,
+            "damage": 0.75
+          }
+        },
+        {
+          "id": "fire-blast",
+          "requires": null,
+          "params": {
+            "explosion": 1
+          }
+        },
+        {
+          "id": "fire-dash",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "storm-lance",
+          "requires": null,
+          "params": {
+            "shotSpeed": 2.4,
+            "pierce": 3,
+            "rate": 1.35,
+            "damage": 1.15
+          }
+        },
+        {
+          "id": "storm-familiar",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "storm-arc",
+          "requires": null,
+          "params": {
+            "chain": 2
+          }
+        },
+        {
+          "id": "storm-conduct",
+          "requires": "storm-arc",
+          "params": {
+            "chain": 2
+          }
+        },
+        {
+          "id": "storm-static",
+          "requires": "storm-arc",
+          "params": {}
+        },
+        {
+          "id": "storm-critical",
+          "requires": null,
+          "params": {
+            "crit": 0.22
+          }
+        },
+        {
+          "id": "storm-surge",
+          "requires": null,
+          "params": {
+            "rate": 0.78
+          }
+        },
+        {
+          "id": "storm-needle",
+          "requires": null,
+          "params": {
+            "pierce": 2
+          }
+        },
+        {
+          "id": "frost-wave",
+          "requires": null,
+          "params": {
+            "wave": 1
+          }
+        },
+        {
+          "id": "frost-fan",
+          "requires": null,
+          "params": {
+            "projectiles": 2,
+            "damage": 0.7
+          }
+        },
+        {
+          "id": "ice-touch",
+          "requires": null,
+          "params": {
+            "slow": 0.35
+          }
+        },
+        {
+          "id": "ice-brittle",
+          "requires": "ice-touch",
+          "params": {}
+        },
+        {
+          "id": "ice-shatter",
+          "requires": "ice-touch",
+          "params": {}
+        },
+        {
+          "id": "ice-pierce",
+          "requires": null,
+          "params": {
+            "pierce": 1,
+            "damage": 4
+          }
+        },
+        {
+          "id": "ice-shell",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "ice-prism",
+          "requires": null,
+          "params": {
+            "bounce": 2
+          }
+        },
+        {
+          "id": "void-orbit",
+          "requires": null,
+          "params": {
+            "pierce": 2,
+            "rate": 1.2
+          }
+        },
+        {
+          "id": "void-return",
+          "requires": null,
+          "params": {
+            "damage": 0.9
+          }
+        },
+        {
+          "id": "void-seek",
+          "requires": null,
+          "params": {
+            "homing": 1
+          }
+        },
+        {
+          "id": "void-horizon",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "void-execute",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "void-leech",
+          "requires": null,
+          "params": {
+            "lifesteal": 1
+          }
+        },
+        {
+          "id": "void-singularity",
+          "requires": null,
+          "params": {
+            "eCooldown": 0.65
+          }
+        },
+        {
+          "id": "void-echo",
+          "requires": null,
+          "params": {
+            "qCooldown": 0.65,
+            "damage": 4
+          }
+        },
+        {
+          "id": "shift-echo",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-rear",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-quick",
+          "requires": null,
+          "params": {
+            "dashCooldown": 0.7
+          }
+        },
+        {
+          "id": "shift-shield",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-nova",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-ice",
+          "requires": null,
+          "params": {
+            "slow": 0.35
+          }
+        },
+        {
+          "id": "shift-reload",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-stride",
+          "requires": null,
+          "params": {
+            "speed": 1.18
+          }
+        }
+      ],
+      "encounters": [
+        {
+          "id": "standard",
+          "pool": [
+            "hunter",
+            "sentry",
+            "lancer"
+          ],
+          "params": {
+            "combatWaves": 3,
+            "eliteWaves": 4,
+            "challengeWaves": 5,
+            "interval": 9,
+            "baseCount": 4,
+            "eliteBonus": 3
+          }
+        }
+      ],
+      "bosses": [
+        {
+          "id": "warden",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "matron",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "forgemaster",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "oracle",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        }
+      ]
+    },
+    "offers": [
+      {
+        "id": "fire-ember",
+        "cost": 2,
+        "unlock": 0,
+        "role": "持续压制",
+        "tradeoff": "持续伤害需要时间结算，不能立即清除威胁。"
+      },
+      {
+        "id": "storm-arc",
+        "cost": 2,
+        "unlock": 0,
+        "role": "群体连锁",
+        "tradeoff": "附近没有额外目标时，连锁收益下降。"
+      },
+      {
+        "id": "ice-touch",
+        "cost": 1,
+        "unlock": 0,
+        "role": "争取空间",
+        "tradeoff": "提供减速，不直接提高单发基础伤害。"
+      },
+      {
+        "id": "fire-split",
+        "cost": 3,
+        "unlock": 0,
+        "role": "扇形覆盖",
+        "tradeoff": "每发伤害降至 75%，远处小目标可能只中一发。"
+      },
+      {
+        "id": "storm-surge",
+        "cost": 2,
+        "unlock": 0,
+        "role": "稳定射速",
+        "tradeoff": "更多射击需要更稳定的瞄准，不扩大覆盖范围。"
+      },
+      {
+        "id": "void-seek",
+        "cost": 2,
+        "unlock": 0,
+        "role": "修正弹道",
+        "tradeoff": "追踪不保证命中，仍受地形与目标移动影响。"
+      },
+      {
+        "id": "fire-meteor",
+        "cost": 3,
+        "unlock": 1,
+        "role": "重型弹体",
+        "tradeoff": "基础伤害提高，射击间隔与弹道速度同时付出代价。"
+      },
+      {
+        "id": "ice-pierce",
+        "cost": 2,
+        "unlock": 1,
+        "role": "直线穿透",
+        "tradeoff": "对单体没有额外穿透目标，不能把穿透次数当伤害倍率。"
+      },
+      {
+        "id": "fire-fuel",
+        "cost": 3,
+        "unlock": 2,
+        "role": "强化燃烧",
+        "tradeoff": "需先装备余烬，占用两个协议槽。"
+      }
+    ],
+    "stages": [
+      {
+        "name": "聚群试炼",
+        "purpose": "猎手靠近形成群体，检验覆盖、连锁与控制。",
+        "budget": 6,
+        "limit": 80,
+        "cover": false,
+        "enemies": [
+          {
+            "kind": "hunter",
+            "x": 440,
+            "y": 240
+          },
+          {
+            "kind": "hunter",
+            "x": 525,
+            "y": 205
+          },
+          {
+            "kind": "hunter",
+            "x": 640,
+            "y": 200
+          },
+          {
+            "kind": "hunter",
+            "x": 755,
+            "y": 205
+          },
+          {
+            "kind": "hunter",
+            "x": 840,
+            "y": 240
+          },
+          {
+            "kind": "sentry",
+            "x": 640,
+            "y": 160
+          }
+        ]
+      },
+      {
+        "name": "交叉火线",
+        "purpose": "冲锋逼迫移动；用掩体断开射线，再寻找输出位置。",
+        "budget": 9,
+        "limit": 100,
+        "cover": true,
+        "enemies": [
+          {
+            "kind": "lancer",
+            "x": 360,
+            "y": 205
+          },
+          {
+            "kind": "lancer",
+            "x": 920,
+            "y": 205
+          },
+          {
+            "kind": "sentry",
+            "x": 220,
+            "y": 350
+          },
+          {
+            "kind": "sentry",
+            "x": 1060,
+            "y": 350
+          },
+          {
+            "kind": "hunter",
+            "x": 510,
+            "y": 235
+          },
+          {
+            "kind": "hunter",
+            "x": 770,
+            "y": 235
+          },
+          {
+            "kind": "weaver",
+            "x": 640,
+            "y": 190
+          }
+        ]
+      },
+      {
+        "name": "守门人",
+        "purpose": "提前知道下一场是单体：继续对群，还是转向稳定单体？",
+        "budget": 12,
+        "limit": 120,
+        "cover": false,
+        "enemies": [
+          {
+            "kind": "warden",
+            "x": 640,
+            "y": 245
+          }
+        ]
+      }
+    ]
+  },
+  "measurements": [
+    {
+      "candidate": {
+        "id": "baseline",
+        "label": "Empty baseline",
+        "cards": []
+      },
+      "samples": [
+        {
+          "seed": 73129,
+          "scene": "single",
+          "damage": 1692,
+          "dps": 141,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "single",
+          "damage": 1662,
+          "dps": 138.5,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "single",
+          "damage": 1587,
+          "dps": 132.25,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 73129,
+          "scene": "swarm",
+          "damage": 3980,
+          "dps": 331.6666666666667,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "swarm",
+          "damage": 3933,
+          "dps": 327.75,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "swarm",
+          "damage": 3904,
+          "dps": 325.3333333333333,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        }
+      ],
+      "single": 137.25,
+      "swarm": 328.25,
+      "dash": 1.2,
+      "speed": 250,
+      "maxHpBonus": 0,
+      "synergies": []
+    },
+    {
+      "candidate": {
+        "id": "build-a",
+        "label": "A: split + ember + frost",
+        "cards": [
+          "fire-split",
+          "fire-ember",
+          "ice-touch"
+        ]
+      },
+      "samples": [
+        {
+          "seed": 73129,
+          "scene": "single",
+          "damage": 3323,
+          "dps": 276.9166666666667,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "single",
+          "damage": 3335,
+          "dps": 277.9166666666667,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "single",
+          "damage": 3273,
+          "dps": 272.75,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 73129,
+          "scene": "swarm",
+          "damage": 5970,
+          "dps": 497.5,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "swarm",
+          "damage": 5936,
+          "dps": 494.6666666666667,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "swarm",
+          "damage": 5950,
+          "dps": 495.8333333333333,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        }
+      ],
+      "single": 275.86111111111114,
+      "swarm": 496,
+      "dash": 1.2,
+      "speed": 250,
+      "maxHpBonus": 0,
+      "synergies": [
+        "thermal"
+      ]
+    },
+    {
+      "candidate": {
+        "id": "build-b",
+        "label": "B: chain + rate + homing",
+        "cards": [
+          "storm-arc",
+          "storm-surge",
+          "void-seek"
+        ]
+      },
+      "samples": [
+        {
+          "seed": 73129,
+          "scene": "single",
+          "damage": 1973,
+          "dps": 164.41666666666666,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "single",
+          "damage": 1959,
+          "dps": 163.25,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "single",
+          "damage": 1913,
+          "dps": 159.41666666666666,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 73129,
+          "scene": "swarm",
+          "damage": 4943,
+          "dps": 411.9166666666667,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "swarm",
+          "damage": 4868,
+          "dps": 405.6666666666667,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "swarm",
+          "damage": 4823,
+          "dps": 401.9166666666667,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        }
+      ],
+      "single": 162.3611111111111,
+      "swarm": 406.5,
+      "dash": 1.2,
+      "speed": 250,
+      "maxHpBonus": 0,
+      "synergies": []
+    },
+    {
+      "candidate": {
+        "id": "build-c",
+        "label": "C: ember + rate + chain",
+        "cards": [
+          "fire-ember",
+          "storm-surge",
+          "storm-arc"
+        ]
+      },
+      "samples": [
+        {
+          "seed": 73129,
+          "scene": "single",
+          "damage": 2069,
+          "dps": 172.41666666666666,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "single",
+          "damage": 1979,
+          "dps": 164.91666666666666,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "single",
+          "damage": 2085,
+          "dps": 173.75,
+          "reactions": 0,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 73129,
+          "scene": "swarm",
+          "damage": 5836,
+          "dps": 486.3333333333333,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 41717,
+          "scene": "swarm",
+          "damage": 5724,
+          "dps": 477,
+          "reactions": 10,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        },
+        {
+          "seed": 90311,
+          "scene": "swarm",
+          "damage": 6004,
+          "dps": 500.3333333333333,
+          "reactions": 13,
+          "ticks": 720,
+          "poolMisses": 0,
+          "casts": {
+            "pulse": 2,
+            "well": 2,
+            "dash": 0
+          }
+        }
+      ],
+      "single": 170.36111111111111,
+      "swarm": 487.88888888888886,
+      "dash": 1.2,
+      "speed": 250,
+      "maxHpBonus": 0,
+      "synergies": [
+        "plasma"
+      ]
+    }
+  ],
+  "priceSensitivity": {
+    "description": "Enumeration only: change fire-split price from 3 to 2; budget 6, at most 4 unique cards, initial unlock-zero catalog, dependencies enforced. No combat coefficients change.",
+    "initialOffers": [
+      {
+        "id": "fire-ember",
+        "cost": 2,
+        "unlock": 0,
+        "role": "持续压制",
+        "tradeoff": "持续伤害需要时间结算，不能立即清除威胁。"
+      },
+      {
+        "id": "storm-arc",
+        "cost": 2,
+        "unlock": 0,
+        "role": "群体连锁",
+        "tradeoff": "附近没有额外目标时，连锁收益下降。"
+      },
+      {
+        "id": "ice-touch",
+        "cost": 1,
+        "unlock": 0,
+        "role": "争取空间",
+        "tradeoff": "提供减速，不直接提高单发基础伤害。"
+      },
+      {
+        "id": "fire-split",
+        "cost": 3,
+        "unlock": 0,
+        "role": "扇形覆盖",
+        "tradeoff": "每发伤害降至 75%，远处小目标可能只中一发。"
+      },
+      {
+        "id": "storm-surge",
+        "cost": 2,
+        "unlock": 0,
+        "role": "稳定射速",
+        "tradeoff": "更多射击需要更稳定的瞄准，不扩大覆盖范围。"
+      },
+      {
+        "id": "void-seek",
+        "cost": 2,
+        "unlock": 0,
+        "role": "修正弹道",
+        "tradeoff": "追踪不保证命中，仍受地形与目标移动影响。"
+      }
+    ],
+    "budget": 6,
+    "slots": 4,
+    "current": {
+      "fireSplitCost": 3,
+      "counts": {
+        "includingEmpty": 36,
+        "nonempty": 35,
+        "spendingExactlySix": 8,
+        "containingFireSplit": 10,
+        "bySlotsUsed": {
+          "0": 1,
+          "1": 6,
+          "2": 15,
+          "3": 14,
+          "4": 0
+        }
+      },
+      "combinations": [
+        {
+          "cards": [],
+          "cost": 0,
+          "remaining": 6,
+          "slotsUsed": 0
+        },
+        {
+          "cards": [
+            "fire-ember"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "storm-arc"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "ice-touch"
+          ],
+          "cost": 1,
+          "remaining": 5,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "ice-touch"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "fire-split"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "fire-split"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "fire-split"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch",
+            "fire-split"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch",
+            "fire-split"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-surge"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-surge"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "storm-surge"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "storm-surge"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "storm-surge"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch",
+            "storm-surge"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch",
+            "storm-surge"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split",
+            "storm-surge"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "fire-split",
+            "storm-surge"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "void-seek"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "void-seek"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "fire-split",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        }
+      ]
+    },
+    "hypothetical": {
+      "fireSplitCost": 2,
+      "counts": {
+        "includingEmpty": 42,
+        "nonempty": 41,
+        "spendingExactlySix": 10,
+        "containingFireSplit": 16,
+        "bySlotsUsed": {
+          "0": 1,
+          "1": 6,
+          "2": 15,
+          "3": 20,
+          "4": 0
+        }
+      },
+      "combinations": [
+        {
+          "cards": [],
+          "cost": 0,
+          "remaining": 6,
+          "slotsUsed": 0
+        },
+        {
+          "cards": [
+            "fire-ember"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "storm-arc"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "ice-touch"
+          ],
+          "cost": 1,
+          "remaining": 5,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "ice-touch"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "fire-split"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "fire-split"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "fire-split"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "fire-split"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch",
+            "fire-split"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch",
+            "fire-split"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-surge"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-surge"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "storm-surge"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "storm-surge"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "storm-surge"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch",
+            "storm-surge"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch",
+            "storm-surge"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split",
+            "storm-surge"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "fire-split",
+            "storm-surge"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "fire-split",
+            "storm-surge"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "fire-split",
+            "storm-surge"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "void-seek"
+          ],
+          "cost": 2,
+          "remaining": 4,
+          "slotsUsed": 1
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-arc",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "void-seek"
+          ],
+          "cost": 3,
+          "remaining": 3,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "ice-touch",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "ice-touch",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "fire-split",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "fire-split",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "fire-split",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 4,
+          "remaining": 2,
+          "slotsUsed": 2
+        },
+        {
+          "cards": [
+            "fire-ember",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "storm-arc",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "ice-touch",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 5,
+          "remaining": 1,
+          "slotsUsed": 3
+        },
+        {
+          "cards": [
+            "fire-split",
+            "storm-surge",
+            "void-seek"
+          ],
+          "cost": 6,
+          "remaining": 0,
+          "slotsUsed": 3
+        }
+      ]
+    },
+    "newlyFeasible": [
+      {
+        "cards": [
+          "fire-ember",
+          "storm-arc",
+          "fire-split"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "fire-ember",
+          "fire-split",
+          "storm-surge"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "storm-arc",
+          "fire-split",
+          "storm-surge"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "fire-ember",
+          "fire-split",
+          "void-seek"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "storm-arc",
+          "fire-split",
+          "void-seek"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      },
+      {
+        "cards": [
+          "fire-split",
+          "storm-surge",
+          "void-seek"
+        ],
+        "cost": 6,
+        "remaining": 0,
+        "slotsUsed": 3
+      }
+    ],
+    "inferenceBoundary": "A cheaper price increases feasible combinations. For an unchanged equipped card set, measure() does not use offer prices, so this alone is not evidence of combat balance improvement."
+  },
+  "limitations": [
+    "This is coach-range-2 automated deterministic simulation, not human play, a live level, or a win-rate measurement.",
+    "Each scene runs 720 fixed ticks at 60 Hz (12 simulated seconds), three fixed seeds; only six samples per build.",
+    "Arc weapon, level 3, no relics, forms [arc], offered [], source camp, exact DEFAULT_TRIAL.content captured here.",
+    "One stationary sentry or eight tightly clustered stationary sentries with 100,000,000 HP, zero speed, zero damage, suppressed attack timers. No kills, moving-target test, or survival pressure.",
+    "Player is stationary at (640,430), aims at (640,350), fires continuously, requests Q and E every tick so they cast when available, and never dashes. DPS includes skills, statuses, and reactions.",
+    "Blocks and zones are removed. Target positions are reset each tick, suppressing spatial consequences of knockback, attraction, and crowd control.",
+    "Swarm DPS is total damage across all eight targets divided by 12 seconds, not per-target DPS.",
+    "The seeds vary random rolls in the same geometry and input policy; they are not independent players or a representative gameplay distribution.",
+    "Zero projectile pool misses only checks pool capacity under these fixed workloads; it is not browser FPS, renderer performance, or a general stress-test result.",
+    "The three six-energy builds are selected examples, not exhaustive build optimization. A stationary target does not adequately value slowing, homing, mobility, terrain, or robustness to aim errors.",
+    "Price sensitivity is a combinatorial enumeration with unchanged combat content. More legal loadouts is not evidence that those loadouts are balanced or that the game is more fun."
+  ]
+}

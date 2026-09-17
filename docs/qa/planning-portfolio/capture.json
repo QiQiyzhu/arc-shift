@@ -1,0 +1,59 @@
+{
+  "recording": true,
+  "events": [
+    {
+      "name": "budget",
+      "seconds": 6.368
+    },
+    {
+      "name": "combat-1",
+      "seconds": 13.155
+    },
+    {
+      "name": "result-1",
+      "seconds": 19.603
+    },
+    {
+      "name": "rebuild-2",
+      "seconds": 25.067
+    },
+    {
+      "name": "combat-2",
+      "seconds": 33.539
+    },
+    {
+      "name": "pause",
+      "seconds": 38.505
+    },
+    {
+      "name": "result-2",
+      "seconds": 51.459
+    },
+    {
+      "name": "rebuild-3",
+      "seconds": 56.852
+    },
+    {
+      "name": "combat-3",
+      "seconds": 68.265
+    },
+    {
+      "name": "result-3",
+      "seconds": 91.766
+    },
+    {
+      "name": "editor",
+      "seconds": 106.213
+    },
+    {
+      "name": "changed-rule",
+      "seconds": 121.506
+    }
+  ],
+  "errors": [],
+  "audioOffsetMs": 13292,
+  "videoStart": 1789673976259,
+  "began": 1789673977626,
+  "duration": 125.835,
+  "disclosure": "Actual browser game controlled through scripted keyboard and pointer. No world-state writes, no human playtest claim."
+}

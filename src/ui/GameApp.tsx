@@ -333,7 +333,21 @@ export default function GameApp() {
                 <ArrowUpRight size={24} />
               </button>
               <div className="menu-secondary">
-                <button onClick={() => location.assign('/challenge')}>
+                <button
+                  className="mode-entry"
+                  onClick={() => location.assign('/build-trial')}
+                >
+                  <span>
+                    星铸协议 <b>构筑远征</b>
+                  </span>
+                  <span>
+                    预算 → 战斗 → 重配 <ArrowRight size={17} />
+                  </span>
+                </button>
+                <button
+                  className="mode-entry"
+                  onClick={() => location.assign('/challenge')}
+                >
                   <span>
                     中继争夺 <b>挑战活动</b>
                   </span>

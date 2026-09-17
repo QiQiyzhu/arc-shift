@@ -1,15 +1,51 @@
 .menu-secondary {
-  flex-wrap: wrap;
-  gap: 18px 26px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: 430px;
+  gap: 12px 18px;
+}
+.menu-secondary .mode-entry {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 7px;
+  padding: 12px 14px;
+  border: 1px solid #60736a80;
+  background: #101e23dc;
+  text-align: left;
+  margin: 0;
+  min-width: 0;
+}
+.menu-secondary .mode-entry:hover {
+  border-color: #dfc996;
+  background: #23332e;
+}
+.mode-entry > span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  font-size: 14px;
+}
+.mode-entry b {
+  font-size: 10px;
+  color: #dcc697;
+  font-weight: 400;
+}
+.mode-entry > span:last-child {
+  font-size: 11px;
+  color: #a5bcb8;
+  gap: 8px;
 }
 .menu-secondary .guide-entry {
+  grid-column: 1 / -1;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
   gap: 9px;
   flex-basis: 100%;
   width: 100%;
-  max-width: 382px;
+  max-width: none;
   padding: 16px 20px;
   border: 1px solid #506762;
   background: #102824ed;
@@ -246,7 +282,7 @@
 }
 @media (max-height: 820px) {
   .menu-copy h1 {
-    font-size: clamp(70px, 7.4vw, 105px);
+    font-size: clamp(64px, 6.3vw, 84px);
   }
   .menu-copy .menu-description {
     margin: 16px 0;

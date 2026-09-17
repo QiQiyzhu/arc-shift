@@ -9,7 +9,15 @@ import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 const root = createRoot(document.getElementById('root')!);
-if (location.pathname === '/challenge') {
+if (location.pathname === '/build-trial') {
+  void import('./trial/TrialApp').then(({ default: App }) =>
+    root.render(
+      <React.StrictMode>
+        <App />
+      </React.StrictMode>,
+    ),
+  );
+} else if (location.pathname === '/challenge') {
   void import('./activities/ActivityApp').then(({ default: ActivityApp }) =>
     root.render(
       <React.StrictMode>
@@ -19,13 +27,15 @@ if (location.pathname === '/challenge') {
   );
 } else if (import.meta.env.DEV && location.pathname.startsWith('/dev/')) {
   const page =
-    location.pathname === '/dev/activity-editor'
-      ? import('./dev/ActivityEditor')
-      : location.pathname === '/dev/content-editor'
-        ? import('./dev/ContentEditor')
-        : location.pathname === '/dev/debugger'
-          ? import('./dev/Debugger')
-          : import('./dev/DevApp');
+    location.pathname === '/dev/trial-editor'
+      ? import('./dev/TrialEditor')
+      : location.pathname === '/dev/activity-editor'
+        ? import('./dev/ActivityEditor')
+        : location.pathname === '/dev/content-editor'
+          ? import('./dev/ContentEditor')
+          : location.pathname === '/dev/debugger'
+            ? import('./dev/Debugger')
+            : import('./dev/DevApp');
   void page.then(({ default: DevApp }) =>
     root.render(
       <React.StrictMode>
