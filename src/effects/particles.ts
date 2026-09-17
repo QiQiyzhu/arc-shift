@@ -1,6 +1,24 @@
 import type Phaser from 'phaser';
 import { Pool } from '../core/pool';
 import type { EffectEvent } from '../core/events';
+import { fillDisc, renderDiagnostics } from '../render/discs';
+
+function labelContent(
+  t: Phaser.GameObjects.Text,
+  value: string,
+  color: string,
+  size: number,
+) {
+  if (import.meta.env.DEV && renderDiagnostics.legacyLabels) {
+    t.setText(value).setColor(color).setFontSize(size);
+    return;
+  }
+  // Pooled Text still uploads a canvas texture on every style mutation, even
+  // when the value is unchanged. Update a changed style once, then the text.
+  if (t.style.color !== color || t.style.fontSize !== `${size}px`)
+    t.setStyle({ color, fontSize: `${size}px` });
+  t.setText(value);
+}
 export class Effects {
   reduced = false;
   particles = new Pool(650, () => ({
@@ -122,16 +140,17 @@ export class Effects {
     ) {
       const t = this.labels.find((t) => !t.visible);
       if (t) {
+        labelContent(
+          t,
+          e.kind === 'hurt' ? `−${e.amount}` : String(e.amount),
+          e.kind === 'crit'
+            ? '#e0ffa5'
+            : e.kind === 'hurt'
+              ? '#ff849b'
+              : '#c6eff0',
+          e.kind === 'crit' ? 25 : 17,
+        );
         t.setPosition(e.x + (Math.random() - 0.5) * 20, e.y - 22)
-          .setText(e.kind === 'hurt' ? `−${e.amount}` : String(e.amount))
-          .setColor(
-            e.kind === 'crit'
-              ? '#e0ffa5'
-              : e.kind === 'hurt'
-                ? '#ff849b'
-                : '#c6eff0',
-          )
-          .setFontSize(e.kind === 'crit' ? 25 : 17)
           .setVisible(true)
           .setAlpha(1);
         t.setData('life', 0.65);
@@ -140,11 +159,9 @@ export class Effects {
     if (e.reaction) {
       const label = this.labels.find((t) => !t.visible);
       if (label) {
+        labelContent(label, e.reaction, '#ffe0b2', 14);
         label
           .setPosition(e.x - 24, e.y - 34)
-          .setText(e.reaction)
-          .setFontSize(14)
-          .setColor('#ffe0b2')
           .setVisible(true)
           .setAlpha(1);
         label.setData('life', 0.75);
@@ -182,7 +199,7 @@ export class Effects {
       } else {
         if (!this.reduced) {
           g.fillStyle(p.color, alpha * 0.12);
-          g.fillCircle(p.x, p.y, p.size * 3);
+          fillDisc(g, p.x, p.y, p.size * 3);
         }
         g.fillStyle(p.color, alpha);
         g.fillRect(p.x, p.y, p.size, p.size);

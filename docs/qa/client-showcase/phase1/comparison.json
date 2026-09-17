@@ -1,0 +1,626 @@
+{
+  "recordedAt": "2026-09-17T07:40:41.259Z",
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900HX",
+    "logicalCpus": 32,
+    "memoryBytes": 16895016960
+  },
+  "browserVersion": "153.0.4234.32",
+  "method": "Fresh page per sample; 120 warm-up then exactly 600 measured fixed steps. Same seed/input/quality, no concurrent browser tests. Frame intervals measured postrender-to-postrender (not GPU timings). Engine includes synchronous effect event handlers. renderSubmit includes graphicsRender. Instrumented/profiled runs are separate from unprofiled comparison. Local one-device synthetic load, not player feedback.",
+  "raw": "outputs/client-showcase/paired-final/results.json",
+  "rows": [
+    {
+      "count": 28,
+      "terrain": false,
+      "before": {
+        "frameP50": 13.400000035762787,
+        "frameP95": 25.399999976158142,
+        "frameP99": 36.89999997615814,
+        "slow33": 0.02763157894736842,
+        "slow50": 0,
+        "engineP95": 0.6000000238418579,
+        "renderSubmitP95": 21.100000023841858,
+        "graphicsP95": 21,
+        "prepareP95": 0.5,
+        "effectsPrepareP95": 0.19999998807907104,
+        "effectEmissionP95": 0.40000003576278687,
+        "hudAudioP95": 0.10000002384185791,
+        "hudCommits": [
+          115,
+          113,
+          113
+        ],
+        "textUploads": [
+          738,
+          740,
+          738
+        ],
+        "frames": [
+          760,
+          678,
+          598
+        ],
+        "worldTicks": [
+          720,
+          720,
+          720
+        ],
+        "droppedMs": [
+          0,
+          0,
+          31.899999999999636
+        ],
+        "frameP95Range": [
+          24.600000023841858,
+          31.599999964237213
+        ]
+      },
+      "after": {
+        "frameP50": 6.800000011920929,
+        "frameP95": 15.199999988079071,
+        "frameP99": 18.900000035762787,
+        "slow33": 0,
+        "slow50": 0,
+        "engineP95": 0.800000011920929,
+        "renderSubmitP95": 3.800000011920929,
+        "graphicsP95": 3.699999988079071,
+        "prepareP95": 1.100000023841858,
+        "effectsPrepareP95": 0.6000000238418579,
+        "effectEmissionP95": 0.3999999761581421,
+        "hudAudioP95": 0.10000002384185791,
+        "hudCommits": [
+          120,
+          120,
+          120
+        ],
+        "textUploads": [
+          320,
+          315,
+          328
+        ],
+        "frames": [
+          1388,
+          1372,
+          1364
+        ],
+        "worldTicks": [
+          720,
+          720,
+          720
+        ],
+        "droppedMs": [
+          0,
+          0,
+          0
+        ],
+        "frameP95Range": [
+          14.599999964237213,
+          15.599999964237213
+        ]
+      },
+      "frameP95Reduction": 0.40157480305721893,
+      "exactBehaviorMatch": {
+        "checksum": "9768f58d",
+        "rng": 1794934569869,
+        "damage": 8405,
+        "kills": 0,
+        "events": 1280,
+        "eventHash": "29f44a0e",
+        "wallet": {
+          "coins": 8,
+          "keys": 1,
+          "bombs": 2,
+          "tonics": 1,
+          "shards": 0
+        },
+        "enemyCount": 28,
+        "queries": {
+          "separation": 16788,
+          "projectile": 26886
+        }
+      }
+    },
+    {
+      "count": 100,
+      "terrain": true,
+      "before": {
+        "frameP50": 19.600000023841858,
+        "frameP95": 37.30000001192093,
+        "frameP99": 39.39999997615814,
+        "slow33": 0.1038135593220339,
+        "slow50": 0,
+        "engineP95": 0.8999999761581421,
+        "renderSubmitP95": 23.30000001192093,
+        "graphicsP95": 23.19999998807907,
+        "prepareP95": 1.300000011920929,
+        "effectsPrepareP95": 0.30000001192092896,
+        "effectEmissionP95": 0.5,
+        "hudAudioP95": 0.19999998807907104,
+        "hudCommits": [
+          113,
+          112,
+          113
+        ],
+        "textUploads": [
+          929,
+          933,
+          923
+        ],
+        "frames": [
+          472,
+          438,
+          466
+        ],
+        "worldTicks": [
+          720,
+          720,
+          720
+        ],
+        "droppedMs": [
+          0,
+          0,
+          0
+        ],
+        "frameP95Range": [
+          36.80000001192093,
+          37.799999952316284
+        ]
+      },
+      "after": {
+        "frameP50": 8.900000035762787,
+        "frameP95": 20.19999998807907,
+        "frameP99": 25.899999976158142,
+        "slow33": 0,
+        "slow50": 0,
+        "engineP95": 1.199999988079071,
+        "renderSubmitP95": 9.700000047683716,
+        "graphicsP95": 9.500000059604645,
+        "prepareP95": 2.099999964237213,
+        "effectsPrepareP95": 0.800000011920929,
+        "effectEmissionP95": 0.5,
+        "hudAudioP95": 0.19999998807907104,
+        "hudCommits": [
+          118,
+          118,
+          118
+        ],
+        "textUploads": [
+          387,
+          345,
+          381
+        ],
+        "frames": [
+          1053,
+          971,
+          984
+        ],
+        "worldTicks": [
+          720,
+          720,
+          720
+        ],
+        "droppedMs": [
+          0,
+          0,
+          0
+        ],
+        "frameP95Range": [
+          19.80000001192093,
+          22.19999998807907
+        ]
+      },
+      "frameP95Reduction": 0.458445040707152,
+      "exactBehaviorMatch": {
+        "checksum": "2f160529",
+        "rng": 5355498510341,
+        "damage": 20035,
+        "kills": 0,
+        "events": 3328,
+        "eventHash": "4aa40a9",
+        "wallet": {
+          "coins": 8,
+          "keys": 1,
+          "bombs": 2,
+          "tonics": 1,
+          "shards": 0
+        },
+        "enemyCount": 100,
+        "queries": {
+          "separation": 245835,
+          "projectile": 59620
+        }
+      }
+    },
+    {
+      "count": 250,
+      "terrain": false,
+      "before": {
+        "frameP50": 30.30000001192093,
+        "frameP95": 48.5,
+        "frameP99": 52.80000001192093,
+        "slow33": 0.3382352941176471,
+        "slow50": 0.027607361963190184,
+        "engineP95": 1.800000011920929,
+        "renderSubmitP95": 31.600000023841858,
+        "graphicsP95": 31.099999964237213,
+        "prepareP95": 2.600000023841858,
+        "effectsPrepareP95": 0.20000004768371582,
+        "effectEmissionP95": 0.699999988079071,
+        "hudAudioP95": 0.20000004768371582,
+        "hudCommits": [
+          109,
+          108,
+          106
+        ],
+        "textUploads": [
+          968,
+          941,
+          965
+        ],
+        "frames": [
+          295,
+          340,
+          326
+        ],
+        "worldTicks": [
+          720,
+          720,
+          720
+        ],
+        "droppedMs": [
+          154.60000000000036,
+          46.900000000001455,
+          38.29999999999745
+        ],
+        "frameP95Range": [
+          47.59999996423721,
+          52.299999952316284
+        ]
+      },
+      "after": {
+        "frameP50": 16.80000001192093,
+        "frameP95": 31.69999998807907,
+        "frameP99": 37.69999998807907,
+        "slow33": 0.03260869565217391,
+        "slow50": 0,
+        "engineP95": 2,
+        "renderSubmitP95": 18.69999998807907,
+        "graphicsP95": 18.100000023841858,
+        "prepareP95": 3.099999964237213,
+        "effectsPrepareP95": 1,
+        "effectEmissionP95": 0.6000000238418579,
+        "hudAudioP95": 0.20000004768371582,
+        "hudCommits": [
+          113,
+          114,
+          114
+        ],
+        "textUploads": [
+          363,
+          346,
+          356
+        ],
+        "frames": [
+          552,
+          552,
+          602
+        ],
+        "worldTicks": [
+          720,
+          720,
+          720
+        ],
+        "droppedMs": [
+          0,
+          0,
+          0
+        ],
+        "frameP95Range": [
+          29.19999998807907,
+          31.899999976158142
+        ]
+      },
+      "frameP95Reduction": 0.34639175282311196,
+      "exactBehaviorMatch": {
+        "checksum": "6afb2d12",
+        "rng": 10861185344219,
+        "damage": 41775,
+        "kills": 0,
+        "events": 6118,
+        "eventHash": "853821ef",
+        "wallet": {
+          "coins": 8,
+          "keys": 1,
+          "bombs": 2,
+          "tonics": 1,
+          "shards": 0
+        },
+        "enemyCount": 250,
+        "queries": {
+          "separation": 1429602,
+          "projectile": 74404
+        }
+      }
+    }
+  ],
+  "profiles": {
+    "baseline-profile": {
+      "gcCount": 344,
+      "gcTotalMs": 532.2770000000002,
+      "gcMaxMs": 9.433,
+      "topCpuSelfMs": [
+        {
+          "frame": "GraphicsWebGLRenderer | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:38591",
+          "ms": 2058.404
+        },
+        {
+          "frame": "sortLinked | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68820",
+          "ms": 928.034
+        },
+        {
+          "frame": "(program) | :0",
+          "ms": 771.96
+        },
+        {
+          "frame": "(garbage collector) | :0",
+          "ms": 757.961
+        },
+        {
+          "frame": "exports.jsxDEV | http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=9268a5a3:191",
+          "ms": 652.526
+        },
+        {
+          "frame": "batchLine | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133437",
+          "ms": 487.552
+        },
+        {
+          "frame": "bufferData | :0",
+          "ms": 475.941
+        },
+        {
+          "frame": "batchFillPath | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133355",
+          "ms": 421.819
+        },
+        {
+          "frame": "earcutLinked | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68658",
+          "ms": 405.308
+        },
+        {
+          "frame": "batchQuad | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:127465",
+          "ms": 404.439
+        },
+        {
+          "frame": "linkedList | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68633",
+          "ms": 396.093
+        },
+        {
+          "frame": "isEarHashed | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68697",
+          "ms": 349.725
+        }
+      ],
+      "topSampledAllocations": [
+        {
+          "fn": "GraphicsWebGLRenderer",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 38591,
+          "bytes": 2458670052
+        },
+        {
+          "fn": "GraphicsWebGLRenderer",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 38591,
+          "bytes": 1872449588
+        },
+        {
+          "fn": "earcut",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 68610,
+          "bytes": 1424815320
+        },
+        {
+          "fn": "batchLine",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133437,
+          "bytes": 1089067536
+        },
+        {
+          "fn": "earcut",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 68610,
+          "bytes": 1018721528
+        },
+        {
+          "fn": "batchLine",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133437,
+          "bytes": 948056976
+        },
+        {
+          "fn": "batchFillPath",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133355,
+          "bytes": 857363448
+        },
+        {
+          "fn": "earcutLinked",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 68658,
+          "bytes": 830030192
+        },
+        {
+          "fn": "batchFillPath",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133355,
+          "bytes": 606912456
+        },
+        {
+          "fn": "earcutLinked",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 68658,
+          "bytes": 587141484
+        },
+        {
+          "fn": "drawActors",
+          "url": "http://127.0.0.1:5173/src/render/actors.ts",
+          "line": 11,
+          "bytes": 280236836
+        },
+        {
+          "fn": "strokeEllipse",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 38061,
+          "bytes": 173300464
+        }
+      ]
+    },
+    "after-profile": {
+      "gcCount": 293,
+      "gcTotalMs": 875.0630000000001,
+      "gcMaxMs": 14.588,
+      "topCpuSelfMs": [
+        {
+          "frame": "GraphicsWebGLRenderer | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:38591",
+          "ms": 1392.614
+        },
+        {
+          "frame": "(garbage collector) | :0",
+          "ms": 1124.798
+        },
+        {
+          "frame": "(program) | :0",
+          "ms": 1120.433
+        },
+        {
+          "frame": "batchLine | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133437",
+          "ms": 886.753
+        },
+        {
+          "frame": "exports.jsxDEV | http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=9268a5a3:191",
+          "ms": 750.266
+        },
+        {
+          "frame": "batchQuad | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:127465",
+          "ms": 638.815
+        },
+        {
+          "frame": "batchStrokePath | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133409",
+          "ms": 484.578
+        },
+        {
+          "frame": "bufferData | :0",
+          "ms": 458.881
+        },
+        {
+          "frame": "multiply | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:33716",
+          "ms": 380.904
+        },
+        {
+          "frame": "fillTriangle | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:37885",
+          "ms": 366.104
+        },
+        {
+          "frame": "(idle) | :0",
+          "ms": 320.566
+        },
+        {
+          "frame": "CircumferencePoint | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:63381",
+          "ms": 292.558
+        }
+      ],
+      "topSampledAllocations": [
+        {
+          "fn": "batchLine",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133437,
+          "bytes": 2317560920
+        },
+        {
+          "fn": "GraphicsWebGLRenderer",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 38591,
+          "bytes": 2299607044
+        },
+        {
+          "fn": "draw",
+          "url": "http://127.0.0.1:5173/src/effects/particles.ts?t=1789630224552",
+          "line": 115,
+          "bytes": 1086033284
+        },
+        {
+          "fn": "GraphicsWebGLRenderer",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 38591,
+          "bytes": 1014645756
+        },
+        {
+          "fn": "drawActors",
+          "url": "http://127.0.0.1:5173/src/render/actors.ts?t=1789630246977",
+          "line": 12,
+          "bytes": 704862124
+        },
+        {
+          "fn": "batchFillTriangle",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133291,
+          "bytes": 515141736
+        },
+        {
+          "fn": "batchLine",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133437,
+          "bytes": 485261956
+        },
+        {
+          "fn": "batchLine",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 133437,
+          "bytes": 428817456
+        },
+        {
+          "fn": "earcut",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 68610,
+          "bytes": 252163224
+        },
+        {
+          "fn": "fan",
+          "url": "http://127.0.0.1:5173/src/render/discs.ts",
+          "line": 30,
+          "bytes": 225231684
+        },
+        {
+          "fn": "strokePoints",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 37990,
+          "bytes": 210660428
+        },
+        {
+          "fn": "strokeEllipse",
+          "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+          "line": 38061,
+          "bytes": 193504124
+        }
+      ]
+    }
+  },
+  "killAndLootOracle": "Baseline 0567590 sources and current sources match exactly for all three weapons, both grid/brute paths, all ten periodic checkpoints per run and event streams.",
+  "excluded": [
+    {
+      "file": "outputs/client-showcase/after/results.json",
+      "repeat": 0,
+      "count": 100,
+      "reason": "Async terrain module loading after world reset allowed three uncontrolled fixed steps; elapsed12.05. Not used in final paired comparison. Subsequent harness resolves imports first and asserts actual worldTicks720."
+    }
+  ],
+  "limits": [
+    "One device; 3 paired repetitions per workload, controlled synthetic input; no human feedback or statistical significance claim.",
+    "Headless Edge, Vite DEV with the same QA instrumentation in both retained rendering paths; not production FPS or GPU timing.",
+    "Intervals are postrender-to-postrender; renderSubmit is synchronous CPU submission including graphicsRender; GPU execution remains unmeasured.",
+    "Engine timing includes synchronous effect emissions; preparation timings exclude WebGL rendering; hudAndAudio is the frame-end signature/audio callback, not React commit duration. CPU profiles separately include React work.",
+    "Profiles include setup/warmup and tracing/sampling overhead; GC numbers restricted to marked sample. GC total time worsened in the profiled optimized run: do not claim a GC-time improvement or use sampled allocation estimates as retained memory.",
+    "Frame counts may increase when render work becomes cheaper. World steps remain exactly720 including120 warmup in every accepted sample; damage, RNG, event streams, wallet and checksums match.",
+    "Pressure fixture has high-HP enemies; kill/loot behavior is checked separately with killable enemies against the original source and brute-force collision path."
+  ]
+}

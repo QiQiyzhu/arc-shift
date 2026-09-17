@@ -1,0 +1,2676 @@
+{
+  "note": "CPU/heap samples include setup and warmup; GC complete events restricted to marked measurement interval. Sampled bytes are allocation estimates, not retained heap or exact object counts. GC total uses outer MinorGC/MajorGC events only.",
+  "markers": {
+    "start": 349663254698,
+    "end": 349673526016
+  },
+  "topCpuSelfMs": [
+    {
+      "frame": "GraphicsWebGLRenderer | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:38591",
+      "ms": 2058.404
+    },
+    {
+      "frame": "sortLinked | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68820",
+      "ms": 928.034
+    },
+    {
+      "frame": "(program) | :0",
+      "ms": 771.96
+    },
+    {
+      "frame": "(garbage collector) | :0",
+      "ms": 757.961
+    },
+    {
+      "frame": "exports.jsxDEV | http://127.0.0.1:5173/node_modules/.vite/deps/react_jsx-dev-runtime.js?v=9268a5a3:191",
+      "ms": 652.526
+    },
+    {
+      "frame": "batchLine | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133437",
+      "ms": 487.552
+    },
+    {
+      "frame": "bufferData | :0",
+      "ms": 475.941
+    },
+    {
+      "frame": "batchFillPath | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133355",
+      "ms": 421.819
+    },
+    {
+      "frame": "earcutLinked | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68658",
+      "ms": 405.308
+    },
+    {
+      "frame": "batchQuad | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:127465",
+      "ms": 404.439
+    },
+    {
+      "frame": "linkedList | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68633",
+      "ms": 396.093
+    },
+    {
+      "frame": "isEarHashed | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68697",
+      "ms": 349.725
+    },
+    {
+      "frame": "CircumferencePoint | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:63381",
+      "ms": 337.542
+    },
+    {
+      "frame": "zOrder | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68859",
+      "ms": 279.716
+    },
+    {
+      "frame": "batchStrokePath | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:133409",
+      "ms": 271.563
+    },
+    {
+      "frame": "batchTri | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:127561",
+      "ms": 248.191
+    },
+    {
+      "frame": "exports.createElement | http://127.0.0.1:5173/node_modules/.vite/deps/react.js?v=9268a5a3:591",
+      "ms": 245.742
+    },
+    {
+      "frame": "multiply | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:33716",
+      "ms": 190.769
+    },
+    {
+      "frame": "query | http://127.0.0.1:5173/src/core/spatial-grid.ts:61",
+      "ms": 189.595
+    },
+    {
+      "frame": "earcut | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68610",
+      "ms": 149.446
+    },
+    {
+      "frame": "Node | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68960",
+      "ms": 148.954
+    },
+    {
+      "frame": "run | :0",
+      "ms": 145.682
+    },
+    {
+      "frame": "isEar | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:68685",
+      "ms": 136.634
+    },
+    {
+      "frame": "getX | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:34161",
+      "ms": 130.479
+    },
+    {
+      "frame": "Point | http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3:38565",
+      "ms": 122.914
+    }
+  ],
+  "topSampledAllocations": [
+    {
+      "fn": "GraphicsWebGLRenderer",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 38591,
+      "bytes": 2458670052
+    },
+    {
+      "fn": "GraphicsWebGLRenderer",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 38591,
+      "bytes": 1872449588
+    },
+    {
+      "fn": "earcut",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 68610,
+      "bytes": 1424815320
+    },
+    {
+      "fn": "batchLine",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 133437,
+      "bytes": 1089067536
+    },
+    {
+      "fn": "earcut",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 68610,
+      "bytes": 1018721528
+    },
+    {
+      "fn": "batchLine",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 133437,
+      "bytes": 948056976
+    },
+    {
+      "fn": "batchFillPath",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 133355,
+      "bytes": 857363448
+    },
+    {
+      "fn": "earcutLinked",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 68658,
+      "bytes": 830030192
+    },
+    {
+      "fn": "batchFillPath",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 133355,
+      "bytes": 606912456
+    },
+    {
+      "fn": "earcutLinked",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 68658,
+      "bytes": 587141484
+    },
+    {
+      "fn": "drawActors",
+      "url": "http://127.0.0.1:5173/src/render/actors.ts",
+      "line": 11,
+      "bytes": 280236836
+    },
+    {
+      "fn": "strokeEllipse",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 38061,
+      "bytes": 173300464
+    },
+    {
+      "fn": "fillEllipse",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 38096,
+      "bytes": 162146972
+    },
+    {
+      "fn": "fillPoints",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 38019,
+      "bytes": 129827792
+    },
+    {
+      "fn": "strokePoints",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 37990,
+      "bytes": 116758580
+    },
+    {
+      "fn": "query",
+      "url": "http://127.0.0.1:5173/src/core/spatial-grid.ts",
+      "line": 61,
+      "bytes": 70599836
+    },
+    {
+      "fn": "add",
+      "url": "",
+      "line": 0,
+      "bytes": 70096196
+    },
+    {
+      "fn": "draw",
+      "url": "http://127.0.0.1:5173/src/effects/particles.ts",
+      "line": 99,
+      "bytes": 64641460
+    },
+    {
+      "fn": "sort",
+      "url": "",
+      "line": 0,
+      "bytes": 56830236
+    },
+    {
+      "fn": "separateWithGrid",
+      "url": "http://127.0.0.1:5173/src/combat/separation.ts",
+      "line": 20,
+      "bytes": 43337912
+    },
+    {
+      "fn": "strokePoints",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 37990,
+      "bytes": 38826788
+    },
+    {
+      "fn": "fillPoints",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 38019,
+      "bytes": 31916244
+    },
+    {
+      "fn": "next",
+      "url": "",
+      "line": 0,
+      "bytes": 27961676
+    },
+    {
+      "fn": "insert",
+      "url": "http://127.0.0.1:5173/src/core/spatial-grid.ts",
+      "line": 20,
+      "bytes": 26625664
+    },
+    {
+      "fn": "CircumferencePoint",
+      "url": "http://127.0.0.1:5173/node_modules/.vite/deps/phaser.js?v=9268a5a3",
+      "line": 63381,
+      "bytes": 25413792
+    }
+  ],
+  "gc": {
+    "count": 344,
+    "totalMs": 532.2770000000002,
+    "maxMs": 9.433,
+    "events": [
+      {
+        "name": "MinorGC",
+        "ts": 349663255172,
+        "dur": 1557,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663291574,
+        "dur": 1053,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663317908,
+        "dur": 1670,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663341532,
+        "dur": 1121,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663367412,
+        "dur": 1136,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663399652,
+        "dur": 1378,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663424529,
+        "dur": 1222,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663449288,
+        "dur": 1685,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663475137,
+        "dur": 1080,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663508597,
+        "dur": 1247,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663532734,
+        "dur": 1723,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663569111,
+        "dur": 1335,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663597018,
+        "dur": 1584,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663623066,
+        "dur": 1617,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663656396,
+        "dur": 1620,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663681617,
+        "dur": 1196,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663705716,
+        "dur": 1535,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663731767,
+        "dur": 1695,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663767655,
+        "dur": 2886,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663791331,
+        "dur": 1527,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663817450,
+        "dur": 1359,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663851544,
+        "dur": 2078,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663880363,
+        "dur": 1357,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663903085,
+        "dur": 1244,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663929616,
+        "dur": 1085,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663961379,
+        "dur": 1232,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349663986394,
+        "dur": 1247,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664010419,
+        "dur": 1952,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664042531,
+        "dur": 1412,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664065018,
+        "dur": 1135,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664090399,
+        "dur": 1198,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664116626,
+        "dur": 1304,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664151221,
+        "dur": 1959,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664176500,
+        "dur": 1716,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664198965,
+        "dur": 1536,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664222878,
+        "dur": 1173,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664254193,
+        "dur": 1529,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664285971,
+        "dur": 1428,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664312811,
+        "dur": 1353,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664345383,
+        "dur": 2361,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664367534,
+        "dur": 984,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664395865,
+        "dur": 1153,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664420211,
+        "dur": 1983,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664454073,
+        "dur": 1348,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664479647,
+        "dur": 2128,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MajorGC",
+        "ts": 349664503770,
+        "dur": 9433,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664535032,
+        "dur": 910,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664569121,
+        "dur": 1661,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664595926,
+        "dur": 1645,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664622278,
+        "dur": 1649,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664658542,
+        "dur": 1219,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664684919,
+        "dur": 1630,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664712318,
+        "dur": 1843,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664747086,
+        "dur": 1597,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664776815,
+        "dur": 1489,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664803941,
+        "dur": 1810,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664835484,
+        "dur": 1281,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664860505,
+        "dur": 2127,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664886560,
+        "dur": 2432,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664921789,
+        "dur": 1361,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664946265,
+        "dur": 1230,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349664969349,
+        "dur": 1319,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665000456,
+        "dur": 1147,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665025185,
+        "dur": 1205,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665048403,
+        "dur": 1494,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665074579,
+        "dur": 1371,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665106127,
+        "dur": 1153,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665128679,
+        "dur": 1644,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665154424,
+        "dur": 1379,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665183750,
+        "dur": 1630,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665207256,
+        "dur": 1248,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665230188,
+        "dur": 1396,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665254831,
+        "dur": 1692,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665286179,
+        "dur": 1089,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665312918,
+        "dur": 1585,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665336163,
+        "dur": 1222,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665366356,
+        "dur": 1451,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665390569,
+        "dur": 1223,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665413632,
+        "dur": 1460,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665446197,
+        "dur": 1596,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665469455,
+        "dur": 1774,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665491688,
+        "dur": 1040,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665513940,
+        "dur": 1693,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665544099,
+        "dur": 1184,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665564733,
+        "dur": 1528,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665589495,
+        "dur": 1705,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665621511,
+        "dur": 1532,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665644618,
+        "dur": 1117,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665667347,
+        "dur": 1088,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665691467,
+        "dur": 2020,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665723626,
+        "dur": 1188,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665747423,
+        "dur": 1299,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665772176,
+        "dur": 1626,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665801492,
+        "dur": 1283,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665825885,
+        "dur": 1619,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665848471,
+        "dur": 1060,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665871056,
+        "dur": 2203,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665902633,
+        "dur": 1057,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665926554,
+        "dur": 1521,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665949753,
+        "dur": 1256,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349665979783,
+        "dur": 1111,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666003999,
+        "dur": 1825,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666028615,
+        "dur": 1477,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666052417,
+        "dur": 1673,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666083381,
+        "dur": 1187,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666106641,
+        "dur": 1668,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666132081,
+        "dur": 1052,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666156104,
+        "dur": 1266,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666185890,
+        "dur": 1127,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666210030,
+        "dur": 1135,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666233834,
+        "dur": 1081,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666265009,
+        "dur": 1132,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666287363,
+        "dur": 1833,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666311350,
+        "dur": 1563,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666333712,
+        "dur": 1880,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666364436,
+        "dur": 1377,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666387591,
+        "dur": 1071,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666409088,
+        "dur": 1110,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666432597,
+        "dur": 1594,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666462758,
+        "dur": 1756,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666486133,
+        "dur": 1090,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666509480,
+        "dur": 1632,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666540171,
+        "dur": 1104,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666562695,
+        "dur": 1623,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666585285,
+        "dur": 1505,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666607631,
+        "dur": 1115,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666637931,
+        "dur": 1479,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666664584,
+        "dur": 2100,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666691846,
+        "dur": 1256,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666714929,
+        "dur": 1663,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666744858,
+        "dur": 1290,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666767875,
+        "dur": 1362,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666791376,
+        "dur": 1115,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666823905,
+        "dur": 914,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666847112,
+        "dur": 1626,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666869018,
+        "dur": 1481,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666891819,
+        "dur": 1581,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666922503,
+        "dur": 1646,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666945934,
+        "dur": 1090,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349666972234,
+        "dur": 2085,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667004183,
+        "dur": 1751,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667063654,
+        "dur": 1193,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667087097,
+        "dur": 1874,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667119532,
+        "dur": 1582,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667143003,
+        "dur": 1557,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667166414,
+        "dur": 1249,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667188994,
+        "dur": 1774,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667220908,
+        "dur": 1163,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667244556,
+        "dur": 1194,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667267349,
+        "dur": 1538,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667290475,
+        "dur": 1126,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667320013,
+        "dur": 1525,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667344952,
+        "dur": 1270,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667367491,
+        "dur": 1669,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667390214,
+        "dur": 1145,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667419279,
+        "dur": 1399,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667442711,
+        "dur": 1922,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667466327,
+        "dur": 1096,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667490417,
+        "dur": 2131,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667520553,
+        "dur": 1296,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667544974,
+        "dur": 1683,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667567519,
+        "dur": 1701,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667597970,
+        "dur": 1158,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667620231,
+        "dur": 1704,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MajorGC",
+        "ts": 349667637469,
+        "dur": 9286,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667675309,
+        "dur": 1002,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667696147,
+        "dur": 1375,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667724289,
+        "dur": 1505,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667751357,
+        "dur": 1729,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667779256,
+        "dur": 1091,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667804522,
+        "dur": 1114,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667827214,
+        "dur": 1736,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667860107,
+        "dur": 1272,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667882382,
+        "dur": 2074,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667902448,
+        "dur": 1161,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667925337,
+        "dur": 1077,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667956530,
+        "dur": 1828,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349667984900,
+        "dur": 1606,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668011360,
+        "dur": 1240,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668045329,
+        "dur": 1359,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668066637,
+        "dur": 902,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668092577,
+        "dur": 1204,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668117245,
+        "dur": 1215,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668153427,
+        "dur": 1224,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668177641,
+        "dur": 1881,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668199966,
+        "dur": 869,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668224713,
+        "dur": 1409,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668257488,
+        "dur": 1704,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668284554,
+        "dur": 1202,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668312091,
+        "dur": 1566,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668343811,
+        "dur": 1459,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668367306,
+        "dur": 1257,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668392938,
+        "dur": 1603,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668416857,
+        "dur": 1542,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668449984,
+        "dur": 1306,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668474258,
+        "dur": 2007,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668498405,
+        "dur": 936,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668522360,
+        "dur": 1221,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668554153,
+        "dur": 1844,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668579550,
+        "dur": 1658,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668605045,
+        "dur": 1253,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668636092,
+        "dur": 1836,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668659430,
+        "dur": 1312,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668682423,
+        "dur": 1096,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668705299,
+        "dur": 1798,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668737276,
+        "dur": 1356,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668761170,
+        "dur": 1225,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668789043,
+        "dur": 1218,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668820463,
+        "dur": 1965,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668842973,
+        "dur": 1062,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668864521,
+        "dur": 1354,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668889949,
+        "dur": 1530,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668922473,
+        "dur": 1221,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668945641,
+        "dur": 1853,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349668970640,
+        "dur": 1178,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669001918,
+        "dur": 1543,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669027476,
+        "dur": 1348,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669051485,
+        "dur": 1537,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669083840,
+        "dur": 1201,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669108150,
+        "dur": 1686,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669133301,
+        "dur": 1201,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669166476,
+        "dur": 1143,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669190349,
+        "dur": 1576,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669214809,
+        "dur": 1142,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669246146,
+        "dur": 1451,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669271023,
+        "dur": 1230,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669293409,
+        "dur": 1053,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669318792,
+        "dur": 1266,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669350922,
+        "dur": 1277,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669376196,
+        "dur": 1251,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669399967,
+        "dur": 1273,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669431860,
+        "dur": 1236,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669457020,
+        "dur": 1374,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669482368,
+        "dur": 1970,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669509350,
+        "dur": 1317,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669540453,
+        "dur": 1346,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669566390,
+        "dur": 1466,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669590408,
+        "dur": 1196,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669622668,
+        "dur": 1595,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669648751,
+        "dur": 1590,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669674897,
+        "dur": 1550,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669705966,
+        "dur": 1632,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669730874,
+        "dur": 1284,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669756245,
+        "dur": 1201,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669789133,
+        "dur": 1401,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669813611,
+        "dur": 1105,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669835524,
+        "dur": 1249,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669860538,
+        "dur": 1200,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669893577,
+        "dur": 1281,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669918723,
+        "dur": 1339,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669943514,
+        "dur": 1572,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669966896,
+        "dur": 1806,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349669999237,
+        "dur": 1482,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670023489,
+        "dur": 1811,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670046814,
+        "dur": 1330,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670072721,
+        "dur": 1222,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670105410,
+        "dur": 1244,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670131494,
+        "dur": 1353,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670156688,
+        "dur": 1632,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670188299,
+        "dur": 1880,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670213759,
+        "dur": 1137,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670237080,
+        "dur": 1665,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670261372,
+        "dur": 1599,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670293950,
+        "dur": 1423,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670319188,
+        "dur": 1157,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670344460,
+        "dur": 1184,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670369545,
+        "dur": 1378,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670400985,
+        "dur": 1314,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670426235,
+        "dur": 1504,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670452326,
+        "dur": 1277,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670483559,
+        "dur": 1234,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670508370,
+        "dur": 1396,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670534013,
+        "dur": 1253,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670564538,
+        "dur": 1556,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670591524,
+        "dur": 1973,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670616459,
+        "dur": 1542,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670650642,
+        "dur": 1434,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670676627,
+        "dur": 1247,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670700618,
+        "dur": 1180,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670733536,
+        "dur": 1396,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670759241,
+        "dur": 1818,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670785456,
+        "dur": 1195,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670817025,
+        "dur": 1305,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670841585,
+        "dur": 1302,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670865498,
+        "dur": 1228,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670896494,
+        "dur": 1568,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670922719,
+        "dur": 1329,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MajorGC",
+        "ts": 349670938303,
+        "dur": 7423,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349670975525,
+        "dur": 904,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671007252,
+        "dur": 1585,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671054336,
+        "dur": 1489,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671090456,
+        "dur": 1368,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671140578,
+        "dur": 1817,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671178958,
+        "dur": 1689,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671230282,
+        "dur": 1949,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671268416,
+        "dur": 1677,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671321686,
+        "dur": 2492,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671364262,
+        "dur": 1949,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671415313,
+        "dur": 1527,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671456535,
+        "dur": 2326,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671506297,
+        "dur": 1120,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671550364,
+        "dur": 2005,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671598936,
+        "dur": 1813,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671651821,
+        "dur": 1834,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671696879,
+        "dur": 1760,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671753217,
+        "dur": 1899,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671796624,
+        "dur": 1607,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671845293,
+        "dur": 1319,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671887228,
+        "dur": 2114,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671937338,
+        "dur": 1527,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349671971967,
+        "dur": 2430,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672015213,
+        "dur": 1771,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672067162,
+        "dur": 1988,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672107764,
+        "dur": 1590,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672159257,
+        "dur": 1691,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672192256,
+        "dur": 1587,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672235769,
+        "dur": 1559,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672288538,
+        "dur": 2131,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672332636,
+        "dur": 1615,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672384899,
+        "dur": 1628,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672420797,
+        "dur": 1597,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672461583,
+        "dur": 1578,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672508297,
+        "dur": 2070,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672549787,
+        "dur": 1804,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672607492,
+        "dur": 2413,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672650658,
+        "dur": 1586,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672689885,
+        "dur": 1589,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672741418,
+        "dur": 1678,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672783929,
+        "dur": 1666,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672843335,
+        "dur": 1911,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672896097,
+        "dur": 1449,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672947034,
+        "dur": 1273,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349672984466,
+        "dur": 1376,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673028630,
+        "dur": 1680,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673082373,
+        "dur": 1807,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673123101,
+        "dur": 1524,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673171746,
+        "dur": 1964,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673215472,
+        "dur": 1648,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673266866,
+        "dur": 2479,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673308436,
+        "dur": 1782,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673365442,
+        "dur": 1384,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673403005,
+        "dur": 1576,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673449624,
+        "dur": 1635,
+        "pid": 39688,
+        "tid": 8664
+      },
+      {
+        "name": "MinorGC",
+        "ts": 349673492562,
+        "dur": 1558,
+        "pid": 39688,
+        "tid": 8664
+      }
+    ]
+  }
+}

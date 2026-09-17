@@ -4,6 +4,7 @@ import type { World } from '../game/world';
 import { ENEMIES } from '../data/enemies';
 import { polygon } from './arena';
 import { drawHeldWeapon, drawSupplies, drawSwordArc } from './arsenal';
+import { fillDisc, fillShadow } from './discs';
 export function glow(
   g: Phaser.GameObjects.Graphics,
   x: number,
@@ -14,7 +15,7 @@ export function glow(
 ) {
   for (let i = 2; i > 0; i--) {
     g.fillStyle(c, a / i);
-    g.fillCircle(x, y, r * i * 0.5);
+    fillDisc(g, x, y, r * i * 0.5);
   }
 }
 export function drawActors(
@@ -56,7 +57,7 @@ export function drawActors(
     const c = e.flash > 0 ? 0xffffff : ENEMIES[e.kind].color;
     const boss = e.radius > 35;
     g.fillStyle(0x010508, 0.65);
-    g.fillEllipse(e.x, e.y + e.radius * 0.9, e.radius * 2.6, e.radius * 0.7);
+    fillShadow(g, e.x, e.y + e.radius * 0.9, e.radius * 2.6, e.radius * 0.7);
     if (
       e.kind === 'oracle' &&
       e.attackIndex % 3 === 2 &&
@@ -307,7 +308,8 @@ export function drawActors(
     g.lineBetween(b.x - Math.cos(a) * 15, b.y - Math.sin(a) * 15, b.x, b.y);
     glow(g, b.x, b.y, b.radius, b.color, 0.14);
     g.fillStyle(b.enemy ? 0xfff1d9 : b.accent);
-    g.fillCircle(b.x, b.y, b.radius * 0.65);
+    if (b.enemy) g.fillCircle(b.x, b.y, b.radius * 0.65);
+    else fillDisc(g, b.x, b.y, b.radius * 0.65);
     if (!b.enemy && b.shape === 'meteor') {
       g.lineStyle(2, b.color, 0.8);
       g.strokeCircle(b.x, b.y, b.radius * 1.2);

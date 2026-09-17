@@ -85,6 +85,7 @@ export default function GameApp() {
       void import('../game/qa').then((m) => {
         if (disposed || scene.current !== s) return;
         const qa = m.installQA(engine, synth);
+        qa.scene = s;
         qa.renderMetrics = () => ({ ...s.displayMetrics, hudCommits });
         qa.guide = guide.current;
       });

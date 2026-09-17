@@ -3,9 +3,11 @@ import type { Synth } from '../audio/synth';
 import { expedition } from '../rooms/expedition';
 import { makeRoom } from '../rooms/generator';
 import type { FieldGuide } from './field-guide';
+import type { ArcScene } from './scene';
 /** Explicit development-only fixtures. Vite removes this import from production builds. */
 export function installQA(engine: Engine, synth: Synth) {
   const harness = {
+    scene: undefined as ArcScene | undefined,
     guide: undefined as FieldGuide | undefined,
     renderMetrics: undefined as (() => Record<string, number>) | undefined,
     engine,
