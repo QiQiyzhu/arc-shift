@@ -48,15 +48,17 @@ export function drawTerrainZones(g: Phaser.GameObjects.Graphics, w: World) {
       g.lineBetween(z.x, z.y - 9, z.x, z.y + 9);
       if (w.room.kind === 'challenge') {
         g.lineStyle(1, c, 0.25);
-        g.strokeCircle(z.x, z.y, 100);
+        const radius = w.challengeRules?.captureRadius ?? 100;
+        const target = w.challengeRules?.holdSeconds ?? 18;
+        g.strokeCircle(z.x, z.y, radius);
         g.lineStyle(4, c, 0.9);
         g.beginPath();
         g.arc(
           z.x,
           z.y,
-          100,
+          radius,
           -Math.PI / 2,
-          -Math.PI / 2 + Math.PI * 2 * Math.min(1, w.challengeTime / 18),
+          -Math.PI / 2 + Math.PI * 2 * Math.min(1, w.challengeTime / target),
           false,
         );
         g.strokePath();

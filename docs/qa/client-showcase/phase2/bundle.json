@@ -1,0 +1,455 @@
+{
+  "recordedAt": "2026-09-17T08:10:36.007Z",
+  "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code.",
+  "totalBytes": 14930388,
+  "javascriptBytes": 1896482,
+  "productionDebugMarkers": [],
+  "files": [
+    {
+      "path": "dist/art/actors-source-v2.png",
+      "bytes": 2088875
+    },
+    {
+      "path": "dist/art/foundry.webp",
+      "bytes": 225914
+    },
+    {
+      "path": "dist/art/grove.webp",
+      "bytes": 341504
+    },
+    {
+      "path": "dist/art/rift-keyart.webp",
+      "bytes": 161028
+    },
+    {
+      "path": "dist/art/sanctum.webp",
+      "bytes": 276558
+    },
+    {
+      "path": "dist/assets/ActivityApp-CXSrZpCX.js",
+      "bytes": 20164,
+      "gzipBytes": 7821,
+      "brotliBytes": 6641
+    },
+    {
+      "path": "dist/assets/ActivityApp-DW3f5iWL.css",
+      "bytes": 6213,
+      "gzipBytes": 1985,
+      "brotliBytes": 1690
+    },
+    {
+      "path": "dist/assets/client-rx99GZtz.js",
+      "bytes": 182381,
+      "gzipBytes": 56764,
+      "brotliBytes": 49094
+    },
+    {
+      "path": "dist/assets/coach.worker-Dxs0_Hih.js",
+      "bytes": 78387,
+      "gzipBytes": 29370,
+      "brotliBytes": 24969
+    },
+    {
+      "path": "dist/assets/game-BwRfqUnr.js",
+      "bytes": 2073,
+      "gzipBytes": 1038,
+      "brotliBytes": 905
+    },
+    {
+      "path": "dist/assets/game-DOwWohaD.css",
+      "bytes": 198301,
+      "gzipBytes": 35107,
+      "brotliBytes": 29235
+    },
+    {
+      "path": "dist/assets/jsx-runtime-Cltr0gcK.js",
+      "bytes": 8430,
+      "gzipBytes": 3212,
+      "brotliBytes": 2880
+    },
+    {
+      "path": "dist/assets/lab-2D79aMuf.css",
+      "bytes": 23497,
+      "gzipBytes": 5380,
+      "brotliBytes": 4616
+    },
+    {
+      "path": "dist/assets/lab-B_LeJ_hm.js",
+      "bytes": 76910,
+      "gzipBytes": 23555,
+      "brotliBytes": 17987
+    },
+    {
+      "path": "dist/assets/page-DlJ9PJPo.js",
+      "bytes": 207131,
+      "gzipBytes": 72880,
+      "brotliBytes": 61567
+    },
+    {
+      "path": "dist/assets/rules-BE1egm8v.js",
+      "bytes": 2739,
+      "gzipBytes": 1227,
+      "brotliBytes": 1117
+    },
+    {
+      "path": "dist/assets/scene-DetqC-PU.js",
+      "bytes": 1316534,
+      "gzipBytes": 360989,
+      "brotliBytes": 288538
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-400-normal-BnQMeOim.woff",
+      "bytes": 17004
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-400-normal-CJ-V5oYT.woff2",
+      "bytes": 13388
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-500-normal-CNSSEhBt.woff",
+      "bytes": 16988
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-500-normal-lFbtlQH6.woff2",
+      "bytes": 13312
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-700-normal-CwsQ-cCU.woff",
+      "bytes": 16416
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-700-normal-RjhwGPKo.woff2",
+      "bytes": 12840
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-400-normal-CfP_5XZW.woff2",
+      "bytes": 12256
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-400-normal-DRPE3kg4.woff",
+      "bytes": 16788
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-500-normal-3dgZTiw9.woff",
+      "bytes": 16788
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-500-normal-DUe3BAxM.woff2",
+      "bytes": 12272
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-700-normal-BQnZhY3m.woff2",
+      "bytes": 11992
+    },
+    {
+      "path": "dist/assets/space-grotesk-latin-ext-700-normal-HVCqSBdx.woff",
+      "bytes": 16460
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-400-normal-B7xT_GF5.woff2",
+      "bytes": 4296
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-400-normal-BIWiOVfw.woff",
+      "bytes": 5728
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-500-normal-BmEvtly_.woff2",
+      "bytes": 4324
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-500-normal-BTqKIpxg.woff",
+      "bytes": 5716
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-700-normal-DMty7AZE.woff2",
+      "bytes": 4204
+    },
+    {
+      "path": "dist/assets/space-grotesk-vietnamese-700-normal-Duxec5Rn.woff",
+      "bytes": 5588
+    },
+    {
+      "path": "dist/favicon.svg",
+      "bytes": 239
+    },
+    {
+      "path": "dist/index.html",
+      "bytes": 788,
+      "gzipBytes": 536,
+      "brotliBytes": 331
+    },
+    {
+      "path": "dist/lab/index.html",
+      "bytes": 854,
+      "gzipBytes": 534,
+      "brotliBytes": 350
+    },
+    {
+      "path": "dist/licenses/base-ui.txt",
+      "bytes": 1072
+    },
+    {
+      "path": "dist/licenses/lucide.txt",
+      "bytes": 3208
+    },
+    {
+      "path": "dist/licenses/phaser.txt",
+      "bytes": 1120
+    },
+    {
+      "path": "dist/licenses/react.txt",
+      "bytes": 1088
+    },
+    {
+      "path": "dist/licenses/space-grotesk.txt",
+      "bytes": 4401
+    },
+    {
+      "path": "dist/portfolio/assets/aegis-arena.png",
+      "bytes": 613777
+    },
+    {
+      "path": "dist/portfolio/assets/arc-content-editor.png",
+      "bytes": 892982
+    },
+    {
+      "path": "dist/portfolio/assets/arc-shift.png",
+      "bytes": 1545926
+    },
+    {
+      "path": "dist/portfolio/assets/designlens.png",
+      "bytes": 141644
+    },
+    {
+      "path": "dist/portfolio/assets/opspilot-demo.webm",
+      "bytes": 1794285
+    },
+    {
+      "path": "dist/portfolio/assets/opspilot.png",
+      "bytes": 251073
+    },
+    {
+      "path": "dist/portfolio/assets/readability.css",
+      "bytes": 3755,
+      "gzipBytes": 1138,
+      "brotliBytes": 937
+    },
+    {
+      "path": "dist/portfolio/assets/repopilot-demo.webm",
+      "bytes": 2609861
+    },
+    {
+      "path": "dist/portfolio/assets/repopilot.png",
+      "bytes": 102795
+    },
+    {
+      "path": "dist/portfolio/assets/showcase.css",
+      "bytes": 14567,
+      "gzipBytes": 4090,
+      "brotliBytes": 3547
+    },
+    {
+      "path": "dist/portfolio/assets/viewer.js",
+      "bytes": 1733,
+      "gzipBytes": 678,
+      "brotliBytes": 524
+    },
+    {
+      "path": "dist/portfolio/assets-manifest.json",
+      "bytes": 4339,
+      "gzipBytes": 1314,
+      "brotliBytes": 1106
+    },
+    {
+      "path": "dist/portfolio/cases/aegis.json",
+      "bytes": 50223,
+      "gzipBytes": 8932,
+      "brotliBytes": 6674
+    },
+    {
+      "path": "dist/portfolio/cases/designlens-deepseek-smoke.json",
+      "bytes": 8521,
+      "gzipBytes": 2209,
+      "brotliBytes": 1785
+    },
+    {
+      "path": "dist/portfolio/cases/designlens.json",
+      "bytes": 217134,
+      "gzipBytes": 11371,
+      "brotliBytes": 7294
+    },
+    {
+      "path": "dist/portfolio/cases/opspilot-deepseek-smoke.json",
+      "bytes": 8541,
+      "gzipBytes": 2194,
+      "brotliBytes": 1774
+    },
+    {
+      "path": "dist/portfolio/cases/opspilot.json",
+      "bytes": 238349,
+      "gzipBytes": 25915,
+      "brotliBytes": 16453
+    },
+    {
+      "path": "dist/portfolio/cases/real-models.json",
+      "bytes": 2205,
+      "gzipBytes": 1140,
+      "brotliBytes": 881
+    },
+    {
+      "path": "dist/portfolio/cases/repopilot-deepseek-task.json",
+      "bytes": 28373,
+      "gzipBytes": 4787,
+      "brotliBytes": 3894
+    },
+    {
+      "path": "dist/portfolio/cases/repopilot.json",
+      "bytes": 10418,
+      "gzipBytes": 2962,
+      "brotliBytes": 2461
+    },
+    {
+      "path": "dist/portfolio/handbooks/Aegis Arena 深度讲解.html",
+      "bytes": 18228,
+      "gzipBytes": 8692,
+      "brotliBytes": 6910
+    },
+    {
+      "path": "dist/portfolio/handbooks/Aegis Arena 深度讲解.md",
+      "bytes": 10745
+    },
+    {
+      "path": "dist/portfolio/handbooks/Aegis Arena 面试讲解.html",
+      "bytes": 73509,
+      "gzipBytes": 25223,
+      "brotliBytes": 19813
+    },
+    {
+      "path": "dist/portfolio/handbooks/Aegis Arena 面试讲解.md",
+      "bytes": 30555
+    },
+    {
+      "path": "dist/portfolio/handbooks/ARC-SHIFT 深度讲解.html",
+      "bytes": 13225,
+      "gzipBytes": 6231,
+      "brotliBytes": 4876
+    },
+    {
+      "path": "dist/portfolio/handbooks/ARC-SHIFT 深度讲解.md",
+      "bytes": 5991
+    },
+    {
+      "path": "dist/portfolio/handbooks/ARC-SHIFT 面试讲解.html",
+      "bytes": 118188,
+      "gzipBytes": 36649,
+      "brotliBytes": 29252
+    },
+    {
+      "path": "dist/portfolio/handbooks/ARC-SHIFT 面试讲解.md",
+      "bytes": 66228
+    },
+    {
+      "path": "dist/portfolio/handbooks/DesignLens AI 深度讲解.html",
+      "bytes": 15619,
+      "gzipBytes": 7418,
+      "brotliBytes": 5862
+    },
+    {
+      "path": "dist/portfolio/handbooks/DesignLens AI 深度讲解.md",
+      "bytes": 7936
+    },
+    {
+      "path": "dist/portfolio/handbooks/DesignLens AI 面试讲解.html",
+      "bytes": 64372,
+      "gzipBytes": 19485,
+      "brotliBytes": 15509
+    },
+    {
+      "path": "dist/portfolio/handbooks/DesignLens AI 面试讲解.md",
+      "bytes": 23595
+    },
+    {
+      "path": "dist/portfolio/handbooks/diagrams/aegis-arena-diagram-1.svg",
+      "bytes": 29937
+    },
+    {
+      "path": "dist/portfolio/handbooks/diagrams/arc-shift-diagram-1.svg",
+      "bytes": 35215
+    },
+    {
+      "path": "dist/portfolio/handbooks/diagrams/designlens-ai-diagram-1.svg",
+      "bytes": 28630
+    },
+    {
+      "path": "dist/portfolio/handbooks/diagrams/opspilot-ai-diagram-1.svg",
+      "bytes": 37214
+    },
+    {
+      "path": "dist/portfolio/handbooks/diagrams/repopilot-diagram-1.svg",
+      "bytes": 30881
+    },
+    {
+      "path": "dist/portfolio/handbooks/index.html",
+      "bytes": 9796,
+      "gzipBytes": 3924,
+      "brotliBytes": 3009
+    },
+    {
+      "path": "dist/portfolio/handbooks/manifest.json",
+      "bytes": 7194,
+      "gzipBytes": 2511,
+      "brotliBytes": 1990
+    },
+    {
+      "path": "dist/portfolio/handbooks/OpsPilot AI 深度讲解.html",
+      "bytes": 14318,
+      "gzipBytes": 6885,
+      "brotliBytes": 5414
+    },
+    {
+      "path": "dist/portfolio/handbooks/OpsPilot AI 深度讲解.md",
+      "bytes": 6670
+    },
+    {
+      "path": "dist/portfolio/handbooks/OpsPilot AI 面试讲解.html",
+      "bytes": 111700,
+      "gzipBytes": 33055,
+      "brotliBytes": 26804
+    },
+    {
+      "path": "dist/portfolio/handbooks/OpsPilot AI 面试讲解.md",
+      "bytes": 59027
+    },
+    {
+      "path": "dist/portfolio/handbooks/RepoPilot 深度讲解.html",
+      "bytes": 16193,
+      "gzipBytes": 7458,
+      "brotliBytes": 5910
+    },
+    {
+      "path": "dist/portfolio/handbooks/RepoPilot 深度讲解.md",
+      "bytes": 8295
+    },
+    {
+      "path": "dist/portfolio/handbooks/RepoPilot 面试讲解.html",
+      "bytes": 64015,
+      "gzipBytes": 20388,
+      "brotliBytes": 16046
+    },
+    {
+      "path": "dist/portfolio/handbooks/RepoPilot 面试讲解.md",
+      "bytes": 21863
+    },
+    {
+      "path": "dist/portfolio/index.html",
+      "bytes": 23277,
+      "gzipBytes": 6935,
+      "brotliBytes": 5375
+    },
+    {
+      "path": "dist/portfolio/README.md",
+      "bytes": 1702
+    }
+  ]
+}

@@ -1,5 +1,11 @@
 # 验收与打磨记录
 
+## 客户端展示增量（2026-09-17）
+
+本地 **211 单元、49 开发浏览器、8 生产浏览器**通过；最终活动语义和清理修正后，另复跑 6 项活动浏览器检查通过。typecheck、lint、build 与生产开发标记检查通过。本轮未运行远端 Linux CI。保留 [检查与源码哈希](qa/client-showcase/phase2/checks.json)、[完整 DEV 原始记录](qa/client-showcase/phase2/full-browser.json)、[最终活动复查](qa/client-showcase/phase2/activity-final-browser.json)、[生产结果](qa/client-showcase/phase2/production-browser.json)。
+
+性能阶段先完成原始基线与 Chrome CPU/分配/GC 记录，再运行同机三轮交错对照，共 18 份固定工作量样本；250 敌 P95 中位数 48.5 → 31.7ms。三武器可击杀/掉落 oracle 与原提交相同。完整方法、排除样本、GC 未改善及业务活动演示见 [客户端报告](client-showcase.md)。完整套件产生的压力样本另存 phase2，不混入受控性能结果。真人反馈尚未收集。
+
 ## Decision Lab 与真实模型展示增量（2026-09-10）
 
 本地完整五项检查通过：typecheck、lint、**151 单元 / 34 DEV 浏览器**、build；另行 **4 项生产浏览器检查通过**。新增实验直接复用几何函数并保留全量 oracle，验证两种漏检反例、偏好排序与零权重、历史返回、存档隔离、三项目实际调用回执和手机布局。原始 [五项记录](qa/engineering/decision-lab/checks.json)、[单元](qa/engineering/decision-lab/unit.json)、[游戏流程](qa/engineering/decision-lab/browser.json)、[生产](qa/engineering/decision-lab/production.json)。源码是记录中的父提交加当时工作区，随后提交的 CI 可从仓库 Actions 核对。

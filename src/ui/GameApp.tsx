@@ -236,7 +236,7 @@ export default function GameApp() {
           ARC<span>{'//'}</span>SHIFT<i>奥术跃迁</i>
         </a>
         <div className="topbar-center">
-          <span className="signal-dot" /> 网络异常 · 连接已建立
+          <span className="signal-dot" /> 本地行动 · 已就绪
         </div>
         <div className="top-actions">
           <span className="version">TACTICAL / 1.2</span>
@@ -333,6 +333,14 @@ export default function GameApp() {
                 <ArrowUpRight size={24} />
               </button>
               <div className="menu-secondary">
+                <button onClick={() => location.assign('/challenge')}>
+                  <span>
+                    中继争夺 <b>挑战活动</b>
+                  </span>
+                  <span>
+                    75 秒守点 <ArrowRight size={17} />
+                  </span>
+                </button>
                 <button
                   className="guide-entry"
                   disabled={!loaded}

@@ -9,8 +9,23 @@ import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';
 const root = createRoot(document.getElementById('root')!);
-if (import.meta.env.DEV && location.pathname.startsWith('/dev/')) {
-  const page = location.pathname === '/dev/content-editor' ? import('./dev/ContentEditor') : location.pathname === '/dev/debugger' ? import('./dev/Debugger') : import('./dev/DevApp');
+if (location.pathname === '/challenge') {
+  void import('./activities/ActivityApp').then(({ default: ActivityApp }) =>
+    root.render(
+      <React.StrictMode>
+        <ActivityApp />
+      </React.StrictMode>,
+    ),
+  );
+} else if (import.meta.env.DEV && location.pathname.startsWith('/dev/')) {
+  const page =
+    location.pathname === '/dev/activity-editor'
+      ? import('./dev/ActivityEditor')
+      : location.pathname === '/dev/content-editor'
+        ? import('./dev/ContentEditor')
+        : location.pathname === '/dev/debugger'
+          ? import('./dev/Debugger')
+          : import('./dev/DevApp');
   void page.then(({ default: DevApp }) =>
     root.render(
       <React.StrictMode>

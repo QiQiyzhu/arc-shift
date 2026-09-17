@@ -365,9 +365,16 @@ export class Engine {
             : w.content.encounters[0].params.combatWaves
           : roomWaveCount(w.room.index);
     if (w.room.kind === 'challenge') {
-      if (Math.hypot(w.player.x - 640, w.player.y - 365) < 100)
+      if (
+        Math.hypot(w.player.x - 640, w.player.y - 365) <
+        (w.challengeRules?.captureRadius ?? 100)
+      )
         w.challengeTime += dt;
-      if (w.challengeTime >= 18) {
+      if (
+        w.challengeRules
+          ? w.challengeTime + 1e-9 >= w.challengeRules.holdSeconds
+          : w.challengeTime >= 18
+      ) {
         this.clear();
         return;
       }

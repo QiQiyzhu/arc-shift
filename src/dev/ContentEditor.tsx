@@ -104,6 +104,7 @@ export default function ContentEditor() {
       <header>
         <a href="/">ARC//SHIFT</a>
         <b>ENGINEERING / CONTENT LAB</b>
+        <a href="/dev/activity-editor">挑战活动编辑器</a>
         <a href="/dev/replay">Replay viewer</a>
         <a href="/dev/debugger">Debugger</a>
       </header>

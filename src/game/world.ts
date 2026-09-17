@@ -40,6 +40,8 @@ export class World {
   fieldBuff = false;
   eventDone = false;
   challengeTime = 0;
+  /** Only isolated activities set this. Undefined keeps ordinary replay state unchanged. */
+  challengeRules?: { holdSeconds: number; captureRadius: number };
   encountered = new Set<EnemyKind>();
   weapon: WeaponId = 'arc';
   preparation = emptyPreparation();

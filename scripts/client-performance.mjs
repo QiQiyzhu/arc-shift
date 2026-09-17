@@ -10,7 +10,8 @@ if (!/^[a-z0-9-]+$/i.test(label)) throw Error('Use a simple label');
 const trace = process.argv.includes('--trace');
 const forceLegacy = process.argv.includes('--legacy');
 const paired = process.argv.includes('--paired');
-if (trace && paired) throw Error('Profile one rendering mode per label to preserve raw captures');
+if (trace && paired)
+  throw Error('Profile one rendering mode per label to preserve raw captures');
 const root = `outputs/client-showcase/${label}`;
 fs.mkdirSync(root, { recursive: true });
 const hashes = {};
@@ -66,9 +67,12 @@ try {
           ],
         ][repeat];
     const runs = fixtures.flatMap(([count, terrain]) =>
-      (paired ? (repeat % 2 ? [false, true] : [true, false]) : [forceLegacy]).map(
-        (legacy) => [count, terrain, legacy],
-      ),
+      (paired
+        ? repeat % 2
+          ? [false, true]
+          : [true, false]
+        : [forceLegacy]
+      ).map((legacy) => [count, terrain, legacy]),
     );
     for (const [count, terrain, legacy] of runs) {
       const page = await browser.newPage({
@@ -174,6 +178,7 @@ try {
           wrap(renderer, 'canvasToTexture', 'textTextureUploads', true);
           const graphicsPrototype = Object.getPrototypeOf(scene.graphics);
           wrap(graphicsPrototype, 'renderWebGL', 'graphicsRenderMs');
+          // oxlint-disable-next-line typescript/unbound-method -- wrapper explicitly calls the original with its engine receiver.
           const original = engine.update;
           engine.update = (dt) => {
             if (tick >= (measuring ? end : warmup)) return;
@@ -343,7 +348,10 @@ try {
         });
       assert.equal(result.measuredTicks, 600);
       assert.equal(result.worldTicks, 720);
-      assert(Math.abs(result.elapsed - 12) < 1e-8, 'Unexpected uncontrolled simulation steps');
+      assert(
+        Math.abs(result.elapsed - 12) < 1e-8,
+        'Unexpected uncontrolled simulation steps',
+      );
       assert.equal(result.poolMisses, 0);
       assert.deepEqual(errors, []);
       records.push({ repeat, legacy, ...result, errors });

@@ -87,6 +87,8 @@ export class ArcScene extends Phaser.Scene {
   pauseBlocked = false;
   /** Used only by the development QA page; production always owns its loop. */
   externalSimulation?: (dt: number, input: Input) => void;
+  /** Trusted product controller; unlike the DEV debugger, focus still pauses it. */
+  simulationDriver?: (dt: number, input: Input) => void;
   onTick: () => void = () => {};
   onReady: () => void = () => {};
   onSuspend: () => void = () => {};
@@ -248,6 +250,7 @@ export class ArcScene extends Phaser.Scene {
     while (this.accumulator >= 1 / 60) {
       if (import.meta.env.DEV && this.externalSimulation)
         this.externalSimulation(1 / 60, input);
+      else if (this.simulationDriver) this.simulationDriver(1 / 60, input);
       else this.engine.update(1 / 60, input);
       input.dash = input.q = input.e = input.bomb = input.heal = false;
       this.actions.consumeStep();

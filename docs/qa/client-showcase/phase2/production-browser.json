@@ -1,0 +1,406 @@
+{
+  "config": {
+    "configFile": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\playwright.production.config.ts",
+    "rootDir": "C:/Users/yzhu/Documents/ChatGPT/New project/e2e-production",
+    "forbidOnly": false,
+    "fullyParallel": false,
+    "globalSetup": null,
+    "globalTeardown": null,
+    "globalTimeout": 0,
+    "grep": {},
+    "grepInvert": null,
+    "maxFailures": 0,
+    "metadata": {
+      "actualWorkers": 1
+    },
+    "preserveOutput": "always",
+    "reporter": [
+      [
+        "list",
+        null
+      ],
+      [
+        "json",
+        {
+          "outputFile": "outputs/qa/production-results.json"
+        }
+      ]
+    ],
+    "reportSlowTests": {
+      "max": 5,
+      "threshold": 300000
+    },
+    "quiet": false,
+    "projects": [
+      {
+        "outputDir": "C:/Users/yzhu/Documents/ChatGPT/New project/outputs/qa/production",
+        "repeatEach": 1,
+        "retries": 0,
+        "metadata": {
+          "actualWorkers": 1
+        },
+        "id": "",
+        "name": "",
+        "testDir": "C:/Users/yzhu/Documents/ChatGPT/New project/e2e-production",
+        "testIgnore": [],
+        "testMatch": [
+          "**/*.@(spec|test).?(c|m)[jt]s?(x)"
+        ],
+        "timeout": 45000
+      }
+    ],
+    "shard": null,
+    "updateSnapshots": "missing",
+    "updateSourceMethod": "patch",
+    "version": "1.55.1",
+    "workers": 1,
+    "webServer": {
+      "command": "npm run start -- --port 5178 --strictPort",
+      "url": "http://127.0.0.1:5178",
+      "reuseExistingServer": false
+    }
+  },
+  "suites": [
+    {
+      "title": "activity.spec.ts",
+      "file": "activity.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "production activity advances real capture through the public controller without QA",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 6089,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 898
+                    }
+                  ],
+                  "startTime": "2026-09-17T08:10:51.935Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "616be4781cf8c32ae453-2a0115fa23ff5db4cd02",
+          "file": "activity.spec.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "title": "unsupported save stays untouched while unscored play remains available",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1265,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-17T08:10:58.193Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "616be4781cf8c32ae453-2b2a431d104624ebcaae",
+          "file": "activity.spec.ts",
+          "line": 47,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "coach.spec.ts",
+      "file": "coach.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "production coach runs its worker offline and trial exits without changing storage",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2020,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-17T08:10:59.481Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "4b1333a7f42ad69c80a4-9b8545b0b78e7ab38575",
+          "file": "coach.spec.ts",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "decision-lab.spec.ts",
+      "file": "decision-lab.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "live geometry catches both defects, isolates game storage, and policy preferences expose trade-offs",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 708,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-17T08:11:01.528Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8a93a460ed4156cd995b-ab61e3a6313bd8325486",
+          "file": "decision-lab.spec.ts",
+          "line": 2,
+          "column": 1
+        },
+        {
+          "title": "recorded cases preserve rejected green tests, retrieval regression, transaction and abstention evidence",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 1136,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-17T08:11:02.247Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8a93a460ed4156cd995b-e66654cb81b23fa17f2c",
+          "file": "decision-lab.spec.ts",
+          "line": 48,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "guide.spec.ts",
+      "file": "guide.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "published build guides real input through fusion without QA or save changes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 3206,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-17T08:11:03.411Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "ae783375225fac93c986-788f23db9de935492969",
+          "file": "guide.spec.ts",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "isolation.spec.ts",
+      "file": "isolation.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "built public game loads and does not expose QA or development intervention routes",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 4837,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "startTime": "2026-09-17T08:11:06.639Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "8603831629f4016ade15-7399d57125e027575306",
+          "file": "isolation.spec.ts",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    },
+    {
+      "title": "portfolio.spec.ts",
+      "file": "portfolio.spec.ts",
+      "column": 0,
+      "line": 0,
+      "specs": [
+        {
+          "title": "public portfolio connects five real project dossiers and accessible media",
+          "ok": true,
+          "tags": [],
+          "tests": [
+            {
+              "timeout": 45000,
+              "annotations": [],
+              "expectedStatus": "passed",
+              "projectId": "",
+              "projectName": "",
+              "results": [
+                {
+                  "workerIndex": 0,
+                  "parallelIndex": 0,
+                  "status": "passed",
+                  "duration": 2546,
+                  "errors": [],
+                  "stdout": [],
+                  "stderr": [],
+                  "retry": 0,
+                  "steps": [
+                    {
+                      "title": "Expect \"poll toBeGreaterThan\"",
+                      "duration": 12
+                    }
+                  ],
+                  "startTime": "2026-09-17T08:11:11.512Z",
+                  "annotations": [],
+                  "attachments": []
+                }
+              ],
+              "status": "expected"
+            }
+          ],
+          "id": "34cb4603fa9a5b79d30c-46591944ff48c0b2bbee",
+          "file": "portfolio.spec.ts",
+          "line": 2,
+          "column": 1
+        }
+      ]
+    }
+  ],
+  "errors": [],
+  "stats": {
+    "startTime": "2026-09-17T08:10:50.217Z",
+    "duration": 47908.837,
+    "expected": 8,
+    "skipped": 0,
+    "unexpected": 0,
+    "flaky": 0
+  }
+}
