@@ -5,6 +5,14 @@
   font-family: 'Space Grotesk', sans-serif;
   padding: 0 4vw 24px;
 }
+.trial-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.trial-header-actions button {
+  min-height: 38px;
+}
 .trial-armory {
   display: grid;
   grid-template-columns: repeat(3, 1fr);

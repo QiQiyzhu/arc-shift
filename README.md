@@ -1,5 +1,7 @@
 # ARC//SHIFT — Game Client Engineering
 
+**2026-09-18 · v2.1 视听升级（当前）**：[在线体验](https://arc-shift.black-kid-3047.chatgpt.site/) · [射击与音乐设计](docs/v21-design.md) · [成品参考](docs/v21-references.md) · [验收与性能证据](docs/qa/v21/README.md) · [简历文本](docs/resume-v21.md)。新增六类缓存弹芯／拖尾、方向枪口与命中反馈，三种武装声纹，以及三个区域九条原创分轨配乐。245项单元测试通过；规则、伤害与掉落保持对照一致。v2.1实机MP4、十页设计PDF和可编辑证据ZIP见output/；真人听感与游玩反馈待用户参与。
+
 **2026-09-18 · v2.0 星铸协议**：[直接进入构筑远征](https://arc-shift.black-kid-3047.chatgpt.site/build-trial) · [系统与数值设计](docs/v2-design.md) · [获奖作品参考核对](docs/v2-references.md)。新增三武装承诺、一次性补给／夺能合约与有效的末关资源取舍；更新主视觉、守门人、动作反馈和危险预警。保留主线、配置工具、旧回放和存档兼容。
 
 **[在线试玩](https://arc-shift.black-kid-3047.chatgpt.site/) · [五项目展示入口](https://arc-shift.black-kid-3047.chatgpt.site/portfolio/) · [A–G 工程交付](docs/delivery-v2.md) · [A–T 面试讲解](docs/interview-dossier.md) · [CI 与原始验收](docs/qa-report.md)**

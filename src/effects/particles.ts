@@ -1,7 +1,8 @@
 import type Phaser from 'phaser';
 import { Pool } from '../core/pool';
 import type { EffectEvent } from '../core/events';
-import { fillDisc, renderDiagnostics } from '../render/discs';
+import { fillDisc, strokeRing, renderDiagnostics } from '../render/discs';
+import { BurstSprites } from './bursts';
 
 function labelContent(
   t: Phaser.GameObjects.Text,
@@ -20,6 +21,7 @@ function labelContent(
   t.setText(value);
 }
 export class Effects {
+  readonly bursts: BurstSprites;
   reduced = false;
   particles = new Pool(650, () => ({
     active: false,
@@ -33,6 +35,7 @@ export class Effects {
     color: 0xffffff,
     ring: false,
     ghost: false,
+    spark: false,
   }));
   labels: Phaser.GameObjects.Text[] = [];
   beams: {
@@ -44,6 +47,7 @@ export class Effects {
     color: number;
   }[] = [];
   constructor(private scene: Phaser.Scene) {
+    this.bursts = new BurstSprites(scene);
     for (let i = 0; i < 40; i++)
       this.labels.push(
         scene.add
@@ -57,7 +61,8 @@ export class Effects {
           .setVisible(false),
       );
   }
-  emit(e: EffectEvent) {
+  emit(e: EffectEvent, angle = 0) {
+    this.bursts.emit(e, angle, this.reduced);
     if (e.x2 !== undefined) {
       if (this.beams.length >= (this.reduced ? 12 : 48)) return;
       this.beams.push({
@@ -78,7 +83,9 @@ export class Effects {
           : e.kind === 'dash'
             ? 2
             : e.kind === 'shot'
-              ? 3
+              ? e.weapon === 'cannon'
+                ? 7
+                : 2
               : e.kind === 'kill'
                 ? 19
                 : e.kind === 'phase' || e.kind === 'victory'
@@ -87,12 +94,17 @@ export class Effects {
     for (let i = 0; i < Math.ceil(count * (this.reduced ? 0.25 : 1)); i++) {
       const p = this.particles.acquire();
       if (!p) break;
-      const a = Math.random() * Math.PI * 2;
+      const a =
+        e.kind === 'shot'
+          ? angle + (Math.random() - 0.5) * 0.7
+          : Math.random() * Math.PI * 2;
       const speed =
         e.kind === 'dash'
           ? 0
           : e.kind === 'shot'
-            ? 40
+            ? e.weapon === 'cannon'
+              ? 120 + Math.random() * 150
+              : 100 + Math.random() * 80
             : 40 + Math.random() * 170;
       Object.assign(p, {
         x: e.x,
@@ -105,6 +117,11 @@ export class Effects {
         color: e.color,
         ring: false,
         ghost: e.kind === 'dash' && i === 0,
+        spark:
+          e.kind === 'shot' ||
+          e.kind === 'hit' ||
+          e.kind === 'crit' ||
+          e.kind === 'impact',
       });
     }
     if (
@@ -131,6 +148,7 @@ export class Effects {
           color: e.color,
           ring: true,
           ghost: false,
+          spark: false,
         });
     }
     if (
@@ -169,6 +187,7 @@ export class Effects {
     }
   }
   draw(g: Phaser.GameObjects.Graphics, dt: number) {
+    this.bursts.update(dt, this.reduced);
     for (const p of this.particles.items) {
       if (!p.active) continue;
       p.life -= dt;
@@ -194,8 +213,17 @@ export class Effects {
         g.fillPoints(pts, true);
         g.strokePoints(pts, true);
       } else if (p.ring) {
-        g.lineStyle(2, p.color, alpha * 0.6);
-        g.strokeCircle(p.x, p.y, p.size * (1 - alpha * 0.7));
+        strokeRing(
+          g,
+          p.x,
+          p.y,
+          p.size * (1 - alpha * 0.7),
+          p.color,
+          alpha * 0.6,
+        );
+      } else if (p.spark) {
+        g.lineStyle(Math.max(1, p.size * 0.55), p.color, alpha * 0.8);
+        g.lineBetween(p.x, p.y, p.x - p.vx * 0.035, p.y - p.vy * 0.035);
       } else {
         if (!this.reduced) {
           g.fillStyle(p.color, alpha * 0.12);
@@ -237,8 +265,12 @@ export class Effects {
     }
   }
   clear() {
+    this.bursts.clear();
     this.particles.clear();
     this.beams = [];
     this.labels.forEach((t) => t.setVisible(false));
+  }
+  dispose() {
+    this.bursts.dispose();
   }
 }

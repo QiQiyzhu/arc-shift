@@ -1,0 +1,4522 @@
+{
+  "schema": 1,
+  "auditedAtUtc": "2026-09-18T05:27:04.062754+00:00",
+  "scope": "Offline read-only evidence analysis; only audit outputs written outside checkout",
+  "sources": {
+    "performanceV2": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\client-showcase\\v2-final\\results.json",
+      "bytes": 4304856,
+      "sha256": "eddc64c5585fd670dbf2bd4e8863ff2d6e4e494c669893b331d5206497f7ef78"
+    },
+    "performanceV21": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\client-showcase\\v21-final\\results.json",
+      "bytes": 4801981,
+      "sha256": "1ab97f239ef17ea6f07be7d3594d5aeb8252c3ca3bb36fc968e3e7c6a7ec4fea"
+    },
+    "behaviorV2": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\docs\\qa\\v2\\behavior-final.json",
+      "bytes": 128058,
+      "sha256": "5c5128850f813c02c6c64b47cf9cbaf1ad520775e4f02c71732cf44565597528"
+    },
+    "behaviorV21": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\client-showcase\\behavior-v21-behavior.json",
+      "bytes": 128058,
+      "sha256": "5c5128850f813c02c6c64b47cf9cbaf1ad520775e4f02c71732cf44565597528"
+    },
+    "experimentV2": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\v2\\experiment\\raw.json",
+      "bytes": 337038,
+      "sha256": "7fa5c4425486a11debc11ce7271e3332591fc0b2a5fe9c6c71c62045a1b857ed"
+    },
+    "experimentV21": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\v21\\experiment\\raw.json",
+      "bytes": 337038,
+      "sha256": "7fa5c4425486a11debc11ce7271e3332591fc0b2a5fe9c6c71c62045a1b857ed"
+    },
+    "unit": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\v21\\unit-results.json",
+      "bytes": 81030,
+      "sha256": "794d6120802847c0823d72ad018a44be3b164b79a25efa4395b4449936beb14f"
+    },
+    "browserFirst": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\v21\\browser-first.json",
+      "bytes": 17420,
+      "sha256": "67bb4ef6dcff212d21adf56656a1a9fc38e90306a84e3ca2ca839747ba70bd9e"
+    },
+    "browserFinal": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\v21\\browser-final.json",
+      "bytes": 18294,
+      "sha256": "bda49667589e2498a6893394fa787d48194692e7221644f9f491600bb2cd6789"
+    },
+    "audioSamples": {
+      "path": "C:\\Users\\yzhu\\Documents\\ChatGPT\\New project\\outputs\\v21\\audio-browser.json",
+      "bytes": 1321,
+      "sha256": "af705b956f8e357dee9b8bdfaee04c25b92281ca971549ac88f360d338b75a42"
+    }
+  },
+  "performance": {
+    "baselineRecordedAt": "2026-09-18T01:56:35.499Z",
+    "candidateRecordedAt": "2026-09-18T05:16:40.932Z",
+    "environment": {
+      "node": "v24.16.0",
+      "platform": "win32",
+      "cpu": "13th Gen Intel(R) Core(TM) i9-13900HX",
+      "logicalCpus": 32,
+      "memoryBytes": 16895016960
+    },
+    "browserVersion": "153.0.4234.32",
+    "profiled": {
+      "baseline": false,
+      "candidate": false
+    },
+    "definitions": {
+      "frameP95": "summary.interval.p95",
+      "graphicsP95": "summary.graphicsRenderMs.p95",
+      "renderAllP95": "No literal renderAllP95 field; equivalent renderer-call measurement is summary.renderSubmitMs.p95 (includes Graphics render, not full frame)",
+      "slow33": "interval > 1000/30 ms",
+      "slow50": "interval > 50 ms"
+    },
+    "scenarios": [
+      {
+        "count": 28,
+        "terrain": false,
+        "repeats": 3,
+        "versions": {
+          "v2": {
+            "p95MedianMs": {
+              "interval": 13.399999998509884,
+              "graphicsRenderMs": 4.099999997764826,
+              "renderSubmitMs": 4.200000002980232,
+              "prepareMs": 1.2999999970197678,
+              "effectDrawMs": 0.5999999977648258,
+              "effectEmissionMs": 0.3999999985098839,
+              "bulletImagesMs": 0.10000000149011612,
+              "hudAndAudioMs": 0.10000000149011612
+            },
+            "p95RoundsMs": {
+              "interval": [
+                11,
+                13.5,
+                13.399999998509884
+              ],
+              "graphicsRenderMs": [
+                2.899999998509884,
+                4.099999997764826,
+                4.300000000745058
+              ],
+              "renderSubmitMs": [
+                3.099999997764826,
+                4.200000002980232,
+                4.5
+              ],
+              "prepareMs": [
+                1.2999999970197678,
+                1.2999999970197678,
+                1.300000000745058
+              ],
+              "effectDrawMs": [
+                0.6000000014901161,
+                0.5999999977648258,
+                0.5999999977648258
+              ],
+              "effectEmissionMs": [
+                0.3999999985098839,
+                0.3999999985098839,
+                0.30000000074505806
+              ],
+              "bulletImagesMs": [
+                0.10000000149011612,
+                0.10000000149011612,
+                0.10000000149011612
+              ],
+              "hudAndAudioMs": [
+                0.10000000149011612,
+                0.10000000149011612,
+                0.10000000149011612
+              ]
+            },
+            "slow33MedianFraction": 0,
+            "slow33RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "slow50MedianFraction": 0,
+            "slow50RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "projectilePoolMisses": [
+              0,
+              0,
+              0
+            ],
+            "decorativeParticlePoolMisses": [
+              749,
+              740,
+              744
+            ],
+            "maxParticles": [
+              646,
+              647,
+              646
+            ],
+            "maxProjectiles": [
+              96,
+              96,
+              96
+            ],
+            "droppedMs": [
+              0,
+              0,
+              0
+            ]
+          },
+          "v21": {
+            "p95MedianMs": {
+              "interval": 11.199999995529652,
+              "graphicsRenderMs": 3.600000001490116,
+              "renderSubmitMs": 3.9000000059604645,
+              "prepareMs": 1.1000000014901161,
+              "effectDrawMs": 0.3999999985098839,
+              "effectEmissionMs": 0.3999999985098839,
+              "bulletImagesMs": 0.20000000298023224,
+              "hudAndAudioMs": 0.10000000149011612
+            },
+            "p95RoundsMs": {
+              "interval": [
+                9.899999998509884,
+                11.199999995529652,
+                11.5
+              ],
+              "graphicsRenderMs": [
+                2.7000000029802322,
+                4,
+                3.600000001490116
+              ],
+              "renderSubmitMs": [
+                3.0999999940395355,
+                4.300000004470348,
+                3.9000000059604645
+              ],
+              "prepareMs": [
+                1.0999999940395355,
+                1.2000000029802322,
+                1.1000000014901161
+              ],
+              "effectDrawMs": [
+                0.3999999985098839,
+                0.3999999985098839,
+                0.3999999985098839
+              ],
+              "effectEmissionMs": [
+                0.30000000447034836,
+                0.3999999985098839,
+                0.3999999985098839
+              ],
+              "bulletImagesMs": [
+                0.20000000298023224,
+                0.20000000298023224,
+                0.20000000298023224
+              ],
+              "hudAndAudioMs": [
+                0.10000000149011612,
+                0.19999999552965164,
+                0.10000000149011612
+              ]
+            },
+            "slow33MedianFraction": 0,
+            "slow33RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "slow50MedianFraction": 0,
+            "slow50RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "projectilePoolMisses": [
+              0,
+              0,
+              0
+            ],
+            "decorativeParticlePoolMisses": [
+              759,
+              739,
+              750
+            ],
+            "maxParticles": [
+              647,
+              647,
+              646
+            ],
+            "maxProjectiles": [
+              96,
+              96,
+              96
+            ],
+            "droppedMs": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "changePercent": {
+          "interval": -16.417910471827447,
+          "graphicsRenderMs": -12.195121867007119,
+          "renderSubmitMs": -7.1428570668308105,
+          "prepareMs": -15.384615076011453,
+          "effectDrawMs": -33.333333333333336,
+          "effectEmissionMs": 0.0,
+          "bulletImagesMs": 100.0,
+          "hudAndAudioMs": 0.0
+        }
+      },
+      {
+        "count": 100,
+        "terrain": true,
+        "repeats": 3,
+        "versions": {
+          "v2": {
+            "p95MedianMs": {
+              "interval": 19.399999998509884,
+              "graphicsRenderMs": 8.299999997019768,
+              "renderSubmitMs": 8.5,
+              "prepareMs": 2.300000000745058,
+              "effectDrawMs": 0.8000000007450581,
+              "effectEmissionMs": 0.4999999962747097,
+              "bulletImagesMs": 0.10000000149011612,
+              "hudAndAudioMs": 0.19999999925494194
+            },
+            "p95RoundsMs": {
+              "interval": [
+                19.5,
+                19.300000000745058,
+                19.399999998509884
+              ],
+              "graphicsRenderMs": [
+                7.699999999254942,
+                8.299999997019768,
+                8.299999997019768
+              ],
+              "renderSubmitMs": [
+                8,
+                8.5,
+                8.5
+              ],
+              "prepareMs": [
+                2.5,
+                2.300000000745058,
+                2.300000000745058
+              ],
+              "effectDrawMs": [
+                0.8000000007450581,
+                0.8999999985098839,
+                0.8000000007450581
+              ],
+              "effectEmissionMs": [
+                0.5,
+                0.4999999962747097,
+                0.4000000022351742
+              ],
+              "bulletImagesMs": [
+                0.10000000149011612,
+                0.10000000149011612,
+                0.10000000149011612
+              ],
+              "hudAndAudioMs": [
+                0.19999999925494194,
+                0.19999999925494194,
+                0.19999999925494194
+              ]
+            },
+            "slow33MedianFraction": 0,
+            "slow33RoundsFraction": [
+              0,
+              0,
+              0.0009727626459143969
+            ],
+            "slow50MedianFraction": 0,
+            "slow50RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "projectilePoolMisses": [
+              0,
+              0,
+              0
+            ],
+            "decorativeParticlePoolMisses": [
+              3107,
+              3076,
+              3080
+            ],
+            "maxParticles": [
+              646,
+              648,
+              648
+            ],
+            "maxProjectiles": [
+              175,
+              175,
+              175
+            ],
+            "droppedMs": [
+              0,
+              0,
+              0
+            ]
+          },
+          "v21": {
+            "p95MedianMs": {
+              "interval": 17.200000002980232,
+              "graphicsRenderMs": 5.899999998509884,
+              "renderSubmitMs": 6.200000002980232,
+              "prepareMs": 1.7999999970197678,
+              "effectDrawMs": 0.5,
+              "effectEmissionMs": 0.4000000059604645,
+              "bulletImagesMs": 0.20000000298023224,
+              "hudAndAudioMs": 0.19999999552965164
+            },
+            "p95RoundsMs": {
+              "interval": [
+                17.799999997019768,
+                17.200000002980232,
+                16.80000000447035
+              ],
+              "graphicsRenderMs": [
+                6.399999998509884,
+                5.899999998509884,
+                5.799999997019768
+              ],
+              "renderSubmitMs": [
+                6.699999995529652,
+                6.200000002980232,
+                6
+              ],
+              "prepareMs": [
+                2,
+                1.7999999970197678,
+                1.7999999970197678
+              ],
+              "effectDrawMs": [
+                0.6000000014901161,
+                0.5,
+                0.5
+              ],
+              "effectEmissionMs": [
+                0.4000000059604645,
+                0.5,
+                0.4000000059604645
+              ],
+              "bulletImagesMs": [
+                0.20000000298023224,
+                0.20000000298023224,
+                0.20000000298023224
+              ],
+              "hudAndAudioMs": [
+                0.19999999552965164,
+                0.10000000149011612,
+                0.19999999552965164
+              ]
+            },
+            "slow33MedianFraction": 0,
+            "slow33RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "slow50MedianFraction": 0,
+            "slow50RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "projectilePoolMisses": [
+              0,
+              0,
+              0
+            ],
+            "decorativeParticlePoolMisses": [
+              3035,
+              3092,
+              3047
+            ],
+            "maxParticles": [
+              647,
+              647,
+              646
+            ],
+            "maxProjectiles": [
+              175,
+              175,
+              175
+            ],
+            "droppedMs": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "changePercent": {
+          "interval": -11.340206163395017,
+          "graphicsRenderMs": -28.91566264303178,
+          "renderSubmitMs": -27.058823494350204,
+          "prepareMs": -21.73913058970961,
+          "effectDrawMs": -37.50000005820766,
+          "effectEmissionMs": -19.99999821186065,
+          "bulletImagesMs": 100.0,
+          "hudAndAudioMs": -1.8626451603331873e-06
+        }
+      },
+      {
+        "count": 250,
+        "terrain": false,
+        "repeats": 3,
+        "versions": {
+          "v2": {
+            "p95MedianMs": {
+              "interval": 30.699999999254942,
+              "graphicsRenderMs": 15.299999997019768,
+              "renderSubmitMs": 15.800000000745058,
+              "prepareMs": 4.899999998509884,
+              "effectDrawMs": 1,
+              "effectEmissionMs": 0.6000000014901161,
+              "bulletImagesMs": 0.19999999925494194,
+              "hudAndAudioMs": 0.30000000074505806
+            },
+            "p95RoundsMs": {
+              "interval": [
+                30.699999999254942,
+                30.399999998509884,
+                31
+              ],
+              "graphicsRenderMs": [
+                15.199999999254942,
+                15.700000002980232,
+                15.299999997019768
+              ],
+              "renderSubmitMs": [
+                15.5,
+                16.199999999254942,
+                15.800000000745058
+              ],
+              "prepareMs": [
+                5.300000000745058,
+                4.899999998509884,
+                4.600000001490116
+              ],
+              "effectDrawMs": [
+                1.0999999977648258,
+                1,
+                0.9000000022351742
+              ],
+              "effectEmissionMs": [
+                0.6000000014901161,
+                0.6000000014901161,
+                0.7000000067055225
+              ],
+              "bulletImagesMs": [
+                0.19999999925494194,
+                0.19999999925494194,
+                0.19999999925494194
+              ],
+              "hudAndAudioMs": [
+                0.30000000074505806,
+                0.29999999701976776,
+                0.30000000074505806
+              ]
+            },
+            "slow33MedianFraction": 0.02010968921389397,
+            "slow33RoundsFraction": [
+              0.018050541516245487,
+              0.02010968921389397,
+              0.02527075812274368
+            ],
+            "slow50MedianFraction": 0,
+            "slow50RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "projectilePoolMisses": [
+              0,
+              0,
+              0
+            ],
+            "decorativeParticlePoolMisses": [
+              7200,
+              7177,
+              7240
+            ],
+            "maxParticles": [
+              643,
+              644,
+              645
+            ],
+            "maxProjectiles": [
+              365,
+              365,
+              365
+            ],
+            "droppedMs": [
+              0,
+              0,
+              0
+            ]
+          },
+          "v21": {
+            "p95MedianMs": {
+              "interval": 26.899999998509884,
+              "graphicsRenderMs": 13.400000005960464,
+              "renderSubmitMs": 14,
+              "prepareMs": 3.899999998509884,
+              "effectDrawMs": 0.6000000014901161,
+              "effectEmissionMs": 0.6000000014901161,
+              "bulletImagesMs": 0.20000000298023224,
+              "hudAndAudioMs": 0.20000000298023224
+            },
+            "p95RoundsMs": {
+              "interval": [
+                27.600000001490116,
+                26.899999998509884,
+                26.899999998509884
+              ],
+              "graphicsRenderMs": [
+                13.799999997019768,
+                13.400000005960464,
+                13.200000002980232
+              ],
+              "renderSubmitMs": [
+                14.199999995529652,
+                14,
+                13.599999994039536
+              ],
+              "prepareMs": [
+                3.600000001490116,
+                3.9000000059604645,
+                3.899999998509884
+              ],
+              "effectDrawMs": [
+                0.7000000029802322,
+                0.6000000014901161,
+                0.6000000014901161
+              ],
+              "effectEmissionMs": [
+                0.6000000014901161,
+                0.6000000014901161,
+                0.6000000014901161
+              ],
+              "bulletImagesMs": [
+                0.20000000298023224,
+                0.20000000298023224,
+                0.20000000298023224
+              ],
+              "hudAndAudioMs": [
+                0.20000000298023224,
+                0.20000000298023224,
+                0.20000000298023224
+              ]
+            },
+            "slow33MedianFraction": 0.0031645569620253164,
+            "slow33RoundsFraction": [
+              0.0031645569620253164,
+              0.004702194357366771,
+              0.003134796238244514
+            ],
+            "slow50MedianFraction": 0,
+            "slow50RoundsFraction": [
+              0,
+              0,
+              0
+            ],
+            "projectilePoolMisses": [
+              0,
+              0,
+              0
+            ],
+            "decorativeParticlePoolMisses": [
+              7159,
+              7188,
+              7181
+            ],
+            "maxParticles": [
+              643,
+              644,
+              645
+            ],
+            "maxProjectiles": [
+              365,
+              365,
+              363
+            ],
+            "droppedMs": [
+              0,
+              0,
+              0
+            ]
+          }
+        },
+        "changePercent": {
+          "interval": -12.37785016559375,
+          "graphicsRenderMs": -12.418300597577758,
+          "renderSubmitMs": -11.392405067469479,
+          "prepareMs": -20.408163271512358,
+          "effectDrawMs": -39.99999985098839,
+          "effectEmissionMs": 0.0,
+          "bulletImagesMs": 1.862645149230957e-06,
+          "hudAndAudioMs": -33.33333250549104
+        }
+      }
+    ],
+    "completeFinalComparisons": [
+      {
+        "count": 28,
+        "terrain": false,
+        "repeat": 0,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "9768f58d",
+          "rng": 1794934569869,
+          "damage": 8405,
+          "kills": 0,
+          "events": 1280,
+          "eventHash": "29f44a0e",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 28,
+          "queries": {
+            "separation": 16788,
+            "projectile": 26886
+          }
+        },
+        "candidateFinal": {
+          "checksum": "9768f58d",
+          "rng": 1794934569869,
+          "damage": 8405,
+          "kills": 0,
+          "events": 1280,
+          "eventHash": "29f44a0e",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 28,
+          "queries": {
+            "separation": 16788,
+            "projectile": 26886
+          }
+        }
+      },
+      {
+        "count": 28,
+        "terrain": false,
+        "repeat": 1,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "9768f58d",
+          "rng": 1794934569869,
+          "damage": 8405,
+          "kills": 0,
+          "events": 1280,
+          "eventHash": "29f44a0e",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 28,
+          "queries": {
+            "separation": 16788,
+            "projectile": 26886
+          }
+        },
+        "candidateFinal": {
+          "checksum": "9768f58d",
+          "rng": 1794934569869,
+          "damage": 8405,
+          "kills": 0,
+          "events": 1280,
+          "eventHash": "29f44a0e",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 28,
+          "queries": {
+            "separation": 16788,
+            "projectile": 26886
+          }
+        }
+      },
+      {
+        "count": 28,
+        "terrain": false,
+        "repeat": 2,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "9768f58d",
+          "rng": 1794934569869,
+          "damage": 8405,
+          "kills": 0,
+          "events": 1280,
+          "eventHash": "29f44a0e",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 28,
+          "queries": {
+            "separation": 16788,
+            "projectile": 26886
+          }
+        },
+        "candidateFinal": {
+          "checksum": "9768f58d",
+          "rng": 1794934569869,
+          "damage": 8405,
+          "kills": 0,
+          "events": 1280,
+          "eventHash": "29f44a0e",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 28,
+          "queries": {
+            "separation": 16788,
+            "projectile": 26886
+          }
+        }
+      },
+      {
+        "count": 100,
+        "terrain": true,
+        "repeat": 0,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "2f160529",
+          "rng": 5355498510341,
+          "damage": 20035,
+          "kills": 0,
+          "events": 3328,
+          "eventHash": "4aa40a9",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 100,
+          "queries": {
+            "separation": 245835,
+            "projectile": 59620
+          }
+        },
+        "candidateFinal": {
+          "checksum": "2f160529",
+          "rng": 5355498510341,
+          "damage": 20035,
+          "kills": 0,
+          "events": 3328,
+          "eventHash": "4aa40a9",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 100,
+          "queries": {
+            "separation": 245835,
+            "projectile": 59620
+          }
+        }
+      },
+      {
+        "count": 100,
+        "terrain": true,
+        "repeat": 1,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "2f160529",
+          "rng": 5355498510341,
+          "damage": 20035,
+          "kills": 0,
+          "events": 3328,
+          "eventHash": "4aa40a9",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 100,
+          "queries": {
+            "separation": 245835,
+            "projectile": 59620
+          }
+        },
+        "candidateFinal": {
+          "checksum": "2f160529",
+          "rng": 5355498510341,
+          "damage": 20035,
+          "kills": 0,
+          "events": 3328,
+          "eventHash": "4aa40a9",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 100,
+          "queries": {
+            "separation": 245835,
+            "projectile": 59620
+          }
+        }
+      },
+      {
+        "count": 100,
+        "terrain": true,
+        "repeat": 2,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "2f160529",
+          "rng": 5355498510341,
+          "damage": 20035,
+          "kills": 0,
+          "events": 3328,
+          "eventHash": "4aa40a9",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 100,
+          "queries": {
+            "separation": 245835,
+            "projectile": 59620
+          }
+        },
+        "candidateFinal": {
+          "checksum": "2f160529",
+          "rng": 5355498510341,
+          "damage": 20035,
+          "kills": 0,
+          "events": 3328,
+          "eventHash": "4aa40a9",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 100,
+          "queries": {
+            "separation": 245835,
+            "projectile": 59620
+          }
+        }
+      },
+      {
+        "count": 250,
+        "terrain": false,
+        "repeat": 0,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "6afb2d12",
+          "rng": 10861185344219,
+          "damage": 41775,
+          "kills": 0,
+          "events": 6118,
+          "eventHash": "853821ef",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 250,
+          "queries": {
+            "separation": 1429602,
+            "projectile": 74404
+          }
+        },
+        "candidateFinal": {
+          "checksum": "6afb2d12",
+          "rng": 10861185344219,
+          "damage": 41775,
+          "kills": 0,
+          "events": 6118,
+          "eventHash": "853821ef",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 250,
+          "queries": {
+            "separation": 1429602,
+            "projectile": 74404
+          }
+        }
+      },
+      {
+        "count": 250,
+        "terrain": false,
+        "repeat": 1,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "6afb2d12",
+          "rng": 10861185344219,
+          "damage": 41775,
+          "kills": 0,
+          "events": 6118,
+          "eventHash": "853821ef",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 250,
+          "queries": {
+            "separation": 1429602,
+            "projectile": 74404
+          }
+        },
+        "candidateFinal": {
+          "checksum": "6afb2d12",
+          "rng": 10861185344219,
+          "damage": 41775,
+          "kills": 0,
+          "events": 6118,
+          "eventHash": "853821ef",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 250,
+          "queries": {
+            "separation": 1429602,
+            "projectile": 74404
+          }
+        }
+      },
+      {
+        "count": 250,
+        "terrain": false,
+        "repeat": 2,
+        "completeFinalEqual": true,
+        "differences": [],
+        "baselineFinal": {
+          "checksum": "6afb2d12",
+          "rng": 10861185344219,
+          "damage": 41775,
+          "kills": 0,
+          "events": 6118,
+          "eventHash": "853821ef",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 250,
+          "queries": {
+            "separation": 1429602,
+            "projectile": 74404
+          }
+        },
+        "candidateFinal": {
+          "checksum": "6afb2d12",
+          "rng": 10861185344219,
+          "damage": 41775,
+          "kills": 0,
+          "events": 6118,
+          "eventHash": "853821ef",
+          "wallet": {
+            "coins": 8,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "enemyCount": 250,
+          "queries": {
+            "separation": 1429602,
+            "projectile": 74404
+          }
+        }
+      }
+    ],
+    "hashChanges": [
+      "src/audio/stems.ts",
+      "src/audio/synth.ts",
+      "src/effects/bursts.ts",
+      "src/effects/particles.ts",
+      "src/game/scene.ts",
+      "src/render/actors.ts",
+      "src/render/projectile-sprites.ts",
+      "src/trial/TrialApp.tsx",
+      "src/trial/TrialArena.tsx",
+      "src/trial/trial.css",
+      "src/ui/GameApp.tsx",
+      "src/ui/SettingsPanel.tsx"
+    ]
+  },
+  "behavior": {
+    "completeDocumentEqual": true,
+    "differences": [],
+    "records": [
+      {
+        "weapon": "arc",
+        "mode": "grid",
+        "checkpoints": 10,
+        "events": 59,
+        "final": {
+          "kills": 40,
+          "damage": 960,
+          "wallet": {
+            "coins": 19,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "rng": 194146049307
+        }
+      },
+      {
+        "weapon": "arc",
+        "mode": "brute",
+        "checkpoints": 10,
+        "events": 59,
+        "final": {
+          "kills": 40,
+          "damage": 960,
+          "wallet": {
+            "coins": 19,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "rng": 194146049307
+        }
+      },
+      {
+        "weapon": "sword",
+        "mode": "grid",
+        "checkpoints": 10,
+        "events": 64,
+        "final": {
+          "kills": 38,
+          "damage": 946,
+          "wallet": {
+            "coins": 15,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "rng": 192314483494
+        }
+      },
+      {
+        "weapon": "sword",
+        "mode": "brute",
+        "checkpoints": 10,
+        "events": 64,
+        "final": {
+          "kills": 38,
+          "damage": 946,
+          "wallet": {
+            "coins": 15,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "rng": 192314483494
+        }
+      },
+      {
+        "weapon": "cannon",
+        "mode": "grid",
+        "checkpoints": 10,
+        "events": 50,
+        "final": {
+          "kills": 39,
+          "damage": 954,
+          "wallet": {
+            "coins": 16,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "rng": 86083666340
+        }
+      },
+      {
+        "weapon": "cannon",
+        "mode": "brute",
+        "checkpoints": 10,
+        "events": 50,
+        "final": {
+          "kills": 39,
+          "damage": 954,
+          "wallet": {
+            "coins": 16,
+            "keys": 1,
+            "bombs": 2,
+            "tonics": 1,
+            "shards": 0
+          },
+          "rng": 86083666340
+        }
+      }
+    ]
+  },
+  "experiment": {
+    "completeDocumentEqual": true,
+    "differences": [],
+    "scriptSha256": "07c5a21d8736f54ea67fc8bd65918f752a2a6f5a45f05531becae570d3ec1dc5",
+    "policy": "fixed-step input policy, no world writes after creation; same per-weapon policy for both contracts; no repair; stage transitions through public session methods",
+    "states": {
+      "failed": 8,
+      "finished": 10
+    },
+    "rows": [
+      {
+        "weapon": "arc",
+        "route": "supply",
+        "seed": 73129,
+        "inputs": 2301,
+        "playingTicks": 2000,
+        "inputHash": "eddb4b3a",
+        "checksum": "8bf05fa2",
+        "state": "failed",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "arc",
+        "route": "supply",
+        "seed": 41717,
+        "inputs": 2147,
+        "playingTicks": 1846,
+        "inputHash": "1b89f17d",
+        "checksum": "dc6ace56",
+        "state": "failed",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "arc",
+        "route": "supply",
+        "seed": 90311,
+        "inputs": 2077,
+        "playingTicks": 1776,
+        "inputHash": "a8c54109",
+        "checksum": "2a35f38b",
+        "state": "failed",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "arc",
+        "route": "overload",
+        "seed": 73129,
+        "inputs": 2327,
+        "playingTicks": 2026,
+        "inputHash": "bcf4cf55",
+        "checksum": "3ca78510",
+        "state": "failed",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "arc",
+        "route": "overload",
+        "seed": 41717,
+        "inputs": 2101,
+        "playingTicks": 1800,
+        "inputHash": "a6c56e53",
+        "checksum": "293e81e7",
+        "state": "failed",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "arc",
+        "route": "overload",
+        "seed": 90311,
+        "inputs": 2131,
+        "playingTicks": 1830,
+        "inputHash": "1a34318e",
+        "checksum": "e0762f53",
+        "state": "failed",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "sword",
+        "route": "supply",
+        "seed": 73129,
+        "inputs": 2614,
+        "playingTicks": 2313,
+        "inputHash": "4a1d929c",
+        "checksum": "23522e81",
+        "state": "finished",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "sword",
+        "route": "supply",
+        "seed": 41717,
+        "inputs": 2425,
+        "playingTicks": 2124,
+        "inputHash": "ea179e96",
+        "checksum": "5755b7d1",
+        "state": "finished",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "sword",
+        "route": "supply",
+        "seed": 90311,
+        "inputs": 2514,
+        "playingTicks": 2213,
+        "inputHash": "f031ca84",
+        "checksum": "296099a5",
+        "state": "finished",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "sword",
+        "route": "overload",
+        "seed": 73129,
+        "inputs": 2955,
+        "playingTicks": 2654,
+        "inputHash": "4debc42d",
+        "checksum": "e796bed7",
+        "state": "finished",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "sword",
+        "route": "overload",
+        "seed": 41717,
+        "inputs": 2481,
+        "playingTicks": 2180,
+        "inputHash": "507c36ba",
+        "checksum": "4db82c23",
+        "state": "finished",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "sword",
+        "route": "overload",
+        "seed": 90311,
+        "inputs": 2604,
+        "playingTicks": 2303,
+        "inputHash": "a5940137",
+        "checksum": "9f4c58d4",
+        "state": "finished",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "cannon",
+        "route": "supply",
+        "seed": 73129,
+        "inputs": 2637,
+        "playingTicks": 2336,
+        "inputHash": "7ebffa7a",
+        "checksum": "b5026402",
+        "state": "finished",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "cannon",
+        "route": "supply",
+        "seed": 41717,
+        "inputs": 2543,
+        "playingTicks": 2242,
+        "inputHash": "4657ffd",
+        "checksum": "c2df279f",
+        "state": "failed",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "cannon",
+        "route": "supply",
+        "seed": 90311,
+        "inputs": 2643,
+        "playingTicks": 2342,
+        "inputHash": "d898c69a",
+        "checksum": "240b1136",
+        "state": "finished",
+        "healthPaid": 0,
+        "earnedCapacity": 0
+      },
+      {
+        "weapon": "cannon",
+        "route": "overload",
+        "seed": 73129,
+        "inputs": 2490,
+        "playingTicks": 2189,
+        "inputHash": "b9081e8",
+        "checksum": "b6947553",
+        "state": "finished",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "cannon",
+        "route": "overload",
+        "seed": 41717,
+        "inputs": 2098,
+        "playingTicks": 1797,
+        "inputHash": "7bbc36bd",
+        "checksum": "d8455c2a",
+        "state": "failed",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      },
+      {
+        "weapon": "cannon",
+        "route": "overload",
+        "seed": 90311,
+        "inputs": 2532,
+        "playingTicks": 2231,
+        "inputHash": "2508130a",
+        "checksum": "0ccb54ae",
+        "state": "finished",
+        "healthPaid": 20,
+        "earnedCapacity": 2
+      }
+    ]
+  },
+  "verification": {
+    "unit": {
+      "reported": {
+        "numTotalTestSuites": 40,
+        "numPassedTestSuites": 40,
+        "numFailedTestSuites": 0,
+        "numTotalTests": 245,
+        "numPassedTests": 245,
+        "numFailedTests": 0,
+        "numPendingTests": 0,
+        "numTodoTests": 0,
+        "success": true
+      },
+      "testResultFiles": 25,
+      "assertionStatusCounts": {
+        "passed": 245
+      },
+      "files": [
+        {
+          "file": "tests/activity.test.ts",
+          "assertions": 30,
+          "status": "passed"
+        },
+        {
+          "file": "tests/audio-budget.test.ts",
+          "assertions": 1,
+          "status": "passed"
+        },
+        {
+          "file": "tests/audio-lifecycle.test.ts",
+          "assertions": 1,
+          "status": "passed"
+        },
+        {
+          "file": "tests/audio-stems.test.ts",
+          "assertions": 6,
+          "status": "passed"
+        },
+        {
+          "file": "tests/coach.test.ts",
+          "assertions": 13,
+          "status": "passed"
+        },
+        {
+          "file": "tests/combat-feel.test.ts",
+          "assertions": 7,
+          "status": "passed"
+        },
+        {
+          "file": "tests/combat.test.ts",
+          "assertions": 18,
+          "status": "passed"
+        },
+        {
+          "file": "tests/content.test.ts",
+          "assertions": 9,
+          "status": "passed"
+        },
+        {
+          "file": "tests/debug-session.test.ts",
+          "assertions": 4,
+          "status": "passed"
+        },
+        {
+          "file": "tests/decision-lab.test.ts",
+          "assertions": 5,
+          "status": "passed"
+        },
+        {
+          "file": "tests/economy.test.ts",
+          "assertions": 15,
+          "status": "passed"
+        },
+        {
+          "file": "tests/field-guide.test.ts",
+          "assertions": 6,
+          "status": "passed"
+        },
+        {
+          "file": "tests/input.test.ts",
+          "assertions": 10,
+          "status": "passed"
+        },
+        {
+          "file": "tests/pilgrimage.test.ts",
+          "assertions": 18,
+          "status": "passed"
+        },
+        {
+          "file": "tests/progression.test.ts",
+          "assertions": 12,
+          "status": "passed"
+        },
+        {
+          "file": "tests/regressions.test.ts",
+          "assertions": 7,
+          "status": "passed"
+        },
+        {
+          "file": "tests/render-discs.test.ts",
+          "assertions": 3,
+          "status": "passed"
+        },
+        {
+          "file": "tests/replay.test.ts",
+          "assertions": 17,
+          "status": "passed"
+        },
+        {
+          "file": "tests/resonance.test.ts",
+          "assertions": 13,
+          "status": "passed"
+        },
+        {
+          "file": "tests/save-compatibility.test.ts",
+          "assertions": 4,
+          "status": "passed"
+        },
+        {
+          "file": "tests/spatial-grid.test.ts",
+          "assertions": 5,
+          "status": "passed"
+        },
+        {
+          "file": "tests/stability.test.ts",
+          "assertions": 5,
+          "status": "passed"
+        },
+        {
+          "file": "tests/trial.test.ts",
+          "assertions": 7,
+          "status": "passed"
+        },
+        {
+          "file": "tests/v2.test.ts",
+          "assertions": 20,
+          "status": "passed"
+        },
+        {
+          "file": "tests/weapons.test.ts",
+          "assertions": 9,
+          "status": "passed"
+        }
+      ]
+    },
+    "browserFirst": {
+      "stats": {
+        "startTime": "2026-09-18T05:09:46.904Z",
+        "duration": 70730.712,
+        "expected": 8,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "tests": [
+        {
+          "file": "audio-v21.spec.ts",
+          "title": "decoded region stems stay synchronized, switch intensity, and release after context recreation",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "audio-v21.spec.ts",
+          "title": "trial intermission owns music after canvas unmount; persistent blur, mute, resume and exit work",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "audio-v21.spec.ts",
+          "title": "missing music files keep gameplay playable through the oscillator fallback",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "resonance.spec.ts",
+          "title": "six resonance trials render their real projectile forms and preserve an existing run",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "resonance.spec.ts",
+          "title": "audio buses mute active voices, pause immediately, and survive context recreation",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "trial.spec.ts",
+          "title": "public build loop, real combat input, pause, protected exit and clean restart",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "trial.spec.ts",
+          "title": "editor repairs invalid input, accepts optional offer removal, and applies an isolated rule",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "v2.spec.ts",
+          "title": "v2 contract boundary UI, weapon lock, save isolation and small-screen layout",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        }
+      ],
+      "perFile": {
+        "audio-v21.spec.ts": 3,
+        "resonance.spec.ts": 2,
+        "trial.spec.ts": 2,
+        "v2.spec.ts": 1
+      }
+    },
+    "browserFinal": {
+      "stats": {
+        "startTime": "2026-09-18T05:12:52.388Z",
+        "duration": 74817.833,
+        "expected": 9,
+        "skipped": 0,
+        "unexpected": 0,
+        "flaky": 0
+      },
+      "errors": [],
+      "tests": [
+        {
+          "file": "audio-v21.spec.ts",
+          "title": "decoded region stems stay synchronized, switch intensity, and release after context recreation",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "audio-v21.spec.ts",
+          "title": "trial intermission owns music after canvas unmount; persistent blur, mute, resume and exit work",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "audio-v21.spec.ts",
+          "title": "missing music files keep gameplay playable through the oscillator fallback",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "combat-feel.spec.ts",
+          "title": "return-blade demo starts through the actual menu, changes the third attack and preserves the save",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "game.spec.ts",
+          "title": "settings and window blur freeze introductions; Escape only dismisses the dialog",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "game.spec.ts",
+          "title": "round 1: real keyboard, aim, shooting, dash, skills, pause and synthesized audio",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "game.spec.ts",
+          "title": "round 2: menu, draft, 40-card library, settings, route, elite, heal, save and resume",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "game.spec.ts",
+          "title": "round 3: two bosses, phase transition, defeat, restart and victory at 1920x1080",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        },
+        {
+          "file": "game.spec.ts",
+          "title": "mobile loads with controls guidance and no horizontal overflow",
+          "project": "",
+          "status": "expected",
+          "attempts": [
+            "passed"
+          ]
+        }
+      ],
+      "perFile": {
+        "audio-v21.spec.ts": 3,
+        "combat-feel.spec.ts": 1,
+        "game.spec.ts": 5
+      }
+    },
+    "distinctBrowserCases": 14,
+    "repeatedCases": [
+      {
+        "file": "audio-v21.spec.ts",
+        "title": "decoded region stems stay synchronized, switch intensity, and release after context recreation",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      },
+      {
+        "file": "audio-v21.spec.ts",
+        "title": "missing music files keep gameplay playable through the oscillator fallback",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      },
+      {
+        "file": "audio-v21.spec.ts",
+        "title": "trial intermission owns music after canvas unmount; persistent blur, mute, resume and exit work",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      }
+    ],
+    "earlyOnlyCases": [
+      {
+        "file": "resonance.spec.ts",
+        "title": "audio buses mute active voices, pause immediately, and survive context recreation",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      },
+      {
+        "file": "resonance.spec.ts",
+        "title": "six resonance trials render their real projectile forms and preserve an existing run",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      },
+      {
+        "file": "trial.spec.ts",
+        "title": "editor repairs invalid input, accepts optional offer removal, and applies an isolated rule",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      },
+      {
+        "file": "trial.spec.ts",
+        "title": "public build loop, real combat input, pause, protected exit and clean restart",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      },
+      {
+        "file": "v2.spec.ts",
+        "title": "v2 contract boundary UI, weapon lock, save isolation and small-screen layout",
+        "project": "",
+        "status": "expected",
+        "attempts": [
+          "passed"
+        ]
+      }
+    ],
+    "audioSamples": {
+      "samples": [
+        {
+          "family": "sanctum",
+          "intensity": 0,
+          "sources": 3,
+          "loading": 0,
+          "failed": [],
+          "decodedBytes": 23040000,
+          "starts": [
+            0.025,
+            0.025,
+            0.025
+          ],
+          "offset": 0,
+          "gains": [
+            0.74,
+            0,
+            0
+          ],
+          "levels": [
+            0,
+            0,
+            0
+          ]
+        },
+        {
+          "family": "grove",
+          "intensity": 1,
+          "sources": 3,
+          "loading": 0,
+          "failed": [],
+          "decodedBytes": 49371432,
+          "starts": [
+            0.025,
+            0.025,
+            0.025
+          ],
+          "offset": 0,
+          "gains": [
+            0.74,
+            0.7,
+            0.08
+          ],
+          "levels": [
+            0.7369403839111328,
+            0.6326783299446106,
+            0.07230611145496368
+          ]
+        },
+        {
+          "family": "foundry",
+          "intensity": 1,
+          "sources": 3,
+          "loading": 0,
+          "failed": [],
+          "decodedBytes": 46080000,
+          "starts": [
+            1.865,
+            1.865,
+            1.865
+          ],
+          "offset": 0,
+          "gains": [
+            0.74,
+            0.7,
+            0.08
+          ],
+          "levels": [
+            0.7380809783935547,
+            0.6981827020645142,
+            0.07979241013526917
+          ]
+        }
+      ],
+      "energy": {
+        "peak": 0.14079348742961884,
+        "rms": 0.03417385469265936
+      },
+      "errors": []
+    }
+  },
+  "limitations": [
+    "Two sequential batches, not randomized or interleaved across versions; environmental drift is not controlled.",
+    "Same recorded Windows device, CPU, integrated Intel UHD/ANGLE renderer, Edge/Chromium version, viewport and quality; one device only.",
+    "Muted DEV browser rendering tests exclude audible BGM/SFX cost; audio lifecycle/energy checks are separate and are not an audio-on performance benchmark.",
+    "Frame P95 is postrender-to-postrender wall time, not GPU time; renderSubmitMs includes graphicsRenderMs and excludes preparation/HUD. Their P95 values must not be added.",
+    "Median of three per-run P95 values; slow-frame statistic is median of three per-run proportions, not pooled-frame percentile/proportion.",
+    "Fixed simulation work is identical but number of display frames and cosmetic Math.random particles can vary. Decorative particles are bounded and dropped at saturation; simulated projectile pool misses remain zero.",
+    "Independent behavior runs have no renderer. Trial automation is a fixed input policy with 10 completions and 8 defeats, not a human win rate or balance conclusion.",
+    "Browser coverage is 8 cases in an earlier batch and 9 in the final batch, with 3 repeated audio cases: 14 unique cases, not one 14-case run. Five early-only cases were not rerun in the final batch.",
+    "No production/browser deployment check is included in this audit."
+  ],
+  "assertionSummary": {
+    "count": 379,
+    "passed": 379,
+    "failed": 0
+  },
+  "assertions": [
+    {
+      "name": "performance.environmentSame",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "performance.browserVersionSame",
+      "passed": true,
+      "actual": "153.0.4234.32",
+      "expected": "153.0.4234.32"
+    },
+    {
+      "name": "performance.benchmarkScriptHashSame",
+      "passed": true,
+      "actual": "6d80537a11f24c8c8504b7778a38a1ae232104e17af6b55e369dd674f5228d6d",
+      "expected": "6d80537a11f24c8c8504b7778a38a1ae232104e17af6b55e369dd674f5228d6d"
+    },
+    {
+      "name": "performance.devBenchmarkHashSame",
+      "passed": true,
+      "actual": "031c3b9a7c027363485010e9b0bdc59c25b6e9445197e3f36599dd09e05017e4",
+      "expected": "031c3b9a7c027363485010e9b0bdc59c25b6e9445197e3f36599dd09e05017e4"
+    },
+    {
+      "name": "v2.28.repeats",
+      "passed": true,
+      "actual": [
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "v2.28.0.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.28.0.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.28.0.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.28.0.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.0.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.28.0.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.28.0.recomputedP95.interval",
+      "passed": true,
+      "actual": 11,
+      "expected": 11
+    },
+    {
+      "name": "v2.28.0.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 2.899999998509884,
+      "expected": 2.899999998509884
+    },
+    {
+      "name": "v2.28.0.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 3.099999997764826,
+      "expected": 3.099999997764826
+    },
+    {
+      "name": "v2.28.0.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.2999999970197678,
+      "expected": 1.2999999970197678
+    },
+    {
+      "name": "v2.28.0.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v2.28.0.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v2.28.0.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.28.0.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.28.0.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.0.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.1.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.28.1.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.28.1.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.28.1.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.1.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.28.1.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.28.1.recomputedP95.interval",
+      "passed": true,
+      "actual": 13.5,
+      "expected": 13.5
+    },
+    {
+      "name": "v2.28.1.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 4.099999997764826,
+      "expected": 4.099999997764826
+    },
+    {
+      "name": "v2.28.1.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 4.200000002980232,
+      "expected": 4.200000002980232
+    },
+    {
+      "name": "v2.28.1.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.2999999970197678,
+      "expected": 1.2999999970197678
+    },
+    {
+      "name": "v2.28.1.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.5999999977648258,
+      "expected": 0.5999999977648258
+    },
+    {
+      "name": "v2.28.1.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v2.28.1.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.28.1.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.28.1.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.1.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.2.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.28.2.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.28.2.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.28.2.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.2.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.28.2.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.28.2.recomputedP95.interval",
+      "passed": true,
+      "actual": 13.399999998509884,
+      "expected": 13.399999998509884
+    },
+    {
+      "name": "v2.28.2.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 4.300000000745058,
+      "expected": 4.300000000745058
+    },
+    {
+      "name": "v2.28.2.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 4.5,
+      "expected": 4.5
+    },
+    {
+      "name": "v2.28.2.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.300000000745058,
+      "expected": 1.300000000745058
+    },
+    {
+      "name": "v2.28.2.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.5999999977648258,
+      "expected": 0.5999999977648258
+    },
+    {
+      "name": "v2.28.2.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.30000000074505806,
+      "expected": 0.30000000074505806
+    },
+    {
+      "name": "v2.28.2.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.28.2.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.28.2.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.28.2.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.repeats",
+      "passed": true,
+      "actual": [
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "v21.28.0.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.28.0.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.28.0.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.28.0.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.0.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.28.0.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.28.0.recomputedP95.interval",
+      "passed": true,
+      "actual": 9.899999998509884,
+      "expected": 9.899999998509884
+    },
+    {
+      "name": "v21.28.0.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 2.7000000029802322,
+      "expected": 2.7000000029802322
+    },
+    {
+      "name": "v21.28.0.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 3.0999999940395355,
+      "expected": 3.0999999940395355
+    },
+    {
+      "name": "v21.28.0.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.0999999940395355,
+      "expected": 1.0999999940395355
+    },
+    {
+      "name": "v21.28.0.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v21.28.0.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.30000000447034836,
+      "expected": 0.30000000447034836
+    },
+    {
+      "name": "v21.28.0.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.28.0.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v21.28.0.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.0.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.1.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.28.1.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.28.1.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.28.1.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.1.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.28.1.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.28.1.recomputedP95.interval",
+      "passed": true,
+      "actual": 11.199999995529652,
+      "expected": 11.199999995529652
+    },
+    {
+      "name": "v21.28.1.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "name": "v21.28.1.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 4.300000004470348,
+      "expected": 4.300000004470348
+    },
+    {
+      "name": "v21.28.1.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.2000000029802322,
+      "expected": 1.2000000029802322
+    },
+    {
+      "name": "v21.28.1.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v21.28.1.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v21.28.1.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.28.1.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.19999999552965164,
+      "expected": 0.19999999552965164
+    },
+    {
+      "name": "v21.28.1.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.1.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.2.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.28.2.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.28.2.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.28.2.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.2.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.28.2.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.28.2.recomputedP95.interval",
+      "passed": true,
+      "actual": 11.5,
+      "expected": 11.5
+    },
+    {
+      "name": "v21.28.2.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 3.600000001490116,
+      "expected": 3.600000001490116
+    },
+    {
+      "name": "v21.28.2.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 3.9000000059604645,
+      "expected": 3.9000000059604645
+    },
+    {
+      "name": "v21.28.2.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.1000000014901161,
+      "expected": 1.1000000014901161
+    },
+    {
+      "name": "v21.28.2.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v21.28.2.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.3999999985098839,
+      "expected": 0.3999999985098839
+    },
+    {
+      "name": "v21.28.2.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.28.2.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v21.28.2.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.28.2.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.28.0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.28.0.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.28.0.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.28.0.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.28.0.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.28.0.terrainBlocks",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.28.1",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.28.1.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.28.1.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.28.1.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.28.1.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.28.1.terrainBlocks",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.28.2",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.28.2.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.28.2.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.28.2.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.28.2.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.28.2.terrainBlocks",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.repeats",
+      "passed": true,
+      "actual": [
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "v2.100.0.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.100.0.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.100.0.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.100.0.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.0.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.100.0.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.100.0.recomputedP95.interval",
+      "passed": true,
+      "actual": 19.5,
+      "expected": 19.5
+    },
+    {
+      "name": "v2.100.0.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 7.699999999254942,
+      "expected": 7.699999999254942
+    },
+    {
+      "name": "v2.100.0.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "name": "v2.100.0.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 2.5,
+      "expected": 2.5
+    },
+    {
+      "name": "v2.100.0.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.8000000007450581,
+      "expected": 0.8000000007450581
+    },
+    {
+      "name": "v2.100.0.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "name": "v2.100.0.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.100.0.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.19999999925494194,
+      "expected": 0.19999999925494194
+    },
+    {
+      "name": "v2.100.0.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.0.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.1.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.100.1.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.100.1.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.100.1.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.1.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.100.1.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.100.1.recomputedP95.interval",
+      "passed": true,
+      "actual": 19.300000000745058,
+      "expected": 19.300000000745058
+    },
+    {
+      "name": "v2.100.1.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 8.299999997019768,
+      "expected": 8.299999997019768
+    },
+    {
+      "name": "v2.100.1.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 8.5,
+      "expected": 8.5
+    },
+    {
+      "name": "v2.100.1.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 2.300000000745058,
+      "expected": 2.300000000745058
+    },
+    {
+      "name": "v2.100.1.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.8999999985098839,
+      "expected": 0.8999999985098839
+    },
+    {
+      "name": "v2.100.1.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.4999999962747097,
+      "expected": 0.4999999962747097
+    },
+    {
+      "name": "v2.100.1.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.100.1.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.19999999925494194,
+      "expected": 0.19999999925494194
+    },
+    {
+      "name": "v2.100.1.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.1.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.2.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.100.2.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.100.2.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.100.2.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.100.2.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.100.2.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.100.2.recomputedP95.interval",
+      "passed": true,
+      "actual": 19.399999998509884,
+      "expected": 19.399999998509884
+    },
+    {
+      "name": "v2.100.2.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 8.299999997019768,
+      "expected": 8.299999997019768
+    },
+    {
+      "name": "v2.100.2.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 8.5,
+      "expected": 8.5
+    },
+    {
+      "name": "v2.100.2.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 2.300000000745058,
+      "expected": 2.300000000745058
+    },
+    {
+      "name": "v2.100.2.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.8000000007450581,
+      "expected": 0.8000000007450581
+    },
+    {
+      "name": "v2.100.2.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.4000000022351742,
+      "expected": 0.4000000022351742
+    },
+    {
+      "name": "v2.100.2.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v2.100.2.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.19999999925494194,
+      "expected": 0.19999999925494194
+    },
+    {
+      "name": "v2.100.2.slow33",
+      "passed": true,
+      "actual": 0.0009727626459143969,
+      "expected": 0.0009727626459143969
+    },
+    {
+      "name": "v2.100.2.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.repeats",
+      "passed": true,
+      "actual": [
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "v21.100.0.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.100.0.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.100.0.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.100.0.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.0.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.100.0.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.100.0.recomputedP95.interval",
+      "passed": true,
+      "actual": 17.799999997019768,
+      "expected": 17.799999997019768
+    },
+    {
+      "name": "v21.100.0.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 6.399999998509884,
+      "expected": 6.399999998509884
+    },
+    {
+      "name": "v21.100.0.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 6.699999995529652,
+      "expected": 6.699999995529652
+    },
+    {
+      "name": "v21.100.0.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 2,
+      "expected": 2
+    },
+    {
+      "name": "v21.100.0.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v21.100.0.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.4000000059604645,
+      "expected": 0.4000000059604645
+    },
+    {
+      "name": "v21.100.0.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.100.0.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.19999999552965164,
+      "expected": 0.19999999552965164
+    },
+    {
+      "name": "v21.100.0.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.0.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.1.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.100.1.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.100.1.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.100.1.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.1.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.100.1.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.100.1.recomputedP95.interval",
+      "passed": true,
+      "actual": 17.200000002980232,
+      "expected": 17.200000002980232
+    },
+    {
+      "name": "v21.100.1.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 5.899999998509884,
+      "expected": 5.899999998509884
+    },
+    {
+      "name": "v21.100.1.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 6.200000002980232,
+      "expected": 6.200000002980232
+    },
+    {
+      "name": "v21.100.1.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.7999999970197678,
+      "expected": 1.7999999970197678
+    },
+    {
+      "name": "v21.100.1.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "name": "v21.100.1.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "name": "v21.100.1.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.100.1.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.10000000149011612,
+      "expected": 0.10000000149011612
+    },
+    {
+      "name": "v21.100.1.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.1.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.2.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.100.2.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.100.2.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.100.2.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.2.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.100.2.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.100.2.recomputedP95.interval",
+      "passed": true,
+      "actual": 16.80000000447035,
+      "expected": 16.80000000447035
+    },
+    {
+      "name": "v21.100.2.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 5.799999997019768,
+      "expected": 5.799999997019768
+    },
+    {
+      "name": "v21.100.2.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 6,
+      "expected": 6
+    },
+    {
+      "name": "v21.100.2.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 1.7999999970197678,
+      "expected": 1.7999999970197678
+    },
+    {
+      "name": "v21.100.2.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.5,
+      "expected": 0.5
+    },
+    {
+      "name": "v21.100.2.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.4000000059604645,
+      "expected": 0.4000000059604645
+    },
+    {
+      "name": "v21.100.2.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.100.2.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.19999999552965164,
+      "expected": 0.19999999552965164
+    },
+    {
+      "name": "v21.100.2.slow33",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.100.2.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.100.0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.100.0.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.100.0.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.100.0.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.100.0.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.100.0.terrainBlocks",
+      "passed": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "name": "finalComplete.100.1",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.100.1.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.100.1.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.100.1.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.100.1.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.100.1.terrainBlocks",
+      "passed": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "name": "finalComplete.100.2",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.100.2.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.100.2.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.100.2.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.100.2.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.100.2.terrainBlocks",
+      "passed": true,
+      "actual": 4,
+      "expected": 4
+    },
+    {
+      "name": "v2.250.repeats",
+      "passed": true,
+      "actual": [
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "v2.250.0.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.250.0.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.250.0.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.250.0.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.250.0.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.250.0.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.250.0.recomputedP95.interval",
+      "passed": true,
+      "actual": 30.699999999254942,
+      "expected": 30.699999999254942
+    },
+    {
+      "name": "v2.250.0.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 15.199999999254942,
+      "expected": 15.199999999254942
+    },
+    {
+      "name": "v2.250.0.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 15.5,
+      "expected": 15.5
+    },
+    {
+      "name": "v2.250.0.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 5.300000000745058,
+      "expected": 5.300000000745058
+    },
+    {
+      "name": "v2.250.0.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 1.0999999977648258,
+      "expected": 1.0999999977648258
+    },
+    {
+      "name": "v2.250.0.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v2.250.0.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.19999999925494194,
+      "expected": 0.19999999925494194
+    },
+    {
+      "name": "v2.250.0.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.30000000074505806,
+      "expected": 0.30000000074505806
+    },
+    {
+      "name": "v2.250.0.slow33",
+      "passed": true,
+      "actual": 0.018050541516245487,
+      "expected": 0.018050541516245487
+    },
+    {
+      "name": "v2.250.0.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.250.1.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.250.1.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.250.1.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.250.1.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.250.1.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.250.1.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.250.1.recomputedP95.interval",
+      "passed": true,
+      "actual": 30.399999998509884,
+      "expected": 30.399999998509884
+    },
+    {
+      "name": "v2.250.1.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 15.700000002980232,
+      "expected": 15.700000002980232
+    },
+    {
+      "name": "v2.250.1.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 16.199999999254942,
+      "expected": 16.199999999254942
+    },
+    {
+      "name": "v2.250.1.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 4.899999998509884,
+      "expected": 4.899999998509884
+    },
+    {
+      "name": "v2.250.1.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "name": "v2.250.1.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v2.250.1.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.19999999925494194,
+      "expected": 0.19999999925494194
+    },
+    {
+      "name": "v2.250.1.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.29999999701976776,
+      "expected": 0.29999999701976776
+    },
+    {
+      "name": "v2.250.1.slow33",
+      "passed": true,
+      "actual": 0.02010968921389397,
+      "expected": 0.02010968921389397
+    },
+    {
+      "name": "v2.250.1.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v2.250.2.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v2.250.2.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v2.250.2.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v2.250.2.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v2.250.2.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v2.250.2.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v2.250.2.recomputedP95.interval",
+      "passed": true,
+      "actual": 31,
+      "expected": 31
+    },
+    {
+      "name": "v2.250.2.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 15.299999997019768,
+      "expected": 15.299999997019768
+    },
+    {
+      "name": "v2.250.2.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 15.800000000745058,
+      "expected": 15.800000000745058
+    },
+    {
+      "name": "v2.250.2.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 4.600000001490116,
+      "expected": 4.600000001490116
+    },
+    {
+      "name": "v2.250.2.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.9000000022351742,
+      "expected": 0.9000000022351742
+    },
+    {
+      "name": "v2.250.2.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.7000000067055225,
+      "expected": 0.7000000067055225
+    },
+    {
+      "name": "v2.250.2.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.19999999925494194,
+      "expected": 0.19999999925494194
+    },
+    {
+      "name": "v2.250.2.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.30000000074505806,
+      "expected": 0.30000000074505806
+    },
+    {
+      "name": "v2.250.2.slow33",
+      "passed": true,
+      "actual": 0.02527075812274368,
+      "expected": 0.02527075812274368
+    },
+    {
+      "name": "v2.250.2.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.250.repeats",
+      "passed": true,
+      "actual": [
+        0,
+        1,
+        2
+      ],
+      "expected": [
+        0,
+        1,
+        2
+      ]
+    },
+    {
+      "name": "v21.250.0.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.250.0.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.250.0.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.250.0.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.250.0.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.250.0.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.250.0.recomputedP95.interval",
+      "passed": true,
+      "actual": 27.600000001490116,
+      "expected": 27.600000001490116
+    },
+    {
+      "name": "v21.250.0.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 13.799999997019768,
+      "expected": 13.799999997019768
+    },
+    {
+      "name": "v21.250.0.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 14.199999995529652,
+      "expected": 14.199999995529652
+    },
+    {
+      "name": "v21.250.0.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 3.600000001490116,
+      "expected": 3.600000001490116
+    },
+    {
+      "name": "v21.250.0.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.7000000029802322,
+      "expected": 0.7000000029802322
+    },
+    {
+      "name": "v21.250.0.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v21.250.0.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.250.0.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.250.0.slow33",
+      "passed": true,
+      "actual": 0.0031645569620253164,
+      "expected": 0.0031645569620253164
+    },
+    {
+      "name": "v21.250.0.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.250.1.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.250.1.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.250.1.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.250.1.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.250.1.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.250.1.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.250.1.recomputedP95.interval",
+      "passed": true,
+      "actual": 26.899999998509884,
+      "expected": 26.899999998509884
+    },
+    {
+      "name": "v21.250.1.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 13.400000005960464,
+      "expected": 13.400000005960464
+    },
+    {
+      "name": "v21.250.1.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 14,
+      "expected": 14
+    },
+    {
+      "name": "v21.250.1.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 3.9000000059604645,
+      "expected": 3.9000000059604645
+    },
+    {
+      "name": "v21.250.1.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v21.250.1.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v21.250.1.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.250.1.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.250.1.slow33",
+      "passed": true,
+      "actual": 0.004702194357366771,
+      "expected": 0.004702194357366771
+    },
+    {
+      "name": "v21.250.1.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "v21.250.2.workload",
+      "passed": true,
+      "actual": [
+        120,
+        600,
+        720
+      ],
+      "expected": [
+        120,
+        600,
+        720
+      ]
+    },
+    {
+      "name": "v21.250.2.elapsed12",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "v21.250.2.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "v21.250.2.projectilePoolMisses",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "v21.250.2.muted",
+      "passed": true,
+      "actual": "muted",
+      "expected": "muted"
+    },
+    {
+      "name": "v21.250.2.nonlegacy",
+      "passed": true,
+      "actual": false,
+      "expected": false
+    },
+    {
+      "name": "v21.250.2.recomputedP95.interval",
+      "passed": true,
+      "actual": 26.899999998509884,
+      "expected": 26.899999998509884
+    },
+    {
+      "name": "v21.250.2.recomputedP95.graphicsRenderMs",
+      "passed": true,
+      "actual": 13.200000002980232,
+      "expected": 13.200000002980232
+    },
+    {
+      "name": "v21.250.2.recomputedP95.renderSubmitMs",
+      "passed": true,
+      "actual": 13.599999994039536,
+      "expected": 13.599999994039536
+    },
+    {
+      "name": "v21.250.2.recomputedP95.prepareMs",
+      "passed": true,
+      "actual": 3.899999998509884,
+      "expected": 3.899999998509884
+    },
+    {
+      "name": "v21.250.2.recomputedP95.effectDrawMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v21.250.2.recomputedP95.effectEmissionMs",
+      "passed": true,
+      "actual": 0.6000000014901161,
+      "expected": 0.6000000014901161
+    },
+    {
+      "name": "v21.250.2.recomputedP95.bulletImagesMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.250.2.recomputedP95.hudAndAudioMs",
+      "passed": true,
+      "actual": 0.20000000298023224,
+      "expected": 0.20000000298023224
+    },
+    {
+      "name": "v21.250.2.slow33",
+      "passed": true,
+      "actual": 0.003134796238244514,
+      "expected": 0.003134796238244514
+    },
+    {
+      "name": "v21.250.2.slow50",
+      "passed": true,
+      "actual": 0.0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.250.0",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.250.0.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.250.0.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.250.0.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.250.0.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.250.0.terrainBlocks",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.250.1",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.250.1.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.250.1.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.250.1.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.250.1.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.250.1.terrainBlocks",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "finalComplete.250.2",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "comparable.250.2.seed",
+      "passed": true,
+      "actual": 73129,
+      "expected": 73129
+    },
+    {
+      "name": "comparable.250.2.quality",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "comparable.250.2.renderer",
+      "passed": true,
+      "actual": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "expected": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)"
+    },
+    {
+      "name": "comparable.250.2.userAgent",
+      "passed": true,
+      "actual": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0",
+      "expected": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/153.0.0.0 Safari/537.36 Edg/153.0.0.0"
+    },
+    {
+      "name": "comparable.250.2.terrainBlocks",
+      "passed": true,
+      "actual": 0,
+      "expected": 0
+    },
+    {
+      "name": "behavior.completeDocumentEqual",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "behavior.oracle.arc",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "behavior.oracle.sword",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "behavior.oracle.cannon",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "experiment.completeDocumentEqual",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "unit.reportedTotals",
+      "passed": true,
+      "actual": [
+        245,
+        245,
+        0
+      ],
+      "expected": [
+        245,
+        245,
+        0
+      ]
+    },
+    {
+      "name": "unit.assertionStatusCounts",
+      "passed": true,
+      "actual": {
+        "equalObject": true
+      },
+      "expected": {
+        "equalObject": true
+      }
+    },
+    {
+      "name": "browserFirst.testCount",
+      "passed": true,
+      "actual": 8,
+      "expected": 8
+    },
+    {
+      "name": "browserFirst.stats",
+      "passed": true,
+      "actual": [
+        8,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        8,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "browserFirst.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "browserFirst.allAttemptsPassed",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "browserFinal.testCount",
+      "passed": true,
+      "actual": 9,
+      "expected": 9
+    },
+    {
+      "name": "browserFinal.stats",
+      "passed": true,
+      "actual": [
+        9,
+        0,
+        0,
+        0
+      ],
+      "expected": [
+        9,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "name": "browserFinal.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "browserFinal.allAttemptsPassed",
+      "passed": true,
+      "actual": true,
+      "expected": true
+    },
+    {
+      "name": "browser.uniqueCases",
+      "passed": true,
+      "actual": 14,
+      "expected": 14
+    },
+    {
+      "name": "browser.repeatedAudioCases",
+      "passed": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "name": "audio.errors",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "audio.sameStart.sanctum",
+      "passed": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "name": "audio.sources.sanctum",
+      "passed": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "name": "audio.failed.sanctum",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "audio.sameStart.grove",
+      "passed": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "name": "audio.sources.grove",
+      "passed": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "name": "audio.failed.grove",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    },
+    {
+      "name": "audio.sameStart.foundry",
+      "passed": true,
+      "actual": 1,
+      "expected": 1
+    },
+    {
+      "name": "audio.sources.foundry",
+      "passed": true,
+      "actual": 3,
+      "expected": 3
+    },
+    {
+      "name": "audio.failed.foundry",
+      "passed": true,
+      "actual": [],
+      "expected": []
+    }
+  ]
+}

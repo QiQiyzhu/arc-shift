@@ -34,6 +34,7 @@ export class ArcScene extends Phaser.Scene {
       ...this.renderMetrics,
       actorImages: this.actors?.count || 0,
       bulletImages: this.bullets?.count || 0,
+      burstImages: this.effects?.bursts.count || 0,
       children: this.children?.length || 0,
     };
   }
@@ -97,6 +98,7 @@ export class ArcScene extends Phaser.Scene {
   reducedMotion = false;
   arenaSkin?: 'observatory';
   release = () => {
+    this.effects?.dispose();
     this.actors?.dispose();
     this.actors = undefined;
     this.bullets?.dispose();
@@ -165,7 +167,7 @@ export class ArcScene extends Phaser.Scene {
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);
     this.unsubscribe = this.engine.world.bus.on((e) => {
-      this.effects.emit(e);
+      this.effects.emit(e, this.engine.world.player.angle);
       if (
         !this.reducedMotion &&
         (e.kind === 'crit' ||
@@ -312,7 +314,8 @@ export class ArcScene extends Phaser.Scene {
     }
     const illustrated =
       this.actors?.update(w, time / 1000, dt, this.reducedMotion) || false;
-    const hostileSprites = this.bullets?.update(w) || false;
+    const hostileSprites =
+      this.bullets?.update(w, this.effects.reduced) || false;
     drawActors(
       this.graphics,
       this.engine.world,

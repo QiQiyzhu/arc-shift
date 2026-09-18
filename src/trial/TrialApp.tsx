@@ -7,6 +7,8 @@ import {
   ArrowUpRight,
   Shield,
   Crosshair,
+  Volume2,
+  VolumeX,
 } from 'lucide-react';
 import { BuildTrialSession } from './session';
 import { DEFAULT_TRIAL, type TrialConfig } from './config';
@@ -62,6 +64,20 @@ export default function TrialApp({
     window.addEventListener('beforeunload', handler);
     return () => window.removeEventListener('beforeunload', handler);
   }, [session.state]);
+  useEffect(() => {
+    const update = () => {
+      if (session.state === 'planning' || session.state === 'contract')
+        sound.update(0.1, false, {
+          phase: 'menu',
+          kind: 'combat',
+          biome: 'sanctum',
+          bossPhase: 0,
+        });
+    };
+    update();
+    const timer = window.setInterval(update, 100);
+    return () => window.clearInterval(timer);
+  }, [session, sound]);
   function leave() {
     if (session.state === 'combat') {
       if (w.phase !== 'paused') session.engine.pause();
@@ -127,9 +143,29 @@ export default function TrialApp({
           ARC<span>{'//'}</span>SHIFT
         </a>
         <span>
-          THE ASTRAL FORGE <i>/</i> 星铸协议 · 2.0
+          THE ASTRAL FORGE <i>/</i> 星铸协议 · 2.1
         </span>
-        <button onClick={leave}>{onBack ? '返回配置' : '返回主菜单'}</button>
+        <div className="trial-header-actions">
+          <button
+            aria-label={
+              sound.settings.muted || !sound.context ? '开启声音' : '静音'
+            }
+            title={sound.settings.muted || !sound.context ? '开启声音' : '静音'}
+            onClick={() => {
+              const locked = !sound.context;
+              unlock();
+              sound.settings.muted = locked ? false : !sound.settings.muted;
+              refresh();
+            }}
+          >
+            {sound.settings.muted ? (
+              <VolumeX size={16} />
+            ) : (
+              <Volume2 size={16} />
+            )}
+          </button>
+          <button onClick={leave}>{onBack ? '返回配置' : '返回主菜单'}</button>
+        </div>
       </header>
       <nav className="trial-stages" aria-label="试炼进度">
         {session.config.stages.map((s, i) => (
@@ -186,6 +222,8 @@ export default function TrialApp({
                   aria-label={`选择${WEAPON_IDENTITY[id].name}`}
                   aria-pressed={w.weapon === id}
                   onClick={() => {
+                    unlock();
+                    sound.ui();
                     session.chooseWeapon(id);
                     refresh();
                   }}
@@ -246,6 +284,8 @@ export default function TrialApp({
                       onMouseEnter={() => setFocus(o.id)}
                       onFocus={() => setFocus(o.id)}
                       onClick={() => {
+                        unlock();
+                        sound.ui();
                         if (!session.toggle(o.id))
                           setMessage(
                             '检查剩余额度、槽位与前置协议；先撤下依赖它的协议再调整。',

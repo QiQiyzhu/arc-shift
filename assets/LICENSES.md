@@ -9,6 +9,7 @@
 | 悼亡林地 / 余烬铸庭地面 | ARC//SHIFT，使用 OpenAI image_gen 生成，2026-09-10 | `public/art/grove.webp`、`foundry.webp`；[原始提示](biome-prompts-v1.json) | 项目贡献者将其可授予的权利按根目录 MIT 提供 | 原创生成，未使用竞品图片作为输入；本地托管 |
 | 六格角色图集 | 继承上一开发会话已落盘的 AI 辅助角色素材 | `public/art/actors-source-v2.png`；本轮保留源图，运行时 chroma matte | 按项目既有素材政策分发；原始生成提示/回执未在交接目录找到，提交者应在正式参赛材料中如实披露并核对 | 本轮完成接入、回退、池化与视觉验证，未重新生成 |
 | 合成音效与四小节乐谱 | ARC//SHIFT project contributors | `src/audio/synth.ts`、`src/audio/score.ts`、`profiles.ts` | 本项目原创代码 | Web Audio 振荡器与生成噪声现场合成，无外部采样或商业音轨 |
+| v2.1 三区域、九层循环配乐 | ARC//SHIFT，AI辅助原创乐谱与程序合成，2026-09-18 | `public/audio/v21/*.ogg`；`assets/audio-v21/generator.py`与`metadata.json` | 项目贡献者将其可授予的权利按根目录MIT提供 | 原创动机、合成乐器与鼓组，无外部采样/商业音轨；48kHz立体声，三区域各8小节、3同步分轨；哈希与循环接缝实测保留 |
 | Space Grotesk | The Space Grotesk Project Authors / Florian Karsten | [Source](https://github.com/floriankarsten/space-grotesk) · `@fontsource/space-grotesk` | SIL OFL 1.1，完整文本见 `licenses/space-grotesk.txt` | 本地打包拉丁标题字体 |
 | Lucide icons | Lucide Icons and Contributors；部分源自 Cole Bemis / Feather | [Lucide](https://lucide.dev/license) | ISC；派生 Feather 图标 MIT，完整文本见 `licenses/lucide.txt` | 技能功能图标、界面控制 |
 | Phaser 3 | Richard Davey / Phaser Studio Inc. | [Phaser](https://github.com/phaserjs/phaser) | MIT，见 `licenses/phaser.txt` | 引擎运行时 |

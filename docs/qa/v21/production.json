@@ -1,0 +1,31 @@
+{
+  "production": true,
+  "viewport": [
+    1366,
+    768
+  ],
+  "errors": [],
+  "audio": [
+    {
+      "url": "http://127.0.0.1:4173/audio/v21/sanctum-bed.ogg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4173/audio/v21/sanctum-pulse.ogg",
+      "status": 200
+    },
+    {
+      "url": "http://127.0.0.1:4173/audio/v21/sanctum-drive.ogg",
+      "status": 200
+    }
+  ],
+  "checks": [
+    "main menu entry",
+    "trial canvas loads",
+    "three production OGG stems served successfully",
+    "real Escape pause",
+    "QA global absent",
+    "protected exit",
+    "DEV editor absent"
+  ]
+}

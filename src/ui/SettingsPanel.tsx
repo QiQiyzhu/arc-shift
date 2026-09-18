@@ -237,6 +237,8 @@ export function UtilityPanel({
             </div>
             {controls && <InputSettings controls={controls} />}
             <div className="settings-note">
+              音乐随区域与战斗变化；重炮和受击声会短暂突出。
+              <br />
               {engine.storageAvailable
                 ? '设置已自动保存'
                 : '浏览器存储不可用，设置在本次会话内有效。'}

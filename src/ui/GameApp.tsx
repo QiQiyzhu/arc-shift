@@ -239,7 +239,7 @@ export default function GameApp() {
           <span className="signal-dot" /> 本地行动 · 已就绪
         </div>
         <div className="top-actions">
-          <span className="version">ASTRAL / 2.0</span>
+          <span className="version">RESONANCE / 2.1</span>
           <button
             aria-label="打开战术教练"
             disabled={
@@ -286,7 +286,7 @@ export default function GameApp() {
             <img className="menu-keyart" src="/art/keyart-v2.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> THE ASTRAL FORGE · v2.0
+                <span /> THE ASTRAL FORGE · v2.1
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -338,7 +338,7 @@ export default function GameApp() {
                   onClick={() => location.assign('/build-trial')}
                 >
                   <span>
-                    星铸协议 <b>2.0 构筑远征</b>
+                    星铸协议 <b>2.1 构筑远征</b>
                   </span>
                   <span>
                     武装 → 合约 → 构筑 <ArrowRight size={17} />

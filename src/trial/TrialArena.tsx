@@ -3,9 +3,14 @@ import Phaser from 'phaser';
 import { ArcScene } from '../game/scene';
 import { Synth } from '../audio/synth';
 import type { BuildTrialSession } from './session';
+import { isBoss } from '../progression/catalog';
 declare global {
   interface Window {
-    buildTrialQA?: { session: BuildTrialSession; scene: ArcScene };
+    buildTrialQA?: {
+      session: BuildTrialSession;
+      scene: ArcScene;
+      sound: Synth;
+    };
   }
 }
 export function TrialArena({
@@ -41,7 +46,7 @@ export function TrialArena({
     const off = w.bus.on((e) => sound.event(e));
     s.onReady = () => {
       if (import.meta.env.DEV && new URLSearchParams(location.search).has('qa'))
-        window.buildTrialQA = { session, scene: s };
+        window.buildTrialQA = { session, scene: s, sound };
       notify.current();
     };
     s.onSuspend = () =>
@@ -49,8 +54,8 @@ export function TrialArena({
     s.onTick = () => {
       sound.update(1 / 60, w.phase === 'playing', {
         phase: w.phase,
-        kind: session.stage === 2 ? 'boss' : 'combat',
-        boss: session.stage === 2 ? 'warden' : undefined,
+        kind: w.boss ? 'boss' : 'combat',
+        boss: w.boss && isBoss(w.boss.kind) ? w.boss.kind : undefined,
         bossPhase: w.boss?.phase ?? 0,
         biome: 'sanctum',
       });

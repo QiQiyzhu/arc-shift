@@ -2,6 +2,7 @@ import type { EffectEvent } from '../core/events';
 import type { Phase, RoomKind, Biome, BossKind } from '../game/types';
 import { midi, scoreStep, stepSeconds } from './score';
 import { MUSIC, musicProfile } from './profiles';
+import { StemMusic } from './stems';
 export interface SoundSettings {
   master: number;
   music: number;
@@ -28,12 +29,37 @@ export class Synth {
   masterGain: GainNode | null = null;
   musicGain: GainNode | null = null;
   sfxGain: GainNode | null = null;
+  private musicDuck: GainNode | null = null;
+  private stems: StemMusic | null = null;
+  private foreground = true;
+  private duckUntil = 0;
+  private ducked = false;
+  private pan = 0;
+  private urgent = false;
+  private shotIndex = 0;
+  private onBlur = () => {
+    this.foreground = false;
+    this.stems?.pause();
+    this.syncMix(true);
+  };
+  private onFocus = () => {
+    this.foreground = !document.hidden;
+  };
+  private onVisibility = () => {
+    if (document.hidden) this.onBlur();
+    else this.onFocus();
+  };
   private active = new Set<Voice>();
   get voices() {
-    return this.active.size;
+    return this.active.size + (this.stems?.sourceCount ?? 0);
   }
   get musicVoices() {
-    return [...this.active].filter((v) => v.music).length;
+    let count = this.stems?.sourceCount ?? 0;
+    for (const voice of this.active) if (voice.music) count++;
+    return count;
+  }
+  get musicState() {
+    return this.stems?.diagnostics ?? null;
   }
   private noiseBuffer: AudioBuffer | null = null;
   private lastShot = -1;
@@ -50,6 +76,7 @@ export class Synth {
   private mixStamp = '';
   private wasPaused = false;
   unlock() {
+    this.foreground = !document.hidden;
     if (!this.context) {
       const c = new AudioContext();
       this.context = c;
@@ -59,6 +86,15 @@ export class Synth {
       this.masterGain = c.createGain();
       this.musicGain = c.createGain();
       this.sfxGain = c.createGain();
+      this.musicDuck = c.createGain();
+      this.musicDuck.connect(this.musicGain);
+      this.stems = new StemMusic(c, this.musicDuck);
+      this.foreground = !document.hidden;
+      this.duckUntil = 0;
+      this.ducked = false;
+      window.addEventListener('blur', this.onBlur);
+      window.addEventListener('focus', this.onFocus);
+      document.addEventListener('visibilitychange', this.onVisibility);
       const compressor = c.createDynamicsCompressor();
       compressor.threshold.value = -12;
       compressor.knee.value = 18;
@@ -132,15 +168,15 @@ export class Synth {
     const c = this.context;
     if (
       !c ||
-      this.active.size >= 30 ||
-      (music && [...this.active].filter((v) => v.music).length >= 12)
+      this.active.size >= (this.urgent ? 24 : 20) ||
+      (music && this.musicVoices >= 12)
     ) {
       source.disconnect();
       filter?.disconnect();
       return false;
     }
     const gain = c.createGain(),
-      bus = music ? this.musicGain : this.sfxGain;
+      bus = music ? this.musicDuck || this.musicGain : this.sfxGain;
     if (!bus) return false;
     gain.gain.setValueAtTime(0.0001, at);
     gain.gain.exponentialRampToValueAtTime(
@@ -152,10 +188,15 @@ export class Synth {
       source.connect(filter);
       filter.connect(gain);
     } else source.connect(gain);
-    gain.connect(bus);
+    const pan = !music && this.pan !== 0 ? c.createStereoPanner() : null;
+    if (pan) {
+      pan.pan.value = this.pan;
+      gain.connect(pan);
+      pan.connect(bus);
+    } else gain.connect(bus);
     const voice: Voice = {
       source,
-      nodes: filter ? [gain, filter] : [gain],
+      nodes: [gain, ...(filter ? [filter] : []), ...(pan ? [pan] : [])],
       music,
     };
     this.active.add(voice);
@@ -182,8 +223,9 @@ export class Synth {
       !c ||
       c.state !== 'running' ||
       this.settings.muted ||
-      this.voices >= 30 ||
-      (music && [...this.active].filter((v) => v.music).length >= 12)
+      this.active.size >= (this.urgent ? 24 : 20) ||
+      !this.foreground ||
+      (music && this.musicVoices >= 12)
     )
       return;
     const o = c.createOscillator();
@@ -211,7 +253,8 @@ export class Synth {
       !c ||
       c.state !== 'running' ||
       !this.noiseBuffer ||
-      this.voices >= 27 ||
+      this.active.size >= (this.urgent ? 24 : 20) ||
+      !this.foreground ||
       this.settings.muted
     )
       return;
@@ -223,29 +266,61 @@ export class Synth {
     this.connect(src, length, volume, music, at, 0.003, filter);
   }
   event(e: EffectEvent) {
+    // Four short-voice slots for danger cues, six for a region crossfade.
+    this.urgent =
+      e.kind === 'hurt' || e.kind === 'phase' || e.kind === 'victory';
     const now = this.context?.currentTime || 0;
+    this.pan = Math.max(-0.6, Math.min(0.6, (e.x - 640) / 850));
+    if (
+      e.kind === 'hurt' ||
+      e.kind === 'bomb' ||
+      e.kind === 'phase' ||
+      (e.kind === 'shot' && e.weapon === 'cannon')
+    )
+      this.duckUntil = now + 0.16;
     if (e.kind === 'shot') {
       if (now - this.lastShot < 0.08 || this.voices >= 25) return;
       this.lastShot = now;
+      const variation = [1, 1.018, 0.986, 1.008][this.shotIndex++ % 4];
       if (e.weapon === 'cannon') {
-        this.tone(155, 32, 0.28, 0.14, 'triangle');
-        this.noise(0.13, 0.08, 700);
+        this.tone(145 * variation, 38, 0.32, 0.2, 'sine');
+        this.tone(330, 82, 0.11, 0.055, 'triangle');
+        this.noise(0.12, 0.09, 520);
+        this.tone(850, 390, 0.045, 0.022, 'triangle', false, now + 0.065);
         return;
       }
       const sounds = {
         fire: [220, 65, 0.12, 'sawtooth'],
-        storm: [1250, 180, 0.055, 'square'],
+        storm: [1250, 280, 0.065, 'triangle'],
         frost: [1100, 880, 0.14, 'sine'],
         void: [170, 48, 0.19, 'sine'],
         shift: [420, 1250, 0.07, 'triangle'],
       } as const;
       const [f, end, length, type] = sounds[e.element || 'shift'];
-      this.tone(f, end, length, e.element === 'storm' ? 0.035 : 0.065, type);
+      this.tone(
+        f * variation,
+        end,
+        length,
+        e.element === 'storm' ? 0.05 : 0.075,
+        type,
+      );
+      this.tone(420 * variation, 210, 0.045, 0.027, 'triangle');
+      if (e.element === 'void' || e.element === 'shift')
+        this.tone(
+          1320 * variation,
+          760,
+          0.11,
+          0.019,
+          'sine',
+          false,
+          now + 0.012,
+        );
       if (e.element === 'fire') this.noise(0.04, 0.025, 800);
       if (e.element === 'frost') this.tone(1650, 1400, 0.09, 0.02);
     } else if (e.kind === 'slash') {
-      this.noise(0.13, 0.075, 2400);
-      this.tone(820, 240, 0.13, 0.045, 'triangle');
+      this.noise(0.16, 0.09, 1600);
+      this.tone(680, 180, 0.16, 0.065, 'triangle');
+      this.tone(1600, 660, 0.055, 0.025, 'sine', false, now + 0.025);
     } else if (e.kind === 'impact') {
       this.tone(115, 48, 0.045, 0.07, 'triangle');
       if (e.weapon === 'sword' && (e.amount ?? 0) >= 30) {
@@ -309,10 +384,29 @@ export class Synth {
     const c = this.context;
     if (!c) return;
     const paused =
+      !this.foreground ||
       mood?.phase === 'paused' ||
       mood?.phase === 'gameover' ||
       mood?.phase === 'victory';
     this.syncMix(paused);
+    if (this.musicDuck && this.ducked !== this.duckUntil > c.currentTime) {
+      this.ducked = this.duckUntil > c.currentTime;
+      this.musicDuck.gain.setTargetAtTime(
+        this.ducked ? 0.66 : 1,
+        c.currentTime,
+        this.ducked ? 0.025 : 0.18,
+      );
+    }
+    const stemActive =
+      this.stems?.update(
+        {
+          biome: mood?.biome,
+          boss: mood?.kind === 'boss' ? mood.boss : undefined,
+          bossPhase: mood?.bossPhase,
+          playing,
+        },
+        paused || this.settings.muted,
+      ) ?? false;
     if (c.state !== 'running') return;
     const boss = mood?.kind === 'boss' ? mood.boss : undefined;
     const roomKey = `${mood?.biome || 'sanctum'}/${boss || ''}`;
@@ -331,6 +425,24 @@ export class Synth {
     if (this.wasPaused || this.nextStep < c.currentTime - 0.25)
       this.nextStep = c.currentTime + 0.03;
     this.wasPaused = false;
+    if (stemActive) {
+      // Retire the oscillator fallback once decoded music is ready; SFX continue.
+      for (const voice of this.active)
+        if (voice.music) {
+          voice.source.onended = null;
+          try {
+            voice.source.stop();
+          } catch {
+            /* already ended */
+          }
+          voice.source.disconnect();
+          voice.nodes.forEach((n) => n.disconnect());
+          this.active.delete(voice);
+        }
+      this.score = requested;
+      this.nextStep = c.currentTime + 0.03;
+      return;
+    }
     const intensity = playing
       ? mood?.kind === 'boss'
         ? 2 + (mood.bossPhase > 1 ? 1 : 0)
@@ -365,11 +477,18 @@ export class Synth {
     }
   }
   ui() {
+    this.urgent = false;
+    this.pan = 0;
     this.tone(720, 960, 0.08, 0.06);
   }
   dispose() {
     const c = this.context;
     this.context = null;
+    window.removeEventListener('blur', this.onBlur);
+    window.removeEventListener('focus', this.onFocus);
+    document.removeEventListener('visibilitychange', this.onVisibility);
+    this.stems?.dispose();
+    this.stems = null;
     for (const v of this.active) {
       v.source.onended = null;
       try {
@@ -382,6 +501,7 @@ export class Synth {
     }
     this.active.clear();
     this.masterGain = this.musicGain = this.sfxGain = null;
+    this.musicDuck = null;
     this.noiseBuffer = null;
     if (c) void c.close().catch(() => {});
   }

@@ -249,6 +249,7 @@ export function drawActors(
       g.strokeCircle(b.x, b.y, b.radius + 5);
       g.lineBetween(b.x - b.radius - 9, b.y, b.x + b.radius + 9, b.y);
     }
+    if (hostileSprites) continue; // Friendly textures share the bounded sprite pool.
     const a = Math.atan2(b.vy, b.vx);
     if (!b.enemy && b.shape === 'lance') {
       const tail = 65;

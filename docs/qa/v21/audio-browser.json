@@ -1,0 +1,81 @@
+{
+  "samples": [
+    {
+      "family": "sanctum",
+      "intensity": 0,
+      "sources": 3,
+      "loading": 0,
+      "failed": [],
+      "decodedBytes": 23040000,
+      "starts": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "offset": 0,
+      "gains": [
+        0.74,
+        0,
+        0
+      ],
+      "levels": [
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "family": "grove",
+      "intensity": 1,
+      "sources": 3,
+      "loading": 0,
+      "failed": [],
+      "decodedBytes": 49371432,
+      "starts": [
+        0.025,
+        0.025,
+        0.025
+      ],
+      "offset": 0,
+      "gains": [
+        0.74,
+        0.7,
+        0.08
+      ],
+      "levels": [
+        0.7369403839111328,
+        0.6326783299446106,
+        0.07230611145496368
+      ]
+    },
+    {
+      "family": "foundry",
+      "intensity": 1,
+      "sources": 3,
+      "loading": 0,
+      "failed": [],
+      "decodedBytes": 46080000,
+      "starts": [
+        1.865,
+        1.865,
+        1.865
+      ],
+      "offset": 0,
+      "gains": [
+        0.74,
+        0.7,
+        0.08
+      ],
+      "levels": [
+        0.7380809783935547,
+        0.6981827020645142,
+        0.07979241013526917
+      ]
+    }
+  ],
+  "energy": {
+    "peak": 0.14079348742961884,
+    "rms": 0.03417385469265936
+  },
+  "errors": []
+}
