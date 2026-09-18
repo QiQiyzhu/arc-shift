@@ -1,3 +1,4 @@
 # Preserve the exact bytes of captured evidence and its hash-linked script.
 docs/qa/planning-portfolio/*.json -text whitespace=cr-at-eol
 docs/qa/planning-portfolio/*.cjs.txt -text
+docs/qa/v2/*.json -text whitespace=cr-at-eol

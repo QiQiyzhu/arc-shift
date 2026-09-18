@@ -5,6 +5,7 @@
 | ARC//SHIFT 名称、几何角色/敌人/Boss、竞技场、粒子、符文、Logo | ARC//SHIFT project contributors | `src/render`, `src/effects`, `public/favicon.svg` | 本项目原创代码；见根目录 LICENSE | 游戏画面 |
 | 圣所地面 / 裂隙主视觉 | ARC//SHIFT，使用 OpenAI image_gen 生成，2026-09-09 | `public/art/sanctum.webp`、`rift-keyart.webp`；[生成记录](../docs/art-direction-v02.md) | 项目贡献者将其可授予的权利按根目录 MIT 提供；不主张第三方作品权利 | 原创提示生成，无输入参考图片；运行时本地托管 |
 | 星铸观测台 | ARC//SHIFT，使用 OpenAI image_gen 生成，2026-09-18 | `public/art/observatory-v3.webp`；[原始提示与转换记录](observatory-prompt-v3.json) | 项目贡献者将其可授予的权利按根目录 MIT 提供；不主张第三方作品权利 | 无竞品图片输入；只转WebP格式，功能掩体由代码绘制 |
+| v2 星铸主视觉 / 守门人 | ARC//SHIFT，使用 OpenAI image_gen 生成，2026-09-18 | `public/art/keyart-v2.webp`、`guardian-v2.webp`；[提示与回执](v2-art-receipts.json) | 项目贡献者将其可授予的权利按根目录 MIT 提供；不主张第三方作品权利 | 原创提示，无竞品参考图；守门人源图真实透明，只转换WebP格式，运行时池化与姿态动画 |
 | 悼亡林地 / 余烬铸庭地面 | ARC//SHIFT，使用 OpenAI image_gen 生成，2026-09-10 | `public/art/grove.webp`、`foundry.webp`；[原始提示](biome-prompts-v1.json) | 项目贡献者将其可授予的权利按根目录 MIT 提供 | 原创生成，未使用竞品图片作为输入；本地托管 |
 | 六格角色图集 | 继承上一开发会话已落盘的 AI 辅助角色素材 | `public/art/actors-source-v2.png`；本轮保留源图，运行时 chroma matte | 按项目既有素材政策分发；原始生成提示/回执未在交接目录找到，提交者应在正式参赛材料中如实披露并核对 | 本轮完成接入、回退、池化与视觉验证，未重新生成 |
 | 合成音效与四小节乐谱 | ARC//SHIFT project contributors | `src/audio/synth.ts`、`src/audio/score.ts`、`profiles.ts` | 本项目原创代码 | Web Audio 振荡器与生成噪声现场合成，无外部采样或商业音轨 |

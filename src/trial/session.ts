@@ -2,7 +2,7 @@ import { Engine } from '../game/engine';
 import { blankSave } from '../core/save';
 import { deriveStats } from '../cards/system';
 import { makeRoom } from '../rooms/generator';
-import type { Input } from '../game/types';
+import type { Input, WeaponId } from '../game/types';
 import { DEFAULT_TRIAL, validateTrial, type TrialConfig } from './config';
 export interface TrialResult {
   stage: number;
@@ -18,15 +18,26 @@ export interface TrialResult {
   cards: string[];
   cost: number;
   repairSpent: number;
+  weapon: WeaponId;
+  contract: 'supply' | 'overload' | null;
+  contractReward: number;
+  capacityBefore: number;
+  earnedCapacity: number;
 }
 export class BuildTrialSession {
   readonly engine: Engine;
   readonly config: TrialConfig;
-  state: 'planning' | 'combat' | 'result' | 'finished' | 'failed' = 'planning';
+  state: 'planning' | 'contract' | 'combat' | 'result' | 'finished' | 'failed' =
+    'planning';
   stage = 0;
   cards: string[] = [];
   repairSpent = 0;
   repaired = false;
+  contract: 'supply' | 'overload' | null = null;
+  earnedCapacity = 0;
+  supplyRecovered = 0;
+  healthPaid = 0;
+  weaponLocked = false;
   results: TrialResult[] = [];
   ticks = 0;
   shots = 0;
@@ -44,8 +55,8 @@ export class BuildTrialSession {
     }));
     e.start(this.config.seed);
     e.world.scenario = 'build-trial';
-    e.world.weapon = 'arc';
-    e.world.forms = ['arc'];
+    e.world.weapon = this.config.weapons[0];
+    e.world.forms = [e.world.weapon];
     e.world.level = 3;
     e.world.wallet = { coins: 0, keys: 0, bombs: 0, tonics: 0, shards: 0 };
     e.world.phase = 'reward';
@@ -56,13 +67,66 @@ export class BuildTrialSession {
     if (!this.off)
       this.off = this.engine.world.bus.on((event) => {
         if (this.state === 'combat') {
-          if (event.kind === 'shot') this.shots++;
+          if (event.kind === 'shot' || event.kind === 'slash') this.shots++;
           if (event.kind === 'kill') this.kills++;
         }
       });
   }
   get capacity() {
-    return this.config.stages[this.stage].budget - this.repairSpent;
+    return (
+      this.config.stages[this.stage].budget +
+      (this.stage === 2 ? this.earnedCapacity : 0) -
+      this.repairSpent
+    );
+  }
+  chooseWeapon(weapon: WeaponId) {
+    if (
+      this.state !== 'planning' ||
+      this.weaponLocked ||
+      !this.config.weapons.includes(weapon)
+    )
+      return false;
+    this.engine.world.weapon = weapon;
+    this.engine.world.forms = [weapon];
+    return true;
+  }
+  chooseContract(choice: 'supply' | 'overload') {
+    const c = this.config.contract;
+    if (
+      this.state !== 'contract' ||
+      this.contract ||
+      !c ||
+      !['supply', 'overload'].includes(choice)
+    )
+      return false;
+    if (choice === 'overload' && this.engine.world.player.hp <= c.healthCost)
+      return false;
+    this.contract = choice;
+    if (choice === 'supply') {
+      const p = this.engine.world.player;
+      this.supplyRecovered = Math.min(c.supplyHealth, p.maxHp - p.hp);
+      p.hp += this.supplyRecovered;
+    } else {
+      this.healthPaid = c.healthCost;
+      this.engine.world.player.hp -= c.healthCost;
+    }
+    this.stage = 1;
+    this.repaired = false;
+    this.state = 'planning';
+    return true;
+  }
+  get enemies() {
+    const base = this.config.stages[this.stage].enemies.map((e) => ({
+      ...e,
+      elite: false,
+    }));
+    if (
+      this.stage === 1 &&
+      this.contract === 'overload' &&
+      this.config.contract
+    )
+      base.push({ ...this.config.contract.elite, elite: true });
+    return base;
   }
   get spent() {
     return this.cards.reduce(
@@ -122,6 +186,7 @@ export class BuildTrialSession {
   }
   start() {
     if (this.state !== 'planning' || !this.cards.length) return false;
+    this.weaponLocked = true;
     const e = this.engine,
       w = e.world,
       stage = this.config.stages[this.stage];
@@ -156,11 +221,11 @@ export class BuildTrialSession {
       zones: [],
     };
     this.applyCards();
-    for (const spec of stage.enemies) {
-      const enemy = w.spawn(spec.kind, spec.x, spec.y, false, true);
-      enemy.hp = enemy.maxHp = w.content.enemies.find(
-        (r) => r.id === spec.kind,
-      )!.params.hp;
+    for (const spec of this.enemies) {
+      const enemy = w.spawn(spec.kind, spec.x, spec.y, spec.elite, true);
+      enemy.hp = enemy.maxHp =
+        w.content.enemies.find((r) => r.id === spec.kind)!.params.hp *
+        (spec.elite ? 1.65 : 1);
     }
     if (
       stage.enemies.some((e) =>
@@ -198,6 +263,12 @@ export class BuildTrialSession {
   private settle(outcome: TrialResult['outcome']) {
     if (this.state !== 'combat') return;
     const w = this.engine.world;
+    const capacityBefore = this.capacity;
+    const contractReward =
+      outcome === 'clear' && this.stage === 1 && this.contract === 'overload'
+        ? this.config.contract!.rewardCapacity
+        : 0;
+    this.earnedCapacity += contractReward;
     this.results.push({
       stage: this.stage,
       name: this.config.stages[this.stage].name,
@@ -212,6 +283,11 @@ export class BuildTrialSession {
       cards: [...this.cards],
       cost: this.spent,
       repairSpent: this.repairSpent,
+      weapon: w.weapon,
+      contract: this.contract,
+      contractReward,
+      capacityBefore,
+      earnedCapacity: this.earnedCapacity,
     });
     this.state = outcome === 'clear' ? 'result' : 'failed';
     w.phase = outcome === 'clear' ? 'reward' : 'gameover';
@@ -226,6 +302,10 @@ export class BuildTrialSession {
   }
   next() {
     if (this.state !== 'result') return false;
+    if (this.stage === 0 && this.config.contract) {
+      this.state = 'contract';
+      return true;
+    }
     if (this.stage === 2) {
       this.state = 'finished';
       this.engine.world.phase = 'victory';
@@ -238,8 +318,14 @@ export class BuildTrialSession {
   }
   export() {
     return {
-      schemaVersion: 1,
+      schemaVersion: 2,
       kind: 'build-trial-results',
+      rulesVersion: '2.0-contract.2',
+      weapon: this.engine.world.weapon,
+      contract: this.contract,
+      supplyRecovered: this.supplyRecovered,
+      healthPaid: this.healthPaid,
+      earnedCapacity: this.earnedCapacity,
       config: structuredClone(this.config),
       results: structuredClone(this.results),
       state: this.state,

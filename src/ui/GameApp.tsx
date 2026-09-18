@@ -239,7 +239,7 @@ export default function GameApp() {
           <span className="signal-dot" /> 本地行动 · 已就绪
         </div>
         <div className="top-actions">
-          <span className="version">TACTICAL / 1.2</span>
+          <span className="version">ASTRAL / 2.0</span>
           <button
             aria-label="打开战术教练"
             disabled={
@@ -283,10 +283,10 @@ export default function GameApp() {
         <div className="vignette" />
         {w.phase === 'menu' && (
           <div className="menu-overlay">
-            <img className="menu-keyart" src="/art/rift-keyart.webp" alt="" />
+            <img className="menu-keyart" src="/art/keyart-v2.webp" alt="" />
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> THE LAST PILGRIMAGE · v1.2
+                <span /> THE ASTRAL FORGE · v2.0
               </div>
               <h1>
                 ARC<span>{'//'}</span>
@@ -295,10 +295,10 @@ export default function GameApp() {
               </h1>
               <div className="cn-title">
                 <span>奥 术 跃 迁</span>
-                <i>钟声尽头，仍有人在等。</i>
+                <i>力量有价，选择有回声。</i>
               </div>
               <p className="menu-description">
-                熔接圣剑、法器与重炮。改写你的下一次攻击。
+                选定武装，改写攻击。带着你的选择走向守门人。
               </p>
               {engine.save.checkpoint && (
                 <button
@@ -338,10 +338,10 @@ export default function GameApp() {
                   onClick={() => location.assign('/build-trial')}
                 >
                   <span>
-                    星铸协议 <b>构筑远征</b>
+                    星铸协议 <b>2.0 构筑远征</b>
                   </span>
                   <span>
-                    预算 → 战斗 → 重配 <ArrowRight size={17} />
+                    武装 → 合约 → 构筑 <ArrowRight size={17} />
                   </span>
                 </button>
                 <button

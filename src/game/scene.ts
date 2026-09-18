@@ -3,6 +3,8 @@ import { Engine } from './engine';
 import { Effects } from '../effects/particles';
 import { drawArena } from '../render/arena';
 import { drawActors } from '../render/actors';
+import { drawTelegraph } from '../render/telegraphs';
+import { strokeRing } from '../render/discs';
 import { drawTerrainStatic, drawTerrainZones } from '../render/terrain';
 import { ActorSprites } from '../render/actor-sprites';
 import { ProjectileSprites } from '../render/projectile-sprites';
@@ -121,7 +123,8 @@ export class ArcScene extends Phaser.Scene {
     this.engine = engine;
   }
   private arenaTexture(template = 0, biome = 'sanctum') {
-    if(this.arenaSkin&&this.textures.exists(this.arenaSkin))return this.arenaSkin;
+    if (this.arenaSkin && this.textures.exists(this.arenaSkin))
+      return this.arenaSkin;
     if (this.textures.exists(biome)) return biome;
     if (this.textures.exists('sanctum')) return 'sanctum';
     const key = `arena-floor-${template}`;
@@ -134,8 +137,10 @@ export class ArcScene extends Phaser.Scene {
     return key;
   }
   preload() {
-    if(this.arenaSkin)this.load.image('observatory','/art/observatory-v3.webp');
+    if (this.arenaSkin)
+      this.load.image('observatory', '/art/observatory-v3.webp');
     this.load.image('actors-chroma-v2', '/art/actors-source-v2.png');
+    this.load.image('guardian-v2', '/art/guardian-v2.webp');
     this.load.image('sanctum', '/art/sanctum.webp');
     this.load.image('grove', '/art/grove.webp');
     this.load.image('foundry', '/art/foundry.webp');
@@ -317,6 +322,26 @@ export class ArcScene extends Phaser.Scene {
       this.reducedMotion,
     );
     this.effects.draw(this.graphics, dt);
+    // Enemy intent is the final graphics pass, above friendly trails and bursts.
+    for (const enemy of w.enemies)
+      drawTelegraph(this.graphics, enemy, time / 1000, this.reducedMotion);
+    for (const hazard of w.hazards)
+      if (!hazard.friendly) {
+        this.graphics.lineStyle(2, 0xffa8b6, 0.85);
+        strokeRing(this.graphics, hazard.x, hazard.y, hazard.r, 0xffa8b6, 0.85);
+        this.graphics.lineBetween(
+          hazard.x - 7,
+          hazard.y,
+          hazard.x + 7,
+          hazard.y,
+        );
+        this.graphics.lineBetween(
+          hazard.x,
+          hazard.y - 7,
+          hazard.x,
+          hazard.y + 7,
+        );
+      }
     if (w.phase === 'playing') {
       // A stable contact ring locates the player even inside a full resonance burst.
       this.graphics.lineStyle(4, 0x081419, 0.95);

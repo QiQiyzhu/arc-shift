@@ -1,0 +1,152 @@
+{
+  "environment": {
+    "node": "v24.16.0",
+    "platform": "win32",
+    "cpu": "13th Gen Intel(R) Core(TM) i9-13900HX",
+    "logicalCpus": 32,
+    "memoryBytes": 16895016960
+  },
+  "browserVersion": "153.0.4234.32",
+  "rows": [
+    {
+      "count": 28,
+      "terrain": false,
+      "before": {
+        "p50": 6.900000002235174,
+        "p95": 12.100000001490116,
+        "p99": 19.600000001490116,
+        "slow33": 0,
+        "simulationP95": 0.7000000029802322,
+        "renderP95": 4.599999997764826,
+        "hudAudioP95": 0.10000000149011612,
+        "presentationP95": 1
+      },
+      "after": {
+        "p50": 6.900000002235174,
+        "p95": 13.399999998509884,
+        "p99": 18.900000002235174,
+        "slow33": 0,
+        "simulationP95": 0.8000000007450581,
+        "renderP95": 4.200000002980232,
+        "hudAudioP95": 0.10000000149011612,
+        "presentationP95": 1.2999999970197678
+      },
+      "identicalFinal": {
+        "checksum": "9768f58d",
+        "rng": 1794934569869,
+        "damage": 8405,
+        "kills": 0,
+        "events": 1280,
+        "eventHash": "29f44a0e",
+        "wallet": {
+          "coins": 8,
+          "keys": 1,
+          "bombs": 2,
+          "tonics": 1,
+          "shards": 0
+        },
+        "enemyCount": 28,
+        "queries": {
+          "separation": 16788,
+          "projectile": 26886
+        }
+      }
+    },
+    {
+      "count": 100,
+      "terrain": true,
+      "before": {
+        "p50": 8.199999999254942,
+        "p95": 19.399999998509884,
+        "p99": 23.400000002235174,
+        "slow33": 0.0009302325581395349,
+        "simulationP95": 1.1000000014901161,
+        "renderP95": 9.300000000745058,
+        "hudAudioP95": 0.19999999925494194,
+        "presentationP95": 1.7000000029802322
+      },
+      "after": {
+        "p50": 8.600000001490116,
+        "p95": 19.399999998509884,
+        "p99": 23.5,
+        "slow33": 0,
+        "simulationP95": 1.1000000014901161,
+        "renderP95": 8.5,
+        "hudAudioP95": 0.19999999925494194,
+        "presentationP95": 2.300000000745058
+      },
+      "identicalFinal": {
+        "checksum": "2f160529",
+        "rng": 5355498510341,
+        "damage": 20035,
+        "kills": 0,
+        "events": 3328,
+        "eventHash": "4aa40a9",
+        "wallet": {
+          "coins": 8,
+          "keys": 1,
+          "bombs": 2,
+          "tonics": 1,
+          "shards": 0
+        },
+        "enemyCount": 100,
+        "queries": {
+          "separation": 245835,
+          "projectile": 59620
+        }
+      }
+    },
+    {
+      "count": 250,
+      "terrain": false,
+      "before": {
+        "p50": 16,
+        "p95": 30.300000000745058,
+        "p99": 35.599999997764826,
+        "slow33": 0.02608695652173913,
+        "simulationP95": 1.800000000745058,
+        "renderP95": 18.600000001490116,
+        "hudAudioP95": 0.20000000298023224,
+        "presentationP95": 3.300000000745058
+      },
+      "after": {
+        "p50": 16.899999998509884,
+        "p95": 30.699999999254942,
+        "p99": 35.900000002235174,
+        "slow33": 0.02010968921389397,
+        "simulationP95": 2.100000001490116,
+        "renderP95": 15.800000000745058,
+        "hudAudioP95": 0.30000000074505806,
+        "presentationP95": 4.899999998509884
+      },
+      "identicalFinal": {
+        "checksum": "6afb2d12",
+        "rng": 10861185344219,
+        "damage": 41775,
+        "kills": 0,
+        "events": 6118,
+        "eventHash": "853821ef",
+        "wallet": {
+          "coins": 8,
+          "keys": 1,
+          "bombs": 2,
+          "tonics": 1,
+          "shards": 0
+        },
+        "enemyCount": 250,
+        "queries": {
+          "separation": 1429602,
+          "projectile": 74404
+        }
+      }
+    }
+  ],
+  "limits": [
+    "Sequential before/after batches, not randomized interleaved comparisons. Single device, three repetitions per workload.",
+    "DEV headless Edge, CPU submission and postrender intervals, not GPU duration or player FPS. Background OS activity not fully controlled.",
+    "Exactly 120 warmup + 600 measured world ticks, matching damage/RNG/events/wallet/checksum; additional raster art and animation are presentation-only.",
+    "A brief independent screenshot browser overlapped the opening baseline sample; raw per-run values retained, no statistical significance or universal improvement claim.",
+    "Synthetic high-HP pressure fixture; kill/drop behavior validated separately.",
+    "Separate tracing before/after the v2 drawing correction captures CPU/allocations/GC with tracing overhead; main throughput table is unprofiled."
+  ]
+}

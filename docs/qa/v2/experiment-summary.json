@@ -1,0 +1,182 @@
+[
+  {
+    "weapon": "arc",
+    "route": "supply",
+    "seed": 73129,
+    "state": "failed",
+    "ticks": 2000,
+    "hurt": 128,
+    "hp": 0,
+    "reward": 0
+  },
+  {
+    "weapon": "arc",
+    "route": "supply",
+    "seed": 41717,
+    "state": "failed",
+    "ticks": 1846,
+    "hurt": 128,
+    "hp": 0,
+    "reward": 0
+  },
+  {
+    "weapon": "arc",
+    "route": "supply",
+    "seed": 90311,
+    "state": "failed",
+    "ticks": 1776,
+    "hurt": 128,
+    "hp": 0,
+    "reward": 0
+  },
+  {
+    "weapon": "arc",
+    "route": "overload",
+    "seed": 73129,
+    "state": "failed",
+    "ticks": 2026,
+    "hurt": 110,
+    "hp": 0,
+    "reward": 2
+  },
+  {
+    "weapon": "arc",
+    "route": "overload",
+    "seed": 41717,
+    "state": "failed",
+    "ticks": 1800,
+    "hurt": 110,
+    "hp": 0,
+    "reward": 2
+  },
+  {
+    "weapon": "arc",
+    "route": "overload",
+    "seed": 90311,
+    "state": "failed",
+    "ticks": 1830,
+    "hurt": 110,
+    "hp": 0,
+    "reward": 2
+  },
+  {
+    "weapon": "sword",
+    "route": "supply",
+    "seed": 73129,
+    "state": "finished",
+    "ticks": 2313,
+    "hurt": 61,
+    "hp": 59,
+    "reward": 0
+  },
+  {
+    "weapon": "sword",
+    "route": "supply",
+    "seed": 41717,
+    "state": "finished",
+    "ticks": 2124,
+    "hurt": 39,
+    "hp": 81,
+    "reward": 0
+  },
+  {
+    "weapon": "sword",
+    "route": "supply",
+    "seed": 90311,
+    "state": "finished",
+    "ticks": 2213,
+    "hurt": 39,
+    "hp": 81,
+    "reward": 0
+  },
+  {
+    "weapon": "sword",
+    "route": "overload",
+    "seed": 73129,
+    "state": "finished",
+    "ticks": 2654,
+    "hurt": 44,
+    "hp": 56,
+    "reward": 2
+  },
+  {
+    "weapon": "sword",
+    "route": "overload",
+    "seed": 41717,
+    "state": "finished",
+    "ticks": 2180,
+    "hurt": 22,
+    "hp": 78,
+    "reward": 2
+  },
+  {
+    "weapon": "sword",
+    "route": "overload",
+    "seed": 90311,
+    "state": "finished",
+    "ticks": 2303,
+    "hurt": 22,
+    "hp": 78,
+    "reward": 2
+  },
+  {
+    "weapon": "cannon",
+    "route": "supply",
+    "seed": 73129,
+    "state": "finished",
+    "ticks": 2336,
+    "hurt": 44,
+    "hp": 76,
+    "reward": 0
+  },
+  {
+    "weapon": "cannon",
+    "route": "supply",
+    "seed": 41717,
+    "state": "failed",
+    "ticks": 2242,
+    "hurt": 128,
+    "hp": 0,
+    "reward": 0
+  },
+  {
+    "weapon": "cannon",
+    "route": "supply",
+    "seed": 90311,
+    "state": "finished",
+    "ticks": 2342,
+    "hurt": 22,
+    "hp": 98,
+    "reward": 0
+  },
+  {
+    "weapon": "cannon",
+    "route": "overload",
+    "seed": 73129,
+    "state": "finished",
+    "ticks": 2189,
+    "hurt": 44,
+    "hp": 56,
+    "reward": 2
+  },
+  {
+    "weapon": "cannon",
+    "route": "overload",
+    "seed": 41717,
+    "state": "failed",
+    "ticks": 1797,
+    "hurt": 110,
+    "hp": 0,
+    "reward": 2
+  },
+  {
+    "weapon": "cannon",
+    "route": "overload",
+    "seed": 90311,
+    "state": "finished",
+    "ticks": 2231,
+    "hurt": 22,
+    "hp": 78,
+    "reward": 2
+  }
+]

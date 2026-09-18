@@ -4,6 +4,13 @@
   max-width: 430px;
   gap: 12px 18px;
 }
+.menu-secondary .mode-entry:first-child {
+  border-color: #bc9c66;
+  background: linear-gradient(120deg, #302d25e8, #11252bef);
+}
+.menu-keyart {
+  object-position: 65% center;
+}
 .menu-secondary .mode-entry {
   display: flex;
   flex-direction: column;

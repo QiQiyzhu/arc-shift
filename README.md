@@ -1,5 +1,7 @@
 # ARC//SHIFT — Game Client Engineering
 
+**2026-09-18 · v2.0 星铸协议**：[直接进入构筑远征](https://arc-shift.black-kid-3047.chatgpt.site/build-trial) · [系统与数值设计](docs/v2-design.md) · [获奖作品参考核对](docs/v2-references.md)。新增三武装承诺、一次性补给／夺能合约与有效的末关资源取舍；更新主视觉、守门人、动作反馈和危险预警。保留主线、配置工具、旧回放和存档兼容。
+
 **[在线试玩](https://arc-shift.black-kid-3047.chatgpt.site/) · [五项目展示入口](https://arc-shift.black-kid-3047.chatgpt.site/portfolio/) · [A–G 工程交付](docs/delivery-v2.md) · [A–T 面试讲解](docs/interview-dossier.md) · [CI 与原始验收](docs/qa-report.md)**
 
 一个可直接在浏览器玩的原创动作构筑游戏：随机起始武器，用协议改写攻击，沿十二层路线管理资源、协议和遗器。v1.2 将战术教练、攻击变形与局部命中反馈接入现有工程。

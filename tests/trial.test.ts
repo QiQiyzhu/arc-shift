@@ -15,6 +15,11 @@ const input = {
   e: false,
 };
 const dt = 1 / 60;
+const legacyRules = {
+  ...DEFAULT_TRIAL,
+  contract: null,
+  stages: DEFAULT_TRIAL.stages.map((s, i) => ({ ...s, budget: [6, 9, 12][i] })),
+};
 function clear(s: BuildTrialSession) {
   const w = s.engine.world;
   w.phase = 'playing';
@@ -55,7 +60,7 @@ describe('build trial: economic and settlement boundaries', () => {
     s.dispose();
   });
   it('enforces price, slot, unlock and prerequisites without refund exploits', () => {
-    const s = new BuildTrialSession();
+    const s = new BuildTrialSession(legacyRules);
     expect(s.start()).toBe(false);
     expect(s.toggle('fire-fuel')).toBe(false);
     expect(s.toggle('fire-split')).toBe(true);
@@ -82,7 +87,7 @@ describe('build trial: economic and settlement boundaries', () => {
     s.dispose();
   });
   it('settles once through real damage, counts kills and avoids main-mode loot, XP and persistence', () => {
-    const s = new BuildTrialSession();
+    const s = new BuildTrialSession(legacyRules);
     s.activate();
     s.activate();
     s.toggle('ice-touch');
@@ -102,7 +107,7 @@ describe('build trial: economic and settlement boundaries', () => {
     s.dispose();
   });
   it('keeps injury and repair cost across stages; blocks empty-build repair softlocks', () => {
-    const s = new BuildTrialSession();
+    const s = new BuildTrialSession(legacyRules);
     s.toggle('ice-touch');
     s.start();
     clear(s);
@@ -142,7 +147,7 @@ describe('build trial: economic and settlement boundaries', () => {
     s.dispose();
   });
   it('accepts an actual projectile kill on the final allowed tick', () => {
-    const s = new BuildTrialSession();
+    const s = new BuildTrialSession(legacyRules);
     s.toggle('ice-touch');
     s.start();
     const w = s.engine.world;
@@ -161,7 +166,7 @@ describe('build trial: economic and settlement boundaries', () => {
     s.dispose();
   });
   it('prioritizes defeat and permits one final summary with detached export', () => {
-    const s = new BuildTrialSession();
+    const s = new BuildTrialSession(legacyRules);
     s.toggle('ice-touch');
     s.start();
     const w = s.engine.world;
@@ -172,7 +177,7 @@ describe('build trial: economic and settlement boundaries', () => {
     expect(s.results[0].outcome).toBe('defeated');
     expect(s.next()).toBe(false);
     s.dispose();
-    const success = new BuildTrialSession();
+    const success = new BuildTrialSession(legacyRules);
     success.toggle('ice-touch');
     for (let i = 0; i < 3; i++) {
       success.start();

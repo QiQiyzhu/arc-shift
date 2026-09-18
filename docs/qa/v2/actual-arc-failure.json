@@ -1,0 +1,733 @@
+{
+  "schemaVersion": 2,
+  "kind": "build-trial-results",
+  "rulesVersion": "2.0-contract.2",
+  "weapon": "arc",
+  "contract": "overload",
+  "supplyRecovered": 0,
+  "healthPaid": 20,
+  "earnedCapacity": 2,
+  "config": {
+    "schemaVersion": 2,
+    "weapons": [
+      "arc",
+      "sword",
+      "cannon"
+    ],
+    "contract": {
+      "supplyHealth": 25,
+      "healthCost": 20,
+      "rewardCapacity": 2,
+      "elite": {
+        "kind": "lancer",
+        "x": 640,
+        "y": 300
+      }
+    },
+    "seed": 812831,
+    "slots": 4,
+    "repairCost": 2,
+    "repairHealth": 35,
+    "content": {
+      "schemaVersion": 1,
+      "enemies": [
+        {
+          "id": "hunter",
+          "params": {
+            "hp": 130,
+            "speed": 100,
+            "damage": 9,
+            "radius": 17
+          }
+        },
+        {
+          "id": "sentry",
+          "params": {
+            "hp": 163,
+            "speed": 64,
+            "damage": 10,
+            "radius": 19
+          }
+        },
+        {
+          "id": "lancer",
+          "params": {
+            "hp": 238,
+            "speed": 70,
+            "damage": 17,
+            "radius": 22
+          }
+        },
+        {
+          "id": "weaver",
+          "params": {
+            "hp": 263,
+            "speed": 52,
+            "damage": 18,
+            "radius": 21
+          }
+        },
+        {
+          "id": "conduit",
+          "params": {
+            "hp": 86,
+            "speed": 70,
+            "damage": 7,
+            "radius": 18
+          }
+        },
+        {
+          "id": "warden",
+          "params": {
+            "hp": 4200,
+            "speed": 62,
+            "damage": 22,
+            "radius": 49
+          }
+        },
+        {
+          "id": "bomber",
+          "params": {
+            "hp": 115,
+            "speed": 62,
+            "damage": 16,
+            "radius": 21
+          }
+        },
+        {
+          "id": "cantor",
+          "params": {
+            "hp": 130,
+            "speed": 54,
+            "damage": 12,
+            "radius": 23
+          }
+        },
+        {
+          "id": "shade",
+          "params": {
+            "hp": 90,
+            "speed": 80,
+            "damage": 15,
+            "radius": 18
+          }
+        },
+        {
+          "id": "matron",
+          "params": {
+            "hp": 5200,
+            "speed": 48,
+            "damage": 20,
+            "radius": 48
+          }
+        },
+        {
+          "id": "forgemaster",
+          "params": {
+            "hp": 5400,
+            "speed": 56,
+            "damage": 22,
+            "radius": 50
+          }
+        },
+        {
+          "id": "oracle",
+          "params": {
+            "hp": 6500,
+            "speed": 55,
+            "damage": 24,
+            "radius": 52
+          }
+        }
+      ],
+      "weapons": [
+        {
+          "id": "arc",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1
+          }
+        },
+        {
+          "id": "sword",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1,
+            "range": 1,
+            "arc": 1
+          }
+        },
+        {
+          "id": "cannon",
+          "params": {
+            "damage": 1,
+            "cooldown": 1,
+            "projectileSpeed": 1,
+            "blast": 1
+          }
+        }
+      ],
+      "cards": [
+        {
+          "id": "fire-meteor",
+          "requires": null,
+          "params": {
+            "shotSize": 9,
+            "shotSpeed": 0.66,
+            "damage": 1.65,
+            "rate": 1.4
+          }
+        },
+        {
+          "id": "fire-bloom",
+          "requires": null,
+          "params": {
+            "fragment": 3
+          }
+        },
+        {
+          "id": "fire-ember",
+          "requires": null,
+          "params": {
+            "burn": 8
+          }
+        },
+        {
+          "id": "fire-fuel",
+          "requires": "fire-ember",
+          "params": {
+            "burn": 18
+          }
+        },
+        {
+          "id": "fire-funeral",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "fire-split",
+          "requires": null,
+          "params": {
+            "projectiles": 3,
+            "damage": 0.75
+          }
+        },
+        {
+          "id": "fire-blast",
+          "requires": null,
+          "params": {
+            "explosion": 1
+          }
+        },
+        {
+          "id": "fire-dash",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "storm-lance",
+          "requires": null,
+          "params": {
+            "shotSpeed": 2.4,
+            "pierce": 3,
+            "rate": 1.35,
+            "damage": 1.15
+          }
+        },
+        {
+          "id": "storm-familiar",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "storm-arc",
+          "requires": null,
+          "params": {
+            "chain": 2
+          }
+        },
+        {
+          "id": "storm-conduct",
+          "requires": "storm-arc",
+          "params": {
+            "chain": 2
+          }
+        },
+        {
+          "id": "storm-static",
+          "requires": "storm-arc",
+          "params": {}
+        },
+        {
+          "id": "storm-critical",
+          "requires": null,
+          "params": {
+            "crit": 0.22
+          }
+        },
+        {
+          "id": "storm-surge",
+          "requires": null,
+          "params": {
+            "rate": 0.78
+          }
+        },
+        {
+          "id": "storm-needle",
+          "requires": null,
+          "params": {
+            "pierce": 2
+          }
+        },
+        {
+          "id": "frost-wave",
+          "requires": null,
+          "params": {
+            "wave": 1
+          }
+        },
+        {
+          "id": "frost-fan",
+          "requires": null,
+          "params": {
+            "projectiles": 2,
+            "damage": 0.7
+          }
+        },
+        {
+          "id": "ice-touch",
+          "requires": null,
+          "params": {
+            "slow": 0.35
+          }
+        },
+        {
+          "id": "ice-brittle",
+          "requires": "ice-touch",
+          "params": {}
+        },
+        {
+          "id": "ice-shatter",
+          "requires": "ice-touch",
+          "params": {}
+        },
+        {
+          "id": "ice-pierce",
+          "requires": null,
+          "params": {
+            "pierce": 1,
+            "damage": 4
+          }
+        },
+        {
+          "id": "ice-shell",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "ice-prism",
+          "requires": null,
+          "params": {
+            "bounce": 2
+          }
+        },
+        {
+          "id": "void-orbit",
+          "requires": null,
+          "params": {
+            "pierce": 2,
+            "rate": 1.2
+          }
+        },
+        {
+          "id": "void-return",
+          "requires": null,
+          "params": {
+            "damage": 0.9
+          }
+        },
+        {
+          "id": "void-seek",
+          "requires": null,
+          "params": {
+            "homing": 1
+          }
+        },
+        {
+          "id": "void-horizon",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "void-execute",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "void-leech",
+          "requires": null,
+          "params": {
+            "lifesteal": 1
+          }
+        },
+        {
+          "id": "void-singularity",
+          "requires": null,
+          "params": {
+            "eCooldown": 0.65
+          }
+        },
+        {
+          "id": "void-echo",
+          "requires": null,
+          "params": {
+            "qCooldown": 0.65,
+            "damage": 4
+          }
+        },
+        {
+          "id": "shift-echo",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-rear",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-quick",
+          "requires": null,
+          "params": {
+            "dashCooldown": 0.7
+          }
+        },
+        {
+          "id": "shift-shield",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-nova",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-ice",
+          "requires": null,
+          "params": {
+            "slow": 0.35
+          }
+        },
+        {
+          "id": "shift-reload",
+          "requires": null,
+          "params": {}
+        },
+        {
+          "id": "shift-stride",
+          "requires": null,
+          "params": {
+            "speed": 1.18
+          }
+        }
+      ],
+      "encounters": [
+        {
+          "id": "standard",
+          "pool": [
+            "hunter",
+            "sentry",
+            "lancer"
+          ],
+          "params": {
+            "combatWaves": 3,
+            "eliteWaves": 4,
+            "challengeWaves": 5,
+            "interval": 9,
+            "baseCount": 4,
+            "eliteBonus": 3
+          }
+        }
+      ],
+      "bosses": [
+        {
+          "id": "warden",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "matron",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "forgemaster",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        },
+        {
+          "id": "oracle",
+          "params": {
+            "phase2At": 0.65,
+            "phase3At": 0.3,
+            "phaseRecovery": 1.8
+          }
+        }
+      ]
+    },
+    "offers": [
+      {
+        "id": "fire-ember",
+        "cost": 2,
+        "unlock": 0,
+        "role": "持续压制",
+        "tradeoff": "持续伤害需要时间结算，不能立即清除威胁。"
+      },
+      {
+        "id": "storm-arc",
+        "cost": 2,
+        "unlock": 0,
+        "role": "群体连锁",
+        "tradeoff": "附近没有额外目标时，连锁收益下降。"
+      },
+      {
+        "id": "ice-touch",
+        "cost": 1,
+        "unlock": 0,
+        "role": "争取空间",
+        "tradeoff": "提供减速，不直接提高单发基础伤害。"
+      },
+      {
+        "id": "fire-split",
+        "cost": 3,
+        "unlock": 0,
+        "role": "扇形覆盖",
+        "tradeoff": "每发伤害降至 75%，远处小目标可能只中一发。"
+      },
+      {
+        "id": "storm-surge",
+        "cost": 2,
+        "unlock": 0,
+        "role": "稳定射速",
+        "tradeoff": "更多射击需要更稳定的瞄准，不扩大覆盖范围。"
+      },
+      {
+        "id": "void-seek",
+        "cost": 2,
+        "unlock": 0,
+        "role": "修正弹道",
+        "tradeoff": "追踪不保证命中，仍受地形与目标移动影响。"
+      },
+      {
+        "id": "fire-meteor",
+        "cost": 3,
+        "unlock": 1,
+        "role": "重型弹体",
+        "tradeoff": "基础伤害提高，射击间隔与弹道速度同时付出代价。"
+      },
+      {
+        "id": "ice-pierce",
+        "cost": 2,
+        "unlock": 1,
+        "role": "直线穿透",
+        "tradeoff": "对单体没有额外穿透目标，不能把穿透次数当伤害倍率。"
+      },
+      {
+        "id": "fire-fuel",
+        "cost": 3,
+        "unlock": 2,
+        "role": "强化燃烧",
+        "tradeoff": "需先装备余烬，占用两个协议槽。"
+      }
+    ],
+    "stages": [
+      {
+        "name": "聚群试炼",
+        "purpose": "猎手靠近形成群体，检验覆盖、连锁与控制。",
+        "budget": 6,
+        "limit": 80,
+        "cover": false,
+        "enemies": [
+          {
+            "kind": "hunter",
+            "x": 440,
+            "y": 240
+          },
+          {
+            "kind": "hunter",
+            "x": 525,
+            "y": 205
+          },
+          {
+            "kind": "hunter",
+            "x": 640,
+            "y": 200
+          },
+          {
+            "kind": "hunter",
+            "x": 755,
+            "y": 205
+          },
+          {
+            "kind": "hunter",
+            "x": 840,
+            "y": 240
+          },
+          {
+            "kind": "sentry",
+            "x": 640,
+            "y": 160
+          }
+        ]
+      },
+      {
+        "name": "交叉火线",
+        "purpose": "冲锋逼迫移动；用掩体断开射线，再寻找输出位置。",
+        "budget": 9,
+        "limit": 100,
+        "cover": true,
+        "enemies": [
+          {
+            "kind": "lancer",
+            "x": 360,
+            "y": 205
+          },
+          {
+            "kind": "lancer",
+            "x": 920,
+            "y": 205
+          },
+          {
+            "kind": "sentry",
+            "x": 220,
+            "y": 350
+          },
+          {
+            "kind": "sentry",
+            "x": 1060,
+            "y": 350
+          },
+          {
+            "kind": "hunter",
+            "x": 510,
+            "y": 235
+          },
+          {
+            "kind": "hunter",
+            "x": 770,
+            "y": 235
+          },
+          {
+            "kind": "weaver",
+            "x": 640,
+            "y": 190
+          }
+        ]
+      },
+      {
+        "name": "守门人",
+        "purpose": "提前知道下一场是单体：继续对群，还是转向稳定单体？",
+        "budget": 9,
+        "limit": 120,
+        "cover": false,
+        "enemies": [
+          {
+            "kind": "warden",
+            "x": 640,
+            "y": 245
+          }
+        ]
+      }
+    ]
+  },
+  "results": [
+    {
+      "stage": 0,
+      "name": "聚群试炼",
+      "outcome": "clear",
+      "ticks": 230,
+      "damage": 813,
+      "damageTaken": 0,
+      "kills": 6,
+      "shots": 21,
+      "reactions": 7,
+      "hp": 120,
+      "cards": [
+        "fire-split",
+        "fire-ember",
+        "ice-touch"
+      ],
+      "cost": 6,
+      "repairSpent": 0,
+      "weapon": "arc",
+      "contract": null,
+      "contractReward": 0,
+      "capacityBefore": 6,
+      "earnedCapacity": 0
+    },
+    {
+      "stage": 1,
+      "name": "交叉火线",
+      "outcome": "clear",
+      "ticks": 680,
+      "damage": 1717.6999999999998,
+      "damageTaken": 22.1,
+      "kills": 8,
+      "shots": 62,
+      "reactions": 15,
+      "hp": 77.9,
+      "cards": [
+        "fire-split",
+        "fire-ember",
+        "ice-touch",
+        "storm-arc"
+      ],
+      "cost": 8,
+      "repairSpent": 0,
+      "weapon": "arc",
+      "contract": "overload",
+      "contractReward": 2,
+      "capacityBefore": 9,
+      "earnedCapacity": 2
+    },
+    {
+      "stage": 2,
+      "name": "守门人",
+      "outcome": "defeated",
+      "ticks": 788,
+      "damage": 2958,
+      "damageTaken": 88,
+      "kills": 0,
+      "shots": 66,
+      "reactions": 0,
+      "hp": 0,
+      "cards": [
+        "fire-ember",
+        "fire-meteor",
+        "storm-surge",
+        "fire-fuel"
+      ],
+      "cost": 10,
+      "repairSpent": 0,
+      "weapon": "arc",
+      "contract": "overload",
+      "contractReward": 0,
+      "capacityBefore": 11,
+      "earnedCapacity": 2
+    }
+  ],
+  "state": "failed",
+  "notice": "本次实战记录，不同阶段的敌人与支出不同，不能直接作为单卡强弱或真人研究结论。"
+}

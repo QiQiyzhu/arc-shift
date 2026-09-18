@@ -248,6 +248,10 @@ export class Synth {
       this.tone(820, 240, 0.13, 0.045, 'triangle');
     } else if (e.kind === 'impact') {
       this.tone(115, 48, 0.045, 0.07, 'triangle');
+      if (e.weapon === 'sword' && (e.amount ?? 0) >= 30) {
+        this.noise(0.08, 0.035, 1700);
+        this.tone(520, 180, 0.12, 0.025, 'triangle');
+      }
     } else if (e.kind === 'pickup') {
       if (now - this.lastHit < 0.07) return;
       this.lastHit = now;

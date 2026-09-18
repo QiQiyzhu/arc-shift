@@ -3,7 +3,7 @@ import type Phaser from 'phaser';
 /** Presentation-only baseline switch, ignored by the production build. */
 export const renderDiagnostics = { legacyDiscs: false, legacyLabels: false };
 export const DISC_ERROR = 0.35; // 1280×720 game coordinates, not physical pixels.
-const kernels = [8, 12, 16, 24, 32].map((n) => {
+const kernels = [8, 12, 16, 24, 32, 48, 64, 96].map((n) => {
   const points = new Float64Array((n + 1) * 2);
   for (let i = 0; i < n; i++) {
     points[i * 2] = Math.cos((i * Math.PI * 2) / n);
@@ -61,4 +61,41 @@ export function fillShadow(
   height: number,
 ) {
   if (!fan(g, x, y, width / 2, height / 2)) g.fillEllipse(x, y, width, height);
+}
+
+/** Thin circular outlines as cached triangle strips: avoids Phaser batchLine's
+ * joins/temporary points for every arc subdivision. Outward error <0.35px. */
+export function strokeRing(
+  g: Phaser.GameObjects.Graphics,
+  x: number,
+  y: number,
+  radius: number,
+  color: number,
+  alpha = 1,
+  width = 2,
+) {
+  const k = kernels.find(
+    (k) => (radius + width / 2) * (1 / (1 - k.error) - 1) <= DISC_ERROR,
+  );
+  if (!k || g.scene.game.renderer.type !== 2) {
+    g.lineStyle(width, color, alpha);
+    g.strokeCircle(x, y, radius);
+    return;
+  }
+  const p = k.points,
+    outer = (radius + width / 2) / (1 - k.error),
+    inner = Math.max(0, radius - width / 2);
+  g.fillStyle(color, alpha);
+  for (let i = 0; i < p.length - 2; i += 2) {
+    const ax = x + p[i] * outer,
+      ay = y + p[i + 1] * outer,
+      bx = x + p[i + 2] * outer,
+      by = y + p[i + 3] * outer,
+      cx = x + p[i] * inner,
+      cy = y + p[i + 1] * inner,
+      dx = x + p[i + 2] * inner,
+      dy = y + p[i + 3] * inner;
+    g.fillTriangle(ax, ay, bx, by, cx, cy);
+    g.fillTriangle(cx, cy, bx, by, dx, dy);
+  }
 }

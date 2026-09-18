@@ -5,7 +5,7 @@ import {
 } from '../content/schema';
 import { CARDS } from '../cards/catalog';
 import { ENEMIES } from '../data/enemies';
-import type { EnemyKind } from '../game/types';
+import type { EnemyKind, WeaponId } from '../game/types';
 export interface TrialOffer {
   id: string;
   cost: number;
@@ -22,7 +22,14 @@ export interface TrialStage {
   cover: boolean;
 }
 export interface TrialConfig {
-  schemaVersion: 1;
+  schemaVersion: 2;
+  weapons: WeaponId[];
+  contract: null | {
+    supplyHealth: number;
+    healthCost: number;
+    rewardCapacity: number;
+    elite: { kind: 'lancer'; x: number; y: number };
+  };
   seed: number;
   slots: number;
   repairCost: number;
@@ -39,7 +46,14 @@ for (const row of content.enemies)
 content.enemies.find((e) => e.id === 'warden')!.params.hp = 4200;
 const spawn = (kind: EnemyKind, x: number, y: number) => ({ kind, x, y });
 export const DEFAULT_TRIAL: TrialConfig = {
-  schemaVersion: 1,
+  schemaVersion: 2,
+  weapons: ['arc', 'sword', 'cannon'],
+  contract: {
+    supplyHealth: 25,
+    healthCost: 20,
+    rewardCapacity: 2,
+    elite: { kind: 'lancer', x: 640, y: 300 },
+  },
   seed: 812831,
   slots: 4,
   repairCost: 2,
@@ -145,7 +159,7 @@ export const DEFAULT_TRIAL: TrialConfig = {
     {
       name: '守门人',
       purpose: '提前知道下一场是单体：继续对群，还是转向稳定单体？',
-      budget: 12,
+      budget: 9,
       limit: 120,
       cover: false,
       enemies: [spawn('warden', 640, 245)],
@@ -165,10 +179,20 @@ export function validateTrial(
   v: unknown,
 ): { ok: true; value: TrialConfig } | { ok: false; errors: string[] } {
   const errors: string[] = [];
+  // Legacy imports retain their original arc-only, no-contract meaning.
+  if (
+    obj(v) &&
+    v.schemaVersion === 1 &&
+    !('weapons' in v) &&
+    !('contract' in v)
+  )
+    v = { ...v, schemaVersion: 2, weapons: ['arc'], contract: null };
   if (
     !obj(v) ||
     !exact(v, [
       'schemaVersion',
+      'weapons',
+      'contract',
       'seed',
       'slots',
       'repairCost',
@@ -180,13 +204,44 @@ export function validateTrial(
   )
     return { ok: false, errors: ['配置字段不完整或包含未知字段'] };
   if (
-    v.schemaVersion !== 1 ||
+    v.schemaVersion !== 2 ||
     !integer(v.seed, 0, 1e8) ||
     !integer(v.slots, 1, 6) ||
     !integer(v.repairCost, 1, 6) ||
     !integer(v.repairHealth, 10, 60)
   )
     errors.push('版本、种子、槽位或维修规则无效');
+  if (
+    !Array.isArray(v.weapons) ||
+    v.weapons.length < 1 ||
+    v.weapons.length > 3 ||
+    new Set(v.weapons).size !== v.weapons.length ||
+    v.weapons.some((w) => !['arc', 'sword', 'cannon'].includes(w))
+  )
+    errors.push('武装列表需包含 1–3 种不同的合法武器');
+  if (v.contract !== null) {
+    const c = v.contract;
+    if (
+      !obj(c) ||
+      !exact(c, ['supplyHealth', 'healthCost', 'rewardCapacity', 'elite']) ||
+      !integer(c.supplyHealth, 1, 60) ||
+      !integer(c.healthCost, 1, 60) ||
+      !integer(c.rewardCapacity, 1, 6) ||
+      !obj(c.elite) ||
+      !exact(c.elite, ['kind', 'x', 'y']) ||
+      c.elite.kind !== 'lancer' ||
+      !integer(c.elite.x, 500, 780) ||
+      !integer(c.elite.y, 180, 330)
+    )
+      errors.push('合约恢复、奖励或精英出生点无效（出生点须在中央安全区域）');
+    if (
+      Array.isArray(v.stages) &&
+      obj(v.stages[2]) &&
+      obj(c) &&
+      Number(v.stages[2].budget) + Number(c.rewardCapacity) > 24
+    )
+      errors.push('末关额度与合约奖励合计不可超过 24');
+  }
   if (!Array.isArray(v.offers) || v.offers.length < 3 || v.offers.length > 12)
     errors.push('协议目录需为 3–12 项');
   else {

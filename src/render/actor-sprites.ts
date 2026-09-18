@@ -2,6 +2,7 @@ import type Phaser from 'phaser';
 import type { EnemyKind } from '../game/types';
 import type { World } from '../game/world';
 import { compositeSpriteMatte } from './sprite-matte';
+import { weaponProfile } from '../combat/weapon-profile';
 
 const SOURCE = 'actors-chroma-v2';
 const TEXTURE = 'actors-composited-v2';
@@ -101,16 +102,30 @@ export class ActorSprites {
       if (!image) {
         image = this.spare.pop() || this.create(FRAME[enemy.kind]);
         this.enemies.set(enemy.id, image);
-        image.setFrame(FRAME[enemy.kind]).setName(`entity-${enemy.kind}`);
+        image.setName(`entity-${enemy.kind}`);
       }
-      if (String(image.frame.name) !== String(FRAME[enemy.kind]))
-        image.setFrame(FRAME[enemy.kind]);
+      const guardian =
+        enemy.kind === 'warden' && this.scene.textures.exists('guardian-v2');
+      const texture = guardian ? 'guardian-v2' : TEXTURE;
+      const frame = guardian ? '__BASE' : FRAME[enemy.kind];
+      if (
+        image.texture.key !== texture ||
+        String(image.frame.name) !== String(frame)
+      )
+        image.setTexture(texture, frame);
       const boss = enemy.radius > 35;
       const bob = reducedMotion
         ? 0
         : Math.sin(time * 3 + enemy.id) * (boss ? 1.4 : 0.6);
-      const size = enemy.radius * (boss ? 3.1 : 3.4);
-      if (image.displayWidth !== size) image.setDisplaySize(size, size);
+      const size = enemy.radius * (guardian ? 3.55 : boss ? 3.1 : 3.4);
+      const anticipation =
+        !reducedMotion && enemy.state === 'telegraph' ? 1 : 0;
+      const recovery = !reducedMotion && enemy.state === 'recover' ? 1 : 0;
+      image.setDisplaySize(
+        size * (1 + anticipation * 0.06),
+        size * (1 - anticipation * 0.045 - recovery * 0.025),
+      );
+      image.setOrigin(0.5, guardian ? 0.79 : 0.68);
       const depth = 2 + Math.floor(enemy.y / 8) / 1250;
       if (image.depth !== depth) image.setDepth(depth);
       image
@@ -125,7 +140,15 @@ export class ActorSprites {
               ? enemy.aimX < enemy.x
                 ? -4
                 : 4
-              : Math.sin(time * 4 + enemy.id) * 1.3,
+              : enemy.state === 'telegraph'
+                ? enemy.aimX < enemy.x
+                  ? 5
+                  : -5
+                : enemy.state === 'attack'
+                  ? enemy.aimX < enemy.x
+                    ? -7
+                    : 7
+                  : Math.sin(time * 4 + enemy.id) * 1.3,
         );
       if (enemy.flash > 0) image.setTint(0xffd5aa);
       else if (enemy.slow > 0) image.setTint(0xa4d9ff);
@@ -134,12 +157,22 @@ export class ActorSprites {
       else image.clearTint();
     }
     const p = w.player;
+    const interval = weaponProfile(w, w.combo === 2).interval;
+    const kick = reducedMotion
+      ? 0
+      : w.swing
+        ? Math.sin(Math.min(1, w.swing.age / 0.28) * Math.PI) * 3
+        : Math.max(0, 1 - (interval - p.shotCd) / 0.14) *
+          (w.weapon === 'cannon' ? 4 : 1.5);
     const movement = Math.hypot(p.vx, p.vy);
     const gait = reducedMotion || movement < 8 ? 0 : Math.sin(time * 15) * 1.2;
     const playerDepth = 2 + Math.floor(p.y / 8) / 1250;
     if (this.player.depth !== playerDepth) this.player.setDepth(playerDepth);
     this.player
-      .setPosition(p.x, p.y + 8 + gait)
+      .setPosition(
+        p.x - Math.cos(p.angle) * kick,
+        p.y + 8 + gait - Math.sin(p.angle) * kick,
+      )
       .setDisplaySize(70, 70)
       .setFlipX(Math.cos(p.angle) < 0)
       .setAngle(reducedMotion ? 0 : Math.max(-5, Math.min(5, p.vx / 85)))

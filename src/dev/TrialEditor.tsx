@@ -18,10 +18,12 @@ export default function TrialEditor() {
     draft && Array.isArray(draft.offers)
       ? draft.offers.find((o) => o?.id === 'fire-split')
       : undefined;
-  const edit = (kind: 'budget' | 'price', value: number) => {
+  const edit = (kind: 'budget' | 'price' | 'contract', value: number) => {
     if (!draft) return;
     const d = structuredClone(draft);
     if (kind === 'budget' && d.stages?.[0]) d.stages[0].budget = value;
+    else if (kind === 'contract' && d.contract)
+      d.contract.rewardCapacity = value;
     else if (kind === 'price' && Array.isArray(d.offers)) {
       const o = d.offers.find((o) => o?.id === 'fire-split');
       if (o) o.cost = value;
@@ -43,6 +45,18 @@ export default function TrialEditor() {
           调整初始预算或一项协议价格，再看可购买组合如何变化。试玩使用同一战斗引擎；不覆盖主线或正式活动记录。
         </p>
         <div className="trial-editor-fields">
+          <label>
+            夺能奖励额度
+            <input
+              aria-label="夺能奖励额度"
+              type="number"
+              min={1}
+              max={6}
+              disabled={!draft?.contract}
+              value={draft?.contract?.rewardCapacity ?? ''}
+              onChange={(e) => edit('contract', Number(e.target.value))}
+            />
+          </label>
           <label>
             初始预算
             <input

@@ -1,10 +1,9 @@
-import { laserGeometry } from '../combat/geometry';
 import type Phaser from 'phaser';
 import type { World } from '../game/world';
 import { ENEMIES } from '../data/enemies';
 import { polygon } from './arena';
 import { drawHeldWeapon, drawSupplies, drawSwordArc } from './arsenal';
-import { fillDisc, fillShadow } from './discs';
+import { fillDisc, fillShadow, strokeRing } from './discs';
 export function glow(
   g: Phaser.GameObjects.Graphics,
   x: number,
@@ -30,12 +29,12 @@ export function drawActors(
   for (const h of w.hazards) {
     const c = h.friendly ? (h.type === 'well' ? 0xb3a0ff : 0xffa36b) : 0xff5977;
     g.lineStyle(2, c, 0.7);
-    g.strokeCircle(h.x, h.y, h.r);
+    strokeRing(g, h.x, h.y, h.r, c, 0.7);
     g.fillStyle(c, h.friendly ? 0.1 : 0.12);
-    g.fillCircle(h.x, h.y, h.r);
+    fillDisc(g, h.x, h.y, h.r);
     if (!h.friendly) {
       g.fillStyle(c, 0.22);
-      g.fillCircle(h.x, h.y, h.r * (1 - h.time / h.duration));
+      fillDisc(g, h.x, h.y, h.r * (1 - h.time / h.duration));
       g.lineStyle(1, c, 0.4);
       g.lineBetween(h.x - 12, h.y, h.x + 12, h.y);
       g.lineBetween(h.x, h.y - 12, h.x, h.y + 12);
@@ -58,33 +57,14 @@ export function drawActors(
     const boss = e.radius > 35;
     g.fillStyle(0x010508, 0.65);
     fillShadow(g, e.x, e.y + e.radius * 0.9, e.radius * 2.6, e.radius * 0.7);
-    if (
-      e.kind === 'oracle' &&
-      e.attackIndex % 3 === 2 &&
-      e.state === 'telegraph'
-    ) {
-      const b = laserGeometry(e);
-      g.lineStyle(b.halfWidth * 2, 0xe5a0ff, 0.18);
-      g.lineBetween(b.x1, b.y1, b.x2, b.y2);
-      g.lineStyle(2, 0xe5a0ff, 0.8);
-      g.lineBetween(b.x1, b.y1, b.x2, b.y2);
-    }
-    if (e.state === 'telegraph') {
-      const a = Math.atan2(e.aimY - e.y, e.aimX - e.x);
-      const charge =
-        e.kind === 'lancer' ||
-        (['warden', 'forgemaster'].includes(e.kind) && e.attackIndex % 3 === 2);
-      g.lineStyle(charge ? 24 : 2, 0xff677f, charge ? 0.13 : 0.65);
-      g.lineBetween(
+    if (boss && e.state === 'recover') {
+      g.lineStyle(2, 0xa7ddce, 0.65);
+      g.strokeEllipse(
         e.x,
-        e.y,
-        e.x + Math.cos(a) * (charge ? 400 : 530),
-        e.y + Math.sin(a) * (charge ? 400 : 530),
+        e.y + e.radius * 0.65,
+        e.radius * 2.5,
+        e.radius * 0.55,
       );
-      g.lineStyle(1, 0xff91a3, 0.85);
-      g.lineBetween(e.x, e.y, e.x + Math.cos(a) * 530, e.y + Math.sin(a) * 530);
-      g.lineStyle(2, 0xff7189, 0.8);
-      g.strokeCircle(e.x, e.y, e.radius + 12 + Math.sin(t * 8) * 3);
     }
     if (e.kind === 'oracle' && e.state === 'attack') {
       const a = Math.atan2(e.aimY - e.y, e.aimX - e.x) + (2.6 - e.timer) * 0.42;
