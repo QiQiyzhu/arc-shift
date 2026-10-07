@@ -1,0 +1,161 @@
+{
+  "version": "after",
+  "captures": [
+    {
+      "seed": 73129,
+      "player": {
+        "x": 435,
+        "y": 450
+      },
+      "enemies": [
+        {
+          "kind": "warden",
+          "x": 865,
+          "y": 278,
+          "state": "telegraph",
+          "timer": 0.6,
+          "aimX": 715,
+          "aimY": 390,
+          "attackIndex": 0
+        },
+        {
+          "kind": "lancer",
+          "x": 930,
+          "y": 565,
+          "state": "telegraph",
+          "timer": 0.6,
+          "aimX": 550,
+          "aimY": 460,
+          "attackIndex": 0
+        },
+        {
+          "kind": "sentry",
+          "x": 670,
+          "y": 380,
+          "state": "recover",
+          "timer": 1.2,
+          "aimX": 670,
+          "aimY": 380,
+          "attackIndex": 0
+        }
+      ],
+      "hazards": [
+        {
+          "x": 720,
+          "y": 505,
+          "r": 74,
+          "time": 0.6,
+          "duration": 1.15,
+          "damage": 20,
+          "type": "blast",
+          "friendly": false,
+          "tick": 0
+        },
+        {
+          "x": 435,
+          "y": 340,
+          "r": 112,
+          "time": 2.2,
+          "duration": 3,
+          "damage": 10,
+          "type": "well",
+          "friendly": true,
+          "tick": 0.1
+        }
+      ],
+      "metrics": {
+        "frames": 5,
+        "terrainBuilds": 2,
+        "simulateMs": 0.10000000149011612,
+        "presentationMs": 0.7000000029802322,
+        "droppedMs": 261,
+        "actorImages": 10,
+        "bulletImages": 0,
+        "burstImages": 2,
+        "signatureEffects": 3,
+        "decorativeParticles": 29,
+        "children": 57
+      },
+      "reduced": false
+    },
+    {
+      "seed": 73129,
+      "player": {
+        "x": 435,
+        "y": 450
+      },
+      "enemies": [
+        {
+          "kind": "warden",
+          "x": 865,
+          "y": 278,
+          "state": "telegraph",
+          "timer": 0.6,
+          "aimX": 715,
+          "aimY": 390,
+          "attackIndex": 0
+        },
+        {
+          "kind": "lancer",
+          "x": 930,
+          "y": 565,
+          "state": "telegraph",
+          "timer": 0.6,
+          "aimX": 550,
+          "aimY": 460,
+          "attackIndex": 0
+        },
+        {
+          "kind": "sentry",
+          "x": 670,
+          "y": 380,
+          "state": "recover",
+          "timer": 1.2,
+          "aimX": 670,
+          "aimY": 380,
+          "attackIndex": 0
+        }
+      ],
+      "hazards": [
+        {
+          "x": 720,
+          "y": 505,
+          "r": 74,
+          "time": 0.6,
+          "duration": 1.15,
+          "damage": 20,
+          "type": "blast",
+          "friendly": false,
+          "tick": 0
+        },
+        {
+          "x": 435,
+          "y": 340,
+          "r": 112,
+          "time": 2.2,
+          "duration": 3,
+          "damage": 10,
+          "type": "well",
+          "friendly": true,
+          "tick": 0.1
+        }
+      ],
+      "metrics": {
+        "frames": 7,
+        "terrainBuilds": 3,
+        "simulateMs": 0,
+        "presentationMs": 0.19999999552965164,
+        "droppedMs": 261,
+        "actorImages": 10,
+        "bulletImages": 0,
+        "burstImages": 2,
+        "signatureEffects": 2,
+        "decorativeParticles": 7,
+        "children": 57
+      },
+      "reduced": true
+    }
+  ],
+  "errors": [],
+  "disclosure": "DEV QA presentation fixture, seeded layout and frozen gameplay. Actual Phaser renderer; manually emitted existing effect events. Not a normal-player combat or performance measurement."
+}

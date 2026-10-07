@@ -1,43 +1,193 @@
 {
-  "recordedAt": "2026-09-10T11:48:04.469Z",
+  "recordedAt": "2026-10-07T16:02:16.793Z",
   "method": "All dist files, on-disk bytes; compressed values are local encodings, not observed network transfer sizes. DEV marker scan plus browser acceptance; not a proof against arbitrary dead code.",
-  "totalBytes": 12679278,
-  "javascriptBytes": 1751320,
+  "totalBytes": 37602447,
+  "javascriptBytes": 2100528,
   "productionDebugMarkers": [],
   "files": [
     {
+      "path": "dist/art/actors-source-v2.png",
+      "bytes": 2088875
+    },
+    {
+      "path": "dist/art/foundry-v23.webp",
+      "bytes": 257972
+    },
+    {
       "path": "dist/art/foundry.webp",
       "bytes": 225914
+    },
+    {
+      "path": "dist/art/grove-v23.webp",
+      "bytes": 332252
     },
     {
       "path": "dist/art/grove.webp",
       "bytes": 341504
     },
     {
+      "path": "dist/art/guardian-v2.webp",
+      "bytes": 350822
+    },
+    {
+      "path": "dist/art/keyart-v2.webp",
+      "bytes": 175156
+    },
+    {
+      "path": "dist/art/keyart-v23.webp",
+      "bytes": 227900
+    },
+    {
+      "path": "dist/art/observatory-v3.webp",
+      "bytes": 345736
+    },
+    {
       "path": "dist/art/rift-keyart.webp",
       "bytes": 161028
+    },
+    {
+      "path": "dist/art/sanctum-v23.webp",
+      "bytes": 312062
     },
     {
       "path": "dist/art/sanctum.webp",
       "bytes": 276558
     },
     {
-      "path": "dist/assets/game-CVgoKZdV.js",
-      "bytes": 1680,
-      "gzipBytes": 924,
-      "brotliBytes": 805
+      "path": "dist/art-direction/assets/aegis-briefing-after.png",
+      "bytes": 477061
     },
     {
-      "path": "dist/assets/game-Dy6SmE_E.css",
-      "bytes": 187591,
-      "gzipBytes": 32858,
-      "brotliBytes": 27337
+      "path": "dist/art-direction/assets/aegis-briefing-before.png",
+      "bytes": 1021312
     },
     {
-      "path": "dist/assets/jsx-runtime-thYREygN.js",
-      "bytes": 190804,
-      "gzipBytes": 59499,
-      "brotliBytes": 51175
+      "path": "dist/art-direction/assets/aegis-charge-input.png",
+      "bytes": 1392383
+    },
+    {
+      "path": "dist/art-direction/assets/arc-combat-after.png",
+      "bytes": 1445758
+    },
+    {
+      "path": "dist/art-direction/assets/arc-combat-before.png",
+      "bytes": 1431544
+    },
+    {
+      "path": "dist/art-direction/assets/arc-combat-reduced.png",
+      "bytes": 1432038
+    },
+    {
+      "path": "dist/art-direction/assets/arc-menu-after.png",
+      "bytes": 1208545
+    },
+    {
+      "path": "dist/art-direction/assets/arc-menu-before.png",
+      "bytes": 1130698
+    },
+    {
+      "path": "dist/art-direction/assets/arc-performance.json",
+      "bytes": 4140,
+      "gzipBytes": 1066,
+      "brotliBytes": 893
+    },
+    {
+      "path": "dist/art-direction/assets/arc-practice-poster.png",
+      "bytes": 2166407
+    },
+    {
+      "path": "dist/art-direction/assets/arc-practice.webm",
+      "bytes": 7169314
+    },
+    {
+      "path": "dist/art-direction/assets/page-verification.json",
+      "bytes": 3306,
+      "gzipBytes": 464,
+      "brotliBytes": 353
+    },
+    {
+      "path": "dist/art-direction/assets/provenance.json",
+      "bytes": 9103,
+      "gzipBytes": 2843,
+      "brotliBytes": 2329
+    },
+    {
+      "path": "dist/art-direction/index.html",
+      "bytes": 28337,
+      "gzipBytes": 10497,
+      "brotliBytes": 8321
+    },
+    {
+      "path": "dist/art-direction/script.js",
+      "bytes": 8381,
+      "gzipBytes": 2908,
+      "brotliBytes": 2300
+    },
+    {
+      "path": "dist/art-direction/style.css",
+      "bytes": 26914,
+      "gzipBytes": 6771,
+      "brotliBytes": 5943
+    },
+    {
+      "path": "dist/assets/ActivityApp-BifsE3j2.js",
+      "bytes": 20837,
+      "gzipBytes": 8098,
+      "brotliBytes": 6857
+    },
+    {
+      "path": "dist/assets/ActivityApp-DW3f5iWL.css",
+      "bytes": 6213,
+      "gzipBytes": 1985,
+      "brotliBytes": 1690
+    },
+    {
+      "path": "dist/assets/client-rx99GZtz.js",
+      "bytes": 182381,
+      "gzipBytes": 56764,
+      "brotliBytes": 49094
+    },
+    {
+      "path": "dist/assets/coach.worker-FmkbR7H3.js",
+      "bytes": 78458,
+      "gzipBytes": 29407,
+      "brotliBytes": 24985
+    },
+    {
+      "path": "dist/assets/EconomyPanels-Daa1lVLx.js",
+      "bytes": 13114,
+      "gzipBytes": 5755,
+      "brotliBytes": 4805
+    },
+    {
+      "path": "dist/assets/FrontierApp-CIGhDP8V.js",
+      "bytes": 35221,
+      "gzipBytes": 13161,
+      "brotliBytes": 11112
+    },
+    {
+      "path": "dist/assets/FrontierApp-D85PlygO.css",
+      "bytes": 14555,
+      "gzipBytes": 3640,
+      "brotliBytes": 3152
+    },
+    {
+      "path": "dist/assets/game-CqmsMlwe.js",
+      "bytes": 89029,
+      "gzipBytes": 41100,
+      "brotliBytes": 33328
+    },
+    {
+      "path": "dist/assets/game-CsZtKl40.css",
+      "bytes": 226268,
+      "gzipBytes": 41537,
+      "brotliBytes": 34479
+    },
+    {
+      "path": "dist/assets/jsx-runtime-Cltr0gcK.js",
+      "bytes": 8430,
+      "gzipBytes": 3212,
+      "brotliBytes": 2880
     },
     {
       "path": "dist/assets/lab-2D79aMuf.css",
@@ -46,22 +196,40 @@
       "brotliBytes": 4616
     },
     {
-      "path": "dist/assets/lab-D30nt5j_.js",
-      "bytes": 76876,
-      "gzipBytes": 23542,
-      "brotliBytes": 17974
+      "path": "dist/assets/lab-B_LeJ_hm.js",
+      "bytes": 76910,
+      "gzipBytes": 23555,
+      "brotliBytes": 17987
     },
     {
-      "path": "dist/assets/page-BpP-M_6k.js",
-      "bytes": 1477488,
-      "gzipBytes": 416537,
-      "brotliBytes": 334077
+      "path": "dist/assets/LanguageToggle-BjkIxHM5.js",
+      "bytes": 446,
+      "gzipBytes": 334,
+      "brotliBytes": 272
+    },
+    {
+      "path": "dist/assets/page-ynODmLqE.js",
+      "bytes": 205844,
+      "gzipBytes": 72721,
+      "brotliBytes": 61328
+    },
+    {
+      "path": "dist/assets/preview-DVI4AZq2.js",
+      "bytes": 3145,
+      "gzipBytes": 1801,
+      "brotliBytes": 1499
     },
     {
       "path": "dist/assets/rules-BE1egm8v.js",
       "bytes": 2739,
       "gzipBytes": 1227,
       "brotliBytes": 1117
+    },
+    {
+      "path": "dist/assets/scene-upHC7IPc.js",
+      "bytes": 1340389,
+      "gzipBytes": 369144,
+      "brotliBytes": 294951
     },
     {
       "path": "dist/assets/space-grotesk-latin-400-normal-BnQMeOim.woff",
@@ -136,20 +304,80 @@
       "bytes": 5588
     },
     {
+      "path": "dist/assets/TrialApp-Bk4-0Goe.js",
+      "bytes": 31679,
+      "gzipBytes": 11605,
+      "brotliBytes": 9812
+    },
+    {
+      "path": "dist/assets/TrialApp-QkC7KJi9.css",
+      "bytes": 14278,
+      "gzipBytes": 3746,
+      "brotliBytes": 3257
+    },
+    {
+      "path": "dist/assets/volume-x-CL1CoV3N.js",
+      "bytes": 933,
+      "gzipBytes": 435,
+      "brotliBytes": 402
+    },
+    {
+      "path": "dist/assets/x-D969AmgF.js",
+      "bytes": 859,
+      "gzipBytes": 456,
+      "brotliBytes": 423
+    },
+    {
+      "path": "dist/audio/v21/foundry-bed.ogg",
+      "bytes": 162756
+    },
+    {
+      "path": "dist/audio/v21/foundry-drive.ogg",
+      "bytes": 135301
+    },
+    {
+      "path": "dist/audio/v21/foundry-pulse.ogg",
+      "bytes": 138707
+    },
+    {
+      "path": "dist/audio/v21/grove-bed.ogg",
+      "bytes": 200149
+    },
+    {
+      "path": "dist/audio/v21/grove-drive.ogg",
+      "bytes": 175818
+    },
+    {
+      "path": "dist/audio/v21/grove-pulse.ogg",
+      "bytes": 164472
+    },
+    {
+      "path": "dist/audio/v21/sanctum-bed.ogg",
+      "bytes": 180223
+    },
+    {
+      "path": "dist/audio/v21/sanctum-drive.ogg",
+      "bytes": 154190
+    },
+    {
+      "path": "dist/audio/v21/sanctum-pulse.ogg",
+      "bytes": 150837
+    },
+    {
       "path": "dist/favicon.svg",
       "bytes": 239
     },
     {
       "path": "dist/index.html",
-      "bytes": 713,
-      "gzipBytes": 520,
-      "brotliBytes": 320
+      "bytes": 788,
+      "gzipBytes": 531,
+      "brotliBytes": 326
     },
     {
       "path": "dist/lab/index.html",
-      "bytes": 779,
-      "gzipBytes": 519,
-      "brotliBytes": 337
+      "bytes": 854,
+      "gzipBytes": 534,
+      "brotliBytes": 350
     },
     {
       "path": "dist/licenses/base-ui.txt",

@@ -4,7 +4,9 @@
 
 ## ▶ 直接玩
 
-**[点击打开游戏](https://arc-shift.black-kid-3047.chatgpt.site/)** · **[详细游玩说明](docs/PLAY.md)** · [版本与验证](docs/release-v2.4.md)
+**[点击打开游戏](https://arc-shift.black-kid-3047.chatgpt.site/)** · **[详细游玩说明](docs/PLAY.md)** · [版本与验证](docs/release-v2.5.md)
+
+**[查看 UI 与战斗特效的美术策划档案](https://arc-shift.black-kid-3047.chatgpt.site/art-direction/index.html)**：两款游戏的真实前后对照、视觉规范、技能节奏与实机演示。v2.5 将铜金铭刻界面、技能冷却环和敌我特效语言统一起来。
 
 无需下载、注册或 API Key。请使用电脑上的 Chrome 或 Edge，准备键盘和鼠标；手机目前没有触屏战斗操作。
 
@@ -31,7 +33,7 @@
 | 边境行动 | 想探索、回收或护送，完成区域目标 | [进入边境](https://arc-shift.black-kid-3047.chatgpt.site/frontier) |
 | 中继争夺 | 想体验短局驻留占点挑战 | [开始挑战](https://arc-shift.black-kid-3047.chatgpt.site/challenge) |
 
-这是持续打磨中的独立游戏试玩候选版。自动化验收范围、已知限制和本次更新见 [v2.4 记录](docs/release-v2.4.md)；没有多人联机或云存档。
+这是持续打磨中的独立游戏试玩候选版。自动化验收范围、已知限制和本次更新见 [v2.5 记录](docs/release-v2.5.md)；没有多人联机或云存档。设置中的「减少动态效果」与「战斗清晰模式」都保留攻击预警。
 
 <details>
 <summary>开发者：本地运行、工程资料与历史版本</summary>

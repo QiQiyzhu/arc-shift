@@ -1,0 +1,187 @@
+{
+  "passed": true,
+  "results": [
+    {
+      "viewport": {
+        "width": 1366,
+        "height": 768
+      },
+      "comparisons": [
+        {
+          "name": "arc-menu",
+          "dimensions": [
+            [
+              1366,
+              768
+            ],
+            [
+              1366,
+              768
+            ]
+          ],
+          "dragged": 25
+        },
+        {
+          "name": "arc-combat",
+          "dimensions": [
+            [
+              1280,
+              720
+            ],
+            [
+              1280,
+              720
+            ]
+          ],
+          "dragged": 25
+        },
+        {
+          "name": "aegis-briefing",
+          "dimensions": [
+            [
+              1600,
+              900
+            ],
+            [
+              1600,
+              900
+            ]
+          ],
+          "dragged": 25
+        }
+      ],
+      "overflow": false,
+      "initialVideoRequests": 0,
+      "errors": [],
+      "badResources": []
+    },
+    {
+      "viewport": {
+        "width": 1600,
+        "height": 900
+      },
+      "comparisons": [
+        {
+          "name": "arc-menu",
+          "dimensions": [
+            [
+              1366,
+              768
+            ],
+            [
+              1366,
+              768
+            ]
+          ],
+          "dragged": 25
+        },
+        {
+          "name": "arc-combat",
+          "dimensions": [
+            [
+              1280,
+              720
+            ],
+            [
+              1280,
+              720
+            ]
+          ],
+          "dragged": 25
+        },
+        {
+          "name": "aegis-briefing",
+          "dimensions": [
+            [
+              1600,
+              900
+            ],
+            [
+              1600,
+              900
+            ]
+          ],
+          "dragged": 25
+        }
+      ],
+      "overflow": false,
+      "initialVideoRequests": 0,
+      "errors": [],
+      "badResources": []
+    },
+    {
+      "viewport": {
+        "width": 390,
+        "height": 844
+      },
+      "comparisons": [
+        {
+          "name": "arc-menu",
+          "dimensions": [
+            [
+              1366,
+              768
+            ],
+            [
+              1366,
+              768
+            ]
+          ],
+          "dragged": 24
+        },
+        {
+          "name": "arc-combat",
+          "dimensions": [
+            [
+              1280,
+              720
+            ],
+            [
+              1280,
+              720
+            ]
+          ],
+          "dragged": 23
+        },
+        {
+          "name": "aegis-briefing",
+          "dimensions": [
+            [
+              1600,
+              900
+            ],
+            [
+              1600,
+              900
+            ]
+          ],
+          "dragged": 24
+        }
+      ],
+      "overflow": false,
+      "initialVideoRequests": 0,
+      "errors": [],
+      "badResources": []
+    },
+    {
+      "reducedMotion": true,
+      "staticStep": true
+    },
+    {
+      "noJavaScript": true,
+      "staticEvidenceVisible": true
+    },
+    {
+      "imageFailureFallback": true
+    },
+    {
+      "video": {
+        "duration": 57.8,
+        "width": 1920,
+        "height": 1080,
+        "muted": true,
+        "currentTime": 0.158524
+      }
+    }
+  ]
+}

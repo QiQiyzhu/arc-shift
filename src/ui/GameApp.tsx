@@ -8,13 +8,10 @@ import {
   Maximize,
   Settings2,
   ChevronRight,
-  Zap,
   Orbit,
-  Wind,
   Pause,
   Play,
   FlaskConical,
-  Shield,
   Hammer,
   BookOpen,
 } from 'lucide-react';
@@ -45,6 +42,7 @@ import { validateCards } from '../coach/knowledge';
 import { deriveStats } from '../cards/system';
 import type { World } from '../game/world';
 import { announceLanguageChange, copy, useLanguage } from './i18n';
+import { ArtGlyph } from './ArtGlyph';
 const engine = new Engine();
 const synth = new Synth();
 const formatTime = (s: number) =>
@@ -75,6 +73,13 @@ export default function GameApp() {
   const [utility, setUtility] = useState<
     'settings' | 'library' | 'help' | 'lab' | 'workshop' | 'camp' | null
   >(null);
+  const reducedMotion = engine.save.settings.reducedMotion;
+  useEffect(() => {
+    document.documentElement.dataset.reducedMotion = String(reducedMotion);
+    return () => {
+      delete document.documentElement.dataset.reducedMotion;
+    };
+  }, [reducedMotion]);
   useEffect(() => {
     if (loaded) return;
     const timer = window.setTimeout(() => setBootSlow(true), 12000);
@@ -278,7 +283,12 @@ export default function GameApp() {
           {t(ui('本地行动 · 已就绪', 'LOCAL OPERATION · READY'))}
         </div>
         <div className="top-actions">
-          <span className="version">RESONANCE / 2.4</span>
+          {w.phase === 'menu' && (
+            <a className="artfolio-link" href="/art-direction/index.html">
+              {ui('美术档案', 'ART DIRECTION')} <ArrowUpRight size={13} />
+            </a>
+          )}
+          <span className="version">GRAVEN / 2.5</span>
           <button
             className="header-language"
             aria-label={ui('切换为 English', 'Switch to 中文')}
@@ -359,9 +369,13 @@ export default function GameApp() {
         {w.phase === 'menu' && (
           <div className="menu-overlay">
             <img className="menu-keyart" src="/art/keyart-v23.webp" alt="" />
+            <div className="sanctum-orbit" aria-hidden="true">
+              <ArtGlyph />
+              <span>THE GRAVEN ATLAS</span>
+            </div>
             <div className="menu-copy">
               <div className="eyebrow">
-                <span /> THE ASTRAL FORGE · v2.4
+                <span /> THE GRAVEN ATLAS · v2.5
               </div>
               <h1>
                 ARC<span>{t('//')}</span>
@@ -577,6 +591,9 @@ export default function GameApp() {
               </div>
             </div>
             <div className="scene-label">
+              <div className="scene-index" aria-hidden="true">
+                I <span>— XII</span>
+              </div>
               <span className="tiny">THE FRACTURED SANCTUM</span>
               <div>
                 <span className="signal-dot" />{' '}
@@ -605,13 +622,15 @@ export default function GameApp() {
         {!['menu', 'victory', 'gameover'].includes(w.phase) && (
           <>
             <div className="hud-top">
-              <div className="health-panel">
+              <div
+                className={`health-panel ${p.hp / p.maxHp <= 0.3 ? 'health-critical' : ''}`}
+              >
                 <div className="hud-caption">
-                  <span>ARСANIST / {t(ui('行动者', 'OPERATIVE'))}</span>
+                  <span>{t(ui('生命共鸣', 'VITAL RESONANCE'))}</span>
                   <b>LV.{t(String(w.level).padStart(2, '0'))}</b>
                 </div>
                 <div className="health-line">
-                  <Shield size={20} />
+                  <ArtGlyph variant="vital" />
                   <div className="hp-track">
                     <i style={{ width: `${(p.hp / p.maxHp) * 100}%` }} />
                   </div>
@@ -669,6 +688,7 @@ export default function GameApp() {
                 </p>
               </div>
               <div className="hud-right">
+                <small>{ui('行动时间', 'RUN TIME')}</small>
                 <span>{t(formatTime(w.elapsed))}</span>
                 <button
                   aria-label={t(ui('暂停', 'Pause'))}
@@ -740,27 +760,31 @@ export default function GameApp() {
                   keycap={controlLabel('PrimaryAttack', 'LMB')}
                   value={0}
                   max={1}
+                  kind="weapon"
                 />
                 <Skill
-                  icon={<Wind />}
+                  icon={<ArtGlyph variant="shift" />}
                   label={t(ui('相位跃迁', 'Phase shift'))}
                   keycap={controlLabel('Dash', 'SPACE')}
                   value={p.dashCd}
                   max={w.stats.dashCooldown}
+                  kind="shift"
                 />
                 <Skill
-                  icon={<Zap />}
+                  icon={<ArtGlyph variant="pulse" />}
                   label={t(ui('湮灭脉冲', 'Annihilation pulse'))}
                   keycap={controlLabel('Pulse', 'Q')}
                   value={p.qCd}
                   max={w.stats.qCooldown}
+                  kind="pulse"
                 />
                 <Skill
-                  icon={<Orbit />}
+                  icon={<ArtGlyph variant="well" />}
                   label={t(ui('引力奇点', 'Gravity singularity'))}
                   keycap={controlLabel('Gravity', 'E')}
                   value={p.eCd}
                   max={w.stats.eCooldown}
+                  kind="well"
                 />
               </div>
               <div className="move-tip">
@@ -822,6 +846,7 @@ export default function GameApp() {
           !(guide.current.active && guide.current.step === 'forge') && (
             <div className="modal-shade">
               <section className="pause-panel">
+                <ArtGlyph className="panel-seal" />
                 <div className="eyebrow">CONNECTION SUSPENDED</div>
                 <h2>{t(ui('行动已暂停', 'Run paused'))}</h2>
                 <p>
@@ -1092,7 +1117,7 @@ export default function GameApp() {
       </section>
       <footer className="bottombar">
         <span>
-          <i /> {t(ui('ALL SYSTEMS UNSTABLE', 'ALL SYSTEMS UNSTABLE'))}
+          <i /> {ui('LOCAL ARCHIVE · CONNECTED', 'LOCAL ARCHIVE · CONNECTED')}
         </span>
         <span>
           {t(movementLabel)} {t(ui('移动', 'Move'))} <i>·</i>{' '}
@@ -1200,17 +1225,28 @@ function Skill({
   keycap,
   value,
   max,
+  kind,
 }: {
   icon: React.ReactNode;
   label: string;
   keycap: string;
   value: number;
   max: number;
+  kind: 'weapon' | 'shift' | 'pulse' | 'well';
 }) {
   const t = useTranslation();
+  const language = useLanguage();
   return (
-    <div className={`skill ${value > 0 ? 'cooling' : ''}`}>
+    <div
+      className={`skill skill-${kind} ${value > 0 ? 'cooling' : 'ready'}`}
+      style={
+        {
+          '--cooldown': `${Math.max(0, Math.min(1, value / max)) * 100}%`,
+        } as React.CSSProperties
+      }
+    >
       <div className="skill-icon">
+        <span className="skill-orbit" aria-hidden="true" />
         {icon}
         {value > 0 && (
           <>
@@ -1221,7 +1257,14 @@ function Skill({
       </div>
       <div>
         <span>{t(label)}</span>
-        <kbd>{t(keycap)}</kbd>
+        <div className="skill-state">
+          <kbd>{t(keycap)}</kbd>
+          <small>
+            {value > 0
+              ? copy(language, '回充', 'RECHARGING')
+              : copy(language, '就绪', 'READY')}
+          </small>
+        </div>
       </div>
     </div>
   );

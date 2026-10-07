@@ -3,6 +3,7 @@ import type { Enemy } from '../game/types';
 import { clamp } from '../core/math';
 import { laserGeometry } from '../combat/geometry';
 import { strokeRing } from './discs';
+import { ARC_PALETTE, drawDangerSeal } from '../effects/arcane';
 
 /** Nominal unobstructed travel. Terrain can stop movement sooner; the corridor
  * intentionally includes the player's contact radius, rather than just the art. */
@@ -89,13 +90,17 @@ export function blastCues(e: Enemy) {
 export function drawTelegraph(
   g: Phaser.GameObjects.Graphics,
   e: Enemy,
-  time: number,
+  _time: number,
   reduced: boolean,
 ) {
   if (e.state !== 'telegraph') return;
-  const c = 0xff8093,
-    pulse = reduced ? 0.8 : 0.72 + Math.sin(time * 9) * 0.12,
-    accent = reduced ? 0.24 : 0.34 + Math.sin(time * 7) * 0.08;
+  // Stable high-contrast borders encode danger even with all motion disabled.
+  // Enemy timers have different windup lengths: this only accents the final
+  // second, and does not claim to be a normalized attack progress meter.
+  const c = ARC_PALETTE.danger,
+    urgency = clamp(1 - e.timer, 0, 1),
+    pulse = 0.94,
+    accent = reduced ? 0.08 : 0.07 + urgency * 0.05;
   const charge = chargeCue(e);
   if (charge) {
     g.lineStyle(charge.halfWidth * 2, c, accent);
@@ -103,16 +108,20 @@ export function drawTelegraph(
     const a = Math.atan2(charge.y - e.y, charge.x - e.x),
       nx = -Math.sin(a) * charge.halfWidth,
       ny = Math.cos(a) * charge.halfWidth;
-    g.lineStyle(2.5, c, pulse);
+    g.lineStyle(5, ARC_PALETTE.ink, 0.8);
+    g.lineBetween(e.x + nx, e.y + ny, charge.x + nx, charge.y + ny);
+    g.lineBetween(e.x - nx, e.y - ny, charge.x - nx, charge.y - ny);
+    g.lineStyle(2, c, pulse);
     // Rounded end caps include contact at both endpoints. Two steps of length
     // margin covers the update that moves before expiring the attack timer.
-    strokeRing(g, e.x, e.y, charge.halfWidth, c, pulse);
-    strokeRing(g, charge.x, charge.y, charge.halfWidth, c, pulse);
+    strokeRing(g, e.x, e.y, charge.halfWidth, c, pulse, 2);
+    strokeRing(g, charge.x, charge.y, charge.halfWidth, c, pulse, 2);
     g.lineBetween(e.x + nx, e.y + ny, charge.x + nx, charge.y + ny);
     g.lineBetween(e.x - nx, e.y - ny, charge.x - nx, charge.y - ny);
     for (let i = 1; i <= 3; i++) {
       const x = e.x + ((charge.x - e.x) * i) / 4,
         y = e.y + ((charge.y - e.y) * i) / 4;
+      g.lineStyle(2, ARC_PALETTE.dangerEdge, 0.9);
       g.lineBetween(
         x + nx * 0.25,
         y + ny * 0.25,
@@ -128,24 +137,26 @@ export function drawTelegraph(
     }
   } else if (e.kind === 'oracle' && e.attackIndex % 3 === 2) {
     const b = laserGeometry(e);
-    g.lineStyle(b.halfWidth * 2, 0xe5a0ff, 0.18);
+    g.lineStyle(b.halfWidth * 2, c, 0.13);
     g.lineBetween(b.x1, b.y1, b.x2, b.y2);
-    g.lineStyle(2, 0xf4d4ff, pulse);
+    const a = Math.atan2(b.y2 - b.y1, b.x2 - b.x1),
+      nx = -Math.sin(a) * b.halfWidth,
+      ny = Math.cos(a) * b.halfWidth;
+    g.lineStyle(2, c, pulse);
+    g.lineBetween(b.x1 + nx, b.y1 + ny, b.x2 + nx, b.y2 + ny);
+    g.lineBetween(b.x1 - nx, b.y1 - ny, b.x2 - nx, b.y2 - ny);
+    g.lineStyle(1, ARC_PALETTE.dangerEdge, 0.65);
     g.lineBetween(b.x1, b.y1, b.x2, b.y2);
   } else {
     const blasts = blastCues(e);
     if (blasts.length)
-      for (const b of blasts) {
-        g.lineStyle(2.5, c, 0.55 + accent * 0.2);
-        strokeRing(g, b.x, b.y, b.r, c, 0.55);
-        g.lineBetween(b.x - 7, b.y, b.x + 7, b.y);
-        g.lineBetween(b.x, b.y - 7, b.x, b.y + 7);
-      }
+      for (const b of blasts)
+        drawDangerSeal(g, b.x, b.y, b.r, urgency, reduced);
     else if (e.radius > 35) {
       if (e.kind === 'warden' && e.attackIndex % 3 === 1) {
         const a = Math.atan2(e.aimY - e.y, e.aimX - e.x);
         for (let i = -3; i <= 3; i++) {
-          g.lineStyle(i === 0 ? 2 : 1, c, 0.5);
+          g.lineStyle(i === 0 ? 2 : 1, c, 0.7);
           g.lineBetween(
             e.x,
             e.y,
@@ -154,8 +165,7 @@ export function drawTelegraph(
           );
         }
       } else {
-        g.lineStyle(2, c, 0.5);
-        strokeRing(g, e.x, e.y, e.radius + 42, c, 0.5);
+        drawDangerSeal(g, e.x, e.y, e.radius + 42, urgency, reduced);
       }
     } else if (e.kind === 'sentry' || e.kind === 'cantor') {
       const a = Math.atan2(e.aimY - e.y, e.aimX - e.x),
@@ -172,5 +182,5 @@ export function drawTelegraph(
     }
   }
   g.lineStyle(2, c, pulse);
-  strokeRing(g, e.x, e.y, e.radius + 9, c, pulse);
+  strokeRing(g, e.x, e.y, e.radius + 9, c, pulse, 2);
 }

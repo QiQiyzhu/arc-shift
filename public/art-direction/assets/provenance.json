@@ -1,0 +1,237 @@
+{
+  "schema": "art-direction-showcase/v1",
+  "recordedDate": "2026-10-07",
+  "afterSourceState": "v2.5 working tree; release commit is provided by the repository release, not guessed here",
+  "authorship": "User direction and feedback; AI-assisted design, code, verification and documentation. Existing AI-generated ARC keyart is disclosed separately. Showcase diagrams are procedural SVG; screenshots are unedited actual captures.",
+  "assets": [
+    {
+      "file": "arc-menu-before.png",
+      "bytes": 1130698,
+      "sha256": "620c3e8873d5fafa145a5eee0ce3d29ee6b71b24c00d934af1d8581fcac1ce8a",
+      "source": "ARC work/v25-ui/before/menu-zh.png",
+      "scope": "v2.4 baseline 2351b164; browser UI, fresh state, Chinese, 1366x768",
+      "dimensions": [
+        1366,
+        768
+      ]
+    },
+    {
+      "file": "arc-menu-after.png",
+      "bytes": 1208545,
+      "sha256": "0ec1021bac3818917f6fab0bb242c7564d9c62ce3cc6554b8fb8a7a3b9ddb069",
+      "source": "ARC work/v25-ui/after-final/menu-zh.png",
+      "scope": "v2.5 final working-tree UI; same browser conditions; existing keyart retained",
+      "dimensions": [
+        1366,
+        768
+      ]
+    },
+    {
+      "file": "arc-combat-before.png",
+      "bytes": 1431544,
+      "sha256": "1c3700b165e343f2e04de456d91585b5a3c18a247c8bbefd1bd06f3e811cb040",
+      "source": "ARC work/v25-vfx/baseline-fixture/normal.png",
+      "scope": "DEV fixed presentation fixture; frozen simulation, manually emitted effect events; not natural gameplay",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "arc-combat-after.png",
+      "bytes": 1445758,
+      "sha256": "2f2eecd8b2c0f3e6ea39fac39340c492c971652ee61e835aeadc2374813f2fe1",
+      "source": "ARC work/v25-vfx/after-fixture/normal.png",
+      "scope": "same fixed seed73129/player435,450/scene12s/effectAge50ms fixture, standard mode",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "arc-combat-reduced.png",
+      "bytes": 1432038,
+      "sha256": "19f11424862315aefbf79b30f2f676cc88b120a04918c707924fa9c9e451a227",
+      "source": "ARC work/v25-vfx/after-fixture/reduced.png",
+      "scope": "same fixture; reducedMotion=true and focusedEffects=true",
+      "dimensions": [
+        1280,
+        720
+      ]
+    },
+    {
+      "file": "aegis-briefing-before.png",
+      "bytes": 1021312,
+      "sha256": "362b4fd7c9c71ee09f0d8972b5d1025d7fa686242f5008b81b24ddca7490fc6b",
+      "source": "Aegis Reports/art-v25-20261007/before-release-flow/briefing.png",
+      "scope": "v2.4 baseline6784c59; Editor game D3D11,1600x900,synthetic menu actions; not Shipping/human",
+      "dimensions": [
+        1600,
+        900
+      ]
+    },
+    {
+      "file": "aegis-briefing-after.png",
+      "bytes": 477061,
+      "sha256": "acfdabca5c9a9040f9b173511f21b4d5da8dbba015432893c0cf98661b2a4475",
+      "source": "Aegis Reports/art-v25-20261007/approved-art-1600/briefing.png",
+      "scope": "v2.5 final font-polished Editor game D3D11,1600x900,synthetic menu actions; not Shipping/human",
+      "dimensions": [
+        1600,
+        900
+      ]
+    },
+    {
+      "file": "aegis-charge-input.png",
+      "bytes": 1392383,
+      "sha256": "13ad2d71c5e1fe764c0812af5859e86e6aec69100c163b7764d3da605567b563",
+      "source": "Aegis Reports/art-v25-20261007/approved-art-1600/charge-impact.png",
+      "scope": "AI frozen for art observation; genuine simulated charge-key input and accepted release; not natural combat",
+      "dimensions": [
+        1600,
+        900
+      ]
+    },
+    {
+      "file": "arc-practice.webm",
+      "bytes": 7169314,
+      "sha256": "d1fb3cd5db6bf344474c95b75113121b4bde0f392c0b07bf550e1cc51c9b54c2",
+      "source": "ARC work/v25-vfx/after-weapons-take3/b1be1ad7de1c6f6b0762de1d0112aad1.webm",
+      "scope": "58.145s real browser capture; public scripted keyboard/mouse, built-in invulnerable practice; silent video, audio separate; inherited capture schema version2.3 is not source version"
+    },
+    {
+      "file": "arc-practice-poster.png",
+      "bytes": 2166407,
+      "sha256": "3069212ff083d8d3ca80f46fe3c6be00035dc00d65e8b174dd10fc4c17d31492",
+      "source": "ARC work/v25-vfx/after-weapons-take3/weapon-cannon.png",
+      "scope": "actual frame from the same public-input practice recording",
+      "dimensions": [
+        1920,
+        1080
+      ]
+    },
+    {
+      "file": "arc-performance.json",
+      "bytes": 4140,
+      "sha256": "583e216c68f57728b544d44d0d22389eec470907ed5dae3ea57fe688920ee670",
+      "source": "ARC work/v25-vfx/performance/results.json",
+      "scope": "three sequential local10s stress samples; headless Edge1440x900 IntelUHD; not isolated benchmark or before/after comparison"
+    }
+  ],
+  "aegisNativeVerification": [
+    {
+      "viewport": [
+        1600,
+        900
+      ],
+      "passed": true,
+      "native": {
+        "passed": true,
+        "checks": 21,
+        "artFixture": true,
+        "aiFrozenForArt": true,
+        "syntheticVisualCues": true,
+        "syntheticMenuActions": true,
+        "simulatedFocusCallback": true,
+        "realWindowFocusTest": false,
+        "humanPlaytest": false,
+        "shippingRuntime": false
+      },
+      "checks": [
+        "release_profile_opens_latest_briefing",
+        "isolated_preferences_default_chinese_music_on",
+        "clickable_language_and_music_controls",
+        "deploy_starts_active_operation",
+        "focus_callback_pauses_active_game",
+        "focus_return_does_not_resume_or_advance_time",
+        "manual_resume_clears_focus_pause",
+        "restart_requires_confirmation_and_preserves_attempt",
+        "cancel_restart_keeps_existing_attempt_paused",
+        "confirmed_restart_returns_clean_briefing",
+        "tactical_pool_has_seven_fixed_components",
+        "real_charge_input_drives_semantic_windup",
+        "reduced_effects_retains_semantic_charge",
+        "accepted_charge_release_emits_cue",
+        "transient_cues_decay_to_zero",
+        "standard_cue_has_bounded_attack_and_decay",
+        "reduced_cue_emits_fewer_decorations",
+        "presentation_does_not_change_health_or_energy",
+        "stress_drops_decorations_without_allocating_components",
+        "stress_cues_expire_and_leave_semantic_layer",
+        "real_dash_input_emits_directional_trail"
+      ]
+    },
+    {
+      "viewport": [
+        1280,
+        720
+      ],
+      "passed": true,
+      "native": {
+        "passed": true,
+        "checks": 21,
+        "artFixture": true,
+        "aiFrozenForArt": true,
+        "syntheticVisualCues": true,
+        "syntheticMenuActions": true,
+        "simulatedFocusCallback": true,
+        "realWindowFocusTest": false,
+        "humanPlaytest": false,
+        "shippingRuntime": false
+      },
+      "checks": [
+        "release_profile_opens_latest_briefing",
+        "isolated_preferences_default_chinese_music_on",
+        "clickable_language_and_music_controls",
+        "deploy_starts_active_operation",
+        "focus_callback_pauses_active_game",
+        "focus_return_does_not_resume_or_advance_time",
+        "manual_resume_clears_focus_pause",
+        "restart_requires_confirmation_and_preserves_attempt",
+        "cancel_restart_keeps_existing_attempt_paused",
+        "confirmed_restart_returns_clean_briefing",
+        "tactical_pool_has_seven_fixed_components",
+        "real_charge_input_drives_semantic_windup",
+        "reduced_effects_retains_semantic_charge",
+        "accepted_charge_release_emits_cue",
+        "transient_cues_decay_to_zero",
+        "standard_cue_has_bounded_attack_and_decay",
+        "reduced_cue_emits_fewer_decorations",
+        "presentation_does_not_change_health_or_energy",
+        "stress_drops_decorations_without_allocating_components",
+        "stress_cues_expire_and_leave_semantic_layer",
+        "real_dash_input_emits_directional_trail"
+      ]
+    }
+  ],
+  "supplementaryVerification": {
+    "arcCurrentLocal": {
+      "unitTests": 284,
+      "uiScenarios": 17,
+      "scope": "local checks reported by the implementation and release verification tasks; historical GitHub baseline is identified separately"
+    },
+    "aegisShipping": {
+      "checks": 9,
+      "scope": "actual local Windows Shipping window/input checks, separate from Editor art fixtures; not a human playtest",
+      "receipt": "https://github.com/QiQiyzhu/aegis-arena/blob/c0f79e8c592c18be0ec6315a63de4afd6c7311e3/evidence/art-v2.5/shipping-ui-smoke.json"
+    },
+    "showcasePage": {
+      "receipt": "page-verification.json",
+      "viewports": [
+        [
+          1366,
+          768
+        ],
+        [
+          1600,
+          900
+        ],
+        [
+          390,
+          844
+        ]
+      ],
+      "scope": "page interactions, image pairing, resource loading, reduced motion, no-JS baseline, image-failure fallback and video playback; not game regression"
+    }
+  }
+}

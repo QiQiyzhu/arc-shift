@@ -3,7 +3,8 @@ import type { World } from '../game/world';
 import { ENEMIES } from '../data/enemies';
 import { polygon } from './arena';
 import { drawHeldWeapon, drawSupplies, drawSwordArc } from './arsenal';
-import { fillDisc, fillShadow, strokeRing } from './discs';
+import { fillDisc, fillShadow } from './discs';
+import { ARC_PALETTE, drawHazardBody } from '../effects/arcane';
 export function glow(
   g: Phaser.GameObjects.Graphics,
   x: number,
@@ -26,32 +27,7 @@ export function drawActors(
   reducedMotion = false,
 ) {
   drawSupplies(g, w, t);
-  for (const h of w.hazards) {
-    const c = h.friendly ? (h.type === 'well' ? 0xb3a0ff : 0xffa36b) : 0xff5977;
-    g.lineStyle(2, c, 0.7);
-    strokeRing(g, h.x, h.y, h.r, c, 0.7);
-    g.fillStyle(c, h.friendly ? 0.1 : 0.12);
-    fillDisc(g, h.x, h.y, h.r);
-    if (!h.friendly) {
-      g.fillStyle(c, 0.22);
-      fillDisc(g, h.x, h.y, h.r * (1 - h.time / h.duration));
-      g.lineStyle(1, c, 0.4);
-      g.lineBetween(h.x - 12, h.y, h.x + 12, h.y);
-      g.lineBetween(h.x, h.y - 12, h.x, h.y + 12);
-    } else if (h.type === 'well') {
-      for (let i = 0; i < 4; i++) {
-        g.lineStyle(1, c, 0.55 - i * 0.08);
-        g.strokeEllipse(h.x, h.y, h.r * (1 + i * 0.3), h.r * (0.4 + i * 0.2));
-      }
-      glow(g, h.x, h.y, 20, c, 0.12);
-      for (let i = 0; i < 10; i++) {
-        const a = t * 1.8 + (i * Math.PI) / 5;
-        const r = h.r * (0.4 + 0.5 * ((t * 0.4 + i / 10) % 1));
-        g.fillStyle(0xe3b5ff, 0.6);
-        g.fillCircle(h.x + Math.cos(a) * r, h.y + Math.sin(a) * r, 2);
-      }
-    }
-  }
+  for (const h of w.hazards) drawHazardBody(g, h, t, reducedMotion);
   for (const e of w.enemies) {
     const c = e.flash > 0 ? 0xffffff : ENEMIES[e.kind].color;
     const boss = e.radius > 35;
@@ -68,21 +44,21 @@ export function drawActors(
     }
     if (e.kind === 'oracle' && e.state === 'attack') {
       const a = Math.atan2(e.aimY - e.y, e.aimX - e.x) + (2.6 - e.timer) * 0.42;
-      g.lineStyle(32, 0xe5a0ff, 0.12);
+      g.lineStyle(32, ARC_PALETTE.danger, reducedMotion ? 0.08 : 0.12);
       g.lineBetween(
         e.x - Math.cos(a) * 1100,
         e.y - Math.sin(a) * 1100,
         e.x + Math.cos(a) * 1100,
         e.y + Math.sin(a) * 1100,
       );
-      g.lineStyle(8, 0xdc9fff, 0.7);
+      g.lineStyle(8, ARC_PALETTE.danger, 0.85);
       g.lineBetween(
         e.x - Math.cos(a) * 1100,
         e.y - Math.sin(a) * 1100,
         e.x + Math.cos(a) * 1100,
         e.y + Math.sin(a) * 1100,
       );
-      g.lineStyle(2, 0xffeaff, 1);
+      g.lineStyle(2, ARC_PALETTE.dangerEdge, 1);
       g.lineBetween(
         e.x - Math.cos(a) * 1100,
         e.y - Math.sin(a) * 1100,
@@ -278,9 +254,9 @@ export function drawActors(
     // Hostile bullets use an opaque rim and bright centre, keeping them legible
     // against both painterly rooms and multicolour friendly resonance effects.
     if (b.enemy) {
-      g.fillStyle(0x220b1c, 0.95);
+      g.fillStyle(ARC_PALETTE.ink, 0.95);
       g.fillCircle(b.x, b.y, b.radius + 2.2);
-      g.lineStyle(1.3, 0xff557e, 1);
+      g.lineStyle(1.3, ARC_PALETTE.danger, 1);
       g.strokeCircle(b.x, b.y, b.radius + 1.2);
     }
     g.lineStyle(b.enemy ? 10 : 9, b.color, 0.08);

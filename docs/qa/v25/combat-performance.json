@@ -1,0 +1,132 @@
+{
+  "recordedAt": "2026-10-07T15:38:28.469Z",
+  "methodology": "Local headless Edge, 1440x900, same seeded 100-enemy high-HP DEV stress fixture and scripted simulation inputs. Actual Phaser renderer; three sequential ten-second windows. Other agents may be active. Presentation timings are CPU submission, frame timings are rAF wall time. Not an ordinary-player session, isolated benchmark, or hardware SLA.",
+  "samples": [
+    {
+      "mode": "normal",
+      "seed": 73129,
+      "enemies": 100,
+      "sampleMs": 10004.09999999553,
+      "frames": 1300,
+      "averageFps": 129.946721844102,
+      "frameMs": {
+        "p50": 6.900000000001455,
+        "p95": 13.899999999999636,
+        "p99": 20.800000000000182
+      },
+      "presentationMs": {
+        "p50": 0.8000000044703484,
+        "p95": 1.7000000029802322,
+        "p99": 2.6999999955296516
+      },
+      "simulationMs": {
+        "p50": 0.10000000149011612,
+        "p95": 0.8999999985098839,
+        "p99": 1.4000000059604645
+      },
+      "simulatedTicks": 599,
+      "simulatedSeconds": 9.983333333333333,
+      "max": {
+        "particles": 360,
+        "signatures": 34,
+        "beams": 0,
+        "bursts": 64,
+        "children": 462,
+        "projectiles": 176
+      },
+      "projectilePoolMisses": 0,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+      "settings": {
+        "focusedEffects": false,
+        "reducedMotion": false
+      },
+      "reducedActive": false,
+      "errors": []
+    },
+    {
+      "mode": "focused",
+      "seed": 73129,
+      "enemies": 100,
+      "sampleMs": 10001.2,
+      "frames": 1362,
+      "averageFps": 136.18365796104467,
+      "frameMs": {
+        "p50": 6.900000000001455,
+        "p95": 7.100000000000364,
+        "p99": 20.799999999999272
+      },
+      "presentationMs": {
+        "p50": 0.7999999970197678,
+        "p95": 1.5,
+        "p99": 2
+      },
+      "simulationMs": {
+        "p50": 0.10000000149011612,
+        "p95": 0.6000000014901161,
+        "p99": 0.9000000059604645
+      },
+      "simulatedTicks": 601,
+      "simulatedSeconds": 10.016666666666667,
+      "max": {
+        "particles": 72,
+        "signatures": 10,
+        "beams": 0,
+        "bursts": 4,
+        "children": 402,
+        "projectiles": 176
+      },
+      "projectilePoolMisses": 0,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+      "settings": {
+        "focusedEffects": true,
+        "reducedMotion": false
+      },
+      "reducedActive": true,
+      "errors": []
+    },
+    {
+      "mode": "reduced-motion",
+      "seed": 73129,
+      "enemies": 100,
+      "sampleMs": 10010.8,
+      "frames": 1168,
+      "averageFps": 116.67399208854438,
+      "frameMs": {
+        "p50": 7,
+        "p95": 14.099999999999909,
+        "p99": 21
+      },
+      "presentationMs": {
+        "p50": 0.8999999985098839,
+        "p95": 1.7000000029802322,
+        "p99": 2.4000000059604645
+      },
+      "simulationMs": {
+        "p50": 0.19999999552965164,
+        "p95": 0.7000000029802322,
+        "p99": 1.1000000014901161
+      },
+      "simulatedTicks": 601,
+      "simulatedSeconds": 10.016666666666667,
+      "max": {
+        "particles": 72,
+        "signatures": 10,
+        "beams": 0,
+        "bursts": 4,
+        "children": 402,
+        "projectiles": 176
+      },
+      "projectilePoolMisses": 0,
+      "renderer": "ANGLE (Intel, Intel(R) UHD Graphics (0x0000A788) Direct3D11 vs_5_0 ps_5_0, D3D11)",
+      "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/154.0.0.0 Safari/537.36 Edg/154.0.0.0",
+      "settings": {
+        "focusedEffects": false,
+        "reducedMotion": true
+      },
+      "reducedActive": true,
+      "errors": []
+    }
+  ]
+}

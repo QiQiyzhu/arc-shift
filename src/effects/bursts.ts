@@ -20,8 +20,8 @@ export class BurstSprites {
       if (!texture) continue;
       const c = texture.context;
       const glow = c.createRadialGradient(64, 64, 0, 64, 64, 62);
-      glow.addColorStop(0, kind === 'shock' ? '#ffffff00' : '#ffffffc8');
-      glow.addColorStop(0.25, '#ffffff30');
+      glow.addColorStop(0, kind === 'shock' ? '#ffffff00' : '#ffffff65');
+      glow.addColorStop(0.25, '#ffffff12');
       glow.addColorStop(1, '#ffffff00');
       c.fillStyle = glow;
       c.fillRect(0, 0, 128, 128);
@@ -30,11 +30,6 @@ export class BurstSprites {
         c.lineWidth = 2.5;
         c.beginPath();
         c.arc(64, 64, 46, 0, Math.PI * 2);
-        c.stroke();
-        c.strokeStyle = '#ffffff62';
-        c.lineWidth = 1.5;
-        c.beginPath();
-        c.arc(64, 64, 28, 0, Math.PI * 2);
         c.stroke();
       } else {
         c.fillStyle = '#fffffff2';
@@ -45,7 +40,7 @@ export class BurstSprites {
           c.lineTo(116, 64);
           c.lineTo(72, 74);
         } else {
-          const points = kind === 'crit' ? 12 : 16;
+          const points = 8;
           for (let i = 0; i < points; i++) {
             const angle = (Math.PI * 2 * i) / points,
               r =
@@ -75,12 +70,12 @@ export class BurstSprites {
   emit(e: EffectEvent, angle: number, reduced: boolean) {
     const muzzle = e.kind === 'shot',
       contact = e.kind === 'hit' || e.kind === 'crit' || e.kind === 'impact';
-    const shock = e.kind === 'bomb' || e.kind === 'kill';
+    const shock = e.kind === 'kill'; // Major blast extent belongs to the sigil pass.
     if (!muzzle && !contact && !shock) return;
     if (reduced && e.kind !== 'crit' && e.kind !== 'impact') return;
     let burst = this.items.find((b) => b.life <= 0);
     if (!burst) {
-      if (this.items.length >= 96) {
+      if (this.items.length >= 64) {
         this.dropped++;
         return;
       }
@@ -94,18 +89,18 @@ export class BurstSprites {
       this.items.push(burst);
     }
     const cannon = muzzle && e.weapon === 'cannon';
-    burst.max = cannon ? 0.16 : muzzle ? 0.075 : shock ? 0.26 : 0.13;
+    burst.max = cannon ? 0.12 : muzzle ? 0.06 : shock ? 0.2 : 0.085;
     burst.life = burst.max;
     burst.scale = cannon
-      ? 0.75
+      ? 0.58
       : muzzle
         ? 0.36
         : e.kind === 'bomb'
           ? Math.min(2.6, (e.amount || 80) / 50)
           : e.kind === 'crit'
-            ? 0.75
+            ? 0.5
             : shock
-              ? 0.55
+              ? 0.42
               : 0.38;
     burst.expanding = shock;
     const offset = cannon ? 18 : 0;

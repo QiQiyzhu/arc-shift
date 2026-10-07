@@ -19,32 +19,39 @@ function friendlyTextures(scene: Phaser.Scene) {
       if (!texture) continue;
       const c = texture.context;
       if (!core) {
-        const halo = c.createRadialGradient(96, 32, 1, 96, 32, 25);
-        halo.addColorStop(0, '#ffffffad');
-        halo.addColorStop(0.35, '#ffffff45');
+        const halo = c.createRadialGradient(96, 32, 1, 96, 32, 17);
+        halo.addColorStop(0, '#ffffff65');
+        halo.addColorStop(0.35, '#ffffff20');
         halo.addColorStop(1, '#ffffff00');
         c.fillStyle = halo;
         c.fillRect(66, 2, 60, 60);
         const tail = c.createLinearGradient(0, 0, 98, 0);
         tail.addColorStop(0, '#ffffff00');
-        tail.addColorStop(0.65, '#ffffff30');
-        tail.addColorStop(1, '#ffffffde');
+        tail.addColorStop(0.65, '#ffffff20');
+        tail.addColorStop(1, '#ffffff95');
         c.fillStyle = tail;
         c.beginPath();
         c.moveTo(0, 32);
-        c.quadraticCurveTo(68, 24, 98, 19);
-        c.lineTo(102, 43);
-        c.quadraticCurveTo(62, 38, 0, 32);
+        c.lineTo(96, 28);
+        c.lineTo(104, 32);
+        c.lineTo(96, 36);
         c.fill();
         if (shape === 'lance') {
           c.fillStyle = '#ffffff77';
           c.fillRect(3, 29, 98, 6);
         }
         if (shape === 'shell' || shape === 'meteor') {
-          c.strokeStyle = '#ffffffe0';
-          c.lineWidth = 1.8;
+          c.strokeStyle = '#ffffff88';
+          c.lineWidth = 1;
           c.beginPath();
-          c.arc(96, 32, shape === 'shell' ? 16 : 13, 0, Math.PI * 2);
+          const radius = shape === 'shell' ? 11 : 10;
+          for (let i = 0; i <= 6; i++) {
+            const a = (i * Math.PI) / 3;
+            const x = 96 + Math.cos(a) * radius,
+              y = 32 + Math.sin(a) * radius;
+            if (i === 0) c.moveTo(x, y);
+            else c.lineTo(x, y);
+          }
           c.stroke();
         }
       } else {
@@ -67,6 +74,14 @@ function friendlyTextures(scene: Phaser.Scene) {
           c.lineTo(85, 29.8);
           c.lineTo(30, 32);
           c.lineTo(85, 34.2);
+        } else if (shape === 'shell' || shape === 'meteor') {
+          for (let i = 0; i < 6; i++) {
+            const a = (i * Math.PI) / 3;
+            const x = 96 + Math.cos(a) * 7,
+              y = 32 + Math.sin(a) * 7;
+            if (i === 0) c.moveTo(x, y);
+            else c.lineTo(x, y);
+          }
         } else
           c.ellipse(
             96,
@@ -98,20 +113,23 @@ export class ProjectileSprites {
       if (!texture) return;
       const c = texture.context;
       const tail = c.createLinearGradient(0, 0, 48, 0);
-      tail.addColorStop(0, '#ff527900');
-      tail.addColorStop(1, '#ff527985');
+      tail.addColorStop(0, '#ff704f00');
+      tail.addColorStop(1, '#ff704f65');
       c.fillStyle = tail;
       c.fillRect(0, 13, 48, 6);
       c.beginPath();
       c.arc(48, 16, 11, 0, Math.PI * 2);
-      c.fillStyle = '#270e22';
+      c.fillStyle = '#07171b';
       c.fill();
       c.lineWidth = 2;
-      c.strokeStyle = '#ff6f96';
+      c.strokeStyle = '#ff704f';
       c.stroke();
       c.beginPath();
-      c.arc(48, 16, 5.5, 0, Math.PI * 2);
-      c.fillStyle = '#fff4d9';
+      c.moveTo(54, 16);
+      c.lineTo(44, 11);
+      c.lineTo(44, 21);
+      c.closePath();
+      c.fillStyle = '#ffc08a';
       c.fill();
       texture.refresh();
     }
@@ -165,7 +183,7 @@ export class ProjectileSprites {
           .setRotation(angle)
           .setScale(scale * (b.shape === 'lance' ? 1.15 : 1), scale)
           .setTint(b.color)
-          .setAlpha(reduced ? 0.18 : 0.64)
+          .setAlpha(reduced ? 0.08 : 0.44)
           .setVisible(true);
         pair.core
           .setTexture(`friendly-${b.shape}-core-v21`)

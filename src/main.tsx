@@ -7,6 +7,7 @@ import '../app/pilgrimage.css';
 import '../app/resonance.css';
 import '../app/coach.css';
 import '../app/release.css';
+import '../app/art-direction.css';
 import '@fontsource/space-grotesk/400.css';
 import '@fontsource/space-grotesk/500.css';
 import '@fontsource/space-grotesk/700.css';

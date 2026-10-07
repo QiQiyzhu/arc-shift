@@ -11,11 +11,13 @@ import { ProjectileSprites } from '../render/projectile-sprites';
 import type { Input } from './types';
 import { ActionInput, type PadSnapshot } from '../input/actions';
 import { loadBindings } from '../input/bindings';
+import { ARC_PALETTE, drawDangerSeal } from '../effects/arcane';
 export class ArcScene extends Phaser.Scene {
   engine: Engine;
   effects!: Effects;
   floor!: Phaser.GameObjects.Image;
   graphics!: Phaser.GameObjects.Graphics;
+  cueGraphics!: Phaser.GameObjects.Graphics;
   terrainGraphics!: Phaser.GameObjects.Graphics;
   private actors?: ActorSprites;
   private bullets?: ProjectileSprites;
@@ -35,6 +37,8 @@ export class ArcScene extends Phaser.Scene {
       actorImages: this.actors?.count || 0,
       bulletImages: this.bullets?.count || 0,
       burstImages: this.effects?.bursts.count || 0,
+      signatureEffects: this.effects?.signatures.pool.count || 0,
+      decorativeParticles: this.effects?.particles.count || 0,
       children: this.children?.length || 0,
     };
   }
@@ -164,25 +168,34 @@ export class ArcScene extends Phaser.Scene {
       .setDepth(0.9)
       .setVisible(false);
     this.graphics = this.add.graphics().setDepth(3);
+    // Functional warnings outrank bloom and projectiles; floating text is depth8.
+    this.cueGraphics = this.add.graphics().setDepth(6);
     this.actors = new ActorSprites(this);
     this.bullets = new ProjectileSprites(this);
-    this.effects = new Effects(this, () => this.engine.save.settings.language ?? 'zh');
+    this.effects = new Effects(
+      this,
+      () => this.engine.save.settings.language ?? 'zh',
+    );
     this.input.mouse!.disableContextMenu();
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);
     this.unsubscribe = this.engine.world.bus.on((e) => {
-      this.effects.emit(e, this.engine.world.player.angle);
-      if (
-        !this.reducedMotion &&
-        (e.kind === 'crit' ||
-          e.kind === 'hurt' ||
-          e.kind === 'phase' ||
-          (e.kind === 'impact' && !this.engine.save.settings.focusedEffects))
-      )
-        this.cameras.main.shake(
-          e.kind === 'phase' ? 180 : e.kind === 'impact' ? 40 : 70,
-          e.kind === 'hurt' ? 0.003 : e.kind === 'impact' ? 0.0008 : 0.0012,
-        );
+      this.effects.reduced =
+        this.reducedMotion || this.engine.save.settings.focusedEffects === true;
+      const player = this.engine.world.player;
+      const angle =
+        e.kind === 'dash' &&
+        e.color !== 0xaec7ff &&
+        Math.hypot(player.vx, player.vy) > 1
+          ? Math.atan2(player.vy, player.vx)
+          : player.angle;
+      this.effects.emit(e, angle);
+      const feedback = this.effects.signatures.cameraFeedback(
+        e,
+        this.effects.reduced,
+      );
+      if (feedback)
+        this.cameras.main.shake(feedback.duration, feedback.strength);
     });
     window.addEventListener('blur', this.onBlur);
     window.addEventListener('focus', this.onFocus);
@@ -305,6 +318,7 @@ export class ArcScene extends Phaser.Scene {
       this.renderMetrics.terrainBuilds++;
     }
     this.graphics.clear();
+    this.cueGraphics.clear();
     this.terrainGraphics.clear();
     drawTerrainZones(this.terrainGraphics, w);
     for (let i = 0; i < (this.effects.reduced ? 0 : 20); i++) {
@@ -317,7 +331,7 @@ export class ArcScene extends Phaser.Scene {
       this.graphics.fillCircle(x, y, i % 3 === 0 ? 1.5 : 1);
     }
     const illustrated =
-      this.actors?.update(w, time / 1000, dt, this.reducedMotion) || false;
+      this.actors?.update(w, time / 1000, dt, this.effects.reduced) || false;
     const hostileSprites =
       this.bullets?.update(w, this.effects.reduced) || false;
     drawActors(
@@ -326,51 +340,52 @@ export class ArcScene extends Phaser.Scene {
       time / 1000,
       illustrated,
       hostileSprites,
-      this.reducedMotion,
+      this.effects.reduced,
     );
     this.effects.draw(this.graphics, dt);
-    // Enemy intent is the final graphics pass, above friendly trails and bursts.
+    // Enemy intent is the final overlay pass, above friendly trails and bursts.
+    const cues = this.cueGraphics;
     for (const enemy of w.enemies)
-      drawTelegraph(this.graphics, enemy, time / 1000, this.reducedMotion);
+      drawTelegraph(cues, enemy, time / 1000, this.effects.reduced);
     for (const hazard of w.hazards)
       if (!hazard.friendly) {
-        this.graphics.lineStyle(2, 0xffa8b6, 0.85);
-        strokeRing(this.graphics, hazard.x, hazard.y, hazard.r, 0xffa8b6, 0.85);
-        this.graphics.lineBetween(
-          hazard.x - 7,
-          hazard.y,
-          hazard.x + 7,
-          hazard.y,
-        );
-        this.graphics.lineBetween(
+        drawDangerSeal(
+          cues,
           hazard.x,
-          hazard.y - 7,
-          hazard.x,
-          hazard.y + 7,
+          hazard.y,
+          hazard.r,
+          1 - hazard.time / hazard.duration,
+          this.effects.reduced,
         );
       }
     if (w.phase === 'playing') {
       // A stable contact ring locates the player even inside a full resonance burst.
-      this.graphics.lineStyle(4, 0x081419, 0.95);
-      this.graphics.strokeCircle(w.player.x, w.player.y, 17);
-      this.graphics.lineStyle(1.5, 0xd5ffe8, 0.95);
-      this.graphics.strokeCircle(w.player.x, w.player.y, 17);
-      this.graphics.fillStyle(0xe4fff2, 1);
-      this.graphics.fillCircle(w.player.x, w.player.y, 2.5);
-      this.graphics.lineStyle(1, 0xd0f7c0, 0.8);
-      this.graphics.strokeCircle(input.aimX, input.aimY, 9);
-      this.graphics.lineBetween(
-        input.aimX - 14,
-        input.aimY,
-        input.aimX - 5,
-        input.aimY,
+      strokeRing(cues, w.player.x, w.player.y, 18, ARC_PALETTE.ink, 0.95, 5);
+      strokeRing(
+        cues,
+        w.player.x,
+        w.player.y,
+        18,
+        ARC_PALETTE.ivory,
+        0.95,
+        1.5,
       );
-      this.graphics.lineBetween(
-        input.aimX + 5,
-        input.aimY,
-        input.aimX + 14,
-        input.aimY,
-      );
+      cues.lineStyle(2, ARC_PALETTE.ally, 0.95);
+      for (let i = 0; i < 4; i++) {
+        const a = (i * Math.PI) / 2;
+        cues.lineBetween(
+          w.player.x + Math.cos(a) * 21,
+          w.player.y + Math.sin(a) * 21,
+          w.player.x + Math.cos(a) * 25,
+          w.player.y + Math.sin(a) * 25,
+        );
+      }
+      cues.fillStyle(ARC_PALETTE.ivory, 1);
+      cues.fillCircle(w.player.x, w.player.y, 2.5);
+      cues.lineStyle(1, ARC_PALETTE.ally, 0.8);
+      cues.strokeCircle(input.aimX, input.aimY, 9);
+      cues.lineBetween(input.aimX - 14, input.aimY, input.aimX - 5, input.aimY);
+      cues.lineBetween(input.aimX + 5, input.aimY, input.aimX + 14, input.aimY);
     }
     this.renderMetrics.presentationMs = performance.now() - drawBegin;
     this.renderMetrics.frames++;

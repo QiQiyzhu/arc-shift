@@ -4,6 +4,12 @@ import type { EffectEvent } from '../core/events';
 import { fillDisc, strokeRing, renderDiagnostics } from '../render/discs';
 import { BurstSprites } from './bursts';
 import { translateCopy, type Language } from '../ui/i18n';
+import {
+  ArcaneSignatures,
+  ARC_PALETTE,
+  VFX_BUDGET,
+  effectColor,
+} from './arcane';
 
 function labelContent(
   t: Phaser.GameObjects.Text,
@@ -23,8 +29,17 @@ function labelContent(
 }
 export class Effects {
   readonly bursts: BurstSprites;
+  readonly signatures = new ArcaneSignatures();
   reduced = false;
-  particles = new Pool(650, () => ({
+  private noise = 0x6a09e667;
+  private random() {
+    // Presentation-only random stream. Never consumes World.rng or Math.random.
+    this.noise ^= this.noise << 13;
+    this.noise ^= this.noise >>> 17;
+    this.noise ^= this.noise << 5;
+    return (this.noise >>> 0) / 4294967296;
+  }
+  particles = new Pool(VFX_BUDGET.particles, () => ({
     active: false,
     x: 0,
     y: 0,
@@ -46,6 +61,7 @@ export class Effects {
     y2: number;
     life: number;
     color: number;
+    seed: number;
   }[] = [];
   constructor(
     private scene: Phaser.Scene,
@@ -66,7 +82,9 @@ export class Effects {
       );
   }
   emit(e: EffectEvent, angle = 0) {
-    this.bursts.emit(e, angle, this.reduced);
+    const color = effectColor(e);
+    this.signatures.emit(e, angle, this.reduced);
+    this.bursts.emit({ ...e, color }, angle, this.reduced);
     if (e.x2 !== undefined) {
       if (this.beams.length >= (this.reduced ? 12 : 48)) return;
       this.beams.push({
@@ -75,7 +93,8 @@ export class Effects {
         x2: e.x2,
         y2: e.y2!,
         life: 0.22,
-        color: e.color,
+        color,
+        seed: this.random() * Math.PI * 2,
       });
       return;
     }
@@ -83,7 +102,7 @@ export class Effects {
       e.kind === 'pickup'
         ? 3
         : e.kind === 'bomb'
-          ? 32
+          ? 20
           : e.kind === 'dash'
             ? 2
             : e.kind === 'shot'
@@ -91,69 +110,52 @@ export class Effects {
                 ? 7
                 : 2
               : e.kind === 'kill'
-                ? 19
+                ? 12
                 : e.kind === 'phase' || e.kind === 'victory'
-                  ? 65
+                  ? 30
                   : 9;
-    for (let i = 0; i < Math.ceil(count * (this.reduced ? 0.25 : 1)); i++) {
+    const available = Math.max(
+      0,
+      (this.reduced ? VFX_BUDGET.reducedParticles : VFX_BUDGET.particles) -
+        this.particles.count,
+    );
+    const amount = Math.min(
+      available,
+      Math.ceil(count * (this.reduced ? 0.15 : 1)),
+    );
+    for (let i = 0; i < amount; i++) {
       const p = this.particles.acquire();
       if (!p) break;
       const a =
         e.kind === 'shot'
-          ? angle + (Math.random() - 0.5) * 0.7
-          : Math.random() * Math.PI * 2;
+          ? angle + (this.random() - 0.5) * 0.7
+          : this.random() * Math.PI * 2;
       const speed =
         e.kind === 'dash'
           ? 0
           : e.kind === 'shot'
             ? e.weapon === 'cannon'
-              ? 120 + Math.random() * 150
-              : 100 + Math.random() * 80
-            : 40 + Math.random() * 170;
+              ? 120 + this.random() * 150
+              : 100 + this.random() * 80
+            : 40 + this.random() * 170;
+      const life = 0.16 + this.random() * 0.28;
       Object.assign(p, {
         x: e.x,
         y: e.y,
         vx: Math.cos(a) * speed,
         vy: Math.sin(a) * speed,
-        life: 0.2 + Math.random() * 0.45,
-        maxLife: 0.65,
-        size: e.kind === 'dash' ? 8 : 1 + Math.random() * 3,
-        color: e.color,
+        life,
+        maxLife: life,
+        size: e.kind === 'dash' ? 3 : 1 + this.random() * 2,
+        color,
         ring: false,
-        ghost: e.kind === 'dash' && i === 0,
+        ghost: false,
         spark:
           e.kind === 'shot' ||
           e.kind === 'hit' ||
           e.kind === 'crit' ||
           e.kind === 'impact',
       });
-    }
-    if (
-      [
-        'skill',
-        'reward',
-        'phase',
-        'kill',
-        'victory',
-        'bomb',
-        'impact',
-      ].includes(e.kind)
-    ) {
-      const p = this.particles.acquire();
-      if (p)
-        Object.assign(p, {
-          x: e.x,
-          y: e.y,
-          vx: 0,
-          vy: 0,
-          life: e.kind === 'impact' ? 0.12 : 0.5,
-          maxLife: e.kind === 'impact' ? 0.12 : 0.5,
-          size: e.amount || 75,
-          color: e.color,
-          ring: true,
-          ghost: false,
-          spark: false,
-        });
     }
     if (
       (e.kind === 'hit' || e.kind === 'crit' || e.kind === 'hurt') &&
@@ -166,13 +168,13 @@ export class Effects {
           t,
           e.kind === 'hurt' ? `−${e.amount}` : String(e.amount),
           e.kind === 'crit'
-            ? '#e0ffa5'
+            ? '#e8bc70'
             : e.kind === 'hurt'
-              ? '#ff849b'
-              : '#c6eff0',
+              ? '#ffc08a'
+              : '#e0ede8',
           e.kind === 'crit' ? 25 : 17,
         );
-        t.setPosition(e.x + (Math.random() - 0.5) * 20, e.y - 22)
+        t.setPosition(e.x + (this.random() - 0.5) * 16, e.y - 22)
           .setVisible(true)
           .setAlpha(1);
         t.setData('life', 0.65);
@@ -182,7 +184,12 @@ export class Effects {
     if (e.reaction) {
       const label = this.labels.find((t) => !t.visible);
       if (label) {
-        labelContent(label, translateCopy(this.language(), e.reaction), '#ffe0b2', 14);
+        labelContent(
+          label,
+          translateCopy(this.language(), e.reaction),
+          '#ffe0b2',
+          14,
+        );
         label
           .setPosition(e.x - 24, e.y - 34)
           .setVisible(true)
@@ -194,8 +201,15 @@ export class Effects {
   }
   draw(g: Phaser.GameObjects.Graphics, dt: number) {
     this.bursts.update(dt, this.reduced);
+    this.signatures.advance(dt, this.reduced);
+    this.signatures.draw(g, this.reduced);
+    let visibleParticles = 0;
     for (const p of this.particles.items) {
       if (!p.active) continue;
+      if (this.reduced && visibleParticles++ >= VFX_BUDGET.reducedParticles) {
+        p.active = false;
+        continue;
+      }
       p.life -= dt;
       if (p.life <= 0) {
         p.active = false;
@@ -203,7 +217,7 @@ export class Effects {
       }
       p.x += p.vx * dt;
       p.y += p.vy * dt;
-      const alpha = Math.min(1, p.life / p.maxLife);
+      const alpha = Math.min(1, p.life / p.maxLife) ** 1.5;
       if (p.ghost) {
         g.fillStyle(p.color, alpha * 0.16);
         g.lineStyle(1, p.color, alpha * 0.45);
@@ -232,7 +246,7 @@ export class Effects {
         g.lineBetween(p.x, p.y, p.x - p.vx * 0.035, p.y - p.vy * 0.035);
       } else {
         if (!this.reduced) {
-          g.fillStyle(p.color, alpha * 0.12);
+          g.fillStyle(p.color, alpha * 0.065);
           fillDisc(g, p.x, p.y, p.size * 3);
         }
         g.fillStyle(p.color, alpha);
@@ -257,31 +271,33 @@ export class Effects {
     this.beams.length = live;
     for (const b of this.beams) {
       b.life -= dt;
-      g.lineStyle(8, b.color, b.life * 0.7);
+      g.lineStyle(this.reduced ? 2 : 5, b.color, b.life * 0.7);
       g.lineBetween(b.x, b.y, b.x2, b.y2);
-      g.lineStyle(2, 0xf0eaff, b.life * 4);
+      g.lineStyle(1.5, ARC_PALETTE.ivory, b.life * 4);
       g.beginPath();
       g.moveTo(b.x, b.y);
       for (let i = 1; i < 7; i++)
         g.lineTo(
           b.x +
             ((b.x2 - b.x) * i) / 7 +
-            (this.reduced ? 0 : (Math.random() - 0.5) * 18),
+            (this.reduced ? 0 : Math.sin(b.seed + i * 4.2) * 7),
           b.y +
             ((b.y2 - b.y) * i) / 7 +
-            (this.reduced ? 0 : (Math.random() - 0.5) * 18),
+            (this.reduced ? 0 : Math.cos(b.seed + i * 3.6) * 7),
         );
       g.lineTo(b.x2, b.y2);
       g.strokePath();
     }
   }
   clear() {
+    this.signatures.clear();
     this.bursts.clear();
     this.particles.clear();
     this.beams = [];
     this.labels.forEach((t) => t.setVisible(false));
   }
   dispose() {
+    this.signatures.clear();
     this.bursts.dispose();
     for (const label of this.labels) label.destroy();
     this.labels = [];
