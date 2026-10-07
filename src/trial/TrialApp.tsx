@@ -1,3 +1,5 @@
+import { useTranslation } from '../ui/i18n';
+import { LanguageToggle } from '../ui/LanguageToggle';
 import { useEffect, useState } from 'react';
 import {
   Flame,
@@ -39,6 +41,7 @@ export default function TrialApp({
   config?: TrialConfig;
   onBack?: () => void;
 }) {
+  const t = useTranslation();
   const [session, setSession] = useState(() => new BuildTrialSession(config)),
     [, render] = useState(0),
     [focus, setFocus] = useState(''),
@@ -140,17 +143,25 @@ export default function TrialApp({
             leave();
           }}
         >
-          ARC<span>{'//'}</span>SHIFT
+          ARC<span>{t('//')}</span>SHIFT
         </a>
         <span>
-          THE ASTRAL FORGE <i>/</i> 星铸协议 · 2.1
+          THE ASTRAL FORGE <i>/</i> {t('星铸协议 · 2.3')}
         </span>
         <div className="trial-header-actions">
+          <LanguageToggle
+            onChange={(language) => {
+              session.engine.save.settings.language = language;
+              sound.settings.language = language;
+            }}
+          />
           <button
-            aria-label={
-              sound.settings.muted || !sound.context ? '开启声音' : '静音'
-            }
-            title={sound.settings.muted || !sound.context ? '开启声音' : '静音'}
+            aria-label={t(
+              sound.settings.muted || !sound.context ? '开启声音' : '静音',
+            )}
+            title={t(
+              sound.settings.muted || !sound.context ? '开启声音' : '静音',
+            )}
             onClick={() => {
               const locked = !sound.context;
               unlock();
@@ -164,10 +175,12 @@ export default function TrialApp({
               <Volume2 size={16} />
             )}
           </button>
-          <button onClick={leave}>{onBack ? '返回配置' : '返回主菜单'}</button>
+          <button onClick={leave}>
+            {t(onBack ? '返回配置' : '返回主菜单')}
+          </button>
         </div>
       </header>
-      <nav className="trial-stages" aria-label="试炼进度">
+      <nav className="trial-stages" aria-label={t('试炼进度')}>
         {session.config.stages.map((s, i) => (
           <div
             key={s.name}
@@ -177,13 +190,15 @@ export default function TrialApp({
           >
             <b>0{i + 1}</b>
             <span>
-              {s.name}
+              {t(s.name)}
               <small>
-                {i < progressStage
-                  ? '已完成'
-                  : i === progressStage
-                    ? '当前阶段'
-                    : '下一阶段'}
+                {t(
+                  i < progressStage
+                    ? '已完成'
+                    : i === progressStage
+                      ? '当前阶段'
+                      : '下一阶段',
+                )}
               </small>
             </span>
           </div>
@@ -195,31 +210,38 @@ export default function TrialApp({
             <div>
               <p>BUILD · FIGHT · RECONSIDER</p>
               <h1>
-                {session.stage === 0
-                  ? '每一格能量，都有代价。'
-                  : '下一场，重新作出选择。'}
+                {t(
+                  session.stage === 0
+                    ? '每一格能量，都有代价。'
+                    : '下一场，重新作出选择。',
+                )}
               </h1>
               <span>
-                {identity.name}
-                {session.weaponLocked ? '已锁定' : '可选武装'} · 等级 3 · 最多{' '}
-                {config.slots} 个协议 · 阶段间可原价撤下重配
+                {t(identity.name)}
+                {t.copy(
+                  session.weaponLocked ? '已锁定' : '可选武装',
+                  session.weaponLocked ? ' · Locked' : ' · Weapon selectable',
+                )}{' '}
+                {t('· 等级 3 · 最多')}
+                {t(' ')}
+                {config.slots} {t('个协议 · 阶段间可原价撤下重配')}
               </span>
             </div>
             <div className="trial-budget">
-              <strong aria-label="剩余额度">{session.remaining}</strong>
+              <strong aria-label={t('剩余额度')}>{session.remaining}</strong>
               <span>
                 / {session.capacity}
-                <small>剩余可用能量</small>
+                <small>{t('剩余可用能量')}</small>
               </span>
             </div>
           </div>
           {!session.weaponLocked && (
-            <div className="trial-armory" aria-label="选择试炼武装">
+            <div className="trial-armory" aria-label={t('选择试炼武装')}>
               {session.config.weapons.map((id) => (
                 <button
                   key={id}
                   className={w.weapon === id ? 'chosen' : ''}
-                  aria-label={`选择${WEAPON_IDENTITY[id].name}`}
+                  aria-label={t(`选择${WEAPON_IDENTITY[id].name}`)}
                   aria-pressed={w.weapon === id}
                   onClick={() => {
                     unlock();
@@ -230,37 +252,42 @@ export default function TrialApp({
                 >
                   <WeaponIcon id={id} size={30} />
                   <div>
-                    <small>{WEAPON_IDENTITY[id].en}</small>
-                    <b>{WEAPON_IDENTITY[id].name}</b>
-                    <span>{WEAPON_IDENTITY[id].verb}</span>
+                    <small>{t(WEAPON_IDENTITY[id].en)}</small>
+                    <b>{t(WEAPON_IDENTITY[id].name)}</b>
+                    <span>{t(WEAPON_IDENTITY[id].verb)}</span>
                   </div>
-                  <i>{w.weapon === id ? '已选择' : '选择'}</i>
+                  <i>{t(w.weapon === id ? '已选择' : '选择')}</i>
                 </button>
               ))}
             </div>
           )}
           <div className="trial-doctrine">
             <p>
-              <b>{identity.name} / </b>
-              {identity.cost}
+              <b>{t(identity.name)} / </b>
+              {t(identity.cost)}
             </p>
-            <span>{identity.protocol}</span>
+            <span>{t(identity.protocol)}</span>
             {session.stage > 0 && (
               <span className="trial-ledger">
-                基础 {stage.budget} + 合约 {session.earnedCapacity} − 维修{' '}
-                {session.repairSpent} = {session.capacity} 可用额度
-                {session.contract === 'overload' && session.stage === 1
-                  ? ` · 清场后获得 +${config.contract!.rewardCapacity}`
-                  : ''}
+                {t('基础')}
+                {stage.budget} {t('+ 合约')}
+                {session.earnedCapacity} {t('− 维修')}
+                {t(' ')}
+                {session.repairSpent} = {session.capacity} {t('可用额度')}
+                {t(
+                  session.contract === 'overload' && session.stage === 1
+                    ? ` · 清场后获得 +${config.contract!.rewardCapacity}`
+                    : '',
+                )}
               </span>
             )}
           </div>
           <div className="trial-workbench">
-            <section className="trial-catalog" aria-label="协议目录">
+            <section className="trial-catalog" aria-label={t('协议目录')}>
               <div className="trial-section-title">
-                <h2>配置你的攻击</h2>
+                <h2>{t('配置你的攻击')}</h2>
                 <span>
-                  {session.cards.length} / {config.slots} 槽位
+                  {session.cards.length} / {config.slots} {t('槽位')}
                 </span>
               </div>
               <div className="trial-card-grid">
@@ -279,7 +306,9 @@ export default function TrialApp({
                     <button
                       key={o.id}
                       className={`trial-card element-${card.element} ${equipped ? 'equipped' : ''}`}
-                      aria-label={`${equipped ? '撤下' : '装备'}${card.name}`}
+                      aria-label={t(
+                        `${equipped ? '撤下' : '装备'}${card.name}`,
+                      )}
                       aria-pressed={equipped}
                       onMouseEnter={() => setFocus(o.id)}
                       onFocus={() => setFocus(o.id)}
@@ -298,30 +327,36 @@ export default function TrialApp({
                         <Icon size={25} />
                         <span className="trial-cost">
                           {o.cost}
-                          <small>能量</small>
+                          <small>{t('能量')}</small>
                         </span>
                       </div>
-                      <h3>{card.name}</h3>
-                      <b>{o.role}</b>
+                      <h3>{t(card.name)}</h3>
+                      <b>{t(o.role)}</b>
                       <p>
-                        {custom
-                          ? '自定义参数 · 以右侧实时预览为准'
-                          : card.preview}
+                        {t(
+                          custom
+                            ? '自定义参数 · 以右侧实时预览为准'
+                            : card.preview,
+                        )}
                       </p>
                       <span className="trial-tradeoff">
-                        {custom
-                          ? '此协议已修改，请对照规则参数及实战记录验证效果。'
-                          : o.tradeoff}
+                        {t(
+                          custom
+                            ? '此协议已修改，请对照规则参数及实战记录验证效果。'
+                            : o.tradeoff,
+                        )}
                       </span>
                       <footer>
-                        {equipped ? '已装备 · 点击撤下' : '选择协议'}
-                        <span>{equipped ? '✓' : '+'}</span>
+                        {t(equipped ? '已装备 · 点击撤下' : '选择协议')}
+                        <span>{t(equipped ? '✓' : '+')}</span>
                       </footer>
                     </button>
                   );
                 })}
               </div>
-              {message && <output className="trial-notice">{message}</output>}
+              {message && (
+                <output className="trial-notice">{t(message)}</output>
+              )}
             </section>
             <aside className="trial-inspector">
               <button
@@ -335,24 +370,30 @@ export default function TrialApp({
                   refresh();
                 }}
               >
-                锁定构筑，进入战场 <ArrowUpRight size={19} />
+                {t('锁定构筑，进入战场')}
+                <ArrowUpRight size={19} />
               </button>
               <div className="trial-next">
-                <p>下一场 / 0{session.stage + 1}</p>
-                <h2>{stage.name}</h2>
-                <p>{stage.purpose}</p>
-                <div className="trial-map" aria-label="下一场敌人配置">
+                <p>
+                  {t('下一场 / 0')}
+                  {session.stage + 1}
+                </p>
+                <h2>{t(stage.name)}</h2>
+                <p>{t(stage.purpose)}</p>
+                <div className="trial-map" aria-label={t('下一场敌人配置')}>
                   {session.enemies.map((e, i) => (
                     <span
                       key={i}
-                      title={`${e.elite ? '精英' : ''}${ENEMIES[e.kind].name}`}
+                      title={t(
+                        `${e.elite ? '精英' : ''}${ENEMIES[e.kind].name}`,
+                      )}
                       style={{
                         left: `${e.x / 12.8}%`,
                         top: `${e.y / 7.2}%`,
                         color: `#${ENEMIES[e.kind].color.toString(16).padStart(6, '0')}`,
                       }}
                     >
-                      {e.kind === 'warden' || e.elite ? '◆' : '●'}
+                      {t(e.kind === 'warden' || e.elite ? '◆' : '●')}
                     </span>
                   ))}
                   {stage.cover && (
@@ -383,14 +424,16 @@ export default function TrialApp({
                   </span>
                 </div>
                 <span>
-                  {stage.enemies
-                    .map((e) => e.kind)
-                    .filter((k, i, a) => a.indexOf(k) === i)
-                    .map(
-                      (k) =>
-                        `${ENEMIES[k].name} × ${stage.enemies.filter((e) => e.kind === k).length}`,
-                    )
-                    .join(' · ')}
+                  {t(
+                    stage.enemies
+                      .map((e) => e.kind)
+                      .filter((k, i, a) => a.indexOf(k) === i)
+                      .map(
+                        (k) =>
+                          `${ENEMIES[k].name} × ${stage.enemies.filter((e) => e.kind === k).length}`,
+                      )
+                      .join(' · '),
+                  )}
                   {session.stage === 1 &&
                     session.contract === 'overload' &&
                     ' · 精英冲锋者 × 1'}
@@ -398,79 +441,87 @@ export default function TrialApp({
               </div>
               <div className="trial-numbers">
                 <h2>
-                  <Crosshair size={16} /> 当前协议参数
+                  <Crosshair size={16} /> {t('当前协议参数')}
                 </h2>
                 <dl>
                   <div>
                     <dt>
-                      {w.weapon === 'sword'
-                        ? w.has('void-return') && w.has('ice-touch')
-                          ? '普攻 / 终结回旋'
-                          : '普攻 / 终结挥砍'
-                        : '单枚直击伤害'}
+                      {t(
+                        w.weapon === 'sword'
+                          ? w.has('void-return') && w.has('ice-touch')
+                            ? '普攻 / 终结回旋'
+                            : '普攻 / 终结挥砍'
+                          : '单枚直击伤害',
+                      )}
                     </dt>
                     <dd>
-                      {profile.damage.toFixed(1)}
-                      {w.weapon === 'sword'
-                        ? ` / ${heavy.damage.toFixed(1)}`
-                        : ''}
+                      {t(profile.damage.toFixed(1))}
+                      {t(
+                        w.weapon === 'sword'
+                          ? ` / ${heavy.damage.toFixed(1)}`
+                          : '',
+                      )}
                     </dd>
                   </div>
                   <div>
-                    <dt>攻击间隔</dt>
+                    <dt>{t('攻击间隔')}</dt>
                     <dd>
-                      {profile.interval.toFixed(2)}
-                      {w.weapon === 'sword'
-                        ? ` / ${heavy.interval.toFixed(2)}`
-                        : ''}
+                      {t(profile.interval.toFixed(2))}
+                      {t(
+                        w.weapon === 'sword'
+                          ? ` / ${heavy.interval.toFixed(2)}`
+                          : '',
+                      )}
                       s
                     </dd>
                   </div>
                   <div>
-                    <dt>{profile.area}</dt>
+                    <dt>{t(profile.area)}</dt>
                     <dd>
-                      {profile.reach.toFixed(0)}{' '}
-                      {w.weapon === 'arc' ? '发' : 'px'}
+                      {t(profile.reach.toFixed(0))}
+                      {t(' ')}
+                      {t(w.weapon === 'arc' ? '发' : 'px')}
                     </dd>
                   </div>
                   <div>
-                    <dt>生命</dt>
+                    <dt>{t('生命')}</dt>
                     <dd>
                       {Math.ceil(w.player.hp)} / {w.player.maxHp}
                     </dd>
                   </div>
                 </dl>
                 <small>
-                  当前武装的非暴击直击参数；不含燃烧、共鸣和爆破，不等于实战
-                  DPS。
+                  {t(
+                    '当前武装的非暴击直击参数；不含燃烧、共鸣和爆破，不等于实战 DPS。',
+                  )}
                 </small>
                 {preview && (
                   <div className="trial-preview">
-                    <b>装备后变化</b>
+                    <b>{t('装备后变化')}</b>
                     {preview.changes.length ? (
                       preview.changes.slice(0, 4).map((x) => (
                         <p key={x.label}>
-                          {x.label}
+                          {t(x.label)}
                           <span>
-                            {x.before} → {x.after}
+                            {t(x.before)} → {t(x.after)}
                           </span>
                         </p>
                       ))
                     ) : (
-                      <p>改变命中后的效果或弹道行为。</p>
+                      <p>{t('改变命中后的效果或弹道行为。')}</p>
                     )}
                   </div>
                 )}
                 {synergies.length > 0 && (
                   <p className="trial-synergy">
-                    {synergies.map((s) => s.name).join(' · ')} 已形成
+                    {t(synergies.map((s) => s.name).join(' · '))} {t('已形成')}
                   </p>
                 )}
               </div>
               {session.stage > 0 && (
                 <button
                   className="trial-repair"
-                  title="至少保留一项协议再维修，每阶段限一次"
+                  title={t('至少保留一项协议再维修，每阶段限一次')}
                   disabled={
                     !session.cards.length ||
                     session.repaired ||
@@ -482,12 +533,16 @@ export default function TrialApp({
                     refresh();
                   }}
                 >
-                  <Shield size={17} /> 修复 {config.repairHealth} 生命{' '}
-                  <b>−{config.repairCost} 永久额度</b>
+                  <Shield size={17} /> {t('修复')}
+                  {config.repairHealth} {t('生命')}
+                  {t(' ')}
+                  <b>
+                    −{config.repairCost} {t('永久额度')}
+                  </b>
                 </button>
               )}
               <small className="trial-local">
-                本次试炼不写主线存档；退出或刷新会结束当前进度。
+                {t('本次试炼不写主线存档；退出或刷新会结束当前进度。')}
               </small>
             </aside>
           </div>
@@ -495,47 +550,51 @@ export default function TrialApp({
       ) : session.state === 'contract' && config.contract ? (
         <section className="trial-contract">
           <div className="trial-contract-art">
-            <img src="/art/guardian-v2.webp" alt="前方的星铸守门人" />
+            <img src="/art/guardian-v2.webp" alt={t('前方的星铸守门人')} />
             <span>THE PRICE OF POWER</span>
           </div>
           <div className="trial-contract-copy">
-            <p className="trial-kicker">航路分歧 / 仅此一次</p>
+            <p className="trial-kicker">{t('航路分歧 / 仅此一次')}</p>
             <h1>
-              带着伤前进，
+              {t('带着伤前进，')}
               <br />
-              还是再赌一次？
+              {t('还是再赌一次？')}
             </h1>
             <p>
-              下一场是交叉火线，之后直面守门人。武装已锁定为{identity.name}
-              ，协议仍可重配。
+              {t('下一场是交叉火线，之后直面守门人。武装已锁定为')}{' '}
+              {t(identity.name)}
+              {t('，协议仍可重配。')}
             </p>
             <div className="trial-contract-options">
               <button
-                aria-label="签订补给合约"
+                aria-label={t('签订补给合约')}
                 onClick={() => {
                   session.chooseContract('supply');
                   refresh();
                 }}
               >
                 <small>01 / SUPPLY</small>
-                <h2>接受补给</h2>
+                <h2>{t('接受补给')}</h2>
                 <b>
-                  立即恢复{' '}
+                  {t('立即恢复')}
+                  {t(' ')}
                   {Math.min(
                     config.contract.supplyHealth,
                     w.player.maxHp - w.player.hp,
-                  )}{' '}
-                  生命
+                  )}
+                  {t(' ')}
+                  {t('生命')}
                 </b>
                 <p>
-                  最多恢复 {config.contract.supplyHealth}
-                  ，不消耗额度。下一场保持原敌阵，末关基础额度{' '}
-                  {config.stages[2].budget}。
+                  {t.copy(
+                    `最多恢复 ${config.contract.supplyHealth}，不消耗额度。下一场保持原敌阵，末关基础额度 ${config.stages[2].budget}。`,
+                    `Restore up to ${config.contract.supplyHealth} HP without spending capacity. The next enemy formation is unchanged. Final base capacity: ${config.stages[2].budget}.`,
+                  )}
                 </p>
-                <span>确认补给 →</span>
+                <span>{t('确认补给 →')}</span>
               </button>
               <button
-                aria-label="签订夺能合约"
+                aria-label={t('签订夺能合约')}
                 disabled={w.player.hp <= config.contract.healthCost}
                 onClick={() => {
                   session.chooseContract('overload');
@@ -543,20 +602,25 @@ export default function TrialApp({
                 }}
               >
                 <small>02 / OVERLOAD</small>
-                <h2>承担夺能</h2>
-                <b>支付 {config.contract.healthCost} 生命 · 精英 × 1</b>
+                <h2>{t('承担夺能')}</h2>
+                <b>
+                  {t('支付')} {config.contract.healthCost}{' '}
+                  {t('生命 · 精英 × 1')}
+                </b>
                 <p>
-                  额外精英冲锋者从中央加入。清场后末关 +
-                  {config.contract.rewardCapacity}{' '}
-                  额度；失败不返还生命、不发奖励。生命须高于{' '}
-                  {config.contract.healthCost} 才可签订。
+                  {t('额外精英冲锋者从中央加入。清场后末关 +')}
+                  {config.contract.rewardCapacity}
+                  {t(' ')}
+                  {t('额度；失败不返还生命、不发奖励。生命须高于')}
+                  {t(' ')}
+                  {config.contract.healthCost} {t('才可签订。')}
                 </p>
-                <span>承担风险 →</span>
+                <span>{t('承担风险 →')}</span>
               </button>
             </div>
             <p className="trial-contract-hp">
-              当前生命 {Math.ceil(w.player.hp)} / {w.player.maxHp} ·
-              合约确认后不能改签
+              {t('当前生命')} {Math.ceil(w.player.hp)} / {w.player.maxHp}{' '}
+              {t('· 合约确认后不能改签')}
             </p>
           </div>
         </section>
@@ -564,7 +628,7 @@ export default function TrialApp({
         <section className="trial-battle">
           <div className="trial-battlebar">
             <div>
-              <p>{stage.name}</p>
+              <p>{t(stage.name)}</p>
               <b>
                 {Math.ceil(Math.max(0, w.player.hp))}
                 <small> / {w.player.maxHp} HP</small>
@@ -572,14 +636,14 @@ export default function TrialApp({
               <progress max={w.player.maxHp} value={Math.max(0, w.player.hp)} />
             </div>
             <div>
-              <p>战斗用时</p>
-              <b aria-label="试炼计时">
-                {(session.ticks / 60).toFixed(1)}
+              <p>{t('战斗用时')}</p>
+              <b aria-label={t('试炼计时')}>
+                {t((session.ticks / 60).toFixed(1))}
                 <small>s</small>
               </b>
             </div>
             <div>
-              <p>能量占用</p>
+              <p>{t('能量占用')}</p>
               <b>
                 {session.spent}
                 <small> / {session.capacity}</small>
@@ -587,7 +651,9 @@ export default function TrialApp({
             </div>
             <div className="trial-equipped">
               {selected.map((o) => (
-                <span key={o.id}>{CARDS.find((c) => c.id === o.id)!.name}</span>
+                <span key={o.id}>
+                  {t(CARDS.find((c) => c.id === o.id)!.name)}
+                </span>
               ))}
             </div>
             {session.state === 'combat' && (
@@ -598,7 +664,7 @@ export default function TrialApp({
                   refresh();
                 }}
               >
-                暂停
+                {t('暂停')}
               </button>
             )}
           </div>
@@ -613,15 +679,17 @@ export default function TrialApp({
               <div className="trial-boss">
                 <div>
                   <span>
-                    {ENEMIES[w.boss.kind].name} · {bossActionLabel(w.boss)}
+                    {t(ENEMIES[w.boss.kind].name)} ·{' '}
+                    {t(bossActionLabel(w.boss))}
                   </span>
                   <b>
-                    阶段 {Math.max(1, w.boss.phase)} ·{' '}
+                    {t('阶段')}
+                    {Math.max(1, w.boss.phase)} ·{t(' ')}
                     {Math.ceil(Math.max(0, w.boss.hp))} / {w.boss.maxHp}
                   </b>
                 </div>
                 <progress
-                  aria-label="首领生命"
+                  aria-label={t('首领生命')}
                   max={w.boss.maxHp}
                   value={Math.max(0, w.boss.hp)}
                 />
@@ -630,15 +698,15 @@ export default function TrialApp({
             {['transition', 'bossIntro'].includes(w.phase) && (
               <div className="trial-intro">
                 <small>ENCOUNTER 0{session.stage + 1}</small>
-                <h2>{stage.name}</h2>
-                <p>{stage.purpose}</p>
+                <h2>{t(stage.name)}</h2>
+                <p>{t(stage.purpose)}</p>
               </div>
             )}
             {w.phase === 'paused' && !exit && (
               <div className="trial-overlay">
                 <div className="trial-modal">
                   <p>TAKE A BREATH</p>
-                  <h2>试炼已暂停</h2>
+                  <h2>{t('试炼已暂停')}</h2>
                   <button
                     className="trial-primary"
                     onClick={() => {
@@ -647,25 +715,27 @@ export default function TrialApp({
                       refresh();
                     }}
                   >
-                    继续试炼
+                    {t('继续试炼')}
                   </button>
-                  <button onClick={leave}>结束本次试炼</button>
+                  <button onClick={leave}>{t('结束本次试炼')}</button>
                 </div>
               </div>
             )}
             {exit && (
               <div className="trial-overlay">
-                <dialog open className="trial-modal" aria-label="退出试炼">
-                  <h2>结束本次试炼？</h2>
-                  <p>进度不会保存，主线存档不受影响。</p>
-                  <button onClick={() => setExit(false)}>留在这里</button>
+                <dialog open className="trial-modal" aria-label={t('退出试炼')}>
+                  <h2>{t('结束本次试炼？')}</h2>
+                  <p>{t('进度不会保存，主线存档不受影响。')}</p>
+                  <button onClick={() => setExit(false)}>
+                    {t('留在这里')}
+                  </button>
                   <button
                     onClick={() => {
                       if (onBack) onBack();
                       else location.assign('/');
                     }}
                   >
-                    确认退出
+                    {t('确认退出')}
                   </button>
                 </dialog>
               </div>
@@ -675,73 +745,80 @@ export default function TrialApp({
                 <dialog
                   open
                   className="trial-modal trial-report"
-                  aria-label="构筑战报"
+                  aria-label={t('构筑战报')}
                 >
                   <p>
-                    {session.state === 'finished'
-                      ? 'EXPEDITION COMPLETE'
-                      : last.outcome === 'clear'
-                        ? 'ENCOUNTER CLEARED'
-                        : 'TRIAL ENDED'}
+                    {t(
+                      session.state === 'finished'
+                        ? 'EXPEDITION COMPLETE'
+                        : last.outcome === 'clear'
+                          ? 'ENCOUNTER CLEARED'
+                          : 'TRIAL ENDED',
+                    )}
                   </p>
                   <h2>
-                    {session.state === 'finished'
-                      ? '星铸完成'
-                      : last.outcome === 'clear'
-                        ? `${last.name} · 已突破`
-                        : last.outcome === 'timeout'
-                          ? '试炼时间耗尽'
-                          : '试炼未能完成'}
+                    {t(
+                      session.state === 'finished'
+                        ? '星铸完成'
+                        : last.outcome === 'clear'
+                          ? `${last.name} · 已突破`
+                          : last.outcome === 'timeout'
+                            ? '试炼时间耗尽'
+                            : '试炼未能完成',
+                    )}
                   </h2>
                   <div className="trial-result-values">
                     <div>
-                      <b>{(last.ticks / 60).toFixed(1)}s</b>
-                      <span>战斗用时</span>
+                      <b>{t((last.ticks / 60).toFixed(1))}s</b>
+                      <span>{t('战斗用时')}</span>
                     </div>
                     <div>
-                      <b>{last.damage.toFixed(0)}</b>
-                      <span>有效伤害</span>
+                      <b>{t(last.damage.toFixed(0))}</b>
+                      <span>{t('有效伤害')}</span>
                     </div>
                     <div>
-                      <b>{last.damageTaken.toFixed(0)}</b>
-                      <span>承受伤害</span>
+                      <b>{t(last.damageTaken.toFixed(0))}</b>
+                      <span>{t('承受伤害')}</span>
                     </div>
                     <div>
                       <b>{last.reactions}</b>
-                      <span>共鸣触发</span>
+                      <span>{t('共鸣触发')}</span>
                     </div>
                   </div>
                   <p className="trial-result-note">
                     {last.contractReward > 0 && (
                       <strong className="trial-earned">
-                        夺能合约完成 · +{last.contractReward} 永久额度
+                        {t('夺能合约完成 · +')}
+                        {last.contractReward} {t('永久额度')}
                         <br />
                       </strong>
                     )}
-                    {last.outcome === 'clear'
-                      ? session.stage < 2
-                        ? session.stage === 0 && config.contract
-                          ? '选择一份航路合约，再为交叉火线调整配装。你的生命与选择都会留到下一场。'
-                          : `下一场可用额度 ${config.stages[session.stage + 1].budget + session.earnedCapacity - session.repairSpent}。生命不自动恢复：维修会占用后续构筑额度。`
-                        : '从对群到单体，你已完成三次不同的构筑验证。'
-                      : '保留这次结果，调整配装或走位后再试。没有隐藏免死或失败补偿。'}
+                    {t(
+                      last.outcome === 'clear'
+                        ? session.stage < 2
+                          ? session.stage === 0 && config.contract
+                            ? '选择一份航路合约，再为交叉火线调整配装。你的生命与选择都会留到下一场。'
+                            : `下一场可用额度 ${config.stages[session.stage + 1].budget + session.earnedCapacity - session.repairSpent}。生命不自动恢复：维修会占用后续构筑额度。`
+                          : '从对群到单体，你已完成三次不同的构筑验证。'
+                        : '保留这次结果，调整配装或走位后再试。没有隐藏免死或失败补偿。',
+                    )}
                   </p>
                   {session.state === 'finished' && (
                     <table>
                       <thead>
                         <tr>
-                          <th>阶段</th>
-                          <th>用时</th>
-                          <th>承伤</th>
-                          <th>协议支出</th>
+                          <th>{t('阶段')}</th>
+                          <th>{t('用时')}</th>
+                          <th>{t('承伤')}</th>
+                          <th>{t('协议支出')}</th>
                         </tr>
                       </thead>
                       <tbody>
                         {session.results.map((r) => (
                           <tr key={r.stage}>
-                            <td>{r.name}</td>
-                            <td>{(r.ticks / 60).toFixed(1)}s</td>
-                            <td>{r.damageTaken.toFixed(0)}</td>
+                            <td>{t(r.name)}</td>
+                            <td>{t((r.ticks / 60).toFixed(1))}s</td>
+                            <td>{t(r.damageTaken.toFixed(0))}</td>
                             <td>{r.cost}</td>
                           </tr>
                         ))}
@@ -749,7 +826,9 @@ export default function TrialApp({
                     </table>
                   )}
                   <small>
-                    各阶段敌人与预算不同；战报用于回顾本次选择，不是单卡排名。
+                    {t(
+                      '各阶段敌人与预算不同；战报用于回顾本次选择，不是单卡排名。',
+                    )}
                   </small>
                   <div className="trial-report-actions">
                     {session.state === 'result' ? (
@@ -761,20 +840,22 @@ export default function TrialApp({
                           refresh();
                         }}
                       >
-                        {session.stage < 2
-                          ? session.stage === 0 && config.contract
-                            ? '选择航路合约'
-                            : '分配下一阶段预算'
-                          : '查看远征总结'}
+                        {t(
+                          session.stage < 2
+                            ? session.stage === 0 && config.contract
+                              ? '选择航路合约'
+                              : '分配下一阶段预算'
+                            : '查看远征总结',
+                        )}
                       </button>
                     ) : (
                       <button className="trial-primary" onClick={restart}>
-                        重新构筑
+                        {t('重新构筑')}
                       </button>
                     )}
-                    <button onClick={download}>导出本次记录</button>
+                    <button onClick={download}>{t('导出本次记录')}</button>
                     {session.state !== 'result' && (
-                      <button onClick={leave}>返回</button>
+                      <button onClick={leave}>{t('返回')}</button>
                     )}
                   </div>
                 </dialog>
@@ -783,27 +864,37 @@ export default function TrialApp({
           </div>
           <footer className="trial-controlbar">
             <span className="trial-weapon-state">
-              {identity.name} ·{' '}
-              {w.weapon === 'sword'
-                ? `连段 ${w.comboTime > 0 ? w.combo + 1 : 0}/3`
-                : w.player.shotCd > 0
-                  ? `回膛 ${w.player.shotCd.toFixed(1)}s`
-                  : '就绪'}
+              {t(identity.name)} ·{t(' ')}
+              {t(
+                w.weapon === 'sword'
+                  ? `连段 ${w.comboTime > 0 ? w.combo + 1 : 0}/3`
+                  : w.player.shotCd > 0
+                    ? `回膛 ${w.player.shotCd.toFixed(1)}s`
+                    : '就绪',
+              )}
             </span>
             <span>
-              {[
-                key('MoveUp'),
-                key('MoveLeft'),
-                key('MoveDown'),
-                key('MoveRight'),
-              ].join(' ')}{' '}
-              移动 · {bindings.mouseAttack === 0 ? '左键' : '右键'}攻击 ·{' '}
-              {key('Dash')} 冲刺
+              {t(
+                [
+                  key('MoveUp'),
+                  key('MoveLeft'),
+                  key('MoveDown'),
+                  key('MoveRight'),
+                ].join(' '),
+              )}
+              {t(' ')}
+              {t('移动 ·')}
+              {t(bindings.mouseAttack === 0 ? '左键' : '右键')}
+              {t('攻击 ·')}
+              {t(' ')}
+              {t(key('Dash'))} {t('冲刺')}
             </span>
             <span>
-              {key('Pulse')} 脉冲 {Math.max(0, w.player.qCd).toFixed(1)}s　
-              {key('Gravity')} 引力 {Math.max(0, w.player.eCd).toFixed(1)}s　
-              {key('Pause')} 暂停
+              {t(key('Pulse'))} {t('脉冲')}
+              {t(Math.max(0, w.player.qCd).toFixed(1))}s　
+              {t(key('Gravity'))} {t('引力')}
+              {t(Math.max(0, w.player.eCd).toFixed(1))}s　
+              {t(key('Pause'))} {t('暂停')}
             </span>
           </footer>
         </section>

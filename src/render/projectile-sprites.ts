@@ -117,7 +117,32 @@ export class ProjectileSprites {
     }
   }
   update(w: World, reduced = false) {
-    if (!this.scene.textures.exists(KEY)) return false;
+    const hidePooled = () => {
+      for (const image of this.images) image.setVisible(false);
+      for (const pair of this.friendly) {
+        pair.aura.setVisible(false);
+        pair.core.setVisible(false);
+      }
+    };
+    if (!this.scene.textures.exists(KEY)) {
+      hidePooled();
+      return false;
+    }
+    // The geometry renderer is the all-or-nothing fallback for projectile
+    // presentation. If even one friendly shape has no generated texture,
+    // returning true would make drawActors skip that projectile entirely.
+    // Hide any images from the previous frame, then let the vector pass draw
+    // every active projectile consistently.
+    for (const b of w.projectiles.items) {
+      if (!b.active || b.enemy) continue;
+      if (
+        !this.scene.textures.exists(`friendly-${b.shape}-aura-v21`) ||
+        !this.scene.textures.exists(`friendly-${b.shape}-core-v21`)
+      ) {
+        hidePooled();
+        return false;
+      }
+    }
     let used = 0,
       friendlyUsed = 0;
     for (const b of w.projectiles.items) {

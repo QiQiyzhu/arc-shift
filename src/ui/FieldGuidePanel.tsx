@@ -1,3 +1,4 @@
+import { useTranslation } from './i18n';
 import { ArrowRight, Swords, X } from 'lucide-react';
 import {
   GUIDE_BUILDS,
@@ -18,34 +19,49 @@ export function FieldGuidePanel({
   keys,
   refresh,
   exit,
+  startRun,
 }: {
   guide: FieldGuide;
   engine: Engine;
   keys: { move: string; attack: string; dash: string; pulse: string };
   refresh: () => void;
   exit: () => void;
+  startRun: () => void;
 }) {
+  const t = useTranslation();
   if (!guide.active) return null;
   const w = engine.world;
   const content = {
     move: [
       '先找到自己的节奏',
-      `${keys.move} 移动。脚下白环标记你的位置；先走出一小段距离。`,
+      t.copy(
+        `${keys.move} 移动。脚下白环标记你的位置；先走出一小段距离。`,
+        `${keys.move} to move. The white ring marks your position; travel a short distance.`,
+      ),
       keys.move,
     ],
     fire: [
       '让第一发准确命中',
-      `用准星瞄准右上方的固定靶，按住 ${keys.attack} 攻击。`,
+      t.copy(
+        `用准星瞄准右上方的固定靶，按住 ${keys.attack} 攻击。`,
+        `Aim at the fixed target in the upper right and hold ${keys.attack} to attack.`,
+      ),
       keys.attack,
     ],
     dash: [
       '穿过危险的间隙',
-      `一边移动，一边按 ${keys.dash} 跃迁。红色预警意味着攻击即将到来。`,
+      t.copy(
+        `一边移动，一边按 ${keys.dash} 跃迁。红色预警意味着攻击即将到来。`,
+        `While moving, press ${keys.dash} to dash. Red telegraphs warn of incoming attacks.`,
+      ),
       keys.dash,
     ],
     pulse: [
       '给自己留一条退路',
-      `按 ${keys.pulse} 释放近身脉冲：伤害、减速敌人，并清除附近敌弹。`,
+      t.copy(
+        `按 ${keys.pulse} 释放近身脉冲：伤害、减速敌人，并清除附近敌弹。`,
+        `Press ${keys.pulse} to pulse: damage and slow nearby enemies, and clear their projectiles.`,
+      ),
       keys.pulse,
     ],
     forge: [
@@ -82,13 +98,13 @@ export function FieldGuidePanel({
         <DialogContent
           className="guide-choice"
           showCloseButton={false}
-          aria-label={guide.step === 'forge' ? '选择演练共鸣' : '演练完成'}
+          aria-label={t(guide.step === 'forge' ? '选择演练共鸣' : '演练完成')}
         >
           <div className="eyebrow">
-            FIELD GUIDE / {guide.step === 'forge' ? 'RESONANCE' : 'COMPLETE'}
+            FIELD GUIDE / {t(guide.step === 'forge' ? 'RESONANCE' : 'COMPLETE')}
           </div>
-          <DialogTitle>{content[0]}</DialogTitle>
-          <DialogDescription>{content[1]}</DialogDescription>
+          <DialogTitle>{t(content[0])}</DialogTitle>
+          <DialogDescription>{t(content[1])}</DialogDescription>
           {guide.step === 'forge' ? (
             <div className="guide-builds">
               {GUIDE_BUILDS.map((b) => (
@@ -100,10 +116,11 @@ export function FieldGuidePanel({
                   }}
                 >
                   <Swords size={30} />
-                  <h3>{b.name}</h3>
-                  <p>{b.detail}</p>
+                  <h3>{t(b.name)}</h3>
+                  <p>{t(b.detail)}</p>
                   <span>
-                    熔接这套共鸣 <ArrowRight size={18} />
+                    {t('熔接这套共鸣')}
+                    <ArrowRight size={18} />
                   </span>
                 </button>
               ))}
@@ -112,53 +129,54 @@ export function FieldGuidePanel({
             <>
               <div className="guide-result">
                 <span>
-                  <b>{w.kills}</b> 净化实体
+                  <b>{w.kills}</b> {t('净化实体')}
                 </span>
                 <span>
-                  <b>{w.reactionCount}</b> 爆发反应
+                  <b>{w.reactionCount}</b> {t('爆发反应')}
                 </span>
-                <span>{guide.build}</span>
+                <span>{t(guide.build)}</span>
               </div>
-              <p>爆发反应只统计电浆、热裂变和坍缩；折光等共鸣不计入。</p>
-              <button
-                className="start-button"
-                onClick={() => {
-                  guide.stop();
-                  engine.start();
-                  refresh();
-                }}
-              >
-                <span>进入正式行动</span>
+              <p>{t('爆发反应只统计电浆、热裂变和坍缩；折光等共鸣不计入。')}</p>
+              <button className="start-button" onClick={startRun}>
+                <span>{t('进入正式行动')}</span>
                 <ArrowRight />
               </button>
             </>
           )}
           <button className="text-button" onClick={exit}>
-            返回主界面
+            {t('返回主界面')}
           </button>
         </DialogContent>
       </Dialog>
     );
   return (
-    <aside className="field-guide" aria-label="行动演练">
+    <aside className="field-guide" aria-label={t('行动演练')}>
       <div className="guide-heading">
-        <span>行动演练 · {GUIDE_STEPS.indexOf(guide.step) + 1} / 7 · 无敌</span>
-        <button onClick={exit} aria-label="退出行动演练">
+        <span>
+          {t('行动演练 ·')}
+          {GUIDE_STEPS.indexOf(guide.step) + 1} {t('/ 7 · 无敌')}
+        </span>
+        <button onClick={exit} aria-label={t('退出行动演练')}>
           <X size={17} />
         </button>
       </div>
       <h3>
-        <kbd>{content[2]}</kbd>
-        {content[0]}
+        <kbd>{t(content[2])}</kbd>
+        {t(content[0])}
       </h3>
-      <p>{content[1]}</p>
+      <p>{t(content[1])}</p>
       {guide.step === 'resonance' && (
         <div className="guide-live">
-          {activeSynergies(w.cards, w.weapon)
-            .map((s) => s.name)
-            .join(' · ')}
-          <b>爆发反应 {w.reactionCount}</b>
-          <small>仅计电浆 / 热裂变 / 坍缩</small>
+          {t(
+            activeSynergies(w.cards, w.weapon)
+              .map((s) => s.name)
+              .join(' · '),
+          )}
+          <b>
+            {t('爆发反应')}
+            {w.reactionCount}
+          </b>
+          <small>{t('仅计电浆 / 热裂变 / 坍缩')}</small>
         </div>
       )}
       <div className="guide-progress">
@@ -177,7 +195,7 @@ export function FieldGuidePanel({
             refresh();
           }}
         >
-          跳过当前提示
+          {t('跳过当前提示')}
         </button>
       )}
     </aside>

@@ -1,0 +1,975 @@
+.frontier-shell {
+  min-height: 100vh;
+  background:
+    radial-gradient(ellipse at 15% 0%, #17333d 0, transparent 45%), #071218;
+  color: #e7ece8;
+  font-family: 'Space Grotesk', 'Microsoft YaHei', sans-serif;
+  padding: 0 clamp(20px, 4vw, 76px) 22px;
+  --frontier-accent: #a1d5c9;
+  --frontier-line: #284149;
+}
+.frontier-foundry {
+  --frontier-accent: #e2b78d;
+  background:
+    radial-gradient(ellipse at 15% 0%, #382b28 0, transparent 45%), #101519;
+}
+.frontier-shell button {
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  border: 1px solid var(--frontier-line);
+  background: #12222b;
+  border-radius: 3px;
+  transition:
+    border-color 0.18s,
+    background 0.18s;
+}
+.frontier-shell button:hover {
+  border-color: var(--frontier-accent);
+  background: #1a333c;
+}
+.frontier-shell button:focus-visible {
+  outline: 2px solid #d9e7b5;
+  outline-offset: 4px;
+}
+.frontier-header {
+  height: 76px;
+  display: flex;
+  align-items: center;
+  gap: 36px;
+  border-bottom: 1px solid var(--frontier-line);
+}
+.frontier-header .frontier-brand {
+  background: none;
+  border: 0;
+  padding: 0;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: -1px;
+  white-space: nowrap;
+}
+.frontier-brand > span {
+  color: var(--frontier-accent);
+  margin: 0 3px;
+}
+.frontier-brand > small {
+  display: block;
+  text-align: left;
+  font-size: 9px;
+  letter-spacing: 6px;
+  color: #78999f;
+  margin-top: 4px;
+}
+.frontier-header-meta {
+  display: grid;
+  gap: 5px;
+  border-left: 1px solid var(--frontier-line);
+  padding-left: 30px;
+}
+.frontier-header-meta > span {
+  font-size: 9px;
+  letter-spacing: 3px;
+  color: #78949c;
+}
+.frontier-header-meta > b {
+  font-size: 13px;
+  font-weight: 500;
+}
+.frontier-header nav {
+  margin-left: auto;
+  display: flex;
+  gap: 8px;
+}
+.frontier-header nav button {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  padding: 9px 12px;
+  font-size: 12px;
+  background: transparent;
+}
+.frontier-chapters {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 65px;
+  padding: 23px 0 24px;
+  font-size: 11px;
+  letter-spacing: 1.2px;
+  color: #698087;
+}
+.frontier-chapters > span {
+  display: flex;
+  gap: 11px;
+  align-items: center;
+}
+.frontier-chapters i {
+  font-style: normal;
+  border: 1px solid #30454b;
+  border-radius: 50%;
+  width: 26px;
+  height: 26px;
+  display: grid;
+  place-items: center;
+  font-size: 10px;
+}
+.frontier-chapters .current {
+  color: var(--frontier-accent);
+}
+.frontier-chapters .current i {
+  background: var(--frontier-accent);
+  color: #10252b;
+  border-color: var(--frontier-accent);
+}
+.frontier-chapters .complete {
+  color: #a6b6ae;
+}
+.frontier-briefing {
+  display: grid;
+  grid-template-columns: minmax(0, 1.42fr) minmax(350px, 0.9fr);
+  min-height: 560px;
+  border: 1px solid var(--frontier-line);
+}
+.frontier-hero {
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: clamp(32px, 5vw, 80px);
+  position: relative;
+  border-right: 1px solid var(--frontier-line);
+}
+.frontier-eyebrow {
+  font-size: 10px;
+  letter-spacing: 2.8px;
+  color: var(--frontier-accent);
+  font-weight: 500;
+}
+.frontier-hero h1 {
+  white-space: pre-line;
+  font-size: clamp(32px, 3.25vw, 53px);
+  line-height: 1.45;
+  font-weight: 500;
+  letter-spacing: 1px;
+  margin: 26px 0 20px;
+}
+.frontier-hero p {
+  font-size: 14px;
+  line-height: 1.95;
+  max-width: 430px;
+  color: #a9bfc2;
+  margin: 0;
+}
+.frontier-mission-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-top: 40px;
+}
+.frontier-mission-tags span {
+  border: 1px solid #45626977;
+  padding: 8px 10px;
+  background: #0b202a88;
+  font-size: 10px;
+  display: flex;
+  gap: 7px;
+  align-items: center;
+  color: #c0d1cf;
+}
+.frontier-deployment {
+  padding: 32px 34px;
+  background: linear-gradient(145deg, #132832dd, #0b1a23);
+}
+.frontier-deployment h2 {
+  font-size: 22px;
+  font-weight: 500;
+  margin: 14px 0 15px;
+}
+.frontier-rule {
+  color: #a3b7b9;
+  font-size: 12px;
+  line-height: 1.9;
+  min-height: 72px;
+}
+.frontier-loadouts {
+  display: grid;
+  gap: 8px;
+  margin: 20px 0;
+}
+.frontier-loadouts button {
+  display: flex;
+  align-items: center;
+  gap: 13px;
+  padding: 13px 15px;
+  text-align: left;
+  background: #0a1c2588;
+}
+.frontier-loadouts button[aria-pressed='true'] {
+  border-color: #a3d5c6;
+  background: #233d40;
+}
+.frontier-loadouts button > span {
+  display: grid;
+  gap: 5px;
+}
+.frontier-loadouts b {
+  font-size: 13px;
+  font-weight: 500;
+}
+.frontier-loadouts small {
+  font-size: 10px;
+  color: #91aab0;
+}
+.frontier-loadouts i {
+  font-style: normal;
+  margin-left: auto;
+  color: var(--frontier-accent);
+}
+.frontier-assist {
+  display: flex;
+  gap: 9px;
+  align-items: flex-start;
+  color: #bdcdc9;
+  font-size: 11px;
+  margin: 21px 0;
+}
+.frontier-assist input {
+  accent-color: #a1d5c9;
+  margin-top: 1px;
+}
+.frontier-assist small {
+  display: block;
+  margin-top: 5px;
+  color: #778f96;
+  font-size: 10px;
+}
+.frontier-shell .frontier-primary {
+  background: var(--frontier-accent);
+  color: #10282e;
+  border-color: var(--frontier-accent);
+  padding: 15px 20px;
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 22px;
+  font-weight: 600;
+  min-width: 180px;
+}
+.frontier-shell .frontier-primary:hover {
+  background: #d0e6d5;
+  border-color: #d0e6d5;
+}
+.frontier-deployment .frontier-primary {
+  width: 100%;
+}
+.frontier-deploy-note {
+  display: block;
+  font-size: 9px;
+  color: #7d999f;
+  text-align: center;
+  margin-top: 12px;
+}
+.frontier-continuity {
+  display: flex;
+  gap: 15px;
+  margin: 30px 0;
+  padding: 22px 16px;
+  background: #1b383855;
+  color: var(--frontier-accent);
+  font-size: 13px;
+  line-height: 1.8;
+}
+.frontier-continuity b {
+  display: block;
+  font-size: 22px;
+  margin-top: 12px;
+}
+.frontier-field {
+  max-width: 1450px;
+  margin: auto;
+}
+.frontier-field-heading {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 14px;
+}
+.frontier-field-heading h1 {
+  font-size: 19px;
+  font-weight: 500;
+  margin: 6px 0 0;
+}
+.frontier-field-heading .frontier-eyebrow {
+  font-size: 9px;
+  letter-spacing: 2px;
+}
+.frontier-operation-clock {
+  font-size: 22px;
+  font-variant-numeric: tabular-nums;
+  color: #dae7da;
+}
+.frontier-operation-clock small {
+  font-size: 13px;
+  color: #687f85;
+}
+.frontier-stage {
+  position: relative;
+  aspect-ratio: 16/9;
+  border: 1px solid #3b4f52;
+  background: #07141a;
+  overflow: hidden;
+  isolation: isolate;
+  max-height: calc(100vh - 380px);
+  min-height: 420px;
+  margin: auto;
+}
+.frontier-canvas {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  inset: 0;
+}
+.frontier-canvas canvas {
+  display: block;
+}
+.frontier-top-hud {
+  position: absolute;
+  top: 19px;
+  left: 24px;
+  right: 24px;
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  pointer-events: none;
+  z-index: 2;
+}
+.frontier-health {
+  width: 220px;
+  background: #091920c9;
+  border-left: 2px solid #c4e8d3;
+  padding: 10px 12px 8px;
+}
+.frontier-health > div:first-child {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+.frontier-health b {
+  font-size: 11px;
+  font-weight: 500;
+}
+.frontier-health small {
+  color: #9bb4b7;
+  font-size: 9px;
+}
+.frontier-health em {
+  font-size: 9px;
+  font-style: normal;
+  margin-left: 13px;
+  color: #e9d49e;
+}
+.frontier-health-track {
+  height: 4px;
+  margin: 7px 0 3px;
+  background: #3d5557;
+}
+.frontier-health-track i {
+  display: block;
+  height: 100%;
+  background: #bde8bf;
+  transition: width 0.15s;
+}
+.frontier-objective-chip {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  padding: 11px 14px;
+  background: #081920de;
+  border: 1px solid #6ca29b66;
+  color: #cae8db;
+  font-size: 11px;
+}
+.frontier-objective-chip b {
+  margin-left: 10px;
+  min-width: 33px;
+  font-size: 14px;
+}
+.frontier-top-hud .frontier-pause {
+  pointer-events: auto;
+  padding: 10px;
+  background: #081920de;
+  display: grid;
+  place-items: center;
+}
+.frontier-boss {
+  position: absolute;
+  left: 35%;
+  right: 27%;
+  top: 21px;
+  text-align: center;
+  font-size: 9px;
+  letter-spacing: 2px;
+  z-index: 2;
+  pointer-events: none;
+  text-shadow: 0 2px 5px #000;
+}
+.frontier-boss > div {
+  height: 6px;
+  background: #131519;
+  border: 1px solid #71483f;
+  margin: 6px 0 4px;
+}
+.frontier-boss i {
+  height: 100%;
+  display: block;
+  background: #dc9980;
+}
+.frontier-boss small {
+  font-size: 8px;
+  color: #e2b398;
+  letter-spacing: 2px;
+}
+.frontier-intro {
+  position: absolute;
+  left: 20%;
+  right: 20%;
+  top: 36%;
+  text-align: center;
+  padding: 25px 35px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    #071720f0 15%,
+    #071720f0 85%,
+    transparent
+  );
+  pointer-events: none;
+}
+.frontier-intro > span {
+  font-size: 9px;
+  letter-spacing: 4px;
+  color: var(--frontier-accent);
+}
+.frontier-intro h2 {
+  font-size: 26px;
+  font-weight: 500;
+  margin: 13px 0;
+}
+.frontier-intro p {
+  font-size: 11px;
+  line-height: 1.8;
+  color: #b2c7c4;
+}
+.frontier-overlay,
+.frontier-modal {
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #031018be;
+  backdrop-filter: blur(7px);
+  padding: 24px;
+}
+.frontier-modal {
+  position: fixed;
+  z-index: 50;
+}
+.frontier-dialog {
+  position: static;
+  margin: 0;
+  color: inherit;
+  width: min(480px, 100%);
+  border: 1px solid #4a6565;
+  background: linear-gradient(140deg, #1a343e, #101d26);
+  padding: 35px;
+  box-shadow: 0 30px 80px #0008;
+}
+.frontier-dialog > svg {
+  color: var(--frontier-accent);
+  margin-bottom: 12px;
+}
+.frontier-dialog .frontier-eyebrow {
+  display: block;
+}
+.frontier-dialog h2 {
+  font-size: 25px;
+  font-weight: 500;
+  margin: 10px 0 17px;
+}
+.frontier-dialog p {
+  font-size: 12px;
+  line-height: 1.9;
+  color: #aec0c3;
+}
+.frontier-dialog > .frontier-primary {
+  width: 100%;
+  justify-content: center;
+  margin-top: 24px;
+}
+.frontier-dialog > button:not(.frontier-primary) {
+  padding: 10px;
+  width: 100%;
+  margin-top: 10px;
+}
+.frontier-help-keys {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 13px;
+  margin: 25px 0;
+  font-size: 12px;
+}
+.frontier-shell kbd {
+  display: inline-grid;
+  place-items: center;
+  padding: 3px 5px;
+  min-width: 22px;
+  background: #273b40;
+  border: 1px solid #51656a;
+  border-radius: 3px;
+  color: #d1ddd4;
+  font-size: 10px;
+  box-shadow: 0 2px 0 #081419;
+  margin-right: 6px;
+}
+.frontier-route-panel {
+  max-width: 950px;
+  width: 100%;
+}
+.frontier-route-panel > h2 {
+  font-size: clamp(20px, 2vw, 31px);
+  font-weight: 500;
+  margin: 13px 0;
+}
+.frontier-route-panel > p {
+  font-size: 12px;
+  color: #a9c0c3;
+  margin: 0 0 25px;
+}
+.frontier-route-cards {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+.frontier-route-cards > button {
+  position: relative;
+  overflow: hidden;
+  text-align: left;
+  min-height: 245px;
+}
+.frontier-route-cards img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.3;
+  transition: opacity 0.25s;
+}
+.frontier-route-cards > button:hover img {
+  opacity: 0.5;
+}
+.frontier-route-cards > button > span {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 11px;
+  padding: 24px;
+  background: linear-gradient(180deg, #05192122, #051921ee);
+}
+.frontier-route-cards svg {
+  color: var(--frontier-accent);
+}
+.frontier-route-cards small {
+  font-size: 9px;
+  letter-spacing: 1px;
+  color: #b8d5cc;
+}
+.frontier-route-cards b {
+  font-size: 20px;
+  font-weight: 500;
+}
+.frontier-route-cards p {
+  font-size: 11px;
+  line-height: 1.9;
+  color: #bed0d0;
+  max-width: 350px;
+  margin: 0;
+}
+.frontier-route-cards strong {
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  border-top: 1px solid #536d6a;
+  width: 100%;
+  padding-top: 14px;
+  margin-top: 5px;
+  font-weight: 500;
+}
+.frontier-result {
+  max-width: 750px;
+  width: 100%;
+  padding: 34px 38px;
+  border: 1px solid #50716e;
+  background: linear-gradient(125deg, #1b353c, #0e1c24);
+}
+.frontier-result h2 {
+  font-size: 32px;
+  font-weight: 500;
+  margin: 15px 0 9px;
+}
+.frontier-result > p {
+  font-size: 11px;
+  color: #a7c0bf;
+}
+.frontier-result-stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin: 25px 0;
+}
+.frontier-result-stats > span {
+  display: flex;
+  flex-direction: column;
+  gap: 9px;
+  font-size: 10px;
+  color: #8eaaa9;
+  border-left: 1px solid #3a5557;
+  padding-left: 18px;
+}
+.frontier-result-stats b {
+  font-size: 30px;
+  font-weight: 500;
+  color: #d4e9d7;
+  line-height: 1;
+}
+.frontier-result-rows {
+  display: grid;
+  gap: 10px;
+}
+.frontier-result-rows > div {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  font-size: 11px;
+  padding: 11px 0;
+  border-top: 1px solid #385154;
+}
+.frontier-result-rows b {
+  margin-left: auto;
+  font-size: 10px;
+  color: #bce0b9;
+}
+.frontier-result-rows small {
+  font-size: 10px;
+  color: #97acae;
+}
+.frontier-result-actions {
+  display: flex;
+  gap: 10px;
+  margin-top: 25px;
+}
+.frontier-result-actions > .frontier-primary {
+  flex: 1;
+  font-size: 11px;
+}
+.frontier-result-actions > button:last-child {
+  font-size: 11px;
+  padding: 13px 18px;
+}
+.frontier-bottom-hud {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 24px;
+  padding: 13px 0;
+  background: #0e2029;
+  border: 1px solid #344950;
+  border-top: 0;
+  color: #bdcec9;
+  font-size: 10px;
+}
+.frontier-bottom-hud > span {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.frontier-bottom-hud .cooling {
+  color: #839399;
+}
+.frontier-field-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  font-size: 11px;
+  line-height: 1.7;
+  color: #8da8ab;
+  margin-top: 12px;
+}
+.frontier-field-note svg {
+  flex-shrink: 0;
+  margin-top: 2px;
+  color: var(--frontier-accent);
+}
+.frontier-footer {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  margin: 22px auto 0;
+  max-width: 1450px;
+  font-size: 9px;
+  color: #719299;
+}
+.frontier-footer > span {
+  letter-spacing: 1px;
+  white-space: nowrap;
+}
+.frontier-footer > div {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.frontier-footer > div > span {
+  padding: 5px 8px;
+  border: 1px solid #2b4148;
+  color: #9bb8b9;
+  background: #0d202a;
+}
+.frontier-footer > small {
+  font-size: 9px;
+  margin-left: auto;
+  white-space: nowrap;
+}
+@media (min-width: 1700px) {
+  .frontier-stage {
+    max-height: calc(100vh - 380px);
+  }
+  .frontier-briefing {
+    min-height: 650px;
+  }
+  .frontier-deployment {
+    padding: 42px 46px;
+  }
+  .frontier-rule {
+    font-size: 14px;
+  }
+  .frontier-loadouts button {
+    padding: 16px;
+  }
+  .frontier-loadouts b {
+    font-size: 15px;
+  }
+  .frontier-loadouts small {
+    font-size: 12px;
+  }
+  .frontier-assist {
+    font-size: 13px;
+  }
+}
+@media (max-width: 1050px) {
+  .frontier-shell {
+    padding: 0 20px 20px;
+  }
+  .frontier-header-meta {
+    display: none;
+  }
+  .frontier-briefing {
+    grid-template-columns: 1fr 350px;
+  }
+  .frontier-hero {
+    padding: 30px;
+  }
+  .frontier-deployment {
+    padding: 25px;
+  }
+  .frontier-bottom-hud {
+    gap: 12px;
+  }
+  .frontier-top-hud {
+    top: 11px;
+    left: 13px;
+    right: 13px;
+  }
+  .frontier-health {
+    width: 185px;
+  }
+  .frontier-objective-chip {
+    font-size: 9px;
+    padding: 10px;
+  }
+  .frontier-route-panel > p {
+    margin-bottom: 15px;
+  }
+  .frontier-route-cards > button > span {
+    padding: 18px;
+  }
+  .frontier-route-cards b {
+    font-size: 17px;
+  }
+  .frontier-footer > small {
+    display: none;
+  }
+  .frontier-boss {
+    left: 36%;
+    right: 31%;
+  }
+}
+@media (max-width: 760px) {
+  .frontier-header {
+    height: 70px;
+    gap: 15px;
+  }
+  .frontier-header .frontier-brand {
+    font-size: 20px;
+  }
+  .frontier-header nav {
+    gap: 4px;
+  }
+  .frontier-header nav button {
+    font-size: 10px;
+    padding: 8px;
+  }
+  .frontier-header nav button:last-child span {
+    display: none;
+  }
+  .frontier-chapters {
+    gap: 18px;
+    padding: 20px 0;
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .frontier-chapters > span {
+    gap: 6px;
+  }
+  .frontier-briefing {
+    grid-template-columns: 1fr;
+  }
+  .frontier-hero {
+    min-height: 370px;
+    border-right: 0;
+    border-bottom: 1px solid #284149;
+  }
+  .frontier-deployment {
+    padding: 26px;
+  }
+  .frontier-field-heading h1 {
+    font-size: 16px;
+  }
+  .frontier-stage {
+    min-height: 370px;
+    max-height: none;
+    aspect-ratio: 16/10;
+  }
+  .frontier-top-hud {
+    gap: 5px;
+  }
+  .frontier-health {
+    width: 142px;
+    padding: 8px;
+  }
+  .frontier-health b {
+    font-size: 9px;
+  }
+  .frontier-health em {
+    display: block;
+    margin-left: 0;
+  }
+  .frontier-objective-chip {
+    padding: 8px;
+    gap: 5px;
+  }
+  .frontier-objective-chip b {
+    font-size: 10px;
+  }
+  .frontier-bottom-hud {
+    flex-wrap: wrap;
+    gap: 11px;
+    font-size: 9px;
+  }
+  .frontier-route-cards {
+    gap: 10px;
+  }
+  .frontier-route-panel > h2 {
+    font-size: 17px;
+    margin: 8px 0;
+  }
+  .frontier-route-panel > p {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+  .frontier-route-cards > button > span {
+    padding: 13px;
+    gap: 8px;
+  }
+  .frontier-route-cards b {
+    font-size: 13px;
+  }
+  .frontier-route-cards p {
+    font-size: 9px;
+    line-height: 1.5;
+  }
+  .frontier-route-cards strong {
+    font-size: 10px;
+    padding-top: 10px;
+  }
+  .frontier-route-cards small {
+    font-size: 8px;
+  }
+  .frontier-route-cards > button {
+    min-height: 210px;
+  }
+  .frontier-result {
+    padding: 22px;
+  }
+  .frontier-result h2 {
+    font-size: 23px;
+  }
+  .frontier-result-stats {
+    margin: 17px 0;
+  }
+  .frontier-result-stats b {
+    font-size: 24px;
+  }
+  .frontier-result-rows {
+    gap: 4px;
+  }
+  .frontier-result-rows > div {
+    padding: 7px 0;
+    font-size: 9px;
+  }
+  .frontier-result-actions {
+    margin-top: 15px;
+  }
+  .frontier-result-actions > .frontier-primary {
+    padding: 12px;
+    font-size: 10px;
+    min-width: 0;
+  }
+  .frontier-intro {
+    left: 8%;
+    right: 8%;
+    top: 30%;
+    padding: 20px;
+  }
+  .frontier-intro h2 {
+    font-size: 20px;
+  }
+  .frontier-intro p {
+    font-size: 10px;
+  }
+  .frontier-boss {
+    top: 82px;
+    left: 31%;
+    right: 31%;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .frontier-shell * {
+    transition: none !important;
+  }
+}

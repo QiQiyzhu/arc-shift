@@ -1,3 +1,5 @@
+import { useTranslation } from '../ui/i18n';
+import { LanguageToggle } from '../ui/LanguageToggle';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { ActivityArena } from './ActivityArena';
 import { RELAY_ACTIVITY, type ActivityDefinition } from './definition';
@@ -30,6 +32,7 @@ export default function ActivityApp({
   draft?: ActivityDefinition;
   onBack?: () => void;
 }) {
+  const t = useTranslation();
   const def = draft ?? RELAY_ACTIVITY;
   const [unscored, setUnscored] = useState(false),
     [retry, setRetry] = useState(0);
@@ -222,12 +225,20 @@ export default function ActivityApp({
             leave();
           }}
         >
-          ARC<span>{'//'}</span>SHIFT
+          ARC<span>{t('//')}</span>SHIFT
         </a>
         <span>
-          RELAY / 01 · {practice ? '草稿试玩 · 不计成绩' : '单机挑战'}
+          RELAY / 01 · {t(practice ? '草稿试玩 · 不计成绩' : '单机挑战')}
         </span>
-        <button onClick={leave}>{onBack ? '返回编辑器' : '返回主菜单'}</button>
+        <LanguageToggle
+          onChange={(language) => {
+            if (session) session.engine.save.settings.language = language;
+            sound.settings.language = language;
+          }}
+        />
+        <button onClick={leave}>
+          {t(onBack ? '返回编辑器' : '返回主菜单')}
+        </button>
       </header>
       {!session && !result ? (
         <section className="activity-lobby">
@@ -240,65 +251,75 @@ export default function ActivityApp({
             </span>
           </div>
           <div className="activity-intro">
-            <p className="activity-kicker">固定配装 · 驻留挑战</p>
-            <h1>{def.name}</h1>
-            <p className="activity-lead">踏入光圈，守住最后一段信号。</p>
+            <p className="activity-kicker">{t('固定配装 · 驻留挑战')}</p>
+            <h1>{t(def.name)}</h1>
+            <p className="activity-lead">{t('踏入光圈，守住最后一段信号。')}</p>
             <div className="activity-rules">
               <div>
                 <strong>
                   {def.timeLimitSeconds}
                   <small>s</small>
                 </strong>
-                <span>战斗时限</span>
+                <span>{t('战斗时限')}</span>
               </div>
               <div>
                 <strong>
                   {def.holdSeconds}
                   <small>s</small>
                 </strong>
-                <span>累计驻留</span>
+                <span>{t('累计驻留')}</span>
               </div>
               <div>
                 <strong>01</strong>
-                <span>首通徽章</span>
+                <span>{t('首通徽章')}</span>
               </div>
             </div>
             <ol>
               <li>
-                进入场地中央光圈，累计驻留 {def.holdSeconds}{' '}
-                秒即成功。离圈保留进度。
+                {t.copy(
+                  `进入场地中央光圈，累计驻留 ${def.holdSeconds} 秒即成功。离圈保留进度。`,
+                  `Enter the central circle and accumulate ${def.holdSeconds} seconds to succeed. Leaving the circle preserves progress.`,
+                )}
               </li>
               <li>
-                在 {def.timeLimitSeconds}{' '}
-                秒内完成；生命值归零或超时则失败。暂停不计时。
+                {t.copy(
+                  `在 ${def.timeLimitSeconds} 秒内完成；生命值归零或超时则失败。暂停不计时。`,
+                  `Finish within ${def.timeLimitSeconds} seconds; zero health or an expired timer means defeat. Pausing stops the clock.`,
+                )}
               </li>
               <li>
-                使用固定武器与协议，击退来敌。首次完成后领取「守望者」徽章。
+                {t(
+                  '使用固定武器与协议，击退来敌。首次完成后领取「守望者」徽章。',
+                )}
               </li>
             </ol>
             <div className="activity-prize">
               <span>◇</span>
               <div>
                 <b>
-                  {save?.awards.length
-                    ? '守望者 · 已获得'
-                    : '守望者 · 首次完成解锁'}
+                  {t(
+                    save?.awards.length
+                      ? '守望者 · 已获得'
+                      : '守望者 · 首次完成解锁',
+                  )}
                 </b>
                 <p>
-                  {save?.bestTicks != null
-                    ? `个人最佳 ${(save.bestTicks / 60).toFixed(2)} 秒`
-                    : '徽章留在本机，重复完成可刷新个人最佳。'}
+                  {t(
+                    save?.bestTicks != null
+                      ? `个人最佳 ${(save.bestTicks / 60).toFixed(2)} 秒`
+                      : '徽章留在本机，重复完成可刷新个人最佳。',
+                  )}
                 </p>
               </div>
             </div>
             {status === 'busy' && (
               <output>
-                另一个页面正在使用活动记录。关闭它后，再重新连接。
+                {t('另一个页面正在使用活动记录。关闭它后，再重新连接。')}
               </output>
             )}
             {error && (
               <p className="activity-error" role="alert">
-                {error}
+                {t(error)}
               </p>
             )}
             <div className="activity-actions">
@@ -307,7 +328,7 @@ export default function ActivityApp({
                 disabled={status !== 'ready'}
                 onClick={start}
               >
-                {status === 'loading' ? '正在准备…' : '进入挑战'}
+                {t(status === 'loading' ? '正在准备…' : '进入挑战')}
               </button>
               {status === 'busy' && (
                 <button
@@ -316,7 +337,7 @@ export default function ActivityApp({
                     setRetry((n) => n + 1);
                   }}
                 >
-                  重新连接
+                  {t('重新连接')}
                 </button>
               )}
               {status === 'error' && (
@@ -326,15 +347,18 @@ export default function ActivityApp({
                     setError('');
                   }}
                 >
-                  不计成绩试玩
+                  {t('不计成绩试玩')}
                 </button>
               )}
             </div>
             <p className="activity-footnote">
-              {practice
-                ? '试玩不写入活动记录，不发放正式徽章。'
-                : '本地单机记录，可被修改或清除；设备日期仅作记录，不是可信线上榜单。'}{' '}
-              主线存档独立保留。
+              {t(
+                practice
+                  ? '试玩不写入活动记录，不发放正式徽章。'
+                  : '本地单机记录，可被修改或清除；设备日期仅作记录，不是可信线上榜单。',
+              )}
+              {t(' ')}
+              {t('主线存档独立保留。')}
             </p>
           </div>
         </section>
@@ -343,14 +367,16 @@ export default function ActivityApp({
           {session && (
             <div className="activity-hud">
               <div>
-                <span>驻留进度</span>
-                <strong aria-label="驻留进度">
-                  {(
-                    result?.metrics?.holdSeconds ??
-                    w?.challengeTime ??
-                    0
-                  ).toFixed(1)}{' '}
-                  / {def.holdSeconds}s
+                <span>{t('驻留进度')}</span>
+                <strong aria-label={t('驻留进度')}>
+                  {t(
+                    (
+                      result?.metrics?.holdSeconds ??
+                      w?.challengeTime ??
+                      0
+                    ).toFixed(1),
+                  )}
+                  {t(' ')}/ {def.holdSeconds}s
                 </strong>
                 <progress
                   max={def.holdSeconds}
@@ -358,13 +384,15 @@ export default function ActivityApp({
                 />
               </div>
               <div>
-                <span>剩余时间</span>
-                <strong aria-label="剩余时间">{remaining.toFixed(1)}s</strong>
+                <span>{t('剩余时间')}</span>
+                <strong aria-label={t('剩余时间')}>
+                  {t(remaining.toFixed(1))}s
+                </strong>
               </div>
               <div>
-                <span>生命</span>
-                <strong aria-label="挑战生命">
-                  {Math.max(0, Math.ceil(w?.player.hp ?? 0))} /{' '}
+                <span>{t('生命')}</span>
+                <strong aria-label={t('挑战生命')}>
+                  {Math.max(0, Math.ceil(w?.player.hp ?? 0))} /{t(' ')}
                   {w?.player.maxHp ?? 120}
                 </strong>
               </div>
@@ -376,7 +404,7 @@ export default function ActivityApp({
                     render((n) => n + 1);
                   }}
                 >
-                  暂停 / 继续
+                  {t('暂停 / 继续')}
                 </button>
               )}
             </div>
@@ -392,17 +420,17 @@ export default function ActivityApp({
             )}
             {w?.phase === 'transition' && !result && (
               <div className="activity-entry">
-                前往中央光圈
+                {t('前往中央光圈')}
                 <br />
-                <small>准备接管中继</small>
+                <small>{t('准备接管中继')}</small>
               </div>
             )}
             {w?.phase === 'paused' && !result && !confirmExit && (
               <div className="activity-overlay">
                 <div className="activity-dialog">
                   <p className="activity-kicker">SIGNAL ON HOLD</p>
-                  <h2>挑战已暂停</h2>
-                  <p>计时与驻留进度均已暂停。</p>
+                  <h2>{t('挑战已暂停')}</h2>
+                  <p>{t('计时与驻留进度均已暂停。')}</p>
                   <button
                     className="activity-primary"
                     onClick={() => {
@@ -411,23 +439,27 @@ export default function ActivityApp({
                       render((n) => n + 1);
                     }}
                   >
-                    继续挑战
+                    {t('继续挑战')}
                   </button>
-                  <button onClick={leave}>撤离挑战</button>
+                  <button onClick={leave}>{t('撤离挑战')}</button>
                 </div>
               </div>
             )}
             {confirmExit && (
               <div className="activity-overlay">
-                <dialog open className="activity-dialog" aria-label="撤离确认">
-                  <h2>现在撤离？</h2>
-                  <p>本次将结束，不发放首通徽章。</p>
+                <dialog
+                  open
+                  className="activity-dialog"
+                  aria-label={t('撤离确认')}
+                >
+                  <h2>{t('现在撤离？')}</h2>
+                  <p>{t('本次将结束，不发放首通徽章。')}</p>
                   <button
                     onClick={() => {
                       setConfirmExit(false);
                     }}
                   >
-                    留在挑战
+                    {t('留在挑战')}
                   </button>
                   <button
                     onClick={() => {
@@ -438,7 +470,7 @@ export default function ActivityApp({
                       persistResult(r);
                     }}
                   >
-                    确认撤离
+                    {t('确认撤离')}
                   </button>
                 </dialog>
               </div>
@@ -448,40 +480,42 @@ export default function ActivityApp({
                 <dialog
                   open
                   className="activity-dialog activity-result"
-                  aria-label="挑战结算"
+                  aria-label={t('挑战结算')}
                 >
                   <p className="activity-kicker">
-                    {result.reason === 'captured'
-                      ? 'RELAY SECURED'
-                      : 'CHALLENGE ENDED'}{' '}
-                    / {practice ? '试玩' : '本机记录'}
+                    {t(
+                      result.reason === 'captured'
+                        ? 'RELAY SECURED'
+                        : 'CHALLENGE ENDED',
+                    )}
+                    {t(' ')}/ {t(practice ? '试玩' : '本机记录')}
                   </p>
                   <div className="result-seal">
-                    {result.reason === 'captured' ? '◇' : '—'}
+                    {t(result.reason === 'captured' ? '◇' : '—')}
                   </div>
-                  <h2>{reasons[result.reason]}</h2>
-                  <p>{explanations[result.reason]}</p>
+                  <h2>{t(reasons[result.reason])}</h2>
+                  <p>{t(explanations[result.reason])}</p>
                   {result.metrics ? (
                     <dl>
                       <div>
-                        <dt>战斗用时</dt>
-                        <dd>{(result.metrics.ticks / 60).toFixed(2)}s</dd>
+                        <dt>{t('战斗用时')}</dt>
+                        <dd>{t((result.metrics.ticks / 60).toFixed(2))}s</dd>
                       </div>
                       <div>
-                        <dt>击败敌人</dt>
+                        <dt>{t('击败敌人')}</dt>
                         <dd>{result.metrics.kills}</dd>
                       </div>
                       <div>
-                        <dt>累计驻留</dt>
-                        <dd>{result.metrics.holdSeconds.toFixed(1)}s</dd>
+                        <dt>{t('累计驻留')}</dt>
+                        <dd>{t(result.metrics.holdSeconds.toFixed(1))}s</dd>
                       </div>
                     </dl>
                   ) : (
-                    <p>未保存战斗进度，不提供本次战斗统计。</p>
+                    <p>{t('未保存战斗进度，不提供本次战斗统计。')}</p>
                   )}
                   {error && (
                     <p className="activity-error" role="alert">
-                      {error}
+                      {t(error)}
                     </p>
                   )}
                   {!stored ? (
@@ -489,26 +523,30 @@ export default function ActivityApp({
                       className="activity-primary"
                       onClick={() => persistResult(result)}
                     >
-                      重试保存结算
+                      {t('重试保存结算')}
                     </button>
                   ) : !ack ? (
                     <button className="activity-primary" onClick={claim}>
-                      {result.reason === 'captured' && !practice
-                        ? '领取徽章并记录成绩'
-                        : '确认本次结果'}
+                      {t(
+                        result.reason === 'captured' && !practice
+                          ? '领取徽章并记录成绩'
+                          : '确认本次结果',
+                      )}
                     </button>
                   ) : (
                     <>
                       <p className="activity-receipt">
-                        {result.reason === 'captured' && !practice
-                          ? '守望者徽章已入藏 · 成绩已记录'
-                          : '本次结算已确认'}
+                        {t(
+                          result.reason === 'captured' && !practice
+                            ? '守望者徽章已入藏 · 成绩已记录'
+                            : '本次结算已确认',
+                        )}
                       </p>
                       <button className="activity-primary" onClick={lobby}>
-                        返回活动大厅
+                        {t('返回活动大厅')}
                       </button>
                       <button onClick={leave}>
-                        {onBack ? '返回编辑器' : '返回主菜单'}
+                        {t(onBack ? '返回编辑器' : '返回主菜单')}
                       </button>
                     </>
                   )}
@@ -517,12 +555,20 @@ export default function ActivityApp({
             )}
           </div>
           <p className="activity-controls">
-            {['MoveUp', 'MoveLeft', 'MoveDown', 'MoveRight']
-              .map((a) => key(a as keyof typeof bindings.keys))
-              .join(' · ')}{' '}
-            移动 · 鼠标瞄准 / {bindings.mouseAttack === 0 ? '左键' : '右键'}攻击
-            · {key('Dash')} 冲刺 · {key('Pulse')} / {key('Gravity')} 技能 ·{' '}
-            {key('Pause')} 暂停{practice ? ' · 草稿试玩，不发放正式徽章' : ''}
+            {t(
+              ['MoveUp', 'MoveLeft', 'MoveDown', 'MoveRight']
+                .map((a) => key(a as keyof typeof bindings.keys))
+                .join(' · '),
+            )}
+            {t(' ')}
+            {t('移动 · 鼠标瞄准 /')}
+            {t(bindings.mouseAttack === 0 ? '左键' : '右键')}
+            {t('攻击 ·')}
+            {t(key('Dash'))} {t('冲刺 ·')}
+            {t(key('Pulse'))} / {t(key('Gravity'))} {t('技能 ·')}
+            {t(' ')}
+            {t(key('Pause'))} {t('暂停')}
+            {t(practice ? ' · 草稿试玩，不发放正式徽章' : '')}
           </p>
         </section>
       )}

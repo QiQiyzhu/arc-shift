@@ -127,6 +127,7 @@ export class ArcScene extends Phaser.Scene {
   private arenaTexture(template = 0, biome = 'sanctum') {
     if (this.arenaSkin && this.textures.exists(this.arenaSkin))
       return this.arenaSkin;
+    if (this.textures.exists(`${biome}-v23`)) return `${biome}-v23`;
     if (this.textures.exists(biome)) return biome;
     if (this.textures.exists('sanctum')) return 'sanctum';
     const key = `arena-floor-${template}`;
@@ -146,6 +147,9 @@ export class ArcScene extends Phaser.Scene {
     this.load.image('sanctum', '/art/sanctum.webp');
     this.load.image('grove', '/art/grove.webp');
     this.load.image('foundry', '/art/foundry.webp');
+    this.load.image('sanctum-v23', '/art/sanctum-v23.webp');
+    this.load.image('grove-v23', '/art/grove-v23.webp');
+    this.load.image('foundry-v23', '/art/foundry-v23.webp');
   }
   create() {
     this.floor = this.add
@@ -162,7 +166,7 @@ export class ArcScene extends Phaser.Scene {
     this.graphics = this.add.graphics().setDepth(3);
     this.actors = new ActorSprites(this);
     this.bullets = new ProjectileSprites(this);
-    this.effects = new Effects(this);
+    this.effects = new Effects(this, () => this.engine.save.settings.language ?? 'zh');
     this.input.mouse!.disableContextMenu();
     window.addEventListener('keydown', this.onKeyDown);
     window.addEventListener('keyup', this.onKeyUp);

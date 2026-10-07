@@ -94,15 +94,16 @@ export function drawTelegraph(
 ) {
   if (e.state !== 'telegraph') return;
   const c = 0xff8093,
-    pulse = reduced ? 0.8 : 0.72 + Math.sin(time * 9) * 0.12;
+    pulse = reduced ? 0.8 : 0.72 + Math.sin(time * 9) * 0.12,
+    accent = reduced ? 0.24 : 0.34 + Math.sin(time * 7) * 0.08;
   const charge = chargeCue(e);
   if (charge) {
-    g.lineStyle(charge.halfWidth * 2, c, 0.12);
+    g.lineStyle(charge.halfWidth * 2, c, accent);
     g.lineBetween(e.x, e.y, charge.x, charge.y);
     const a = Math.atan2(charge.y - e.y, charge.x - e.x),
       nx = -Math.sin(a) * charge.halfWidth,
       ny = Math.cos(a) * charge.halfWidth;
-    g.lineStyle(2, c, pulse);
+    g.lineStyle(2.5, c, pulse);
     // Rounded end caps include contact at both endpoints. Two steps of length
     // margin covers the update that moves before expiring the attack timer.
     strokeRing(g, e.x, e.y, charge.halfWidth, c, pulse);
@@ -135,7 +136,7 @@ export function drawTelegraph(
     const blasts = blastCues(e);
     if (blasts.length)
       for (const b of blasts) {
-        g.lineStyle(2, c, 0.55);
+        g.lineStyle(2.5, c, 0.55 + accent * 0.2);
         strokeRing(g, b.x, b.y, b.r, c, 0.55);
         g.lineBetween(b.x - 7, b.y, b.x + 7, b.y);
         g.lineBetween(b.x, b.y - 7, b.x, b.y + 7);

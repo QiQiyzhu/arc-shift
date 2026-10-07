@@ -36,3 +36,11 @@ next-env.d.ts
 /.wrangler/
 /outputs/
 /work/
+
+# Local video deliveries are distributed separately from the game source.
+/output/
+
+# Earlier local drafts belong to the separate Aegis project, not this game.
+/docs/aegis-v2.2-status.md
+/docs/portfolio-v2.3-delivery.md
+/docs/v23-visual-gameplay.md

@@ -1,3 +1,4 @@
+import { useTranslation } from './i18n';
 import { useState } from 'react';
 import type { ActionInput } from '../input/actions';
 import {
@@ -27,6 +28,7 @@ const choices = [
   ...'1234567890'.split('').map((c) => `Digit${c}`),
 ];
 export function InputSettings({ controls }: { controls: ActionInput }) {
+  const t = useTranslation();
   const [, render] = useState(0);
   const [message, setMessage] = useState('');
   const config = controls.bindings;
@@ -46,19 +48,21 @@ export function InputSettings({ controls }: { controls: ActionInput }) {
   return (
     <details className="input-settings">
       <summary>
-        操作与手柄{' '}
-        <span>{controls.connected ? '标准手柄已连接' : '键盘 / 鼠标'}</span>
+        {t('操作与手柄')}
+        {t(' ')}
+        <span>{t(controls.connected ? '标准手柄已连接' : '键盘 / 鼠标')}</span>
       </summary>
       <p>
-        左摇杆移动 · 右摇杆瞄准 · RT 攻击 · A 跃迁 · LB 脉冲 · RB 引力 · X 炸弹
-        · Y 灵药 · Start 暂停。菜单和选卡使用鼠标。
+        {t(
+          '左摇杆移动 · 右摇杆瞄准 · RT 攻击 · A 跃迁 · LB 脉冲 · RB 引力 · X 炸弹 · Y 灵药 · Start 暂停。菜单和选卡使用鼠标。',
+        )}
       </p>
       <div className="binding-grid">
         {Object.entries(labels).map(([action, label]) => (
           <label key={action}>
-            <span>{label}</span>
+            <span>{t(label)}</span>
             <select
-              aria-label={`${label}按键`}
+              aria-label={t(`${label}按键`)}
               value={config.keys[action as KeyAction][0]}
               onChange={(event) => {
                 const next = structuredClone(config),
@@ -74,7 +78,7 @@ export function InputSettings({ controls }: { controls: ActionInput }) {
                 ...new Set([...choices, ...config.keys[action as KeyAction]]),
               ].map((code) => (
                 <option key={code} value={code}>
-                  {keyLabel(code)}
+                  {t(keyLabel(code))}
                 </option>
               ))}
             </select>
@@ -82,9 +86,10 @@ export function InputSettings({ controls }: { controls: ActionInput }) {
         ))}
       </div>
       <label className="input-deadzone">
-        摇杆死区{' '}
+        {t('摇杆死区')}
+        {t(' ')}
         <select
-          aria-label="摇杆死区"
+          aria-label={t('摇杆死区')}
           value={String(config.deadzone)}
           onChange={(e) =>
             apply({ ...config, deadzone: Number(e.target.value) })
@@ -98,15 +103,17 @@ export function InputSettings({ controls }: { controls: ActionInput }) {
         </select>
       </label>
       <p>
-        重复按键会被拒绝；方向键仍是备用移动键。浏览器首次识别手柄时，请按一下手柄按钮。
+        {t(
+          '重复按键会被拒绝；方向键仍是备用移动键。浏览器首次识别手柄时，请按一下手柄按钮。',
+        )}
       </p>
       <button
         className="binding-reset"
         onClick={() => apply(structuredClone(DEFAULT_BINDINGS))}
       >
-        恢复默认操作
+        {t('恢复默认操作')}
       </button>
-      {message && <output>{message}</output>}
+      {message && <output>{t(message)}</output>}
     </details>
   );
 }

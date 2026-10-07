@@ -1360,6 +1360,42 @@ kbd {
 .settings-list {
   margin-top: 15px;
 }
+.language-setting {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 18px;
+  margin: 18px 0 26px;
+  padding: 14px 0 20px;
+  border-bottom: 1px solid #2b4037;
+}
+.language-setting label {
+  font-size: 14px;
+}
+.language-setting p {
+  color: #7c978a;
+  font-size: 12px;
+  line-height: 1.6;
+  margin: 6px 0 0;
+}
+.language-options {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.language-options button {
+  border: 1px solid #3b5749;
+  background: #12231e;
+  color: #9ab0a5;
+  padding: 8px 12px;
+  font-size: 12px;
+}
+.language-options button.active,
+.language-options button:hover {
+  border-color: #b4d694;
+  color: #e1efdb;
+  background: #21382d;
+}
 .setting-row {
   margin-bottom: 25px;
 }

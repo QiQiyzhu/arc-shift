@@ -10,6 +10,8 @@ export interface SoundSettings {
   muted: boolean;
   reducedMotion: boolean;
   focusedEffects?: boolean;
+  /** Persisted interface locale; Chinese is the v2.3 default. */
+  language?: 'zh' | 'en';
 }
 export const defaultSettings: SoundSettings = {
   master: 0.6,
@@ -17,6 +19,7 @@ export const defaultSettings: SoundSettings = {
   sfx: 0.65,
   muted: false,
   reducedMotion: false,
+  language: 'zh',
 };
 type Voice = {
   source: AudioScheduledSourceNode;

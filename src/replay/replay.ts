@@ -331,7 +331,13 @@ export function importReplay(raw: string): Replay {
     throw Error('Invalid initial profile');
   validateInitialTree(data.initial.save);
   const save = parseSave(JSON.stringify(data.initial.save));
-  if (canonical(save) !== canonical(data.initial.save))
+  // Locale is presentation-only. Existing v1.2 recordings predate this setting;
+  // allow just its absent default without relaxing validation of other fields.
+  const original = data.initial.save;
+  const comparable = object(original.settings) && original.settings.language === undefined
+    ? { ...original, settings: { ...original.settings, language: 'zh' } }
+    : original;
+  if (canonical(save) !== canonical(comparable))
     throw Error('Initial profile failed save validation');
   if (save.checkpoint?.campaign === 'legacy') {
     const room = save.checkpoint.room;

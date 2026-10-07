@@ -1,3 +1,4 @@
+import { useTranslation } from './i18n';
 import { useState } from 'react';
 import { ArrowRight, Check, LockKeyhole, Gem, BookOpen } from 'lucide-react';
 import type { Engine } from '../game/engine';
@@ -17,23 +18,25 @@ const modifiers = {
   fervor: '狂热：敌人伤害 +15%',
 };
 export function HybridHUD({ engine }: { engine: Engine }) {
+  const t = useTranslation();
   const w = engine.world;
   return (
-    <div className="hybrid-hud" aria-label="当前混搭武装">
+    <div className="hybrid-hud" aria-label={t('当前混搭武装')}>
       {w.forms.map((id, i) => (
         <span key={id}>
           <WeaponIcon id={id} />
-          {WEAPONS.find((x) => x.id === id)!.name}
-          <small>{i === 0 ? '主' : '改造'}</small>
+          {t(WEAPONS.find((x) => x.id === id)!.name)}
+          <small>{t(i === 0 ? '主' : '改造')}</small>
         </span>
       ))}
       {w.forms.length > 1 && (
-        <b title={fusionDescription(w.weapon, w.forms)}>形态改写</b>
+        <b title={t(fusionDescription(w.weapon, w.forms))}>{t('形态改写')}</b>
       )}
     </div>
   );
 }
 export function ExpeditionMap({ engine }: { engine: Engine }) {
+  const t = useTranslation();
   const w = engine.world,
     graph = expedition(w.seed),
     available = availableNodes(w.seed, w.room.nodeId!),
@@ -50,22 +53,24 @@ export function ExpeditionMap({ engine }: { engine: Engine }) {
       <section className="pilgrimage-map">
         <div className="map-title">
           <div>
-            <div className="eyebrow">THE LAST PILGRIMAGE / 路线规划</div>
-            <h2>钟声尽头</h2>
+            <div className="eyebrow">{t('THE LAST PILGRIMAGE / 路线规划')}</div>
+            <h2>{t('钟声尽头')}</h2>
           </div>
           <WalletBar engine={engine} />
         </div>
-        <p>查看整条路线，再选择相连的下一站。每次经过，都会关闭其他岔路。</p>
+        <p>
+          {t('查看整条路线，再选择相连的下一站。每次经过，都会关闭其他岔路。')}
+        </p>
         <div className="route-biomes">
           {Object.values(BIOMES).map((b) => (
             <span key={b.en} style={{ color: b.color }}>
-              {b.name}
-              <small>{b.en}</small>
+              {t(b.name)}
+              <small>{t(b.en)}</small>
             </span>
           ))}
         </div>
         <div className="route-scroll">
-          <div className="route-graph" aria-label="十二层分支地图">
+          <div className="route-graph" aria-label={t('十二层分支地图')}>
             <svg
               viewBox="0 0 1048 285"
               preserveAspectRatio="none"
@@ -101,12 +106,17 @@ export function ExpeditionMap({ engine }: { engine: Engine }) {
                   className={`route-stop ${visited ? 'visited' : ''} ${reachable ? 'reachable' : ''} ${selected === n.id ? 'selected' : ''} ${n.room.kind === 'boss' ? 'core' : ''}`}
                   style={{ left: `${(p.x / 1048) * 100}%`, top: p.y }}
                   onClick={() => setSelected(n.id)}
-                  aria-label={`第 ${n.depth} 层 ${n.room.name} · ${reachable ? '可前往' : visited ? '已走过' : '预览'}`}
+                  aria-label={t.copy(
+                    `第 ${n.depth} 层 ${n.room.name} · ${reachable ? '可前往' : visited ? '已走过' : '预览'}`,
+                    `Sector ${n.depth}: ${t(n.room.name)} · ${reachable ? 'Reachable' : visited ? 'Visited' : 'Preview'}`,
+                  )}
                   aria-pressed={selected === n.id}
                 >
                   <i>{visited ? <Check size={19} /> : <i.Icon size={21} />}</i>
-                  <span>{n.room.kind === 'boss' ? n.room.name : i.name}</span>
-                  <small>{String(n.depth).padStart(2, '0')}</small>
+                  <span>
+                    {t(n.room.kind === 'boss' ? n.room.name : i.name)}
+                  </span>
+                  <small>{t(String(n.depth).padStart(2, '0'))}</small>
                 </button>
               );
             })}
@@ -116,28 +126,33 @@ export function ExpeditionMap({ engine }: { engine: Engine }) {
           <info.Icon size={30} />
           <div>
             <span>
-              第 {node.depth} 层 · {BIOMES[node.room.biome!].name} / {info.name}
+              {t.copy(`第 ${node.depth} 层`, `Sector ${node.depth}`)} ·{' '}
+              {t(BIOMES[node.room.biome!].name)} / {t(info.name)}
             </span>
-            <h3>{node.room.name}</h3>
+            <h3>{t(node.room.name)}</h3>
             <p>
-              {node.room.kind === 'heal'
-                ? '恢复 55 生命或补充一瓶灵药'
-                : node.room.kind === 'treasure'
-                  ? '免费熔接武装或回收物资；钥匙可开启额外协议箱'
-                  : info.reward}
+              {t(
+                node.room.kind === 'heal'
+                  ? '恢复 55 生命或补充一瓶灵药'
+                  : node.room.kind === 'treasure'
+                    ? '免费熔接武装或回收物资；钥匙可开启额外协议箱'
+                    : info.reward,
+              )}
             </p>
-            <small>{modifiers[node.room.modifier || 'none']}</small>
+            <small>{t(modifiers[node.room.modifier || 'none'])}</small>
           </div>
           <button
             className="journey-button"
             disabled={!canTravel}
             onClick={() => engine.travel(node.id)}
           >
-            {canTravel
-              ? '前往此处'
-              : w.route.includes(node.id)
-                ? '已经过'
-                : '尚未连接'}
+            {t(
+              canTravel
+                ? '前往此处'
+                : w.route.includes(node.id)
+                  ? '已经过'
+                  : '尚未连接',
+            )}
             <ArrowRight size={19} />
           </button>
         </div>
@@ -145,10 +160,10 @@ export function ExpeditionMap({ engine }: { engine: Engine }) {
           <CampActions engine={engine} />
         )}
         <div className="map-legend">
-          <span>◇ 亮线：下一站</span>
-          <span>✓ 已走过</span>
-          <span>点击远处节点可预览</span>
-          <span>进度已自动保存</span>
+          <span>{t('◇ 亮线：下一站')}</span>
+          <span>{t('✓ 已走过')}</span>
+          <span>{t('点击远处节点可预览')}</span>
+          <span>{t('进度已自动保存')}</span>
         </div>
       </section>
     </div>
@@ -178,6 +193,7 @@ const encounters = {
   ],
 } as const;
 export function EncounterPanel({ engine }: { engine: Engine }) {
+  const t = useTranslation();
   const w = engine.world,
     kind = w.room.kind as keyof typeof encounters,
     [title, text] = encounters[kind];
@@ -193,8 +209,8 @@ export function EncounterPanel({ engine }: { engine: Engine }) {
       disabled={disabled}
       onClick={() => engine.resolveEvent(id)}
     >
-      <b>{label}</b>
-      <span>{detail}</span>
+      <b>{t(label)}</b>
+      <span>{t(detail)}</span>
       <ArrowRight size={18} />
     </button>
   );
@@ -204,10 +220,10 @@ export function EncounterPanel({ engine }: { engine: Engine }) {
     <div className="modal-shade encounter-shade">
       <section className={`encounter-panel encounter-${kind}`}>
         <div className="eyebrow">
-          {BIOMES[w.room.biome!].en} / {ROOM_INFO[kind].name}
+          {t(BIOMES[w.room.biome!].en)} / {t(ROOM_INFO[kind].name)}
         </div>
-        <h2>{title}</h2>
-        <p className="fragment-quote">{text}</p>
+        <h2>{t(title)}</h2>
+        <p className="fragment-quote">{t(text)}</p>
         <WalletBar engine={engine} />
         <div className="encounter-choices">
           {(kind === 'forge' || kind === 'treasure') &&
@@ -267,10 +283,11 @@ export function EncounterPanel({ engine }: { engine: Engine }) {
           className="text-button encounter-leave"
           onClick={() => engine.resolveEvent('leave')}
         >
-          {kind === 'shop' ? '离开行商' : '不再停留'} <ArrowRight size={17} />
+          {t(kind === 'shop' ? '离开行商' : '不再停留')}{' '}
+          <ArrowRight size={17} />
         </button>
         <small className="encounter-note">
-          每处仅能选择一项主要行动。额外交易独立结算。
+          {t('每处仅能选择一项主要行动。额外交易独立结算。')}
         </small>
       </section>
     </div>
@@ -283,13 +300,14 @@ export function RelicCollection({
   engine: Engine;
   refresh: () => void;
 }) {
+  const t = useTranslation();
   const m = engine.save.meta;
   return (
     <>
       <div className="archive-summary">
         <Gem size={20} />
-        {m.shards} 已归档碎片
-        <span>出发时携带一件遗器，局内可在工坊继续熔接。</span>
+        {m.shards} {t('已归档碎片')}
+        <span>{t('出发时携带一件遗器，局内可在工坊继续熔接。')}</span>
       </div>
       <div className="relic-grid">
         {RELICS.map((r) => {
@@ -298,10 +316,10 @@ export function RelicCollection({
             equipped = m.equipped === r.id;
           return (
             <article key={r.id} className={equipped ? 'equipped' : ''}>
-              <small>{r.boss ? ENEMIES[r.boss].name : '无击破要求'}</small>
-              <h3>{r.name}</h3>
-              <p>{r.text}</p>
-              <blockquote>{r.lore}</blockquote>
+              <small>{t(r.boss ? ENEMIES[r.boss].name : '无击破要求')}</small>
+              <h3>{t(r.name)}</h3>
+              <p>{t(r.text)}</p>
+              <blockquote>{t(r.lore)}</blockquote>
               <button
                 disabled={
                   engine.world.phase !== 'menu' ||
@@ -313,13 +331,15 @@ export function RelicCollection({
                   refresh();
                 }}
               >
-                {owned
-                  ? equipped
-                    ? '已装备 · 卸下'
-                    : '携带此遗器'
-                  : locked
-                    ? `击败${ENEMIES[r.boss!].name}后解锁`
-                    : `${r.cost} 碎片 · 解锁`}
+                {t(
+                  owned
+                    ? equipped
+                      ? '已装备 · 卸下'
+                      : '携带此遗器'
+                    : locked
+                      ? `击败${ENEMIES[r.boss!].name}后解锁`
+                      : `${r.cost} 碎片 · 解锁`,
+                )}
               </button>
             </article>
           );
@@ -329,11 +349,13 @@ export function RelicCollection({
   );
 }
 export function MemoryCollection({ engine }: { engine: Engine }) {
+  const t = useTranslation();
   const m = engine.save.meta;
   return (
     <>
       <p className="archive-summary">
-        记忆 {m.lore.length} / {LORE.length} · 有些空白，也许本来就没有答案。
+        {t('记忆')}
+        {m.lore.length} / {LORE.length} {t('· 有些空白，也许本来就没有答案。')}
       </p>
       <div className="memory-grid">
         {LORE.map((l) => {
@@ -341,9 +363,9 @@ export function MemoryCollection({ engine }: { engine: Engine }) {
           return (
             <article key={l.id} className={known ? '' : 'locked'}>
               {known ? <BookOpen size={23} /> : <LockKeyhole size={23} />}
-              <small>{l.source}</small>
-              <h3>{known ? l.title : '未拾得的记忆'}</h3>
-              <p>{known ? l.text : '还没有人把这一页带回来。'}</p>
+              <small>{t(l.source)}</small>
+              <h3>{t(known ? l.title : '未拾得的记忆')}</h3>
+              <p>{t(known ? l.text : '还没有人把这一页带回来。')}</p>
             </article>
           );
         })}
@@ -352,6 +374,7 @@ export function MemoryCollection({ engine }: { engine: Engine }) {
   );
 }
 export function EnemyCollection({ engine }: { engine: Engine }) {
+  const t = useTranslation();
   const [filter, setFilter] = useState('all');
   const entries = Object.entries(ENEMIES) as [
     EnemyKind,
@@ -370,7 +393,7 @@ export function EnemyCollection({ engine }: { engine: Engine }) {
             className={filter === id ? 'active' : ''}
             onClick={() => setFilter(id)}
           >
-            {label}
+            {t(label)}
           </button>
         ))}
       </div>
@@ -384,15 +407,17 @@ export function EnemyCollection({ engine }: { engine: Engine }) {
           .map(([id, e]) => (
             <article key={id}>
               <small>
-                {engine.save.meta.enemies.includes(id) ? '已记录' : '尚未清除'}{' '}
-                / {e.radius > 35 ? '核心' : '游荡者'}
+                {t(
+                  engine.save.meta.enemies.includes(id) ? '已记录' : '尚未清除',
+                )}
+                {t(' ')}/ {t(e.radius > 35 ? '核心' : '游荡者')}
               </small>
               <h3
                 style={{ color: `#${e.color.toString(16).padStart(6, '0')}` }}
               >
-                {e.name}
+                {t(e.name)}
               </h3>
-              <p>{ENEMY_NOTES[id]}</p>
+              <p>{t(ENEMY_NOTES[id])}</p>
             </article>
           ))}
       </div>

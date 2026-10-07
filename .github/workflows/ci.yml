@@ -33,15 +33,11 @@ jobs:
       FULL_SUITE: ${{ github.event_name == 'schedule' || (github.event_name == 'workflow_dispatch' && inputs.full_suite) }}
       ARC_BENCH_LABEL: ci-${{ github.run_id }}-${{ github.run_attempt }}
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
+      - uses: actions/setup-node@v7
         with:
           node-version: '24'
           cache: npm
-      - name: Install locked dependencies
-        run: npm ci
-      - name: Audit locked dependencies
-        run: npm audit --audit-level=moderate
       - name: Record the tested source and environment
         run: |
           mkdir -p outputs/qa
@@ -60,6 +56,10 @@ jobs:
             browser: 'Playwright-managed Chromium', workers: 1,
           }, null, 2));
           NODE
+      - name: Install locked dependencies
+        run: npm ci 2>&1 | tee outputs/qa/install.log
+      - name: Audit locked dependencies
+        run: npm audit --audit-level=moderate 2>&1 | tee outputs/qa/audit.log
       - name: Typecheck
         run: npm run typecheck 2>&1 | tee outputs/qa/typecheck.log
       - name: Lint
@@ -109,7 +109,7 @@ jobs:
           fi
       - name: Upload results, traces and failure screenshots
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: arc-verification-${{ github.run_id }}-${{ github.run_attempt }}
           path: |
@@ -119,7 +119,7 @@ jobs:
           retention-days: 30
       - name: Upload the tested production build
         if: ${{ always() && steps.production_build.outcome == 'success' }}
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: arc-production-${{ github.run_id }}-${{ github.run_attempt }}
           path: dist/

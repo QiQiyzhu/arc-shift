@@ -53,12 +53,35 @@ export function drawSupplies(
     g.fillCircle(b.x, b.y, 5);
   }
 }
-export function drawSwordArc(g: Phaser.GameObjects.Graphics, w: World) {
+export function drawSwordArc(
+  g: Phaser.GameObjects.Graphics,
+  w: World,
+  reducedMotion = false,
+) {
   const s = w.swing;
   if (!s) return;
   const anticipation = s.age < 0.055,
     fade = anticipation ? 0.2 : Math.max(0, 1 - (s.age - 0.055) / 0.225);
   const color = s.combo === 2 ? 0xffebad : 0xffd991;
+  // A pair of offset after-images keeps the blade readable during the short
+  // swing without adding particles or changing the melee hit window.
+  if (!anticipation && !reducedMotion) {
+    for (let trail = 2; trail >= 1; trail--) {
+      const shift = trail * 0.045,
+        trailFade = fade * (0.11 / trail);
+      g.lineStyle(7 - trail, color, trailFade);
+      g.beginPath();
+      g.arc(
+        s.x,
+        s.y,
+        s.range - trail * 5,
+        s.angle - s.arc / 2 - shift,
+        s.angle + s.arc / 2 - shift,
+        false,
+      );
+      g.strokePath();
+    }
+  }
   const points = [{ x: s.x, y: s.y }];
   for (let i = 0; i <= 24; i++) {
     const a = s.angle - s.arc / 2 + (s.arc * i) / 24;

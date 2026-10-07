@@ -31,8 +31,15 @@
   display: flex;
   align-items: center;
   gap: 6px;
-  white-space: nowrap;
+  white-space: normal;
+  max-width: 100%;
+  line-height: 1.5;
   font-size: 14px;
+}
+.mode-entry > span:first-child {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 3px;
 }
 .mode-entry b {
   font-size: 10px;
@@ -45,7 +52,7 @@
   gap: 8px;
 }
 .menu-secondary .guide-entry {
-  grid-column: 1 / -1;
+  grid-column: auto;
   display: flex;
   flex-direction: column;
   align-items: flex-start;
@@ -62,7 +69,9 @@
 .guide-entry > span {
   display: flex;
   align-items: center;
-  gap: 12px;
+  gap: 5px;
+  flex-wrap: wrap;
+  line-height: 1.5;
   font-size: 15px;
 }
 .guide-entry > span:last-child {
@@ -267,6 +276,19 @@
 .draft-panel .protocol-card {
   padding: 20px 23px;
 }
+.draft-panel .protocol-impact p {
+  min-height: 0;
+  margin: 8px 0 0;
+}
+.draft-panel .draft-cards {
+  margin-top: 22px;
+}
+.draft-panel > h2 {
+  margin: 12px 0 8px;
+}
+.draft-panel .draft-foot {
+  margin-top: 15px;
+}
 .draft-panel .card-sigil i {
   transform: scale(0.7);
 }
@@ -370,5 +392,64 @@
   .game-shell * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+/* Keep the expanded bilingual mode menu inside the actual game viewport. */
+.menu-overlay .menu-copy {
+  max-height: 100%;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  scrollbar-width: thin;
+  padding-block: 24px;
+}
+.menu-overlay .menu-copy h1 {
+  font-size: clamp(72px, 7vw, 112px);
+  margin: 20px 0;
+}
+.menu-overlay .menu-secondary {
+  max-width: 480px;
+  gap: 12px;
+  align-items: stretch;
+}
+.menu-secondary .guide-entry {
+  padding: 12px 14px;
+  gap: 7px;
+  justify-content: center;
+}
+.menu-overlay .menu-description {
+  letter-spacing: 0.6px;
+  margin: 16px 0 20px;
+}
+.menu-overlay .edition-note {
+  line-height: 1.6;
+  margin-top: 16px;
+}
+.draft-shade {
+  grid-template-rows: minmax(0, 1fr);
+}
+@media (max-height: 820px) and (min-width: 701px) {
+  .menu-overlay .menu-copy {
+    padding-block: 16px;
+  }
+  .menu-overlay .menu-copy h1 {
+    font-size: 72px;
+    margin: 12px 0;
+  }
+  .menu-overlay .menu-description {
+    margin: 12px 0;
+    font-size: 14px;
+    line-height: 1.65;
+  }
+  .menu-overlay .start-button {
+    height: 50px;
+  }
+  .menu-overlay .menu-secondary {
+    margin-top: 16px;
+    gap: 10px;
+  }
+  .menu-overlay .edition-note {
+    margin-top: 10px;
+    font-size: 11px;
   }
 }

@@ -3,6 +3,7 @@ import { Pool } from '../core/pool';
 import type { EffectEvent } from '../core/events';
 import { fillDisc, strokeRing, renderDiagnostics } from '../render/discs';
 import { BurstSprites } from './bursts';
+import { translateCopy, type Language } from '../ui/i18n';
 
 function labelContent(
   t: Phaser.GameObjects.Text,
@@ -46,7 +47,10 @@ export class Effects {
     life: number;
     color: number;
   }[] = [];
-  constructor(private scene: Phaser.Scene) {
+  constructor(
+    private scene: Phaser.Scene,
+    private language: () => Language = () => 'zh',
+  ) {
     this.bursts = new BurstSprites(scene);
     for (let i = 0; i < 40; i++)
       this.labels.push(
@@ -172,17 +176,19 @@ export class Effects {
           .setVisible(true)
           .setAlpha(1);
         t.setData('life', 0.65);
+        t.setData('reaction', null);
       }
     }
     if (e.reaction) {
       const label = this.labels.find((t) => !t.visible);
       if (label) {
-        labelContent(label, e.reaction, '#ffe0b2', 14);
+        labelContent(label, translateCopy(this.language(), e.reaction), '#ffe0b2', 14);
         label
           .setPosition(e.x - 24, e.y - 34)
           .setVisible(true)
           .setAlpha(1);
         label.setData('life', 0.75);
+        label.setData('reaction', e.reaction);
       }
     }
   }
@@ -235,6 +241,11 @@ export class Effects {
     }
     for (const t of this.labels) {
       if (!t.visible) continue;
+      const reaction = t.getData('reaction') as string | null;
+      if (reaction) {
+        const translated = translateCopy(this.language(), reaction);
+        if (t.text !== translated) t.setText(translated);
+      }
       const life = t.getData('life') - dt;
       t.setData('life', life);
       t.y -= dt * 34;
@@ -272,5 +283,9 @@ export class Effects {
   }
   dispose() {
     this.bursts.dispose();
+    for (const label of this.labels) label.destroy();
+    this.labels = [];
+    this.beams = [];
+    this.particles.clear();
   }
 }

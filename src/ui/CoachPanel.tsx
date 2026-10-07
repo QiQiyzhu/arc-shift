@@ -1,3 +1,5 @@
+import { useTranslation } from './i18n';
+import { coachSearchQuery } from './locale-coach';
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   ArrowRight,
@@ -56,6 +58,7 @@ export function CoachPanel({
   onTrial: (c: Candidate, b: BuildSnapshot) => void;
   onSelect: (id: string) => boolean;
 }) {
+  const t = useTranslation();
   const [build, setBuild] = useState(() => captureBuild(engine));
   const [goal, setGoal] = useState<Goal>('single');
   const [query, setQuery] = useState('');
@@ -68,7 +71,14 @@ export function CoachPanel({
   const revision = useRef(0);
   const plans = useMemo(() => compatiblePlans(build.content), [build.content]);
   const retrieved = useMemo(
-    () => retrieveStrategies(plans, query, goal, build.weapon, build.cards),
+    () =>
+      retrieveStrategies(
+        plans,
+        coachSearchQuery(query),
+        goal,
+        build.weapon,
+        build.cards,
+      ),
     [plans, query, goal, build],
   );
   const knowledge = facts(build.content);
@@ -98,7 +108,7 @@ export function CoachPanel({
     setBuild(fresh);
     const matches = retrieveStrategies(
       compatiblePlans(fresh.content),
-      query,
+      coachSearchQuery(query),
       goal,
       fresh.weapon,
       fresh.cards,
@@ -240,31 +250,34 @@ export function CoachPanel({
     >
       <DialogContent className="coach-panel">
         <div className="coach-kicker">
-          <Orbit size={17} /> TACTICAL OBSERVATORY{' '}
-          <span>模型策略库 · 本地推演</span>
+          <Orbit size={17} /> TACTICAL OBSERVATORY{t(' ')}
+          <span>{t('模型策略库 · 本地推演')}</span>
         </div>
-        <DialogTitle>把下一次选择，先试一遍。</DialogTitle>
+        <DialogTitle>{t('把下一次选择，先试一遍。')}</DialogTitle>
         <DialogDescription>
-          战术教练读取你的构筑，在独立靶场里比较打法。你决定带走哪一种。
+          {t('战术教练读取你的构筑，在独立靶场里比较打法。你决定带走哪一种。')}
         </DialogDescription>
         <div className="coach-context">
           <span>
-            {WEAPONS.find((w) => w.id === build.weapon)?.name} · Lv.
+            {t(WEAPONS.find((w) => w.id === build.weapon)?.name)} · Lv.
             {build.level}
           </span>
           <span>
-            {build.cards.length} 项协议 · {build.forms.length || 1} 种武装
+            {build.cards.length} {t('项协议 ·')}
+            {build.forms.length || 1} {t('种武装')}
           </span>
           <span>
-            {build.source === 'checkpoint'
-              ? '读取营地存档'
-              : build.source === 'camp'
-                ? '营地范例 · Lv.4'
-                : '读取当前行动'}
+            {t(
+              build.source === 'checkpoint'
+                ? '读取营地存档'
+                : build.source === 'camp'
+                  ? '营地范例 · Lv.4'
+                  : '读取当前行动',
+            )}
           </span>
         </div>
         <div className="coach-controls">
-          <fieldset className="coach-goals" aria-label="战术目标">
+          <fieldset className="coach-goals" aria-label={t('战术目标')}>
             {Object.entries(GOALS).map(([id, g]) => (
               <button
                 key={id}
@@ -274,12 +287,12 @@ export function CoachPanel({
                   setGoal(id as Goal);
                 }}
               >
-                {g.name}
+                {t(g.name)}
               </button>
             ))}
           </fieldset>
           <label>
-            打法关键词
+            {t('打法关键词')}
             <input
               value={query}
               maxLength={80}
@@ -287,52 +300,62 @@ export function CoachPanel({
                 reset();
                 setQuery(e.target.value);
               }}
-              placeholder="如：连锁、跃迁、首领"
+              placeholder={t('如：连锁、跃迁、首领')}
             />
           </label>
           <button className="coach-run" onClick={run} disabled={busy}>
-            {busy ? progress : '比较候选'}
+            {t(busy ? progress : '比较候选')}
             <ArrowRight size={18} />
           </button>
         </div>
         {busy && (
           <output className="coach-progress">
             <i />
-            {progress} · 关闭即可取消
+            {t(progress)} {t('· 关闭即可取消')}
           </output>
         )}
         {error && (
           <p className="coach-error" role="alert">
-            {error}
+            {t(error)}
           </p>
         )}
         <div className="coach-columns">
-          <section className="coach-comparison" aria-label="靶场比较">
+          <section className="coach-comparison" aria-label={t('靶场比较')}>
             <div className="coach-section-title">
               <h3>
-                {build.offered.length ? '这次选卡的取舍' : '范例构筑比较'}
+                {t(build.offered.length ? '这次选卡的取舍' : '范例构筑比较')}
               </h3>
-              <span>12 秒 × 3 种子 × 2 场景</span>
+              <span>{t('12 秒 × 3 种子 × 2 场景')}</span>
             </div>
             <p className="coach-note">
-              {build.offered.length
-                ? '每个候选只增加这一张协议。'
-                : '范例有 4–6 张协议，与当前构筑卡数可能不同，不是等预算升级比较。'}
+              {t(
+                build.offered.length
+                  ? '每个候选只增加这一张协议。'
+                  : '范例有 4–6 张协议，与当前构筑卡数可能不同，不是等预算升级比较。',
+              )}
             </p>
             {!result && !busy && (
               <div className="coach-empty">
                 <FlaskConical size={34} />
-                <strong>让引擎给出数字</strong>
+                <strong>{t('让引擎给出数字')}</strong>
                 <p>
-                  相同主武器、形态修饰、等级和遗器，比较单体与敌群输出；走位目标优先看跃迁冷却和移速。
+                  {t(
+                    '相同主武器、形态修饰、等级和遗器，比较单体与敌群输出；走位目标优先看跃迁冷却和移速。',
+                  )}
                 </p>
               </div>
             )}
             {baseline && (
               <div className="coach-baseline">
-                <span>当前构筑</span>
-                <b>单体 {baseline.single.toFixed(1)}</b>
-                <b>敌群 {baseline.swarm.toFixed(1)} / 秒</b>
+                <span>{t('当前构筑')}</span>
+                <b>
+                  {t('单体')}
+                  {t(baseline.single.toFixed(1))}
+                </b>
+                <b>
+                  {t('敌群')}
+                  {t(baseline.swarm.toFixed(1))} {t('/ 秒')}
+                </b>
               </div>
             )}
             {result?.rows.map((r, i) => (
@@ -341,13 +364,15 @@ export function CoachPanel({
                 key={r.candidate.id}
               >
                 <div className="coach-result-heading">
-                  <span>{String(i + 1).padStart(2, '0')}</span>
-                  <h4>{r.candidate.label}</h4>
+                  <span>{t(String(i + 1).padStart(2, '0'))}</span>
+                  <h4>{t(r.candidate.label)}</h4>
                   {i === 0 && (
                     <small>
-                      {goal === 'mobility'
-                        ? '当前走位指标优先'
-                        : '当前靶场输出较高'}
+                      {t(
+                        goal === 'mobility'
+                          ? '当前走位指标优先'
+                          : '当前靶场输出较高',
+                      )}
                     </small>
                   )}
                 </div>
@@ -360,35 +385,39 @@ export function CoachPanel({
                 </div>
                 <dl>
                   <div>
-                    <dt>单体 / 秒</dt>
-                    <dd>{r.single.toFixed(1)}</dd>
+                    <dt>{t('单体 / 秒')}</dt>
+                    <dd>{t(r.single.toFixed(1))}</dd>
                   </div>
                   <div>
-                    <dt>敌群 / 秒</dt>
-                    <dd>{r.swarm.toFixed(1)}</dd>
+                    <dt>{t('敌群 / 秒')}</dt>
+                    <dd>{t(r.swarm.toFixed(1))}</dd>
                   </div>
                   <div>
-                    <dt>跃迁冷却</dt>
-                    <dd>{r.dash.toFixed(2)}s</dd>
+                    <dt>{t('跃迁冷却')}</dt>
+                    <dd>{t(r.dash.toFixed(2))}s</dd>
                   </div>
                   <div>
-                    <dt>移速</dt>
-                    <dd>{r.speed.toFixed(0)}</dd>
+                    <dt>{t('移速')}</dt>
+                    <dd>{t(r.speed.toFixed(0))}</dd>
                   </div>
                 </dl>
                 <p>
-                  {r.candidate.cards
-                    .map((id) => CARDS.find((c) => c.id === id)!.name)
-                    .join(' · ')}
+                  {t(
+                    r.candidate.cards
+                      .map((id) => CARDS.find((c) => c.id === id)!.name)
+                      .join(' · '),
+                  )}
                 </p>
                 <p className="coach-synergy">
-                  {r.synergies
-                    .map((id) => SYNERGIES.find((s) => s.id === id)!.name)
-                    .join(' · ') || '暂未激活跨系共鸣'}
-                  {r.maxHpBonus ? ` · 生命上限协议 +${r.maxHpBonus}` : ''}
+                  {t(
+                    r.synergies
+                      .map((id) => SYNERGIES.find((s) => s.id === id)!.name)
+                      .join(' · ') || '暂未激活跨系共鸣',
+                  )}
+                  {t(r.maxHpBonus ? ` · 生命上限协议 +${r.maxHpBonus}` : '')}
                 </p>
                 {r.samples.some((s) => s.poolMisses > 0) && (
-                  <p>此候选存在弹体池耗尽，结果受容量限制。</p>
+                  <p>{t('此候选存在弹体池耗尽，结果受容量限制。')}</p>
                 )}
                 <button
                   onClick={() => applyCandidate(r.candidate)}
@@ -396,7 +425,9 @@ export function CoachPanel({
                     !r.candidate.nextCard && engine.world.phase !== 'menu'
                   }
                 >
-                  {r.candidate.nextCard ? '选择这张协议' : '亲手试用这套构筑'}
+                  {t(
+                    r.candidate.nextCard ? '选择这张协议' : '亲手试用这套构筑',
+                  )}
                   <ArrowRight size={15} />
                 </button>
               </article>
@@ -404,29 +435,34 @@ export function CoachPanel({
             {result && (
               <button className="coach-export" onClick={download}>
                 <Download size={15} />
-                导出本次依据与推演记录
+                {t('导出本次依据与推演记录')}
               </button>
             )}
             <details className="coach-method">
-              <summary>这些数字能说明什么？</summary>
+              <summary>{t('这些数字能说明什么？')}</summary>
               <p>
-                固定站位，最近靶距离 80 像素；持续开火，Q/E
-                就绪即释放，不使用跃迁。保留真实弹道、伤害和元素规则。靶位每帧复原，会抵消聚拢与击退位移；高生命靶不会触发击杀与斩杀收益。没有地形、跃迁触发收益、承伤、吸血和首领走位测量。数字不是胜率或通关保证。
+                {t(
+                  '固定站位，最近靶距离 80 像素；持续开火，Q/E 就绪即释放，不使用跃迁。保留真实弹道、伤害和元素规则。靶位每帧复原，会抵消聚拢与击退位移；高生命靶不会触发击杀与斩杀收益。没有地形、跃迁触发收益、承伤、吸血和首领走位测量。数字不是胜率或通关保证。',
+                )}
               </p>
               <p>
-                走位排序：跃迁冷却更短 → 移速更高 →
-                单体输出。每种输出是三个种子的均值，不是置信区间。实战请自行验证。
+                {t(
+                  '走位排序：跃迁冷却更短 → 移速更高 → 单体输出。每种输出是三个种子的均值，不是置信区间。实战请自行验证。',
+                )}
               </p>
             </details>
           </section>
-          <section className="coach-retrieval" aria-label="检索到的战术">
+          <section className="coach-retrieval" aria-label={t('检索到的战术')}>
             <div className="coach-section-title">
-              <h3>检索到的战术</h3>
-              <span>{retrieved.length} 条</span>
+              <h3>{t('检索到的战术')}</h3>
+              <span>
+                {retrieved.length} {t('条')}
+              </span>
             </div>
             <p className="coach-note">
-              DeepSeek
-              离线生成，程序校验协议前置与引用，说明经源码复核修订。匹配依据：武器、目标、已有协议和关键词。
+              {t(
+                'DeepSeek 离线生成，程序校验协议前置与引用，说明经源码复核修订。匹配依据：武器、目标、已有协议和关键词。',
+              )}
             </p>
             {retrieved.map(({ plan: p, reasons }) => (
               <StrategyCard
@@ -438,23 +474,29 @@ export function CoachPanel({
             ))}
             {!retrieved.length && (
               <p>
-                战术库对应默认规则；自定义内容暂不使用旧版说明。奖励界面仍可推演实际候选协议。
+                {t(
+                  '战术库对应默认规则；自定义内容暂不使用旧版说明。奖励界面仍可推演实际候选协议。',
+                )}
               </p>
             )}
             <details className="coach-method">
-              <summary>AI 在这里做了什么？</summary>
+              <summary>{t('AI 在这里做了什么？')}</summary>
               <p>
-                模型从检索到的规则中生成结构化战术；程序拒绝未知协议、缺失前置和不成立的引用。当前推荐由浏览器后台线程的真实引擎排序。关键词检索不使用向量模型；试玩时不发送你的输入或存档，也不在线调用模型。
+                {t(
+                  '模型从检索到的规则中生成结构化战术；程序拒绝未知协议、缺失前置和不成立的引用。当前推荐由浏览器后台线程的真实引擎排序。关键词检索不使用向量模型；试玩时不发送你的输入或存档，也不在线调用模型。',
+                )}
               </p>
               <p>
-                模型：{library.models.join(' / ') || '未生成'} · 资料日期{' '}
-                {String(library.generatedAt || '').slice(0, 10) || '—'}
+                {t('模型：')}
+                {t(library.models.join(' / ') || '未生成')} {t('· 资料日期')}
+                {t(' ')}
+                {t(String(library.generatedAt || '').slice(0, 10) || '—')}
               </p>
             </details>
           </section>
         </div>
         <div className="coach-bottom">
-          <span>先理解取舍，再进入战场。</span>
+          <span>{t('先理解取舍，再进入战场。')}</span>
           <button
             onClick={() => {
               reset();
@@ -462,7 +504,7 @@ export function CoachPanel({
             }}
           >
             <RotateCcw size={15} />
-            重新读取构筑
+            {t('重新读取构筑')}
           </button>
         </div>
       </DialogContent>
@@ -478,23 +520,27 @@ function StrategyCard({
   reasons: string[];
   knowledge: ReturnType<typeof facts>;
 }) {
+  const t = useTranslation();
   return (
     <article className="coach-strategy">
       <div>
-        <span>{GOALS[p.goal].name}</span>
-        <h4>{p.title}</h4>
+        <span>{t(GOALS[p.goal].name)}</span>
+        <h4>{t(p.title)}</h4>
       </div>
-      <p>{p.explanation}</p>
-      <p className="coach-caution">取舍 · {p.caution}</p>
-      <small>{reasons.join(' · ')}</small>
+      <p>{t(p.explanation)}</p>
+      <p className="coach-caution">
+        {t('取舍 ·')}
+        {t(p.caution)}
+      </p>
+      <small>{t(reasons.join(' · '))}</small>
       <details>
-        <summary>查看规则依据</summary>
+        <summary>{t('查看规则依据')}</summary>
         {p.evidence.map((id) => {
           const f = knowledge.find((x) => x.id === id);
           return (
             f && (
               <p key={id}>
-                <b>{f.title}</b> · {f.text}
+                <b>{t(f.title)}</b> · {t(f.text)}
               </p>
             )
           );

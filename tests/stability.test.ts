@@ -4,7 +4,15 @@ import { Engine } from '../src/game/engine';
 import { blankSave, parseSave } from '../src/core/save';
 import { Random } from '../src/core/math';
 import { stressInput } from '../src/dev/benchmark';
-import { ReplayPlayer, checksum } from '../src/replay/replay';
+import { ReplayPlayer, checksum, importReplay } from '../src/replay/replay';
+
+it('accepts a missing legacy locale but rejects a corrupt explicit locale', () => {
+  const raw = readFileSync('tests/fixtures/replays/v12/combat.json', 'utf8');
+  expect(() => importReplay(raw)).not.toThrow();
+  const damaged = JSON.parse(raw);
+  damaged.initial.save.settings.language = 'invalid';
+  expect(() => importReplay(JSON.stringify(damaged))).toThrow('save validation');
+});
 
 it.each(['combat', 'boss', 'shop-route'])(
   'replays committed %s input/checksum history without regeneration',

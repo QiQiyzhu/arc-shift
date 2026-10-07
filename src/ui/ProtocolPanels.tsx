@@ -1,3 +1,4 @@
+import { useTranslation } from './i18n';
 import {
   ArrowRight,
   ArrowUpRight,
@@ -60,6 +61,7 @@ export function CardView({
   preview?: ReturnType<typeof protocolPreview>;
   weapon?: WeaponId;
 }) {
+  const t = useTranslation();
   const el = ELEMENTS[card.element];
   const Glyph = card.id.includes('meteor')
     ? Sparkles
@@ -84,18 +86,20 @@ export function CardView({
       style={{ '--element': el.color, '--index': index } as React.CSSProperties}
       onClick={onSelect}
       disabled={!onSelect}
-      aria-label={`${card.name}：${card.description} ${card.preview}`}
+      aria-label={t(`${card.name}：${card.description} ${card.preview}`)}
     >
       <div className="card-top">
         <span>
-          {el.en} / {el.name}
+          {t(el.en)} / {t(el.name)}
         </span>
         <b>
-          {card.rarity === 'epic'
-            ? '史诗'
-            : card.rarity === 'rare'
-              ? '稀有'
-              : '标准'}
+          {t(
+            card.rarity === 'epic'
+              ? '史诗'
+              : card.rarity === 'rare'
+                ? '稀有'
+                : '标准',
+          )}
         </b>
       </div>
       <div className="card-sigil">
@@ -107,40 +111,42 @@ export function CardView({
           <ElementIcon element={card.element} size={45} />
         )}
       </div>
-      <span className="card-en">{card.en}</span>
-      <h3>{card.name}</h3>
-      <p>{card.description}</p>
-      <div className="card-preview">{card.preview}</div>
+      <span className="card-en">{t(card.en)}</span>
+      <h3>{t(card.name)}</h3>
+      <p>{t(card.description)}</p>
+      <div className="card-preview">{t(card.preview)}</div>
       {preview && (
-        <div className="protocol-impact" aria-label="整合后变化">
+        <div className="protocol-impact" aria-label={t('整合后变化')}>
           {preview.changes.slice(0, 4).map((c) => (
             <div key={c.label} className={c.benefit ? 'benefit' : 'tradeoff'}>
-              <span>{c.label}</span>
+              <span>{t(c.label)}</span>
               <b>
-                {c.before} → {c.after}
+                {t(c.before)} → {t(c.after)}
               </b>
             </div>
           ))}
-          {preview.threshold && <p>{preview.threshold}</p>}
+          {preview.threshold && <p>{t(preview.threshold)}</p>}
           {preview.active.map((s) => (
             <p key={s.id} className="benefit">
-              {s.description}
+              {t(s.description)}
             </p>
           ))}
           {!preview.active.length &&
             preview.pending.slice(0, 1).map((s) => (
               <p key={s.name}>
-                {s.name} · 还缺「{s.missing.join('、')}」
+                {t(s.name)} {t('· 还缺「')}
+                {t(s.missing.join('、'))}」
               </p>
             ))}
           {preview.tradeoff && (
-            <p className="impact-note">{preview.tradeoff}</p>
+            <p className="impact-note">{t(preview.tradeoff)}</p>
           )}
         </div>
       )}
       {newSynergies(build, card.id, weapon).map((s) => (
         <div className="synergy-preview" key={s.id}>
-          ✦ 激活 {s.name}
+          {t('✦ 激活')}
+          {t(s.name)}
         </div>
       ))}
       {!newSynergies(build, card.id, weapon).length &&
@@ -148,19 +154,20 @@ export function CardView({
           .slice(0, 1)
           .map((s) => (
             <div className="synergy-hint" key={s.id}>
-              共鸣方向 · {s.name}
+              {t('共鸣方向 ·')}
+              {t(s.name)}
             </div>
           ))}
       <div className="card-bottom">
         <span>
           {owned ? (
             <>
-              <Check size={14} /> 已收录
+              <Check size={14} /> {t('已收录')}
             </>
           ) : onSelect ? (
-            '整合此协议'
+            t('整合此协议')
           ) : (
-            '未收录'
+            t('未收录')
           )}
         </span>
         {onSelect ? (
@@ -179,28 +186,35 @@ export function CardDraft({
   engine: Engine;
   onCoach?: () => void;
 }) {
+  const t = useTranslation();
   const w = engine.world;
   return (
     <div className="modal-shade draft-shade">
       <section className="draft-panel">
         <div className="eyebrow">
-          {w.rewardContext === 'start'
-            ? 'INITIALIZE YOUR PROTOCOL'
-            : 'ANOMALY PURGED // REWARD AVAILABLE'}
+          {t(
+            w.rewardContext === 'start'
+              ? 'INITIALIZE YOUR PROTOCOL'
+              : 'ANOMALY PURGED // REWARD AVAILABLE',
+          )}
         </div>
         <h2>
-          {w.rewardContext === 'start'
-            ? '选择你的初始协议'
-            : '力量，等待被改写。'}
+          {t(
+            w.rewardContext === 'start'
+              ? '选择你的初始协议'
+              : '力量，等待被改写。',
+          )}
         </h2>
         <p>
-          {w.rewardContext === 'start'
-            ? `本次随机武器：${WEAPONS.find((x) => x.id === w.weapon)!.name}。选择一种元素，开始跃迁。`
-            : '形态 × 弹道 × 元素。预览这次选择将激活的共鸣。'}
+          {t(
+            w.rewardContext === 'start'
+              ? `本次随机武器：${WEAPONS.find((x) => x.id === w.weapon)!.name}。选择一种元素，开始跃迁。`
+              : '形态 × 弹道 × 元素。预览这次选择将激活的共鸣。',
+          )}
         </p>
         {onCoach && (
           <button className="coach-draft-link" onClick={onCoach}>
-            让战术教练比较这三张
+            {t('让战术教练比较这三张')}
           </button>
         )}
         <div className="draft-cards">
@@ -217,16 +231,18 @@ export function CardDraft({
           ))}
         </div>
         <div className="draft-foot">
-          <span>选择 1 项 · 本次行动持续生效</span>
+          <span>{t('选择 1 项 · 本次行动持续生效')}</span>
           <span>
-            {w.rewardContext === 'start'
-              ? '初始选择 / 01'
-              : `区域净化奖励 / 0${w.room.index}`}
+            {t(
+              w.rewardContext === 'start'
+                ? '初始选择 / 01'
+                : `区域净化奖励 / 0${w.room.index}`,
+            )}
           </span>
         </div>
         {w.weapon === 'sword' && (
           <p className="weapon-trial-note">
-            圣剑：元素强化剑弧，弹道协议化为次生剑气，多发扩大挥砍范围。
+            {t('圣剑：元素强化剑弧，弹道协议化为次生剑气，多发扩大挥砍范围。')}
           </p>
         )}
         {w.rewardContext !== 'start' && (
@@ -236,9 +252,12 @@ export function CardDraft({
               onClick={() => engine.reroll()}
               disabled={w.rerolls >= 3 || w.wallet.coins < 12 + w.rerolls * 6}
             >
-              {w.rerolls >= 3
-                ? '本次重抽已用尽'
-                : `${12 + w.rerolls * 6} 金币 · 重抽协议`}{' '}
+              {t(
+                w.rerolls >= 3
+                  ? '本次重抽已用尽'
+                  : `${12 + w.rerolls * 6} 金币 · 重抽协议`,
+              )}
+              {t(' ')}
               <small>{w.rerolls} / 3</small>
             </button>
           </div>
@@ -313,13 +332,14 @@ export const ROOM_INFO: Record<
   },
 };
 export function RouteMap({ engine }: { engine: Engine }) {
+  const t = useTranslation();
   const w = engine.world;
   return (
     <div className="modal-shade">
       <section className="map-panel">
-        <div className="eyebrow">NETWORK TOPOLOGY // 选择路径</div>
-        <h2>下一次跃迁，去往何处？</h2>
-        <p>先整理资源，再决定下一站。营地交易可全部跳过。</p>
+        <div className="eyebrow">{t('NETWORK TOPOLOGY // 选择路径')}</div>
+        <h2>{t('下一次跃迁，去往何处？')}</h2>
+        <p>{t('先整理资源，再决定下一站。营地交易可全部跳过。')}</p>
         <CampActions engine={engine} />
         <div className="node-map">
           {Array.from({ length: 8 }, (_, i) => (
@@ -337,7 +357,9 @@ export function RouteMap({ engine }: { engine: Engine }) {
                 )}
               </i>
               <span>
-                {i === 3 ? '守门人' : i === 7 ? '零号神谕' : `区域 0${i + 1}`}
+                {t(
+                  i === 3 ? '守门人' : i === 7 ? '零号神谕' : `区域 0${i + 1}`,
+                )}
               </span>
             </div>
           ))}
@@ -354,21 +376,22 @@ export function RouteMap({ engine }: { engine: Engine }) {
                 <div className="route-heading">
                   <info.Icon size={24} />
                   <span>
-                    {info.name} / SECTOR 0{r.index}
+                    {t(info.name)} / SECTOR 0{r.index}
                   </span>
                 </div>
-                <h3>{r.name}</h3>
-                <p>{info.risk}</p>
-                <div className="route-reward">{info.reward}</div>
+                <h3>{t(r.name)}</h3>
+                <p>{t(info.risk)}</p>
+                <div className="route-reward">{t(info.reward)}</div>
                 <div className="route-bottom">
-                  跃迁至此区域 <ArrowRight size={20} />
+                  {t('跃迁至此区域')}
+                  <ArrowRight size={20} />
                 </div>
               </button>
             );
           })}
         </div>
         <p className="checkpoint-note">
-          进入区域时自动保存 · 可从主界面继续行动
+          {t('进入区域时自动保存 · 可从主界面继续行动')}
         </p>
       </section>
     </div>
@@ -381,6 +404,7 @@ export function BuildHUD({
   cards: string[];
   weapon: WeaponId;
 }) {
+  const t = useTranslation();
   const counts = buildCounts(cards);
   return (
     <aside className="build-hud">
@@ -390,14 +414,14 @@ export function BuildHUD({
         .map((el) => (
           <div
             key={el}
-            title={ELEMENTS[el].synergy}
+            title={t(ELEMENTS[el].synergy)}
             style={{ '--element': ELEMENTS[el].color } as React.CSSProperties}
           >
             <ElementIcon element={el} size={17} />
-            <span>{ELEMENTS[el].name}</span>
+            <span>{t(ELEMENTS[el].name)}</span>
             <b>{counts[el]}</b>
             <i className={counts[el] >= 3 ? 'resonant' : ''}>
-              {counts[el] >= 3 ? '共鸣' : '/ 3'}
+              {t(counts[el] >= 3 ? '共鸣' : '/ 3')}
             </i>
           </div>
         ))}
@@ -405,10 +429,10 @@ export function BuildHUD({
         <div
           className="fusion-hud"
           key={s.id}
-          title={s.description}
+          title={t(s.description)}
           style={{ color: s.color }}
         >
-          ✦ {s.name}
+          ✦ {t(s.name)}
         </div>
       ))}
     </aside>

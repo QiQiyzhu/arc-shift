@@ -115,6 +115,8 @@ export function parseSave(raw: string | null): SaveData {
     settings.muted = v.settings.muted === true;
     settings.reducedMotion = v.settings.reducedMotion === true;
     if (typeof v.settings.focusedEffects === 'boolean') settings.focusedEffects = v.settings.focusedEffects;
+    // v1 saves predate the locale setting and intentionally remain Chinese.
+    settings.language = v.settings.language === 'en' ? 'en' : 'zh';
     const ids = new Set(CARDS.map((c) => c.id));
     const meta = {
       unlocked: known(

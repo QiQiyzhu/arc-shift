@@ -26,7 +26,7 @@ import type {
   Upgrade,
 } from './types';
 export class World {
-  scenario?: 'build-trial';
+  scenario?: 'build-trial' | 'frontier';
   constructor(readonly content: ContentPack = DEFAULT_CONTENT) {}
   tick = 0;
   queries = newQueryMetrics();

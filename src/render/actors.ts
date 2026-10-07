@@ -346,7 +346,7 @@ export function drawActors(
         f === 'sword' ? Math.PI / 4 : a,
       );
     });
-  drawSwordArc(g, w);
+  drawSwordArc(g, w, reducedMotion);
   const c =
     p.dashTime > 0 ? 0xe4ffde : w.cards.length ? w.stats.primary : 0x83efdb;
   if (w.stats.orbit) {

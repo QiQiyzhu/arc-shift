@@ -13,26 +13,31 @@ export class BurstSprites {
   private items: Burst[] = [];
   dropped = 0;
   constructor(private scene: Phaser.Scene) {
-    for (const kind of ['muzzle', 'contact', 'shock']) {
-      const key = `burst-${kind}-v21`;
+    for (const kind of ['muzzle', 'contact', 'crit', 'shock']) {
+      const key = `burst-${kind}-v22`;
       if (scene.textures.exists(key)) continue;
       const texture = scene.textures.createCanvas(key, 128, 128);
       if (!texture) continue;
       const c = texture.context;
       const glow = c.createRadialGradient(64, 64, 0, 64, 64, 62);
-      glow.addColorStop(0, kind === 'shock' ? '#ffffff00' : '#ffffffb0');
+      glow.addColorStop(0, kind === 'shock' ? '#ffffff00' : '#ffffffc8');
       glow.addColorStop(0.25, '#ffffff30');
       glow.addColorStop(1, '#ffffff00');
       c.fillStyle = glow;
       c.fillRect(0, 0, 128, 128);
       if (kind === 'shock') {
-        c.strokeStyle = '#ffffffb0';
+        c.strokeStyle = '#ffffffc0';
         c.lineWidth = 2.5;
         c.beginPath();
         c.arc(64, 64, 46, 0, Math.PI * 2);
         c.stroke();
+        c.strokeStyle = '#ffffff62';
+        c.lineWidth = 1.5;
+        c.beginPath();
+        c.arc(64, 64, 28, 0, Math.PI * 2);
+        c.stroke();
       } else {
-        c.fillStyle = '#fffffff0';
+        c.fillStyle = '#fffffff2';
         c.beginPath();
         if (kind === 'muzzle') {
           c.moveTo(34, 64);
@@ -40,9 +45,21 @@ export class BurstSprites {
           c.lineTo(116, 64);
           c.lineTo(72, 74);
         } else {
-          for (let i = 0; i < 16; i++) {
-            const angle = (Math.PI * i) / 8,
-              r = i % 2 ? 6 : i % 4 ? 24 : 48;
+          const points = kind === 'crit' ? 12 : 16;
+          for (let i = 0; i < points; i++) {
+            const angle = (Math.PI * 2 * i) / points,
+              r =
+                kind === 'crit'
+                  ? i % 2
+                    ? 10
+                    : i % 4
+                      ? 31
+                      : 52
+                  : i % 2
+                    ? 6
+                    : i % 4
+                      ? 24
+                      : 48;
             const x = 64 + Math.cos(angle) * r,
               y = 64 + Math.sin(angle) * r;
             if (i === 0) c.moveTo(x, y);
@@ -94,14 +111,15 @@ export class BurstSprites {
     const offset = cannon ? 18 : 0;
     burst.image
       .setTexture(
-        `burst-${muzzle ? 'muzzle' : shock ? 'shock' : 'contact'}-v21`,
+        `burst-${muzzle ? 'muzzle' : shock ? 'shock' : e.kind === 'crit' ? 'crit' : 'contact'}-v22`,
       )
       .setPosition(
         e.x + Math.cos(angle) * offset,
         e.y + Math.sin(angle) * offset,
       )
       .setRotation(angle)
-      .setTint(muzzle && !cannon ? e.color : 0xffe4b9)
+      .setTint(muzzle || contact ? e.color : 0xffe4b9)
+      .setBlendMode('ADD')
       .setScale(burst.scale)
       .setAlpha(reduced ? 0.4 : 0.85)
       .setVisible(true);

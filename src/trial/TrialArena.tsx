@@ -1,4 +1,5 @@
 import { useEffect, useRef } from 'react';
+import { useTranslation } from '../ui/i18n';
 import Phaser from 'phaser';
 import { ArcScene } from '../game/scene';
 import { Synth } from '../audio/synth';
@@ -24,6 +25,7 @@ export function TrialArena({
   onTick: () => void;
   blocked: boolean;
 }) {
+  const t = useTranslation();
   const host = useRef<HTMLDivElement>(null),
     notify = useRef(onTick),
     scene = useRef<ArcScene | null>(null);
@@ -97,5 +99,7 @@ export function TrialArena({
       if (window.buildTrialQA?.session === session) delete window.buildTrialQA;
     };
   }, [session, sound, session.stage]);
-  return <div className="trial-canvas" ref={host} aria-label="构筑试炼战场" />;
+  return (
+    <div className="trial-canvas" ref={host} aria-label={t('构筑试炼战场')} />
+  );
 }

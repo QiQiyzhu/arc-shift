@@ -1,0 +1,25 @@
+name: 游戏问题 / Game bug
+description: 报告无法启动、操作、存档或关卡问题
+title: "[游戏问题] "
+body:
+  - type: input
+    id: version
+    attributes:
+      label: 游戏版本 / Version
+      placeholder: v2.4 / 在线版
+    validations:
+      required: true
+  - type: input
+    id: device
+    attributes:
+      label: 系统与浏览器 / OS and browser
+      placeholder: Windows 11 / Edge
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 如何重现 / Steps to reproduce
+      description: 从打开游戏开始，说明点了哪些按钮、预期结果与实际结果。可以附图，请勿上传私人信息。
+    validations:
+      required: true
