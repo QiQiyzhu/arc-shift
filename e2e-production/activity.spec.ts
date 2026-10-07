@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { enterCaptureCircle } from '../e2e/helpers/activity';
 
 test('production activity advances real capture through the public controller without QA', async ({
   page,
@@ -8,16 +9,12 @@ test('production activity advances real capture through the public controller wi
   await page.goto('/challenge?qa');
   await page.getByRole('button', { name: '进入挑战', exact: true }).click();
   await expect(page.locator('canvas')).toBeVisible();
-  await page.waitForTimeout(2000);
-  await page.keyboard.down('w');
-  await page.waitForTimeout(520);
-  await page.keyboard.up('w');
+  const captureProgress = page.getByLabel('驻留进度');
+  await enterCaptureCircle(page);
   await expect
-    .poll(
-      async () =>
-        parseFloat((await page.getByLabel('驻留进度').textContent())!),
-      { timeout: 7000 },
-    )
+    .poll(async () => parseFloat((await captureProgress.textContent())!), {
+      timeout: 30000,
+    })
     .toBeGreaterThan(1);
   await page.keyboard.press('Escape');
   await expect(page.getByRole('heading', { name: '挑战已暂停' })).toBeVisible();

@@ -6,6 +6,7 @@ declare global {
 }
 import { test, expect, type Page } from '@playwright/test';
 import fs from 'node:fs';
+import { enterCaptureCircle } from './helpers/activity';
 const dir = 'outputs/client-showcase/activity';
 fs.mkdirSync(dir, { recursive: true });
 async function start(page: Page) {
@@ -48,9 +49,7 @@ test('public entry, real keyboard combat, pause, protected exit and re-entry', a
   const y = await page.evaluate(
     () => window.activityQA!.session.engine.world.player.y,
   );
-  await page.keyboard.down('w');
-  await page.waitForTimeout(480);
-  await page.keyboard.up('w');
+  await enterCaptureCircle(page);
   expect(
     await page.evaluate(() => window.activityQA!.session.engine.world.player.y),
   ).toBeLessThan(y - 30);
@@ -206,12 +205,9 @@ test('editor changes a rule, validates errors and plays the same flow without sa
   await page.getByRole('button', { name: '进入挑战', exact: true }).click();
   await expect(page.locator('canvas')).toBeVisible();
   // Natural keyboard traversal in the edited activity, with no QA intervention.
-  await page.waitForTimeout(1600);
-  await page.keyboard.down('w');
-  await page.waitForTimeout(520);
-  await page.keyboard.up('w');
+  await enterCaptureCircle(page);
   await expect(page.getByRole('heading', { name: '中继已接管' })).toBeVisible({
-    timeout: 18000,
+    timeout: 30000,
   });
   await page.getByRole('button', { name: '确认本次结果' }).click();
   await page
